@@ -126,6 +126,14 @@ class Api(object):
                  album = None,
                  mbid = None):
         return Album.getInfo(self, artist, album, mbid)
+    
+    def getArtist(self,
+                  artist = None,
+                  mbid = None):
+        return Artist.getInfo(self, artist, mbid)
+    
+    def getEvent(self, event):
+        return Event.getInfo(self, event)
 
     def fetchUrl(self,
                   url,
@@ -174,12 +182,26 @@ class Api(object):
         # Always return the latest version
         return url_data
     
+    def fetchData(self, params):
+        params.update({'api_key': self.__apiKey})
+        xml = self.fetchUrl(Api.API_ROOT_URL, params)
+       
+        data = ElementTree.XML(xml)
+        if data.get('status') != "ok":
+            raise LastfmError("Error code: %s (%s)" % (data.find("error").get('code'), data.findtext('error')))
+        return data
+    
 import urllib
 import urllib2
 import urlparse
-import cElementTree as ElementTree
 import time
 from datetime import datetime
+import sys
+if sys.version.startswith('2.5'):
+    import xml.etree.cElementTree as ElementTree
+else:
+    import cElementTree as ElementTree
+
 
 from album import Album
 from artist import Artist
@@ -190,5 +212,4 @@ from filecache import FileCache
 #from tag import Tag
 #from track import Track
 #from user import User
-from xml2dict import Xml2Dict
 from error import LastfmError

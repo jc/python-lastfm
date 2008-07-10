@@ -85,43 +85,46 @@ class Album(object):
                 artist = None,
                 album = None,
                 mbid = None):
-        apiKey = api.getApiKey()
-        params = {'method': 'album.getinfo', 'api_key': apiKey}
+        params = {'method': 'album.getinfo'}
         if not ((artist and album) or mbid):
             raise LastfmError("either (artist and album) or mbid has to be given as argument.")
         if artist and album:
             params.update({'artist': artist, 'album': album})
         elif mbid:
             params.update({'mbid': mbid})
-        xml = api.fetchUrl(Api.API_ROOT_URL, params)
-        data = Xml2Dict(ElementTree.XML(xml))
-        if data['@status'] != "ok":
-            raise LastfmError("Error code: %s (%s)" % (data['error']['@code'], data['error']['text']))
-        
+        data = api.fetchData(params).find('album')
+
         return Album(
                      api,
-                     name = data['album']['name'],
+                     name = data.findtext('name'),
                      artist = Artist(
-                            api,
-                            name = data['album']['artist']
-                            ),
-                     id = int(data['album']['id']),
-                     mbid = data['album']['mbid'],
-                     url = data['album']['url'],
-                     releaseDate = data['album']['releasedate'] and 
-                                        datetime(*(time.strptime(data['album']['releasedate'], '%d %b %Y, 00:00')[0:6])),
-                     image = dict([(i['@size'],i['text']) for i in data['album']['image']]),
-                     listeners = int(data['album']['listeners']),
-                     playcount = int(data['album']['playcount']),
-                     topTags = [Tag(api, name = t['name'], url = t['url']) for t in data['album']['toptags']['tag']]
-                    )
-                     
+                                     api,
+                                     name = data.findtext('artist'),
+                                     ),
+                     id = int(data.findtext('id')),
+                     mbid = data.findtext('mbid'),
+                     url = data.findtext('url'),
+                     releaseDate = data.findtext('releasedate') and 
+                                        datetime(*(time.strptime(data.findtext('releasedate').strip(), '%d %b %Y, 00:00')[0:6])),
+                     image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
+                     listeners = int(data.findtext('listeners')),
+                     playcount = int(data.findtext('playcount')),
+                     topTags = [
+                                Tag(
+                                    api,
+                                    name = t.findtext('name'),
+                                    url = t.findtext('url')
+                                    ) 
+                                for t in data.findall('toptags/tag')
+                                ]
+                     )
         
-import cElementTree as ElementTree
+    def __eq__(self, other):
+        return self.id == other.id
+                     
 from datetime import datetime
 import time
 
-from xml2dict import Xml2Dict
 from error import LastfmError
 from api import Api
 from tag import Tag
