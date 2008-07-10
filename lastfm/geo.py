@@ -6,31 +6,27 @@ __license__ = "GNU Lesser General Public License"
 
 class Geo(object):
     """A class representing an geographic location."""
-    pass
+    @staticmethod
+    def getEvents(api, location, distance, page):
+        pass
+    
+    @staticmethod
+    def getTopArtists(api, country):
+        pass
+    
+    @staticmethod
+    def getTopTracks(api, country):
+        pass
 
 class Venue(object):
     """A class representing a venue of an event"""
     def __init__(self,
-                 event,
                  name = None,
                  location = None,
                  url = None):
-        self.__event = event
         self.__name = name
-        self.__location = location and Location(
-                                                event,
-                                                city = location.city,
-                                                country = location.country,
-                                                street = location.street,
-                                                postalCode = location.postalCode,
-                                                latitude = location.latitude,
-                                                longitude = location.longitude,
-                                                timezone = location.timezone
-                                                )
+        self.__location = location
         self.__url = url
-
-    def getEvent(self):
-        return self.__event
 
     def getName(self):
         return self.__name
@@ -41,8 +37,6 @@ class Venue(object):
     def getUrl(self):
         return self.__url
     
-    event = property(getEvent, None, None, "Event's Docstring")
-
     name = property(getName, None, None, "Name's Docstring")
 
     location = property(getLocation, None, None, "Location's Docstring")
@@ -57,7 +51,8 @@ class Location(object):
     xmlns = "http://www.w3.org/2003/01/geo/wgs84_pos#"
     
     def __init__(self,
-                 event,
+                 api,
+                 name = None,
                  city = None,
                  country = None,
                  street = None,
@@ -65,7 +60,8 @@ class Location(object):
                  latitude = None,
                  longitude = None,
                  timezone = None):
-        self.__event = event
+        self.__api = api
+        self.__name = name
         self.__city = city
         self.__country = country
         self.__street = street
@@ -73,9 +69,9 @@ class Location(object):
         self.__latitude = latitude
         self.__longitude = longitude
         self.__timezone = timezone
-
-    def getEvent(self):
-        return self.__event
+        
+    def getName(self):
+        return self.__city
 
     def getCity(self):
         return self.__city
@@ -97,8 +93,8 @@ class Location(object):
 
     def getTimezone(self):
         return self.__timezone
-
-    event = property(getEvent, None, None, "Event's Docstring")
+    
+    name = property(getName, None, None, "Name's Docstring")
 
     city = property(getCity, None, None, "City's Docstring")
 
@@ -114,5 +110,44 @@ class Location(object):
 
     timezone = property(getTimezone, None, None, "Timezone's Docstring")        
     
+    def getEvents(self,
+                  distance = None,
+                  page = None):
+        return Geo.getEvents(self.__api, self.name, distance, page)
+    
+    events = property(getEvents, None, None, "Event's Docstring")
+    
     def __eq__(self, other):
         return self.latitude == other.latitude and self.longitude == other.longitude
+    
+class Country(object):
+    """A class representing a country."""
+    def __init__(self,
+                 api,
+                 name = None):
+        self.__api = api
+        self.__name = name
+
+    def getName(self):
+        return self.__name
+    
+    name = property(getName, None, None, "Name's Docstring")
+    
+    def getTopArtists(self):
+        return Geo.getTopArtists(self.__api, self.name)
+    
+    topArtists = property(getTopArtists, None, None, "Docstring")
+    topArtist = property(
+                         lambda self: len(self.topArtists) and self.topArtists[0],
+                         None, None, "Docstring"                         
+                         )
+    
+    def getTopTracks(self):
+        return Geo.getTopTracks(self.__api, self.name)
+    
+    topTracks = property(getTopTracks, None, None, "Docstring")
+    topTrack = property(lambda self: len(self.topTracks) and self.topTracks[0],
+                        None, None, "Docstring")
+    
+    def __eq__(self, other):
+        return self.name == other.name

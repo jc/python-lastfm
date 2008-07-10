@@ -26,12 +26,7 @@ class Event(object):
         self.__title = title
         self.__artists = artists
         self.__headliner = headliner
-        self.__venue = venue and Venue(
-                                       self,
-                                       name = venue.name,
-                                       location = venue.location,
-                                       url = venue.url
-                                       )
+        self.__venue = venue
         self.__startDate = startDate
         self.__startTime = startTime
         self.__description = description
@@ -118,12 +113,14 @@ class Event(object):
                      artists = [Artist(api, name = a.text) for a in data.findall('artists/artist')],
                      headliner = data.findtext('artists/headliner'),
                      venue = Venue(
-                                   event = int(data.findtext('id')),
                                    name = data.findtext('venue/name'),
                                    location = Location(
-                                                       event = int(data.findtext('id')),
+                                                       api,
                                                        city = data.findtext('venue/location/city'),
-                                                       country = data.findtext('venue/location/country'),
+                                                       country = Country(
+                                                            api,
+                                                            name = data.findtext('venue/location/country')
+                                                            ),
                                                        street = data.findtext('venue/location/street'),
                                                        postalCode = data.findtext('venue/location/postalcode'),
                                                        latitude = float(data.findtext(
@@ -153,4 +150,4 @@ import time
 
 from api import Api
 from artist import Artist
-from geo import Venue, Location
+from geo import Venue, Location, Country

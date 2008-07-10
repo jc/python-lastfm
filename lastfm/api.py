@@ -132,10 +132,25 @@ class Api(object):
                   mbid = None):
         return Artist.getInfo(self, artist, mbid)
     
+    def searchArtist(self,
+                     artist,
+                     limit = None,
+                     page = None):
+        return Artist.search(self, artist, limit, page)
+    
     def getEvent(self, event):
         return Event.getInfo(self, event)
+    
+    def getLocation(self, name):
+        return Location(self, name)
+    
+    def getCountry(self, name):
+        return Country(self, name)
+    
+    def getGroup(self, name):
+        return Group(self, name)
 
-    def fetchUrl(self,
+    def _fetchUrl(self,
                   url,
                   parameters = None,
                   no_cache = False):
@@ -184,7 +199,7 @@ class Api(object):
     
     def fetchData(self, params):
         params.update({'api_key': self.__apiKey})
-        xml = self.fetchUrl(Api.API_ROOT_URL, params)
+        xml = self._fetchUrl(Api.API_ROOT_URL, params)
        
         data = ElementTree.XML(xml)
         if data.get('status') != "ok":
@@ -202,14 +217,14 @@ if sys.version.startswith('2.5'):
 else:
     import cElementTree as ElementTree
 
+from error import LastfmError
+from filecache import FileCache
 
 from album import Album
 from artist import Artist
-from geo import Geo
 from event import Event
-from filecache import FileCache
-#from group import Group
+from geo import Location, Country
+from group import Group
 #from tag import Tag
 #from track import Track
 #from user import User
-from error import LastfmError

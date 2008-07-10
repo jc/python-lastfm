@@ -15,7 +15,7 @@ class Artist(object):
                  streamable = None,
                  stats = None,
                  similar = None,
-                 tags = None,
+                 topTags = None,
                  bio = None):
         self.__api = api
         self.__name = name
@@ -29,7 +29,7 @@ class Artist(object):
                              plays = stats.plays
                             )
         self.__similar = similar
-        self.__tags = tags
+        self.__topTags = topTags
         self.__bio = bio and Bio(
                          artist = self,
                          published = bio.published,
@@ -52,14 +52,17 @@ class Artist(object):
     def getStats(self):
         return self.__stats
 
-    def getSimilar(self):
+    def getSimilar(self, limit = None):
         if self.__similar:
             return self.__similar
         else:
             pass
 
-    def getTags(self):
-        return self.__tags
+    def getTopTags(self):
+        if self.__topTags:
+            return self.__topTags
+        else:
+            pass
 
     def getBio(self):
         return self.__bio
@@ -76,9 +79,28 @@ class Artist(object):
 
     similar = property(getSimilar, None, None, "Similar's Docstring")
 
-    tags = property(getTags, None, None, "Tags's Docstring")
+    topTags = property(getTopTags, None, None, "Tags's Docstring")
 
     bio = property(getBio, None, None, "Bio's Docstring")
+    
+    def getEvents(self):
+        pass
+    
+    def getTopAlbums(self):
+        pass
+    
+    def getTopFans(self):
+        pass
+    
+    def getTopTracks(self):
+        pass
+    
+    @staticmethod
+    def search(api,
+               artist,
+               limit = None,
+               page = None):
+        pass
 
     @staticmethod
     def getInfo(api,
