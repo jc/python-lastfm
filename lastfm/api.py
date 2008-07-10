@@ -149,6 +149,27 @@ class Api(object):
     
     def getGroup(self, name):
         return Group(self, name)
+    
+    def fetchPlaylist(self, playlistUrl):
+        return Playlist(self, playlistUrl)
+    
+    def getTag(self, name):
+        return Tag(self, name)
+    
+    def getGlobalTopTags(self):
+        return Tag.getTopTags(self)
+    
+    def searchTag(self,
+                  tag,
+                  limit = None,
+                  page = None):
+        return Tag.search(self, tag, limit, page)
+    
+    def compareTaste(self,
+                     type1, type2,
+                     value1, value2,
+                     limit = None):
+        return Tasteometer(self, type1, type2, value1, value2, limit)
 
     def _fetchUrl(self,
                   url,
@@ -197,14 +218,17 @@ class Api(object):
         # Always return the latest version
         return url_data
     
-    def fetchData(self, params):
+    def fetchData(self, params, parse = True):
         params.update({'api_key': self.__apiKey})
         xml = self._fetchUrl(Api.API_ROOT_URL, params)
        
         data = ElementTree.XML(xml)
         if data.get('status') != "ok":
             raise LastfmError("Error code: %s (%s)" % (data.find("error").get('code'), data.findtext('error')))
-        return data
+        if parse:
+            return data
+        else:
+            return xml
     
 import urllib
 import urllib2
@@ -225,6 +249,8 @@ from artist import Artist
 from event import Event
 from geo import Location, Country
 from group import Group
-#from tag import Tag
+from playlist import Playlist
+from tag import Tag
+from tasteometer import Tasteometer
 #from track import Track
 #from user import User

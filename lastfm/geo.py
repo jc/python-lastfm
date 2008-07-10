@@ -151,3 +151,6 @@ class Country(object):
     
     def __eq__(self, other):
         return self.name == other.name
+    
+from artist import Artist
+from track import Track

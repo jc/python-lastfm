@@ -126,6 +126,5 @@ from datetime import datetime
 import time
 
 from error import LastfmError
-from api import Api
 from tag import Tag
 from artist import Artist

@@ -220,5 +220,4 @@ import time
 import types
 
 from error import LastfmError
-from api import Api
 from tag import Tag

@@ -148,6 +148,5 @@ class Event(object):
 from datetime import datetime
 import time
 
-from api import Api
 from artist import Artist
 from geo import Venue, Location, Country

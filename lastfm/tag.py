@@ -24,3 +24,29 @@ class Tag(object):
 
     url = property(getUrl, None, None, "Url's Docstring")        
     
+    def getSimilar(self):
+        pass
+    
+    def getTopAlbums(self):
+        pass
+    
+    def getTopArtists(self):
+        pass
+    
+    def getTopTracks(self):
+        pass
+    
+    @staticmethod
+    def getTopTags(api):
+        pass
+    
+    @staticmethod
+    def search(api,
+               tag,
+               limit = None,
+               page = None):
+        pass
+    
+from album import Album
+from artist import Artist
+from track import Track
