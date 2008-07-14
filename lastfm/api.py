@@ -170,6 +170,19 @@ class Api(object):
                      value1, value2,
                      limit = None):
         return Tasteometer(self, type1, type2, value1, value2, limit)
+    
+    def getTrack(self, name, artist = None):
+        return Track(self, name = name, artist = artist)
+    
+    def searchTrack(self,
+                    track,
+                    artist = None,
+                    limit = None,
+                    page = None):
+        return Track.search(self, track, artist, limit, page)
+    
+    def getUser(self, name):
+        return User(self, name = name)
 
     def _fetchUrl(self,
                   url,
