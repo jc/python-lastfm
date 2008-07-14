@@ -114,5 +114,5 @@ class Track(object):
         pass
         
 from error import LastfmError
-from user import user
+from user import User
 from tag import Tag
