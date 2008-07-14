@@ -4,6 +4,8 @@ __author__ = "Abhinav Sarkar"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
+from base import LastfmBase
+
 class Geo(object):
     """A class representing an geographic location."""
     @staticmethod
@@ -18,9 +20,9 @@ class Geo(object):
     def getTopTracks(api, country):
         pass
 
-class Venue(object):
+class Venue(LastfmBase):
     """A class representing a venue of an event"""
-    def __init__(self,
+    def init(self,
                  name = None,
                  location = None,
                  url = None):
@@ -43,14 +45,30 @@ class Venue(object):
 
     url = property(getUrl, None, None, "Url's Docstring")
     
-    def __eq__(self, other):
-        return sefl.url == other.url
+    @staticmethod
+    def hashFunc(*args, **kwds):
+        try:
+            return hash(kwds['url'])
+        except KeyError:
+            raise LastfmError("url has to be provided for hashing")
+        
+    def __hash__(self):
+        return self.__class__.hashFunc(url = self.url)
     
-class Location(object):
+    def __eq__(self, other):
+        return self.url == other.url
+    
+    def __lt__(self, other):
+        return self.name < other.name
+        
+    def __repr__(self):
+        return "<lastfm.geo.Venue: %s, %s>" % (self.name, self.location.city)
+    
+class Location(LastfmBase):
     """A class representing a location of an event"""
     xmlns = "http://www.w3.org/2003/01/geo/wgs84_pos#"
     
-    def __init__(self,
+    def init(self,
                  api,
                  name = None,
                  city = None,
@@ -117,12 +135,31 @@ class Location(object):
     
     events = property(getEvents, None, None, "Event's Docstring")
     
+    @staticmethod
+    def hashFunc(*args, **kwds):
+        try:
+            return hash("%s%s" % (kwds['latitude'], kwds['longitude']))
+        except KeyError:
+            raise LastfmError("latitude and longitude have to be provided for hashing")
+        
+    def __hash__(self):
+        return self.__class__.hashFunc(latitude = self.latitude, longitude = self.longitude)
+    
     def __eq__(self, other):
         return self.latitude == other.latitude and self.longitude == other.longitude
     
-class Country(object):
+    def __lt__(self, other):
+        if self.country != other.country:
+            return self.country < other.country
+        else:
+            return self.city < other.city
+    
+    def __repr__(self):
+        return "<lastfm.geo.Location: (%s, %s)>" % (self.latitude, self.longitude)
+    
+class Country(LastfmBase):
     """A class representing a country."""
-    def __init__(self,
+    def init(self,
                  api,
                  name = None):
         self.__api = api
@@ -149,8 +186,24 @@ class Country(object):
     topTrack = property(lambda self: len(self.topTracks) and self.topTracks[0],
                         None, None, "Docstring")
     
+    @staticmethod
+    def hashFunc(*args, **kwds):
+        try:
+            return hash(kwds['name'])
+        except KeyError:
+            raise LastfmError("name has to be provided for hashing")
+        
+    def __hash__(self):
+        return self.__class__.hashFunc(name = self.name)
+    
     def __eq__(self, other):
         return self.name == other.name
     
+    def __lt__(self, other):
+        return self.name < other.name
+    
+    def __repr__(self):
+        return "<lastfm.geo.Country: %s" % self.name
+
 from artist import Artist
 from track import Track

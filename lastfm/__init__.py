@@ -4,7 +4,9 @@ __author__ = "Abhinav Sarkar"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
+from base import LastfmBase
 from error import LastfmError
+from api import Api
 
 from album import Album
 from artist import Artist
@@ -17,6 +19,6 @@ from tasteometer import Tasteometer
 from track import Track
 from user import User
 
-__all__ = ['Album', 'Artist', 'Event', 'Location', 'Country',
-           'Group', 'Playlist', 'Tag', 'Tasteometer', 'Track',
-           'User']
+__all__ = ['LastfmError', 'Api', 'Album', 'Artist', 'Event',
+           'Location', 'Country', 'Group', 'Playlist', 'Tag',
+           'Tasteometer', 'Track', 'User']

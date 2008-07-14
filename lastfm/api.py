@@ -265,5 +265,5 @@ from group import Group
 from playlist import Playlist
 from tag import Tag
 from tasteometer import Tasteometer
-#from track import Track
-#from user import User
+from track import Track
+from user import User

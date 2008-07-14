@@ -4,9 +4,11 @@ __author__ = "Abhinav Sarkar"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
-class Track(object):
+from base import LastfmBase
+
+class Track(LastfmBase):
     """A class representing a track."""
-    def __init__(self,
+    def init(self,
                  api,
                  name = None,
                  mbid = None,
@@ -112,6 +114,31 @@ class Track(object):
                limit = None,
                page = None):
         pass
+    
+    @staticmethod
+    def hashFunc(*args, **kwds):
+        try:
+            return hash("%s%s" % (kwds['name'], hash(kwds['artist'])))
+        except KeyError:
+            raise LastfmError("name and artist have to be provided for hashing")
+        
+    def __hash__(self):
+        return self.__class__.hashFunc(name = self.name, artist = self.artist)
+    
+    def __eq__(self, other):
+        if self.mbid and other.mbid:
+            return self.mbid == other.mbid
+        if self.url and other.url:
+            return self.url == other.url
+        if (self.name and self.artist) and (other.name and other.artist):
+            return (self.name == other.name) and (self.artist == other.artist)
+        return super(Track, self).__eq__(other)
+    
+    def __lt__(self, other):
+        return self.name < other.name
+    
+    def __repr__(self):
+        return "<lastfm.Track: %s by %s>" % (self.name, self.artist.name)
         
 from error import LastfmError
 from user import User

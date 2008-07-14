@@ -4,13 +4,16 @@ __author__ = "Abhinav Sarkar"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
-class Artist(object):
+from base import LastfmBase
+
+class Artist(LastfmBase):
     """A class representing an artist."""
-    def __init__(self,
+    def init(self,
                  api,
                  name = None,
                  mbid = None,
                  url = None,
+                 match = None,
                  image = None,
                  streamable = None,
                  stats = None,
@@ -20,7 +23,8 @@ class Artist(object):
         self.__api = api
         self.__name = name
         self.__mbid = mbid
-        self.___url = url
+        self.__url = url
+        self.__match = match
         self.__image = image
         self.__streamable = streamable
         self.__stats = stats and Stats(
@@ -43,6 +47,12 @@ class Artist(object):
     def getMbid(self):
         return self.__mbid
 
+    def getUrl(self):
+        return self.__url
+
+    def getMatch(self):
+        return self.__match
+    
     def getImage(self):
         return self.__image
 
@@ -53,10 +63,24 @@ class Artist(object):
         return self.__stats
 
     def getSimilar(self, limit = None):
-        if self.__similar:
-            return self.__similar
-        else:
-            pass
+        params = {
+                  'method': 'artist.getsimilar',
+                  'artist': self.__name}
+        if limit is not None:
+            params.update({'limit': limit})
+        data = self.__api.fetchData(params).find('similarartists')
+        self.__similar = [
+                          Artist(
+                                 self.__api,
+                                 name = a.findtext('name'),
+                                 mbid = a.findtext('mbid'),
+                                 match = float(a.findtext('match')),
+                                 url = 'http://' + a.findtext('url'),
+                                 image = {'large': a.findtext('image')}
+                                 )
+                          for a in data.findall('artist')
+                          ]
+        return self.__similar
 
     def getTopTags(self):
         if self.__topTags:
@@ -70,6 +94,10 @@ class Artist(object):
     name = property(getName, None, None, "Name's Docstring")
 
     mbid = property(getMbid, None, None, "Mbid's Docstring")
+    
+    url = property(getUrl, None, None, "Url's Docstring")
+
+    match = property(getMatch, None, None, "Match's Docstring")
 
     image = property(getImage, None, None, "Image's Docstring")
 
@@ -84,7 +112,51 @@ class Artist(object):
     bio = property(getBio, None, None, "Bio's Docstring")
     
     def getEvents(self):
-        pass
+        params = {'method': 'artist.getevents', 'artist': self.name}
+        data = self.__api.fetchData(params).find('events')
+        
+        return [
+                Event(
+                      self.__api,
+                      id = int(e.findtext('id')),
+                      title = e.findtext('title'),
+                      artists = [Artist(self.__api, name = a.text) for a in e.findall('artists/artist')],
+                      headliner = e.findtext('artists/headliner'),
+                      venue = Venue(
+                                    name = e.findtext('venue/name'),
+                                    location = Location(
+                                                        self.__api,
+                                                        city = e.findtext('venue/location/city'),
+                                                        country = Country(
+                                                            self.__api,
+                                                            name = e.findtext('venue/location/country')
+                                                            ),
+                                                        street = e.findtext('venue/location/street'),
+                                                        postalCode = e.findtext('venue/location/postalcode'),
+                                                        latitude = float(e.findtext(
+                                                            'venue/location/{%s}point/{%s}lat' % ((Location.xmlns,)*2)
+                                                            )),
+                                                        longitude = float(e.findtext(
+                                                            'venue/location/{%s}point/{%s}long' % ((Location.xmlns,)*2)
+                                                            )),
+                                                        timezone = e.findtext('venue/location/timezone')
+                                                        ),
+                                    url = e.findtext('venue/url')
+                                    ),
+                      startDate = e.findtext('startDate') and 
+                                    datetime(*(time.strptime(e.findtext('startDate').strip(), '%a, %d %b %Y')[0:6])) or
+                                    None,
+                      startTime = e.findtext('startTime') and 
+                                    datetime(*(time.strptime(e.findtext('startTime').strip(), '%H:%M')[0:6])) or
+                                    None,
+                      description = e.findtext('description'),
+                      image = dict([(i.get('size'), i.text) for i in e.findall('image')]),
+                      url = e.findtext('url')
+                      )
+                for e in data.findall('event')
+                ]
+    
+    events = property(getEvents, None, None, "Docstring")        
     
     def getTopAlbums(self):
         pass
@@ -136,7 +208,7 @@ class Artist(object):
                                         )
                                  for a in data.findall('similar/artist')
                                  ],
-                      tags = [
+                      topTags = [
                               Tag(
                                   api,
                                   name = t.findtext('name'),
@@ -154,9 +226,29 @@ class Artist(object):
                                 content = data.findtext('bio/content')
                                 )
                       )
+        
+    @staticmethod
+    def hashFunc(*args, **kwds):
+        try:
+            return hash(kwds['name'])
+        except KeyError:
+            raise LastfmError("name has to be provided for hashing")
+        
+    def __hash__(self):
+        return self.__class__.hashFunc(name = self.name)
     
     def __eq__(self, other):
+        if self.mbid and other.mbid:
+            return self.mbid == other.mbid
+        if self.url and other.url:
+            return self.url == other.url
         return self.name == other.name
+    
+    def __lt__(self, other):
+        return self.name < other.name
+    
+    def __repr__(self):
+        return "<lastfm.Artist: %s>" % self.__name
 
 class Stats(object):
     """A class representing the stats of an artist."""
@@ -182,6 +274,9 @@ class Stats(object):
     plays = property(getPlays, None, None, "Plays's Docstring")
 
     artist = property(getArtist, None, None, "Artist's Docstring")
+    
+    def __repr__(self):
+        return "<lastfm.artist.Stats: for artist '%s'>" % self.__artist.name
 
 class Bio(object):
     """A class representing the biography of an artist."""
@@ -214,10 +309,14 @@ class Bio(object):
     content = property(getContent, None, None, "Content's Docstring")
 
     artist = property(getArtist, None, None, "Artist's Docstring")
+    
+    def __repr__(self):
+        return "<lastfm.artist.Bio: for artist '%s'>" % self.__artist.name
 
 from datetime import datetime
 import time
-import types
 
 from error import LastfmError
+from event import Event
+from geo import Country, Location, Venue
 from tag import Tag

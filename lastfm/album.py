@@ -4,9 +4,11 @@ __author__ = "Abhinav Sarkar"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
-class Album(object):
+from base import LastfmBase
+
+class Album(LastfmBase):
     """A class representing an album."""
-    def __init__(self,
+    def init(self,
                  api,
                  name = None,
                  artist = None,
@@ -118,9 +120,33 @@ class Album(object):
                                 for t in data.findall('toptags/tag')
                                 ]
                      )
+    @staticmethod
+    def hashFunc(*args, **kwds):
+        try:
+            return hash("%s%s" % (kwds['name'], hash(kwds['artist'])))
+        except KeyError:
+            raise LastfmError("name and artist have to be provided for hashing")
+        
+    def __hash__(self):
+        return self.__class__.hashFunc(name = self.name, artist = self.artist)
         
     def __eq__(self, other):
-        return self.id == other.id
+        if self.id and other.id:
+            return self.id == other.id
+        if self.mbid and other.mbid:
+            return self.mbid == other.mbid
+        if self.url and other.url:
+            return self.url == other.url
+        if (self.name and self.artist) and (other.name and other.artist):
+            return (self.name == other.name) and (self.artist == other.artist)
+        return super(Album, self).__eq__(other)
+    
+    def __lt__(self, other):
+        return self.name < other.name
+    
+    def __repr__(self):
+        return "<lastfm.Album: %s by %s>" % (self.name, self.artist.name)
+        
                      
 from datetime import datetime
 import time

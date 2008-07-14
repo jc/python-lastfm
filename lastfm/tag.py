@@ -4,9 +4,11 @@ __author__ = "Abhinav Sarkar"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
-class Tag(object):
+from base import LastfmBase
+
+class Tag(LastfmBase):
     """"A class representing a tag."""
-    def __init__(self,
+    def init(self,
                  api,
                  name = None,
                  url = None):
@@ -47,6 +49,25 @@ class Tag(object):
                page = None):
         pass
     
+    @staticmethod
+    def hashFunc(*args, **kwds):
+        try:
+            return hash(kwds['name'])
+        except KeyError:
+            raise LastfmError("name has to be provided for hashing")
+        
+    def __hash__(self):
+        return self.__class__.hashFunc(name = self.name)
+    
+    def __eq__(self, other):
+        return self.name == other.name
+    
+    def __lt__(self, other):
+        return self.name < other.name
+    
+    def __repr__(self):
+        return "<lastfm.Tag: %s>" % self.name
+
 from album import Album
 from artist import Artist
 from track import Track

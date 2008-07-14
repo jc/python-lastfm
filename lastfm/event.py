@@ -4,9 +4,11 @@ __author__ = "Abhinav Sarkar"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
-class Event(object):
+from base import LastfmBase
+
+class Event(LastfmBase):
     """A class representing an event."""
-    def __init__(self,
+    def init(self,
                  api,
                  id = None,
                  title = None,
@@ -105,7 +107,7 @@ class Event(object):
     def getInfo(api, event):
         params = {'method': 'event.getinfo', 'event': event}
         data = api.fetchData(params).find('event')
-        
+    
         return Event(
                      api,
                      id = int(data.findtext('id')),
@@ -133,8 +135,12 @@ class Event(object):
                                                        ),
                                    url = data.findtext('venue/url')
                                    ),
-                     startDate = datetime(*(time.strptime(data.findtext('startDate').strip(), '%a, %d %b %Y')[0:6])),
-                     startTime = datetime(*(time.strptime(data.findtext('startTime').strip(), '%H:%M')[0:6])),
+                     startDate = data.findtext('startDate') and 
+                                    datetime(*(time.strptime(data.findtext('startDate').strip(), '%a, %d %b %Y')[0:6])) or
+                                    None,
+                     startTime = data.findtext('startTime') and 
+                                    datetime(*(time.strptime(data.findtext('startTime').strip(), '%H:%M')[0:6])) or
+                                    None,
                      description = data.findtext('description'),
                      image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
                      url = data.findtext('url'),
@@ -142,8 +148,25 @@ class Event(object):
                      reviews = int(data.findtext('reviews')),
                      tag = data.findtext('tag')
                     )
+        
+    @staticmethod
+    def hashFunc(*args, **kwds):
+        try:
+            return hash(kwds['id'])
+        except KeyError:
+            raise LastfmError("id has to be provided for hashing")
+        
+    def __hash__(self):
+        return Event.hashFunc(id = self.id)
+    
     def __eq__(self, other):
         return self.id == other.id
+    
+    def __lt__(self, other):
+        return self.startDate < other.startDate
+    
+    def __repr__(self):
+        return "<lastfm.Event: %s at %s on %s>" % (self.title, self.venue.name, self.startDate.strftime("%x"))
         
 from datetime import datetime
 import time
