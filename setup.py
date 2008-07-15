@@ -6,7 +6,7 @@ __license__ = "GNU Lesser General Public License"
 
 METADATA = dict(
 	name='lastfm',
-	version='0.1a',
+	version='0.1',
 	description="a pure python interface to the Last.fm Webservices API",
 	long_description="a pure python interface to the Last.fm Webservices API",
 	author="Abhinav Sarkar",
@@ -15,7 +15,7 @@ METADATA = dict(
 	maintainer_email="abhinav.sarkar@gmail.com",
 	url="http://code.google.com/p/python-lastfm/downloads/list/",
 	download_url="http://python-lastfm.googlecode.com/files/lastfm-0.1.tar.gz",
-	package_dir = {'':'src'},
+	package_dir = {'lastfm':'src'},
 	packages=['lastfm'],
 	license="GNU Lesser General Public License",
 	keywords="audioscrobbler webservice api last.fm",
