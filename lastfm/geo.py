@@ -89,7 +89,7 @@ class Location(LastfmBase):
         self.__timezone = timezone
         
     def getName(self):
-        return self.__city
+        return self.__name
 
     def getCity(self):
         return self.__city
@@ -138,12 +138,20 @@ class Location(LastfmBase):
     @staticmethod
     def hashFunc(*args, **kwds):
         try:
-            return hash("%s%s" % (kwds['latitude'], kwds['longitude']))
+            return hash("latlong%s%s" % (kwds['latitude'], kwds['longitude']))
         except KeyError:
-            raise LastfmError("latitude and longitude have to be provided for hashing")
+            try:
+                return hash("name%s" % kwds['name'])
+            except KeyError:
+                raise LastfmError("either latitude and longitude or name has to be provided for hashing")
         
     def __hash__(self):
-        return self.__class__.hashFunc(latitude = self.latitude, longitude = self.longitude)
+        if not self.name:
+            return self.__class__.hashFunc(
+                                           latitude = self.latitude,
+                                           longitude = self.longitude)
+        else:
+            return self.__class__.hashFunc(name = self.name)
     
     def __eq__(self, other):
         return self.latitude == other.latitude and self.longitude == other.longitude
@@ -155,7 +163,10 @@ class Location(LastfmBase):
             return self.city < other.city
     
     def __repr__(self):
-        return "<lastfm.geo.Location: (%s, %s)>" % (self.latitude, self.longitude)
+        if self.name is None:
+            return "<lastfm.geo.Location: (%s, %s)>" % (self.latitude, self.longitude)
+        else:
+            return "<lastfm.geo.Location: %s>" % self.name
     
 class Country(LastfmBase):
     """A class representing a country."""
@@ -204,6 +215,7 @@ class Country(LastfmBase):
     
     def __repr__(self):
         return "<lastfm.geo.Country: %s" % self.name
-
+    
+from error import LastfmError
 from artist import Artist
 from track import Track

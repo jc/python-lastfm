@@ -61,3 +61,5 @@ class Group(LastfmBase):
     
     def __repr__(self):
         return "<lastfm.Group: %s>" % self.name
+
+from error import LastfmError

@@ -142,19 +142,19 @@ class Api(object):
         return Event.getInfo(self, event)
     
     def getLocation(self, name):
-        return Location(self, name)
+        return Location(self, name = name)
     
     def getCountry(self, name):
-        return Country(self, name)
+        return Country(self, name = name)
     
     def getGroup(self, name):
-        return Group(self, name)
+        return Group(self, name = name)
     
     def fetchPlaylist(self, playlistUrl):
-        return Playlist(self, playlistUrl)
+        return Playlist(self, playlistUrl = playlistUrl)
     
     def getTag(self, name):
-        return Tag(self, name)
+        return Tag(self, name = name)
     
     def getGlobalTopTags(self):
         return Tag.getTopTags(self)

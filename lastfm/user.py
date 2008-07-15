@@ -130,3 +130,5 @@ class User(LastfmBase):
     
     def __repr__(self):
         return "<lastfm.User: %s>" % self.name
+    
+from error import LastfmError

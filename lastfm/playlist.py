@@ -40,3 +40,5 @@ class Playlist(LastfmBase, str):
     
     def __repr__(self):
         return "<lastfm.Playlist: %s>" % self.playlistUrl
+    
+from error import LastfmError

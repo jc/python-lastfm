@@ -68,6 +68,7 @@ class Tag(LastfmBase):
     def __repr__(self):
         return "<lastfm.Tag: %s>" % self.name
 
+from error import LastfmError
 from album import Album
 from artist import Artist
 from track import Track

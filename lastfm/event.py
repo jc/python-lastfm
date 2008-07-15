@@ -171,5 +171,6 @@ class Event(LastfmBase):
 from datetime import datetime
 import time
 
+from error import LastfmError
 from artist import Artist
 from geo import Venue, Location, Country
