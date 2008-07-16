@@ -20,6 +20,8 @@ class Artist(LastfmBase):
                  similar = None,
                  topTags = None,
                  bio = None):
+        if not isinstance(api, Api):
+            raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__mbid = mbid
@@ -106,8 +108,12 @@ class Artist(LastfmBase):
     stats = property(getStats, None, None, "Stats's Docstring")
 
     similar = property(getSimilar, None, None, "Similar's Docstring")
+    mostSimilar = property(lambda self: len(self.similar) and self.similar[0],
+                   None, None, "docstring")
 
     topTags = property(getTopTags, None, None, "Tags's Docstring")
+    topTag = property(lambda self: len(self.topTags) and self.topTags[0],
+                   None, None, "docstring")
 
     bio = property(getBio, None, None, "Bio's Docstring")
     
@@ -159,10 +165,43 @@ class Artist(LastfmBase):
     events = property(getEvents, None, None, "Docstring")        
     
     def getTopAlbums(self):
-        pass
+        params = {'method': 'artist.gettopalbums', 'artist': self.name}
+        data = self.__api.fetchData(params).find('topalbums')
+        
+        return [
+                Album(
+                     self.__api,
+                     name = a.findtext('name'),
+                     artist = self,
+                     mbid = a.findtext('mbid'),
+                     url = a.findtext('url'),
+                     image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                     playcount = int(a.findtext('playcount')),
+                     )
+                for a in data.findall('album')
+                ]
+        
+    topAlbums = property(getTopAlbums, None, None, "Docstring")
+    topAlbum = property(lambda self: len(self.topAlbums) and self.topAlbums[0],
+                   None, None, "docstring")
     
     def getTopFans(self):
-        pass
+        params = {'method': 'artist.gettopfans', 'artist': self.name}
+        data = self.__api.fetchData(params).find('topfans')
+        return [
+                User(
+                     self.__api,
+                     name = u.findtext('name'),
+                     url = u.findtext('url'),
+                     image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
+                     weight = int(u.findtext('weight'))
+                     )
+                for u in data.findall('user')
+                ]
+        
+    topFans = property(getTopFans, None, None, "Docstring")
+    topFan = property(lambda self: len(self.topFans) and self.topFans[0],
+                   None, None, "docstring")
     
     def getTopTracks(self):
         pass
@@ -230,9 +269,13 @@ class Artist(LastfmBase):
     @staticmethod
     def hashFunc(*args, **kwds):
         try:
-            return hash(kwds['name'])
+            return hash(kwds['name'].lower())
         except KeyError:
-            raise LastfmError("name has to be provided for hashing")
+            try:
+                print args[1].lower()
+                return hash(args[1].lower())
+            except IndexError:
+                raise LastfmError("name has to be provided for hashing")
         
     def __hash__(self):
         return self.__class__.hashFunc(name = self.name)
@@ -316,7 +359,10 @@ class Bio(object):
 from datetime import datetime
 import time
 
+from api import Api
+from album import Album
 from error import LastfmError
 from event import Event
 from geo import Country, Location, Venue
 from tag import Tag
+from user import User

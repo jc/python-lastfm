@@ -78,6 +78,8 @@ class Location(LastfmBase):
                  latitude = None,
                  longitude = None,
                  timezone = None):
+        if not isinstance(api, Api):
+            raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__city = city
@@ -173,6 +175,8 @@ class Country(LastfmBase):
     def init(self,
                  api,
                  name = None):
+        if not isinstance(api, Api):
+            raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
 
@@ -216,6 +220,7 @@ class Country(LastfmBase):
     def __repr__(self):
         return "<lastfm.geo.Country: %s" % self.name
     
+from api import Api
 from error import LastfmError
 from artist import Artist
 from track import Track

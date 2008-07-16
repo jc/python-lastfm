@@ -17,6 +17,8 @@ class Track(LastfmBase):
                  artist = None,
                  image = None,
                  match = None):
+        if not isinstance(api, Api):
+            raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__mbid = mbid
@@ -69,7 +71,7 @@ class Track(LastfmBase):
         if not ((artist and track) or mbid):
             raise LastfmError("either (artist and track) or mbid has to be given as argument.")
         
-        if artist and album:
+        if artist and track:
             params.update({'artist': artist, 'track': track})
         elif mbid:
             params.update({'mbid': mbid})
@@ -138,8 +140,9 @@ class Track(LastfmBase):
         return self.name < other.name
     
     def __repr__(self):
-        return "<lastfm.Track: %s by %s>" % (self.name, self.artist.name)
-        
+        return "<lastfm.Track: '%s' by %s>" % (self.name, self.artist.name)
+
+from api import Api
 from error import LastfmError
 from user import User
 from tag import Tag

@@ -20,6 +20,8 @@ class Album(LastfmBase):
                  listeners = None,
                  playcount = None,
                  topTags = None):
+        if not isinstance(api, Api):
+            raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__artist = artist
@@ -60,6 +62,14 @@ class Album(LastfmBase):
         return self.__playcount
 
     def getTopTags(self):
+        if self.__topTags is None:
+            self.__topTags = Album.getInfo(
+                                           self.__api,
+                                           self.artist.name,
+                                           self.name,
+                                           self.mbid,
+                                           bypassRegistry = True
+                                           ).topTags
         return self.__topTags
 
     name = property(getName, None, None, "Name's Docstring")
@@ -81,12 +91,14 @@ class Album(LastfmBase):
     playcount = property(getPlaycount, None, None, "Playcount's Docstring")
 
     topTags = property(getTopTags, None, None, "TopTags's Docstring")
+    topTag = property(lambda self: self.topTags and len(self.topTags) and self.topTags[0],
+                   None, None, "docstring")
     
     @staticmethod
     def getInfo(api,
                 artist = None,
                 album = None,
-                mbid = None):
+                mbid = None, **kwds):
         params = {'method': 'album.getinfo'}
         if not ((artist and album) or mbid):
             raise LastfmError("either (artist and album) or mbid has to be given as argument.")
@@ -106,7 +118,7 @@ class Album(LastfmBase):
                      id = int(data.findtext('id')),
                      mbid = data.findtext('mbid'),
                      url = data.findtext('url'),
-                     releaseDate = data.findtext('releasedate') and 
+                     releaseDate = data.findtext('releasedate') and data.findtext('releasedate').strip() and 
                                         datetime(*(time.strptime(data.findtext('releasedate').strip(), '%d %b %Y, 00:00')[0:6])),
                      image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
                      listeners = int(data.findtext('listeners')),
@@ -118,7 +130,8 @@ class Album(LastfmBase):
                                     url = t.findtext('url')
                                     ) 
                                 for t in data.findall('toptags/tag')
-                                ]
+                                ],
+                     **kwds
                      )
     @staticmethod
     def hashFunc(*args, **kwds):
@@ -145,12 +158,13 @@ class Album(LastfmBase):
         return self.name < other.name
     
     def __repr__(self):
-        return "<lastfm.Album: %s by %s>" % (self.name, self.artist.name)
+        return "<lastfm.Album: '%s' by %s>" % (self.name, self.artist.name)
         
                      
 from datetime import datetime
 import time
 
+from api import Api
 from error import LastfmError
 from tag import Tag
 from artist import Artist

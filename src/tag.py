@@ -12,6 +12,8 @@ class Tag(LastfmBase):
                  api,
                  name = None,
                  url = None):
+        if not isinstance(api, Api):
+            raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__url = url
@@ -68,6 +70,7 @@ class Tag(LastfmBase):
     def __repr__(self):
         return "<lastfm.Tag: %s>" % self.name
 
+from api import Api
 from error import LastfmError
 from album import Album
 from artist import Artist

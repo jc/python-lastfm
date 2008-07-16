@@ -8,15 +8,19 @@ from base import LastfmBase
 
 class User(LastfmBase):
     """A class representing an user."""
-    def __init__(self,
+    def init(self,
                  api,
                  name = None,
                  url = None,
-                 image = None):
+                 image = None,
+                 weight = None):
+        if not isinstance(api, Api):
+            raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__url = url
         self.__image = image
+        self.__weight = weight
 
     def getName(self):
         return self.__name
@@ -27,11 +31,16 @@ class User(LastfmBase):
     def getImage(self):
         return self.__image
 
+    def getWeight(self):
+        return self.__weight
+    
     name = property(getName, None, None, "Name's Docstring")
 
     url = property(getUrl, None, None, "Url's Docstring")
 
     image = property(getImage, None, None, "Image's Docstring")
+    
+    weight = property(getWeight, None, None, "Weight's Docstring")
     
     def getEvents(self):
         pass
@@ -130,5 +139,6 @@ class User(LastfmBase):
     
     def __repr__(self):
         return "<lastfm.User: %s>" % self.name
-    
+
+from api import Api
 from error import LastfmError

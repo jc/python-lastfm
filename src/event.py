@@ -23,6 +23,8 @@ class Event(LastfmBase):
                  attendance = None,
                  reviews = None,
                  tag = None):
+        if not isinstance(api, Api):
+            raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
         self.__id = id
         self.__title = title
@@ -171,6 +173,7 @@ class Event(LastfmBase):
 from datetime import datetime
 import time
 
+from api import Api
 from error import LastfmError
 from artist import Artist
 from geo import Venue, Location, Country

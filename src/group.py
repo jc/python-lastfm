@@ -11,6 +11,8 @@ class Group(LastfmBase):
     def init(self,
                  api,
                  name = None):
+        if not isinstance(api, Api):
+            raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
 
@@ -62,4 +64,5 @@ class Group(LastfmBase):
     def __repr__(self):
         return "<lastfm.Group: %s>" % self.name
 
+from api import Api
 from error import LastfmError

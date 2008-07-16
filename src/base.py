@@ -9,11 +9,16 @@ class LastfmBase(object):
     
     registry = {}
     
-    def __new__(cls, *args, **kwds):   
-        inst, alreadyRegistered = LastfmBase.register(object.__new__(cls),
-                                                        cls.hashFunc(*args, **kwds))
+    def __new__(cls, *args, **kwds):
+        key = cls.hashFunc(*args, **kwds)
+        inst, alreadyRegistered = LastfmBase.register(object.__new__(cls), key)
         if not alreadyRegistered:
             inst.init(*args, **kwds)
+        else:
+            if 'bypassRegistry' in kwds:
+                del kwds['bypassRegistry']
+                inst = object.__new__(cls)
+                inst.init(*args, **kwds)
         return inst
     
     @staticmethod
@@ -21,8 +26,8 @@ class LastfmBase(object):
         if not ob.__class__ in LastfmBase.registry:
             LastfmBase.registry[ob.__class__] = {}
         if key in LastfmBase.registry[ob.__class__]:
-            #print "already registered: %s" % ob.__class__
             ob = LastfmBase.registry[ob.__class__][key]
+            #print "already registered: %s" % repr(ob)
             return (ob, True)
         else:
             #print "not already registered: %s" % ob.__class__

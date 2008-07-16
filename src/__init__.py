@@ -7,6 +7,7 @@ __license__ = "GNU Lesser General Public License"
 from base import LastfmBase
 from error import LastfmError
 from api import Api
+from registry import Registry
 
 from album import Album
 from artist import Artist
@@ -21,4 +22,4 @@ from user import User
 
 __all__ = ['LastfmError', 'Api', 'Album', 'Artist', 'Event',
            'Location', 'Country', 'Group', 'Playlist', 'Tag',
-           'Tasteometer', 'Track', 'User']
+           'Tasteometer', 'Track', 'User', 'Registry']

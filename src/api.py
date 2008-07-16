@@ -125,6 +125,8 @@ class Api(object):
                  artist = None,
                  album = None,
                  mbid = None):
+        if isinstance(artist, Artist):
+            artist = artist.name
         return Album.getInfo(self, artist, album, mbid)
     
     def getArtist(self,
@@ -172,6 +174,8 @@ class Api(object):
         return Tasteometer(self, type1, type2, value1, value2, limit)
     
     def getTrack(self, name, artist = None):
+        if isinstance(artist, Artist):
+            artist = artist.name
         return Track(self, name = name, artist = artist)
     
     def searchTrack(self,
@@ -179,6 +183,8 @@ class Api(object):
                     artist = None,
                     limit = None,
                     page = None):
+        if isinstance(artist, Artist):
+            artist = artist.name
         return Track.search(self, track, artist, limit, page)
     
     def getUser(self, name):
@@ -242,12 +248,14 @@ class Api(object):
             return data
         else:
             return xml
+        
+    def __repr__(self):
+        return "<lastfm.Api: %s>" % self.__apiKey
     
 import urllib
 import urllib2
 import urlparse
 import time
-from datetime import datetime
 import sys
 if sys.version.startswith('2.5'):
     import xml.etree.cElementTree as ElementTree
