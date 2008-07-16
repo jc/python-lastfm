@@ -63,13 +63,20 @@ class Album(LastfmBase):
 
     def getTopTags(self):
         if self.__topTags is None:
-            self.__topTags = Album.getInfo(
-                                           self.__api,
-                                           self.artist.name,
-                                           self.name,
-                                           self.mbid,
-                                           bypassRegistry = True
-                                           ).topTags
+            params = {'method': 'album.getinfo'}
+            if self.artist and self.name:
+                params.update({'artist': self.artist.name, 'album': self.name})
+            elif self.mbid:
+                params.update({'mbid': self.mbid})
+            data = self.__api.fetchData(params).find('album')
+            self.__topTags = [
+                              Tag(
+                                  self.__api,
+                                  name = t.findtext('name'),
+                                  url = t.findtext('url')
+                                  ) 
+                              for t in data.findall('toptags/tag')
+                              ]
         return self.__topTags
 
     name = property(getName, None, None, "Name's Docstring")
@@ -98,7 +105,7 @@ class Album(LastfmBase):
     def getInfo(api,
                 artist = None,
                 album = None,
-                mbid = None, **kwds):
+                mbid = None):
         params = {'method': 'album.getinfo'}
         if not ((artist and album) or mbid):
             raise LastfmError("either (artist and album) or mbid has to be given as argument.")
@@ -130,8 +137,7 @@ class Album(LastfmBase):
                                     url = t.findtext('url')
                                     ) 
                                 for t in data.findall('toptags/tag')
-                                ],
-                     **kwds
+                                ]
                      )
     @staticmethod
     def hashFunc(*args, **kwds):

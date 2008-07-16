@@ -16,7 +16,9 @@ class Track(LastfmBase):
                  streamable = None,
                  artist = None,
                  image = None,
-                 match = None):
+                 match = None,
+                 playcount = None,
+                 fullTrack = None):
         if not isinstance(api, Api):
             raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
@@ -27,6 +29,8 @@ class Track(LastfmBase):
         self.__artist = artist
         self.__image = image
         self.__match = match
+        self.__playcount = playcount
+        self.__fullTrack = fullTrack
 
     def getName(self):
         return self.__name
@@ -48,6 +52,12 @@ class Track(LastfmBase):
 
     def getMatch(self):
         return self.__match
+    
+    def getPlaycount(self):
+        return self.__playcount
+    
+    def getFullTrack(self):
+        return self.__fullTrack
 
     name = property(getName, None, None, "Name's Docstring")
 
@@ -62,6 +72,10 @@ class Track(LastfmBase):
     image = property(getImage, None, None, "Image's Docstring")
 
     match = property(getMatch, None, None, "Match's Docstring")
+    
+    playcount = property(getPlaycount, None, None, "Match's Docstring")
+    
+    fullTrack = property(getFullTrack, None, None, "Match's Docstring")
     
     def __checkParams(self,
                       params,

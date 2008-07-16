@@ -67,7 +67,8 @@ class Artist(LastfmBase):
     def getSimilar(self, limit = None):
         params = {
                   'method': 'artist.getsimilar',
-                  'artist': self.__name}
+                  'artist': self.__name
+                  }
         if limit is not None:
             params.update({'limit': limit})
         data = self.__api.fetchData(params).find('similarartists')
@@ -85,10 +86,21 @@ class Artist(LastfmBase):
         return self.__similar
 
     def getTopTags(self):
-        if self.__topTags:
-            return self.__topTags
-        else:
-            pass
+        if self.__topTags is None or len(self.__topTags) < 6:
+            params = {
+                      'method': 'artist.gettoptags',
+                      'artist': self.__name
+                      }
+            data = self.__api.fetchData(params).find('toptags')
+            self.__topTags = [
+                              Tag(
+                                  self.__api,
+                                  name = t.findtext('name'),
+                                  url = t.findtext('url')
+                                  )
+                              for t in data.findall('tag')
+                              ]
+        return self.__topTags
 
     def getBio(self):
         return self.__bio
@@ -204,7 +216,25 @@ class Artist(LastfmBase):
                    None, None, "docstring")
     
     def getTopTracks(self):
-        pass
+        params = {'method': 'artist.gettoptracks', 'artist': self.name}
+        data = self.__api.fetchData(params).find('toptracks')
+        return [
+                Track(
+                      self.__api,
+                      name = t.findtext('name'),
+                      artist = self,
+                      mbid = t.findtext('mbid'),
+                      playcount = int(t.findtext('playcount')),
+                      streamable = (t.findtext('streamable') == '1'),
+                      fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                      image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                      )
+                for t in data.findall('track')
+                ]
+    
+    topTracks = property(getTopTracks, None, None, "Docstring")
+    topTrack = property(lambda self: len(self.topTracks) and self.topTracks[0],
+                   None, None, "docstring")
     
     @staticmethod
     def search(api,
@@ -365,4 +395,5 @@ from error import LastfmError
 from event import Event
 from geo import Country, Location, Venue
 from tag import Tag
+from track import Track
 from user import User
