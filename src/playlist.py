@@ -6,39 +6,44 @@ __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
 
-class Playlist(LastfmBase, str):
+class Playlist(LastfmBase):
     """A class representing an XPSF playlist."""
-    def init(self, xpsfData, playlistUrl):
-        self = xpsfData
-        self.__playlistUrl = playlistUrl
+    def init(self, xpsfData, url):
+        self.__data = xpsfData
+        self.__url = url
 
-    def getPlaylistUrl(self):
-        return self.__playlistUrl
+    def getData(self):
+        return self.__data
+    
+    def getUrl(self):
+        return self.__url
+    
+    data = property(getData, None, None, "docstring")
 
-    playlistUrl = property(getPlaylistUrl, None, None, "PlaylistUrl's Docstring")
+    url = property(getUrl, None, None, "url's Docstring")
         
     @staticmethod
-    def fetch(api, playlistUrl):
-        params = {'method': 'playlist.fetch'}
-        return Playlist(api.fetchData(params, parse = False), playlistUrl)
+    def fetch(api, url):
+        params = {'method': 'playlist.fetch', 'playlistURL': url}
+        return Playlist(api.fetchData(params, parse = False), url = url)
     
     @staticmethod
     def hashFunc(*args, **kwds):
         try:
-            return hash(kwds['playlistUrl'])
+            return hash(kwds['url'])
         except KeyError:
-            raise LastfmError("playlistUrl has to be provided for hashing")
+            raise LastfmError("url has to be provided for hashing")
         
     def __hash__(self):
-        return self.__class__.hashFunc(playlistUrl = self.playlistUrl)
+        return self.__class__.hashFunc(url = self.url)
     
     def __eq__(self, other):
-        return self.playlistUrl == other.playlistUrl
+        return self.url == other.url
     
     def __lt__(self, other):
-        return self.playlistUrl < other.playlistUrl
+        return self.url < other.url
     
     def __repr__(self):
-        return "<lastfm.Playlist: %s>" % self.playlistUrl
+        return "<lastfm.Playlist: %s>" % self.url
     
 from error import LastfmError

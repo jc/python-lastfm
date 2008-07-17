@@ -65,15 +65,15 @@ class SearchResult(LastfmBase):
     @staticmethod
     def hashFunc(*args, **kwds):
         try:
-            return hash("%s%s%s" % (kwds['searchTerms'], kwds['type'], kwds['startIndex']))
+            return hash("%s%s%s" % (kwds['searchTerms'], kwds['type'], kwds['startPage']))
         except KeyError:
-            raise LastfmError("name and artist have to be provided for hashing")
+            raise LastfmError("searchTerms, type and startPage have to be provided for hashing")
         
     def __hash__(self):
         return self.__class__.hashFunc(
                                        searchTerms = self.searchTerms,
                                        type = self.type,
-                                       startIndex = self.startIndex
+                                       startPage = self.startPage
                                        )
     
     def __eq__(self, other):

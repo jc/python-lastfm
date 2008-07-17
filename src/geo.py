@@ -9,16 +9,108 @@ from base import LastfmBase
 class Geo(object):
     """A class representing an geographic location."""
     @staticmethod
-    def getEvents(api, location, distance, page):
-        pass
+    def getEvents(api,
+                  location,
+                  distance = None,
+                  page = None):
+        params = {'method': 'geo.getevents', 'location': location}
+        data = api.fetchData(params).find('events')
+        
+        return SearchResult(
+                            type = 'event',
+                            searchTerms = data.attrib['location'],
+                            startPage = int(data.attrib['page']),
+                            totalResults = int(data.attrib['total']),
+                            itemsPerPage = int(math.ceil(float(data.attrib['total']))/float(data.attrib['totalpages'])),
+                            matches = [
+                                   Event(
+                                   api,
+                                   id = int(e.findtext('id')),
+                                   title = e.findtext('title'),
+                                   artists = [Artist(api, name = a.text) for a in e.findall('artists/artist')],
+                                   headliner = Artist(api, name = e.findtext('artists/headliner')),
+                                   venue = Venue(
+                                                 name = e.findtext('venue/name'),
+                                                 location = Location(
+                                                                     api,
+                                                                     city = e.findtext('venue/location/city'),
+                                                                     country = Country(
+                                                                        api,
+                                                                        name = e.findtext('venue/location/country')
+                                                                        ),
+                                                                     street = e.findtext('venue/location/street'),
+                                                                     postalCode = e.findtext('venue/location/postalcode'),
+                                                                     latitude = float(e.findtext(
+                                                                         'venue/location/{%s}point/{%s}lat' % ((Location.xmlns,)*2)
+                                                                         )),
+                                                                     longitude = float(e.findtext(
+                                                                         'venue/location/{%s}point/{%s}long' % ((Location.xmlns,)*2)
+                                                                         )),
+                                                                     timezone = e.findtext('venue/location/timezone')
+                                                                     ),
+                                                 url = e.findtext('venue/url')
+                                                 ),
+                                   startDate = e.findtext('startDate') and 
+                                                 datetime(*(time.strptime(e.findtext('startDate').strip(), '%a, %d %b %Y')[0:6])) or
+                                                 None,
+                                   startTime = e.findtext('startTime') and 
+                                                 datetime(*(time.strptime(e.findtext('startTime').strip(), '%H:%M')[0:6])) or
+                                                 None,
+                                   description = e.findtext('description'),
+                                   image = dict([(i.get('size'), i.text) for i in e.findall('image')]),
+                                   url = e.findtext('url')
+                                   )
+                             for e in data.findall('event')
+                            ]
+                        )
     
     @staticmethod
     def getTopArtists(api, country):
-        pass
+        params = {'method': 'geo.gettopartists', 'country': country}
+        data = api.fetchData(params).find('topartists')
+        return [
+                Artist(
+                       api,
+                       name = a.findtext('name'),
+                       mbid = a.findtext('mbid'),
+                       stats = Stats(
+                                     subject = a.findtext('name'),
+                                     rank = int(a.attrib['rank']),
+                                     playcount = int(a.findtext('playcount'))
+                                     ),
+                       url = 'http://' + a.findtext('url'),
+                       image = {'large': a.findtext('image')}
+                       )
+                for a in data.findall('artist')
+                ]
     
     @staticmethod
     def getTopTracks(api, country):
-        pass
+        params = {'method': 'geo.gettoptracks', 'country': country}
+        data = api.fetchData(params).find('toptracks')
+        return [
+                Track(
+                       api,
+                       name = t.findtext('name'),
+                       mbid = t.findtext('mbid'),
+                       artist = Artist(
+                                       api,
+                                       name = t.findtext('artist/name'),
+                                       mbid = t.findtext('artist/mbid'),
+                                       url = t.findtext('artist/url')
+                                       ),
+                       stats = Stats(
+                                     subject = t.findtext('name'),
+                                     rank = int(t.attrib['rank']),
+                                     playcount = int(t.findtext('playcount'))
+                                     ),
+                       streamable = (t.findtext('streamable') == '1'),
+                       fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'), 
+                       url = 'http://' + t.findtext('url'),
+                       image = {'large': t.findtext('image')}
+                       )
+                for t in data.findall('track')
+                ]
 
 class Venue(LastfmBase):
     """A class representing a venue of an event"""
@@ -133,7 +225,7 @@ class Location(LastfmBase):
     def getEvents(self,
                   distance = None,
                   page = None):
-        return Geo.getEvents(self.__api, self.name, distance, page)
+        return Geo.getEvents(self.__api, self.name, distance, page).matches
     
     events = property(getEvents, None, None, "Event's Docstring")
     
@@ -218,9 +310,16 @@ class Country(LastfmBase):
         return self.name < other.name
     
     def __repr__(self):
-        return "<lastfm.geo.Country: %s" % self.name
+        return "<lastfm.geo.Country: %s>" % self.name
     
+import math
+from datetime import datetime
+import time
+
 from api import Api
 from error import LastfmError
 from artist import Artist
 from track import Track
+from event import Event
+from search import SearchResult
+from stats import Stats

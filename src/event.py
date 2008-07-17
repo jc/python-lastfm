@@ -20,8 +20,7 @@ class Event(LastfmBase):
                  description = None,
                  image = None,
                  url = None,
-                 attendance = None,
-                 reviews = None,
+                 stats = None,
                  tag = None):
         if not isinstance(api, Api):
             raise LastfmError("api reference must be supplied as an argument")
@@ -36,8 +35,11 @@ class Event(LastfmBase):
         self.__description = description
         self.__image = image
         self.__url = url
-        self.__attendance = attendance
-        self.__reviews = reviews
+        self.__stats = stats and Stats(
+                             subject = self,
+                             attendance = self.attendance,
+                             reviews = self.reviews
+                            )
         self.__tag = tag
 
     def getId(self):
@@ -70,11 +72,8 @@ class Event(LastfmBase):
     def getUrl(self):
         return self.__url
 
-    def getAttendance(self):
-        return self.__attendance
-
-    def getReviews(self):
-        return self.__reviews
+    def getStats(self):
+        return self.__stats
 
     def getTag(self):
         return self.__tag
@@ -99,10 +98,8 @@ class Event(LastfmBase):
 
     url = property(getUrl, None, None, "Url's Docstring")
 
-    attendance = property(getAttendance, None, None, "Attendance's Docstring")
-
-    reviews = property(getReviews, None, None, "Reviews's Docstring")
-
+    stats = property(getStats, None, None, "Match's Docstring")
+    
     tag = property(getTag, None, None, "Tag's Docstring")        
     
     @staticmethod
@@ -115,7 +112,7 @@ class Event(LastfmBase):
                      id = int(data.findtext('id')),
                      title = data.findtext('title'),
                      artists = [Artist(api, name = a.text) for a in data.findall('artists/artist')],
-                     headliner = data.findtext('artists/headliner'),
+                     headliner = Artist(api, name = data.findtext('artists/headliner')),
                      venue = Venue(
                                    name = data.findtext('venue/name'),
                                    location = Location(
@@ -146,8 +143,11 @@ class Event(LastfmBase):
                      description = data.findtext('description'),
                      image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
                      url = data.findtext('url'),
-                     attendance = int(data.findtext('attendance')),
-                     reviews = int(data.findtext('reviews')),
+                     stats = Stats(
+                                   subject = int(data.findtext('id')),
+                                   attendance = int(data.findtext('attendance')),
+                                   reviews = int(data.findtext('reviews')),
+                                   ),
                      tag = data.findtext('tag')
                     )
         
@@ -177,3 +177,4 @@ from api import Api
 from error import LastfmError
 from artist import Artist
 from geo import Venue, Location, Country
+from stats import Stats

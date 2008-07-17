@@ -17,8 +17,7 @@ class Album(LastfmBase):
                  url = None,
                  releaseDate = None,
                  image = None,
-                 listeners = None,
-                 playcount = None,
+                 stats = None,
                  topTags = None):
         if not isinstance(api, Api):
             raise LastfmError("api reference must be supplied as an argument")
@@ -30,8 +29,13 @@ class Album(LastfmBase):
         self.__url = url
         self.__releaseDate = releaseDate
         self.__image = image
-        self.__listeners = listeners
-        self.__playcount = playcount
+        self.__stats = stats and Stats(
+                             subject = self,
+                             listeners = stats.listeners,
+                             playcount = stats.playcount,
+                             match = stats.match,
+                             rank = stats.rank
+                            )
         self.__topTags = topTags
 
     def getName(self):
@@ -55,11 +59,8 @@ class Album(LastfmBase):
     def getImage(self):
         return self.__image
 
-    def getListeners(self):
-        return self.__listeners
-
-    def getPlaycount(self):
-        return self.__playcount
+    def getStats(self):
+        return self.__stats
 
     def getTopTags(self):
         if self.__topTags is None:
@@ -93,9 +94,7 @@ class Album(LastfmBase):
 
     image = property(getImage, None, None, "Image's Docstring")
 
-    listeners = property(getListeners, None, None, "Listeners's Docstring")
-
-    playcount = property(getPlaycount, None, None, "Playcount's Docstring")
+    stats = property(getStats, None, None, "Stats's Docstring")
 
     topTags = property(getTopTags, None, None, "TopTags's Docstring")
     topTag = property(lambda self: self.topTags and len(self.topTags) and self.topTags[0],
@@ -128,8 +127,11 @@ class Album(LastfmBase):
                      releaseDate = data.findtext('releasedate') and data.findtext('releasedate').strip() and 
                                         datetime(*(time.strptime(data.findtext('releasedate').strip(), '%d %b %Y, 00:00')[0:6])),
                      image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
-                     listeners = int(data.findtext('listeners')),
-                     playcount = int(data.findtext('playcount')),
+                     stats = Stats(
+                                   subject = data.findtext('name'),
+                                   listeners = int(data.findtext('listeners')),
+                                   playcount = int(data.findtext('playcount')),
+                                   ),
                      topTags = [
                                 Tag(
                                     api,
@@ -174,3 +176,4 @@ from api import Api
 from error import LastfmError
 from tag import Tag
 from artist import Artist
+from stats import Stats

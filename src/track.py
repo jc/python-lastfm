@@ -16,8 +16,7 @@ class Track(LastfmBase):
                  streamable = None,
                  artist = None,
                  image = None,
-                 match = None,
-                 playcount = None,
+                 stats = None,
                  fullTrack = None):
         if not isinstance(api, Api):
             raise LastfmError("api reference must be supplied as an argument")
@@ -28,8 +27,12 @@ class Track(LastfmBase):
         self.__streamable = streamable
         self.__artist = artist
         self.__image = image
-        self.__match = match
-        self.__playcount = playcount
+        self.__stats = stats and Stats(
+                             subject = self,
+                             match = stats.match,
+                             playcount = stats.playcount,
+                             rank = stats.rank
+                            )
         self.__fullTrack = fullTrack
 
     def getName(self):
@@ -50,11 +53,8 @@ class Track(LastfmBase):
     def getImage(self):
         return self.__image
 
-    def getMatch(self):
-        return self.__match
-    
-    def getPlaycount(self):
-        return self.__playcount
+    def getStats(self):
+        return self.__stats
     
     def getFullTrack(self):
         return self.__fullTrack
@@ -71,9 +71,7 @@ class Track(LastfmBase):
 
     image = property(getImage, None, None, "Image's Docstring")
 
-    match = property(getMatch, None, None, "Match's Docstring")
-    
-    playcount = property(getPlaycount, None, None, "Match's Docstring")
+    stats = property(getStats, None, None, "Match's Docstring")
     
     fullTrack = property(getFullTrack, None, None, "Match's Docstring")
     
@@ -160,3 +158,4 @@ from api import Api
 from error import LastfmError
 from user import User
 from tag import Tag
+from stats import Stats

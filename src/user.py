@@ -13,14 +13,18 @@ class User(LastfmBase):
                  name = None,
                  url = None,
                  image = None,
-                 weight = None):
+                 stats = None):
         if not isinstance(api, Api):
             raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__url = url
         self.__image = image
-        self.__weight = weight
+        self.__stats = stats and Stats(
+                             subject = self,
+                             match = stats.match,
+                             weight = stats.weight
+                            )
 
     def getName(self):
         return self.__name
@@ -31,8 +35,8 @@ class User(LastfmBase):
     def getImage(self):
         return self.__image
 
-    def getWeight(self):
-        return self.__weight
+    def getStats(self):
+        return self.__stats
     
     name = property(getName, None, None, "Name's Docstring")
 
@@ -40,7 +44,7 @@ class User(LastfmBase):
 
     image = property(getImage, None, None, "Image's Docstring")
     
-    weight = property(getWeight, None, None, "Weight's Docstring")
+    stats = property(getStats, None, None, "Weight's Docstring")
     
     def getEvents(self):
         pass
@@ -142,3 +146,4 @@ class User(LastfmBase):
 
 from api import Api
 from error import LastfmError
+from stats import Stats

@@ -13,7 +13,6 @@ class Artist(LastfmBase):
                  name = None,
                  mbid = None,
                  url = None,
-                 match = None,
                  image = None,
                  streamable = None,
                  stats = None,
@@ -26,13 +25,14 @@ class Artist(LastfmBase):
         self.__name = name
         self.__mbid = mbid
         self.__url = url
-        self.__match = match
         self.__image = image
         self.__streamable = streamable
         self.__stats = stats and Stats(
-                             artist = self,
+                             subject = self,
                              listeners = stats.listeners,
-                             plays = stats.plays
+                             playcount = stats.playcount,
+                             match = stats.match,
+                             rank = stats.rank
                             )
         self.__similar = similar
         self.__topTags = topTags
@@ -52,9 +52,6 @@ class Artist(LastfmBase):
     def getUrl(self):
         return self.__url
 
-    def getMatch(self):
-        return self.__match
-    
     def getImage(self):
         return self.__image
 
@@ -77,7 +74,10 @@ class Artist(LastfmBase):
                                  self.__api,
                                  name = a.findtext('name'),
                                  mbid = a.findtext('mbid'),
-                                 match = float(a.findtext('match')),
+                                 stats = Stats(
+                                               artist = a.findtext('name'),
+                                               match = float(a.findtext('match')),
+                                               ),
                                  url = 'http://' + a.findtext('url'),
                                  image = {'large': a.findtext('image')}
                                  )
@@ -111,8 +111,6 @@ class Artist(LastfmBase):
     
     url = property(getUrl, None, None, "Url's Docstring")
 
-    match = property(getMatch, None, None, "Match's Docstring")
-
     image = property(getImage, None, None, "Image's Docstring")
 
     streamable = property(getStreamable, None, None, "Streamable's Docstring")
@@ -139,7 +137,7 @@ class Artist(LastfmBase):
                       id = int(e.findtext('id')),
                       title = e.findtext('title'),
                       artists = [Artist(self.__api, name = a.text) for a in e.findall('artists/artist')],
-                      headliner = e.findtext('artists/headliner'),
+                      headliner = Artist(self.__api, name = e.findtext('artists/headliner')),
                       venue = Venue(
                                     name = e.findtext('venue/name'),
                                     location = Location(
@@ -188,7 +186,11 @@ class Artist(LastfmBase):
                      mbid = a.findtext('mbid'),
                      url = a.findtext('url'),
                      image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
-                     playcount = int(a.findtext('playcount')),
+                     stats = Stats(
+                                   subject = a.findtext('name'),
+                                   playcount = int(a.findtext('playcount')),
+                                   rank = int(a.attrib['rank'])
+                                   )
                      )
                 for a in data.findall('album')
                 ]
@@ -206,7 +208,10 @@ class Artist(LastfmBase):
                      name = u.findtext('name'),
                      url = u.findtext('url'),
                      image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
-                     weight = int(u.findtext('weight'))
+                     stats = Stats(
+                                   subject = u.findtext('name'),
+                                   weight = int(u.findtext('weight'))
+                                   )
                      )
                 for u in data.findall('user')
                 ]
@@ -224,7 +229,11 @@ class Artist(LastfmBase):
                       name = t.findtext('name'),
                       artist = self,
                       mbid = t.findtext('mbid'),
-                      playcount = int(t.findtext('playcount')),
+                      stats = Stats(
+                                    subject = t.findtext('name'),
+                                    playcount = int(t.findtext('playcount')),
+                                    rank = int(t.attrib['rank'])
+                                    ),
                       streamable = (t.findtext('streamable') == '1'),
                       fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
                       image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
@@ -263,7 +272,7 @@ class Artist(LastfmBase):
                                               image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
                                               streamable = (a.findtext('streamable') == '1'),
                                               stats = Stats(
-                                                            artist = a.findtext('name'),
+                                                            subject = a.findtext('name'),
                                                             listeners = int(a.findtext('listeners')),
                                                             ),
                                               )
@@ -293,9 +302,9 @@ class Artist(LastfmBase):
                       image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
                       streamable = (data.findtext('streamable') == 1),
                       stats = Stats(
-                                    artist,
+                                    subject = artist,
                                     listeners = int(data.findtext('stats/listeners')),
-                                    plays = int(data.findtext('stats/plays'))
+                                    playcount = int(data.findtext('stats/plays'))
                                     ),
                       similar = [
                                  Artist(
@@ -352,34 +361,6 @@ class Artist(LastfmBase):
     def __repr__(self):
         return "<lastfm.Artist: %s>" % self.__name
 
-class Stats(object):
-    """A class representing the stats of an artist."""
-    def __init__(self,
-                 artist,
-                 listeners = None,
-                 plays = None):
-        self.__artist = artist
-        self.__listeners = listeners
-        self.__plays = plays
-
-    def getArtist(self):
-        return self.__artist
-
-    def getListeners(self):
-        return self.__listeners
-
-    def getPlays(self):
-        return self.__plays
-
-    listeners = property(getListeners, None, None, "Listeners's Docstring")
-
-    plays = property(getPlays, None, None, "Plays's Docstring")
-
-    artist = property(getArtist, None, None, "Artist's Docstring")
-    
-    def __repr__(self):
-        return "<lastfm.artist.Stats: for artist '%s'>" % self.__artist.name
-
 class Bio(object):
     """A class representing the biography of an artist."""
     def __init__(self,
@@ -427,3 +408,4 @@ from tag import Tag
 from track import Track
 from user import User
 from search import SearchResult
+from stats import Stats
