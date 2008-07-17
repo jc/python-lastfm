@@ -19,7 +19,8 @@ from tag import Tag
 from tasteometer import Tasteometer
 from track import Track
 from user import User
+from search import SearchResult
 
 __all__ = ['LastfmError', 'Api', 'Album', 'Artist', 'Event',
            'Location', 'Country', 'Group', 'Playlist', 'Tag',
-           'Tasteometer', 'Track', 'User', 'Registry']
+           'Tasteometer', 'Track', 'User', 'Registry', 'SearchResult']

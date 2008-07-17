@@ -207,7 +207,7 @@ class Api(object):
         '''
         # Add key/value parameters to the query string of the url
         url = self._BuildUrl(url, extra_params=parameters)
-
+        #print url
         # Get a url opener that can handle basic auth
         opener = self._GetOpener(url)
 

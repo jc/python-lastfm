@@ -16,11 +16,12 @@ from playlist import Playlist
 from tag import Tag
 from track import Track
 from user import User
+from search import SearchResult
 
-class Registry(dict):
+class Registry(object):
     """The registry to contain all the entities"""
     keys = [Album, Artist, Event, Location, Country, Group, 
-            Playlist, Tag, Track, User]
+            Playlist, Tag, Track, User, SearchResult]
     
     def get(self, name):
         if name not in Registry.keys:
@@ -33,3 +34,5 @@ class Registry(dict):
             except KeyError:
                 return []
             
+    def __repr__(self):
+        return "<lastfm.Registry>"

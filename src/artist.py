@@ -241,7 +241,36 @@ class Artist(LastfmBase):
                artist,
                limit = None,
                page = None):
-        pass
+        params = {'method': 'artist.search', 'artist': artist}
+        if limit:
+            params.update({'limit': limit})
+        if page:
+            params.update({'page': page})
+        data = api.fetchData(params).find('results')
+        return SearchResult(
+                            type = 'artist',
+                            searchTerms = data.find("{%s}Query" % SearchResult.xmlns).attrib['searchTerms'],
+                            startPage = int(data.find("{%s}Query" % SearchResult.xmlns).attrib['startPage']),
+                            totalResults = int(data.findtext("{%s}totalResults" % SearchResult.xmlns)),
+                            startIndex = int(data.findtext("{%s}startIndex" % SearchResult.xmlns)),
+                            itemsPerPage = int(data.findtext("{%s}itemsPerPage" % SearchResult.xmlns)),
+                            matches = [
+                                       Artist(
+                                              api,
+                                              name = a.findtext('name'),
+                                              mbid = a.findtext('mbid'),
+                                              url = a.findtext('url'),
+                                              image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                                              streamable = (a.findtext('streamable') == '1'),
+                                              stats = Stats(
+                                                            artist = a.findtext('name'),
+                                                            listeners = int(a.findtext('listeners')),
+                                                            ),
+                                              )
+                                       for a in data.findall('artistmatches/artist')
+                                       ]
+                            )
+        
 
     @staticmethod
     def getInfo(api,
@@ -397,3 +426,4 @@ from geo import Country, Location, Venue
 from tag import Tag
 from track import Track
 from user import User
+from search import SearchResult
