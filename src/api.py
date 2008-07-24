@@ -240,7 +240,7 @@ class Api(object):
     def fetchData(self, params, parse = True):
         params.update({'api_key': self.__apiKey})
         xml = self._fetchUrl(Api.API_ROOT_URL, params)
-       
+        #print xml
         data = ElementTree.XML(xml)
         if data.get('status') != "ok":
             raise LastfmError("Error code: %s (%s)" % (data.find("error").get('code'), data.findtext('error')))

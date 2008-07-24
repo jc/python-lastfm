@@ -282,7 +282,7 @@ class Country(LastfmBase):
     
     topArtists = property(getTopArtists, None, None, "Docstring")
     topArtist = property(
-                         lambda self: len(self.topArtists) and self.topArtists[0],
+                         lambda self: len(self.topArtists) and self.topArtists[0] or None,
                          None, None, "Docstring"                         
                          )
     
@@ -290,7 +290,7 @@ class Country(LastfmBase):
         return Geo.getTopTracks(self.__api, self.name)
     
     topTracks = property(getTopTracks, None, None, "Docstring")
-    topTrack = property(lambda self: len(self.topTracks) and self.topTracks[0],
+    topTrack = property(lambda self: len(self.topTracks) and self.topTracks[0] or None,
                         None, None, "Docstring")
     
     @staticmethod

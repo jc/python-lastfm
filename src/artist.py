@@ -47,18 +47,28 @@ class Artist(LastfmBase):
         return self.__name
 
     def getMbid(self):
+        if self.__mbid is None:
+            self.fillInfo()
         return self.__mbid
 
     def getUrl(self):
+        if self.__url is None:
+            self.fillInfo()
         return self.__url
 
     def getImage(self):
+        if self.__image is None:
+            self.fillInfo()
         return self.__image
 
     def getStreamable(self):
+        if self.__streamable is None:
+            self.fillInfo()
         return self.__streamable
 
     def getStats(self):
+        if self.__stats is None:
+            self.fillInfo()
         return self.__stats
 
     def getSimilar(self, limit = None):
@@ -103,6 +113,8 @@ class Artist(LastfmBase):
         return self.__topTags
 
     def getBio(self):
+        if self.__bio is None:
+            self.fillInfo()
         return self.__bio
 
     name = property(getName, None, None, "Name's Docstring")
@@ -280,9 +292,8 @@ class Artist(LastfmBase):
                                        ]
                             )
         
-
     @staticmethod
-    def getInfo(api,
+    def fetchData(api,
                 artist = None,
                 mbid = None):
         params = {'method': 'artist.getinfo'}
@@ -292,47 +303,56 @@ class Artist(LastfmBase):
             params.update({'artist': artist})
         elif mbid:
             params.update({'mbid': mbid})
-        data = api.fetchData(params).find('artist')
-                
-        return Artist(
-                      api,
-                      name = data.findtext('name'),
-                      mbid = data.findtext('mbid'),
-                      url = data.findtext('url'),
-                      image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
-                      streamable = (data.findtext('streamable') == 1),
-                      stats = Stats(
-                                    subject = artist,
-                                    listeners = int(data.findtext('stats/listeners')),
-                                    playcount = int(data.findtext('stats/plays'))
-                                    ),
-                      similar = [
-                                 Artist(
-                                        api,
-                                        name = a.findtext('name'),
-                                        url = a.findtext('url'),
-                                        image = dict([(i.get('size'), i.text) for i in a.findall('image')])
-                                        )
-                                 for a in data.findall('similar/artist')
-                                 ],
-                      topTags = [
-                              Tag(
-                                  api,
-                                  name = t.findtext('name'),
-                                  url = t.findtext('url')
-                                  ) 
-                              for t in data.findall('tags/tag')
-                              ],
-                      bio = Bio(
-                                artist,
-                                published = datetime(*(time.strptime(
-                                                                     data.findtext('bio/published').strip(),
-                                                                     '%a, %d %b %Y %H:%M:%S +0000'
-                                                                     )[0:6])),
-                                summary = data.findtext('bio/summary'),
-                                content = data.findtext('bio/content')
-                                )
-                      )
+        return api.fetchData(params).find('artist')
+
+    def fillInfo(self):
+        data = Artist.fetchData(self.__api, self.name)
+        self.__name = data.findtext('name'),
+        self.__mbid = data.findtext('mbid'),
+        self.__url = data.findtext('url'),
+        self.__image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
+        self.__streamable = (data.findtext('streamable') == 1),
+        self.__stats = Stats(
+                             subject = self,
+                             listeners = int(data.findtext('stats/listeners')),
+                             playcount = int(data.findtext('stats/playcount'))
+                             ),
+        self.__similar = [
+                          Artist(
+                                 self.__api,
+                                 name = a.findtext('name'),
+                                 url = a.findtext('url'),
+                                 image = dict([(i.get('size'), i.text) for i in a.findall('image')])
+                                 )
+                          for a in data.findall('similar/artist')
+                          ],
+        self.__topTags = [
+                          Tag(
+                              self.__api,
+                              name = t.findtext('name'),
+                              url = t.findtext('url')
+                              ) 
+                          for t in data.findall('tags/tag')
+                          ],
+        self.__bio = Bio(
+                         self,
+                         published = datetime(*(time.strptime(
+                                                              data.findtext('bio/published').strip(),
+                                                              '%a, %d %b %Y %H:%M:%S +0000'
+                                                              )[0:6])),
+                         summary = data.findtext('bio/summary'),
+                         content = data.findtext('bio/content')
+                         )
+        
+    @staticmethod
+    def getInfo(api,
+                artist = None,
+                mbid = None):
+        data = Artist.fetchData(api, artist, mbid)
+        
+        a = Artist(api, name = data.findtext('name'))
+        a.fillInfo()
+        return a
         
     @staticmethod
     def hashFunc(*args, **kwds):
