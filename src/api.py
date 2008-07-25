@@ -246,7 +246,10 @@ class Api(object):
         params.update({'api_key': self.__apiKey})
         xml = self._fetchUrl(Api.API_ROOT_URL, params, no_cache = self._no_cache)
         #print xml
-        data = ElementTree.XML(xml)
+        try:
+            data = ElementTree.XML(xml)
+        except SyntaxError, e:
+            raise LastfmError("Error in parsing XML: %s" % e)
         if data.get('status') != "ok":
             raise LastfmError("Error code: %s (%s)" % (data.find("error").get('code'), data.findtext('error')))
         if parse:

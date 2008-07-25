@@ -65,7 +65,7 @@ class Artist(LastfmBase):
             self._fillInfo()
         return self.__image
 
-    def getStreamable(self):
+    def isStreamable(self):
         if self.__streamable is None:
             self._fillInfo()
         return self.__streamable
@@ -89,7 +89,7 @@ class Artist(LastfmBase):
                                  name = a.findtext('name'),
                                  mbid = a.findtext('mbid'),
                                  stats = Stats(
-                                               artist = a.findtext('name'),
+                                               subject = a.findtext('name'),
                                                match = float(a.findtext('match')),
                                                ),
                                  url = 'http://' + a.findtext('url'),
@@ -129,7 +129,7 @@ class Artist(LastfmBase):
 
     image = property(getImage, None, None, "Image's Docstring")
 
-    streamable = property(getStreamable, None, None, "Streamable's Docstring")
+    streamable = property(isStreamable, None, None, "Streamable's Docstring")
 
     stats = property(getStats, None, None, "Stats's Docstring")
 

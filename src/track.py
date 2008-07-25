@@ -44,7 +44,7 @@ class Track(LastfmBase):
     def getUrl(self):
         return self.__url
 
-    def getStreamable(self):
+    def isStreamable(self):
         return self.__streamable
 
     def getArtist(self):
@@ -65,7 +65,7 @@ class Track(LastfmBase):
 
     url = property(getUrl, None, None, "Url's Docstring")
 
-    streamable = property(getStreamable, None, None, "Streamable's Docstring")
+    streamable = property(isStreamable, None, None, "Streamable's Docstring")
 
     artist = property(getArtist, None, None, "Artist's Docstring")
 

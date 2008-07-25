@@ -10,6 +10,8 @@ class Stats(object):
                  subject,
                  listeners = None,
                  playcount = None,
+                 tagcount = None,
+                 count = None,
                  match = None,
                  rank = None,
                  weight = None,
@@ -18,6 +20,8 @@ class Stats(object):
         self.__subject = subject
         self.__listeners = listeners
         self.__playcount = playcount
+        self.__tagcount = tagcount
+        self.__count = count
         self.__match = match
         self.__rank = rank
         self.__weight = weight
@@ -35,7 +39,13 @@ class Stats(object):
 
     def getPlaycount(self):
         return self.__playcount
+
+    def getTagcount(self):
+        return self.__tagcount
     
+    def getCount(self):
+        return self.__count
+        
     def getMatch(self):
         return self.__match
 
@@ -51,6 +61,10 @@ class Stats(object):
     listeners = property(getListeners, None, None, "Listeners's Docstring")
 
     playcount = property(getPlaycount, None, None, "Plays's Docstring")
+    
+    tagcount = property(getTagcount, None, None, "Plays's Docstring")
+    
+    count = property(getCount, None, None, "Plays's Docstring")
 
     match = property(getMatch, None, None, "Match's Docstring")
 
