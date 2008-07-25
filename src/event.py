@@ -105,7 +105,7 @@ class Event(LastfmBase):
     @staticmethod
     def getInfo(api, event):
         params = {'method': 'event.getinfo', 'event': event}
-        data = api.fetchData(params).find('event')
+        data = api._fetchData(params).find('event')
     
         return Event(
                      api,

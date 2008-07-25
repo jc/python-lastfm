@@ -42,33 +42,37 @@ class Artist(LastfmBase):
                          summary = bio.summary,
                          content = bio.content
                         )
+        self.__events = None
+        self.__topAlbums = None
+        self.__topTracks = None
+        self.__topFans = None
 
     def getName(self):
         return self.__name
 
     def getMbid(self):
         if self.__mbid is None:
-            self.fillInfo()
+            self._fillInfo()
         return self.__mbid
 
     def getUrl(self):
         if self.__url is None:
-            self.fillInfo()
+            self._fillInfo()
         return self.__url
 
     def getImage(self):
         if self.__image is None:
-            self.fillInfo()
+            self._fillInfo()
         return self.__image
 
     def getStreamable(self):
         if self.__streamable is None:
-            self.fillInfo()
+            self._fillInfo()
         return self.__streamable
 
     def getStats(self):
         if self.__stats is None:
-            self.fillInfo()
+            self._fillInfo()
         return self.__stats
 
     def getSimilar(self, limit = None):
@@ -78,7 +82,7 @@ class Artist(LastfmBase):
                   }
         if limit is not None:
             params.update({'limit': limit})
-        data = self.__api.fetchData(params).find('similarartists')
+        data = self.__api._fetchData(params).find('similarartists')
         self.__similar = [
                           Artist(
                                  self.__api,
@@ -101,7 +105,7 @@ class Artist(LastfmBase):
                       'method': 'artist.gettoptags',
                       'artist': self.__name
                       }
-            data = self.__api.fetchData(params).find('toptags')
+            data = self.__api._fetchData(params).find('toptags')
             self.__topTags = [
                               Tag(
                                   self.__api,
@@ -114,7 +118,7 @@ class Artist(LastfmBase):
 
     def getBio(self):
         if self.__bio is None:
-            self.fillInfo()
+            self._fillInfo()
         return self.__bio
 
     name = property(getName, None, None, "Name's Docstring")
@@ -140,118 +144,126 @@ class Artist(LastfmBase):
     bio = property(getBio, None, None, "Bio's Docstring")
     
     def getEvents(self):
-        params = {'method': 'artist.getevents', 'artist': self.name}
-        data = self.__api.fetchData(params).find('events')
-        
-        return [
-                Event(
-                      self.__api,
-                      id = int(e.findtext('id')),
-                      title = e.findtext('title'),
-                      artists = [Artist(self.__api, name = a.text) for a in e.findall('artists/artist')],
-                      headliner = Artist(self.__api, name = e.findtext('artists/headliner')),
-                      venue = Venue(
-                                    name = e.findtext('venue/name'),
-                                    location = Location(
-                                                        self.__api,
-                                                        city = e.findtext('venue/location/city'),
-                                                        country = Country(
+        if self.__events is None:
+            params = {'method': 'artist.getevents', 'artist': self.name}
+            data = self.__api._fetchData(params).find('events')
+            
+            self.__events = [
+                    Event(
+                          self.__api,
+                          id = int(e.findtext('id')),
+                          title = e.findtext('title'),
+                          artists = [Artist(self.__api, name = a.text) for a in e.findall('artists/artist')],
+                          headliner = Artist(self.__api, name = e.findtext('artists/headliner')),
+                          venue = Venue(
+                                        name = e.findtext('venue/name'),
+                                        location = Location(
                                                             self.__api,
-                                                            name = e.findtext('venue/location/country')
+                                                            city = e.findtext('venue/location/city'),
+                                                            country = Country(
+                                                                self.__api,
+                                                                name = e.findtext('venue/location/country')
+                                                                ),
+                                                            street = e.findtext('venue/location/street'),
+                                                            postalCode = e.findtext('venue/location/postalcode'),
+                                                            latitude = float(e.findtext(
+                                                                'venue/location/{%s}point/{%s}lat' % ((Location.xmlns,)*2)
+                                                                )),
+                                                            longitude = float(e.findtext(
+                                                                'venue/location/{%s}point/{%s}long' % ((Location.xmlns,)*2)
+                                                                )),
+                                                            timezone = e.findtext('venue/location/timezone')
                                                             ),
-                                                        street = e.findtext('venue/location/street'),
-                                                        postalCode = e.findtext('venue/location/postalcode'),
-                                                        latitude = float(e.findtext(
-                                                            'venue/location/{%s}point/{%s}lat' % ((Location.xmlns,)*2)
-                                                            )),
-                                                        longitude = float(e.findtext(
-                                                            'venue/location/{%s}point/{%s}long' % ((Location.xmlns,)*2)
-                                                            )),
-                                                        timezone = e.findtext('venue/location/timezone')
-                                                        ),
-                                    url = e.findtext('venue/url')
-                                    ),
-                      startDate = e.findtext('startDate') and 
-                                    datetime(*(time.strptime(e.findtext('startDate').strip(), '%a, %d %b %Y')[0:6])) or
-                                    None,
-                      startTime = e.findtext('startTime') and 
-                                    datetime(*(time.strptime(e.findtext('startTime').strip(), '%H:%M')[0:6])) or
-                                    None,
-                      description = e.findtext('description'),
-                      image = dict([(i.get('size'), i.text) for i in e.findall('image')]),
-                      url = e.findtext('url')
-                      )
-                for e in data.findall('event')
-                ]
+                                        url = e.findtext('venue/url')
+                                        ),
+                          startDate = e.findtext('startDate') and 
+                                        datetime(*(time.strptime(e.findtext('startDate').strip(), '%a, %d %b %Y')[0:6])) or
+                                        None,
+                          startTime = e.findtext('startTime') and 
+                                        datetime(*(time.strptime(e.findtext('startTime').strip(), '%H:%M')[0:6])) or
+                                        None,
+                          description = e.findtext('description'),
+                          image = dict([(i.get('size'), i.text) for i in e.findall('image')]),
+                          url = e.findtext('url')
+                          )
+                    for e in data.findall('event')
+                    ]
+            return self.__events
     
     events = property(getEvents, None, None, "Docstring")        
     
     def getTopAlbums(self):
-        params = {'method': 'artist.gettopalbums', 'artist': self.name}
-        data = self.__api.fetchData(params).find('topalbums')
-        
-        return [
-                Album(
-                     self.__api,
-                     name = a.findtext('name'),
-                     artist = self,
-                     mbid = a.findtext('mbid'),
-                     url = a.findtext('url'),
-                     image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
-                     stats = Stats(
-                                   subject = a.findtext('name'),
-                                   playcount = int(a.findtext('playcount')),
-                                   rank = int(a.attrib['rank'])
-                                   )
-                     )
-                for a in data.findall('album')
-                ]
+        if self.__topAlbums is None:
+            params = {'method': 'artist.gettopalbums', 'artist': self.name}
+            data = self.__api._fetchData(params).find('topalbums')
+            
+            self.__topAlbums = [
+                    Album(
+                         self.__api,
+                         name = a.findtext('name'),
+                         artist = self,
+                         mbid = a.findtext('mbid'),
+                         url = a.findtext('url'),
+                         image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                         stats = Stats(
+                                       subject = a.findtext('name'),
+                                       playcount = int(a.findtext('playcount')),
+                                       rank = int(a.attrib['rank'])
+                                       )
+                         )
+                    for a in data.findall('album')
+                    ]
+        return self.__topAlbums
         
     topAlbums = property(getTopAlbums, None, None, "Docstring")
     topAlbum = property(lambda self: len(self.topAlbums) and self.topAlbums[0],
                    None, None, "docstring")
     
     def getTopFans(self):
-        params = {'method': 'artist.gettopfans', 'artist': self.name}
-        data = self.__api.fetchData(params).find('topfans')
-        return [
-                User(
-                     self.__api,
-                     name = u.findtext('name'),
-                     url = u.findtext('url'),
-                     image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
-                     stats = Stats(
-                                   subject = u.findtext('name'),
-                                   weight = int(u.findtext('weight'))
-                                   )
-                     )
-                for u in data.findall('user')
-                ]
+        if self.__topFans is None:
+            params = {'method': 'artist.gettopfans', 'artist': self.name}
+            data = self.__api._fetchData(params).find('topfans')
+            self.__topFans = [
+                    User(
+                         self.__api,
+                         name = u.findtext('name'),
+                         url = u.findtext('url'),
+                         image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
+                         stats = Stats(
+                                       subject = u.findtext('name'),
+                                       weight = int(u.findtext('weight'))
+                                       )
+                         )
+                    for u in data.findall('user')
+                    ]
+        return self.__topFans
         
     topFans = property(getTopFans, None, None, "Docstring")
     topFan = property(lambda self: len(self.topFans) and self.topFans[0],
                    None, None, "docstring")
     
     def getTopTracks(self):
-        params = {'method': 'artist.gettoptracks', 'artist': self.name}
-        data = self.__api.fetchData(params).find('toptracks')
-        return [
-                Track(
-                      self.__api,
-                      name = t.findtext('name'),
-                      artist = self,
-                      mbid = t.findtext('mbid'),
-                      stats = Stats(
-                                    subject = t.findtext('name'),
-                                    playcount = int(t.findtext('playcount')),
-                                    rank = int(t.attrib['rank'])
-                                    ),
-                      streamable = (t.findtext('streamable') == '1'),
-                      fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
-                      image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
-                      )
-                for t in data.findall('track')
-                ]
+        if self.__topTracks is None:
+            params = {'method': 'artist.gettoptracks', 'artist': self.name}
+            data = self.__api._fetchData(params).find('toptracks')
+            self.__topTracks = [
+                    Track(
+                          self.__api,
+                          name = t.findtext('name'),
+                          artist = self,
+                          mbid = t.findtext('mbid'),
+                          stats = Stats(
+                                        subject = t.findtext('name'),
+                                        playcount = int(t.findtext('playcount')),
+                                        rank = int(t.attrib['rank'])
+                                        ),
+                          streamable = (t.findtext('streamable') == '1'),
+                          fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                          image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                          )
+                    for t in data.findall('track')
+                    ]
+        return self.__topTracks
     
     topTracks = property(getTopTracks, None, None, "Docstring")
     topTrack = property(lambda self: len(self.topTracks) and self.topTracks[0],
@@ -267,7 +279,7 @@ class Artist(LastfmBase):
             params.update({'limit': limit})
         if page:
             params.update({'page': page})
-        data = api.fetchData(params).find('results')
+        data = api._fetchData(params).find('results')
         return SearchResult(
                             type = 'artist',
                             searchTerms = data.find("{%s}Query" % SearchResult.xmlns).attrib['searchTerms'],
@@ -283,17 +295,13 @@ class Artist(LastfmBase):
                                               url = a.findtext('url'),
                                               image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
                                               streamable = (a.findtext('streamable') == '1'),
-                                              stats = Stats(
-                                                            subject = a.findtext('name'),
-                                                            listeners = int(a.findtext('listeners')),
-                                                            ),
                                               )
                                        for a in data.findall('artistmatches/artist')
                                        ]
                             )
         
     @staticmethod
-    def fetchData(api,
+    def _fetchData(api,
                 artist = None,
                 mbid = None):
         params = {'method': 'artist.getinfo'}
@@ -303,20 +311,20 @@ class Artist(LastfmBase):
             params.update({'artist': artist})
         elif mbid:
             params.update({'mbid': mbid})
-        return api.fetchData(params).find('artist')
+        return api._fetchData(params).find('artist')
 
-    def fillInfo(self):
-        data = Artist.fetchData(self.__api, self.name)
-        self.__name = data.findtext('name'),
-        self.__mbid = data.findtext('mbid'),
-        self.__url = data.findtext('url'),
-        self.__image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
-        self.__streamable = (data.findtext('streamable') == 1),
+    def _fillInfo(self):
+        data = Artist._fetchData(self.__api, self.name)
+        self.__name = data.findtext('name')
+        self.__mbid = data.findtext('mbid')
+        self.__url = data.findtext('url')
+        self.__image = dict([(i.get('size'), i.text) for i in data.findall('image')])
+        self.__streamable = (data.findtext('streamable') == 1)
         self.__stats = Stats(
                              subject = self,
                              listeners = int(data.findtext('stats/listeners')),
                              playcount = int(data.findtext('stats/playcount'))
-                             ),
+                             )
         self.__similar = [
                           Artist(
                                  self.__api,
@@ -325,7 +333,7 @@ class Artist(LastfmBase):
                                  image = dict([(i.get('size'), i.text) for i in a.findall('image')])
                                  )
                           for a in data.findall('similar/artist')
-                          ],
+                          ]
         self.__topTags = [
                           Tag(
                               self.__api,
@@ -333,7 +341,7 @@ class Artist(LastfmBase):
                               url = t.findtext('url')
                               ) 
                           for t in data.findall('tags/tag')
-                          ],
+                          ]
         self.__bio = Bio(
                          self,
                          published = datetime(*(time.strptime(
@@ -348,12 +356,13 @@ class Artist(LastfmBase):
     def getInfo(api,
                 artist = None,
                 mbid = None):
-        data = Artist.fetchData(api, artist, mbid)
+        data = Artist._fetchData(api, artist, mbid)
         
         a = Artist(api, name = data.findtext('name'))
-        a.fillInfo()
+        if a.bio is None:
+            a._fillInfo()
         return a
-        
+                
     @staticmethod
     def hashFunc(*args, **kwds):
         try:

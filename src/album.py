@@ -45,21 +45,33 @@ class Album(LastfmBase):
         return self.__artist
 
     def getId(self):
+        if self.__id is None:
+            self._fillInfo()
         return self.__id
 
     def getMbid(self):
+        if self.__mbid is None:
+            self._fillInfo()
         return self.__mbid
 
     def getUrl(self):
+        if self.__url is None:
+            self._fillInfo()
         return self.__url
 
     def getReleaseDate(self):
+        if self.__releaseDate is None:
+            self._fillInfo()
         return self.__releaseDate
 
     def getImage(self):
+        if self.__image is None:
+            self._fillInfo()
         return self.__image
 
     def getStats(self):
+        if self.__stats is None:
+            self._fillInfo()
         return self.__stats
 
     def getTopTags(self):
@@ -69,7 +81,7 @@ class Album(LastfmBase):
                 params.update({'artist': self.artist.name, 'album': self.name})
             elif self.mbid:
                 params.update({'mbid': self.mbid})
-            data = self.__api.fetchData(params).find('album')
+            data = self.__api._fetchData(params).find('album')
             self.__topTags = [
                               Tag(
                                   self.__api,
@@ -101,7 +113,7 @@ class Album(LastfmBase):
                    None, None, "docstring")
     
     @staticmethod
-    def getInfo(api,
+    def _fetchData(api,
                 artist = None,
                 album = None,
                 mbid = None):
@@ -112,35 +124,48 @@ class Album(LastfmBase):
             params.update({'artist': artist, 'album': album})
         elif mbid:
             params.update({'mbid': mbid})
-        data = api.fetchData(params).find('album')
-
-        return Album(
-                     api,
-                     name = data.findtext('name'),
-                     artist = Artist(
-                                     api,
-                                     name = data.findtext('artist'),
-                                     ),
-                     id = int(data.findtext('id')),
-                     mbid = data.findtext('mbid'),
-                     url = data.findtext('url'),
-                     releaseDate = data.findtext('releasedate') and data.findtext('releasedate').strip() and 
-                                        datetime(*(time.strptime(data.findtext('releasedate').strip(), '%d %b %Y, 00:00')[0:6])),
-                     image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
-                     stats = Stats(
-                                   subject = data.findtext('name'),
-                                   listeners = int(data.findtext('listeners')),
-                                   playcount = int(data.findtext('playcount')),
-                                   ),
-                     topTags = [
-                                Tag(
-                                    api,
-                                    name = t.findtext('name'),
-                                    url = t.findtext('url')
-                                    ) 
-                                for t in data.findall('toptags/tag')
-                                ]
-                     )
+        return api._fetchData(params).find('album')
+    
+    def _fillInfo(self):
+        data = Album._fetchData(self.__api, self.artist.name, self.name)
+        self.__id = int(data.findtext('id'))
+        self.__mbid = data.findtext('mbid')
+        self.__url = data.findtext('url')
+        self.__releaseDate = data.findtext('releasedate') and data.findtext('releasedate').strip() and \
+                            datetime(*(time.strptime(data.findtext('releasedate').strip(), '%d %b %Y, 00:00')[0:6]))
+        self.__image = dict([(i.get('size'), i.text) for i in data.findall('image')])
+        self.__stats = Stats(
+                       subject = data.findtext('name'),
+                       listeners = int(data.findtext('listeners')),
+                       playcount = int(data.findtext('playcount')),
+                       )
+        self.__topTags = [
+                    Tag(
+                        self.__api,
+                        name = t.findtext('name'),
+                        url = t.findtext('url')
+                        ) 
+                    for t in data.findall('toptags/tag')
+                    ]
+                         
+    @staticmethod
+    def getInfo(api,
+                artist = None,
+                album = None,
+                mbid = None):
+        data = Album._fetchData(api, artist, album, mbid)
+        a = Album(
+                  api,
+                  name = data.findtext('name'),
+                  artist = Artist(
+                                  api,
+                                  name = data.findtext('artist'),
+                                  ),
+                  )
+        if a.id is None:
+            a._fillInfo()
+        return a
+        
     @staticmethod
     def hashFunc(*args, **kwds):
         try:

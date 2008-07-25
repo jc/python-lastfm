@@ -94,7 +94,7 @@ class Track(LastfmBase):
                    track = None,
                    mbid = None):
         params = self.__checkParams({'method': 'track.getsimilar'}, artist, track, mbid)
-        data = self.__api.fetchData(params).find('similartracks')
+        data = self.__api._fetchData(params).find('similartracks')
         
     similar = property(getSimilar, None, None, "Similar's Docstring")
     mostSimilar = property(lambda self: len(self.similar) and self.similar[0],
@@ -105,7 +105,7 @@ class Track(LastfmBase):
                    track = None,
                    mbid = None):
         params = self.__checkParams({'method': 'track.gettopfans'}, artist, track, mbid)
-        data = self.__api.fetchData(params).find('topfans')
+        data = self.__api._fetchData(params).find('topfans')
         
     topFans = property(getTopFans, None, None, "top fans's Docstring")
     topFan = property(lambda self: len(self.topFans) and self.topFans[0],
@@ -116,7 +116,7 @@ class Track(LastfmBase):
                    track = None,
                    mbid = None):
         params = self.__checkParams({'method': 'track.gettoptags'}, artist, track, mbid)
-        data = self.__api.fetchData(params).find('toptags')
+        data = self.__api._fetchData(params).find('toptags')
         
     topTags = property(getTopTags, None, None, "docstring")
     topTag = property(lambda self: len(self.topTags) and self.topTags[0], None, None, "docstring")

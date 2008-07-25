@@ -13,7 +13,9 @@ class Api(object):
     def __init__(self,
                  apiKey = '23caa86333d2cb2055fa82129802780a',
                  input_encoding=None,
-                 request_headers=None):
+                 request_headers=None,
+                 no_cache = False,
+                 debug = False):
         self.__apiKey = apiKey
         self._cache = FileCache()
         self._urllib = urllib2
@@ -21,6 +23,8 @@ class Api(object):
         self._InitializeRequestHeaders(request_headers)
         self._InitializeUserAgent()
         self._input_encoding = input_encoding
+        self._no_cache = no_cache
+        self._debug = debug
 
     def getApiKey(self):
         return self.__apiKey
@@ -89,7 +93,7 @@ class Api(object):
             self._request_headers = {}
 
     def _InitializeUserAgent(self):
-        user_agent = 'Python-urllib/%s (python-audioscrobblerws/%s)' % \
+        user_agent = 'Python-urllib/%s (python-lastfm/%s)' % \
                      (self._urllib.__version__, __version__)
         self.setUserAgent(user_agent)
 
@@ -207,7 +211,8 @@ class Api(object):
         '''
         # Add key/value parameters to the query string of the url
         url = self._BuildUrl(url, extra_params=parameters)
-        #print url
+        if self._debug:
+            print url
         # Get a url opener that can handle basic auth
         opener = self._GetOpener(url)
 
@@ -237,9 +242,9 @@ class Api(object):
         # Always return the latest version
         return url_data
     
-    def fetchData(self, params, parse = True):
+    def _fetchData(self, params, parse = True):
         params.update({'api_key': self.__apiKey})
-        xml = self._fetchUrl(Api.API_ROOT_URL, params)
+        xml = self._fetchUrl(Api.API_ROOT_URL, params, no_cache = self._no_cache)
         #print xml
         data = ElementTree.XML(xml)
         if data.get('status') != "ok":

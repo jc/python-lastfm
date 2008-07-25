@@ -25,7 +25,7 @@ class Playlist(LastfmBase):
     @staticmethod
     def fetch(api, url):
         params = {'method': 'playlist.fetch', 'playlistURL': url}
-        return Playlist(api.fetchData(params, parse = False), url = url)
+        return Playlist(api._fetchData(params, parse = False), url = url)
     
     @staticmethod
     def hashFunc(*args, **kwds):

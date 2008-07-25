@@ -14,7 +14,7 @@ class Geo(object):
                   distance = None,
                   page = None):
         params = {'method': 'geo.getevents', 'location': location}
-        data = api.fetchData(params).find('events')
+        data = api._fetchData(params).find('events')
         
         return SearchResult(
                             type = 'event',
@@ -67,7 +67,7 @@ class Geo(object):
     @staticmethod
     def getTopArtists(api, country):
         params = {'method': 'geo.gettopartists', 'country': country}
-        data = api.fetchData(params).find('topartists')
+        data = api._fetchData(params).find('topartists')
         return [
                 Artist(
                        api,
@@ -87,7 +87,7 @@ class Geo(object):
     @staticmethod
     def getTopTracks(api, country):
         params = {'method': 'geo.gettoptracks', 'country': country}
-        data = api.fetchData(params).find('toptracks')
+        data = api._fetchData(params).find('toptracks')
         return [
                 Track(
                        api,
