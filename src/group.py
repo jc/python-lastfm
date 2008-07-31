@@ -16,12 +16,12 @@ class Group(LastfmBase):
         self.__api = api
         self.__name = name
 
-    def getName(self):
+    @property
+    def name(self):
         return self.__name
     
-    name = property(getName, None, None, "Name's Docstring")
-    
-    def getWeeklyChartList(self):
+    @property
+    def weeklyChartList(self):
         pass
 
     def getWeeklyAlbumChart(self,
@@ -29,21 +29,27 @@ class Group(LastfmBase):
                              end = None):
         pass
     
-    weeklyAlbumChart = property(getWeeklyAlbumChart, None, None, "Docstring")
+    @property
+    def recentWeeklyAlbumChart(self):
+        return self.getWeeklyAlbumChart()
     
     def getWeeklyArtistChart(self,
                              start = None,
                              end = None):
         pass
     
-    weeklyArtistChart = property(getWeeklyArtistChart, None, None, "Docstring")
+    @property
+    def recentWeeklyArtistChart(self):
+        return self.getWeeklyArtistChart()
     
     def getWeeklyTrackChart(self,
                              start = None,
                              end = None):
         pass
     
-    weeklyTrackChart = property(getWeeklyTrackChart, None, None, "Docstring")
+    @property
+    def recentWeeklyTrackChart(self):
+        return self.getWeeklyTrackChart()
     
     @staticmethod
     def hashFunc(*args, **kwds):

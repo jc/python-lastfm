@@ -42,65 +42,65 @@ class Event(LastfmBase):
                             )
         self.__tag = tag
 
-    def getId(self):
+    @property
+    def id(self):
+        """id of the event"""
         return self.__id
 
-    def getTitle(self):
+    @property
+    def title(self):
+        """title of the event"""
         return self.__title
 
-    def getArtists(self):
+    @property
+    def artists(self):
+        """artists performing in the event"""
         return self.__artists
     
-    def getHeadliner(self):
+    @property
+    def headliner(self):
+        """headliner artist of the event"""
         return self.__headliner
 
-    def getVenue(self):
+    @property
+    def venue(self):
+        """venue of the event"""
         return self.__venue
 
-    def getStartDate(self):
+    @property
+    def startDate(self):
+        """start date of the event"""
         return self.__startDate
 
-    def getStartTime(self):
+    @property
+    def startTime(self):
+        """start time of the event"""
         return self.__startTime
 
-    def getDescription(self):
+    @property
+    def description(self):
+        """description of the event"""
         return self.__description
 
-    def getImage(self):
+    @property
+    def image(self):
+        """poster of the event"""
         return self.__image
 
-    def getUrl(self):
+    @property
+    def url(self):
+        """url of the event's page"""
         return self.__url
 
-    def getStats(self):
+    @property
+    def stats(self):
+        """stats of the event"""
         return self.__stats
 
-    def getTag(self):
+    @property
+    def tag(self):
+        """tags for the event"""
         return self.__tag
-        
-    id = property(getId, None, None, "Id's Docstring")
-
-    title = property(getTitle, None, None, "Title's Docstring")
-
-    artists = property(getArtists, None, None, "Artists's Docstring")
-    
-    headliner = property(getHeadliner, None, None, "headliner's Docstring")
-
-    venue = property(getVenue, None, None, "Venue's Docstring")
-
-    startDate = property(getStartDate, None, None, "StartDate's Docstring")
-
-    startTime = property(getStartTime, None, None, "StartTime's Docstring")
-
-    description = property(getDescription, None, None, "Description's Docstring")
-
-    image = property(getImage, None, None, "Image's Docstring")
-
-    url = property(getUrl, None, None, "Url's Docstring")
-
-    stats = property(getStats, None, None, "Match's Docstring")
-    
-    tag = property(getTag, None, None, "Tag's Docstring")        
     
     @staticmethod
     def getInfo(api, event):

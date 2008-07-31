@@ -35,45 +35,45 @@ class Track(LastfmBase):
                             )
         self.__fullTrack = fullTrack
 
-    def getName(self):
+    @property
+    def name(self):
+        """name of the track"""
         return self.__name
 
-    def getMbid(self):
+    @property
+    def mbid(self):
+        """mbid of the track"""
         return self.__mbid
 
-    def getUrl(self):
+    @property
+    def url(self):
+        """url of the tracks's page"""
         return self.__url
 
-    def isStreamable(self):
+    @property
+    def streamable(self):
+        """is the track streamable"""
         return self.__streamable
 
-    def getArtist(self):
+    @property
+    def artist(self):
+        """artist of the track"""
         return self.__artist
 
-    def getImage(self):
+    @property
+    def image(self):
+        """image of the track's album cover"""
         return self.__image
 
-    def getStats(self):
+    @property
+    def stats(self):
+        """stats of the track"""
         return self.__stats
     
-    def getFullTrack(self):
+    @property
+    def fullTrack(self):
+        """is the full track streamable"""
         return self.__fullTrack
-
-    name = property(getName, None, None, "Name's Docstring")
-
-    mbid = property(getMbid, None, None, "Mbid's Docstring")
-
-    url = property(getUrl, None, None, "Url's Docstring")
-
-    streamable = property(isStreamable, None, None, "Streamable's Docstring")
-
-    artist = property(getArtist, None, None, "Artist's Docstring")
-
-    image = property(getImage, None, None, "Image's Docstring")
-
-    stats = property(getStats, None, None, "Match's Docstring")
-    
-    fullTrack = property(getFullTrack, None, None, "Match's Docstring")
     
     def __checkParams(self,
                       params,
@@ -96,9 +96,15 @@ class Track(LastfmBase):
         params = self.__checkParams({'method': 'track.getsimilar'}, artist, track, mbid)
         data = self.__api._fetchData(params).find('similartracks')
         
-    similar = property(getSimilar, None, None, "Similar's Docstring")
-    mostSimilar = property(lambda self: len(self.similar) and self.similar[0],
-                           None, None, "docstring")
+    @property
+    def similar(self):
+        """tracks similar to this track"""
+        return self.getSimilar()
+    
+    @property
+    def mostSimilar(self):
+        """track most similar to this track"""
+        return (len(self.similar) and self.similar[0] or None)
         
     def getTopFans(self,
                    artist = None,
@@ -107,9 +113,14 @@ class Track(LastfmBase):
         params = self.__checkParams({'method': 'track.gettopfans'}, artist, track, mbid)
         data = self.__api._fetchData(params).find('topfans')
         
-    topFans = property(getTopFans, None, None, "top fans's Docstring")
-    topFan = property(lambda self: len(self.topFans) and self.topFans[0],
-                      None, None, "docstring")
+    @property
+    def topFans(self):
+        """top fans of the track"""
+        return self.getTopFans()
+    
+    @property
+    def topFan(self):
+        return (len(self.topFans) and self.topFans[0] or None)
         
     def getTopTags(self,
                    artist = None,
@@ -118,8 +129,14 @@ class Track(LastfmBase):
         params = self.__checkParams({'method': 'track.gettoptags'}, artist, track, mbid)
         data = self.__api._fetchData(params).find('toptags')
         
-    topTags = property(getTopTags, None, None, "docstring")
-    topTag = property(lambda self: len(self.topTags) and self.topTags[0], None, None, "docstring")
+    @property
+    def topTags(self):
+        """top tags for the track"""
+        return self.getTopTags()
+    
+    @property
+    def topTag(self):
+        return (len(self.topTags) and self.topTags[0] or None)
     
     @staticmethod
     def search(api,

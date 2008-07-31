@@ -28,55 +28,55 @@ class Stats(object):
         self.__attendance = attendance
         self.__reviews = reviews
 
-    def getSubject(self):
+    @property
+    def subject(self):
+        """subject of the stats"""
         return self.__subject
 
-    def getRank(self):
+    @property
+    def rank(self):
+        """rank of the subject"""
         return self.__rank
 
-    def getListeners(self):
+    @property
+    def listeners(self):
+        """number of listeners of the subject"""
         return self.__listeners
 
-    def getPlaycount(self):
+    @property
+    def playcount(self):
+        """playcount of the subject"""
         return self.__playcount
 
-    def getTagcount(self):
+    @property
+    def tagcount(self):
+        """tagcount of the subject"""
         return self.__tagcount
     
-    def getCount(self):
+    @property
+    def count(self):
+        """count of the subject"""
         return self.__count
         
-    def getMatch(self):
+    @property
+    def match(self):
+        """match of the subject"""
         return self.__match
 
-    def getWeight(self):
+    @property
+    def weight(self):
+        """weight of the subject"""
         return self.__weight
 
-    def getAttendance(self):
+    @property
+    def attendance(self):
+        """attendance of the subject"""
         return self.__attendance
 
-    def getReviews(self):
+    @property
+    def reviews(self):
+        """reviews of the subject"""
         return self.__reviews
-
-    listeners = property(getListeners, None, None, "Listeners's Docstring")
-
-    playcount = property(getPlaycount, None, None, "Plays's Docstring")
-    
-    tagcount = property(getTagcount, None, None, "Plays's Docstring")
-    
-    count = property(getCount, None, None, "Plays's Docstring")
-
-    match = property(getMatch, None, None, "Match's Docstring")
-
-    rank = property(getRank, None, None, "Artist's Docstring")
-
-    subject = property(getSubject, None, None, "subject's Docstring")
-
-    weight = property(getWeight, None, None, "Weight's Docstring")
-
-    attendance = property(getAttendance, None, None, "Attendance's Docstring")
-
-    reviews = property(getReviews, None, None, "Reviews's Docstring")
 
     def __repr__(self):
         return "<lastfm.Stats: for '%s'>" % self.__subject.name

@@ -47,30 +47,42 @@ class Artist(LastfmBase):
         self.__topTracks = None
         self.__topFans = None
 
-    def getName(self):
+    @property
+    def name(self):
+        """name of the artist"""
         return self.__name
 
-    def getMbid(self):
+    @property
+    def mbid(self):
+        """mbid of the artist"""
         if self.__mbid is None:
             self._fillInfo()
         return self.__mbid
 
-    def getUrl(self):
+    @property
+    def url(self):
+        """url of the artist's page"""
         if self.__url is None:
             self._fillInfo()
         return self.__url
 
-    def getImage(self):
+    @property
+    def image(self):
+        """images of the artist"""
         if self.__image is None:
             self._fillInfo()
         return self.__image
 
-    def isStreamable(self):
+    @property
+    def streamable(self):
+        """is the artist streamable"""
         if self.__streamable is None:
             self._fillInfo()
         return self.__streamable
 
-    def getStats(self):
+    @property
+    def stats(self):
+        """stats for the artist"""
         if self.__stats is None:
             self._fillInfo()
         return self.__stats
@@ -99,7 +111,19 @@ class Artist(LastfmBase):
                           ]
         return self.__similar
 
-    def getTopTags(self):
+    @property
+    def similar(self):
+        """artists similar to this artist"""
+        return self.getSimilar()
+    
+    @property
+    def mostSimilar(self):
+        """artist most similar to this artist"""
+        return (len(self.similar) and self.similar[0] or None)
+    
+    @property
+    def topTags(self):
+        """top tags for the artist"""
         if self.__topTags is None or len(self.__topTags) < 6:
             params = {
                       'method': 'artist.gettoptags',
@@ -115,35 +139,22 @@ class Artist(LastfmBase):
                               for t in data.findall('tag')
                               ]
         return self.__topTags
+    
+    @property
+    def topTag(self):
+        """top tag for the artist"""
+        return (len(self.topTags) and self.topTags[0] or None)
 
-    def getBio(self):
+    @property
+    def bio(self):
+        """biography of the artist"""
         if self.__bio is None:
             self._fillInfo()
         return self.__bio
-
-    name = property(getName, None, None, "Name's Docstring")
-
-    mbid = property(getMbid, None, None, "Mbid's Docstring")
     
-    url = property(getUrl, None, None, "Url's Docstring")
-
-    image = property(getImage, None, None, "Image's Docstring")
-
-    streamable = property(isStreamable, None, None, "Streamable's Docstring")
-
-    stats = property(getStats, None, None, "Stats's Docstring")
-
-    similar = property(getSimilar, None, None, "Similar's Docstring")
-    mostSimilar = property(lambda self: len(self.similar) and self.similar[0],
-                   None, None, "docstring")
-
-    topTags = property(getTopTags, None, None, "Tags's Docstring")
-    topTag = property(lambda self: len(self.topTags) and self.topTags[0],
-                   None, None, "docstring")
-
-    bio = property(getBio, None, None, "Bio's Docstring")
-    
-    def getEvents(self):
+    @property
+    def events(self):
+        """events for the artist"""
         if self.__events is None:
             params = {'method': 'artist.getevents', 'artist': self.name}
             data = self.__api._fetchData(params).find('events')
@@ -188,11 +199,11 @@ class Artist(LastfmBase):
                           )
                     for e in data.findall('event')
                     ]
-            return self.__events
+        return self.__events
     
-    events = property(getEvents, None, None, "Docstring")        
-    
-    def getTopAlbums(self):
+    @property
+    def topAlbums(self):
+        """top albums of the artist"""
         if self.__topAlbums is None:
             params = {'method': 'artist.gettopalbums', 'artist': self.name}
             data = self.__api._fetchData(params).find('topalbums')
@@ -215,11 +226,14 @@ class Artist(LastfmBase):
                     ]
         return self.__topAlbums
         
-    topAlbums = property(getTopAlbums, None, None, "Docstring")
-    topAlbum = property(lambda self: len(self.topAlbums) and self.topAlbums[0],
-                   None, None, "docstring")
+    @property
+    def topAlbum(self):
+        """top album of the artist"""
+        return (len(self.topAlbums) and self.topAlbums[0] or None)
     
-    def getTopFans(self):
+    @property
+    def topFans(self):
+        """top fans of the artist"""
         if self.__topFans is None:
             params = {'method': 'artist.gettopfans', 'artist': self.name}
             data = self.__api._fetchData(params).find('topfans')
@@ -238,11 +252,14 @@ class Artist(LastfmBase):
                     ]
         return self.__topFans
         
-    topFans = property(getTopFans, None, None, "Docstring")
-    topFan = property(lambda self: len(self.topFans) and self.topFans[0],
-                   None, None, "docstring")
+    @property
+    def topFan(self):
+        """top fan of the artist"""
+        return (len(self.topFans) and self.topFans[0] or None)
     
-    def getTopTracks(self):
+    @property
+    def topTracks(self):
+        """top tracks of the artist"""
         if self.__topTracks is None:
             params = {'method': 'artist.gettoptracks', 'artist': self.name}
             data = self.__api._fetchData(params).find('toptracks')
@@ -265,9 +282,9 @@ class Artist(LastfmBase):
                     ]
         return self.__topTracks
     
-    topTracks = property(getTopTracks, None, None, "Docstring")
-    topTrack = property(lambda self: len(self.topTracks) and self.topTracks[0],
-                   None, None, "docstring")
+    @property
+    def topTrack(self):
+        return (len(self.topTracks) and self.topTracks[0] or None)
     
     @staticmethod
     def search(api,
@@ -402,26 +419,26 @@ class Bio(object):
         self.__summary = summary
         self.__content = content
 
-    def getArtist(self):
+    @property
+    def artist(self):
+        """artist for which the biography is"""
         return self.__artist
 
-    def getPublished(self):
+    @property
+    def published(self):
+        """publication time of the biography"""
         return self.__published
 
-    def getSummary(self):
+    @property
+    def summary(self):
+        """summary of the biography"""
         return self.__summary
 
-    def getContent(self):
+    @property
+    def content(self):
+        """content of the biography"""
         return self.__content
 
-    published = property(getPublished, None, None, "Published's Docstring")
-
-    summary = property(getSummary, None, None, "Summary's Docstring")
-
-    content = property(getContent, None, None, "Content's Docstring")
-
-    artist = property(getArtist, None, None, "Artist's Docstring")
-    
     def __repr__(self):
         return "<lastfm.artist.Bio: for artist '%s'>" % self.__artist.name
 

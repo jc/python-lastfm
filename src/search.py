@@ -25,42 +25,44 @@ class SearchResult(LastfmBase):
         self.__itemsPerPage = itemsPerPage
         self.__matches = matches
     
-    def getType(self):
+    @property
+    def type(self):
+        """type of the search"""
         return self.__type
 
-    def getSearchTerms(self):
+    @property
+    def searchTerms(self):
+        """terms searched for in the search"""
         return self.__searchTerms
 
-    def getStartPage(self):
+    @property
+    def startPage(self):
+        """start page of the search"""
         return self.__startPage
 
-    def getTotalResults(self):
+    @property
+    def totalResults(self):
+        """number of total results for the search"""
         return self.__totalResults
 
-    def getStartIndex(self):
+    @property
+    def startIndex(self):
+        """start index of the search"""
         return self.__startIndex
 
-    def getItemsPerPage(self):
+    @property
+    def itemsPerPage(self):
+        """number of items per page for the search"""
         return self.__itemsPerPage
 
-    def getMatches(self):
+    @property
+    def matches(self):
+        """match result of the search"""
         return self.__matches
     
-    type = property(getType, None, None, "Type's Docstring")
-
-    searchTerms = property(getSearchTerms, None, None, "SearchTerm's Docstring")
-
-    startPage = property(getStartPage, None, None, "StartPage's Docstring")
-
-    totalResults = property(getTotalResults, None, None, "TotalResults's Docstring")
-
-    startIndex = property(getStartIndex, None, None, "StartIndex's Docstring")
-
-    itemsPerPage = property(getItemsPerPage, None, None, "ItemsPerPage's Docstring")
-
-    matches = property(getMatches, None, None, "Matches's Docstring")
-    topMatch = property(lambda self: len(self.matches) and self.matches[0],
-                        None, None, "docstring")
+    @property
+    def topMatch(self):
+        return (len(self.matches) and self.matches[0] or None)
         
     @staticmethod
     def hashFunc(*args, **kwds):

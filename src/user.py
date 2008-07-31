@@ -26,82 +26,120 @@ class User(LastfmBase):
                              weight = stats.weight
                             )
 
-    def getName(self):
+    @property
+    def name(self):
+        """name of the user"""
         return self.__name
 
-    def getUrl(self):
+    @property
+    def url(self):
+        """url of the user's page"""
         return self.__url
 
-    def getImage(self):
+    @property
+    def image(self):
+        """image of the user"""
         return self.__image
 
-    def getStats(self):
+    @property
+    def stats(self):
+        """stats for the user"""
         return self.__stats
-    
-    name = property(getName, None, None, "Name's Docstring")
-
-    url = property(getUrl, None, None, "Url's Docstring")
-
-    image = property(getImage, None, None, "Image's Docstring")
-    
-    stats = property(getStats, None, None, "Weight's Docstring")
-    
-    def getEvents(self):
+        
+    @property
+    def events(self):
         pass
-    
-    events = property(getEvents, None, None, "docstring")
     
     def getFriends(self,
                    recentTracks = False,
                    limit = None):
         pass
     
-    friends = property(getFriends, None, None, "docstring")
+    @property
+    def friends(self):
+        """friends of the user"""
+        return self.getFriends()
     
     def getNeighbours(self, limit = None):
         pass
     
-    neighbours = property(getNeighbours, None, None, "docstring")
+    @property
+    def neighbours(self):
+        """neightbours of the user"""
+        return self.getNeighbours()
     
-    def getPlaylists(self):
+    @property
+    def playlists(self):
+        """playlists of the user"""
         pass
-    
-    playlists = property(getPlaylists, None, None, "docstring")
     
     def getRecentTracks(self, limit = None):
         pass
     
-    recentTracks = property(getRecentTracks, None, None, "docstring")
+    @property
+    def recentTracks(self):
+        """recent tracks played by the user"""
+        return self.getRecentTracks()
+    
+    @property
+    def mostRecentTrack(self):
+        """most recent track played by the user"""
+        return (len(self.recentTracks) and self.recentTracks[0] or None)
     
     def getTopAlbums(self, period = None):
         pass
     
-    topAlbums = property(getTopAlbums, None, None, "docstring")
-    topAlbum = property(lambda self: len(self.topAlbums) and self.topAlbums[0],
-                   None, None, "docstring")
+    @property
+    def topAlbums(self):
+        """top albums of the user"""
+        return self.getTopAlbums()
+    
+    @property
+    def topAlbum(self):
+        """top album fo the user"""
+        return (len(self.topAlbums) and self.topAlbums[0] or None)
     
     def getTopArtists(self, period = None):
         pass
     
-    topArtists = property(getTopArtists, None, None, "docstring")
-    topArtist = property(lambda self: len(self.topArtists) and self.topArtists[0],
-                   None, None, "docstring")
+    @property
+    def topArtists(self):
+        """top artists of the user"""
+        return self.getTopArtists()
+    
+    @property
+    def topArtist(self):
+        """top artist of the user"""
+        return (len(self.topArtists) and self.topArtists[0] or None)
     
     def getTopTracks(self, period = None):
         pass
     
-    topTracks = property(getTopTracks, None, None, "docstring")
-    topTrack = property(lambda self: len(self.topTracks) and self.topTracks[0],
-                   None, None, "docstring")
+    @property
+    def topTracks(self):
+        """top tracks of the user"""
+        return self.getTopTracks()
+     
+    @property
+    def topTrack(self):
+        """top track of the user"""
+        return (len(self.topTracks) and self.topTracks[0] or None)
     
     def getTopTags(self, limit = None):
         pass
     
-    topTags = property(getTopTags, None, None, "docstring")
-    topTag = property(lambda self: len(self.topTags) and self.topTags[0],
-                   None, None, "docstring")
+    @property
+    def topTags(self):
+        """top tags of the user"""
+        return self.getTopTags()
     
-    def getWeeklyChartList(self):
+    @property
+    def topTag(self):
+        """top tag of the user"""
+        return (len(self.topTags) and self.topTags[0] or None)
+    
+    @property
+    def weeklyChartList(self):
         pass
 
     def getWeeklyAlbumChart(self,
@@ -109,21 +147,27 @@ class User(LastfmBase):
                              end = None):
         pass
     
-    weeklyAlbumChart = property(getWeeklyAlbumChart, None, None, "Docstring")
+    @property
+    def recentWeeklyAlbumChart(self):
+        return self.getWeeklyAlbumChart()
     
     def getWeeklyArtistChart(self,
                              start = None,
                              end = None):
         pass
     
-    weeklyArtistChart = property(getWeeklyArtistChart, None, None, "Docstring")
+    @property
+    def recentWeeklyArtistChart(self):
+        return self.getWeeklyArtistChart()
     
     def getWeeklyTrackChart(self,
                              start = None,
                              end = None):
         pass
     
-    weeklyTrackChart = property(getWeeklyTrackChart, None, None, "Docstring")
+    @property
+    def recentWeeklyTrackChart(self):
+        return self.getWeeklyTrackChart()
     
     @staticmethod
     def hashFunc(*args, **kwds):

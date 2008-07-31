@@ -122,21 +122,21 @@ class Venue(LastfmBase):
         self.__location = location
         self.__url = url
 
-    def getName(self):
+    @property
+    def name(self):
+        """name of the venue"""
         return self.__name
 
-    def getLocation(self):
+    @property
+    def location(self):
+        """location of the event"""
         return self.__location
 
-    def getUrl(self):
+    @property
+    def url(self):
+        """url of the event's page"""
         return self.__url
-    
-    name = property(getName, None, None, "Name's Docstring")
-
-    location = property(getLocation, None, None, "Location's Docstring")
-
-    url = property(getUrl, None, None, "Url's Docstring")
-    
+        
     @staticmethod
     def hashFunc(*args, **kwds):
         try:
@@ -181,53 +181,56 @@ class Location(LastfmBase):
         self.__latitude = latitude
         self.__longitude = longitude
         self.__timezone = timezone
-        
-    def getName(self):
+    
+    @property  
+    def name(self):
+        """name of the location"""
         return self.__name
 
-    def getCity(self):
+    @property  
+    def city(self):
+        """city in which the location is situated"""
         return self.__city
 
-    def getCountry(self):
+    @property  
+    def country(self):
+        """country in which the location is situated"""
         return self.__country
 
-    def getStreet(self):
+    @property  
+    def street(self):
+        """street in which the location is situated"""
         return self.__street
 
-    def getPostalCode(self):
+    @property  
+    def postalCode(self):
+        """postal code of the location"""
         return self.__postalCode
 
-    def getLatitude(self):
+    @property  
+    def latitude(self):
+        """latitude of the location"""
         return self.__latitude
 
-    def getLongitude(self):
+    @property  
+    def longitude(self):
+        """longitude of the location"""
         return self.__longitude
 
-    def getTimezone(self):
+    @property  
+    def timezone(self):
+        """timezone in which the location is situated"""
         return self.__timezone
-    
-    name = property(getName, None, None, "Name's Docstring")
-
-    city = property(getCity, None, None, "City's Docstring")
-
-    country = property(getCountry, None, None, "Country's Docstring")
-
-    street = property(getStreet, None, None, "Street's Docstring")
-
-    postalCode = property(getPostalCode, None, None, "PostalCode's Docstring")
-
-    latitude = property(getLatitude, None, None, "Latitude's Docstring")
-
-    longitude = property(getLongitude, None, None, "Longitude's Docstring")
-
-    timezone = property(getTimezone, None, None, "Timezone's Docstring")        
-    
+        
     def getEvents(self,
                   distance = None,
                   page = None):
         return Geo.getEvents(self.__api, self.name, distance, page).matches
     
-    events = property(getEvents, None, None, "Event's Docstring")
+    @property  
+    def events(self):
+        """events taking place at/around the location"""
+        return self.getEvents()
     
     @staticmethod
     def hashFunc(*args, **kwds):
@@ -272,26 +275,30 @@ class Country(LastfmBase):
         self.__api = api
         self.__name = name
 
-    def getName(self):
+    @property  
+    def name(self):
+        """name of the country"""
         return self.__name
     
-    name = property(getName, None, None, "Name's Docstring")
-    
-    def getTopArtists(self):
+    @property  
+    def topArtists(self):
+        """top artists of the country"""
         return Geo.getTopArtists(self.__api, self.name)
     
-    topArtists = property(getTopArtists, None, None, "Docstring")
-    topArtist = property(
-                         lambda self: len(self.topArtists) and self.topArtists[0] or None,
-                         None, None, "Docstring"                         
-                         )
+    @property  
+    def topArtist(self):
+        """top artist of the country"""
+        return (len(self.topArtists) and self.topArtists[0] or None)
     
-    def getTopTracks(self):
+    @property  
+    def topTracks(self):
+        """top tracks of the country"""
         return Geo.getTopTracks(self.__api, self.name)
     
-    topTracks = property(getTopTracks, None, None, "Docstring")
-    topTrack = property(lambda self: len(self.topTracks) and self.topTracks[0] or None,
-                        None, None, "Docstring")
+    @property
+    def topTrack(self):
+        """top track of the country"""
+        return (len(self.topTracks) and self.topTracks[0] or None)
     
     @staticmethod
     def hashFunc(*args, **kwds):

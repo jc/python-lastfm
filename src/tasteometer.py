@@ -14,20 +14,20 @@ class Tasteometer(object):
         self.__matches = matches
         self.__artists = artists#set
 
-    def getScore(self):
+    @property
+    def score(self):
+        """score of the comparison"""
         return self.__score
 
-    def getMatches(self):
+    @property
+    def matches(self):
+        """matches for the comparison"""
         return self.__matches
 
-    def getArtists(self):
+    @property
+    def artists(self):
+        """artists for the comparison"""
         return self.__artists
-
-    score = property(getScore, None, None, "Score's Docstring")
-
-    matches = property(getMatches, None, None, "Matches's Docstring")
-
-    artists = property(getArtists, None, None, "Artists's Docstring")
     
     @staticmethod
     def compare(api,

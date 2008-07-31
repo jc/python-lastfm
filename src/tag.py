@@ -24,22 +24,24 @@ class Tag(LastfmBase):
         self.__topArtists = None
         self.__topTracks = None
     
-    def getName(self):
+    @property
+    def name(self):
+        """name of the tag"""
         return self.__name
 
-    def getUrl(self):
+    @property
+    def url(self):
+        """url of the tag's page"""
         return self.__url
     
-    def isStreamable(self):
+    @property
+    def streamable(self):
+        """is the tag streamable"""
         return self.__streamable
     
-    name = property(getName, None, None, "Name's Docstring")
-
-    url = property(getUrl, None, None, "Url's Docstring")
-    
-    streamable = property(isStreamable, None, None, "Docstring")
-    
-    def getSimilar(self):
+    @property    
+    def similar(self):
+        """tags similar to this tag"""
         if self.__similar is None:
             params = {'method': 'tag.getsimilar', 'tag': self.name}
             data = self.__api._fetchData(params).find('similartags')
@@ -54,9 +56,9 @@ class Tag(LastfmBase):
                               ]
         return self.__similar
     
-    similar = property(getSimilar, None, None, "Docstring")
-    
-    def getTopAlbums(self):
+    @property
+    def topAlbums(self):
+        """top albums for the tag"""
         if self.__topAlbums is None:
             params = {'method': 'tag.gettopalbums', 'tag': self.name}
             data = self.__api._fetchData(params).find('topalbums')
@@ -83,13 +85,14 @@ class Tag(LastfmBase):
                                 ]
         return self.__topAlbums
     
-    topAlbums = property(getTopAlbums, None, None, "Docstring")
-    topAlbum = property(
-                         lambda self: len(self.topAlbums) and self.topAlbums[0] or None,
-                         None, None, "Docstring"                         
-                         )
+    @property
+    def topAlbum(self):
+        """top album for the tag"""
+        return (len(self.topAlbums) and self.topAlbums[0] or None)
     
-    def getTopArtists(self):
+    @property
+    def topArtists(self):
+        """top artists for the tag"""
         if self.__topArtists is None:
             params = {'method': 'tag.gettopartists', 'tag': self.name}
             data = self.__api._fetchData(params).find('topartists')
@@ -111,13 +114,14 @@ class Tag(LastfmBase):
                                  ]
         return self.__topArtists
             
-    topArtists = property(getTopArtists, None, None, "Docstring")
-    topArtist = property(
-                         lambda self: len(self.topArtists) and self.topArtists[0] or None,
-                         None, None, "Docstring"                         
-                         )
+    @property
+    def topArtist(self):
+        """top artist for the tag"""
+        return (len(self.topArtists) and self.topArtists[0] or None)
     
-    def getTopTracks(self):
+    @property
+    def topTracks(self):
+        """top tracks for the tag"""
         if self.__topTracks is None:
             params = {'method': 'tag.gettoptracks', 'tag': self.name}
             data = self.__api._fetchData(params).find('toptracks')
@@ -145,9 +149,9 @@ class Tag(LastfmBase):
                                 ]
         return self.__topTracks
     
-    topTracks = property(getTopTracks, None, None, "Docstring")
-    topTrack = property(lambda self: len(self.topTracks) and self.topTracks[0],
-                   None, None, "docstring")
+    @property
+    def topTrack(self):
+        return (len(self.topTracks) and self.topTracks[0] or None)
     
     @staticmethod
     def getTopTags(api):

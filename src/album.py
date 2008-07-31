@@ -37,44 +37,62 @@ class Album(LastfmBase):
                              rank = stats.rank
                             )
         self.__topTags = topTags
-
-    def getName(self):
+    
+    @property
+    def name(self):
+        """name of the album"""
         return self.__name
     
-    def getArtist(self):
+    @property
+    def artist(self):
+        """artist of the album"""
         return self.__artist
-
-    def getId(self):
+    
+    @property
+    def id(self):
+        """id of the album"""
         if self.__id is None:
             self._fillInfo()
         return self.__id
 
-    def getMbid(self):
+    @property
+    def mbid(self):
+        """mbid of the album"""
         if self.__mbid is None:
             self._fillInfo()
         return self.__mbid
 
-    def getUrl(self):
+    @property
+    def url(self):
+        """url of the album's page"""
         if self.__url is None:
             self._fillInfo()
         return self.__url
 
-    def getReleaseDate(self):
+    @property
+    def releaseDate(self):
+        """release date of the album"""
         if self.__releaseDate is None:
             self._fillInfo()
         return self.__releaseDate
 
-    def getImage(self):
+    @property
+    def image(self):
+        """cover images of the album"""
         if self.__image is None:
             self._fillInfo()
         return self.__image
 
-    def getStats(self):
+    @property
+    def stats(self):
+        """stats related to the album"""
         if self.__stats is None:
             self._fillInfo()
         return self.__stats
 
-    def getTopTags(self):
+    @property
+    def topTags(self):
+        """top tags for the album"""
         if self.__topTags is None:
             params = {'method': 'album.getinfo'}
             if self.artist and self.name:
@@ -92,25 +110,10 @@ class Album(LastfmBase):
                               ]
         return self.__topTags
 
-    name = property(getName, None, None, "Name's Docstring")
-
-    artist = property(getArtist, None, None, "Artist's Docstring")
-
-    id = property(getId, None, None, "Id's Docstring")
-
-    mbid = property(getMbid, None, None, "Mbid's Docstring")
-
-    url = property(getUrl, None, None, "Url's Docstring")
-
-    releaseDate = property(getReleaseDate, None, None, "ReleaseDate's Docstring")
-
-    image = property(getImage, None, None, "Image's Docstring")
-
-    stats = property(getStats, None, None, "Stats's Docstring")
-
-    topTags = property(getTopTags, None, None, "TopTags's Docstring")
-    topTag = property(lambda self: self.topTags and len(self.topTags) and self.topTags[0],
-                   None, None, "docstring")
+    @property
+    def topTag(self):
+        """top tag for the album"""
+        return (self.topTags and len(self.topTags) and self.topTags[0] or None)
     
     @staticmethod
     def _fetchData(api,
@@ -135,7 +138,7 @@ class Album(LastfmBase):
                             datetime(*(time.strptime(data.findtext('releasedate').strip(), '%d %b %Y, 00:00')[0:6]))
         self.__image = dict([(i.get('size'), i.text) for i in data.findall('image')])
         self.__stats = Stats(
-                       subject = data.findtext('name'),
+                       subject = self,
                        listeners = int(data.findtext('listeners')),
                        playcount = int(data.findtext('playcount')),
                        )

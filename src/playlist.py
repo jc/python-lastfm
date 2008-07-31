@@ -12,16 +12,16 @@ class Playlist(LastfmBase):
         self.__data = xpsfData
         self.__url = url
 
-    def getData(self):
+    @property
+    def data(self):
+        """playlist's data"""
         return self.__data
     
-    def getUrl(self):
+    @property
+    def url(self):
+        """url of the playlist"""
         return self.__url
     
-    data = property(getData, None, None, "docstring")
-
-    url = property(getUrl, None, None, "url's Docstring")
-        
     @staticmethod
     def fetch(api, url):
         params = {'method': 'playlist.fetch', 'playlistURL': url}
