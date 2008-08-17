@@ -31,9 +31,13 @@ class Track(LastfmBase):
                              subject = self,
                              match = stats.match,
                              playcount = stats.playcount,
-                             rank = stats.rank
+                             rank = stats.rank,
+                             listeners = stats.listeners,
                             )
         self.__fullTrack = fullTrack
+        self.__similar = None
+        self.__topFans = None
+        self.__topTags = None
 
     @property
     def name(self):
@@ -89,50 +93,99 @@ class Track(LastfmBase):
             params.update({'mbid': mbid})
         return params
         
-    def getSimilar(self,
-                   artist = None,
-                   track = None,
-                   mbid = None):
-        params = self.__checkParams({'method': 'track.getsimilar'}, artist, track, mbid)
-        data = self.__api._fetchData(params).find('similartracks')
-        
     @property
     def similar(self):
         """tracks similar to this track"""
-        return self.getSimilar()
+        if self.__similar is None:
+            params = self.__checkParams(
+                                        {'method': 'track.getsimilar'},
+                                        self.artist.name,
+                                        self.name,
+                                        self.mbid
+                                        )
+            data = self.__api._fetchData(params).find('similartracks')
+            self.__similar = [
+                        Track(
+                              self.__api,
+                              name = t.findtext('name'),
+                              artist = Artist(
+                                              self.__api,
+                                              name = t.findtext('artist/name'),
+                                              mbid = t.findtext('artist/mbid'),
+                                              url = t.findtext('artist/url')
+                                              ),
+                              mbid = t.findtext('mbid'),
+                              stats = Stats(
+                                            subject = t.findtext('name'),
+                                            match = float(t.findtext('match'))
+                                            ),
+                              streamable = (t.findtext('streamable') == '1'),
+                              fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                              image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                              )
+                        for t in data.findall('track')
+                        ]
+        return self.__similar
     
     @property
     def mostSimilar(self):
         """track most similar to this track"""
         return (len(self.similar) and self.similar[0] or None)
         
-    def getTopFans(self,
-                   artist = None,
-                   track = None,
-                   mbid = None):
-        params = self.__checkParams({'method': 'track.gettopfans'}, artist, track, mbid)
-        data = self.__api._fetchData(params).find('topfans')
-        
     @property
     def topFans(self):
         """top fans of the track"""
-        return self.getTopFans()
+        if self.__topFans is None:
+            params = self.__checkParams(
+                                        {'method': 'track.gettopfans'},
+                                        self.artist.name,
+                                        self.name,
+                                        self.mbid
+                                        )
+            data = self.__api._fetchData(params).find('topfans')
+            self.__topFans = [
+                              User(
+                                   self.__api,
+                                   name = u.findtext('name'),
+                                   url = u.findtext('url'),
+                                   image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
+                                   stats = Stats(
+                                                 subject = u.findtext('name'),
+                                                 weight = int(u.findtext('weight'))
+                                                 )
+                                   )
+                              for u in data.findall('user')
+                              ]
+        return self.__topFans
     
     @property
     def topFan(self):
         return (len(self.topFans) and self.topFans[0] or None)
         
-    def getTopTags(self,
-                   artist = None,
-                   track = None,
-                   mbid = None):
-        params = self.__checkParams({'method': 'track.gettoptags'}, artist, track, mbid)
-        data = self.__api._fetchData(params).find('toptags')
-        
     @property
     def topTags(self):
         """top tags for the track"""
-        return self.getTopTags()
+        if self.__topTags is None:
+            params = self.__checkParams(
+                                        {'method': 'track.gettoptags'},
+                                        self.artist.name,
+                                        self.name,
+                                        self.mbid
+                                        )
+            data = self.__api._fetchData(params).find('toptags')
+            self.__topTags = [
+                              Tag(
+                                  self.__api,
+                                  name = t.findtext('name'),
+                                  url = t.findtext('url'),
+                                  stats = Stats(
+                                                subject = t.findtext('name'),
+                                                count = int(t.findtext('count')),
+                                                )
+                                  )
+                              for t in data.findall('tag')
+                              ]
+        return self.__topTags
     
     @property
     def topTag(self):
@@ -144,7 +197,41 @@ class Track(LastfmBase):
                artist = None,
                limit = None,
                page = None):
-        pass
+        params = {'method': 'track.search', 'track': track}
+        if artist is not None:
+            params.update({'artist': artist})
+        if limit is not None:
+            params.update({'limit': limit})
+        if page is not None:
+            params.update({'page': page})
+        data = api._fetchData(params).find('results')
+        return SearchResult(
+                            type = 'track',
+                            searchTerms = data.find("{%s}Query" % SearchResult.xmlns).attrib['searchTerms'],
+                            startPage = int(data.find("{%s}Query" % SearchResult.xmlns).attrib['startPage']),
+                            totalResults = int(data.findtext("{%s}totalResults" % SearchResult.xmlns)),
+                            startIndex = int(data.findtext("{%s}startIndex" % SearchResult.xmlns)),
+                            itemsPerPage = int(data.findtext("{%s}itemsPerPage" % SearchResult.xmlns)),
+                            matches = [
+                                       Track(
+                                              api,
+                                              name = t.findtext('name'),
+                                              artist = Artist(
+                                                              api,
+                                                              name = t.findtext('artist')
+                                                              ),
+                                              url = t.findtext('url'),
+                                              stats = Stats(
+                                                            subject = t.findtext('name'),
+                                                            listeners = int(t.findtext('listeners'))
+                                                            ),
+                                              streamable = (t.findtext('streamable') == '1'),
+                                              fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                                              image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                                              )
+                                       for t in data.findall('trackmatches/track')
+                                       ]
+                            )
     
     @staticmethod
     def hashFunc(*args, **kwds):
@@ -176,3 +263,5 @@ from error import LastfmError
 from user import User
 from tag import Tag
 from stats import Stats
+from artist import Artist
+from search import SearchResult

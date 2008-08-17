@@ -34,7 +34,31 @@ class Tasteometer(object):
                 type1, type2,
                 value1, value2,
                 limit = None):
-        pass
+        params = {
+                  'method': 'tasteometer.compare',
+                  'type1': type1,
+                  'type2': type2,
+                  'value1': value1,
+                  'value2': value2
+                  }
+        if limit is not None:
+            params.update({'limit': limit})
+        data = api._fetchData(params).find('comparison/result')
+        return Tasteometer(
+                           score = float(data.findtext('score')),
+                           matches = int(data.find('artists').attrib['matches']),
+                           artists = [
+                                      Artist(
+                                              api,
+                                              name = a.findtext('name'),
+                                              url = a.findtext('url'),
+                                              image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                                              )
+                                      for a in data.findall('artists/artist')
+                                      ]
+                           )
+        
+            
     
     def __repr__(self):
         return "<lastfm.Tasteometer>"

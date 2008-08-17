@@ -12,13 +12,18 @@ class Tag(LastfmBase):
                  api,
                  name = None,
                  url = None,
-                 streamable = None):
+                 streamable = None,
+                 stats = None):
         if not isinstance(api, Api):
             raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__url = url
         self.__streamable = streamable
+        self.__stats = stats and Stats(
+                             subject = self,
+                             count = stats.count
+                             )
         self.__similar = None
         self.__topAlbums = None
         self.__topArtists = None
@@ -38,6 +43,10 @@ class Tag(LastfmBase):
     def streamable(self):
         """is the tag streamable"""
         return self.__streamable
+    
+    @property
+    def stats(self):
+        return self.__stats
     
     @property    
     def similar(self):
@@ -155,14 +164,52 @@ class Tag(LastfmBase):
     
     @staticmethod
     def getTopTags(api):
-        pass
+        params = {'method': 'tag.getTopTags'}
+        data = api._fetchData(params).find('toptags')
+        return [
+                Tag(
+                    api,
+                    name = t.findtext('name'),
+                    url = t.findtext('url'),
+                    stats = Stats(
+                                  subject = t.findtext('name'),
+                                  count = int(t.findtext('count')),
+                                  )
+                    )
+                for t in data.findall('tag')
+                ]
     
     @staticmethod
     def search(api,
                tag,
                limit = None,
                page = None):
-        pass
+        params = {'method': 'tag.search', 'tag': tag}
+        if limit:
+            params.update({'limit': limit})
+        if page:
+            params.update({'page': page})
+        data = api._fetchData(params).find('results')
+        return SearchResult(
+                            type = 'tag',
+                            searchTerms = data.find("{%s}Query" % SearchResult.xmlns).attrib['searchTerms'],
+                            startPage = int(data.find("{%s}Query" % SearchResult.xmlns).attrib['startPage']),
+                            totalResults = int(data.findtext("{%s}totalResults" % SearchResult.xmlns)),
+                            startIndex = int(data.findtext("{%s}startIndex" % SearchResult.xmlns)),
+                            itemsPerPage = int(data.findtext("{%s}itemsPerPage" % SearchResult.xmlns)),
+                            matches = [
+                                       Tag(
+                                              api,
+                                              name = t.findtext('name'),
+                                              url = t.findtext('url'),
+                                              stats = Stats(
+                                                            subject = t.findtext('name'),
+                                                            count = int(t.findtext('count')),
+                                                            )
+                                              )
+                                       for t in data.findall('tagmatches/tag')
+                                       ]
+                            )
     
     @staticmethod
     def hashFunc(*args, **kwds):
@@ -189,3 +236,4 @@ from album import Album
 from artist import Artist
 from track import Track
 from stats import Stats
+from search import SearchResult

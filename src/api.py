@@ -175,7 +175,7 @@ class Api(object):
                      type1, type2,
                      value1, value2,
                      limit = None):
-        return Tasteometer(self, type1, type2, value1, value2, limit)
+        return Tasteometer.compare(self, type1, type2, value1, value2, limit)
     
     def getTrack(self, name, artist = None):
         if isinstance(artist, Artist):
