@@ -114,7 +114,7 @@ class Artist(LastfmBase):
     @property
     def similar(self):
         """artists similar to this artist"""
-        if self.__similar is None:
+        if self.__similar is None or len(self.__similar) < 6:
             return self.getSimilar()
         return self.__similar
     
