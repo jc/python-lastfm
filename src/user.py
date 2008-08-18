@@ -13,7 +13,8 @@ class User(LastfmBase):
                  name = None,
                  url = None,
                  image = None,
-                 stats = None):
+                 stats = None,
+                 mostRecentTrack = None):
         if not isinstance(api, Api):
             raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
@@ -26,6 +27,10 @@ class User(LastfmBase):
                              weight = stats.weight
                             )
         self.__events = None
+        self.__pastEvents = None
+        self.__friends = None
+        self.__lovedTracks = None
+        self.__mostRecentTrack = mostRecentTrack
 
     @property
     def name(self):
@@ -61,17 +66,65 @@ class User(LastfmBase):
 
     @property
     def pastEvents(self):
-        pass
+        if self.__pastEvents is None:
+            params = {'method': 'user.getpastevents', 'user': self.name}
+            data = self.__api._fetchData(params).find('events')
+
+            self.__pastEvents = [
+                Event.createFromData(self.__api, e)
+                for e in data.findall('event')
+                ]
+        return self.__pastEvents
 
     def getFriends(self,
-                   recentTracks = False,
+                   recentTrack = False,
                    limit = None):
-        pass
+        params = {'method': 'user.getfriends', 'user': self.name}
+        if recentTrack:
+            params.update({'recenttracks': 'true'})
+        if limit is not None:
+            params.update({'limit': limit})
+        data = self.__api._fetchData(params).find('friends')
+        if recentTrack:
+            return [
+                User(
+                    self.__api,
+                    name = u.findtext('name'),
+                    image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
+                    url = u.findtext('url'),
+                    mostRecentTrack = Track(
+                        self.__api,
+                        name = u.findtext('recenttrack/name'),
+                        mbid = u.findtext('recenttrack/mbid'),
+                        url = u.findtext('recenttrack/url'),
+                        artist = Artist(
+                            self.__api,
+                            name = u.findtext('recenttrack/artist/name'),
+                            mbid = u.findtext('recenttrack/artist/mbid'),
+                            url = u.findtext('recenttrack/artist/url'),
+                        ),
+                    ),
+                )
+                for u in data.findall('user')
+            ]
+        else:
+            return [
+                User(
+                    self.__api,
+                    name = u.findtext('name'),
+                    image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
+                    url = u.findtext('url'),
+                )
+                for u in data.findall('user')
+            ]
+
 
     @property
     def friends(self):
         """friends of the user"""
-        return self.getFriends()
+        if self.__friends is None:
+            self.__friends = self.getFriends()
+        return self.__friends
 
     def getNeighbours(self, limit = None):
         pass
@@ -85,6 +138,34 @@ class User(LastfmBase):
     def playlists(self):
         """playlists of the user"""
         pass
+
+    @property
+    def lovedTracks(self):
+        if self.__lovedTracks is None:
+            params = {'method': 'user.getlovedtracks', 'user': self.name}
+            data = self.__api._fetchData(params).find('lovedtracks')
+            self.__lovedTracks = [
+                    Track(
+                        self.__api,
+                        name = t.findtext('name'),
+                        artist = Artist(
+                            self.__api,
+                            name = t.findtext('artist/name'),
+                            mbid = t.findtext('artist/mbid'),
+                            url = t.findtext('artist/url'),
+                        ),
+                        mbid = t.findtext('mbid'),
+                        image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                        lovedOn = datetime(*(
+                            time.strptime(
+                                t.findtext('date').strip(),
+                                '%d %b %Y, %H:%M'
+                                )[0:6])
+                            )
+                        )
+                    for t in data.findall('track')
+                    ]
+        return self.__lovedTracks
 
     def getRecentTracks(self, limit = None):
         pass
@@ -201,7 +282,12 @@ class User(LastfmBase):
     def __repr__(self):
         return "<lastfm.User: %s>" % self.name
 
+from datetime import datetime
+import time
+
 from api import Api
+from artist import Artist
 from error import LastfmError
 from event import Event
 from stats import Stats
+from track import Track
