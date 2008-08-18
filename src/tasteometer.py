@@ -12,7 +12,7 @@ class Tasteometer(object):
                  artists = None):
         self.__score = score
         self.__matches = matches
-        self.__artists = artists#set
+        self.__artists = artists
 
     @property
     def score(self):
@@ -64,5 +64,3 @@ class Tasteometer(object):
         return "<lastfm.Tasteometer>"
         
 from artist import Artist
-from error import LastfmError
-        

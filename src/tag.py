@@ -230,10 +230,10 @@ class Tag(LastfmBase):
     def __repr__(self):
         return "<lastfm.Tag: %s>" % self.name
 
-from api import Api
-from error import LastfmError
 from album import Album
+from api import Api
 from artist import Artist
-from track import Track
-from stats import Stats
+from error import LastfmError
 from search import SearchResult
+from stats import Stats
+from track import Track

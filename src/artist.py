@@ -117,12 +117,12 @@ class Artist(LastfmBase):
         if self.__similar is None or len(self.__similar) < 6:
             return self.getSimilar()
         return self.__similar
-    
+
     @property
     def mostSimilar(self):
         """artist most similar to this artist"""
         return (len(self.similar) and self.similar[0] or None)
-    
+
     @property
     def topTags(self):
         """top tags for the artist"""
@@ -141,7 +141,7 @@ class Artist(LastfmBase):
                               for t in data.findall('tag')
                               ]
         return self.__topTags
-    
+
     @property
     def topTag(self):
         """top tag for the artist"""
@@ -153,63 +153,27 @@ class Artist(LastfmBase):
         if self.__bio is None:
             self._fillInfo()
         return self.__bio
-    
+
     @property
     def events(self):
         """events for the artist"""
         if self.__events is None:
             params = {'method': 'artist.getevents', 'artist': self.name}
             data = self.__api._fetchData(params).find('events')
-            
+
             self.__events = [
-                    Event(
-                          self.__api,
-                          id = int(e.findtext('id')),
-                          title = e.findtext('title'),
-                          artists = [Artist(self.__api, name = a.text) for a in e.findall('artists/artist')],
-                          headliner = Artist(self.__api, name = e.findtext('artists/headliner')),
-                          venue = Venue(
-                                        name = e.findtext('venue/name'),
-                                        location = Location(
-                                                            self.__api,
-                                                            city = e.findtext('venue/location/city'),
-                                                            country = Country(
-                                                                self.__api,
-                                                                name = e.findtext('venue/location/country')
-                                                                ),
-                                                            street = e.findtext('venue/location/street'),
-                                                            postalCode = e.findtext('venue/location/postalcode'),
-                                                            latitude = float(e.findtext(
-                                                                'venue/location/{%s}point/{%s}lat' % ((Location.xmlns,)*2)
-                                                                )),
-                                                            longitude = float(e.findtext(
-                                                                'venue/location/{%s}point/{%s}long' % ((Location.xmlns,)*2)
-                                                                )),
-                                                            timezone = e.findtext('venue/location/timezone')
-                                                            ),
-                                        url = e.findtext('venue/url')
-                                        ),
-                          startDate = e.findtext('startDate') and 
-                                        datetime(*(time.strptime(e.findtext('startDate').strip(), '%a, %d %b %Y')[0:6])) or
-                                        None,
-                          startTime = e.findtext('startTime') and 
-                                        datetime(*(time.strptime(e.findtext('startTime').strip(), '%H:%M')[0:6])) or
-                                        None,
-                          description = e.findtext('description'),
-                          image = dict([(i.get('size'), i.text) for i in e.findall('image')]),
-                          url = e.findtext('url')
-                          )
-                    for e in data.findall('event')
-                    ]
+                Event.createFromData(self.__api, e)
+                for e in data.findall('event')
+                ]
         return self.__events
-    
+
     @property
     def topAlbums(self):
         """top albums of the artist"""
         if self.__topAlbums is None:
             params = {'method': 'artist.gettopalbums', 'artist': self.name}
             data = self.__api._fetchData(params).find('topalbums')
-            
+
             self.__topAlbums = [
                     Album(
                          self.__api,
@@ -227,12 +191,12 @@ class Artist(LastfmBase):
                     for a in data.findall('album')
                     ]
         return self.__topAlbums
-        
+
     @property
     def topAlbum(self):
         """top album of the artist"""
         return (len(self.topAlbums) and self.topAlbums[0] or None)
-    
+
     @property
     def topFans(self):
         """top fans of the artist"""
@@ -253,12 +217,12 @@ class Artist(LastfmBase):
                     for u in data.findall('user')
                     ]
         return self.__topFans
-        
+
     @property
     def topFan(self):
         """top fan of the artist"""
         return (len(self.topFans) and self.topFans[0] or None)
-    
+
     @property
     def topTracks(self):
         """top tracks of the artist"""
@@ -283,11 +247,11 @@ class Artist(LastfmBase):
                     for t in data.findall('track')
                     ]
         return self.__topTracks
-    
+
     @property
     def topTrack(self):
         return (len(self.topTracks) and self.topTracks[0] or None)
-    
+
     @staticmethod
     def search(api,
                artist,
@@ -318,7 +282,7 @@ class Artist(LastfmBase):
                                        for a in data.findall('artistmatches/artist')
                                        ]
                             )
-        
+
     @staticmethod
     def _fetchData(api,
                 artist = None,
@@ -358,7 +322,7 @@ class Artist(LastfmBase):
                               self.__api,
                               name = t.findtext('name'),
                               url = t.findtext('url')
-                              ) 
+                              )
                           for t in data.findall('tags/tag')
                           ]
         self.__bio = Bio(
@@ -370,18 +334,18 @@ class Artist(LastfmBase):
                          summary = data.findtext('bio/summary'),
                          content = data.findtext('bio/content')
                          )
-        
+
     @staticmethod
     def getInfo(api,
                 artist = None,
                 mbid = None):
         data = Artist._fetchData(api, artist, mbid)
-        
+
         a = Artist(api, name = data.findtext('name'))
         if a.bio is None:
             a._fillInfo()
         return a
-                
+
     @staticmethod
     def hashFunc(*args, **kwds):
         try:
@@ -392,20 +356,20 @@ class Artist(LastfmBase):
                 return hash(args[1].lower())
             except IndexError:
                 raise LastfmError("name has to be provided for hashing")
-        
+
     def __hash__(self):
         return self.__class__.hashFunc(name = self.name)
-    
+
     def __eq__(self, other):
         if self.mbid and other.mbid:
             return self.mbid == other.mbid
         if self.url and other.url:
             return self.url == other.url
         return self.name == other.name
-    
+
     def __lt__(self, other):
         return self.name < other.name
-    
+
     def __repr__(self):
         return "<lastfm.Artist: %s>" % self.__name
 
@@ -447,13 +411,13 @@ class Bio(object):
 from datetime import datetime
 import time
 
-from api import Api
 from album import Album
+from api import Api
 from error import LastfmError
 from event import Event
 from geo import Country, Location, Venue
+from search import SearchResult
+from stats import Stats
 from tag import Tag
 from track import Track
 from user import User
-from search import SearchResult
-from stats import Stats

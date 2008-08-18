@@ -4,12 +4,10 @@ __author__ = "Abhinav Sarkar"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
-from base import LastfmBase
-
-class SearchResult(LastfmBase):
+class SearchResult(object):
     """A class to represent a search result"""
     xmlns = "http://a9.com/-/spec/opensearch/1.1/"
-    def init(self,
+    def __init__(self,
              type = None,
              searchTerms = None,
              startPage = None,
@@ -63,34 +61,7 @@ class SearchResult(LastfmBase):
     @property
     def topMatch(self):
         return (len(self.matches) and self.matches[0] or None)
-        
-    @staticmethod
-    def hashFunc(*args, **kwds):
-        try:
-            return hash("%s%s%s" % (kwds['searchTerms'], kwds['type'], kwds['startPage']))
-        except KeyError:
-            raise LastfmError("searchTerms, type and startPage have to be provided for hashing")
-        
-    def __hash__(self):
-        return self.__class__.hashFunc(
-                                       searchTerms = self.searchTerms,
-                                       type = self.type,
-                                       startPage = self.startPage
-                                       )
-    
-    def __eq__(self, other):
-        return (
-                self.searchTerms == other.searchTerms and
-                self.type == other.type and
-                self.startIndex == other.startIndex
-                )
-    
-    def __lt__(self, other):
-        if self.searchTerms != other.searchTerms:
-            return self.searchTerms < other.searchTerms
-        else:
-            return self.startIndex < other.startIndex
-    
+                
     def __repr__(self):
         return "<lastfm.SearchResult: for %s '%s'>" % (self.type, self.searchTerms)
     

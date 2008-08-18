@@ -31,14 +31,13 @@ class Event(LastfmBase):
         self.__headliner = headliner
         self.__venue = venue
         self.__startDate = startDate
-        self.__startTime = startTime
         self.__description = description
         self.__image = image
         self.__url = url
         self.__stats = stats and Stats(
                              subject = self,
-                             attendance = self.attendance,
-                             reviews = self.reviews
+                             attendance = stats.attendance,
+                             reviews = stats.reviews
                             )
         self.__tag = tag
 
@@ -56,7 +55,7 @@ class Event(LastfmBase):
     def artists(self):
         """artists performing in the event"""
         return self.__artists
-    
+
     @property
     def headliner(self):
         """headliner artist of the event"""
@@ -71,11 +70,6 @@ class Event(LastfmBase):
     def startDate(self):
         """start date of the event"""
         return self.__startDate
-
-    @property
-    def startTime(self):
-        """start time of the event"""
-        return self.__startTime
 
     @property
     def description(self):
@@ -101,12 +95,47 @@ class Event(LastfmBase):
     def tag(self):
         """tags for the event"""
         return self.__tag
-    
+
     @staticmethod
     def getInfo(api, event):
         params = {'method': 'event.getinfo', 'event': event}
         data = api._fetchData(params).find('event')
-    
+        return Event.createFromData(api, data)
+
+    @staticmethod
+    def createFromData(api, data):
+        startDate = None
+
+        if data.findtext('startTime') is not None:
+            startDate = datetime(*(
+                time.strptime(
+                    "%s %s" % (
+                        data.findtext('startDate').strip(),
+                        data.findtext('startTime').strip()
+                    ),
+                    '%a, %d %b %Y %H:%M'
+                )[0:6])
+            )
+        else:
+            try:
+                startDate = datetime(*(
+                    time.strptime(
+                        data.findtext('startDate').strip(),
+                        '%a, %d %b %Y %H:%M:%S'
+                    )[0:6])
+                )
+            except ValueError:
+                try:
+                    startDate = datetime(*(
+                        time.strptime(
+                            data.findtext('startDate').strip(),
+                            '%a, %d %b %Y'
+                        )[0:6])
+                    )
+                except ValueError:
+                    pass
+
+
         return Event(
                      api,
                      id = int(data.findtext('id')),
@@ -134,12 +163,7 @@ class Event(LastfmBase):
                                                        ),
                                    url = data.findtext('venue/url')
                                    ),
-                     startDate = data.findtext('startDate') and 
-                                    datetime(*(time.strptime(data.findtext('startDate').strip(), '%a, %d %b %Y')[0:6])) or
-                                    None,
-                     startTime = data.findtext('startTime') and 
-                                    datetime(*(time.strptime(data.findtext('startTime').strip(), '%H:%M')[0:6])) or
-                                    None,
+                     startDate = startDate,
                      description = data.findtext('description'),
                      image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
                      url = data.findtext('url'),
@@ -150,31 +174,31 @@ class Event(LastfmBase):
                                    ),
                      tag = data.findtext('tag')
                     )
-        
+
     @staticmethod
     def hashFunc(*args, **kwds):
         try:
             return hash(kwds['id'])
         except KeyError:
             raise LastfmError("id has to be provided for hashing")
-        
+
     def __hash__(self):
         return Event.hashFunc(id = self.id)
-    
+
     def __eq__(self, other):
         return self.id == other.id
-    
+
     def __lt__(self, other):
         return self.startDate < other.startDate
-    
+
     def __repr__(self):
         return "<lastfm.Event: %s at %s on %s>" % (self.title, self.venue.name, self.startDate.strftime("%x"))
-        
+
 from datetime import datetime
 import time
 
 from api import Api
-from error import LastfmError
 from artist import Artist
+from error import LastfmError
 from geo import Venue, Location, Country
 from stats import Stats

@@ -177,10 +177,13 @@ class Api(object):
                      limit = None):
         return Tasteometer.compare(self, type1, type2, value1, value2, limit)
     
-    def getTrack(self, name, artist = None):
+    def getTrack(self, track, artist):
         if isinstance(artist, Artist):
             artist = artist.name
-        return Track(self, name = name, artist = artist)
+        result = Track.search(self, track, artist)
+        if len(result.matches) == 0:
+            raise LastfmError("'%s' by %s: no such track found" % (track, artist))
+        return result.matches[0]
     
     def searchTrack(self,
                     track,
@@ -260,22 +263,17 @@ class Api(object):
     def __repr__(self):
         return "<lastfm.Api: %s>" % self.__apiKey
     
+import sys
+import time
 import urllib
 import urllib2
 import urlparse
-import time
-import sys
-if sys.version.startswith('2.5'):
-    import xml.etree.cElementTree as ElementTree
-else:
-    import cElementTree as ElementTree
-
-from error import LastfmError
-from filecache import FileCache
 
 from album import Album
 from artist import Artist
+from error import LastfmError
 from event import Event
+from filecache import FileCache
 from geo import Location, Country
 from group import Group
 from playlist import Playlist
@@ -283,3 +281,14 @@ from tag import Tag
 from tasteometer import Tasteometer
 from track import Track
 from user import User
+
+if sys.version.startswith('2.5'):
+    import xml.etree.cElementTree as ElementTree
+else:
+    try:
+        import cElementTree as ElementTree
+    except ImportError:
+        try:
+            import ElementTree
+        except ImportError:
+            raise LastfmError("Install ElementTree package for using python-lastfm")

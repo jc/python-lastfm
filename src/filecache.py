@@ -4,9 +4,9 @@ __author__ = "Abhinav Sarkar"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
-import tempfile
-import os
 import md5
+import os
+import tempfile
 
 class _FileCacheError(Exception):
 	'''Base exception class for FileCache related errors'''

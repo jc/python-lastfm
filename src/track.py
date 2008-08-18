@@ -259,9 +259,9 @@ class Track(LastfmBase):
         return "<lastfm.Track: '%s' by %s>" % (self.name, self.artist.name)
 
 from api import Api
-from error import LastfmError
-from user import User
-from tag import Tag
-from stats import Stats
 from artist import Artist
+from error import LastfmError
 from search import SearchResult
+from stats import Stats
+from tag import Tag
+from user import User

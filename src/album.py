@@ -201,7 +201,7 @@ from datetime import datetime
 import time
 
 from api import Api
-from error import LastfmError
-from tag import Tag
 from artist import Artist
+from error import LastfmError
 from stats import Stats
+from tag import Tag
