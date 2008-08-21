@@ -15,6 +15,7 @@ class Track(LastfmBase):
                  url = None,
                  streamable = None,
                  artist = None,
+                 album = None,
                  image = None,
                  stats = None,
                  fullTrack = None,
@@ -28,6 +29,7 @@ class Track(LastfmBase):
         self.__url = url
         self.__streamable = streamable
         self.__artist = artist
+        self.__album = album
         self.__image = image
         self.__stats = stats and Stats(
                              subject = self,
@@ -67,6 +69,11 @@ class Track(LastfmBase):
     def artist(self):
         """artist of the track"""
         return self.__artist
+
+    @property
+    def album(self):
+        """artist of the track"""
+        return self.__album
 
     @property
     def image(self):
@@ -141,10 +148,10 @@ class Track(LastfmBase):
                         ]
         return self.__similar
 
-    @property
+    @LastfmBase.topProperty("similar")
     def mostSimilar(self):
         """track most similar to this track"""
-        return (len(self.similar) and self.similar[0] or None)
+        pass
 
     @property
     def topFans(self):
@@ -172,9 +179,10 @@ class Track(LastfmBase):
                               ]
         return self.__topFans
 
-    @property
+    @LastfmBase.topProperty("topFans")
     def topFan(self):
-        return (len(self.topFans) and self.topFans[0] or None)
+        """topmost fan of the track"""
+        pass
 
     @property
     def topTags(self):
@@ -201,9 +209,10 @@ class Track(LastfmBase):
                               ]
         return self.__topTags
 
-    @property
+    @LastfmBase.topProperty("topTags")
     def topTag(self):
-        return (len(self.topTags) and self.topTags[0] or None)
+        """topmost tag for the track"""
+        pass
 
     @staticmethod
     def search(api,

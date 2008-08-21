@@ -44,6 +44,16 @@ class LastfmBase(object):
             #print "not already registered: %s" % ob.__class__
             LastfmBase.registry[ob.__class__][key] = ob
             return (ob, False)
+    
+    @staticmethod    
+    def topProperty(listPropertyName):
+        def top(func):
+            def wrapper(ob):
+                topList = getattr(ob, listPropertyName)
+                return (len(topList) and topList[0] or None)
+            return property(fget = wrapper, doc = func.__doc__)
+        return top
+    
 
     def __gt__(self, other):
         return not (self.__lt__(other) or self.__eq(other))

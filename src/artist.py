@@ -88,10 +88,7 @@ class Artist(LastfmBase):
         return self.__stats
 
     def getSimilar(self, limit = None):
-        params = {
-                  'method': 'artist.getsimilar',
-                  'artist': self.__name
-                  }
+        params = {'method': 'artist.getsimilar', 'artist': self.__name}
         if limit is not None:
             params.update({'limit': limit})
         data = self.__api._fetchData(params).find('similarartists')
@@ -118,10 +115,10 @@ class Artist(LastfmBase):
             return self.getSimilar()
         return self.__similar
 
-    @property
+    @LastfmBase.topProperty("similar")
     def mostSimilar(self):
         """artist most similar to this artist"""
-        return (len(self.similar) and self.similar[0] or None)
+        pass
 
     @property
     def topTags(self):
@@ -142,10 +139,10 @@ class Artist(LastfmBase):
                               ]
         return self.__topTags
 
-    @property
+    @LastfmBase.topProperty("topTags")
     def topTag(self):
         """top tag for the artist"""
-        return (len(self.topTags) and self.topTags[0] or None)
+        pass
 
     @property
     def bio(self):
@@ -192,10 +189,10 @@ class Artist(LastfmBase):
                     ]
         return self.__topAlbums
 
-    @property
+    @LastfmBase.topProperty("topAlbums")
     def topAlbum(self):
         """top album of the artist"""
-        return (len(self.topAlbums) and self.topAlbums[0] or None)
+        pass
 
     @property
     def topFans(self):
@@ -218,10 +215,10 @@ class Artist(LastfmBase):
                     ]
         return self.__topFans
 
-    @property
+    @LastfmBase.topProperty("topFans")
     def topFan(self):
         """top fan of the artist"""
-        return (len(self.topFans) and self.topFans[0] or None)
+        pass
 
     @property
     def topTracks(self):
@@ -248,9 +245,10 @@ class Artist(LastfmBase):
                     ]
         return self.__topTracks
 
-    @property
+    @LastfmBase.topProperty("topTracks")
     def topTrack(self):
-        return (len(self.topTracks) and self.topTracks[0] or None)
+        """topmost fan of the artist"""
+        pass
 
     @staticmethod
     def search(api,
@@ -415,7 +413,6 @@ from album import Album
 from api import Api
 from error import LastfmError
 from event import Event
-from geo import Country, Location, Venue
 from search import SearchResult
 from stats import Stats
 from tag import Tag

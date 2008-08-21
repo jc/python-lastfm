@@ -4,6 +4,8 @@ __author__ = "Abhinav Sarkar"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
+from base import LastfmBase
+
 class SearchResult(object):
     """A class to represent a search result"""
     xmlns = "http://a9.com/-/spec/opensearch/1.1/"
@@ -58,11 +60,10 @@ class SearchResult(object):
         """match result of the search"""
         return self.__matches
     
-    @property
+    @LastfmBase.topProperty("matches")
     def topMatch(self):
-        return (len(self.matches) and self.matches[0] or None)
+        """top match for the search"""
+        pass
                 
     def __repr__(self):
         return "<lastfm.SearchResult: for %s '%s'>" % (self.type, self.searchTerms)
-    
-from error import LastfmError

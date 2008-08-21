@@ -195,7 +195,14 @@ class Api(object):
         return Track.search(self, track, artist, limit, page)
     
     def getUser(self, name):
-        return User(self, name = name)
+        user = None
+        try:
+            user = User(self, name = name)
+            user.friends
+        except LastfmError, e:
+            raise e
+        return user
+        
 
     def _fetchUrl(self,
                   url,
@@ -245,9 +252,12 @@ class Api(object):
         # Always return the latest version
         return url_data
     
-    def _fetchData(self, params, parse = True):
+    def _fetchData(self,
+                   params,
+                   parse = True,
+                   no_cache = False):
         params.update({'api_key': self.__apiKey})
-        xml = self._fetchUrl(Api.API_ROOT_URL, params, no_cache = self._no_cache)
+        xml = self._fetchUrl(Api.API_ROOT_URL, params, no_cache = self._no_cache or no_cache)
         #print xml
         try:
             data = ElementTree.XML(xml)

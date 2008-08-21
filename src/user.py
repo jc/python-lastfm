@@ -13,8 +13,7 @@ class User(LastfmBase):
                  name = None,
                  url = None,
                  image = None,
-                 stats = None,
-                 mostRecentTrack = None):
+                 stats = None):
         if not isinstance(api, Api):
             raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
@@ -29,8 +28,12 @@ class User(LastfmBase):
         self.__events = None
         self.__pastEvents = None
         self.__friends = None
+        self.__neighbours = None
         self.__lovedTracks = None
-        self.__mostRecentTrack = mostRecentTrack
+        self.__topAlbums = None
+        self.__topArtists = None
+        self.__topTracks = None
+        self.__topTags = None
 
     @property
     def name(self):
@@ -64,59 +67,42 @@ class User(LastfmBase):
                 ]
         return self.__events
 
+    def getPastEvents(self,
+                      page = None,
+                      limit = None):
+        params = {'method': 'user.getpastevents', 'user': self.name}
+        if page is not None:
+            params.update({'page': page})
+        if limit is not None:
+            params.update({'limit': limit})
+    
+        data = self.__api._fetchData(params).find('events')
+        return [
+            Event.createFromData(self.__api, e)
+            for e in data.findall('event')
+            ]
+        
     @property
     def pastEvents(self):
         if self.__pastEvents is None:
-            params = {'method': 'user.getpastevents', 'user': self.name}
-            data = self.__api._fetchData(params).find('events')
-
-            self.__pastEvents = [
-                Event.createFromData(self.__api, e)
-                for e in data.findall('event')
-                ]
+            self.__pastEvents = self.getPastEvents()
         return self.__pastEvents
 
     def getFriends(self,
-                   recentTrack = False,
                    limit = None):
         params = {'method': 'user.getfriends', 'user': self.name}
-        if recentTrack:
-            params.update({'recenttracks': 'true'})
         if limit is not None:
             params.update({'limit': limit})
         data = self.__api._fetchData(params).find('friends')
-        if recentTrack:
-            return [
-                User(
-                    self.__api,
-                    name = u.findtext('name'),
-                    image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
-                    url = u.findtext('url'),
-                    mostRecentTrack = Track(
-                        self.__api,
-                        name = u.findtext('recenttrack/name'),
-                        mbid = u.findtext('recenttrack/mbid'),
-                        url = u.findtext('recenttrack/url'),
-                        artist = Artist(
-                            self.__api,
-                            name = u.findtext('recenttrack/artist/name'),
-                            mbid = u.findtext('recenttrack/artist/mbid'),
-                            url = u.findtext('recenttrack/artist/url'),
-                        ),
-                    ),
-                )
-                for u in data.findall('user')
-            ]
-        else:
-            return [
-                User(
-                    self.__api,
-                    name = u.findtext('name'),
-                    image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
-                    url = u.findtext('url'),
-                )
-                for u in data.findall('user')
-            ]
+        return [
+            User(
+                self.__api,
+                name = u.findtext('name'),
+                image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
+                url = u.findtext('url'),
+            )
+            for u in data.findall('user')
+        ]
 
 
     @property
@@ -127,13 +113,36 @@ class User(LastfmBase):
         return self.__friends
 
     def getNeighbours(self, limit = None):
-        pass
+        params = {'method': 'user.getneighbours', 'user': self.name}
+        if limit is not None:
+            params.update({'limit': limit})
+        data = self.__api._fetchData(params).find('neighbours')
+        return [
+                User(
+                    self.__api,
+                    name = u.findtext('name'),
+                    image = {'medium': u.findtext('image')},
+                    url = u.findtext('url'),
+                    stats = Stats(
+                                  subject = u.findtext('name'),
+                                  match = float(u.findtext('match')),
+                                  ),
+                )
+                for u in data.findall('user')
+            ]
 
     @property
     def neighbours(self):
-        """neightbours of the user"""
-        return self.getNeighbours()
-
+        """neighbours of the user"""
+        if self.__neighbours is None:
+            self.__neighbours = self.getNeighbours()
+        return self.__neighbours
+    
+    @LastfmBase.topProperty("neighbours")
+    def nearestNeighbour(self):
+        """nearest neightbour of the user"""
+        pass
+    
     @property
     def playlists(self):
         """playlists of the user"""
@@ -168,30 +177,90 @@ class User(LastfmBase):
         return self.__lovedTracks
 
     def getRecentTracks(self, limit = None):
-        pass
+        params = {'method': 'user.getrecenttracks', 'user': self.name}
+        data = self.__api._fetchData(params, no_cache = True).find('recenttracks')
+        return [
+                Track(
+                      self.__api,
+                      name = t.findtext('name'),
+                      artist = Artist(
+                                      self.__api,
+                                      name = t.findtext('artist'),
+                                      mbid = t.find('artist').attrib['mbid'],
+                                      ),
+                      album = Album(
+                                    self.__api,
+                                    name = t.findtext('album'),
+                                    artist = Artist(
+                                                    self.__api,
+                                                    name = t.findtext('artist'),
+                                                    mbid = t.find('artist').attrib['mbid'],
+                                                    ),
+                                    mbid = t.find('album').attrib['mbid'],
+                                    ),
+                      mbid = t.findtext('mbid'),
+                      streamable = (t.findtext('streamable') == '1'),
+                      url = t.findtext('url'),
+                      image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                      playedOn = datetime(*(
+                                           time.strptime(
+                                                         t.findtext('date').strip(),
+                                                         '%d %b %Y, %H:%M'
+                                                         )[0:6])
+                                           )
+                      )
+                      for t in data.findall('track')
+                      ]
 
     @property
     def recentTracks(self):
         """recent tracks played by the user"""
         return self.getRecentTracks()
 
-    @property
+    @LastfmBase.topProperty("recentTracks")
     def mostRecentTrack(self):
         """most recent track played by the user"""
-        return (len(self.recentTracks) and self.recentTracks[0] or None)
+        pass
 
     def getTopAlbums(self, period = None):
-        pass
+        params = {'method': 'user.gettopalbums', 'user': self.name}
+        if period is not None:
+            params.update({'period': period})
+        data = self.__api._fetchData(params).find('topalbums')
+
+        return [
+                Album(
+                     self.__api,
+                     name = a.findtext('name'),
+                     artist = Artist(
+                                     self.__api,
+                                     name = a.findtext('artist/name'),
+                                     mbid = a.findtext('artist/mbid'),
+                                     url = a.findtext('artist/url'),
+                                     ),
+                     mbid = a.findtext('mbid'),
+                     url = a.findtext('url'),
+                     image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                     stats = Stats(
+                                   subject = a.findtext('name'),
+                                   playcount = int(a.findtext('playcount')),
+                                   rank = int(a.attrib['rank'])
+                                   )
+                     )
+                for a in data.findall('album')
+                ]
 
     @property
     def topAlbums(self):
-        """top albums of the user"""
-        return self.getTopAlbums()
-
-    @property
+        """overall top albums of the user"""
+        if self.__topAlbums is None:
+            self.__topAlbums = self.getTopAlbums()
+        return self.__topAlbums
+    
+    @LastfmBase.topProperty("topAlbums")
     def topAlbum(self):
-        """top album fo the user"""
-        return (len(self.topAlbums) and self.topAlbums[0] or None)
+        """overall top most album of the user"""
+        pass
 
     def getTopArtists(self, period = None):
         pass
@@ -287,6 +356,7 @@ import time
 
 from api import Api
 from artist import Artist
+from album import Album
 from error import LastfmError
 from event import Event
 from stats import Stats

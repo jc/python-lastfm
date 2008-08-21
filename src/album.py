@@ -110,10 +110,10 @@ class Album(LastfmBase):
                               ]
         return self.__topTags
 
-    @property
+    @LastfmBase.topProperty("topTags")
     def topTag(self):
         """top tag for the album"""
-        return (self.topTags and len(self.topTags) and self.topTags[0] or None)
+        pass
     
     @staticmethod
     def _fetchData(api,

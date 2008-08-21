@@ -23,7 +23,7 @@ class Geo(object):
                             totalResults = int(data.attrib['total']),
                             itemsPerPage = int(math.ceil(float(data.attrib['total']))/float(data.attrib['totalpages'])),
                             matches = [
-                                Event.createFromData(self.__api, e)
+                                Event.createFromData(api, e)
                                 for e in data.findall('event')
                                 ]
                         )
@@ -145,6 +145,7 @@ class Location(LastfmBase):
         self.__latitude = latitude
         self.__longitude = longitude
         self.__timezone = timezone
+        self.__events = None
 
     @property
     def name(self):
@@ -194,7 +195,9 @@ class Location(LastfmBase):
     @property
     def events(self):
         """events taking place at/around the location"""
-        return self.getEvents()
+        if self.__events is None:
+            self.__events = self.getEvents()
+        return self.__events
 
     @staticmethod
     def hashFunc(*args, **kwds):
@@ -238,6 +241,8 @@ class Country(LastfmBase):
             raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
+        self.__topArtists = None
+        self.__topTracks = None
 
     @property
     def name(self):
@@ -247,22 +252,26 @@ class Country(LastfmBase):
     @property
     def topArtists(self):
         """top artists of the country"""
-        return Geo.getTopArtists(self.__api, self.name)
+        if self.__topArtists is None:
+            self.__topArtists = Geo.getTopArtists(self.__api, self.name)
+        return self.__topArtists
 
-    @property
+    @LastfmBase.topProperty("topArtists")
     def topArtist(self):
         """top artist of the country"""
-        return (len(self.topArtists) and self.topArtists[0] or None)
+        pass
 
     @property
     def topTracks(self):
         """top tracks of the country"""
-        return Geo.getTopTracks(self.__api, self.name)
+        if self.__topTracks is None:
+            self.__topTracks = Geo.getTopTracks(self.__api, self.name)
+        return self.__topTracks
 
-    @property
+    @LastfmBase.topProperty("topTracks")
     def topTrack(self):
         """top track of the country"""
-        return (len(self.topTracks) and self.topTracks[0] or None)
+        pass
 
     @staticmethod
     def hashFunc(*args, **kwds):
@@ -283,9 +292,7 @@ class Country(LastfmBase):
     def __repr__(self):
         return "<lastfm.geo.Country: %s>" % self.name
 
-from datetime import datetime
 import math
-import time
 
 from api import Api
 from artist import Artist

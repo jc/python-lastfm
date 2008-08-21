@@ -65,6 +65,11 @@ class Tag(LastfmBase):
                               ]
         return self.__similar
     
+    @LastfmBase.topProperty("similar")
+    def mostSimilar(self):
+        """most similar tag to this tag"""
+        pass
+    
     @property
     def topAlbums(self):
         """top albums for the tag"""
@@ -94,10 +99,10 @@ class Tag(LastfmBase):
                                 ]
         return self.__topAlbums
     
-    @property
+    @LastfmBase.topProperty("topAlbums")
     def topAlbum(self):
         """top album for the tag"""
-        return (len(self.topAlbums) and self.topAlbums[0] or None)
+        pass
     
     @property
     def topArtists(self):
@@ -123,10 +128,10 @@ class Tag(LastfmBase):
                                  ]
         return self.__topArtists
             
-    @property
+    @LastfmBase.topProperty("topArtists")
     def topArtist(self):
         """top artist for the tag"""
-        return (len(self.topArtists) and self.topArtists[0] or None)
+        pass
     
     @property
     def topTracks(self):
@@ -158,9 +163,10 @@ class Tag(LastfmBase):
                                 ]
         return self.__topTracks
     
-    @property
+    @LastfmBase.topProperty("")
     def topTrack(self):
-        return (len(self.topTracks) and self.topTracks[0] or None)
+        """top track for the tag"""
+        pass
     
     @staticmethod
     def getTopTags(api):
