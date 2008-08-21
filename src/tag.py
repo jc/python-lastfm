@@ -163,7 +163,7 @@ class Tag(LastfmBase):
                                 ]
         return self.__topTracks
     
-    @LastfmBase.topProperty("")
+    @LastfmBase.topProperty("topTracks")
     def topTrack(self):
         """top track for the tag"""
         pass
