@@ -90,25 +90,23 @@ class Album(LastfmBase):
             self._fillInfo()
         return self.__stats
 
-    @property
+    @LastfmBase.cachedProperty
     def topTags(self):
         """top tags for the album"""
-        if self.__topTags is None:
-            params = {'method': 'album.getinfo'}
-            if self.artist and self.name:
-                params.update({'artist': self.artist.name, 'album': self.name})
-            elif self.mbid:
-                params.update({'mbid': self.mbid})
-            data = self.__api._fetchData(params).find('album')
-            self.__topTags = [
-                              Tag(
-                                  self.__api,
-                                  name = t.findtext('name'),
-                                  url = t.findtext('url')
-                                  ) 
-                              for t in data.findall('toptags/tag')
-                              ]
-        return self.__topTags
+        params = {'method': 'album.getinfo'}
+        if self.artist and self.name:
+            params.update({'artist': self.artist.name, 'album': self.name})
+        elif self.mbid:
+            params.update({'mbid': self.mbid})
+        data = self.__api._fetchData(params).find('album')
+        return [
+                Tag(
+                    self.__api,
+                    name = t.findtext('name'),
+                    url = t.findtext('url')
+                    ) 
+                for t in data.findall('toptags/tag')
+                ]
 
     @LastfmBase.topProperty("topTags")
     def topTag(self):

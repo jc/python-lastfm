@@ -42,10 +42,6 @@ class Artist(LastfmBase):
                          summary = bio.summary,
                          content = bio.content
                         )
-        self.__events = None
-        self.__topAlbums = None
-        self.__topTracks = None
-        self.__topFans = None
 
     @property
     def name(self):
@@ -151,100 +147,92 @@ class Artist(LastfmBase):
             self._fillInfo()
         return self.__bio
 
-    @property
+    @LastfmBase.cachedProperty
     def events(self):
         """events for the artist"""
-        if self.__events is None:
-            params = {'method': 'artist.getevents', 'artist': self.name}
-            data = self.__api._fetchData(params).find('events')
+        params = {'method': 'artist.getevents', 'artist': self.name}
+        data = self.__api._fetchData(params).find('events')
 
-            self.__events = [
+        return [
                 Event.createFromData(self.__api, e)
                 for e in data.findall('event')
                 ]
-        return self.__events
 
-    @property
+    @LastfmBase.cachedProperty
     def topAlbums(self):
         """top albums of the artist"""
-        if self.__topAlbums is None:
-            params = {'method': 'artist.gettopalbums', 'artist': self.name}
-            data = self.__api._fetchData(params).find('topalbums')
+        params = {'method': 'artist.gettopalbums', 'artist': self.name}
+        data = self.__api._fetchData(params).find('topalbums')
 
-            self.__topAlbums = [
-                    Album(
-                         self.__api,
-                         name = a.findtext('name'),
-                         artist = self,
-                         mbid = a.findtext('mbid'),
-                         url = a.findtext('url'),
-                         image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
-                         stats = Stats(
-                                       subject = a.findtext('name'),
-                                       playcount = int(a.findtext('playcount')),
-                                       rank = int(a.attrib['rank'])
-                                       )
-                         )
-                    for a in data.findall('album')
-                    ]
-        return self.__topAlbums
+        return [
+                Album(
+                     self.__api,
+                     name = a.findtext('name'),
+                     artist = self,
+                     mbid = a.findtext('mbid'),
+                     url = a.findtext('url'),
+                     image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                     stats = Stats(
+                                   subject = a.findtext('name'),
+                                   playcount = int(a.findtext('playcount')),
+                                   rank = int(a.attrib['rank'])
+                                   )
+                     )
+                for a in data.findall('album')
+                ]
 
     @LastfmBase.topProperty("topAlbums")
     def topAlbum(self):
         """top album of the artist"""
         pass
 
-    @property
+    @LastfmBase.cachedProperty
     def topFans(self):
         """top fans of the artist"""
-        if self.__topFans is None:
-            params = {'method': 'artist.gettopfans', 'artist': self.name}
-            data = self.__api._fetchData(params).find('topfans')
-            self.__topFans = [
-                    User(
-                         self.__api,
-                         name = u.findtext('name'),
-                         url = u.findtext('url'),
-                         image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
-                         stats = Stats(
-                                       subject = u.findtext('name'),
-                                       weight = int(u.findtext('weight'))
-                                       )
-                         )
-                    for u in data.findall('user')
-                    ]
-        return self.__topFans
-
+        params = {'method': 'artist.gettopfans', 'artist': self.name}
+        data = self.__api._fetchData(params).find('topfans')
+        return [
+                User(
+                     self.__api,
+                     name = u.findtext('name'),
+                     url = u.findtext('url'),
+                     image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
+                     stats = Stats(
+                                   subject = u.findtext('name'),
+                                   weight = int(u.findtext('weight'))
+                                   )
+                     )
+                for u in data.findall('user')
+                ]
+    
     @LastfmBase.topProperty("topFans")
     def topFan(self):
         """top fan of the artist"""
         pass
 
-    @property
+    @LastfmBase.cachedProperty
     def topTracks(self):
         """top tracks of the artist"""
-        if self.__topTracks is None:
-            params = {'method': 'artist.gettoptracks', 'artist': self.name}
-            data = self.__api._fetchData(params).find('toptracks')
-            self.__topTracks = [
-                    Track(
-                          self.__api,
-                          name = t.findtext('name'),
-                          artist = self,
-                          mbid = t.findtext('mbid'),
-                          stats = Stats(
-                                        subject = t.findtext('name'),
-                                        playcount = int(t.findtext('playcount')),
-                                        rank = int(t.attrib['rank'])
-                                        ),
-                          streamable = (t.findtext('streamable') == '1'),
-                          fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
-                          image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
-                          )
-                    for t in data.findall('track')
-                    ]
-        return self.__topTracks
-
+        params = {'method': 'artist.gettoptracks', 'artist': self.name}
+        data = self.__api._fetchData(params).find('toptracks')
+        return [
+                Track(
+                      self.__api,
+                      name = t.findtext('name'),
+                      artist = self,
+                      mbid = t.findtext('mbid'),
+                      stats = Stats(
+                                    subject = t.findtext('name'),
+                                    playcount = int(t.findtext('playcount')),
+                                    rank = int(t.attrib['rank'])
+                                    ),
+                      streamable = (t.findtext('streamable') == '1'),
+                      fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                      image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                      )
+                for t in data.findall('track')
+                ]
+    
     @LastfmBase.topProperty("topTracks")
     def topTrack(self):
         """topmost fan of the artist"""

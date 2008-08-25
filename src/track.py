@@ -41,10 +41,7 @@ class Track(LastfmBase):
         self.__fullTrack = fullTrack
         self.__playedOn = playedOn
         self.__lovedOn = lovedOn
-        self.__similar = None
-        self.__topFans = None
-        self.__topTags = None
-
+        
     @property
     def name(self):
         """name of the track"""
@@ -114,100 +111,94 @@ class Track(LastfmBase):
             params.update({'mbid': mbid})
         return params
 
-    @property
+    @LastfmBase.cachedProperty
     def similar(self):
         """tracks similar to this track"""
-        if self.__similar is None:
-            params = self.__checkParams(
-                                        {'method': 'track.getsimilar'},
-                                        self.artist.name,
-                                        self.name,
-                                        self.mbid
-                                        )
-            data = self.__api._fetchData(params).find('similartracks')
-            self.__similar = [
-                        Track(
-                              self.__api,
-                              name = t.findtext('name'),
-                              artist = Artist(
-                                              self.__api,
-                                              name = t.findtext('artist/name'),
-                                              mbid = t.findtext('artist/mbid'),
-                                              url = t.findtext('artist/url')
-                                              ),
-                              mbid = t.findtext('mbid'),
-                              stats = Stats(
-                                            subject = t.findtext('name'),
-                                            match = float(t.findtext('match'))
-                                            ),
-                              streamable = (t.findtext('streamable') == '1'),
-                              fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
-                              image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
-                              )
-                        for t in data.findall('track')
-                        ]
-        return self.__similar
+        params = self.__checkParams(
+                                    {'method': 'track.getsimilar'},
+                                    self.artist.name,
+                                    self.name,
+                                    self.mbid
+                                    )
+        data = self.__api._fetchData(params).find('similartracks')
+        return [
+                Track(
+                      self.__api,
+                      name = t.findtext('name'),
+                      artist = Artist(
+                                      self.__api,
+                                      name = t.findtext('artist/name'),
+                                      mbid = t.findtext('artist/mbid'),
+                                      url = t.findtext('artist/url')
+                                      ),
+                      mbid = t.findtext('mbid'),
+                      stats = Stats(
+                                    subject = t.findtext('name'),
+                                    match = float(t.findtext('match'))
+                                    ),
+                      streamable = (t.findtext('streamable') == '1'),
+                      fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                      image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                      )
+                for t in data.findall('track')
+                ]
 
     @LastfmBase.topProperty("similar")
     def mostSimilar(self):
         """track most similar to this track"""
         pass
 
-    @property
+    @LastfmBase.cachedProperty
     def topFans(self):
         """top fans of the track"""
-        if self.__topFans is None:
-            params = self.__checkParams(
-                                        {'method': 'track.gettopfans'},
-                                        self.artist.name,
-                                        self.name,
-                                        self.mbid
-                                        )
-            data = self.__api._fetchData(params).find('topfans')
-            self.__topFans = [
-                              User(
-                                   self.__api,
-                                   name = u.findtext('name'),
-                                   url = u.findtext('url'),
-                                   image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
-                                   stats = Stats(
-                                                 subject = u.findtext('name'),
-                                                 weight = int(u.findtext('weight'))
-                                                 )
+        params = self.__checkParams(
+                                    {'method': 'track.gettopfans'},
+                                    self.artist.name,
+                                    self.name,
+                                    self.mbid
+                                    )
+        data = self.__api._fetchData(params).find('topfans')
+        return [
+                User(
+                     self.__api,
+                     name = u.findtext('name'),
+                     url = u.findtext('url'),
+                     image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
+                     stats = Stats(
+                                   subject = u.findtext('name'),
+                                   weight = int(u.findtext('weight'))
                                    )
-                              for u in data.findall('user')
-                              ]
-        return self.__topFans
+                     )
+                for u in data.findall('user')
+                ]
 
     @LastfmBase.topProperty("topFans")
     def topFan(self):
         """topmost fan of the track"""
         pass
 
-    @property
+    @LastfmBase.cachedProperty
     def topTags(self):
         """top tags for the track"""
-        if self.__topTags is None:
-            params = self.__checkParams(
-                                        {'method': 'track.gettoptags'},
-                                        self.artist.name,
-                                        self.name,
-                                        self.mbid
-                                        )
-            data = self.__api._fetchData(params).find('toptags')
-            self.__topTags = [
-                              Tag(
-                                  self.__api,
-                                  name = t.findtext('name'),
-                                  url = t.findtext('url'),
-                                  stats = Stats(
-                                                subject = t.findtext('name'),
-                                                count = int(t.findtext('count')),
-                                                )
+        params = self.__checkParams(
+                                    {'method': 'track.gettoptags'},
+                                    self.artist.name,
+                                    self.name,
+                                    self.mbid
+                                    )
+        data = self.__api._fetchData(params).find('toptags')
+        return [
+                Tag(
+                    self.__api,
+                    name = t.findtext('name'),
+                    url = t.findtext('url'),
+                    stats = Stats(
+                                  subject = t.findtext('name'),
+                                  count = int(t.findtext('count')),
                                   )
-                              for t in data.findall('tag')
-                              ]
-        return self.__topTags
+                    )
+                for t in data.findall('tag')
+                ]
 
     @LastfmBase.topProperty("topTags")
     def topTag(self):

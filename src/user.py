@@ -25,15 +25,6 @@ class User(LastfmBase):
                              match = stats.match,
                              weight = stats.weight
                             )
-        self.__events = None
-        self.__pastEvents = None
-        self.__friends = None
-        self.__neighbours = None
-        self.__lovedTracks = None
-        self.__topAlbums = None
-        self.__topArtists = None
-        self.__topTracks = None
-        self.__topTags = None
         self.__lirary = User.Library(api, self)
 
     @property
@@ -56,18 +47,16 @@ class User(LastfmBase):
         """stats for the user"""
         return self.__stats
 
-    @property
+    @LastfmBase.cachedProperty
     def events(self):
-        if self.__events is None:
-            params = {'method': 'user.getevents', 'user': self.name}
-            data = self.__api._fetchData(params).find('events')
+        params = {'method': 'user.getevents', 'user': self.name}
+        data = self.__api._fetchData(params).find('events')
 
-            self.__events = [
+        return [
                 Event.createFromData(self.__api, e)
                 for e in data.findall('event')
                 ]
-        return self.__events
-
+        
     def getPastEvents(self,
                       page = None,
                       limit = None):
@@ -83,11 +72,9 @@ class User(LastfmBase):
             for e in data.findall('event')
             ]
         
-    @property
+    @LastfmBase.cachedProperty
     def pastEvents(self):
-        if self.__pastEvents is None:
-            self.__pastEvents = self.getPastEvents()
-        return self.__pastEvents
+        return self.getPastEvents()
 
     def getFriends(self,
                    limit = None):
@@ -106,13 +93,11 @@ class User(LastfmBase):
         ]
 
 
-    @property
+    @LastfmBase.cachedProperty
     def friends(self):
         """friends of the user"""
-        if self.__friends is None:
-            self.__friends = self.getFriends()
-        return self.__friends
-
+        return self.getFriends()
+        
     def getNeighbours(self, limit = None):
         params = {'method': 'user.getneighbours', 'user': self.name}
         if limit is not None:
@@ -132,12 +117,10 @@ class User(LastfmBase):
                 for u in data.findall('user')
             ]
 
-    @property
+    @LastfmBase.cachedProperty
     def neighbours(self):
         """neighbours of the user"""
-        if self.__neighbours is None:
-            self.__neighbours = self.getNeighbours()
-        return self.__neighbours
+        return self.getNeighbours()
     
     @LastfmBase.topProperty("neighbours")
     def nearestNeighbour(self):
@@ -149,34 +132,32 @@ class User(LastfmBase):
         """playlists of the user"""
         pass
 
-    @property
+    @LastfmBase.cachedProperty
     def lovedTracks(self):
-        if self.__lovedTracks is None:
-            params = {'method': 'user.getlovedtracks', 'user': self.name}
-            data = self.__api._fetchData(params).find('lovedtracks')
-            self.__lovedTracks = [
-                    Track(
+        params = {'method': 'user.getlovedtracks', 'user': self.name}
+        data = self.__api._fetchData(params).find('lovedtracks')
+        return [
+                Track(
+                    self.__api,
+                    name = t.findtext('name'),
+                    artist = Artist(
                         self.__api,
-                        name = t.findtext('name'),
-                        artist = Artist(
-                            self.__api,
-                            name = t.findtext('artist/name'),
-                            mbid = t.findtext('artist/mbid'),
-                            url = t.findtext('artist/url'),
-                        ),
-                        mbid = t.findtext('mbid'),
-                        image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
-                        lovedOn = datetime(*(
-                            time.strptime(
-                                t.findtext('date').strip(),
-                                '%d %b %Y, %H:%M'
-                                )[0:6])
-                            )
+                        name = t.findtext('artist/name'),
+                        mbid = t.findtext('artist/mbid'),
+                        url = t.findtext('artist/url'),
+                    ),
+                    mbid = t.findtext('mbid'),
+                    image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                    lovedOn = datetime(*(
+                        time.strptime(
+                            t.findtext('date').strip(),
+                            '%d %b %Y, %H:%M'
+                            )[0:6])
                         )
-                    for t in data.findall('track')
-                    ]
-        return self.__lovedTracks
-
+                    )
+                for t in data.findall('track')
+                ]
+        
     def getRecentTracks(self, limit = None):
         params = {'method': 'user.getrecenttracks', 'user': self.name}
         data = self.__api._fetchData(params, no_cache = True).find('recenttracks')
@@ -251,13 +232,11 @@ class User(LastfmBase):
                 for a in data.findall('album')
                 ]
 
-    @property
+    @LastfmBase.cachedProperty
     def topAlbums(self):
         """overall top albums of the user"""
-        if self.__topAlbums is None:
-            self.__topAlbums = self.getTopAlbums()
-        return self.__topAlbums
-    
+        return self.getTopAlbums()
+        
     @LastfmBase.topProperty("topAlbums")
     def topAlbum(self):
         """overall top most album of the user"""
@@ -286,13 +265,11 @@ class User(LastfmBase):
                 for a in data.findall('artist')
                 ]
 
-    @property
+    @LastfmBase.cachedProperty
     def topArtists(self):
         """top artists of the user"""
-        if self.__topArtists is None:
-            self.__topArtists = self.getTopArtists()
-        return self.__topArtists
-
+        return self.getTopArtists()
+        
     @LastfmBase.topProperty("topArtists")
     def topArtist(self):
         """top artist of the user"""
@@ -326,13 +303,11 @@ class User(LastfmBase):
                 for t in data.findall('track')
                 ]
 
-    @property
+    @LastfmBase.cachedProperty
     def topTracks(self):
         """top tracks of the user"""
-        if self.__topTracks is None:
-            self.__topTracks = self.getTopTracks()
-        return self.__topTracks
-
+        return self.getTopTracks()
+        
     @LastfmBase.topProperty("topTracks")
     def topTrack(self):
         """top track of the user"""
@@ -356,13 +331,11 @@ class User(LastfmBase):
                 for t in data.findall('tag')
                 ]
 
-    @property
+    @LastfmBase.cachedProperty
     def topTags(self):
         """top tags of the user"""
-        if self.__topTags is None:
-            self.__topTags = self.getTopTags()
-        return self.__topTags
-
+        return self.getTopTags()
+        
     @LastfmBase.topProperty("topTags")
     def topTag(self):
         """top tag of the user"""
@@ -423,12 +396,10 @@ class User(LastfmBase):
         return "<lastfm.User: %s>" % self.name
     
     class Library(object):
+        """A class representing the music library of the user."""
         def __init__(self, api, user):
             self.__api = api
             self.__user = user
-            self.__albums = None
-            self.__artists = None
-            self.__tracks = None
             
         @property
         def user(self):
@@ -465,12 +436,10 @@ class User(LastfmBase):
                                ]
                     }
             
-        @property
+        @LastfmBase.cachedProperty
         def albums(self):
-            if self.__albums is None:
-                self.__albums = self.getAlbums()['albums']
-            return self.__albums
-        
+            return self.getAlbums()['albums']
+
         def getArtists(self,
                        limit = None,
                        page = None):
@@ -498,11 +467,9 @@ class User(LastfmBase):
                                 ]
                     }
             
-        @property
+        @LastfmBase.cachedProperty
         def artists(self):
-            if self.__artists is None:
-                self.__artists = self.getArtists()['artists']
-            return self.__artists
+            return self.getArtists()['artists']
         
         def getTracks(self,
                       limit = None,
@@ -537,12 +504,10 @@ class User(LastfmBase):
                                ]
                     }
         
-        @property
+        @LastfmBase.cachedProperty
         def tracks(self):
-            if self.__tracks is None:
-                self.__tracks = self.getTracks()['tracks']
-            return self.__tracks
-        
+            return self.getTracks()['tracks']
+            
         def _fetchData(self, params, limit, page):
             params .update({'user': self.user.name})
             if limit is not None:
@@ -571,3 +536,4 @@ from track import Track
 #extract self.__* property as decorator
 #write depaginations
 #write exceptions
+#argument type checking

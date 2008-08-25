@@ -54,6 +54,20 @@ class LastfmBase(object):
             return property(fget = wrapper, doc = func.__doc__)
         return decorator
     
+    @staticmethod
+    def cachedProperty(func):
+        frame = sys._getframe(1)
+        classname = frame.f_code.co_name
+        funcName = func.func_code.co_name
+        attributeName = "_%s__%s" % (classname, funcName)
+        
+        def wrapper(ob):
+            cacheAttribute = getattr(ob, attributeName, None)
+            if cacheAttribute is None:
+                setattr(ob, attributeName, func(ob))
+            return cacheAttribute
+        
+        return property(fget = wrapper, doc = func.__doc__)
 
     def __gt__(self, other):
         return not (self.__lt__(other) or self.__eq(other))
@@ -66,3 +80,5 @@ class LastfmBase(object):
 
     def __le__(self, other):
         return not self.__gt__(other)
+
+import sys

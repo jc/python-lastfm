@@ -151,7 +151,6 @@ class Location(LastfmBase):
         self.__latitude = latitude
         self.__longitude = longitude
         self.__timezone = timezone
-        self.__events = None
 
     @property
     def name(self):
@@ -198,13 +197,11 @@ class Location(LastfmBase):
                   page = None):
         return Geo.getEvents(self.__api, self.name, distance, page).matches
 
-    @property
+    @LastfmBase.cachedProperty
     def events(self):
         """events taking place at/around the location"""
-        if self.__events is None:
-            self.__events = self.getEvents()
-        return self.__events
-
+        return self.getEvents()
+        
     @staticmethod
     def hashFunc(*args, **kwds):
         try:
@@ -247,33 +244,27 @@ class Country(LastfmBase):
             raise LastfmError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
-        self.__topArtists = None
-        self.__topTracks = None
 
     @property
     def name(self):
         """name of the country"""
         return self.__name
 
-    @property
+    @LastfmBase.cachedProperty
     def topArtists(self):
         """top artists of the country"""
-        if self.__topArtists is None:
-            self.__topArtists = Geo.getTopArtists(self.__api, self.name)
-        return self.__topArtists
-
+        return Geo.getTopArtists(self.__api, self.name)
+        
     @LastfmBase.topProperty("topArtists")
     def topArtist(self):
         """top artist of the country"""
         pass
 
-    @property
+    @LastfmBase.cachedProperty
     def topTracks(self):
         """top tracks of the country"""
-        if self.__topTracks is None:
-            self.__topTracks = Geo.getTopTracks(self.__api, self.name)
-        return self.__topTracks
-
+        return Geo.getTopTracks(self.__api, self.name)
+        
     @LastfmBase.topProperty("topTracks")
     def topTrack(self):
         """top track of the country"""

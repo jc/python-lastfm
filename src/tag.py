@@ -24,11 +24,7 @@ class Tag(LastfmBase):
                              subject = self,
                              count = stats.count
                              )
-        self.__similar = None
-        self.__topAlbums = None
-        self.__topArtists = None
-        self.__topTracks = None
-    
+        
     @property
     def name(self):
         """name of the tag"""
@@ -48,121 +44,113 @@ class Tag(LastfmBase):
     def stats(self):
         return self.__stats
     
-    @property    
+    @LastfmBase.cachedProperty
     def similar(self):
         """tags similar to this tag"""
-        if self.__similar is None:
-            params = {'method': 'tag.getsimilar', 'tag': self.name}
-            data = self.__api._fetchData(params).find('similartags')
-            self.__similar = [
-                              Tag(
-                                  self.__api,
-                                  name = t.findtext('name'),
-                                  url = t.findtext('url'),
-                                  streamable = (t.findtext('streamable') == "1"),
-                                  )
-                              for t in data.findall('tag')
-                              ]
-        return self.__similar
+        params = {'method': 'tag.getsimilar', 'tag': self.name}
+        data = self.__api._fetchData(params).find('similartags')
+        return [
+                Tag(
+                    self.__api,
+                    name = t.findtext('name'),
+                    url = t.findtext('url'),
+                    streamable = (t.findtext('streamable') == "1"),
+                    )
+                for t in data.findall('tag')
+                ]
     
     @LastfmBase.topProperty("similar")
     def mostSimilar(self):
         """most similar tag to this tag"""
         pass
     
-    @property
+    @LastfmBase.cachedProperty
     def topAlbums(self):
         """top albums for the tag"""
-        if self.__topAlbums is None:
-            params = {'method': 'tag.gettopalbums', 'tag': self.name}
-            data = self.__api._fetchData(params).find('topalbums')
-            self.__topAlbums = [
-                                Album(
+        params = {'method': 'tag.gettopalbums', 'tag': self.name}
+        data = self.__api._fetchData(params).find('topalbums')
+        return [
+                Album(
+                      self.__api,
+                      name = a.findtext('name'),
+                      artist = Artist(
                                       self.__api,
-                                      name = a.findtext('name'),
-                                      artist = Artist(
-                                                      self.__api,
-                                                      name = a.findtext('artist/name'),
-                                                      mbid = a.findtext('artist/mbid'),
-                                                      url = a.findtext('artist/url'),
-                                                      ),
-                                      mbid = a.findtext('mbid'),
-                                      url = a.findtext('url'),
-                                      image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
-                                      stats = Stats(
-                                                    subject = a.findtext('name'),
-                                                    tagcount = a.findtext('tagcount') and int(a.findtext('tagcount')) or None,
-                                                    rank = a.attrib['rank'].strip() and int(a.attrib['rank']) or None
-                                                    )
-                                      )
-                                for a in data.findall('album')
-                                ]
-        return self.__topAlbums
-    
+                                      name = a.findtext('artist/name'),
+                                      mbid = a.findtext('artist/mbid'),
+                                      url = a.findtext('artist/url'),
+                                      ),
+                      mbid = a.findtext('mbid'),
+                      url = a.findtext('url'),
+                      image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                      stats = Stats(
+                                    subject = a.findtext('name'),
+                                    tagcount = a.findtext('tagcount') and int(a.findtext('tagcount')) or None,
+                                    rank = a.attrib['rank'].strip() and int(a.attrib['rank']) or None
+                                    )
+                      )
+                for a in data.findall('album')
+                ]
+
     @LastfmBase.topProperty("topAlbums")
     def topAlbum(self):
         """top album for the tag"""
         pass
     
-    @property
+    @LastfmBase.cachedProperty
     def topArtists(self):
         """top artists for the tag"""
-        if self.__topArtists is None:
-            params = {'method': 'tag.gettopartists', 'tag': self.name}
-            data = self.__api._fetchData(params).find('topartists')
-            self.__topArtists = [
-                                 Artist(
-                                        self.__api,
-                                        name = a.findtext('name'),
-                                        mbid = a.findtext('mbid'),
-                                        stats = Stats(
-                                                      subject = a.findtext('name'),
-                                                      rank = a.attrib['rank'].strip() and int(a.attrib['rank']) or None,
-                                                      tagcount = a.findtext('tagcount') and int(a.findtext('tagcount')) or None
-                                                      ),
-                                        url = a.findtext('url'),
-                                        streamable = (a.findtext('streamable') == "1"),
-                                        image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
-                                        )
-                                 for a in data.findall('artist')
-                                 ]
-        return self.__topArtists
-            
+        params = {'method': 'tag.gettopartists', 'tag': self.name}
+        data = self.__api._fetchData(params).find('topartists')
+        return [
+                Artist(
+                       self.__api,
+                       name = a.findtext('name'),
+                       mbid = a.findtext('mbid'),
+                       stats = Stats(
+                                     subject = a.findtext('name'),
+                                     rank = a.attrib['rank'].strip() and int(a.attrib['rank']) or None,
+                                     tagcount = a.findtext('tagcount') and int(a.findtext('tagcount')) or None
+                                     ),
+                       url = a.findtext('url'),
+                       streamable = (a.findtext('streamable') == "1"),
+                       image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                       )
+                for a in data.findall('artist')
+                ]
+
     @LastfmBase.topProperty("topArtists")
     def topArtist(self):
         """top artist for the tag"""
         pass
     
-    @property
+    @LastfmBase.cachedProperty
     def topTracks(self):
         """top tracks for the tag"""
-        if self.__topTracks is None:
-            params = {'method': 'tag.gettoptracks', 'tag': self.name}
-            data = self.__api._fetchData(params).find('toptracks')
-            self.__topTracks = [
-                                Track(
+        params = {'method': 'tag.gettoptracks', 'tag': self.name}
+        data = self.__api._fetchData(params).find('toptracks')
+        return [
+                Track(
+                      self.__api,
+                      name = t.findtext('name'),
+                      artist = Artist(
                                       self.__api,
-                                      name = t.findtext('name'),
-                                      artist = Artist(
-                                                      self.__api,
-                                                      name = t.findtext('artist/name'),
-                                                      mbid = t.findtext('artist/mbid'),
-                                                      url = t.findtext('artist/url'),
-                                                      ),
-                                      mbid = t.findtext('mbid'),
-                                      stats = Stats(
-                                                    subject = t.findtext('name'),
-                                                    rank = t.attrib['rank'].strip() and int(t.attrib['rank']) or None,
-                                                    tagcount = t.findtext('tagcount') and int(t.findtext('tagcount')) or None
-                                                    ),
-                                      streamable = (t.findtext('streamable') == '1'),
-                                      fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
-                                      image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
-                                      )
-                                for t in data.findall('track')
-                                ]
-        return self.__topTracks
-    
+                                      name = t.findtext('artist/name'),
+                                      mbid = t.findtext('artist/mbid'),
+                                      url = t.findtext('artist/url'),
+                                      ),
+                      mbid = t.findtext('mbid'),
+                      stats = Stats(
+                                    subject = t.findtext('name'),
+                                    rank = t.attrib['rank'].strip() and int(t.attrib['rank']) or None,
+                                    tagcount = t.findtext('tagcount') and int(t.findtext('tagcount')) or None
+                                    ),
+                      streamable = (t.findtext('streamable') == '1'),
+                      fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                      image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                      )
+                for t in data.findall('track')
+                ]
+
     @LastfmBase.topProperty("topTracks")
     def topTrack(self):
         """top track for the tag"""
