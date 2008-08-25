@@ -64,7 +64,8 @@ class LastfmBase(object):
         def wrapper(ob):
             cacheAttribute = getattr(ob, attributeName, None)
             if cacheAttribute is None:
-                setattr(ob, attributeName, func(ob))
+                cacheAttribute = func(ob)
+                setattr(ob, attributeName, cacheAttribute)
             return cacheAttribute
         
         return property(fget = wrapper, doc = func.__doc__)

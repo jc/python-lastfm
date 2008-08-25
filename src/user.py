@@ -533,7 +533,6 @@ from tag import Tag
 from track import Track
 
 #TODO
-#extract self.__* property as decorator
 #write depaginations
 #write exceptions
 #argument type checking
