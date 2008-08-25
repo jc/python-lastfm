@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-__author__ = "Abhinav Sarkar"
+__author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
@@ -14,6 +14,12 @@ class Geo(object):
                   distance = None,
                   page = None):
         params = {'method': 'geo.getevents', 'location': location}
+        if distance is not None:
+            params.update({'distance': distance})
+            
+        if page is not None:
+            params.update({'page': page})
+
         data = api._fetchData(params).find('events')
 
         return SearchResult(

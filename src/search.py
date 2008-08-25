@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-__author__ = "Abhinav Sarkar"
+__author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
@@ -66,4 +66,4 @@ class SearchResult(object):
         pass
                 
     def __repr__(self):
-        return "<lastfm.SearchResult: for %s '%s'>" % (self.type, self.searchTerms)
+        return "<lastfm.SearchResult: %s results for %s '%s'>" % (self.totalResults, self.type, self.searchTerms)

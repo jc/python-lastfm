@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-__author__ = "Abhinav Sarkar"
+__author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
@@ -36,7 +36,7 @@ class Artist(LastfmBase):
                             )
         self.__similar = similar
         self.__topTags = topTags
-        self.__bio = bio and Bio(
+        self.__bio = bio and Artist.Bio(
                          artist = self,
                          published = bio.published,
                          summary = bio.summary,
@@ -323,7 +323,7 @@ class Artist(LastfmBase):
                               )
                           for t in data.findall('tags/tag')
                           ]
-        self.__bio = Bio(
+        self.__bio = Artist.Bio(
                          self,
                          published = datetime(*(time.strptime(
                                                               data.findtext('bio/published').strip(),
@@ -371,40 +371,40 @@ class Artist(LastfmBase):
     def __repr__(self):
         return "<lastfm.Artist: %s>" % self.__name
 
-class Bio(object):
-    """A class representing the biography of an artist."""
-    def __init__(self,
-                 artist,
-                 published = None,
-                 summary = None,
-                 content = None):
-        self.__artist = artist
-        self.__published = published
-        self.__summary = summary
-        self.__content = content
-
-    @property
-    def artist(self):
-        """artist for which the biography is"""
-        return self.__artist
-
-    @property
-    def published(self):
-        """publication time of the biography"""
-        return self.__published
-
-    @property
-    def summary(self):
-        """summary of the biography"""
-        return self.__summary
-
-    @property
-    def content(self):
-        """content of the biography"""
-        return self.__content
-
-    def __repr__(self):
-        return "<lastfm.artist.Bio: for artist '%s'>" % self.__artist.name
+    class Bio(object):
+        """A class representing the biography of an artist."""
+        def __init__(self,
+                     artist,
+                     published = None,
+                     summary = None,
+                     content = None):
+            self.__artist = artist
+            self.__published = published
+            self.__summary = summary
+            self.__content = content
+    
+        @property
+        def artist(self):
+            """artist for which the biography is"""
+            return self.__artist
+    
+        @property
+        def published(self):
+            """publication time of the biography"""
+            return self.__published
+    
+        @property
+        def summary(self):
+            """summary of the biography"""
+            return self.__summary
+    
+        @property
+        def content(self):
+            """content of the biography"""
+            return self.__content
+    
+        def __repr__(self):
+            return "<lastfm.artist.Bio: for artist '%s'>" % self.__artist.name
 
 from datetime import datetime
 import time

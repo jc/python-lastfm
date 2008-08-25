@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-__author__ = "Abhinav Sarkar"
+__author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
@@ -34,6 +34,7 @@ class User(LastfmBase):
         self.__topArtists = None
         self.__topTracks = None
         self.__topTags = None
+        self.__lirary = User.Library(api, self)
 
     @property
     def name(self):
@@ -263,43 +264,109 @@ class User(LastfmBase):
         pass
 
     def getTopArtists(self, period = None):
-        pass
+        params = {'method': 'user.gettopartists', 'user': self.name}
+        if period is not None:
+            params.update({'period': period})
+        data = self.__api._fetchData(params).find('topartists')
+        
+        return [
+                Artist(
+                       self.__api,
+                       name = a.findtext('name'),
+                       mbid = a.findtext('mbid'),
+                       stats = Stats(
+                                     subject = a.findtext('name'),
+                                     rank = a.attrib['rank'].strip() and int(a.attrib['rank']) or None,
+                                     playcount = a.findtext('playcount') and int(a.findtext('playcount')) or None
+                                     ),
+                       url = a.findtext('url'),
+                       streamable = (a.findtext('streamable') == "1"),
+                       image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                       )
+                for a in data.findall('artist')
+                ]
 
     @property
     def topArtists(self):
         """top artists of the user"""
-        return self.getTopArtists()
+        if self.__topArtists is None:
+            self.__topArtists = self.getTopArtists()
+        return self.__topArtists
 
-    @property
+    @LastfmBase.topProperty("topArtists")
     def topArtist(self):
         """top artist of the user"""
-        return (len(self.topArtists) and self.topArtists[0] or None)
+        pass
 
     def getTopTracks(self, period = None):
-        pass
+        params = {'method': 'user.gettoptracks', 'user': self.name}
+        if period is not None:
+            params.update({'period': period})
+        data = self.__api._fetchData(params).find('toptracks')
+        return [
+                Track(
+                      self.__api,
+                      name = t.findtext('name'),
+                      artist = Artist(
+                                      self.__api,
+                                      name = t.findtext('artist/name'),
+                                      mbid = t.findtext('artist/mbid'),
+                                      url = t.findtext('artist/url'),
+                                      ),
+                      mbid = t.findtext('mbid'),
+                      stats = Stats(
+                                    subject = t.findtext('name'),
+                                    rank = t.attrib['rank'].strip() and int(t.attrib['rank']) or None,
+                                    playcount = t.findtext('playcount') and int(t.findtext('playcount')) or None
+                                    ),
+                      streamable = (t.findtext('streamable') == '1'),
+                      fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                      image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                      )
+                for t in data.findall('track')
+                ]
 
     @property
     def topTracks(self):
         """top tracks of the user"""
-        return self.getTopTracks()
+        if self.__topTracks is None:
+            self.__topTracks = self.getTopTracks()
+        return self.__topTracks
 
-    @property
+    @LastfmBase.topProperty("topTracks")
     def topTrack(self):
         """top track of the user"""
         return (len(self.topTracks) and self.topTracks[0] or None)
 
     def getTopTags(self, limit = None):
-        pass
+        params = {'method': 'user.gettoptags', 'user': self.name}
+        if limit is not None:
+            params.update({'limit': limit})
+        data = self.__api._fetchData(params).find('toptags')
+        return [
+                Tag(
+                    self.__api,
+                    name = t.findtext('name'),
+                    url = t.findtext('url'),
+                    stats = Stats(
+                                  subject = t.findtext('name'),
+                                  count = int(t.findtext('count'))
+                                  )
+                    ) 
+                for t in data.findall('tag')
+                ]
 
     @property
     def topTags(self):
         """top tags of the user"""
-        return self.getTopTags()
+        if self.__topTags is None:
+            self.__topTags = self.getTopTags()
+        return self.__topTags
 
-    @property
+    @LastfmBase.topProperty("topTags")
     def topTag(self):
         """top tag of the user"""
-        return (len(self.topTags) and self.topTags[0] or None)
+        pass
 
     @property
     def weeklyChartList(self):
@@ -331,6 +398,10 @@ class User(LastfmBase):
     @property
     def recentWeeklyTrackChart(self):
         return self.getWeeklyTrackChart()
+    
+    @property
+    def library(self):
+        return self.__lirary
 
     @staticmethod
     def hashFunc(*args, **kwds):
@@ -350,6 +421,139 @@ class User(LastfmBase):
 
     def __repr__(self):
         return "<lastfm.User: %s>" % self.name
+    
+    class Library(object):
+        def __init__(self, api, user):
+            self.__api = api
+            self.__user = user
+            self.__albums = None
+            self.__artists = None
+            self.__tracks = None
+            
+        @property
+        def user(self):
+            return self.__user
+            
+        def getAlbums(self,
+                      limit = None,
+                      page = None):
+            params = {'method': 'library.getalbums'}
+            data = self._fetchData(params, limit, page).find('albums')
+            return {
+                    'page': int(data.attrib['page']),
+                    'perPage': int(data.attrib['perPage']),
+                    'totalPages': int(data.attrib['totalPages']),
+                    'albums': [
+                               Album(
+                                     self.__api,
+                                     name = a.findtext('name'),
+                                     artist = Artist(
+                                                     self.__api,
+                                                     name = a.findtext('artist/name'),
+                                                     mbid = a.findtext('artist/mbid'),
+                                                     url = a.findtext('artist/url'),
+                                                     ),
+                                     mbid = a.findtext('mbid'),
+                                     url = a.findtext('url'),
+                                     image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                                     stats = Stats(
+                                                   subject = a.findtext('name'),
+                                                   playcount = int(a.findtext('playcount')),
+                                                   )
+                                     )
+                               for a in data.findall('album')
+                               ]
+                    }
+            
+        @property
+        def albums(self):
+            if self.__albums is None:
+                self.__albums = self.getAlbums()['albums']
+            return self.__albums
+        
+        def getArtists(self,
+                       limit = None,
+                       page = None):
+            params = {'method': 'library.getartists'}
+            data = self._fetchData(params, limit, page).find('artists')
+            return {
+                    'page': int(data.attrib['page']),
+                    'perPage': int(data.attrib['perPage']),
+                    'totalPages': int(data.attrib['totalPages']),
+                    'artists': [
+                                Artist(
+                                       self.__api,
+                                       name = a.findtext('name'),
+                                       mbid = a.findtext('mbid'),
+                                       stats = Stats(
+                                                     subject = a.findtext('name'),
+                                                     playcount = a.findtext('playcount') and int(a.findtext('playcount')) or None,
+                                                     tagcount = a.findtext('tagcount') and int(a.findtext('tagcount')) or None
+                                                     ),
+                                       url = a.findtext('url'),
+                                       streamable = (a.findtext('streamable') == "1"),
+                                       image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                                       )
+                                for a in data.findall('artist')
+                                ]
+                    }
+            
+        @property
+        def artists(self):
+            if self.__artists is None:
+                self.__artists = self.getArtists()['artists']
+            return self.__artists
+        
+        def getTracks(self,
+                      limit = None,
+                      page = None):
+            params = {'method': 'library.gettracks'}
+            data = self._fetchData(params, limit, page).find('tracks')
+            return {
+                    'page': int(data.attrib['page']),
+                    'perPage': int(data.attrib['perPage']),
+                    'totalPages': int(data.attrib['totalPages']),
+                    'tracks': [
+                               Track(
+                                     self.__api,
+                                     name = t.findtext('name'),
+                                     artist = Artist(
+                                                     self.__api,
+                                                     name = t.findtext('artist/name'),
+                                                     mbid = t.findtext('artist/mbid'),
+                                                     url = t.findtext('artist/url'),
+                                                     ),
+                                     mbid = t.findtext('mbid'),
+                                     stats = Stats(
+                                                   subject = t.findtext('name'),
+                                                   playcount = t.findtext('playcount') and int(t.findtext('playcount')) or None,
+                                                   tagcount = t.findtext('tagcount') and int(t.findtext('tagcount')) or None
+                                                   ),
+                                     streamable = (t.findtext('streamable') == '1'),
+                                     fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                                     image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                                     )
+                               for t in data.findall('track')
+                               ]
+                    }
+        
+        @property
+        def tracks(self):
+            if self.__tracks is None:
+                self.__tracks = self.getTracks()['tracks']
+            return self.__tracks
+        
+        def _fetchData(self, params, limit, page):
+            params .update({'user': self.user.name})
+            if limit is not None:
+                params.update({'limit': limit})
+            if page is not None:
+                params.update({'page': page})
+                
+            return self.__api._fetchData(params)
+        
+        def __repr__(self):
+            return "<lastfm.User.Library: for user '%s'>" % self.user.name
 
 from datetime import datetime
 import time
@@ -360,4 +564,10 @@ from album import Album
 from error import LastfmError
 from event import Event
 from stats import Stats
+from tag import Tag
 from track import Track
+
+#TODO
+#extract self.__* property as decorator
+#write depaginations
+#write exceptions

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-__author__ = "Abhinav Sarkar"
+__author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
@@ -47,12 +47,12 @@ class LastfmBase(object):
     
     @staticmethod    
     def topProperty(listPropertyName):
-        def top(func):
+        def decorator(func):
             def wrapper(ob):
                 topList = getattr(ob, listPropertyName)
                 return (len(topList) and topList[0] or None)
             return property(fget = wrapper, doc = func.__doc__)
-        return top
+        return decorator
     
 
     def __gt__(self, other):
