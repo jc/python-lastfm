@@ -266,6 +266,11 @@ class Country(LastfmBase):
     def topTracks(self):
         """top tracks of the country"""
         return Geo.getTopTracks(self.__api, self.name)
+    
+    @LastfmBase.cachedProperty
+    def events(self):
+        """events taking place at/around the location"""
+        return Geo.getEvents(self.__api, self.name)
         
     @LastfmBase.topProperty("topTracks")
     def topTrack(self):
