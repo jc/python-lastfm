@@ -341,34 +341,61 @@ class User(LastfmBase):
         """top tag of the user"""
         pass
 
-    @property
+    @LastfmBase.cachedProperty
     def weeklyChartList(self):
-        pass
-
+        params = {'method': 'user.getweeklychartlist', 'user': self.name}
+        data = self.__api._fetchData(params).find('weeklychartlist')
+        return [
+                WeeklyChart.createFromData(self.__api, self, c)
+                for c in data.findall('chart')
+                ]
+    def _checkWeeklyChartParams(self, params, start = None, end = None):
+        if (start is not None and end is None) or (start is None and end is not None):
+            raise LastfmError("both start and end have to be provided.")
+        if start is not None and end is not None:
+            if isinstance(start, datetime) and isinstance(end, datetime):
+                params.update({
+                               'start': int(time.mktime(start.timetuple())),
+                               'end': int(time.mktime(end.timetuple()))
+                               })
+            else:
+                raise LastfmError("start and end must be datetime.datetime instances")
+            
+        return params
+            
     def getWeeklyAlbumChart(self,
                              start = None,
                              end = None):
-        pass
+        params = {'method': 'user.getweeklyalbumchart', 'user': self.name}
+        params = self._checkWeeklyChartParams(params, start, end)            
+        data = self.__api._fetchData(params).find('weeklyalbumchart')   
+        return WeeklyAlbumChart.createFromData(self.__api, self, data)
 
-    @property
+    @LastfmBase.cachedProperty
     def recentWeeklyAlbumChart(self):
         return self.getWeeklyAlbumChart()
 
     def getWeeklyArtistChart(self,
                              start = None,
                              end = None):
-        pass
+        params = {'method': 'user.getweeklyartistchart', 'user': self.name}
+        params = self._checkWeeklyChartParams(params, start, end)
+        data = self.__api._fetchData(params).find('weeklyartistchart')   
+        return WeeklyArtistChart.createFromData(self.__api, self, data)
 
-    @property
+    @LastfmBase.cachedProperty
     def recentWeeklyArtistChart(self):
         return self.getWeeklyArtistChart()
 
     def getWeeklyTrackChart(self,
                              start = None,
                              end = None):
-        pass
+        params = {'method': 'user.getweeklytrackchart', 'user': self.name}
+        params = self._checkWeeklyChartParams(params, start, end)
+        data = self.__api._fetchData(params).find('weeklytrackchart')   
+        return WeeklyTrackChart.createFromData(self.__api, self, data)
 
-    @property
+    @LastfmBase.cachedProperty
     def recentWeeklyTrackChart(self):
         return self.getWeeklyTrackChart()
     
@@ -531,6 +558,7 @@ from event import Event
 from stats import Stats
 from tag import Tag
 from track import Track
+from weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
 
 #TODO
 #write depaginations

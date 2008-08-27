@@ -15,11 +15,12 @@ from playlist import Playlist
 from tag import Tag
 from track import Track
 from user import User
+from weeklychart import WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
 
 class Registry(object):
     """The registry to contain all the entities"""
     keys = [Album, Artist, Event, Location, Country, Group, 
-            Playlist, Tag, Track, User]
+            Playlist, Tag, Track, User, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart]
     
     def get(self, name):
         if name not in Registry.keys:

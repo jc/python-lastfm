@@ -338,7 +338,6 @@ class Artist(LastfmBase):
             return hash(kwds['name'].lower())
         except KeyError:
             try:
-                print args[1].lower()
                 return hash(args[1].lower())
             except IndexError:
                 raise LastfmError("name has to be provided for hashing")
