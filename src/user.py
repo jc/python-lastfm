@@ -381,7 +381,10 @@ class User(LastfmBase):
         @lazylist
         def gen(lst):
             for wc in wcl:
-                yield self.getWeeklyAlbumChart(wc.start, wc.end)
+                try:
+                    yield self.getWeeklyAlbumChart(wc.start, wc.end)
+                except LastfmError:
+                    pass
         return gen()
 
     def getWeeklyArtistChart(self,
@@ -403,7 +406,10 @@ class User(LastfmBase):
         @lazylist
         def gen(lst):
             for wc in wcl:
-                yield self.getWeeklyArtistChart(wc.start, wc.end)
+                try:
+                    yield self.getWeeklyArtistChart(wc.start, wc.end)
+                except LastfmError:
+                    pass
         return gen()
 
     def getWeeklyTrackChart(self,
@@ -425,7 +431,10 @@ class User(LastfmBase):
         @lazylist
         def gen(lst):
             for wc in wcl:
-                yield self.getWeeklyTrackChart(wc.start, wc.end)
+                try:
+                    yield self.getWeeklyTrackChart(wc.start, wc.end)
+                except LastfmError:
+                    pass
         return gen()
     
     @property

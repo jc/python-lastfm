@@ -9,6 +9,7 @@ class Api(object):
     
     DEFAULT_CACHE_TIMEOUT = 3600 # cache for 1 hour
     API_ROOT_URL = "http://ws.audioscrobbler.com/2.0/"
+    FETCH_INTERVAL = 1
 
     def __init__(self,
                  apiKey = '23caa86333d2cb2055fa82129802780a',
@@ -25,6 +26,7 @@ class Api(object):
         self._input_encoding = input_encoding
         self._no_cache = no_cache
         self._debug = debug
+        self._lastFetchTime = datetime.now()
 
     def getApiKey(self):
         return self.__apiKey
@@ -225,11 +227,21 @@ class Api(object):
             print url
         # Get a url opener that can handle basic auth
         opener = self._GetOpener(url)
+        
+        def readUrlData():
+            now = datetime.now()
+            delta = now - self._lastFetchTime
+            delta = delta.seconds + float(delta.microseconds)/1000000
+            if delta < Api.FETCH_INTERVAL:
+                time.sleep(Api.FETCH_INTERVAL - delta)
+            url_data = opener.open(url).read()
+            self._lastFetchTime = datetime.now()
+            return url_data
 
         # Open and return the URL immediately if we're not going to cache
         if no_cache or not self._cache or not self._cache_timeout:
             try:
-                url_data = opener.open(url).read()
+                url_data = readUrlData()
             except urllib2.HTTPError, e:
                 url_data = e.read()
         else:
@@ -242,7 +254,7 @@ class Api(object):
             # If the cached version is outdated then fetch another and store it
             if not last_cached or time.time() >= last_cached + self._cache_timeout:
                 try:
-                    url_data = opener.open(url).read()
+                    url_data = readUrlData()
                 except urllib2.HTTPError, e:
                     url_data = e.read()
                 self._cache.Set(key, url_data)
@@ -273,6 +285,7 @@ class Api(object):
     def __repr__(self):
         return "<lastfm.Api: %s>" % self.__apiKey
     
+from datetime import datetime
 import sys
 import time
 import urllib
