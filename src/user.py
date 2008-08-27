@@ -5,6 +5,7 @@ __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from lazylist import lazylist
 
 class User(LastfmBase):
     """A class representing an user."""
@@ -349,55 +350,72 @@ class User(LastfmBase):
                 WeeklyChart.createFromData(self.__api, self, c)
                 for c in data.findall('chart')
                 ]
-    def _checkWeeklyChartParams(self, params, start = None, end = None):
-        if (start is not None and end is None) or (start is None and end is not None):
-            raise LastfmError("both start and end have to be provided.")
-        if start is not None and end is not None:
-            if isinstance(start, datetime) and isinstance(end, datetime):
-                params.update({
-                               'start': int(time.mktime(start.timetuple())),
-                               'end': int(time.mktime(end.timetuple()))
-                               })
-            else:
-                raise LastfmError("start and end must be datetime.datetime instances")
-            
-        return params
             
     def getWeeklyAlbumChart(self,
                              start = None,
                              end = None):
         params = {'method': 'user.getweeklyalbumchart', 'user': self.name}
-        params = self._checkWeeklyChartParams(params, start, end)            
+        params = WeeklyChart._checkWeeklyChartParams(params, start, end)            
         data = self.__api._fetchData(params).find('weeklyalbumchart')   
         return WeeklyAlbumChart.createFromData(self.__api, self, data)
 
     @LastfmBase.cachedProperty
     def recentWeeklyAlbumChart(self):
         return self.getWeeklyAlbumChart()
+    
+    @LastfmBase.cachedProperty
+    def weeklyAlbumChartList(self):
+        wcl = list(self.weeklyChartList)
+        wcl.reverse()
+        @lazylist
+        def gen(lst):
+            for wc in wcl:
+                yield self.getWeeklyAlbumChart(wc.start, wc.end)
+        return gen()
 
     def getWeeklyArtistChart(self,
                              start = None,
                              end = None):
         params = {'method': 'user.getweeklyartistchart', 'user': self.name}
-        params = self._checkWeeklyChartParams(params, start, end)
+        params = WeeklyChart._checkWeeklyChartParams(params, start, end)
         data = self.__api._fetchData(params).find('weeklyartistchart')   
         return WeeklyArtistChart.createFromData(self.__api, self, data)
 
     @LastfmBase.cachedProperty
     def recentWeeklyArtistChart(self):
         return self.getWeeklyArtistChart()
+    
+    @LastfmBase.cachedProperty
+    def weeklyArtistChartList(self):
+        wcl = list(self.weeklyChartList)
+        wcl.reverse()
+        @lazylist
+        def gen(lst):
+            for wc in wcl:
+                yield self.getWeeklyArtistChart(wc.start, wc.end)
+        return gen()
 
     def getWeeklyTrackChart(self,
                              start = None,
                              end = None):
         params = {'method': 'user.getweeklytrackchart', 'user': self.name}
-        params = self._checkWeeklyChartParams(params, start, end)
+        params = WeeklyChart._checkWeeklyChartParams(params, start, end)
         data = self.__api._fetchData(params).find('weeklytrackchart')   
         return WeeklyTrackChart.createFromData(self.__api, self, data)
 
     @LastfmBase.cachedProperty
     def recentWeeklyTrackChart(self):
         return self.getWeeklyTrackChart()
+    
+    @LastfmBase.cachedProperty
+    def weeklyTrackChartList(self):
+        wcl = list(self.weeklyChartList)
+        wcl.reverse()
+        @lazylist
+        def gen(lst):
+            for wc in wcl:
+                yield self.getWeeklyTrackChart(wc.start, wc.end)
+        return gen()
     
     @property
     def library(self):

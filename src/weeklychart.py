@@ -33,7 +33,22 @@ class WeeklyChart(LastfmBase):
                            start = datetime.utcfromtimestamp(int(data.attrib['from'])),
                            end = datetime.utcfromtimestamp(int(data.attrib['to']))
                            )
-        
+    
+    @staticmethod
+    def _checkWeeklyChartParams(params, start = None, end = None):
+        if (start is not None and end is None) or (start is None and end is not None):
+            raise LastfmError("both start and end have to be provided.")
+        if start is not None and end is not None:
+            if isinstance(start, datetime) and isinstance(end, datetime):
+                params.update({
+                               'from': int(calendar.timegm(start.timetuple())),
+                               'to': int(calendar.timegm(end.timetuple()))
+                               })
+            else:
+                raise LastfmError("start and end must be datetime.datetime instances")
+            
+        return params
+    
     @staticmethod
     def hashFunc(*args, **kwds):
         try:
@@ -190,6 +205,7 @@ class WeeklyTrackChart(WeeklyChart):
                            )
     
 from datetime import datetime
+import calendar
 
 from album import Album
 from artist import Artist
