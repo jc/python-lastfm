@@ -5,34 +5,37 @@ __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from lazylist import lazylist
 
 class Geo(object):
     """A class representing an geographic location."""
     @staticmethod
     def getEvents(api,
                   location,
-                  distance = None,
-                  page = None):
+                  distance = None):
         params = {'method': 'geo.getevents', 'location': location}
         if distance is not None:
             params.update({'distance': distance})
+        
+        @lazylist
+        def gen(lst):
+            data = api._fetchData(params).find('events')
+            totalPages = int(data.attrib['totalpages'])
             
-        if page is not None:
-            params.update({'page': page})
-
-        data = api._fetchData(params).find('events')
-
-        return SearchResult(
-                            type = 'event',
-                            searchTerms = data.attrib['location'],
-                            startPage = int(data.attrib['page']),
-                            totalResults = int(data.attrib['total']),
-                            itemsPerPage = int(math.ceil(float(data.attrib['total']))/float(data.attrib['totalpages'])),
-                            matches = [
-                                Event.createFromData(api, e)
-                                for e in data.findall('event')
-                                ]
-                        )
+            @lazylist
+            def gen2(lst, data):
+                for e in data.findall('event'):
+                    yield Event.createFromData(api, e)
+            
+            for e in gen2(data):
+                yield e
+            
+            for page in xrange(2, totalPages+1):
+                params.update({'page': page})
+                data = api._fetchData(params).find('events')
+                for e in gen2(data):
+                    yield e            
+        return gen()
 
     @staticmethod
     def getTopArtists(api, country):
@@ -193,9 +196,8 @@ class Location(LastfmBase):
         return self.__timezone
 
     def getEvents(self,
-                  distance = None,
-                  page = None):
-        return Geo.getEvents(self.__api, self.name, distance, page).matches
+                  distance = None):
+        return Geo.getEvents(self.__api, self.name, distance)
 
     @LastfmBase.cachedProperty
     def events(self):
@@ -289,12 +291,9 @@ class Country(LastfmBase):
     def __repr__(self):
         return "<lastfm.geo.Country: %s>" % self.name
 
-import math
-
 from api import Api
 from artist import Artist
 from error import LastfmError
 from event import Event
-from search import SearchResult
 from stats import Stats
 from track import Track

@@ -59,19 +59,30 @@ class User(LastfmBase):
                 ]
         
     def getPastEvents(self,
-                      page = None,
                       limit = None):
         params = {'method': 'user.getpastevents', 'user': self.name}
-        if page is not None:
-            params.update({'page': page})
         if limit is not None:
             params.update({'limit': limit})
-    
-        data = self.__api._fetchData(params).find('events')
-        return [
-            Event.createFromData(self.__api, e)
-            for e in data.findall('event')
-            ]
+                
+        @lazylist
+        def gen(lst):
+            data = self.__api._fetchData(params).find('events')
+            totalPages = int(data.attrib['totalPages'])
+            
+            @lazylist
+            def gen2(lst, data):
+                for e in data.findall('event'):
+                    yield Event.createFromData(self.__api, e)
+            
+            for e in gen2(data):
+                yield e
+            
+            for page in xrange(2, totalPages+1):
+                params.update({'page': page})
+                data = self.__api._fetchData(params).find('events')
+                for e in gen2(data):
+                    yield e            
+        return gen()
         
     @LastfmBase.cachedProperty
     def pastEvents(self):
@@ -451,117 +462,142 @@ class User(LastfmBase):
             return self.__user
             
         def getAlbums(self,
-                      limit = None,
-                      page = None):
-            params = {'method': 'library.getalbums'}
-            data = self._fetchData(params, limit, page).find('albums')
-            return {
-                    'page': int(data.attrib['page']),
-                    'perPage': int(data.attrib['perPage']),
-                    'totalPages': int(data.attrib['totalPages']),
-                    'albums': [
-                               Album(
-                                     self.__api,
-                                     name = a.findtext('name'),
-                                     artist = Artist(
-                                                     self.__api,
-                                                     name = a.findtext('artist/name'),
-                                                     mbid = a.findtext('artist/mbid'),
-                                                     url = a.findtext('artist/url'),
-                                                     ),
-                                     mbid = a.findtext('mbid'),
-                                     url = a.findtext('url'),
-                                     image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
-                                     stats = Stats(
-                                                   subject = a.findtext('name'),
-                                                   playcount = int(a.findtext('playcount')),
-                                                   )
-                                     )
-                               for a in data.findall('album')
-                               ]
-                    }
+                      limit = None):
+            params = {'method': 'library.getalbums', 'user': self.user.name}
+            if limit is not None:
+                params.update({'limit': limit})
+            
+            @lazylist
+            def gen(lst):
+                data = self.__api._fetchData(params).find('albums')
+                totalPages = int(data.attrib['totalPages'])
+                
+                @lazylist
+                def gen2(lst, data):
+                    for a in data.findall('album'):
+                        yield Album(
+                                    self.__api,
+                                    name = a.findtext('name'),
+                                    artist = Artist(
+                                                    self.__api,
+                                                    name = a.findtext('artist/name'),
+                                                    mbid = a.findtext('artist/mbid'),
+                                                    url = a.findtext('artist/url'),
+                                                    ),
+                                    mbid = a.findtext('mbid'),
+                                    url = a.findtext('url'),
+                                    image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                                    stats = Stats(
+                                                  subject = a.findtext('name'),
+                                                  playcount = int(a.findtext('playcount')),
+                                                  )
+                                    )
+                               
+                
+                for a in gen2(data):
+                    yield a
+                
+                for page in xrange(2, totalPages+1):
+                    params.update({'page': page})
+                    data = self.__api._fetchData(params).find('albums')
+                    for a in gen2(data):
+                        yield a            
+            return gen()
             
         @LastfmBase.cachedProperty
         def albums(self):
-            return self.getAlbums()['albums']
+            return self.getAlbums()
 
         def getArtists(self,
-                       limit = None,
-                       page = None):
-            params = {'method': 'library.getartists'}
-            data = self._fetchData(params, limit, page).find('artists')
-            return {
-                    'page': int(data.attrib['page']),
-                    'perPage': int(data.attrib['perPage']),
-                    'totalPages': int(data.attrib['totalPages']),
-                    'artists': [
-                                Artist(
-                                       self.__api,
-                                       name = a.findtext('name'),
-                                       mbid = a.findtext('mbid'),
-                                       stats = Stats(
-                                                     subject = a.findtext('name'),
-                                                     playcount = a.findtext('playcount') and int(a.findtext('playcount')) or None,
-                                                     tagcount = a.findtext('tagcount') and int(a.findtext('tagcount')) or None
-                                                     ),
-                                       url = a.findtext('url'),
-                                       streamable = (a.findtext('streamable') == "1"),
-                                       image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
-                                       )
-                                for a in data.findall('artist')
-                                ]
-                    }
+                       limit = None):
+            params = {'method': 'library.getartists', 'user': self.user.name}
+            if limit is not None:
+                params.update({'limit': limit})
+            
+            @lazylist
+            def gen(lst):
+                data = self.__api._fetchData(params).find('artists')
+                totalPages = int(data.attrib['totalPages'])
+                
+                @lazylist
+                def gen2(lst, data):
+                    for a in data.findall('artist'):
+                        yield Artist(
+                                     self.__api,
+                                     name = a.findtext('name'),
+                                     mbid = a.findtext('mbid'),
+                                     stats = Stats(
+                                                   subject = a.findtext('name'),
+                                                   playcount = a.findtext('playcount') and int(a.findtext('playcount')) or None,
+                                                   tagcount = a.findtext('tagcount') and int(a.findtext('tagcount')) or None
+                                                   ),
+                                     url = a.findtext('url'),
+                                     streamable = (a.findtext('streamable') == "1"),
+                                     image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                                     )                               
+                
+                for a in gen2(data):
+                    yield a
+                
+                for page in xrange(2, totalPages+1):
+                    params.update({'page': page})
+                    data = self.__api._fetchData(params).find('artists')
+                    for a in gen2(data):
+                        yield a            
+            return gen()
             
         @LastfmBase.cachedProperty
         def artists(self):
-            return self.getArtists()['artists']
+            return self.getArtists()
         
         def getTracks(self,
-                      limit = None,
-                      page = None):
-            params = {'method': 'library.gettracks'}
-            data = self._fetchData(params, limit, page).find('tracks')
-            return {
-                    'page': int(data.attrib['page']),
-                    'perPage': int(data.attrib['perPage']),
-                    'totalPages': int(data.attrib['totalPages']),
-                    'tracks': [
-                               Track(
-                                     self.__api,
-                                     name = t.findtext('name'),
-                                     artist = Artist(
-                                                     self.__api,
-                                                     name = t.findtext('artist/name'),
-                                                     mbid = t.findtext('artist/mbid'),
-                                                     url = t.findtext('artist/url'),
-                                                     ),
-                                     mbid = t.findtext('mbid'),
-                                     stats = Stats(
-                                                   subject = t.findtext('name'),
-                                                   playcount = t.findtext('playcount') and int(t.findtext('playcount')) or None,
-                                                   tagcount = t.findtext('tagcount') and int(t.findtext('tagcount')) or None
-                                                   ),
-                                     streamable = (t.findtext('streamable') == '1'),
-                                     fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
-                                     image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
-                                     )
-                               for t in data.findall('track')
-                               ]
-                    }
+                      limit = None):
+            params = {'method': 'library.gettracks', 'user': self.user.name}
+            if limit is not None:
+                params.update({'limit': limit})
+            
+            @lazylist
+            def gen(lst):
+                data = self.__api._fetchData(params).find('tracks')
+                totalPages = int(data.attrib['totalPages'])
+                
+                @lazylist
+                def gen2(lst, data):
+                    for t in data.findall('track'):
+                        yield Track(
+                                    self.__api,
+                                    name = t.findtext('name'),
+                                    artist = Artist(
+                                                    self.__api,
+                                                    name = t.findtext('artist/name'),
+                                                    mbid = t.findtext('artist/mbid'),
+                                                    url = t.findtext('artist/url'),
+                                                    ),
+                                    mbid = t.findtext('mbid'),
+                                    stats = Stats(
+                                                  subject = t.findtext('name'),
+                                                  playcount = t.findtext('playcount') and int(t.findtext('playcount')) or None,
+                                                  tagcount = t.findtext('tagcount') and int(t.findtext('tagcount')) or None
+                                                  ),
+                                    streamable = (t.findtext('streamable') == '1'),
+                                    fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                                    image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                                    )                            
+                
+                for t in gen2(data):
+                    yield t
+                
+                for page in xrange(2, totalPages+1):
+                    params.update({'page': page})
+                    data = self.__api._fetchData(params).find('tracks')
+                    for t in gen2(data):
+                        yield t            
+            return gen()
         
         @LastfmBase.cachedProperty
         def tracks(self):
-            return self.getTracks()['tracks']
+            return self.getTracks()
             
-        def _fetchData(self, params, limit, page):
-            params .update({'user': self.user.name})
-            if limit is not None:
-                params.update({'limit': limit})
-            if page is not None:
-                params.update({'page': page})
-                
-            return self.__api._fetchData(params)
-        
         def __repr__(self):
             return "<lastfm.User.Library: for user '%s'>" % self.user.name
 
@@ -579,6 +615,5 @@ from track import Track
 from weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
 
 #TODO
-#write depaginations
 #write exceptions
 #argument type checking
