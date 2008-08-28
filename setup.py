@@ -13,8 +13,7 @@ METADATA = dict(
 	author_email="abhinav.sarkar@gmail.com",
 	maintainer="Abhinav Sarkar",
 	maintainer_email="abhinav.sarkar@gmail.com",
-	url="http://code.google.com/p/python-lastfm/downloads/list/",
-	download_url="http://python-lastfm.googlecode.com/files/lastfm-0.1.tar.gz",
+	url="http://python-lastfm.googlecode.com/svn/trunk/dist/",
 	package_dir = {'lastfm':'src'},
 	packages=['lastfm'],
 	license="GNU Lesser General Public License",
@@ -22,7 +21,7 @@ METADATA = dict(
 )
 
 SETUPTOOLS_METADATA = dict(
-	install_requires = ['setuptools', 'vobject'],
+	install_requires = ['setuptools'],
 	include_package_data = True,
 	classifiers = [
 		'Development Status :: 3 - Alpha',
