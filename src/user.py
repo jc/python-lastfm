@@ -97,6 +97,7 @@ class User(LastfmBase):
         return [
             User(
                 self.__api,
+                subject = self,
                 name = u.findtext('name'),
                 image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
                 url = u.findtext('url'),
@@ -118,6 +119,7 @@ class User(LastfmBase):
         return [
                 User(
                     self.__api,
+                    subject = self,
                     name = u.findtext('name'),
                     image = {'medium': u.findtext('image')},
                     url = u.findtext('url'),
@@ -151,9 +153,11 @@ class User(LastfmBase):
         return [
                 Track(
                     self.__api,
+                    subject = self,
                     name = t.findtext('name'),
                     artist = Artist(
                         self.__api,
+                        subject = self,
                         name = t.findtext('artist/name'),
                         mbid = t.findtext('artist/mbid'),
                         url = t.findtext('artist/url'),
@@ -176,17 +180,21 @@ class User(LastfmBase):
         return [
                 Track(
                       self.__api,
+                      subject = self,
                       name = t.findtext('name'),
                       artist = Artist(
                                       self.__api,
+                                      subject = self,
                                       name = t.findtext('artist'),
                                       mbid = t.find('artist').attrib['mbid'],
                                       ),
                       album = Album(
                                     self.__api,
+                                    subject = self,
                                     name = t.findtext('album'),
                                     artist = Artist(
                                                     self.__api,
+                                                    subject = self,
                                                     name = t.findtext('artist'),
                                                     mbid = t.find('artist').attrib['mbid'],
                                                     ),
@@ -225,9 +233,11 @@ class User(LastfmBase):
         return [
                 Album(
                      self.__api,
+                     subject = self,
                      name = a.findtext('name'),
                      artist = Artist(
                                      self.__api,
+                                     subject = self,
                                      name = a.findtext('artist/name'),
                                      mbid = a.findtext('artist/mbid'),
                                      url = a.findtext('artist/url'),
@@ -263,6 +273,7 @@ class User(LastfmBase):
         return [
                 Artist(
                        self.__api,
+                       subject = self,
                        name = a.findtext('name'),
                        mbid = a.findtext('mbid'),
                        stats = Stats(
@@ -295,9 +306,11 @@ class User(LastfmBase):
         return [
                 Track(
                       self.__api,
+                      subject = self,
                       name = t.findtext('name'),
                       artist = Artist(
                                       self.__api,
+                                      subject = self,
                                       name = t.findtext('artist/name'),
                                       mbid = t.findtext('artist/mbid'),
                                       url = t.findtext('artist/url'),
@@ -333,6 +346,7 @@ class User(LastfmBase):
         return [
                 Tag(
                     self.__api,
+                    subject = self,
                     name = t.findtext('name'),
                     url = t.findtext('url'),
                     stats = Stats(
@@ -486,9 +500,11 @@ class User(LastfmBase):
                     for a in data.findall('album'):
                         yield Album(
                                     self.__api,
+                                    subject = self,
                                     name = a.findtext('name'),
                                     artist = Artist(
                                                     self.__api,
+                                                    subject = self,
                                                     name = a.findtext('artist/name'),
                                                     mbid = a.findtext('artist/mbid'),
                                                     url = a.findtext('artist/url'),
@@ -533,6 +549,7 @@ class User(LastfmBase):
                     for a in data.findall('artist'):
                         yield Artist(
                                      self.__api,
+                                     subject = self,
                                      name = a.findtext('name'),
                                      mbid = a.findtext('mbid'),
                                      stats = Stats(
@@ -575,9 +592,11 @@ class User(LastfmBase):
                     for t in data.findall('track'):
                         yield Track(
                                     self.__api,
+                                    subject = self,
                                     name = t.findtext('name'),
                                     artist = Artist(
                                                     self.__api,
+                                                    subject = self,
                                                     name = t.findtext('artist/name'),
                                                     mbid = t.findtext('artist/mbid'),
                                                     url = t.findtext('artist/url'),
@@ -606,6 +625,16 @@ class User(LastfmBase):
         @LastfmBase.cachedProperty
         def tracks(self):
             return self.getTracks()
+        
+        @staticmethod
+        def hashFunc(*args, **kwds):
+            try:
+                return hash(kwds['user'])
+            except KeyError:
+                raise LastfmError("user has to be provided for hashing")
+    
+        def __hash__(self):
+            return self.__class__.hashFunc(user = self.user)
             
         def __repr__(self):
             return "<lastfm.User.Library: for user '%s'>" % self.user.name
@@ -626,7 +655,5 @@ from weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, Weekly
 #TODO
 #write exceptions
 #argument type checking
-#extra methods in weeklycharts
-#setup.py
 #cross check with website
-#registry issue
+#parse xml in chunks

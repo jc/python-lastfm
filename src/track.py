@@ -125,9 +125,11 @@ class Track(LastfmBase):
         return [
                 Track(
                       self.__api,
+                      subject = self,
                       name = t.findtext('name'),
                       artist = Artist(
                                       self.__api,
+                                      subject = self,
                                       name = t.findtext('artist/name'),
                                       mbid = t.findtext('artist/mbid'),
                                       url = t.findtext('artist/url')
@@ -162,6 +164,7 @@ class Track(LastfmBase):
         return [
                 User(
                      self.__api,
+                     subject = self,
                      name = u.findtext('name'),
                      url = u.findtext('url'),
                      image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
@@ -191,6 +194,7 @@ class Track(LastfmBase):
         return [
                 Tag(
                     self.__api,
+                    subject = self,
                     name = t.findtext('name'),
                     url = t.findtext('url'),
                     stats = Stats(

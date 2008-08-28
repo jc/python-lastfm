@@ -102,6 +102,7 @@ class Album(LastfmBase):
         return [
                 Tag(
                     self.__api,
+                    subject = self,
                     name = t.findtext('name'),
                     url = t.findtext('url')
                     ) 
@@ -143,6 +144,7 @@ class Album(LastfmBase):
         self.__topTags = [
                     Tag(
                         self.__api,
+                        subject = self,
                         name = t.findtext('name'),
                         url = t.findtext('url')
                         ) 
@@ -160,6 +162,7 @@ class Album(LastfmBase):
                   name = data.findtext('name'),
                   artist = Artist(
                                   api,
+                                  subject = self,
                                   name = data.findtext('artist'),
                                   ),
                   )

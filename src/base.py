@@ -16,6 +16,11 @@ class LastfmBase(object):
     _lock = Lock()
 
     def __new__(cls, *args, **kwds):
+        subject = None
+        if 'subject' in kwds and not cls.__name__.startswith('Weekly'):
+            subject = kwds['subject']
+            del kwds['subject']
+            
         if 'bypassRegistry' in kwds:
                 del kwds['bypassRegistry']
                 inst = object.__new__(cls)
@@ -23,6 +28,9 @@ class LastfmBase(object):
                 return inst
 
         key = cls.hashFunc(*args, **kwds)
+        if subject is not None:
+            key = (hash(subject), key)
+            
         LastfmBase._lock.acquire()
         try:
             inst, alreadyRegistered = LastfmBase.register(object.__new__(cls), key)

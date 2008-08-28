@@ -9,22 +9,28 @@ from base import LastfmBase
 class WeeklyChart(LastfmBase):
     """A class for representing the weekly charts"""
 
-    def init(self, subject, start, end):
-        self._subject = subject
-        self._start = start
-        self._end = end
+    def init(self, subject, start, end,
+             stats = None):
+        self.__subject = subject
+        self.__start = start
+        self.__end = end
+        self.__stats = stats
 
     @property
     def subject(self):
-        return self._subject
+        return self.__subject
 
     @property
     def start(self):
-        return self._start
+        return self.__start
 
     @property
     def end(self):
-        return self._end
+        return self.__end
+    
+    @property
+    def stats(self):
+        return self.__stats
     
     @staticmethod
     def createFromData(api, subject, data):
@@ -52,12 +58,12 @@ class WeeklyChart(LastfmBase):
     @staticmethod
     def hashFunc(*args, **kwds):
         try:
-            return "%s%s%s%s" % (
-                               hash(kwds['subject'].__class__.__name__),
-                               hash(kwds['subject'].name),
-                               hash(kwds['start']),
-                               hash(kwds['end'])
-                               )
+            return hash("%s%s%s%s" % (
+                                      kwds['subject'].__class__.__name__,
+                                      kwds['subject'].name,
+                                      kwds['start'],
+                                      kwds['end']
+                               ))
         except KeyError:
             raise LastfmError("subject, start and end have to be provided for hashing")
         
@@ -94,10 +100,8 @@ class WeeklyChart(LastfmBase):
     
 class WeeklyAlbumChart(WeeklyChart):
     """A class for representing the weekly album charts"""
-    def init(self, subject, start, end, albums):
-        self._subject = subject
-        self._start = start
-        self._end = end
+    def init(self, subject, start, end, stats, albums):
+        super(WeeklyAlbumChart, self).init(subject, start, end, stats)
         self.__albums = albums
         
     @property
@@ -106,17 +110,34 @@ class WeeklyAlbumChart(WeeklyChart):
     
     @staticmethod
     def createFromData(api, subject, data):
+        w = WeeklyChart(
+                        subject = subject,
+                        start = datetime.utcfromtimestamp(int(data.attrib['from'])),
+                        end = datetime.utcfromtimestamp(int(data.attrib['to'])),
+                        )
         return WeeklyAlbumChart(
                            subject = subject,
                            start = datetime.utcfromtimestamp(int(data.attrib['from'])),
                            end = datetime.utcfromtimestamp(int(data.attrib['to'])),
+                           stats = Stats(
+                                         subject = subject,
+                                         playcount = reduce(
+                                                            lambda x,y:(
+                                                                        x + int(y.findtext('playcount'))
+                                                                        ),
+                                                            data.findall('album'),
+                                                            0
+                                          )
+                                    ),
                            albums = [
                                      Album(
                                            api,
+                                           subject = w,
                                            name = a.findtext('name'),
                                            mbid = a.findtext('mbid'),
                                            artist = Artist(
                                                            api,
+                                                           subject = w,
                                                            name = a.findtext('artist'),
                                                            mbid = a.find('artist').attrib['mbid'],
                                                            ),
@@ -133,10 +154,8 @@ class WeeklyAlbumChart(WeeklyChart):
     
 class WeeklyArtistChart(WeeklyChart):
     """A class for representing the weekly artist charts"""
-    def init(self, subject, start, end, artists):
-        self._subject = subject
-        self._start = start
-        self._end = end
+    def init(self, subject, start, end, stats, artists):
+        super(WeeklyArtistChart, self).init(subject, start, end, stats)
         self.__artists = artists
         
     @property
@@ -145,13 +164,29 @@ class WeeklyArtistChart(WeeklyChart):
     
     @staticmethod
     def createFromData(api, subject, data):
+        w = WeeklyChart(
+                        subject = subject,
+                        start = datetime.utcfromtimestamp(int(data.attrib['from'])),
+                        end = datetime.utcfromtimestamp(int(data.attrib['to'])),
+                        )
         return WeeklyArtistChart(
                            subject = subject,
                            start = datetime.utcfromtimestamp(int(data.attrib['from'])),
                            end = datetime.utcfromtimestamp(int(data.attrib['to'])),
+                           stats = Stats(
+                                         subject = subject,
+                                         playcount = reduce(
+                                                            lambda x,y:(
+                                                                        x + int(y.findtext('playcount'))
+                                                                        ),
+                                                            data.findall('artist'),
+                                                            0
+                                          )
+                                    ),
                            artists = [
                                      Artist(
                                            api,
+                                           subject = w,
                                            name = a.findtext('name'),
                                            mbid = a.findtext('mbid'),
                                            stats = Stats(
@@ -167,10 +202,8 @@ class WeeklyArtistChart(WeeklyChart):
     
 class WeeklyTrackChart(WeeklyChart):
     """A class for representing the weekly track charts"""
-    def init(self, subject, start, end, tracks):
-        self._subject = subject
-        self._start = start
-        self._end = end
+    def init(self, subject, start, end, tracks, stats):
+        super(WeeklyTrackChart, self).init(subject, start, end, stats)
         self.__tracks = tracks
         
     @property
@@ -179,13 +212,29 @@ class WeeklyTrackChart(WeeklyChart):
     
     @staticmethod
     def createFromData(api, subject, data):
+        w = WeeklyChart(
+                        subject = subject,
+                        start = datetime.utcfromtimestamp(int(data.attrib['from'])),
+                        end = datetime.utcfromtimestamp(int(data.attrib['to'])),
+                        )
         return WeeklyTrackChart(
                            subject = subject,
                            start = datetime.utcfromtimestamp(int(data.attrib['from'])),
                            end = datetime.utcfromtimestamp(int(data.attrib['to'])),
+                           stats = Stats(
+                                         subject = subject,
+                                         playcount = reduce(
+                                                            lambda x,y:(
+                                                                        x + int(y.findtext('playcount'))
+                                                                        ),
+                                                            data.findall('track'),
+                                                            0
+                                          )
+                                    ),
                            tracks = [
                                      Track(
                                            api,
+                                           subject = w,
                                            name = t.findtext('name'),
                                            mbid = t.findtext('mbid'),
                                            artist = Artist(

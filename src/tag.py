@@ -53,6 +53,7 @@ class Tag(LastfmBase):
         return [
                 Tag(
                     self.__api,
+                    subject = self,
                     name = t.findtext('name'),
                     url = t.findtext('url'),
                     streamable = (t.findtext('streamable') == "1"),
@@ -73,9 +74,11 @@ class Tag(LastfmBase):
         return [
                 Album(
                       self.__api,
+                      subject = self,
                       name = a.findtext('name'),
                       artist = Artist(
                                       self.__api,
+                                      subject = self,
                                       name = a.findtext('artist/name'),
                                       mbid = a.findtext('artist/mbid'),
                                       url = a.findtext('artist/url'),
@@ -105,6 +108,7 @@ class Tag(LastfmBase):
         return [
                 Artist(
                        self.__api,
+                       subject = self,
                        name = a.findtext('name'),
                        mbid = a.findtext('mbid'),
                        stats = Stats(
@@ -132,9 +136,11 @@ class Tag(LastfmBase):
         return [
                 Track(
                       self.__api,
+                      subject = self,
                       name = t.findtext('name'),
                       artist = Artist(
                                       self.__api,
+                                      subject = self,
                                       name = t.findtext('artist/name'),
                                       mbid = t.findtext('artist/mbid'),
                                       url = t.findtext('artist/url'),

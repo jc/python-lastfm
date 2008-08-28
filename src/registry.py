@@ -19,15 +19,15 @@ from weeklychart import WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
 
 class Registry(object):
     """The registry to contain all the entities"""
-    keys = [Album, Artist, Event, Location, Country, Group, 
-            Playlist, Tag, Track, User, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart]
+    keys = [c.__name__ for c in [Album, Artist, Event, Location, Country, Group, 
+            Playlist, Tag, Track, User, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart]]
     
-    def get(self, name):
+    def __getitem__(self, name):
         if name not in Registry.keys:
             raise LastfmError("Key does not correspond to a valid class")
         else:
             try:
-                vals = LastfmBase.registry[name].values()
+                vals = LastfmBase.registry[eval(name)].values()
                 vals.sort()
                 return vals
             except KeyError:

@@ -92,6 +92,7 @@ class Artist(LastfmBase):
         self.__similar = [
                           Artist(
                                  self.__api,
+                                 subject = self,
                                  name = a.findtext('name'),
                                  mbid = a.findtext('mbid'),
                                  stats = Stats(
@@ -129,6 +130,7 @@ class Artist(LastfmBase):
             self.__topTags = [
                               Tag(
                                   self.__api,
+                                  subject = self,
                                   name = t.findtext('name'),
                                   url = t.findtext('url')
                                   )
@@ -168,6 +170,7 @@ class Artist(LastfmBase):
         return [
                 Album(
                      self.__api,
+                     subject = self,
                      name = a.findtext('name'),
                      artist = self,
                      mbid = a.findtext('mbid'),
@@ -195,6 +198,7 @@ class Artist(LastfmBase):
         return [
                 User(
                      self.__api,
+                     subject = self,
                      name = u.findtext('name'),
                      url = u.findtext('url'),
                      image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
@@ -219,6 +223,7 @@ class Artist(LastfmBase):
         return [
                 Track(
                       self.__api,
+                      subject = self,
                       name = t.findtext('name'),
                       artist = self,
                       mbid = t.findtext('mbid'),
@@ -303,6 +308,7 @@ class Artist(LastfmBase):
         self.__similar = [
                           Artist(
                                  self.__api,
+                                 subject = self,
                                  name = a.findtext('name'),
                                  url = a.findtext('url'),
                                  image = dict([(i.get('size'), i.text) for i in a.findall('image')])
@@ -312,6 +318,7 @@ class Artist(LastfmBase):
         self.__topTags = [
                           Tag(
                               self.__api,
+                              subject = self,
                               name = t.findtext('name'),
                               url = t.findtext('url')
                               )
