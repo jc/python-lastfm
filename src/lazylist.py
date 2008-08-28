@@ -96,6 +96,9 @@ class LazyList(object):
 class RecursiveLazyList(LazyList):
     def __init__(self, prod, *args, **kwds):
         super(RecursiveLazyList,self).__init__(prod(self,*args, **kwds))
+        
+    def __repr__(self):
+        return "<lastfm.lazylist>"
 
 class RecursiveLazyListFactory:
     def __init__(self, producer):

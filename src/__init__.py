@@ -14,7 +14,6 @@ from geo import Location, Country
 from group import Group
 from playlist import Playlist
 from registry import Registry
-from search import SearchResult
 from tag import Tag
 from tasteometer import Tasteometer
 from track import Track
@@ -22,4 +21,4 @@ from user import User
 
 __all__ = ['LastfmError', 'Api', 'Album', 'Artist', 'Event',
            'Location', 'Country', 'Group', 'Playlist', 'Tag',
-           'Tasteometer', 'Track', 'User', 'Registry', 'SearchResult']
+           'Tasteometer', 'Track', 'User', 'Registry']

@@ -626,3 +626,7 @@ from weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, Weekly
 #TODO
 #write exceptions
 #argument type checking
+#extra methods in weeklycharts
+#setup.py
+#cross check with website
+#registry issue

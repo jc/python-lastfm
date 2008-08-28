@@ -10,6 +10,7 @@ class Api(object):
     DEFAULT_CACHE_TIMEOUT = 3600 # cache for 1 hour
     API_ROOT_URL = "http://ws.audioscrobbler.com/2.0/"
     FETCH_INTERVAL = 1
+    SEARCH_XMLNS = "http://a9.com/-/spec/opensearch/1.1/"
 
     def __init__(self,
                  apiKey = '23caa86333d2cb2055fa82129802780a',
@@ -142,9 +143,8 @@ class Api(object):
     
     def searchArtist(self,
                      artist,
-                     limit = None,
-                     page = None):
-        return Artist.search(self, artist, limit, page)
+                     limit = None):
+        return Artist.search(self, artist, limit)
     
     def getEvent(self, event):
         return Event.getInfo(self, event)
@@ -169,9 +169,8 @@ class Api(object):
     
     def searchTag(self,
                   tag,
-                  limit = None,
-                  page = None):
-        return Tag.search(self, tag, limit, page)
+                  limit = None):
+        return Tag.search(self, tag, limit)
     
     def compareTaste(self,
                      type1, type2,
@@ -190,11 +189,10 @@ class Api(object):
     def searchTrack(self,
                     track,
                     artist = None,
-                    limit = None,
-                    page = None):
+                    limit = None):
         if isinstance(artist, Artist):
             artist = artist.name
-        return Track.search(self, track, artist, limit, page)
+        return Track.search(self, track, artist, limit)
     
     def getUser(self, name):
         user = None

@@ -5,6 +5,7 @@ __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from lazylist import lazylist
 
 class Tag(LastfmBase):
     """"A class representing a tag."""
@@ -176,34 +177,39 @@ class Tag(LastfmBase):
     @staticmethod
     def search(api,
                tag,
-               limit = None,
-               page = None):
+               limit = None):
         params = {'method': 'tag.search', 'tag': tag}
         if limit:
             params.update({'limit': limit})
-        if page:
-            params.update({'page': page})
-        data = api._fetchData(params).find('results')
-        return SearchResult(
-                            type = 'tag',
-                            searchTerms = data.find("{%s}Query" % SearchResult.xmlns).attrib['searchTerms'],
-                            startPage = int(data.find("{%s}Query" % SearchResult.xmlns).attrib['startPage']),
-                            totalResults = int(data.findtext("{%s}totalResults" % SearchResult.xmlns)),
-                            startIndex = int(data.findtext("{%s}startIndex" % SearchResult.xmlns)),
-                            itemsPerPage = int(data.findtext("{%s}itemsPerPage" % SearchResult.xmlns)),
-                            matches = [
-                                       Tag(
-                                              api,
-                                              name = t.findtext('name'),
-                                              url = t.findtext('url'),
-                                              stats = Stats(
-                                                            subject = t.findtext('name'),
-                                                            count = int(t.findtext('count')),
-                                                            )
-                                              )
-                                       for t in data.findall('tagmatches/tag')
-                                       ]
-                            )
+            
+        @lazylist
+        def gen(lst):
+            data = api._fetchData(params).find('results')
+            totalPages = int(data.findtext("{%s}totalResults" % Api.SEARCH_XMLNS))/ \
+                            int(data.findtext("{%s}itemsPerPage" % Api.SEARCH_XMLNS)) + 1
+            
+            @lazylist
+            def gen2(lst, data):
+                for t in data.findall('tagmatches/tag'):
+                    yield Tag(
+                              api,
+                              name = t.findtext('name'),
+                              url = t.findtext('url'),
+                              stats = Stats(
+                                            subject = t.findtext('name'),
+                                            count = int(t.findtext('count')),
+                                            )
+                              )
+                          
+            for t in gen2(data):
+                yield t
+            
+            for page in xrange(2, totalPages+1):
+                params.update({'page': page})
+                data = api._fetchData(params).find('results')
+                for t in gen2(data):
+                    yield t
+        return gen()
     
     @staticmethod
     def hashFunc(*args, **kwds):
@@ -228,6 +234,5 @@ from album import Album
 from api import Api
 from artist import Artist
 from error import LastfmError
-from search import SearchResult
 from stats import Stats
 from track import Track

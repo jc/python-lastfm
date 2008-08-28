@@ -5,6 +5,7 @@ __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from lazylist import lazylist
 
 class Track(LastfmBase):
     """A class representing a track."""
@@ -209,43 +210,48 @@ class Track(LastfmBase):
     def search(api,
                track,
                artist = None,
-               limit = None,
-               page = None):
+               limit = None):
         params = {'method': 'track.search', 'track': track}
         if artist is not None:
             params.update({'artist': artist})
         if limit is not None:
             params.update({'limit': limit})
-        if page is not None:
-            params.update({'page': page})
-        data = api._fetchData(params).find('results')
-        return SearchResult(
-                            type = 'track',
-                            searchTerms = data.find("{%s}Query" % SearchResult.xmlns).attrib['searchTerms'],
-                            startPage = int(data.find("{%s}Query" % SearchResult.xmlns).attrib['startPage']),
-                            totalResults = int(data.findtext("{%s}totalResults" % SearchResult.xmlns)),
-                            startIndex = int(data.findtext("{%s}startIndex" % SearchResult.xmlns)),
-                            itemsPerPage = int(data.findtext("{%s}itemsPerPage" % SearchResult.xmlns)),
-                            matches = [
-                                       Track(
-                                              api,
-                                              name = t.findtext('name'),
-                                              artist = Artist(
-                                                              api,
-                                                              name = t.findtext('artist')
-                                                              ),
-                                              url = t.findtext('url'),
-                                              stats = Stats(
-                                                            subject = t.findtext('name'),
-                                                            listeners = int(t.findtext('listeners'))
-                                                            ),
-                                              streamable = (t.findtext('streamable') == '1'),
-                                              fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
-                                              image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
-                                              )
-                                       for t in data.findall('trackmatches/track')
-                                       ]
-                            )
+            
+        @lazylist
+        def gen(lst):
+            data = api._fetchData(params).find('results')
+            totalPages = int(data.findtext("{%s}totalResults" % Api.SEARCH_XMLNS))/ \
+                            int(data.findtext("{%s}itemsPerPage" % Api.SEARCH_XMLNS)) + 1
+            
+            @lazylist
+            def gen2(lst, data):
+                for t in data.findall('trackmatches/track'):
+                    yield Track(
+                                api,
+                                name = t.findtext('name'),
+                                artist = Artist(
+                                                api,
+                                                name = t.findtext('artist')
+                                                ),
+                                url = t.findtext('url'),
+                                stats = Stats(
+                                              subject = t.findtext('name'),
+                                              listeners = int(t.findtext('listeners'))
+                                              ),
+                                streamable = (t.findtext('streamable') == '1'),
+                                fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                                image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                                )
+                          
+            for t in gen2(data):
+                yield t
+            
+            for page in xrange(2, totalPages+1):
+                params.update({'page': page})
+                data = api._fetchData(params).find('results')
+                for t in gen2(data):
+                    yield t
+        return gen()
 
     @staticmethod
     def hashFunc(*args, **kwds):
@@ -275,7 +281,6 @@ class Track(LastfmBase):
 from api import Api
 from artist import Artist
 from error import LastfmError
-from search import SearchResult
 from stats import Stats
 from tag import Tag
 from user import User

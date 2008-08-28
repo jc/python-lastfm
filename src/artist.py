@@ -5,6 +5,7 @@ __version__ = "0.1"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from lazylist import lazylist
 
 class Artist(LastfmBase):
     """A class representing an artist."""
@@ -241,34 +242,39 @@ class Artist(LastfmBase):
     @staticmethod
     def search(api,
                artist,
-               limit = None,
-               page = None):
+               limit = None):
         params = {'method': 'artist.search', 'artist': artist}
         if limit:
             params.update({'limit': limit})
-        if page:
-            params.update({'page': page})
-        data = api._fetchData(params).find('results')
-        return SearchResult(
-                            type = 'artist',
-                            searchTerms = data.find("{%s}Query" % SearchResult.xmlns).attrib['searchTerms'],
-                            startPage = int(data.find("{%s}Query" % SearchResult.xmlns).attrib['startPage']),
-                            totalResults = int(data.findtext("{%s}totalResults" % SearchResult.xmlns)),
-                            startIndex = int(data.findtext("{%s}startIndex" % SearchResult.xmlns)),
-                            itemsPerPage = int(data.findtext("{%s}itemsPerPage" % SearchResult.xmlns)),
-                            matches = [
-                                       Artist(
-                                              api,
-                                              name = a.findtext('name'),
-                                              mbid = a.findtext('mbid'),
-                                              url = a.findtext('url'),
-                                              image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
-                                              streamable = (a.findtext('streamable') == '1'),
-                                              )
-                                       for a in data.findall('artistmatches/artist')
-                                       ]
-                            )
-
+            
+        @lazylist
+        def gen(lst):
+            data = api._fetchData(params).find('results')
+            totalPages = int(data.findtext("{%s}totalResults" % Api.SEARCH_XMLNS))/ \
+                            int(data.findtext("{%s}itemsPerPage" % Api.SEARCH_XMLNS)) + 1
+            
+            @lazylist
+            def gen2(lst, data):
+                for a in data.findall('artistmatches/artist'):
+                    yield Artist(
+                                 api,
+                                 name = a.findtext('name'),
+                                 mbid = a.findtext('mbid'),
+                                 url = a.findtext('url'),
+                                 image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                                 streamable = (a.findtext('streamable') == '1'),
+                                 )
+                          
+            for a in gen2(data):
+                yield a
+            
+            for page in xrange(2, totalPages+1):
+                params.update({'page': page})
+                data = api._fetchData(params).find('results')
+                for a in gen2(data):
+                    yield a
+        return gen()
+    
     @staticmethod
     def _fetchData(api,
                 artist = None,
@@ -400,7 +406,6 @@ from album import Album
 from api import Api
 from error import LastfmError
 from event import Event
-from search import SearchResult
 from stats import Stats
 from tag import Tag
 from track import Track
