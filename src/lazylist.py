@@ -49,8 +49,7 @@ class LazyList(object):
 
             def LazyListIterator():
                 count = start
-                predicate = ((lambda: True) if stop is None
-                             else (lambda: count < stop))
+                predicate = (stop is None) and (lambda: True) or (lambda: count < stop)
                 while predicate():
                     try:
                         yield self[count]
