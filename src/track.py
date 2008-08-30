@@ -23,7 +23,7 @@ class Track(LastfmBase):
                  playedOn = None,
                  lovedOn = None):
         if not isinstance(api, Api):
-            raise LastfmError("api reference must be supplied as an argument")
+            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__mbid = mbid
@@ -104,7 +104,7 @@ class Track(LastfmBase):
                       track = None,
                       mbid = None):
         if not ((artist and track) or mbid):
-            raise LastfmError("either (artist and track) or mbid has to be given as argument.")
+            raise LastfmInvalidParametersError("either (artist and track) or mbid has to be given as argument.")
 
         if artist and track:
             params.update({'artist': artist, 'track': track})
@@ -262,7 +262,7 @@ class Track(LastfmBase):
         try:
             return hash("%s%s" % (kwds['name'], hash(kwds['artist'])))
         except KeyError:
-            raise LastfmError("name and artist have to be provided for hashing")
+            raise LastfmInvalidParametersError("name and artist have to be provided for hashing")
 
     def __hash__(self):
         return self.__class__.hashFunc(name = self.name, artist = self.artist)
@@ -284,7 +284,7 @@ class Track(LastfmBase):
 
 from api import Api
 from artist import Artist
-from error import LastfmError
+from error import LastfmInvalidParametersError
 from stats import Stats
 from tag import Tag
 from user import User

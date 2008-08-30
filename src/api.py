@@ -6,7 +6,7 @@ __license__ = "GNU Lesser General Public License"
 
 class Api(object):
     """The class representing the last.fm web services API."""
-    
+
     DEFAULT_CACHE_TIMEOUT = 3600 # cache for 1 hour
     API_ROOT_URL = "http://ws.audioscrobbler.com/2.0/"
     FETCH_INTERVAL = 1
@@ -31,7 +31,7 @@ class Api(object):
 
     def getApiKey(self):
         return self.__apiKey
-    
+
     def setCache(self, cache):
         '''Override the default cache.  Set to None to prevent caching.
 
@@ -127,7 +127,7 @@ class Api(object):
             return None
         else:
             return urllib.urlencode(dict([(k, self._Encode(v)) for k, v in parameters.items() if v is not None]))
-        
+
     def getAlbum(self,
                  artist = None,
                  album = None,
@@ -135,57 +135,57 @@ class Api(object):
         if isinstance(artist, Artist):
             artist = artist.name
         return Album.getInfo(self, artist, album, mbid)
-    
+
     def getArtist(self,
                   artist = None,
                   mbid = None):
         return Artist.getInfo(self, artist, mbid)
-    
+
     def searchArtist(self,
                      artist,
                      limit = None):
         return Artist.search(self, artist, limit)
-    
+
     def getEvent(self, event):
         return Event.getInfo(self, event)
-    
+
     def getLocation(self, name):
         return Location(self, name = name)
-    
+
     def getCountry(self, name):
         return Country(self, name = name)
-    
+
     def getGroup(self, name):
         return Group(self, name = name)
-    
+
     def fetchPlaylist(self, url):
         return Playlist.fetch(self, url)
-    
+
     def getTag(self, name):
         return Tag(self, name = name)
-    
+
     def getGlobalTopTags(self):
         return Tag.getTopTags(self)
-    
+
     def searchTag(self,
                   tag,
                   limit = None):
         return Tag.search(self, tag, limit)
-    
+
     def compareTaste(self,
                      type1, type2,
                      value1, value2,
                      limit = None):
         return Tasteometer.compare(self, type1, type2, value1, value2, limit)
-    
+
     def getTrack(self, track, artist):
         if isinstance(artist, Artist):
             artist = artist.name
         result = Track.search(self, track, artist)
         if len(result.matches) == 0:
-            raise LastfmError("'%s' by %s: no such track found" % (track, artist))
+            raise LastfmInvalidResourceError("'%s' by %s: no such track found" % (track, artist))
         return result.matches[0]
-    
+
     def searchTrack(self,
                     track,
                     artist = None,
@@ -193,7 +193,7 @@ class Api(object):
         if isinstance(artist, Artist):
             artist = artist.name
         return Track.search(self, track, artist, limit)
-    
+
     def getUser(self, name):
         user = None
         try:
@@ -202,7 +202,7 @@ class Api(object):
         except LastfmError, e:
             raise e
         return user
-        
+
 
     def _fetchUrl(self,
                   url,
@@ -225,7 +225,7 @@ class Api(object):
             print url
         # Get a url opener that can handle basic auth
         opener = self._GetOpener(url)
-        
+
         def readUrlData():
             now = datetime.now()
             delta = now - self._lastFetchTime
@@ -261,7 +261,7 @@ class Api(object):
 
         # Always return the latest version
         return url_data
-    
+
     def _fetchData(self,
                    params,
                    parse = True,
@@ -272,17 +272,22 @@ class Api(object):
         try:
             data = ElementTree.XML(xml)
         except SyntaxError, e:
-            raise LastfmError("Error in parsing XML: %s" % e)
+            raise LastfmOperationFailedError("Error in parsing XML: %s" % e)
         if data.get('status') != "ok":
-            raise LastfmError("Error code: %s (%s)" % (data.find("error").get('code'), data.findtext('error')))
+            code = int(data.find("error").get('code'))
+            message = data.findtext('error')
+            if code in errorMap.keys():
+                raise errorMap[code](message, code)
+            else:
+                raise LastfmError(message, code)
         if parse:
             return data
         else:
             return xml
-        
+
     def __repr__(self):
         return "<lastfm.Api: %s>" % self.__apiKey
-    
+
 from datetime import datetime
 import sys
 import time
@@ -292,7 +297,7 @@ import urlparse
 
 from album import Album
 from artist import Artist
-from error import LastfmError
+from error import errorMap, LastfmError, LastfmOperationFailedError, LastfmInvalidResourceError
 from event import Event
 from filecache import FileCache
 from geo import Location, Country

@@ -32,7 +32,7 @@ class Playlist(LastfmBase):
         try:
             return hash(kwds['url'])
         except KeyError:
-            raise LastfmError("url has to be provided for hashing")
+            raise LastfmInvalidParametersError("url has to be provided for hashing")
         
     def __hash__(self):
         return self.__class__.hashFunc(url = self.url)
@@ -46,4 +46,4 @@ class Playlist(LastfmBase):
     def __repr__(self):
         return "<lastfm.Playlist: %s>" % self.url
     
-from error import LastfmError
+from error import LastfmInvalidParametersError

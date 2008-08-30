@@ -7,7 +7,7 @@ __license__ = "GNU Lesser General Public License"
 from album import Album
 from artist import Artist
 from base import LastfmBase
-from error import LastfmError
+from error import LastfmInvalidParametersError
 from event import Event
 from geo import Location, Country
 from group import Group
@@ -24,7 +24,7 @@ class Registry(object):
     
     def __getitem__(self, name):
         if name not in Registry.keys:
-            raise LastfmError("Key does not correspond to a valid class")
+            raise LastfmInvalidParametersError("Key does not correspond to a valid class")
         else:
             try:
                 vals = LastfmBase.registry[eval(name)].values()

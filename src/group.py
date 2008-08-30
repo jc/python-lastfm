@@ -13,7 +13,7 @@ class Group(LastfmBase):
                  api,
                  name = None):
         if not isinstance(api, Api):
-            raise LastfmError("api reference must be supplied as an argument")
+            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
 
@@ -101,7 +101,7 @@ class Group(LastfmBase):
         try:
             return hash(kwds['name'])
         except KeyError:
-            raise LastfmError("name has to be provided for hashing")
+            raise LastfmInvalidParametersError("name has to be provided for hashing")
 
     def __hash__(self):
         return self.__class__.hashFunc(name = self.name)
@@ -116,5 +116,5 @@ class Group(LastfmBase):
         return "<lastfm.Group: %s>" % self.name
 
 from api import Api
-from error import LastfmError
+from error import LastfmInvalidParametersError
 from weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart

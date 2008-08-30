@@ -16,7 +16,7 @@ class Tag(LastfmBase):
                  streamable = None,
                  stats = None):
         if not isinstance(api, Api):
-            raise LastfmError("api reference must be supplied as an argument")
+            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__url = url
@@ -222,7 +222,7 @@ class Tag(LastfmBase):
         try:
             return hash(kwds['name'])
         except KeyError:
-            raise LastfmError("name has to be provided for hashing")
+            raise LastfmInvalidParametersError("name has to be provided for hashing")
         
     def __hash__(self):
         return self.__class__.hashFunc(name = self.name)
@@ -239,6 +239,6 @@ class Tag(LastfmBase):
 from album import Album
 from api import Api
 from artist import Artist
-from error import LastfmError
+from error import LastfmInvalidParametersError
 from stats import Stats
 from track import Track

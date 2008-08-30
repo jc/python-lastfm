@@ -43,7 +43,7 @@ class WeeklyChart(LastfmBase):
     @staticmethod
     def _checkWeeklyChartParams(params, start = None, end = None):
         if (start is not None and end is None) or (start is None and end is not None):
-            raise LastfmError("both start and end have to be provided.")
+            raise LastfmInvalidParametersError("both start and end have to be provided.")
         if start is not None and end is not None:
             if isinstance(start, datetime) and isinstance(end, datetime):
                 params.update({
@@ -51,7 +51,7 @@ class WeeklyChart(LastfmBase):
                                'to': int(calendar.timegm(end.timetuple()))
                                })
             else:
-                raise LastfmError("start and end must be datetime.datetime instances")
+                raise LastfmInvalidParametersError("start and end must be datetime.datetime instances")
             
         return params
     
@@ -65,7 +65,7 @@ class WeeklyChart(LastfmBase):
                                       kwds['end']
                                ))
         except KeyError:
-            raise LastfmError("subject, start and end have to be provided for hashing")
+            raise LastfmInvalidParametersError("subject, start and end have to be provided for hashing")
         
     def __hash__(self):
         return self.__class__.hashFunc(
@@ -258,6 +258,6 @@ import calendar
 
 from album import Album
 from artist import Artist
-from error import LastfmError
+from error import LastfmInvalidParametersError
 from stats import Stats
 from track import Track

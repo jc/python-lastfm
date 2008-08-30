@@ -20,7 +20,7 @@ class Album(LastfmBase):
                  stats = None,
                  topTags = None):
         if not isinstance(api, Api):
-            raise LastfmError("api reference must be supplied as an argument")
+            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__artist = artist
@@ -105,7 +105,7 @@ class Album(LastfmBase):
                     subject = self,
                     name = t.findtext('name'),
                     url = t.findtext('url')
-                    ) 
+                    )
                 for t in data.findall('toptags/tag')
                 ]
 
@@ -121,7 +121,7 @@ class Album(LastfmBase):
                 mbid = None):
         params = {'method': 'album.getinfo'}
         if not ((artist and album) or mbid):
-            raise LastfmError("either (artist and album) or mbid has to be given as argument.")
+            raise LastfmInvalidParametersError("either (artist and album) or mbid has to be given as argument.")
         if artist and album:
             params.update({'artist': artist, 'album': album})
         elif mbid:
@@ -162,7 +162,6 @@ class Album(LastfmBase):
                   name = data.findtext('name'),
                   artist = Artist(
                                   api,
-                                  subject = self,
                                   name = data.findtext('artist'),
                                   ),
                   )
@@ -175,7 +174,7 @@ class Album(LastfmBase):
         try:
             return hash("%s%s" % (kwds['name'], hash(kwds['artist'])))
         except KeyError:
-            raise LastfmError("name and artist have to be provided for hashing")
+            raise LastfmInvalidParametersError("name and artist have to be provided for hashing")
         
     def __hash__(self):
         return self.__class__.hashFunc(name = self.name, artist = self.artist)
@@ -203,6 +202,6 @@ import time
 
 from api import Api
 from artist import Artist
-from error import LastfmError
+from error import LastfmInvalidParametersError
 from stats import Stats
 from tag import Tag

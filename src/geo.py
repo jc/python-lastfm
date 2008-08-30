@@ -115,7 +115,7 @@ class Venue(LastfmBase):
         try:
             return hash(kwds['url'])
         except KeyError:
-            raise LastfmError("url has to be provided for hashing")
+            raise LastfmInvalidParametersError("url has to be provided for hashing")
 
     def __hash__(self):
         return self.__class__.hashFunc(url = self.url)
@@ -144,7 +144,7 @@ class Location(LastfmBase):
                  longitude = None,
                  timezone = None):
         if not isinstance(api, Api):
-            raise LastfmError("api reference must be supplied as an argument")
+            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__city = city
@@ -212,7 +212,7 @@ class Location(LastfmBase):
             try:
                 return hash("name%s" % kwds['name'])
             except KeyError:
-                raise LastfmError("either latitude and longitude or name has to be provided for hashing")
+                raise LastfmInvalidParametersError("either latitude and longitude or name has to be provided for hashing")
 
     def __hash__(self):
         if not self.name:
@@ -243,7 +243,7 @@ class Country(LastfmBase):
                  api,
                  name = None):
         if not isinstance(api, Api):
-            raise LastfmError("api reference must be supplied as an argument")
+            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
 
@@ -282,7 +282,7 @@ class Country(LastfmBase):
         try:
             return hash(kwds['name'])
         except KeyError:
-            raise LastfmError("name has to be provided for hashing")
+            raise LastfmInvalidParametersError("name has to be provided for hashing")
 
     def __hash__(self):
         return self.__class__.hashFunc(name = self.name)
@@ -298,7 +298,7 @@ class Country(LastfmBase):
 
 from api import Api
 from artist import Artist
-from error import LastfmError
+from error import LastfmInvalidParametersError
 from event import Event
 from stats import Stats
 from track import Track

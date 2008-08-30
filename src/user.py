@@ -16,7 +16,7 @@ class User(LastfmBase):
                  image = None,
                  stats = None):
         if not isinstance(api, Api):
-            raise LastfmError("api reference must be supplied as an argument")
+            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__url = url
@@ -460,7 +460,7 @@ class User(LastfmBase):
         try:
             return hash(kwds['name'])
         except KeyError:
-            raise LastfmError("name has to be provided for hashing")
+            raise LastfmInvalidParametersError("name has to be provided for hashing")
 
     def __hash__(self):
         return self.__class__.hashFunc(name = self.name)
@@ -631,7 +631,7 @@ class User(LastfmBase):
             try:
                 return hash(kwds['user'])
             except KeyError:
-                raise LastfmError("user has to be provided for hashing")
+                raise LastfmInvalidParametersError("user has to be provided for hashing")
     
         def __hash__(self):
             return self.__class__.hashFunc(user = self.user)
@@ -645,15 +645,9 @@ import time
 from api import Api
 from artist import Artist
 from album import Album
-from error import LastfmError
+from error import LastfmError, LastfmInvalidParametersError
 from event import Event
 from stats import Stats
 from tag import Tag
 from track import Track
 from weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
-
-#TODO
-#write exceptions
-#argument type checking
-#cross check with website
-#parse xml in chunks

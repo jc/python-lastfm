@@ -23,7 +23,7 @@ class Event(LastfmBase):
                  stats = None,
                  tag = None):
         if not isinstance(api, Api):
-            raise LastfmError("api reference must be supplied as an argument")
+            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
         self.__id = id
         self.__title = title
@@ -180,7 +180,7 @@ class Event(LastfmBase):
         try:
             return hash(kwds['id'])
         except KeyError:
-            raise LastfmError("id has to be provided for hashing")
+            raise LastfmInvalidParametersError("id has to be provided for hashing")
 
     def __hash__(self):
         return Event.hashFunc(id = self.id)
@@ -199,6 +199,6 @@ import time
 
 from api import Api
 from artist import Artist
-from error import LastfmError
+from error import LastfmInvalidParametersError
 from geo import Venue, Location, Country
 from stats import Stats

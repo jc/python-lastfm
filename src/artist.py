@@ -21,7 +21,7 @@ class Artist(LastfmBase):
                  topTags = None,
                  bio = None):
         if not isinstance(api, Api):
-            raise LastfmError("api reference must be supplied as an argument")
+            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__mbid = mbid
@@ -286,7 +286,7 @@ class Artist(LastfmBase):
                 mbid = None):
         params = {'method': 'artist.getinfo'}
         if not (artist or mbid):
-            raise LastfmError("either artist or mbid has to be given as argument.")
+            raise LastfmInvalidParametersError("either artist or mbid has to be given as argument.")
         if artist:
             params.update({'artist': artist})
         elif mbid:
@@ -353,7 +353,7 @@ class Artist(LastfmBase):
             try:
                 return hash(args[1].lower())
             except IndexError:
-                raise LastfmError("name has to be provided for hashing")
+                raise LastfmInvalidParametersError("name has to be provided for hashing")
 
     def __hash__(self):
         return self.__class__.hashFunc(name = self.name)
@@ -411,7 +411,7 @@ import time
 
 from album import Album
 from api import Api
-from error import LastfmError
+from error import LastfmInvalidParametersError
 from event import Event
 from stats import Stats
 from tag import Tag
