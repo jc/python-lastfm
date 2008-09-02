@@ -8,14 +8,18 @@ from base import LastfmBase
 
 class Playlist(LastfmBase):
     """A class representing an XPSF playlist."""
-    def init(self, xpsfData, url):
-        self.__data = xpsfData
+    def init(self, api, url):
+        self.__api = api
+        self.__data = None
         self.__url = url
 
-    @property
+    @LastfmBase.cachedProperty
     def data(self):
         """playlist's data"""
-        return self.__data
+        params = {'method': 'playlist.fetch', 'playlistURL': self.__url}
+        tmp = StringIO.StringIO()
+        ElementTree.ElementTree(self.__api._fetchData(params)[0]).write(tmp)
+        return tmp.getvalue()
     
     @property
     def url(self):
@@ -24,8 +28,7 @@ class Playlist(LastfmBase):
     
     @staticmethod
     def fetch(api, url):
-        params = {'method': 'playlist.fetch', 'playlistURL': url}
-        return Playlist(api._fetchData(params, parse = False), url = url)
+        return Playlist(api, url = url)
     
     @staticmethod
     def hashFunc(*args, **kwds):
@@ -45,5 +48,18 @@ class Playlist(LastfmBase):
     
     def __repr__(self):
         return "<lastfm.Playlist: %s>" % self.url
-    
+
+import StringIO
+import sys
 from error import LastfmInvalidParametersError
+
+if sys.version.startswith('2.5'):
+    import xml.etree.cElementTree as ElementTree
+else:
+    try:
+        import cElementTree as ElementTree
+    except ImportError:
+        try:
+            import ElementTree
+        except ImportError:
+            raise LastfmError("Install ElementTree package for using python-lastfm")

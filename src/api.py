@@ -13,7 +13,7 @@ class Api(object):
     SEARCH_XMLNS = "http://a9.com/-/spec/opensearch/1.1/"
 
     def __init__(self,
-                 apiKey = '23caa86333d2cb2055fa82129802780a',
+                 apiKey,
                  input_encoding=None,
                  request_headers=None,
                  no_cache = False,
@@ -264,7 +264,6 @@ class Api(object):
 
     def _fetchData(self,
                    params,
-                   parse = True,
                    no_cache = False):
         params.update({'api_key': self.__apiKey})
         xml = self._fetchUrl(Api.API_ROOT_URL, params, no_cache = self._no_cache or no_cache)
@@ -280,10 +279,7 @@ class Api(object):
                 raise errorMap[code](message, code)
             else:
                 raise LastfmError(message, code)
-        if parse:
-            return data
-        else:
-            return xml
+        return data
 
     def __repr__(self):
         return "<lastfm.Api: %s>" % self.__apiKey

@@ -6,6 +6,7 @@ __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
 from lazylist import lazylist
+import playlist
 
 class User(LastfmBase):
     """A class representing an user."""
@@ -141,10 +142,27 @@ class User(LastfmBase):
         """nearest neightbour of the user"""
         pass
     
-    @property
+    @LastfmBase.cachedProperty
     def playlists(self):
         """playlists of the user"""
-        pass
+        params = {'method': 'user.getPlaylists', 'user': self.name}
+        data = self.__api._fetchData(params).find('playlists')
+        return [
+                User.Playlist(
+                              self.__api,
+                              id = int(p.findtext('id')),
+                              title = p.findtext('title'),
+                              date = datetime(*(
+                                                time.strptime(
+                                                              p.findtext('date').strip(),
+                                                              '%Y-%m-%dT%H:%M:%S'
+                                                              )[0:6])
+                              ),
+                              size = int(p.findtext('size')),
+                              creator = self
+                              )
+                for p in data.findall('playlist')
+                ]
 
     @LastfmBase.cachedProperty
     def lovedTracks(self):
@@ -451,6 +469,11 @@ class User(LastfmBase):
                     pass
         return gen()
     
+    def compare(self, other, limit = None):
+        return Tasteometer.compare(self.__api,
+                                   'user', 'user',
+                                   self.name, other.name,
+                                   limit)
     @property
     def library(self):
         return self.__lirary
@@ -474,6 +497,49 @@ class User(LastfmBase):
     def __repr__(self):
         return "<lastfm.User: %s>" % self.name
     
+    class Playlist(playlist.Playlist):
+        """A class representing a playlist belonging to the user."""
+        def init(self, api, id, title, date, size, creator):
+            super(User.Playlist, self).init(api, "lastfm://playlist/%s" % id)
+            self.__id = id
+            self.__title = title
+            self.__date = date
+            self.__size = size
+            self.__creator = creator
+            
+        @property
+        def id(self):
+            return self.__id
+    
+        @property
+        def title(self):
+            return self.__title
+    
+        @property
+        def date(self):
+            return self.__date
+    
+        @property
+        def size(self):
+            return self.__size
+    
+        @property
+        def creator(self):
+            return self.__creator
+        
+        @staticmethod
+        def hashFunc(*args, **kwds):
+            try:
+                return hash(kwds['id'])
+            except KeyError:
+                raise LastfmInvalidParametersError("id has to be provided for hashing")
+            
+        def __hash__(self):
+            return self.__class__.hashFunc(id = self.id)
+        
+        def __repr__(self):
+            return "<lastfm.User.Playlist: %s>" % self.title
+        
     class Library(object):
         """A class representing the music library of the user."""
         def __init__(self, api, user):
@@ -649,5 +715,6 @@ from error import LastfmError, LastfmInvalidParametersError
 from event import Event
 from stats import Stats
 from tag import Tag
+from tasteometer import Tasteometer
 from track import Track
 from weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart

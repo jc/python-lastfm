@@ -114,6 +114,10 @@ class Album(LastfmBase):
         """top tag for the album"""
         pass
     
+    @LastfmBase.cachedProperty
+    def playlist(self):
+        return Playlist.fetch(self.__api, "lastfm://playlist/album/%s" % self.id)
+    
     @staticmethod
     def _fetchData(api,
                 artist = None,
@@ -203,5 +207,6 @@ import time
 from api import Api
 from artist import Artist
 from error import LastfmInvalidParametersError
+from playlist import Playlist
 from stats import Stats
 from tag import Tag

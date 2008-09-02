@@ -163,6 +163,11 @@ class Tag(LastfmBase):
         """top track for the tag"""
         pass
     
+    @LastfmBase.cachedProperty
+    def playlist(self):
+        return Playlist.fetch(self.__api,
+                              "lastfm://playlist/tag/%s/freetracks" % self.name)
+    
     @staticmethod
     def getTopTags(api):
         params = {'method': 'tag.getTopTags'}
@@ -240,5 +245,6 @@ from album import Album
 from api import Api
 from artist import Artist
 from error import LastfmInvalidParametersError
+from playlist import Playlist
 from stats import Stats
 from track import Track
