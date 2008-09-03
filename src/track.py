@@ -211,20 +211,22 @@ class Track(LastfmBase):
         """topmost tag for the track"""
         pass
     
-    def getTags(self):
+    @LastfmBase.cachedProperty
+    def tags(self):
         if self.__tags is None:
             if not (self.artist and self.name):
                 raise LastfmInvalidParametersError("artist and track name have to be provided.")
             params = {'method': 'track.getTags', 'artist': self.artist.name, 'track': self.name}
             data = self.__api._fetchData(params, sign = True, session = True, no_cache = True).find('tags')
-            self.__tags = [
+            self.__tags = SafeList([
                            Tag(
                                self.__api,
                                name = t.findtext('name'),
                                url = t.findtext('url')
                                )
                            for t in data.findall('tag')
-                           ]
+                           ],
+                           self.addTags, self.removeTag)
         return self.__tags
     
     def addTags(self, tags):
@@ -266,6 +268,25 @@ class Track(LastfmBase):
     
     def love(self):
         params = {'method': 'track.love', 'artist': self.artist.name, 'track': self.name}
+        self.__api._postData(params)
+        
+    def ban(self):
+        params = {'method': 'track.ban', 'artist': self.artist.name, 'track': self.name}
+        self.__api._postData(params)
+        
+    def share(self, recipient, message = None):
+        params = {
+                  'method': 'track.share',
+                  'artist': self.artist.name,
+                  'track': self.name
+                  }
+        if message is not None:
+            params['message'] = message
+        
+        for i in xrange(len(recipient)):
+            if isinstance(recipient[i], User):
+                recipient[i] = recipient[i].name
+        params['recipient'] = ",".join(recipient)
         self.__api._postData(params)
 
     @staticmethod
@@ -343,6 +364,7 @@ class Track(LastfmBase):
 from api import Api
 from artist import Artist
 from error import LastfmInvalidParametersError
+from safelist import SafeList
 from stats import Stats
 from tag import Tag
 from user import User

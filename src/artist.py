@@ -104,14 +104,14 @@ class Artist(LastfmBase):
                                  )
                           for a in data.findall('artist')
                           ]
-        return self.__similar
+        return self.__similar[:]
 
     @property
     def similar(self):
         """artists similar to this artist"""
         if self.__similar is None or len(self.__similar) < 6:
             return self.getSimilar()
-        return self.__similar
+        return self.__similar[:]
 
     @LastfmBase.topProperty("similar")
     def mostSimilar(self):
@@ -136,7 +136,7 @@ class Artist(LastfmBase):
                                   )
                               for t in data.findall('tag')
                               ]
-        return self.__topTags
+        return self.__topTags[:]
 
     @LastfmBase.topProperty("topTags")
     def topTag(self):

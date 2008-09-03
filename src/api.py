@@ -298,22 +298,18 @@ class Api(object):
                    sign = False,
                    session = False,
                    no_cache = False):
-        params.update({'api_key': self.apiKey})
+        params['api_key'] = self.apiKey
         
         if session:
-            params.update({'sk': self.sessionKey})
+            if self.sessionKey is not None:
+                params['sk'] = self.sessionKey
+            else:
+                raise LastfmAuthenticationFailedError("session key must be present to call this method")
+            
         if sign:
-            keys = params.keys()[:]
-            keys.sort()
-            sig = unicode() 
-            for name in keys:
-                sig += (name + params[name])
-            sig += self.secret
-            hashed_sig = md5.new(sig).hexdigest()
-            params.update({'api_sig': hashed_sig})            
+            params['api_sig'] = self._getApiSig(params)
            
         xml = self._fetchUrl(Api.API_ROOT_URL, params, no_cache = self._no_cache or no_cache)
-        
         return self._checkXML(xml)
     
     def _postUrl(self,
@@ -328,19 +324,29 @@ class Api(object):
         return url_data
     
     def _postData(self, params):
-        params.update({'api_key': self.apiKey, 'sk': self.sessionKey})
+        params['api_key'] = self.apiKey
         
-        keys = params.keys()[:]
-        keys.sort()
-        sig = unicode() 
-        for name in keys:
-            sig += (name + params[name])
-        sig += self.secret
-        hashed_sig = md5.new(sig).hexdigest()
-        params.update({'api_sig': hashed_sig})
-       
+        if self.sessionKey is not None:
+            params['sk'] = self.sessionKey
+        else:
+            raise LastfmAuthenticationFailedError("session key must be present to call this method")
+        
+        params['api_sig'] = self._getApiSig(params)       
         xml = self._postUrl(Api.API_ROOT_URL, params)
         return self._checkXML(xml)
+    
+    def _getApiSig(self, params):
+        if self.secret is not None:
+                keys = params.keys()[:]
+                keys.sort()
+                sig = unicode() 
+                for name in keys:
+                    sig += (name + params[name])
+                sig += self.secret
+                hashed_sig = md5.new(sig).hexdigest()
+                return hashed_sig
+        else:
+            raise LastfmAuthenticationFailedError("api secret must be present to call this method")
 
     def _checkXML(self, xml):
         data = None
@@ -370,7 +376,7 @@ import urlparse
 
 from album import Album
 from artist import Artist
-from error import errorMap, LastfmError, LastfmOperationFailedError, LastfmInvalidResourceError
+from error import errorMap, LastfmError, LastfmOperationFailedError, LastfmInvalidResourceError, LastfmAuthenticationFailedError
 from event import Event
 from filecache import FileCache
 from geo import Location, Country
