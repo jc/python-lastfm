@@ -4,6 +4,8 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
+from base import LastfmBase
+
 class Api(object):
     """The class representing the last.fm web services API."""
 
@@ -14,11 +16,15 @@ class Api(object):
 
     def __init__(self,
                  apiKey,
+                 secret = None,
+                 sessionKey = None,
                  input_encoding=None,
                  request_headers=None,
                  no_cache = False,
                  debug = False):
         self.__apiKey = apiKey
+        self.__secret = secret
+        self.__sessionKey = sessionKey
         self._cache = FileCache()
         self._urllib = urllib2
         self._cache_timeout = Api.DEFAULT_CACHE_TIMEOUT
@@ -29,9 +35,33 @@ class Api(object):
         self._debug = debug
         self._lastFetchTime = datetime.now()
 
-    def getApiKey(self):
+    @property
+    def apiKey(self):
         return self.__apiKey
-
+    
+    @property
+    def secret(self):
+        return self.__secret
+    
+    @property
+    def sessionKey(self):
+        return self.__sessionKey
+    
+    def setSessionKey(self):
+        params = {'method': 'auth.getSession', 'token': self.authToken}
+        self.__sessionKey = self._fetchData(params, sign = True).findtext('session/key')
+        self.__authToken = None
+    
+    @LastfmBase.cachedProperty
+    def authToken(self):
+        params = {'method': 'auth.getToken'}
+        return self._fetchData(params, sign = True).findtext('token')
+    
+    @LastfmBase.cachedProperty
+    def authUrl(self):
+        return "http://www.last.fm/api/auth/?api_key=%s&token=%s" % (self.apiKey, self.authToken)
+    
+    
     def setCache(self, cache):
         '''Override the default cache.  Set to None to prevent caching.
 
@@ -63,6 +93,83 @@ class Api(object):
         user_agent: a string that should be send to the server as the User-agent
         '''
         self._request_headers['User-Agent'] = user_agent
+
+    def getAlbum(self,
+                 artist = None,
+                 album = None,
+                 mbid = None):
+        if isinstance(artist, Artist):
+            artist = artist.name
+        return Album.getInfo(self, artist, album, mbid)
+
+    def getArtist(self,
+                  artist = None,
+                  mbid = None):
+        return Artist.getInfo(self, artist, mbid)
+
+    def searchArtist(self,
+                     artist,
+                     limit = None):
+        return Artist.search(self, artist, limit)
+
+    def getEvent(self, event):
+        return Event.getInfo(self, event)
+
+    def getLocation(self, name):
+        return Location(self, name = name)
+
+    def getCountry(self, name):
+        return Country(self, name = name)
+
+    def getGroup(self, name):
+        return Group(self, name = name)
+
+    def fetchPlaylist(self, url):
+        return Playlist.fetch(self, url)
+
+    def getTag(self, name):
+        return Tag(self, name = name)
+
+    def getGlobalTopTags(self):
+        return Tag.getTopTags(self)
+
+    def searchTag(self,
+                  tag,
+                  limit = None):
+        return Tag.search(self, tag, limit)
+
+    def compareTaste(self,
+                     type1, type2,
+                     value1, value2,
+                     limit = None):
+        return Tasteometer.compare(self, type1, type2, value1, value2, limit)
+
+    def getTrack(self, track, artist):
+        if isinstance(artist, Artist):
+            artist = artist.name
+        result = Track.search(self, track, artist)
+        try:
+            result[0]
+        except IndexError:
+            raise LastfmInvalidResourceError("'%s' by %s: no such track found" % (track, artist))
+        return result[0]
+
+    def searchTrack(self,
+                    track,
+                    artist = None,
+                    limit = None):
+        if isinstance(artist, Artist):
+            artist = artist.name
+        return Track.search(self, track, artist, limit)
+
+    def getUser(self, name):
+        user = None
+        try:
+            user = User(self, name = name)
+            user.friends
+        except LastfmError, e:
+            raise e
+        return user
 
     def _BuildUrl(self, url, path_elements=None, extra_params=None):
         # Break url into consituent parts
@@ -127,83 +234,17 @@ class Api(object):
             return None
         else:
             return urllib.urlencode(dict([(k, self._Encode(v)) for k, v in parameters.items() if v is not None]))
-
-    def getAlbum(self,
-                 artist = None,
-                 album = None,
-                 mbid = None):
-        if isinstance(artist, Artist):
-            artist = artist.name
-        return Album.getInfo(self, artist, album, mbid)
-
-    def getArtist(self,
-                  artist = None,
-                  mbid = None):
-        return Artist.getInfo(self, artist, mbid)
-
-    def searchArtist(self,
-                     artist,
-                     limit = None):
-        return Artist.search(self, artist, limit)
-
-    def getEvent(self, event):
-        return Event.getInfo(self, event)
-
-    def getLocation(self, name):
-        return Location(self, name = name)
-
-    def getCountry(self, name):
-        return Country(self, name = name)
-
-    def getGroup(self, name):
-        return Group(self, name = name)
-
-    def fetchPlaylist(self, url):
-        return Playlist.fetch(self, url)
-
-    def getTag(self, name):
-        return Tag(self, name = name)
-
-    def getGlobalTopTags(self):
-        return Tag.getTopTags(self)
-
-    def searchTag(self,
-                  tag,
-                  limit = None):
-        return Tag.search(self, tag, limit)
-
-    def compareTaste(self,
-                     type1, type2,
-                     value1, value2,
-                     limit = None):
-        return Tasteometer.compare(self, type1, type2, value1, value2, limit)
-
-    def getTrack(self, track, artist):
-        if isinstance(artist, Artist):
-            artist = artist.name
-        result = Track.search(self, track, artist)
-        if len(result.matches) == 0:
-            raise LastfmInvalidResourceError("'%s' by %s: no such track found" % (track, artist))
-        return result.matches[0]
-
-    def searchTrack(self,
-                    track,
-                    artist = None,
-                    limit = None):
-        if isinstance(artist, Artist):
-            artist = artist.name
-        return Track.search(self, track, artist, limit)
-
-    def getUser(self, name):
-        user = None
-        try:
-            user = User(self, name = name)
-            user.friends
-        except LastfmError, e:
-            raise e
-        return user
-
-
+        
+    def _ReadUrlData(self, opener, url, data = None):
+            now = datetime.now()
+            delta = now - self._lastFetchTime
+            delta = delta.seconds + float(delta.microseconds)/1000000
+            if delta < Api.FETCH_INTERVAL:
+                time.sleep(Api.FETCH_INTERVAL - delta)
+            url_data = opener.open(url, data).read()
+            self._lastFetchTime = datetime.now()
+            return url_data        
+    
     def _fetchUrl(self,
                   url,
                   parameters = None,
@@ -226,20 +267,10 @@ class Api(object):
         # Get a url opener that can handle basic auth
         opener = self._GetOpener(url)
 
-        def readUrlData():
-            now = datetime.now()
-            delta = now - self._lastFetchTime
-            delta = delta.seconds + float(delta.microseconds)/1000000
-            if delta < Api.FETCH_INTERVAL:
-                time.sleep(Api.FETCH_INTERVAL - delta)
-            url_data = opener.open(url).read()
-            self._lastFetchTime = datetime.now()
-            return url_data
-
         # Open and return the URL immediately if we're not going to cache
         if no_cache or not self._cache or not self._cache_timeout:
             try:
-                url_data = readUrlData()
+                url_data = self._ReadUrlData(opener, url)
             except urllib2.HTTPError, e:
                 url_data = e.read()
         else:
@@ -252,7 +283,7 @@ class Api(object):
             # If the cached version is outdated then fetch another and store it
             if not last_cached or time.time() >= last_cached + self._cache_timeout:
                 try:
-                    url_data = readUrlData()
+                    url_data = self._ReadUrlData(opener, url)
                 except urllib2.HTTPError, e:
                     url_data = e.read()
                 self._cache.Set(key, url_data)
@@ -264,10 +295,55 @@ class Api(object):
 
     def _fetchData(self,
                    params,
+                   sign = False,
+                   session = False,
                    no_cache = False):
-        params.update({'api_key': self.__apiKey})
+        params.update({'api_key': self.apiKey})
+        
+        if session:
+            params.update({'sk': self.sessionKey})
+        if sign:
+            keys = params.keys()[:]
+            keys.sort()
+            sig = unicode() 
+            for name in keys:
+                sig += (name + params[name])
+            sig += self.secret
+            hashed_sig = md5.new(sig).hexdigest()
+            params.update({'api_sig': hashed_sig})            
+           
         xml = self._fetchUrl(Api.API_ROOT_URL, params, no_cache = self._no_cache or no_cache)
-        #print xml
+        
+        return self._checkXML(xml)
+    
+    def _postUrl(self,
+                 url,
+                 parameters):
+        url = self._BuildUrl(url)
+        if self._debug:
+            print url
+        data = self._EncodeParameters(parameters)
+        opener = self._GetOpener(url)
+        url_data = self._ReadUrlData(opener, url, data)
+        return url_data
+    
+    def _postData(self, params):
+        params.update({'api_key': self.apiKey, 'sk': self.sessionKey})
+        
+        keys = params.keys()[:]
+        keys.sort()
+        sig = unicode() 
+        for name in keys:
+            sig += (name + params[name])
+        sig += self.secret
+        hashed_sig = md5.new(sig).hexdigest()
+        params.update({'api_sig': hashed_sig})
+       
+        xml = self._postUrl(Api.API_ROOT_URL, params)
+        return self._checkXML(xml)
+
+    def _checkXML(self, xml):
+        data = None
         try:
             data = ElementTree.XML(xml)
         except SyntaxError, e:
@@ -285,6 +361,7 @@ class Api(object):
         return "<lastfm.Api: %s>" % self.__apiKey
 
 from datetime import datetime
+import md5
 import sys
 import time
 import urllib

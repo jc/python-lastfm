@@ -6,7 +6,7 @@ __license__ = "GNU Lesser General Public License"
 
 METADATA = dict(
 	name='lastfm',
-	version='0.1',
+	version='0.2',
 	description="a pure python interface to the Last.fm Webservices API",
 	long_description="""a pure python interface to the Last.fm Webservices API version 2.0,
 located at http://ws.audioscrobbler.com/2.0/ .""",

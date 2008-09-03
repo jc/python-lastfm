@@ -23,7 +23,7 @@ class Group(LastfmBase):
 
     @LastfmBase.cachedProperty
     def weeklyChartList(self):
-        params = {'method': 'group.getweeklychartlist', 'group': self.name}
+        params = {'method': 'group.getWeeklyChartList', 'group': self.name}
         data = self.__api._fetchData(params).find('weeklychartlist')
         return [
                 WeeklyChart.createFromData(self.__api, self, c)
@@ -33,7 +33,7 @@ class Group(LastfmBase):
     def getWeeklyAlbumChart(self,
                              start = None,
                              end = None):
-        params = {'method': 'group.getweeklyalbumchart', 'group': self.name}
+        params = {'method': 'group.getWeeklyAlbumChart', 'group': self.name}
         params = WeeklyChart._checkWeeklyChartParams(params, start, end)
         data = self.__api._fetchData(params).find('weeklyalbumchart')
         return WeeklyAlbumChart.createFromData(self.__api, self, data)
@@ -55,7 +55,7 @@ class Group(LastfmBase):
     def getWeeklyArtistChart(self,
                              start = None,
                              end = None):
-        params = {'method': 'group.getweeklyartistchart', 'group': self.name}
+        params = {'method': 'group.getWeeklyArtistChart', 'group': self.name}
         params = WeeklyChart._checkWeeklyChartParams(params, start, end)
         data = self.__api._fetchData(params).find('weeklyartistchart')
         return WeeklyArtistChart.createFromData(self.__api, self, data)
@@ -77,7 +77,7 @@ class Group(LastfmBase):
     def getWeeklyTrackChart(self,
                              start = None,
                              end = None):
-        params = {'method': 'group.getweeklytrackchart', 'group': self.name}
+        params = {'method': 'group.getWeeklyTrackChart', 'group': self.name}
         params = WeeklyChart._checkWeeklyChartParams(params, start, end)
         data = self.__api._fetchData(params).find('weeklytrackchart')
         return WeeklyTrackChart.createFromData(self.__api, self, data)

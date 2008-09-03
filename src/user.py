@@ -51,7 +51,7 @@ class User(LastfmBase):
 
     @LastfmBase.cachedProperty
     def events(self):
-        params = {'method': 'user.getevents', 'user': self.name}
+        params = {'method': 'user.getEvents', 'user': self.name}
         data = self.__api._fetchData(params).find('events')
 
         return [
@@ -61,7 +61,7 @@ class User(LastfmBase):
         
     def getPastEvents(self,
                       limit = None):
-        params = {'method': 'user.getpastevents', 'user': self.name}
+        params = {'method': 'user.getPastEvents', 'user': self.name}
         if limit is not None:
             params.update({'limit': limit})
                 
@@ -91,7 +91,7 @@ class User(LastfmBase):
 
     def getFriends(self,
                    limit = None):
-        params = {'method': 'user.getfriends', 'user': self.name}
+        params = {'method': 'user.getFriends', 'user': self.name}
         if limit is not None:
             params.update({'limit': limit})
         data = self.__api._fetchData(params).find('friends')
@@ -113,7 +113,7 @@ class User(LastfmBase):
         return self.getFriends()
         
     def getNeighbours(self, limit = None):
-        params = {'method': 'user.getneighbours', 'user': self.name}
+        params = {'method': 'user.getNeighbours', 'user': self.name}
         if limit is not None:
             params.update({'limit': limit})
         data = self.__api._fetchData(params).find('neighbours')
@@ -166,7 +166,7 @@ class User(LastfmBase):
 
     @LastfmBase.cachedProperty
     def lovedTracks(self):
-        params = {'method': 'user.getlovedtracks', 'user': self.name}
+        params = {'method': 'user.getLovedTracks', 'user': self.name}
         data = self.__api._fetchData(params).find('lovedtracks')
         return [
                 Track(
@@ -193,7 +193,7 @@ class User(LastfmBase):
                 ]
         
     def getRecentTracks(self, limit = None):
-        params = {'method': 'user.getrecenttracks', 'user': self.name}
+        params = {'method': 'user.getRecentTracks', 'user': self.name}
         data = self.__api._fetchData(params, no_cache = True).find('recenttracks')
         return [
                 Track(
@@ -243,7 +243,7 @@ class User(LastfmBase):
         pass
 
     def getTopAlbums(self, period = None):
-        params = {'method': 'user.gettopalbums', 'user': self.name}
+        params = {'method': 'user.getTopAlbums', 'user': self.name}
         if period is not None:
             params.update({'period': period})
         data = self.__api._fetchData(params).find('topalbums')
@@ -283,7 +283,7 @@ class User(LastfmBase):
         pass
 
     def getTopArtists(self, period = None):
-        params = {'method': 'user.gettopartists', 'user': self.name}
+        params = {'method': 'user.getTopArtists', 'user': self.name}
         if period is not None:
             params.update({'period': period})
         data = self.__api._fetchData(params).find('topartists')
@@ -317,7 +317,7 @@ class User(LastfmBase):
         pass
 
     def getTopTracks(self, period = None):
-        params = {'method': 'user.gettoptracks', 'user': self.name}
+        params = {'method': 'user.getTopTracks', 'user': self.name}
         if period is not None:
             params.update({'period': period})
         data = self.__api._fetchData(params).find('toptracks')
@@ -357,7 +357,7 @@ class User(LastfmBase):
         return (len(self.topTracks) and self.topTracks[0] or None)
 
     def getTopTags(self, limit = None):
-        params = {'method': 'user.gettoptags', 'user': self.name}
+        params = {'method': 'user.getTopTags', 'user': self.name}
         if limit is not None:
             params.update({'limit': limit})
         data = self.__api._fetchData(params).find('toptags')
@@ -387,7 +387,7 @@ class User(LastfmBase):
 
     @LastfmBase.cachedProperty
     def weeklyChartList(self):
-        params = {'method': 'user.getweeklychartlist', 'user': self.name}
+        params = {'method': 'user.getWeeklyChartList', 'user': self.name}
         data = self.__api._fetchData(params).find('weeklychartlist')
         return [
                 WeeklyChart.createFromData(self.__api, self, c)
@@ -397,7 +397,7 @@ class User(LastfmBase):
     def getWeeklyAlbumChart(self,
                              start = None,
                              end = None):
-        params = {'method': 'user.getweeklyalbumchart', 'user': self.name}
+        params = {'method': 'user.getWeeklyAlbumChart', 'user': self.name}
         params = WeeklyChart._checkWeeklyChartParams(params, start, end)            
         data = self.__api._fetchData(params).find('weeklyalbumchart')   
         return WeeklyAlbumChart.createFromData(self.__api, self, data)
@@ -422,7 +422,7 @@ class User(LastfmBase):
     def getWeeklyArtistChart(self,
                              start = None,
                              end = None):
-        params = {'method': 'user.getweeklyartistchart', 'user': self.name}
+        params = {'method': 'user.getWeeklyArtistChart', 'user': self.name}
         params = WeeklyChart._checkWeeklyChartParams(params, start, end)
         data = self.__api._fetchData(params).find('weeklyartistchart')   
         return WeeklyArtistChart.createFromData(self.__api, self, data)
@@ -447,7 +447,7 @@ class User(LastfmBase):
     def getWeeklyTrackChart(self,
                              start = None,
                              end = None):
-        params = {'method': 'user.getweeklytrackchart', 'user': self.name}
+        params = {'method': 'user.getWeeklyTrackChart', 'user': self.name}
         params = WeeklyChart._checkWeeklyChartParams(params, start, end)
         data = self.__api._fetchData(params).find('weeklytrackchart')   
         return WeeklyTrackChart.createFromData(self.__api, self, data)
@@ -552,7 +552,7 @@ class User(LastfmBase):
             
         def getAlbums(self,
                       limit = None):
-            params = {'method': 'library.getalbums', 'user': self.user.name}
+            params = {'method': 'library.getAlbums', 'user': self.user.name}
             if limit is not None:
                 params.update({'limit': limit})
             
@@ -601,7 +601,7 @@ class User(LastfmBase):
 
         def getArtists(self,
                        limit = None):
-            params = {'method': 'library.getartists', 'user': self.user.name}
+            params = {'method': 'library.getArtists', 'user': self.user.name}
             if limit is not None:
                 params.update({'limit': limit})
             
@@ -644,7 +644,7 @@ class User(LastfmBase):
         
         def getTracks(self,
                       limit = None):
-            params = {'method': 'library.gettracks', 'user': self.user.name}
+            params = {'method': 'library.getTracks', 'user': self.user.name}
             if limit is not None:
                 params.update({'limit': limit})
             

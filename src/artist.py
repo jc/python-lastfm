@@ -85,7 +85,7 @@ class Artist(LastfmBase):
         return self.__stats
 
     def getSimilar(self, limit = None):
-        params = {'method': 'artist.getsimilar', 'artist': self.__name}
+        params = {'method': 'artist.getSimilar', 'artist': self.__name}
         if limit is not None:
             params.update({'limit': limit})
         data = self.__api._fetchData(params).find('similarartists')
@@ -123,7 +123,7 @@ class Artist(LastfmBase):
         """top tags for the artist"""
         if self.__topTags is None or len(self.__topTags) < 6:
             params = {
-                      'method': 'artist.gettoptags',
+                      'method': 'artist.getTopTags',
                       'artist': self.__name
                       }
             data = self.__api._fetchData(params).find('toptags')
@@ -153,7 +153,7 @@ class Artist(LastfmBase):
     @LastfmBase.cachedProperty
     def events(self):
         """events for the artist"""
-        params = {'method': 'artist.getevents', 'artist': self.name}
+        params = {'method': 'artist.getEvents', 'artist': self.name}
         data = self.__api._fetchData(params).find('events')
 
         return [
@@ -164,7 +164,7 @@ class Artist(LastfmBase):
     @LastfmBase.cachedProperty
     def topAlbums(self):
         """top albums of the artist"""
-        params = {'method': 'artist.gettopalbums', 'artist': self.name}
+        params = {'method': 'artist.getTopAlbums', 'artist': self.name}
         data = self.__api._fetchData(params).find('topalbums')
 
         return [
@@ -193,7 +193,7 @@ class Artist(LastfmBase):
     @LastfmBase.cachedProperty
     def topFans(self):
         """top fans of the artist"""
-        params = {'method': 'artist.gettopfans', 'artist': self.name}
+        params = {'method': 'artist.getTopFans', 'artist': self.name}
         data = self.__api._fetchData(params).find('topfans')
         return [
                 User(
@@ -218,7 +218,7 @@ class Artist(LastfmBase):
     @LastfmBase.cachedProperty
     def topTracks(self):
         """top tracks of the artist"""
-        params = {'method': 'artist.gettoptracks', 'artist': self.name}
+        params = {'method': 'artist.getTopTracks', 'artist': self.name}
         data = self.__api._fetchData(params).find('toptracks')
         return [
                 Track(
@@ -284,7 +284,7 @@ class Artist(LastfmBase):
     def _fetchData(api,
                 artist = None,
                 mbid = None):
-        params = {'method': 'artist.getinfo'}
+        params = {'method': 'artist.getInfo'}
         if not (artist or mbid):
             raise LastfmInvalidParametersError("either artist or mbid has to be given as argument.")
         if artist:

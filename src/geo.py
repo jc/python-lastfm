@@ -15,7 +15,7 @@ class Geo(object):
                   latitude = None,
                   longitude = None,
                   distance = None):
-        params = {'method': 'geo.getevents', 'location': location}
+        params = {'method': 'geo.getEvents', 'location': location}
         if distance is not None:
             params.update({'distance': distance})
             
@@ -44,7 +44,7 @@ class Geo(object):
 
     @staticmethod
     def getTopArtists(api, country):
-        params = {'method': 'geo.gettopartists', 'country': country}
+        params = {'method': 'geo.getTopArtists', 'country': country}
         data = api._fetchData(params).find('topartists')
         return [
                 Artist(
@@ -64,7 +64,7 @@ class Geo(object):
 
     @staticmethod
     def getTopTracks(api, country, location = None):
-        params = {'method': 'geo.gettoptracks', 'country': country}
+        params = {'method': 'geo.getTopTracks', 'country': country}
         if location is not None:
             params.update({'location': location})
             

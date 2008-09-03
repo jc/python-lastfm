@@ -93,7 +93,7 @@ class Album(LastfmBase):
     @LastfmBase.cachedProperty
     def topTags(self):
         """top tags for the album"""
-        params = {'method': 'album.getinfo'}
+        params = {'method': 'album.getInfo'}
         if self.artist and self.name:
             params.update({'artist': self.artist.name, 'album': self.name})
         elif self.mbid:
@@ -123,7 +123,7 @@ class Album(LastfmBase):
                 artist = None,
                 album = None,
                 mbid = None):
-        params = {'method': 'album.getinfo'}
+        params = {'method': 'album.getInfo'}
         if not ((artist and album) or mbid):
             raise LastfmInvalidParametersError("either (artist and album) or mbid has to be given as argument.")
         if artist and album:

@@ -48,7 +48,7 @@ class Tag(LastfmBase):
     @LastfmBase.cachedProperty
     def similar(self):
         """tags similar to this tag"""
-        params = {'method': 'tag.getsimilar', 'tag': self.name}
+        params = {'method': 'tag.getSimilar', 'tag': self.name}
         data = self.__api._fetchData(params).find('similartags')
         return [
                 Tag(
@@ -69,7 +69,7 @@ class Tag(LastfmBase):
     @LastfmBase.cachedProperty
     def topAlbums(self):
         """top albums for the tag"""
-        params = {'method': 'tag.gettopalbums', 'tag': self.name}
+        params = {'method': 'tag.getTopAlbums', 'tag': self.name}
         data = self.__api._fetchData(params).find('topalbums')
         return [
                 Album(
@@ -103,7 +103,7 @@ class Tag(LastfmBase):
     @LastfmBase.cachedProperty
     def topArtists(self):
         """top artists for the tag"""
-        params = {'method': 'tag.gettopartists', 'tag': self.name}
+        params = {'method': 'tag.getTopArtists', 'tag': self.name}
         data = self.__api._fetchData(params).find('topartists')
         return [
                 Artist(
@@ -131,7 +131,7 @@ class Tag(LastfmBase):
     @LastfmBase.cachedProperty
     def topTracks(self):
         """top tracks for the tag"""
-        params = {'method': 'tag.gettoptracks', 'tag': self.name}
+        params = {'method': 'tag.getTopTracks', 'tag': self.name}
         data = self.__api._fetchData(params).find('toptracks')
         return [
                 Track(

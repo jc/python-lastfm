@@ -42,6 +42,7 @@ class Track(LastfmBase):
         self.__fullTrack = fullTrack
         self.__playedOn = playedOn
         self.__lovedOn = lovedOn
+        self.__tags = None
         
     @property
     def name(self):
@@ -116,7 +117,7 @@ class Track(LastfmBase):
     def similar(self):
         """tracks similar to this track"""
         params = self.__checkParams(
-                                    {'method': 'track.getsimilar'},
+                                    {'method': 'track.getSimilar'},
                                     self.artist.name,
                                     self.name,
                                     self.mbid
@@ -155,7 +156,7 @@ class Track(LastfmBase):
     def topFans(self):
         """top fans of the track"""
         params = self.__checkParams(
-                                    {'method': 'track.gettopfans'},
+                                    {'method': 'track.getTopFans'},
                                     self.artist.name,
                                     self.name,
                                     self.mbid
@@ -185,7 +186,7 @@ class Track(LastfmBase):
     def topTags(self):
         """top tags for the track"""
         params = self.__checkParams(
-                                    {'method': 'track.gettoptags'},
+                                    {'method': 'track.getTopTags'},
                                     self.artist.name,
                                     self.name,
                                     self.mbid
@@ -209,6 +210,63 @@ class Track(LastfmBase):
     def topTag(self):
         """topmost tag for the track"""
         pass
+    
+    def getTags(self):
+        if self.__tags is None:
+            if not (self.artist and self.name):
+                raise LastfmInvalidParametersError("artist and track name have to be provided.")
+            params = {'method': 'track.getTags', 'artist': self.artist.name, 'track': self.name}
+            data = self.__api._fetchData(params, sign = True, session = True, no_cache = True).find('tags')
+            self.__tags = [
+                           Tag(
+                               self.__api,
+                               name = t.findtext('name'),
+                               url = t.findtext('url')
+                               )
+                           for t in data.findall('tag')
+                           ]
+        return self.__tags
+    
+    def addTags(self, tags):
+        while(len(tags) > 10):
+                        section = tags[0:9]
+                        tags = tags[9:]
+                        self.addTags(section)
+        
+        if len(tags) == 0: return
+
+        tagnames = []
+        for tag in tags:
+            if isinstance(tag, Tag):
+                tagnames.append(tag.name)
+            elif isinstance(tag, str):
+                tagnames.append(tag)
+                
+        params = {
+                  'method': 'track.addTags',
+                  'artist': self.artist.name,
+                  'track': self.name,
+                  'tags': ",".join(tagnames)
+                  }
+        
+        self.__api._postData(params)
+        self.__tags = None
+        
+    def removeTag(self, tag):
+        if isinstance(tag, Tag):
+            tag = tag.name
+        params = {
+                  'method': 'track.removeTag',
+                  'artist': self.artist.name,
+                  'track': self.name,
+                  'tag': tag
+                  }
+        self.__api._postData(params)
+        self.__tags = None
+    
+    def love(self):
+        params = {'method': 'track.love', 'artist': self.artist.name, 'track': self.name}
+        self.__api._postData(params)
 
     @staticmethod
     def search(api,
