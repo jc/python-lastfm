@@ -74,7 +74,11 @@ class LastfmBase(object):
             if cacheAttribute is None:
                 cacheAttribute = func(ob)
                 setattr(ob, attributeName, cacheAttribute)
-            return copy.copy(cacheAttribute)
+            try:
+                cp = copy.copy(cacheAttribute)
+                return cp
+            except LastfmError:
+                return cacheAttribute
         
         return property(fget = wrapper, doc = func.__doc__)
 
@@ -92,3 +96,4 @@ class LastfmBase(object):
 
 import sys
 import copy
+from error import LastfmError

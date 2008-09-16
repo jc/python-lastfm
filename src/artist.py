@@ -37,8 +37,8 @@ class Artist(LastfmBase):
                             )
         self.__similar = similar
         self.__topTags = topTags
-        self.__bio = bio and Artist.Bio(
-                         artist = self,
+        self.__bio = bio and Wiki(
+                         subject = self,
                          published = bio.published,
                          summary = bio.summary,
                          content = bio.content
@@ -324,7 +324,7 @@ class Artist(LastfmBase):
                               )
                           for t in data.findall('tags/tag')
                           ]
-        self.__bio = Artist.Bio(
+        self.__bio = Wiki(
                          self,
                          published = datetime(*(time.strptime(
                                                               data.findtext('bio/published').strip(),
@@ -341,8 +341,7 @@ class Artist(LastfmBase):
         data = Artist._fetchData(api, artist, mbid)
 
         a = Artist(api, name = data.findtext('name'))
-        if a.bio is None:
-            a._fillInfo()
+        a._fillInfo()
         return a
 
     @staticmethod
@@ -371,41 +370,6 @@ class Artist(LastfmBase):
     def __repr__(self):
         return "<lastfm.Artist: %s>" % self.__name
 
-    class Bio(object):
-        """A class representing the biography of an artist."""
-        def __init__(self,
-                     artist,
-                     published = None,
-                     summary = None,
-                     content = None):
-            self.__artist = artist
-            self.__published = published
-            self.__summary = summary
-            self.__content = content
-    
-        @property
-        def artist(self):
-            """artist for which the biography is"""
-            return self.__artist
-    
-        @property
-        def published(self):
-            """publication time of the biography"""
-            return self.__published
-    
-        @property
-        def summary(self):
-            """summary of the biography"""
-            return self.__summary
-    
-        @property
-        def content(self):
-            """content of the biography"""
-            return self.__content
-    
-        def __repr__(self):
-            return "<lastfm.artist.Bio: for artist '%s'>" % self.__artist.name
-
 from datetime import datetime
 import time
 
@@ -417,3 +381,4 @@ from stats import Stats
 from tag import Tag
 from track import Track
 from user import User
+from wiki import Wiki

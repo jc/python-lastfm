@@ -14,23 +14,30 @@ class Track(LastfmBase):
                  name = None,
                  mbid = None,
                  url = None,
+                 duration = None,
                  streamable = None,
+                 fullTrack = None,
                  artist = None,
                  album = None,
+                 position = None,
                  image = None,
                  stats = None,
-                 fullTrack = None,
                  playedOn = None,
-                 lovedOn = None):
+                 lovedOn = None,
+                 wiki = None):
         if not isinstance(api, Api):
             raise LastfmInvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
+        self.__id = id
         self.__name = name
         self.__mbid = mbid
         self.__url = url
+        self.__duration = duration
         self.__streamable = streamable
+        self.__fullTrack = fullTrack
         self.__artist = artist
         self.__album = album
+        self.__position = position
         self.__image = image
         self.__stats = stats and Stats(
                              subject = self,
@@ -39,10 +46,19 @@ class Track(LastfmBase):
                              rank = stats.rank,
                              listeners = stats.listeners,
                             )
-        self.__fullTrack = fullTrack
         self.__playedOn = playedOn
         self.__lovedOn = lovedOn
-        self.__tags = None
+        self.__wiki = wiki and Wiki(
+                         subject = self,
+                         published = wiki.published,
+                         summary = wiki.summary,
+                         content = wiki.content
+                        )
+    
+    @property
+    def id(self):
+        """id of the track"""
+        return self.__id
         
     @property
     def name(self):
@@ -58,12 +74,26 @@ class Track(LastfmBase):
     def url(self):
         """url of the tracks's page"""
         return self.__url
+    
+    @property
+    def duration(self):
+        """duration of the tracks's page"""
+        return self.__duration
 
     @property
     def streamable(self):
         """is the track streamable"""
+        if self.__streamable is None:
+            self._fillInfo()
         return self.__streamable
 
+    @property
+    def fullTrack(self):
+        """is the full track streamable"""
+        if self.__fullTrack is None:
+            self._fillInfo()
+        return self.__fullTrack
+    
     @property
     def artist(self):
         """artist of the track"""
@@ -72,8 +102,17 @@ class Track(LastfmBase):
     @property
     def album(self):
         """artist of the track"""
+        if self.__album is None:
+            self._fillInfo()
         return self.__album
 
+    @property
+    def position(self):
+        """position of the track"""
+        if self.__position is None:
+            self._fillInfo()
+        return self.__position
+    
     @property
     def image(self):
         """image of the track's album cover"""
@@ -85,11 +124,6 @@ class Track(LastfmBase):
         return self.__stats
 
     @property
-    def fullTrack(self):
-        """is the full track streamable"""
-        return self.__fullTrack
-
-    @property
     def playedOn(self):
         """datetime the track was last played"""
         return self.__playedOn
@@ -98,6 +132,15 @@ class Track(LastfmBase):
     def lovedOn(self):
         """datetime the track was marked 'loved'"""
         return self.__lovedOn
+    
+    @property
+    def wiki(self):
+        """wiki of the track"""
+        if self.__wiki == "na":
+            return None
+        if self.__wiki is None:
+            self._fillInfo()
+        return self.__wiki
 
     def __checkParams(self,
                       params,
@@ -213,21 +256,19 @@ class Track(LastfmBase):
     
     @LastfmBase.cachedProperty
     def tags(self):
-        if self.__tags is None:
-            if not (self.artist and self.name):
-                raise LastfmInvalidParametersError("artist and track name have to be provided.")
-            params = {'method': 'track.getTags', 'artist': self.artist.name, 'track': self.name}
-            data = self.__api._fetchData(params, sign = True, session = True, no_cache = True).find('tags')
-            self.__tags = SafeList([
-                           Tag(
-                               self.__api,
-                               name = t.findtext('name'),
-                               url = t.findtext('url')
-                               )
-                           for t in data.findall('tag')
-                           ],
-                           self.addTags, self.removeTag)
-        return self.__tags
+        if not (self.artist and self.name):
+            raise LastfmInvalidParametersError("artist and track name have to be provided.")
+        params = {'method': 'track.getTags', 'artist': self.artist.name, 'track': self.name}
+        data = self.__api._fetchData(params, sign = True, session = True, no_cache = True).find('tags')
+        return SafeList([
+                       Tag(
+                           self.__api,
+                           name = t.findtext('name'),
+                           url = t.findtext('url')
+                           )
+                       for t in data.findall('tag')
+                       ],
+                       self.addTags, self.removeTag)
     
     def addTags(self, tags):
         while(len(tags) > 10):
@@ -335,6 +376,80 @@ class Track(LastfmBase):
                 for t in gen2(data):
                     yield t
         return gen()
+    
+    @staticmethod
+    def _fetchData(api,
+                artist = None,
+                track = None,
+                mbid = None):
+        params = {'method': 'track.getInfo'}
+        if not ((artist and track) or mbid):
+            raise LastfmInvalidParametersError("either (artist and track) or mbid has to be given as argument.")
+        if artist and track:
+            params.update({'artist': artist, 'track': track})
+        elif mbid:
+            params.update({'mbid': mbid})
+        return api._fetchData(params).find('track')
+    
+    def _fillInfo(self):
+        data = Track._fetchData(self.__api, self.artist.name, self.name)
+        self.__id = int(data.findtext('id'))
+        self.__mbid = data.findtext('mbid')
+        self.__url = data.findtext('url')
+        self.__duration = int(data.findtext('duration'))
+        self.__streamable = (data.findtext('streamable') == '1'),
+        self.__fullTrack = (data.find('streamable').attrib['fulltrack'] == '1'),
+                                
+        self.__image = dict([(i.get('size'), i.text) for i in data.findall('image')])
+        self.__stats = Stats(
+                       subject = self,
+                       listeners = int(data.findtext('listeners')),
+                       playcount = int(data.findtext('playcount')),
+                       )
+        self.__artist = Artist(
+                        self.__api,
+                        name = data.findtext('artist/name'),
+                        mbid = data.findtext('artist/mbid'),
+                        url = data.findtext('artist/url')
+                        )
+        self.__album = Album(
+                             self.__api,
+                             artist = self.__artist,
+                             name = data.findtext('album/title'),
+                             mbid = data.findtext('album/mbid'),
+                             url = data.findtext('album/url'),
+                             image = dict([(i.get('size'), i.text) for i in data.findall('album/image')])
+                             )
+        self.__position = int(data.find('album').attrib['position'])
+        if data.find('wiki') is not None:
+            self.__wiki = Wiki(
+                         self,
+                         published = datetime(*(time.strptime(
+                                                              data.findtext('wiki/published').strip(),
+                                                              '%a, %d %b %Y %H:%M:%S +0000'
+                                                              )[0:6])),
+                         summary = data.findtext('wiki/summary'),
+                         content = data.findtext('wiki/content')
+                         )
+        else:
+            self.__wiki = 'na'
+                         
+    @staticmethod
+    def getInfo(api,
+                artist = None,
+                track = None,
+                mbid = None):
+        data = Track._fetchData(api, artist, track, mbid)
+        t = Track(
+                  api,
+                  name = data.findtext('name'),
+                  artist = Artist(
+                                  api,
+                                  name = data.findtext('artist/name'),
+                                  ),
+                  )
+        t._fillInfo()
+        return t
 
     @staticmethod
     def hashFunc(*args, **kwds):
@@ -361,10 +476,15 @@ class Track(LastfmBase):
     def __repr__(self):
         return "<lastfm.Track: '%s' by %s>" % (self.name, self.artist.name)
 
+import time
+from datetime import datetime
+
 from api import Api
 from artist import Artist
+from album import Album
 from error import LastfmInvalidParametersError
 from safelist import SafeList
 from stats import Stats
 from tag import Tag
 from user import User
+from wiki import Wiki

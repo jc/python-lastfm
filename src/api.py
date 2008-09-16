@@ -144,15 +144,10 @@ class Api(object):
                      limit = None):
         return Tasteometer.compare(self, type1, type2, value1, value2, limit)
 
-    def getTrack(self, track, artist):
+    def getTrack(self, track, artist = None, mbid = None):
         if isinstance(artist, Artist):
             artist = artist.name
-        result = Track.search(self, track, artist)
-        try:
-            result[0]
-        except IndexError:
-            raise LastfmInvalidResourceError("'%s' by %s: no such track found" % (track, artist))
-        return result[0]
+        return Track.getInfo(self, artist, track, mbid)
 
     def searchTrack(self,
                     track,
@@ -209,6 +204,8 @@ class Api(object):
 
     def _GetOpener(self, url):
         opener = self._urllib.build_opener()
+        if self._urllib._opener is not None:
+            opener = self._urllib.build_opener(*self._urllib._opener.handlers)
         opener.addheaders = self._request_headers.items()
         return opener
 
@@ -233,7 +230,9 @@ class Api(object):
         if parameters is None:
             return None
         else:
-            return urllib.urlencode(dict([(k, self._Encode(v)) for k, v in parameters.items() if v is not None]))
+            keys = parameters.keys()
+            keys.sort()
+            return urllib.urlencode([(k, self._Encode(parameters[k])) for k in keys if parameters[k] is not None])
         
     def _ReadUrlData(self, opener, url, data = None):
             now = datetime.now()

@@ -590,7 +590,10 @@ class User(LastfmBase):
                 
                 for page in xrange(2, totalPages+1):
                     params.update({'page': page})
-                    data = self.__api._fetchData(params).find('albums')
+                    try:
+                        data = self.__api._fetchData(params).find('albums')
+                    except LastfmError:
+                        continue
                     for a in gen2(data):
                         yield a            
             return gen()
@@ -633,7 +636,10 @@ class User(LastfmBase):
                 
                 for page in xrange(2, totalPages+1):
                     params.update({'page': page})
-                    data = self.__api._fetchData(params).find('artists')
+                    try:
+                        data = self.__api._fetchData(params).find('artists')
+                    except LastfmError:
+                        continue
                     for a in gen2(data):
                         yield a            
             return gen()
@@ -683,7 +689,11 @@ class User(LastfmBase):
                 
                 for page in xrange(2, totalPages+1):
                     params.update({'page': page})
-                    data = self.__api._fetchData(params).find('tracks')
+                    data = None
+                    try:
+                        data = self.__api._fetchData(params).find('tracks')
+                    except LastfmError:
+                        continue
                     for t in gen2(data):
                         yield t            
             return gen()

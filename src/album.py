@@ -169,8 +169,7 @@ class Album(LastfmBase):
                                   name = data.findtext('artist'),
                                   ),
                   )
-        if a.id is None:
-            a._fillInfo()
+        a._fillInfo()
         return a
         
     @staticmethod
