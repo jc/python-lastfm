@@ -29,7 +29,7 @@ def test_app(environ, start_response):
     global _app_was_hit
     _app_was_hit = True
     
-    filedata = unicode(open(os.path.join(os.path.dirname(__file__), 'data', key)).read())
+    filedata = unicode(open(os.path.join(os.path.dirname(__file__), 'data', "%s.xml" % key)).read())
     return [filedata]
 
 def create_wsgi_app():
