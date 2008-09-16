@@ -1,4 +1,5 @@
 import unittest
+import datetime
 import api
 import album
 
@@ -17,5 +18,13 @@ class testAlbum(unittest.TestCase):
     def testAlbumArtist(self):
         self.assertEqual(self.album_test.artist.name, "Oasis")
         
+    def testAlbumUrl(self):
+        url = 'http://www.last.fm/music/Oasis/Supersonic'
+        self.assertEqual(self.album_test.url, url)
+        
+    def testAlbumReleaseDate(self):
+        date = datetime.datetime(1994, 7, 28, 0, 0)
+        self.assertEqual(self.album_test.releaseDate, date)
+    
 if __name__ == '__main__':
     unittest.main()
