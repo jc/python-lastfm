@@ -25,6 +25,14 @@ class testAlbum(unittest.TestCase):
     def testAlbumReleaseDate(self):
         date = datetime.datetime(1994, 7, 28, 0, 0)
         self.assertEqual(self.album_test.releaseDate, date)
+        
+    def testAlbumMbid(self):
+        mbid = '2c2a24de-67b6-483b-b597-9c6b7891ba90'
+        self.assertEqual(self.album_test.mbid, mbid)
+        
+    def testAlbumId(self):
+        id = 2038492
+        self.assertEqual(self.album_test.id, id)
     
 if __name__ == '__main__':
     unittest.main()
