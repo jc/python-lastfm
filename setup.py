@@ -34,6 +34,7 @@ SETUPTOOLS_METADATA = dict(
 		'Topic :: Multimedia :: Sound/Audio',
 		'Topic :: Internet',
 	],
+	test_suite = "test",
 )
 
 import sys
