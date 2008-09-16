@@ -1,15 +1,17 @@
 import unittest
 import datetime
-import api
-import album
+import sys
+sys.path.append("..")
+
+from src import Api
 
 apikey = "152a230561e72192b8b0f3e42362c6ff"
 
-class testAlbum(unittest.TestCase):
+class TestAlbum(unittest.TestCase):
     """ A test class for the Album module. """
     
     def setUp(self):
-        self.api_test = api.Api(apikey)
+        self.api_test = Api(apikey)
         self.album_test = self.api_test.getAlbum("Oasis", "Supersonic")
 
     def testAlbumName(self):
