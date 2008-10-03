@@ -110,7 +110,7 @@ class Api(object):
     def searchArtist(self,
                      artist,
                      limit = None):
-        return Artist.search(self, artist, limit)
+        return Artist.search(self, searchItem = artist, limit = limit)
 
     def getEvent(self, event):
         return Event.getInfo(self, event)
@@ -136,7 +136,7 @@ class Api(object):
     def searchTag(self,
                   tag,
                   limit = None):
-        return Tag.search(self, tag, limit)
+        return Tag.search(self, searchItem = tag, limit = limit)
 
     def compareTaste(self,
                      type1, type2,
@@ -155,7 +155,7 @@ class Api(object):
                     limit = None):
         if isinstance(artist, Artist):
             artist = artist.name
-        return Track.search(self, track, artist, limit)
+        return Track.search(self, searchItem = track, limit = limit, artist = artist)
 
     def getUser(self, name):
         user = None

@@ -7,9 +7,10 @@ __license__ = "GNU Lesser General Public License"
 from base import LastfmBase
 from taggable import Taggable
 from sharable import Sharable
+from searchable import Searchable
 from lazylist import lazylist
 
-class Track(LastfmBase, Taggable, Sharable):
+class Track(LastfmBase, Taggable, Sharable, Searchable):
     """A class representing a track."""
     def init(self,
                  api,
@@ -261,52 +262,24 @@ class Track(LastfmBase, Taggable, Sharable):
         self.__api._postData(params)
 
     @staticmethod
-    def search(api,
-               track,
-               artist = None,
-               limit = None):
-        params = {'method': 'track.search', 'track': track}
-        if artist is not None:
-            params.update({'artist': artist})
-        if limit is not None:
-            params.update({'limit': limit})
-            
-        @lazylist
-        def gen(lst):
-            data = api._fetchData(params).find('results')
-            totalPages = int(data.findtext("{%s}totalResults" % Api.SEARCH_XMLNS))/ \
-                            int(data.findtext("{%s}itemsPerPage" % Api.SEARCH_XMLNS)) + 1
-            
-            @lazylist
-            def gen2(lst, data):
-                for t in data.findall('trackmatches/track'):
-                    yield Track(
-                                api,
-                                name = t.findtext('name'),
-                                artist = Artist(
-                                                api,
-                                                name = t.findtext('artist')
-                                                ),
-                                url = t.findtext('url'),
-                                stats = Stats(
-                                              subject = t.findtext('name'),
-                                              listeners = int(t.findtext('listeners'))
-                                              ),
-                                streamable = (t.findtext('streamable') == '1'),
-                                fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
-                                image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
-                                )
-                          
-            for t in gen2(data):
-                yield t
-            
-            for page in xrange(2, totalPages+1):
-                params.update({'page': page})
-                data = api._fetchData(params).find('results')
-                for t in gen2(data):
-                    yield t
-        return gen()
-    
+    def _searchYieldFunc(api, track):
+        return Track(
+                     api,
+                     name = track.findtext('name'),
+                     artist = Artist(
+                                     api,
+                                     name=track.findtext('artist')
+                                     ),
+                    url = track.findtext('url'),
+                    stats = Stats(
+                                  subject=track.findtext('name'),
+                                  listeners=int(track.findtext('listeners'))
+                                  ),
+                    streamable = (track.findtext('streamable') == '1'),
+                    fullTrack = (track.find('streamable').attrib['fulltrack'] == '1'),
+                    image = dict([(i.get('size'), i.text) for i in track.findall('image')]),
+                    )
+        
     @staticmethod
     def _fetchData(api,
                 artist = None,

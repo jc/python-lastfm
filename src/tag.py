@@ -5,9 +5,10 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from searchable import Searchable
 from lazylist import lazylist
 
-class Tag(LastfmBase):
+class Tag(LastfmBase, Searchable):
     """"A class representing a tag."""
     def init(self,
                  api,
@@ -186,41 +187,16 @@ class Tag(LastfmBase):
                 ]
     
     @staticmethod
-    def search(api,
-               tag,
-               limit = None):
-        params = {'method': 'tag.search', 'tag': tag}
-        if limit:
-            params.update({'limit': limit})
-            
-        @lazylist
-        def gen(lst):
-            data = api._fetchData(params).find('results')
-            totalPages = int(data.findtext("{%s}totalResults" % Api.SEARCH_XMLNS))/ \
-                            int(data.findtext("{%s}itemsPerPage" % Api.SEARCH_XMLNS)) + 1
-            
-            @lazylist
-            def gen2(lst, data):
-                for t in data.findall('tagmatches/tag'):
-                    yield Tag(
-                              api,
-                              name = t.findtext('name'),
-                              url = t.findtext('url'),
-                              stats = Stats(
-                                            subject = t.findtext('name'),
-                                            count = int(t.findtext('count')),
-                                            )
-                              )
-                          
-            for t in gen2(data):
-                yield t
-            
-            for page in xrange(2, totalPages+1):
-                params.update({'page': page})
-                data = api._fetchData(params).find('results')
-                for t in gen2(data):
-                    yield t
-        return gen()
+    def _searchYieldFunc(api, tag):
+        return Tag(
+                   api,
+                   name = tag.findtext('name'),
+                   url = tag.findtext('url'),
+                   stats = Stats(
+                                 subject = tag.findtext('name'),
+                                 count = int(tag.findtext('count')),
+                                 )
+                    )
     
     @staticmethod
     def hashFunc(*args, **kwds):

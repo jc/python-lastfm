@@ -7,9 +7,10 @@ __license__ = "GNU Lesser General Public License"
 from base import LastfmBase
 from taggable import Taggable
 from sharable import Sharable
+from searchable import Searchable
 from lazylist import lazylist
 
-class Artist(LastfmBase, Taggable, Sharable):
+class Artist(LastfmBase, Taggable, Sharable, Searchable):
     """A class representing an artist."""
     def init(self,
                  api,
@@ -254,41 +255,15 @@ class Artist(LastfmBase, Taggable, Sharable):
         pass
 
     @staticmethod
-    def search(api,
-               artist,
-               limit = None):
-        params = {'method': 'artist.search', 'artist': artist}
-        if limit:
-            params.update({'limit': limit})
-            
-        @lazylist
-        def gen(lst):
-            data = api._fetchData(params).find('results')
-            totalPages = int(data.findtext("{%s}totalResults" % Api.SEARCH_XMLNS))/ \
-                            int(data.findtext("{%s}itemsPerPage" % Api.SEARCH_XMLNS)) + 1
-            
-            @lazylist
-            def gen2(lst, data):
-                for a in data.findall('artistmatches/artist'):
-                    yield Artist(
-                                 api,
-                                 name = a.findtext('name'),
-                                 mbid = a.findtext('mbid'),
-                                 url = a.findtext('url'),
-                                 image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
-                                 streamable = (a.findtext('streamable') == '1'),
-                                 )
-                          
-            for a in gen2(data):
-                yield a
-            
-            for page in xrange(2, totalPages+1):
-                params.update({'page': page})
-                data = api._fetchData(params).find('results')
-                for a in gen2(data):
-                    yield a
-        return gen()
-    
+    def _searchYieldFunc(api, artist):
+        return Artist(
+                      api,
+                      name = artist.findtext('name'),
+                      mbid = artist.findtext('mbid'),
+                      url = artist.findtext('url'),
+                      image = dict([(i.get('size'), i.text) for i in artist.findall('image')]),
+                      streamable = (artist.findtext('streamable') == '1'),
+                      )
     @staticmethod
     def _fetchData(api,
                 artist = None,
