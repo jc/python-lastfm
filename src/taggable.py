@@ -14,7 +14,6 @@ class Taggable(object):
     @LastfmBase.cachedProperty
     def tags(self):
         from tag import Tag
-        
         params = self._defaultParams({'method': '%s.getTags' % self.__class__.__name__.lower()})
         data = self.__api._fetchData(params, sign = True, session = True, no_cache = True).find('tags')
         return SafeList([

@@ -5,8 +5,9 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from sharable import Sharable
 
-class Event(LastfmBase):
+class Event(LastfmBase, Sharable):
     """A class representing an event."""
     def init(self,
                  api,
@@ -24,6 +25,7 @@ class Event(LastfmBase):
                  tag = None):
         if not isinstance(api, Api):
             raise LastfmInvalidParametersError("api reference must be supplied as an argument")
+        Sharable.init(self, api)
         self.__api = api
         self.__id = id
         self.__title = title
@@ -95,6 +97,14 @@ class Event(LastfmBase):
     def tag(self):
         """tags for the event"""
         return self.__tag
+    
+    def _defaultParams(self, extraParams = None):
+        if not self.id:
+            raise LastfmInvalidParametersError("id has to be provided.")
+        params = {'event': self.id}
+        if extraParams is not None:
+            params.update(extraParams)
+        return params
 
     @staticmethod
     def getInfo(api, event):

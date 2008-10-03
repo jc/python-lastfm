@@ -22,7 +22,7 @@ class Album(Taggable, LastfmBase):
                  topTags = None):
         if not isinstance(api, Api):
             raise LastfmInvalidParametersError("api reference must be supplied as an argument")
-        super(self.__class__, self).init(api)
+        Taggable.init(self, api)
         self.__api = api
         self.__name = name
         self.__artist = artist

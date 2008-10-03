@@ -6,9 +6,10 @@ __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
 from taggable import Taggable
+from sharable import Sharable
 from lazylist import lazylist
 
-class Track(LastfmBase, Taggable):
+class Track(LastfmBase, Taggable, Sharable):
     """A class representing a track."""
     def init(self,
                  api,
@@ -28,7 +29,8 @@ class Track(LastfmBase, Taggable):
                  wiki = None):
         if not isinstance(api, Api):
             raise LastfmInvalidParametersError("api reference must be supplied as an argument")
-        super(self.__class__, self).init(api)
+        Taggable.init(self, api)
+        Sharable.init(self, api)
         self.__api = api
         self.__id = id
         self.__name = name
@@ -256,17 +258,6 @@ class Track(LastfmBase, Taggable):
         
     def ban(self):
         params = self._defaultParams({'method': 'track.ban'})
-        self.__api._postData(params)
-        
-    def share(self, recipient, message = None):
-        params = self._defaultParams({'method': 'track.share'})
-        if message is not None:
-            params['message'] = message
-        
-        for i in xrange(len(recipient)):
-            if isinstance(recipient[i], User):
-                recipient[i] = recipient[i].name
-        params['recipient'] = ",".join(recipient)
         self.__api._postData(params)
 
     @staticmethod

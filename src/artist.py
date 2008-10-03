@@ -6,9 +6,10 @@ __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
 from taggable import Taggable
+from sharable import Sharable
 from lazylist import lazylist
 
-class Artist(Taggable, LastfmBase):
+class Artist(LastfmBase, Taggable, Sharable):
     """A class representing an artist."""
     def init(self,
                  api,
@@ -23,7 +24,8 @@ class Artist(Taggable, LastfmBase):
                  bio = None):
         if not isinstance(api, Api):
             raise LastfmInvalidParametersError("api reference must be supplied as an argument")
-        super(self.__class__, self).init(api)
+        Taggable.init(self, api)
+        Sharable.init(self, api)
         self.__api = api
         self.__name = name
         self.__mbid = mbid
