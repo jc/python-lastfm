@@ -5,9 +5,10 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from taggable import Taggable
 from lazylist import lazylist
 
-class Artist(LastfmBase):
+class Artist(Taggable, LastfmBase):
     """A class representing an artist."""
     def init(self,
                  api,
@@ -22,6 +23,7 @@ class Artist(LastfmBase):
                  bio = None):
         if not isinstance(api, Api):
             raise LastfmInvalidParametersError("api reference must be supplied as an argument")
+        super(self.__class__, self).init(api)
         self.__api = api
         self.__name = name
         self.__mbid = mbid
@@ -84,8 +86,16 @@ class Artist(LastfmBase):
             self._fillInfo()
         return self.__stats
 
+    def _defaultParams(self, extraParams = None):
+        if not self.name:
+            raise LastfmInvalidParametersError("artist has to be provided.")
+        params = {'artist': self.name}
+        if extraParams is not None:
+            params.update(extraParams)
+        return params
+    
     def getSimilar(self, limit = None):
-        params = {'method': 'artist.getSimilar', 'artist': self.__name}
+        params = self._defaultParams({'method': 'artist.getSimilar'})
         if limit is not None:
             params.update({'limit': limit})
         data = self.__api._fetchData(params).find('similarartists')
@@ -122,10 +132,7 @@ class Artist(LastfmBase):
     def topTags(self):
         """top tags for the artist"""
         if self.__topTags is None or len(self.__topTags) < 6:
-            params = {
-                      'method': 'artist.getTopTags',
-                      'artist': self.__name
-                      }
+            params = self._defaultParams({'method': 'artist.getTopTags'})
             data = self.__api._fetchData(params).find('toptags')
             self.__topTags = [
                               Tag(
@@ -153,7 +160,7 @@ class Artist(LastfmBase):
     @LastfmBase.cachedProperty
     def events(self):
         """events for the artist"""
-        params = {'method': 'artist.getEvents', 'artist': self.name}
+        params = self._defaultParams({'method': 'artist.getEvents'})
         data = self.__api._fetchData(params).find('events')
 
         return [
@@ -164,7 +171,7 @@ class Artist(LastfmBase):
     @LastfmBase.cachedProperty
     def topAlbums(self):
         """top albums of the artist"""
-        params = {'method': 'artist.getTopAlbums', 'artist': self.name}
+        params = self._defaultParams({'method': 'artist.getTopAlbums'})
         data = self.__api._fetchData(params).find('topalbums')
 
         return [
@@ -193,7 +200,7 @@ class Artist(LastfmBase):
     @LastfmBase.cachedProperty
     def topFans(self):
         """top fans of the artist"""
-        params = {'method': 'artist.getTopFans', 'artist': self.name}
+        params = self._defaultParams({'method': 'artist.getTopFans'})
         data = self.__api._fetchData(params).find('topfans')
         return [
                 User(
@@ -218,7 +225,7 @@ class Artist(LastfmBase):
     @LastfmBase.cachedProperty
     def topTracks(self):
         """top tracks of the artist"""
-        params = {'method': 'artist.getTopTracks', 'artist': self.name}
+        params = self._defaultParams({'method': 'artist.getTopTracks'})
         data = self.__api._fetchData(params).find('toptracks')
         return [
                 Track(

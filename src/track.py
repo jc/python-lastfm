@@ -5,9 +5,10 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from taggable import Taggable
 from lazylist import lazylist
 
-class Track(LastfmBase):
+class Track(LastfmBase, Taggable):
     """A class representing a track."""
     def init(self,
                  api,
@@ -27,6 +28,7 @@ class Track(LastfmBase):
                  wiki = None):
         if not isinstance(api, Api):
             raise LastfmInvalidParametersError("api reference must be supplied as an argument")
+        super(self.__class__, self).init(api)
         self.__api = api
         self.__id = id
         self.__name = name
@@ -141,25 +143,19 @@ class Track(LastfmBase):
         if self.__wiki is None:
             self._fillInfo()
         return self.__wiki
-
-    def __checkParams(self,
-                      params,
-                      artist = None,
-                      track = None,
-                      mbid = None):
-        if not ((artist and track) or mbid):
-            raise LastfmInvalidParametersError("either (artist and track) or mbid has to be given as argument.")
-
-        if artist and track:
-            params.update({'artist': artist, 'track': track})
-        elif mbid:
-            params.update({'mbid': mbid})
+    
+    def _defaultParams(self, extraParams = None):
+        if not (self.artist and self.name):
+            raise LastfmInvalidParametersError("artist and track have to be provided.")
+        params = {'artist': self.artist.name, 'track': self.name}
+        if extraParams is not None:
+            params.update(extraParams)
         return params
 
     @LastfmBase.cachedProperty
     def similar(self):
         """tracks similar to this track"""
-        params = self.__checkParams(
+        params = Track._checkParams(
                                     {'method': 'track.getSimilar'},
                                     self.artist.name,
                                     self.name,
@@ -198,7 +194,7 @@ class Track(LastfmBase):
     @LastfmBase.cachedProperty
     def topFans(self):
         """top fans of the track"""
-        params = self.__checkParams(
+        params = Track._checkParams(
                                     {'method': 'track.getTopFans'},
                                     self.artist.name,
                                     self.name,
@@ -228,7 +224,7 @@ class Track(LastfmBase):
     @LastfmBase.cachedProperty
     def topTags(self):
         """top tags for the track"""
-        params = self.__checkParams(
+        params = Track._checkParams(
                                     {'method': 'track.getTopTags'},
                                     self.artist.name,
                                     self.name,
@@ -254,73 +250,16 @@ class Track(LastfmBase):
         """topmost tag for the track"""
         pass
     
-    @LastfmBase.cachedProperty
-    def tags(self):
-        if not (self.artist and self.name):
-            raise LastfmInvalidParametersError("artist and track name have to be provided.")
-        params = {'method': 'track.getTags', 'artist': self.artist.name, 'track': self.name}
-        data = self.__api._fetchData(params, sign = True, session = True, no_cache = True).find('tags')
-        return SafeList([
-                       Tag(
-                           self.__api,
-                           name = t.findtext('name'),
-                           url = t.findtext('url')
-                           )
-                       for t in data.findall('tag')
-                       ],
-                       self.addTags, self.removeTag)
-    
-    def addTags(self, tags):
-        while(len(tags) > 10):
-                        section = tags[0:9]
-                        tags = tags[9:]
-                        self.addTags(section)
-        
-        if len(tags) == 0: return
-
-        tagnames = []
-        for tag in tags:
-            if isinstance(tag, Tag):
-                tagnames.append(tag.name)
-            elif isinstance(tag, str):
-                tagnames.append(tag)
-                
-        params = {
-                  'method': 'track.addTags',
-                  'artist': self.artist.name,
-                  'track': self.name,
-                  'tags': ",".join(tagnames)
-                  }
-        
-        self.__api._postData(params)
-        self.__tags = None
-        
-    def removeTag(self, tag):
-        if isinstance(tag, Tag):
-            tag = tag.name
-        params = {
-                  'method': 'track.removeTag',
-                  'artist': self.artist.name,
-                  'track': self.name,
-                  'tag': tag
-                  }
-        self.__api._postData(params)
-        self.__tags = None
-    
     def love(self):
-        params = {'method': 'track.love', 'artist': self.artist.name, 'track': self.name}
+        params = self._defaultParams({'method': 'track.love'})
         self.__api._postData(params)
         
     def ban(self):
-        params = {'method': 'track.ban', 'artist': self.artist.name, 'track': self.name}
+        params = self._defaultParams({'method': 'track.ban'})
         self.__api._postData(params)
         
     def share(self, recipient, message = None):
-        params = {
-                  'method': 'track.share',
-                  'artist': self.artist.name,
-                  'track': self.name
-                  }
+        params = self._defaultParams({'method': 'track.share'})
         if message is not None:
             params['message'] = message
         
@@ -382,13 +321,7 @@ class Track(LastfmBase):
                 artist = None,
                 track = None,
                 mbid = None):
-        params = {'method': 'track.getInfo'}
-        if not ((artist and track) or mbid):
-            raise LastfmInvalidParametersError("either (artist and track) or mbid has to be given as argument.")
-        if artist and track:
-            params.update({'artist': artist, 'track': track})
-        elif mbid:
-            params.update({'mbid': mbid})
+        params = Track._checkParams({'method': 'track.getInfo'}, artist, track, mbid)
         return api._fetchData(params).find('track')
     
     def _fillInfo(self):
@@ -452,6 +385,20 @@ class Track(LastfmBase):
         return t
 
     @staticmethod
+    def _checkParams(params,
+                      artist = None,
+                      track = None,
+                      mbid = None):
+        if not ((artist and track) or mbid):
+            raise LastfmInvalidParametersError("either (artist and track) or mbid has to be given as argument.")
+
+        if artist and track:
+            params.update({'artist': artist, 'track': track})
+        elif mbid:
+            params.update({'mbid': mbid})
+        return params
+
+    @staticmethod
     def hashFunc(*args, **kwds):
         try:
             return hash("%s%s" % (kwds['name'], hash(kwds['artist'])))
@@ -483,7 +430,6 @@ from api import Api
 from artist import Artist
 from album import Album
 from error import LastfmInvalidParametersError
-from safelist import SafeList
 from stats import Stats
 from tag import Tag
 from user import User

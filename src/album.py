@@ -5,8 +5,9 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from taggable import Taggable
 
-class Album(LastfmBase):
+class Album(Taggable, LastfmBase):
     """A class representing an album."""
     def init(self,
                  api,
@@ -21,6 +22,7 @@ class Album(LastfmBase):
                  topTags = None):
         if not isinstance(api, Api):
             raise LastfmInvalidParametersError("api reference must be supplied as an argument")
+        super(self.__class__, self).init(api)
         self.__api = api
         self.__name = name
         self.__artist = artist
@@ -117,6 +119,14 @@ class Album(LastfmBase):
     @LastfmBase.cachedProperty
     def playlist(self):
         return Playlist.fetch(self.__api, "lastfm://playlist/album/%s" % self.id)
+    
+    def _defaultParams(self, extraParams = None):
+        if not (self.artist and self.name):
+            raise LastfmInvalidParametersError("artist and album have to be provided.")
+        params = {'artist': self.artist.name, 'album': self.name}
+        if extraParams is not None:
+            params.update(extraParams)
+        return params
     
     @staticmethod
     def _fetchData(api,
