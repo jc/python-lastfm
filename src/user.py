@@ -162,7 +162,7 @@ class User(LastfmBase):
                     url = u.findtext('url'),
                     stats = Stats(
                                   subject = u.findtext('name'),
-                                  match = float(u.findtext('match')),
+                                  match = u.findtext('match') and float(u.findtext('match')),
                                   ),
                 )
                 for u in data.findall('user')
