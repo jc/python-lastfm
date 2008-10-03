@@ -9,6 +9,10 @@ from sharable import Sharable
 
 class Event(LastfmBase, Sharable):
     """A class representing an event."""
+    STATUS_ATTENDING = 0
+    STATUS_MAYBE = 1
+    STATUS_NOT = 2
+    
     def init(self,
                  api,
                  id = None,
@@ -97,6 +101,12 @@ class Event(LastfmBase, Sharable):
     def tag(self):
         """tags for the event"""
         return self.__tag
+    
+    def attend(self, status = STATUS_ATTENDING):
+        if status not in [Event.STATUS_ATTENDING, Event.STATUS_MAYBE, Event.STATUS_NOT]:
+            LastfmInvalidParametersError("status has to be 0, 1 or 2")
+        params = self._defaultParams({'method': 'event.attend', 'status': status})
+        self.__api._postData(params)
     
     def _defaultParams(self, extraParams = None):
         if not self.id:

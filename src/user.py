@@ -15,7 +15,12 @@ class User(LastfmBase):
                  name = None,
                  url = None,
                  image = None,
-                 stats = None):
+                 stats = None,
+                 language = None,
+                 country = None,
+                 age = None,
+                 gender = None,
+                 subscriber = None):
         if not isinstance(api, Api):
             raise LastfmInvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
@@ -25,9 +30,15 @@ class User(LastfmBase):
         self.__stats = stats and Stats(
                              subject = self,
                              match = stats.match,
-                             weight = stats.weight
+                             weight = stats.weight,
+                             playcount = stats.playcount
                             )
-        self.__lirary = User.Library(api, self)
+        self.__library = User.Library(api, self)
+        self.__language = language
+        self.__country = country
+        self.__age = age
+        self.__gender = gender
+        self.__subscriber = subscriber
 
     @property
     def name(self):
@@ -48,6 +59,31 @@ class User(LastfmBase):
     def stats(self):
         """stats for the user"""
         return self.__stats
+    
+    @property
+    def language(self):
+        """lang for the user"""
+        return self.__language
+    
+    @property
+    def country(self):
+        """country for the user"""
+        return self.__country
+    
+    @property
+    def age(self):
+        """age for the user"""
+        return self.__age
+    
+    @property
+    def gender(self):
+        """stats for the user"""
+        return self.__gender
+    
+    @property
+    def subscriber(self):
+        """is the user a subscriber"""
+        return self.__subscriber
 
     @LastfmBase.cachedProperty
     def events(self):
@@ -476,7 +512,25 @@ class User(LastfmBase):
                                    limit)
     @property
     def library(self):
-        return self.__lirary
+        return self.__library
+    
+    @staticmethod
+    def getAuthenticatedUser(api):
+        data = api._fetchData({'method': 'user.getInfo'}, sign = True, session = True).find('user')
+        return User(
+                api,
+                name = data.findtext('name'),
+                url = data.findtext('url'),
+                language = data.findtext('lang'),
+                country = Country(api, name = data.findtext('country')),
+                age = int(data.findtext('age')),
+                gender = data.findtext('gender'),
+                subscriber = (data.findtext('subscriber') == '1'),
+                stats = Stats(
+                              subject = data.findtext('name'),
+                              playcount = data.findtext('playcount')
+                              )
+            )
 
     @staticmethod
     def hashFunc(*args, **kwds):
@@ -526,6 +580,15 @@ class User(LastfmBase):
         @property
         def creator(self):
             return self.__creator
+        
+        def addTrack(self, track):
+            params = {'method': 'playlist.addTrack', 'playlistID': self.id}
+            if not isinstance(track, Track):
+                track = self.__api.searchTrack(track)[0]
+            
+            params['artist'] = track.artist.name
+            params['track'] = track.name
+            self.__api._postData(params)            
         
         @staticmethod
         def hashFunc(*args, **kwds):
@@ -723,6 +786,7 @@ from artist import Artist
 from album import Album
 from error import LastfmError, LastfmInvalidParametersError
 from event import Event
+from geo import Country
 from stats import Stats
 from tag import Tag
 from tasteometer import Tasteometer

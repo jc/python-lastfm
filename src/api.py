@@ -165,6 +165,11 @@ class Api(object):
         except LastfmError, e:
             raise e
         return user
+    
+    def getAuthenticatedUser(self):
+        if self.sessionKey is not None:
+            return User.getAuthenticatedUser(self)
+        return None
 
     def _BuildUrl(self, url, path_elements=None, extra_params=None):
         # Break url into consituent parts
@@ -340,7 +345,7 @@ class Api(object):
                 keys.sort()
                 sig = unicode() 
                 for name in keys:
-                    sig += (name + params[name])
+                    sig += ("%s%s" % (name, params[name]))
                 sig += self.secret
                 hashed_sig = md5.new(sig).hexdigest()
                 return hashed_sig
