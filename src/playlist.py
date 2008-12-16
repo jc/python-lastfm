@@ -50,10 +50,11 @@ class Playlist(LastfmBase):
         return "<lastfm.Playlist: %s>" % self.url
 
 import StringIO
-import sys
+import platform
 from error import LastfmInvalidParametersError
 
-if sys.version.startswith('2.5'):
+python_version = platform.python_version_tuple()
+if python_version[0] == 2 and python_version[1] >= 5:
     import xml.etree.cElementTree as ElementTree
 else:
     try:
@@ -62,4 +63,5 @@ else:
         try:
             import ElementTree
         except ImportError:
+            from error import LastfmError
             raise LastfmError("Install ElementTree package for using python-lastfm")

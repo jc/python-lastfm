@@ -372,7 +372,7 @@ class Api(object):
 
 from datetime import datetime
 import md5
-import sys
+import platform
 import time
 import urllib
 import urllib2
@@ -391,7 +391,8 @@ from tasteometer import Tasteometer
 from track import Track
 from user import User
 
-if sys.version.startswith('2.5'):
+python_version = platform.python_version_tuple()
+if python_version[0] == 2 and python_version[1] >= 5:
     import xml.etree.cElementTree as ElementTree
 else:
     try:
