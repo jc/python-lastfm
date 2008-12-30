@@ -6,8 +6,9 @@ __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
 from taggable import Taggable
+from cacheable import Cacheable
 
-class Album(Taggable, LastfmBase):
+class Album(LastfmBase, Cacheable, Taggable):
     """A class representing an album."""
     def init(self,
                  api,

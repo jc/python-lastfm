@@ -4,54 +4,8 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-try:
-    from threading import Lock
-except ImportError:
-    from dummy_threading import Lock
-
 class LastfmBase(object):
     """Base class for all the classes in this package"""
-
-    registry = {}
-    _lock = Lock()
-
-    def __new__(cls, *args, **kwds):
-        subject = None
-        if 'subject' in kwds and not cls.__name__.startswith('Weekly'):
-            subject = kwds['subject']
-            del kwds['subject']
-
-        if 'bypass_registry' in kwds:
-                del kwds['bypass_registry']
-                inst = object.__new__(cls)
-                inst.init(*args, **kwds)
-                return inst
-
-        key = cls._hash_func(*args, **kwds)
-        if subject is not None:
-            key = (hash(subject), key)
-
-        LastfmBase._lock.acquire()
-        try:
-            inst, already_registered = LastfmBase.register(object.__new__(cls), key)
-            if not already_registered:
-                inst.init(*args, **kwds)
-        finally:
-            LastfmBase._lock.release()
-        return inst
-
-    @staticmethod
-    def register(ob, key):
-        if not ob.__class__ in LastfmBase.registry:
-            LastfmBase.registry[ob.__class__] = {}
-        if key in LastfmBase.registry[ob.__class__]:
-            ob = LastfmBase.registry[ob.__class__][key]
-            #print "already registered: %s" % repr(ob)
-            return (ob, True)
-        else:
-            #print "not already registered: %s" % ob.__class__
-            LastfmBase.registry[ob.__class__][key] = ob
-            return (ob, False)
 
     @staticmethod
     def top_property(list_property_name):

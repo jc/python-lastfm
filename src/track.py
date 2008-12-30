@@ -5,12 +5,13 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from cacheable import Cacheable
 from taggable import Taggable
 from sharable import Sharable
 from searchable import Searchable
 from lazylist import lazylist
 
-class Track(LastfmBase, Taggable, Sharable, Searchable):
+class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
     """A class representing a track."""
     def init(self,
                  api,

@@ -5,9 +5,10 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from cacheable import Cacheable
 from sharable import Sharable
 
-class Event(LastfmBase, Sharable):
+class Event(LastfmBase, Cacheable, Sharable):
     """A class representing an event."""
     STATUS_ATTENDING = 0
     STATUS_MAYBE = 1

@@ -5,10 +5,11 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from cacheable import Cacheable
 from lazylist import lazylist
 import playlist
 
-class User(LastfmBase):
+class User(LastfmBase, Cacheable):
     """A class representing an user."""
     def init(self,
                  api,

@@ -5,8 +5,9 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from cacheable import Cacheable
 
-class Playlist(LastfmBase):
+class Playlist(LastfmBase, Cacheable):
     """A class representing an XPSF playlist."""
     def init(self, api, url):
         self._api = api

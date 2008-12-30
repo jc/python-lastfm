@@ -6,9 +6,10 @@ __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
 from searchable import Searchable
+from cacheable import Cacheable
 from lazylist import lazylist
 
-class Tag(LastfmBase, Searchable):
+class Tag(LastfmBase, Cacheable, Searchable):
     """"A class representing a tag."""
     def init(self,
                  api,

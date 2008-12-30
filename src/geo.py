@@ -5,6 +5,7 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from cacheable import Cacheable
 from lazylist import lazylist
 
 class Geo(object):
@@ -93,7 +94,7 @@ class Geo(object):
                 for t in data.findall('track')
                 ]
 
-class Venue(LastfmBase):
+class Venue(LastfmBase, Cacheable):
     """A class representing a venue of an event"""
     def init(self,
                  name = None,
@@ -137,7 +138,7 @@ class Venue(LastfmBase):
     def __repr__(self):
         return "<lastfm.geo.Venue: %s, %s>" % (self.name, self.location.city)
 
-class Location(LastfmBase):
+class Location(LastfmBase, Cacheable):
     """A class representing a location of an event"""
     XMLNS = "http://www.w3.org/2003/01/geo/wgs84_pos#"
 
@@ -254,7 +255,7 @@ class Location(LastfmBase):
         else:
             return "<lastfm.geo.Location: %s>" % self.city
 
-class Country(LastfmBase):
+class Country(LastfmBase, Cacheable):
     """A class representing a country."""
     def init(self,
                  api,

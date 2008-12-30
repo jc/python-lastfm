@@ -5,9 +5,10 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from cacheable import Cacheable
 from lazylist import lazylist
 
-class Group(LastfmBase):
+class Group(LastfmBase, Cacheable):
     """A class representing a group on last.fm."""
     def init(self,
                  api,

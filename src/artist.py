@@ -5,12 +5,13 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from cacheable import Cacheable
 from taggable import Taggable
 from sharable import Sharable
 from searchable import Searchable
 from lazylist import lazylist
 
-class Artist(LastfmBase, Taggable, Sharable, Searchable):
+class Artist(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
     """A class representing an artist."""
     def init(self,
                  api,

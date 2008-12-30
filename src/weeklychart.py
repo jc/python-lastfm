@@ -5,8 +5,9 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from base import LastfmBase
+from cacheable import Cacheable
 
-class WeeklyChart(LastfmBase):
+class WeeklyChart(LastfmBase, Cacheable):
     """A class for representing the weekly charts"""
 
     def init(self, subject, start, end,
