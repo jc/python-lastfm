@@ -11,26 +11,26 @@ class WeeklyChart(LastfmBase):
 
     def init(self, subject, start, end,
              stats = None):
-        self.__subject = subject
-        self.__start = start
-        self.__end = end
-        self.__stats = stats
+        self._subject = subject
+        self._start = start
+        self._end = end
+        self._stats = stats
 
     @property
     def subject(self):
-        return self.__subject
+        return self._subject
 
     @property
     def start(self):
-        return self.__start
+        return self._start
 
     @property
     def end(self):
-        return self.__end
+        return self._end
     
     @property
     def stats(self):
-        return self.__stats
+        return self._stats
     
     @staticmethod
     def create_from_data(api, subject, data):
@@ -56,7 +56,7 @@ class WeeklyChart(LastfmBase):
         return params
     
     @staticmethod
-    def hash_func(*args, **kwds):
+    def _hash_func(*args, **kwds):
         try:
             return hash("%s%s%s%s" % (
                                       kwds['subject'].__class__.__name__,
@@ -68,7 +68,7 @@ class WeeklyChart(LastfmBase):
             raise InvalidParametersError("subject, start and end have to be provided for hashing")
         
     def __hash__(self):
-        return self.__class__.hash_func(
+        return self.__class__._hash_func(
                                        subject = self.subject,
                                        start = self.start,
                                        end = self.end
@@ -102,11 +102,11 @@ class WeeklyAlbumChart(WeeklyChart):
     """A class for representing the weekly album charts"""
     def init(self, subject, start, end, stats, albums):
         super(WeeklyAlbumChart, self).init(subject, start, end, stats)
-        self.__albums = albums
+        self._albums = albums
         
     @property
     def albums(self):
-        return self.__albums
+        return self._albums
     
     @staticmethod
     def create_from_data(api, subject, data):
@@ -156,11 +156,11 @@ class WeeklyArtistChart(WeeklyChart):
     """A class for representing the weekly artist charts"""
     def init(self, subject, start, end, stats, artists):
         super(WeeklyArtistChart, self).init(subject, start, end, stats)
-        self.__artists = artists
+        self._artists = artists
         
     @property
     def artists(self):
-        return self.__artists
+        return self._artists
     
     @staticmethod
     def create_from_data(api, subject, data):
@@ -204,11 +204,11 @@ class WeeklyTrackChart(WeeklyChart):
     """A class for representing the weekly track charts"""
     def init(self, subject, start, end, tracks, stats):
         super(WeeklyTrackChart, self).init(subject, start, end, stats)
-        self.__tracks = tracks
+        self._tracks = tracks
         
     @property
     def tracks(self):
-        return self.__tracks
+        return self._tracks
     
     @staticmethod
     def create_from_data(api, subject, data):

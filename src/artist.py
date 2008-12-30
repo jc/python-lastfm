@@ -27,22 +27,22 @@ class Artist(LastfmBase, Taggable, Sharable, Searchable):
             raise InvalidParametersError("api reference must be supplied as an argument")
         Taggable.init(self, api)
         Sharable.init(self, api)
-        self.__api = api
-        self.__name = name
-        self.__mbid = mbid
-        self.__url = url
-        self.__image = image
-        self.__streamable = streamable
-        self.__stats = stats and Stats(
+        self._api = api
+        self._name = name
+        self._mbid = mbid
+        self._url = url
+        self._image = image
+        self._streamable = streamable
+        self._stats = stats and Stats(
                              subject = self,
                              listeners = stats.listeners,
                              playcount = stats.playcount,
                              match = stats.match,
                              rank = stats.rank
                             )
-        self.__similar = similar
-        self.__top_tags = top_tags
-        self.__bio = bio and Wiki(
+        self._similar = similar
+        self._top_tags = top_tags
+        self._bio = bio and Wiki(
                          subject = self,
                          published = bio.published,
                          summary = bio.summary,
@@ -52,59 +52,51 @@ class Artist(LastfmBase, Taggable, Sharable, Searchable):
     @property
     def name(self):
         """name of the artist"""
-        return self.__name
+        return self._name
 
     @property
     def mbid(self):
         """mbid of the artist"""
-        if self.__mbid is None:
+        if self._mbid is None:
             self._fill_info()
-        return self.__mbid
+        return self._mbid
 
     @property
     def url(self):
         """url of the artist's page"""
-        if self.__url is None:
+        if self._url is None:
             self._fill_info()
-        return self.__url
+        return self._url
 
     @property
     def image(self):
         """images of the artist"""
-        if self.__image is None:
+        if self._image is None:
             self._fill_info()
-        return self.__image
+        return self._image
 
     @property
     def streamable(self):
         """is the artist streamable"""
-        if self.__streamable is None:
+        if self._streamable is None:
             self._fill_info()
-        return self.__streamable
+        return self._streamable
 
     @property
     def stats(self):
         """stats for the artist"""
-        if self.__stats is None:
+        if self._stats is None:
             self._fill_info()
-        return self.__stats
+        return self._stats
 
-    def _default_params(self, extraParams = None):
-        if not self.name:
-            raise InvalidParametersError("artist has to be provided.")
-        params = {'artist': self.name}
-        if extraParams is not None:
-            params.update(extraParams)
-        return params
-    
     def get_similar(self, limit = None):
         params = self._default_params({'method': 'artist.getSimilar'})
         if limit is not None:
             params.update({'limit': limit})
-        data = self.__api._fetch_data(params).find('similarartists')
-        self.__similar = [
+        data = self._api._fetch_data(params).find('similarartists')
+        self._similar = [
                           Artist(
-                                 self.__api,
+                                 self._api,
                                  subject = self,
                                  name = a.findtext('name'),
                                  mbid = a.findtext('mbid'),
@@ -117,16 +109,16 @@ class Artist(LastfmBase, Taggable, Sharable, Searchable):
                                  )
                           for a in data.findall('artist')
                           ]
-        return self.__similar[:]
+        return self._similar[:]
 
     @property
     def similar(self):
         """artists similar to this artist"""
-        if self.__similar is None or len(self.__similar) < 6:
+        if self._similar is None or len(self._similar) < 6:
             return self.get_similar()
-        return self.__similar[:]
+        return self._similar[:]
 
-    @LastfmBase.topProperty("similar")
+    @LastfmBase.top_property("similar")
     def most_similar(self):
         """artist most similar to this artist"""
         pass
@@ -134,21 +126,21 @@ class Artist(LastfmBase, Taggable, Sharable, Searchable):
     @property
     def top_tags(self):
         """top tags for the artist"""
-        if self.__top_tags is None or len(self.__top_tags) < 6:
+        if self._top_tags is None or len(self._top_tags) < 6:
             params = self._default_params({'method': 'artist.getTopTags'})
-            data = self.__api._fetch_data(params).find('toptags')
-            self.__top_tags = [
+            data = self._api._fetch_data(params).find('toptags')
+            self._top_tags = [
                               Tag(
-                                  self.__api,
+                                  self._api,
                                   subject = self,
                                   name = t.findtext('name'),
                                   url = t.findtext('url')
                                   )
                               for t in data.findall('tag')
                               ]
-        return self.__top_tags[:]
+        return self._top_tags[:]
 
-    @LastfmBase.topProperty("top_tags")
+    @LastfmBase.top_property("top_tags")
     def top_tag(self):
         """top tag for the artist"""
         pass
@@ -156,30 +148,30 @@ class Artist(LastfmBase, Taggable, Sharable, Searchable):
     @property
     def bio(self):
         """biography of the artist"""
-        if self.__bio is None:
+        if self._bio is None:
             self._fill_info()
-        return self.__bio
+        return self._bio
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def events(self):
         """events for the artist"""
         params = self._default_params({'method': 'artist.getEvents'})
-        data = self.__api._fetch_data(params).find('events')
+        data = self._api._fetch_data(params).find('events')
 
         return [
-                Event.create_from_data(self.__api, e)
+                Event.create_from_data(self._api, e)
                 for e in data.findall('event')
                 ]
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def top_albums(self):
         """top albums of the artist"""
         params = self._default_params({'method': 'artist.getTopAlbums'})
-        data = self.__api._fetch_data(params).find('topalbums')
+        data = self._api._fetch_data(params).find('topalbums')
 
         return [
                 Album(
-                     self.__api,
+                     self._api,
                      subject = self,
                      name = a.findtext('name'),
                      artist = self,
@@ -195,19 +187,19 @@ class Artist(LastfmBase, Taggable, Sharable, Searchable):
                 for a in data.findall('album')
                 ]
 
-    @LastfmBase.topProperty("top_albums")
+    @LastfmBase.top_property("top_albums")
     def top_album(self):
         """top album of the artist"""
         pass
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def top_fans(self):
         """top fans of the artist"""
         params = self._default_params({'method': 'artist.getTopFans'})
-        data = self.__api._fetch_data(params).find('topfans')
+        data = self._api._fetch_data(params).find('topfans')
         return [
                 User(
-                     self.__api,
+                     self._api,
                      subject = self,
                      name = u.findtext('name'),
                      url = u.findtext('url'),
@@ -219,20 +211,20 @@ class Artist(LastfmBase, Taggable, Sharable, Searchable):
                      )
                 for u in data.findall('user')
                 ]
-    
-    @LastfmBase.topProperty("top_fans")
+
+    @LastfmBase.top_property("top_fans")
     def top_fan(self):
         """top fan of the artist"""
         pass
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def top_tracks(self):
         """top tracks of the artist"""
         params = self._default_params({'method': 'artist.getTopTracks'})
-        data = self.__api._fetch_data(params).find('toptracks')
+        data = self._api._fetch_data(params).find('toptracks')
         return [
                 Track(
-                      self.__api,
+                      self._api,
                       subject = self,
                       name = t.findtext('name'),
                       artist = self,
@@ -243,16 +235,87 @@ class Artist(LastfmBase, Taggable, Sharable, Searchable):
                                     rank = int(t.attrib['rank'])
                                     ),
                       streamable = (t.findtext('streamable') == '1'),
-                      fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                      full_track = (t.find('streamable').attrib['fulltrack'] == '1'),
                       image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
                       )
                 for t in data.findall('track')
                 ]
-    
-    @LastfmBase.topProperty("top_tracks")
+
+    @LastfmBase.top_property("top_tracks")
     def top_track(self):
         """topmost fan of the artist"""
         pass
+
+    @staticmethod
+    def get_info(api,
+                artist = None,
+                mbid = None):
+        data = Artist._fetch_data(api, artist, mbid)
+
+        a = Artist(api, name = data.findtext('name'))
+        a._fill_info()
+        return a
+
+    def _default_params(self, extra_params = {}):
+        if not self.name:
+            raise InvalidParametersError("artist has to be provided.")
+        params = {'artist': self.name}
+        params.update(extra_params)
+        return params
+
+    @staticmethod
+    def _fetch_data(api,
+                artist = None,
+                mbid = None):
+        params = {'method': 'artist.getInfo'}
+        if not (artist or mbid):
+            raise InvalidParametersError("either artist or mbid has to be given as argument.")
+        if artist:
+            params.update({'artist': artist})
+        elif mbid:
+            params.update({'mbid': mbid})
+        return api._fetch_data(params).find('artist')
+
+    def _fill_info(self):
+        data = Artist._fetch_data(self._api, self.name)
+        self._name = data.findtext('name')
+        self._mbid = data.findtext('mbid')
+        self._url = data.findtext('url')
+        self._image = dict([(i.get('size'), i.text) for i in data.findall('image')])
+        self._streamable = (data.findtext('streamable') == 1)
+        self._stats = Stats(
+                             subject = self,
+                             listeners = int(data.findtext('stats/listeners')),
+                             playcount = int(data.findtext('stats/playcount'))
+                             )
+        self._similar = [
+                          Artist(
+                                 self._api,
+                                 subject = self,
+                                 name = a.findtext('name'),
+                                 url = a.findtext('url'),
+                                 image = dict([(i.get('size'), i.text) for i in a.findall('image')])
+                                 )
+                          for a in data.findall('similar/artist')
+                          ]
+        self._top_tags = [
+                          Tag(
+                              self._api,
+                              subject = self,
+                              name = t.findtext('name'),
+                              url = t.findtext('url')
+                              )
+                          for t in data.findall('tags/tag')
+                          ]
+        self._bio = Wiki(
+                         self,
+                         published = datetime(*(time.strptime(
+                                                              data.findtext('bio/published').strip(),
+                                                              '%a, %d %b %Y %H:%M:%S +0000'
+                                                              )[0:6])),
+                         summary = data.findtext('bio/summary'),
+                         content = data.findtext('bio/content')
+                         )
 
     @staticmethod
     def _search_yield_func(api, artist):
@@ -265,71 +328,7 @@ class Artist(LastfmBase, Taggable, Sharable, Searchable):
                       streamable = (artist.findtext('streamable') == '1'),
                       )
     @staticmethod
-    def _fetch_data(api,
-                artist = None,
-                mbid = None):
-        params = {'method': 'artist.get_info'}
-        if not (artist or mbid):
-            raise InvalidParametersError("either artist or mbid has to be given as argument.")
-        if artist:
-            params.update({'artist': artist})
-        elif mbid:
-            params.update({'mbid': mbid})
-        return api._fetch_data(params).find('artist')
-
-    def _fill_info(self):
-        data = Artist._fetch_data(self.__api, self.name)
-        self.__name = data.findtext('name')
-        self.__mbid = data.findtext('mbid')
-        self.__url = data.findtext('url')
-        self.__image = dict([(i.get('size'), i.text) for i in data.findall('image')])
-        self.__streamable = (data.findtext('streamable') == 1)
-        self.__stats = Stats(
-                             subject = self,
-                             listeners = int(data.findtext('stats/listeners')),
-                             playcount = int(data.findtext('stats/playcount'))
-                             )
-        self.__similar = [
-                          Artist(
-                                 self.__api,
-                                 subject = self,
-                                 name = a.findtext('name'),
-                                 url = a.findtext('url'),
-                                 image = dict([(i.get('size'), i.text) for i in a.findall('image')])
-                                 )
-                          for a in data.findall('similar/artist')
-                          ]
-        self.__top_tags = [
-                          Tag(
-                              self.__api,
-                              subject = self,
-                              name = t.findtext('name'),
-                              url = t.findtext('url')
-                              )
-                          for t in data.findall('tags/tag')
-                          ]
-        self.__bio = Wiki(
-                         self,
-                         published = datetime(*(time.strptime(
-                                                              data.findtext('bio/published').strip(),
-                                                              '%a, %d %b %Y %H:%M:%S +0000'
-                                                              )[0:6])),
-                         summary = data.findtext('bio/summary'),
-                         content = data.findtext('bio/content')
-                         )
-
-    @staticmethod
-    def get_info(api,
-                artist = None,
-                mbid = None):
-        data = Artist._fetch_data(api, artist, mbid)
-
-        a = Artist(api, name = data.findtext('name'))
-        a._fill_info()
-        return a
-
-    @staticmethod
-    def hash_func(*args, **kwds):
+    def _hash_func(*args, **kwds):
         try:
             return hash(kwds['name'].lower())
         except KeyError:
@@ -339,7 +338,7 @@ class Artist(LastfmBase, Taggable, Sharable, Searchable):
                 raise InvalidParametersError("name has to be provided for hashing")
 
     def __hash__(self):
-        return self.__class__.hash_func(name = self.name)
+        return self.__class__._hash_func(name = self.name)
 
     def __eq__(self, other):
         if self.mbid and other.mbid:
@@ -352,7 +351,7 @@ class Artist(LastfmBase, Taggable, Sharable, Searchable):
         return self.name < other.name
 
     def __repr__(self):
-        return "<lastfm.Artist: %s>" % self.__name
+        return "<lastfm.Artist: %s>" % self._name
 
 from datetime import datetime
 import time

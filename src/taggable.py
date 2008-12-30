@@ -9,16 +9,16 @@ from safelist import SafeList
 
 class Taggable(object):
     def init(self, api):
-        self.__api = api
+        self._api = api
         
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def tags(self):
         from tag import Tag
         params = self._default_params({'method': '%s.getTags' % self.__class__.__name__.lower()})
-        data = self.__api._fetch_data(params, sign = True, session = True, no_cache = True).find('tags')
+        data = self._api._fetch_data(params, sign = True, session = True, no_cache = True).find('tags')
         return SafeList([
                        Tag(
-                           self.__api,
+                           self._api,
                            name = t.findtext('name'),
                            url = t.findtext('url')
                            )
@@ -46,8 +46,8 @@ class Taggable(object):
             'method': '%s.addTags' % self.__class__.__name__.lower(),
             'tags': ",".join(tagnames)
             })       
-        self.__api._post_data(params)
-        self.__tags = None
+        self._api._post_data(params)
+        self._tags = None
         
     def remove_tag(self, tag):
         from tag import Tag
@@ -58,8 +58,8 @@ class Taggable(object):
             'method': '%s.removeTag' % self.__class__.__name__.lower(),
             'tag': tag
             })
-        self.__api._post_data(params)
-        self.__tags = None
+        self._api._post_data(params)
+        self._tags = None
         
-    def _default_params(self, extra_params):
-        pass
+    def _default_params(self, extra_params = {}):
+        return extra_params

@@ -10,24 +10,24 @@ class Tasteometer(object):
                  score = None,
                  matches = None,
                  artists = None):
-        self.__score = score
-        self.__matches = matches
-        self.__artists = artists
+        self._score = score
+        self._matches = matches
+        self._artists = artists
 
     @property
     def score(self):
         """score of the comparison"""
-        return self.__score
+        return self._score
 
     @property
     def matches(self):
         """matches for the comparison"""
-        return self.__matches
+        return self._matches
 
     @property
     def artists(self):
         """artists for the comparison"""
-        return self.__artists
+        return self._artists
     
     @staticmethod
     def compare(api,

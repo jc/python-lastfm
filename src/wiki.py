@@ -11,30 +11,30 @@ class Wiki(object):
                      published = None,
                      summary = None,
                      content = None):
-            self.__subject = subject
-            self.__published = published
-            self.__summary = summary
-            self.__content = content
+            self._subject = subject
+            self._published = published
+            self._summary = summary
+            self._content = content
     
         @property
         def subject(self):
             """artist for which the biography is"""
-            return self.__subject
+            return self._subject
     
         @property
         def published(self):
             """publication time of the biography"""
-            return self.__published
+            return self._published
     
         @property
         def summary(self):
             """summary of the biography"""
-            return self.__summary
+            return self._summary
     
         @property
         def content(self):
             """content of the biography"""
-            return self.__content
+            return self._content
     
         def __repr__(self):
             return "<lastfm.Wiki: for %s '%s'>" % (self.subject.__class__.__name__, self.subject.name)

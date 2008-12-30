@@ -12,7 +12,7 @@ class Event(LastfmBase, Sharable):
     STATUS_ATTENDING = 0
     STATUS_MAYBE = 1
     STATUS_NOT = 2
-    
+
     def init(self,
                  api,
                  id = None,
@@ -29,91 +29,83 @@ class Event(LastfmBase, Sharable):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         Sharable.init(self, api)
-        self.__api = api
-        self.__id = id
-        self.__title = title
-        self.__artists = artists
-        self.__headliner = headliner
-        self.__venue = venue
-        self.__start_date = start_date
-        self.__description = description
-        self.__image = image
-        self.__url = url
-        self.__stats = stats and Stats(
+        self._api = api
+        self._id = id
+        self._title = title
+        self._artists = artists
+        self._headliner = headliner
+        self._venue = venue
+        self._start_date = start_date
+        self._description = description
+        self._image = image
+        self._url = url
+        self._stats = stats and Stats(
                              subject = self,
                              attendance = stats.attendance,
                              reviews = stats.reviews
                             )
-        self.__tag = tag
+        self._tag = tag
 
     @property
     def id(self):
         """id of the event"""
-        return self.__id
+        return self._id
 
     @property
     def title(self):
         """title of the event"""
-        return self.__title
+        return self._title
 
     @property
     def artists(self):
         """artists performing in the event"""
-        return self.__artists
+        return self._artists
 
     @property
     def headliner(self):
         """headliner artist of the event"""
-        return self.__headliner
+        return self._headliner
 
     @property
     def venue(self):
         """venue of the event"""
-        return self.__venue
+        return self._venue
 
     @property
     def start_date(self):
         """start date of the event"""
-        return self.__start_date
+        return self._start_date
 
     @property
     def description(self):
         """description of the event"""
-        return self.__description
+        return self._description
 
     @property
     def image(self):
         """poster of the event"""
-        return self.__image
+        return self._image
 
     @property
     def url(self):
         """url of the event's page"""
-        return self.__url
+        return self._url
 
     @property
     def stats(self):
         """stats of the event"""
-        return self.__stats
+        return self._stats
 
     @property
     def tag(self):
         """tags for the event"""
-        return self.__tag
-    
+        return self._tag
+
     def attend(self, status = STATUS_ATTENDING):
         if status not in [Event.STATUS_ATTENDING, Event.STATUS_MAYBE, Event.STATUS_NOT]:
             InvalidParametersError("status has to be 0, 1 or 2")
         params = self._default_params({'method': 'event.attend', 'status': status})
-        self.__api._post_data(params)
-    
-    def _default_params(self, extra_params = None):
-        if not self.id:
-            raise InvalidParametersError("id has to be provided.")
-        params = {'event': self.id}
-        if extra_params is not None:
-            params.update(extra_params)
-        return params
+        self._api._post_data(params)
 
     @staticmethod
     def get_info(api, event):
@@ -171,7 +163,7 @@ class Event(LastfmBase, Sharable):
                                                             name = data.findtext('venue/location/country')
                                                             ),
                                                        street = data.findtext('venue/location/street'),
-                                                       postalCode = data.findtext('venue/location/postalcode'),
+                                                       postal_code = data.findtext('venue/location/postalcode'),
                                                        latitude = float(data.findtext(
                                                            'venue/location/{%s}point/{%s}lat' % ((Location.XMLNS,)*2)
                                                            )),
@@ -194,15 +186,22 @@ class Event(LastfmBase, Sharable):
                      tag = data.findtext('tag')
                     )
 
+    def _default_params(self, extra_params = []):
+        if not self.id:
+            raise InvalidParametersError("id has to be provided.")
+        params = {'event': self.id}
+        params.update(extra_params)
+        return params
+
     @staticmethod
-    def hash_func(*args, **kwds):
+    def _hash_func(*args, **kwds):
         try:
             return hash(kwds['id'])
         except KeyError:
             raise InvalidParametersError("id has to be provided for hashing")
 
     def __hash__(self):
-        return Event.hash_func(id = self.id)
+        return Event._hash_func(id = self.id)
 
     def __eq__(self, other):
         return self.id == other.id

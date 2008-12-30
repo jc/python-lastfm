@@ -20,21 +20,21 @@ class LastfmBase(object):
         if 'subject' in kwds and not cls.__name__.startswith('Weekly'):
             subject = kwds['subject']
             del kwds['subject']
-            
-        if 'bypassRegistry' in kwds:
-                del kwds['bypassRegistry']
+
+        if 'bypass_registry' in kwds:
+                del kwds['bypass_registry']
                 inst = object.__new__(cls)
                 inst.init(*args, **kwds)
                 return inst
 
-        key = cls.hash_func(*args, **kwds)
+        key = cls._hash_func(*args, **kwds)
         if subject is not None:
             key = (hash(subject), key)
-            
+
         LastfmBase._lock.acquire()
         try:
-            inst, alreadyRegistered = LastfmBase.register(object.__new__(cls), key)
-            if not alreadyRegistered:
+            inst, already_registered = LastfmBase.register(object.__new__(cls), key)
+            if not already_registered:
                 inst.init(*args, **kwds)
         finally:
             LastfmBase._lock.release()
@@ -52,34 +52,32 @@ class LastfmBase(object):
             #print "not already registered: %s" % ob.__class__
             LastfmBase.registry[ob.__class__][key] = ob
             return (ob, False)
-    
-    @staticmethod    
-    def topProperty(listPropertyName):
+
+    @staticmethod
+    def top_property(list_property_name):
         def decorator(func):
             def wrapper(ob):
-                topList = getattr(ob, listPropertyName)
-                return (len(topList) and topList[0] or None)
+                top_list = getattr(ob, list_property_name)
+                return (len(top_list) and top_list[0] or None)
             return property(fget = wrapper, doc = func.__doc__)
         return decorator
-    
+
     @staticmethod
-    def cachedProperty(func):
-        frame = sys._getframe(1)
-        classname = frame.f_code.co_name
-        funcName = func.func_code.co_name
-        attributeName = "_%s__%s" % (classname, funcName)
-        
+    def cached_property(func):
+        func_name = func.func_code.co_name
+        attribute_name = "_%s" % func_name
+
         def wrapper(ob):
-            cacheAttribute = getattr(ob, attributeName, None)
-            if cacheAttribute is None:
-                cacheAttribute = func(ob)
-                setattr(ob, attributeName, cacheAttribute)
+            cache_attribute = getattr(ob, attribute_name, None)
+            if cache_attribute is None:
+                cache_attribute = func(ob)
+                setattr(ob, attribute_name, cache_attribute)
             try:
-                cp = copy.copy(cacheAttribute)
+                cp = copy.copy(cache_attribute)
                 return cp
             except Error:
-                return cacheAttribute
-        
+                return cache_attribute
+
         return property(fget = wrapper, doc = func.__doc__)
 
     def __gt__(self, other):
@@ -94,6 +92,5 @@ class LastfmBase(object):
     def __le__(self, other):
         return not self.__gt__(other)
 
-import sys
 import copy
 from error import Error

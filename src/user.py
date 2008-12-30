@@ -23,117 +23,117 @@ class User(LastfmBase):
                  subscriber = None):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
-        self.__api = api
-        self.__name = name
-        self.__url = url
-        self.__image = image
-        self.__stats = stats and Stats(
+        self._api = api
+        self._name = name
+        self._url = url
+        self._image = image
+        self._stats = stats and Stats(
                              subject = self,
                              match = stats.match,
                              weight = stats.weight,
                              playcount = stats.playcount
                             )
-        self.__library = User.Library(api, self)
-        self.__language = language
-        self.__country = country
-        self.__age = age
-        self.__gender = gender
-        self.__subscriber = subscriber
+        self._library = User.Library(api, self)
+        self._language = language
+        self._country = country
+        self._age = age
+        self._gender = gender
+        self._subscriber = subscriber
 
     @property
     def name(self):
         """name of the user"""
-        return self.__name
+        return self._name
 
     @property
     def url(self):
         """url of the user's page"""
-        return self.__url
+        return self._url
 
     @property
     def image(self):
         """image of the user"""
-        return self.__image
+        return self._image
 
     @property
     def stats(self):
         """stats for the user"""
-        return self.__stats
-    
+        return self._stats
+
     @property
     def language(self):
         """lang for the user"""
-        return self.__language
-    
+        return self._language
+
     @property
     def country(self):
         """country for the user"""
-        return self.__country
-    
+        return self._country
+
     @property
     def age(self):
         """age for the user"""
-        return self.__age
-    
+        return self._age
+
     @property
     def gender(self):
         """stats for the user"""
-        return self.__gender
-    
+        return self._gender
+
     @property
     def subscriber(self):
         """is the user a subscriber"""
-        return self.__subscriber
+        return self._subscriber
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def events(self):
-        params = {'method': 'user.getEvents', 'user': self.name}
-        data = self.__api._fetch_data(params).find('events')
+        params = self._default_params({'method': 'user.getEvents'})
+        data = self._api._fetch_data(params).find('events')
 
         return [
-                Event.create_from_data(self.__api, e)
+                Event.create_from_data(self._api, e)
                 for e in data.findall('event')
                 ]
-        
+
     def get_past_events(self,
                       limit = None):
-        params = {'method': 'user.getPastEvents', 'user': self.name}
+        params = self._default_params({'method': 'user.getPastEvents'})
         if limit is not None:
             params.update({'limit': limit})
-                
+
         @lazylist
         def gen(lst):
-            data = self.__api._fetch_data(params).find('events')
-            totalPages = int(data.attrib['totalPages'])
-            
+            data = self._api._fetch_data(params).find('events')
+            total_pages = int(data.attrib['totalPages'])
+
             @lazylist
             def gen2(lst, data):
                 for e in data.findall('event'):
-                    yield Event.create_from_data(self.__api, e)
-            
+                    yield Event.create_from_data(self._api, e)
+
             for e in gen2(data):
                 yield e
-            
-            for page in xrange(2, totalPages+1):
+
+            for page in xrange(2, total_pages+1):
                 params.update({'page': page})
-                data = self.__api._fetch_data(params).find('events')
+                data = self._api._fetch_data(params).find('events')
                 for e in gen2(data):
-                    yield e            
+                    yield e
         return gen()
-        
-    @LastfmBase.cachedProperty
+
+    @LastfmBase.cached_property
     def past_events(self):
         return self.get_past_events()
 
     def get_friends(self,
                    limit = None):
-        params = {'method': 'user.getFriends', 'user': self.name}
+        params = self._default_params({'method': 'user.getFriends'})
         if limit is not None:
             params.update({'limit': limit})
-        data = self.__api._fetch_data(params).find('friends')
+        data = self._api._fetch_data(params).find('friends')
         return [
             User(
-                self.__api,
+                self._api,
                 subject = self,
                 name = u.findtext('name'),
                 image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
@@ -143,19 +143,19 @@ class User(LastfmBase):
         ]
 
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def friends(self):
         """friends of the user"""
         return self.get_friends()
-        
+
     def get_neighbours(self, limit = None):
-        params = {'method': 'user.getNeighbours', 'user': self.name}
+        params = self._default_params({'method': 'user.getNeighbours'})
         if limit is not None:
             params.update({'limit': limit})
-        data = self.__api._fetch_data(params).find('neighbours')
+        data = self._api._fetch_data(params).find('neighbours')
         return [
                 User(
-                    self.__api,
+                    self._api,
                     subject = self,
                     name = u.findtext('name'),
                     image = {'medium': u.findtext('image')},
@@ -168,24 +168,24 @@ class User(LastfmBase):
                 for u in data.findall('user')
             ]
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def neighbours(self):
         """neighbours of the user"""
         return self.get_neighbours()
-    
-    @LastfmBase.topProperty("neighbours")
+
+    @LastfmBase.top_property("neighbours")
     def nearest_neighbour(self):
         """nearest neightbour of the user"""
         pass
-    
-    @LastfmBase.cachedProperty
+
+    @LastfmBase.cached_property
     def playlists(self):
         """playlists of the user"""
-        params = {'method': 'user.getPlaylists', 'user': self.name}
-        data = self.__api._fetch_data(params).find('playlists')
+        params = self._default_params({'method': 'user.getPlaylists'})
+        data = self._api._fetch_data(params).find('playlists')
         return [
                 User.Playlist(
-                              self.__api,
+                              self._api,
                               id = int(p.findtext('id')),
                               title = p.findtext('title'),
                               date = datetime(*(
@@ -200,17 +200,17 @@ class User(LastfmBase):
                 for p in data.findall('playlist')
                 ]
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def loved_tracks(self):
-        params = {'method': 'user.getLovedTracks', 'user': self.name}
-        data = self.__api._fetch_data(params).find('lovedtracks')
+        params = self._default_params({'method': 'user.getLovedTracks'})
+        data = self._api._fetch_data(params).find('lovedtracks')
         return [
                 Track(
-                    self.__api,
+                    self._api,
                     subject = self,
                     name = t.findtext('name'),
                     artist = Artist(
-                        self.__api,
+                        self._api,
                         subject = self,
                         name = t.findtext('artist/name'),
                         mbid = t.findtext('artist/mbid'),
@@ -218,7 +218,7 @@ class User(LastfmBase):
                     ),
                     mbid = t.findtext('mbid'),
                     image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
-                    lovedOn = datetime(*(
+                    loved_on = datetime(*(
                         time.strptime(
                             t.findtext('date').strip(),
                             '%d %b %Y, %H:%M'
@@ -227,27 +227,27 @@ class User(LastfmBase):
                     )
                 for t in data.findall('track')
                 ]
-        
+
     def get_recent_tracks(self, limit = None):
-        params = {'method': 'user.getRecentTracks', 'user': self.name}
-        data = self.__api._fetch_data(params, no_cache = True).find('recenttracks')
+        params = self._default_params({'method': 'user.getRecentTracks'})
+        data = self._api._fetch_data(params, no_cache = True).find('recenttracks')
         return [
                 Track(
-                      self.__api,
+                      self._api,
                       subject = self,
                       name = t.findtext('name'),
                       artist = Artist(
-                                      self.__api,
+                                      self._api,
                                       subject = self,
                                       name = t.findtext('artist'),
                                       mbid = t.find('artist').attrib['mbid'],
                                       ),
                       album = Album(
-                                    self.__api,
+                                    self._api,
                                     subject = self,
                                     name = t.findtext('album'),
                                     artist = Artist(
-                                                    self.__api,
+                                                    self._api,
                                                     subject = self,
                                                     name = t.findtext('artist'),
                                                     mbid = t.find('artist').attrib['mbid'],
@@ -258,7 +258,7 @@ class User(LastfmBase):
                       streamable = (t.findtext('streamable') == '1'),
                       url = t.findtext('url'),
                       image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
-                      playedOn = datetime(*(
+                      played_on = datetime(*(
                                            time.strptime(
                                                          t.findtext('date').strip(),
                                                          '%d %b %Y, %H:%M'
@@ -273,24 +273,24 @@ class User(LastfmBase):
         """recent tracks played by the user"""
         return self.get_recent_tracks()
 
-    @LastfmBase.topProperty("recent_tracks")
+    @LastfmBase.top_property("recent_tracks")
     def most_recent_track(self):
         """most recent track played by the user"""
         pass
 
     def get_top_albums(self, period = None):
-        params = {'method': 'user.getTopAlbums', 'user': self.name}
+        params = self._default_params({'method': 'user.getTopAlbums'})
         if period is not None:
             params.update({'period': period})
-        data = self.__api._fetch_data(params).find('topalbums')
+        data = self._api._fetch_data(params).find('topalbums')
 
         return [
                 Album(
-                     self.__api,
+                     self._api,
                      subject = self,
                      name = a.findtext('name'),
                      artist = Artist(
-                                     self.__api,
+                                     self._api,
                                      subject = self,
                                      name = a.findtext('artist/name'),
                                      mbid = a.findtext('artist/mbid'),
@@ -308,25 +308,25 @@ class User(LastfmBase):
                 for a in data.findall('album')
                 ]
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def top_albums(self):
         """overall top albums of the user"""
         return self.get_top_albums()
-        
-    @LastfmBase.topProperty("top_albums")
+
+    @LastfmBase.top_property("top_albums")
     def top_album(self):
         """overall top most album of the user"""
         pass
 
     def get_top_artists(self, period = None):
-        params = {'method': 'user.getTopArtists', 'user': self.name}
+        params = self._default_params({'method': 'user.getTopArtists'})
         if period is not None:
             params.update({'period': period})
-        data = self.__api._fetch_data(params).find('topartists')
-        
+        data = self._api._fetch_data(params).find('topartists')
+
         return [
                 Artist(
-                       self.__api,
+                       self._api,
                        subject = self,
                        name = a.findtext('name'),
                        mbid = a.findtext('mbid'),
@@ -342,28 +342,28 @@ class User(LastfmBase):
                 for a in data.findall('artist')
                 ]
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def top_artists(self):
         """top artists of the user"""
         return self.get_top_artists()
-        
-    @LastfmBase.topProperty("top_artists")
+
+    @LastfmBase.top_property("top_artists")
     def top_artist(self):
         """top artist of the user"""
         pass
 
     def get_top_tracks(self, period = None):
-        params = {'method': 'user.getTopTracks', 'user': self.name}
+        params = self._default_params({'method': 'user.getTopTracks'})
         if period is not None:
             params.update({'period': period})
-        data = self.__api._fetch_data(params).find('toptracks')
+        data = self._api._fetch_data(params).find('toptracks')
         return [
                 Track(
-                      self.__api,
+                      self._api,
                       subject = self,
                       name = t.findtext('name'),
                       artist = Artist(
-                                      self.__api,
+                                      self._api,
                                       subject = self,
                                       name = t.findtext('artist/name'),
                                       mbid = t.findtext('artist/mbid'),
@@ -376,30 +376,30 @@ class User(LastfmBase):
                                     playcount = t.findtext('playcount') and int(t.findtext('playcount')) or None
                                     ),
                       streamable = (t.findtext('streamable') == '1'),
-                      fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                      full_track = (t.find('streamable').attrib['fulltrack'] == '1'),
                       image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
                       )
                 for t in data.findall('track')
                 ]
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def top_tracks(self):
         """top tracks of the user"""
         return self.get_top_tracks()
-        
-    @LastfmBase.topProperty("top_tracks")
+
+    @LastfmBase.top_property("top_tracks")
     def top_track(self):
         """top track of the user"""
         return (len(self.top_tracks) and self.top_tracks[0] or None)
 
     def get_top_tags(self, limit = None):
-        params = {'method': 'user.getTopTags', 'user': self.name}
+        params = self._default_params({'method': 'user.getTopTags'})
         if limit is not None:
             params.update({'limit': limit})
-        data = self.__api._fetch_data(params).find('toptags')
+        data = self._api._fetch_data(params).find('toptags')
         return [
                 Tag(
-                    self.__api,
+                    self._api,
                     subject = self,
                     name = t.findtext('name'),
                     url = t.findtext('url'),
@@ -407,42 +407,42 @@ class User(LastfmBase):
                                   subject = t.findtext('name'),
                                   count = int(t.findtext('count'))
                                   )
-                    ) 
+                    )
                 for t in data.findall('tag')
                 ]
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def top_tags(self):
         """top tags of the user"""
         return self.get_top_tags()
-        
-    @LastfmBase.topProperty("top_tags")
+
+    @LastfmBase.top_property("top_tags")
     def top_tag(self):
         """top tag of the user"""
         pass
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def weekly_chart_list(self):
-        params = {'method': 'user.getWeeklyChartList', 'user': self.name}
-        data = self.__api._fetch_data(params).find('weeklychartlist')
+        params = self._default_params({'method': 'user.getWeeklyChartList'})
+        data = self._api._fetch_data(params).find('weeklychartlist')
         return [
-                WeeklyChart.create_from_data(self.__api, self, c)
+                WeeklyChart.create_from_data(self._api, self, c)
                 for c in data.findall('chart')
                 ]
-            
+
     def get_weekly_album_chart(self,
                              start = None,
                              end = None):
-        params = {'method': 'user.getWeeklyAlbumChart', 'user': self.name}
-        params = WeeklyChart._check_weekly_chart_params(params, start, end)            
-        data = self.__api._fetch_data(params).find('weeklyalbumchart')   
-        return WeeklyAlbumChart.create_from_data(self.__api, self, data)
+        params = self._default_params({'method': 'user.getWeeklyAlbumChart'})
+        params = WeeklyChart._check_weekly_chart_params(params, start, end)
+        data = self._api._fetch_data(params).find('weeklyalbumchart')
+        return WeeklyAlbumChart.create_from_data(self._api, self, data)
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def recent_weekly_album_chart(self):
         return self.get_weekly_album_chart()
-    
-    @LastfmBase.cachedProperty
+
+    @LastfmBase.cached_property
     def weekly_album_chart_list(self):
         wcl = list(self.weekly_chart_list)
         wcl.reverse()
@@ -458,16 +458,16 @@ class User(LastfmBase):
     def get_weekly_artist_chart(self,
                              start = None,
                              end = None):
-        params = {'method': 'user.getWeeklyArtistChart', 'user': self.name}
+        params = self._default_params({'method': 'user.getWeeklyArtistChart'})
         params = WeeklyChart._check_weekly_chart_params(params, start, end)
-        data = self.__api._fetch_data(params).find('weeklyartistchart')   
-        return WeeklyArtistChart.create_from_data(self.__api, self, data)
+        data = self._api._fetch_data(params).find('weeklyartistchart')
+        return WeeklyArtistChart.create_from_data(self._api, self, data)
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def recent_weekly_artist_chart(self):
         return self.get_weekly_artist_chart()
-    
-    @LastfmBase.cachedProperty
+
+    @LastfmBase.cached_property
     def weekly_artist_chart_list(self):
         wcl = list(self.weekly_chart_list)
         wcl.reverse()
@@ -483,16 +483,16 @@ class User(LastfmBase):
     def get_weekly_track_chart(self,
                              start = None,
                              end = None):
-        params = {'method': 'user.getWeeklyTrackChart', 'user': self.name}
+        params = self._default_params({'method': 'user.getWeeklyTrackChart'})
         params = WeeklyChart._check_weekly_chart_params(params, start, end)
-        data = self.__api._fetch_data(params).find('weeklytrackchart')   
-        return WeeklyTrackChart.create_from_data(self.__api, self, data)
+        data = self._api._fetch_data(params).find('weeklytrackchart')
+        return WeeklyTrackChart.create_from_data(self._api, self, data)
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def recent_weekly_track_chart(self):
         return self.get_weekly_track_chart()
-    
-    @LastfmBase.cachedProperty
+
+    @LastfmBase.cached_property
     def weekly_track_chart_list(self):
         wcl = list(self.weekly_chart_list)
         wcl.reverse()
@@ -504,16 +504,16 @@ class User(LastfmBase):
                 except Error:
                     pass
         return gen()
-    
+
     def compare(self, other, limit = None):
-        return Tasteometer.compare(self.__api,
+        return Tasteometer.compare(self._api,
                                    'user', 'user',
                                    self.name, other.name,
                                    limit)
     @property
     def library(self):
-        return self.__library
-    
+        return self._library
+
     @staticmethod
     def get_authenticated_user(api):
         data = api._fetch_data({'method': 'user.getInfo'}, sign = True, session = True).find('user')
@@ -532,15 +532,22 @@ class User(LastfmBase):
                               )
             )
 
+    def _default_params(self, extra_params = {}):
+        if not self.name:
+            raise InvalidParametersError("user has to be provided.")
+        params = {'user': self.name}
+        params.update(extra_params)
+        return params
+
     @staticmethod
-    def hash_func(*args, **kwds):
+    def _hash_func(*args, **kwds):
         try:
             return hash(kwds['name'])
         except KeyError:
             raise InvalidParametersError("name has to be provided for hashing")
 
     def __hash__(self):
-        return self.__class__.hash_func(name = self.name)
+        return self.__class__._hash_func(name = self.name)
 
     def __eq__(self, other):
         return self.name == other.name
@@ -550,89 +557,89 @@ class User(LastfmBase):
 
     def __repr__(self):
         return "<lastfm.User: %s>" % self.name
-    
+
     class Playlist(playlist.Playlist):
         """A class representing a playlist belonging to the user."""
         def init(self, api, id, title, date, size, creator):
             super(User.Playlist, self).init(api, "lastfm://playlist/%s" % id)
-            self.__id = id
-            self.__title = title
-            self.__date = date
-            self.__size = size
-            self.__creator = creator
-            
+            self._id = id
+            self._title = title
+            self._date = date
+            self._size = size
+            self._creator = creator
+
         @property
         def id(self):
-            return self.__id
-    
+            return self._id
+
         @property
         def title(self):
-            return self.__title
-    
+            return self._title
+
         @property
         def date(self):
-            return self.__date
-    
+            return self._date
+
         @property
         def size(self):
-            return self.__size
-    
+            return self._size
+
         @property
         def creator(self):
-            return self.__creator
-        
-        def addTrack(self, track):
+            return self._creator
+
+        def add_track(self, track):
             params = {'method': 'playlist.addTrack', 'playlistID': self.id}
             if not isinstance(track, Track):
-                track = self.__api.search_track(track)[0]
-            
+                track = self._api.search_track(track)[0]
+
             params['artist'] = track.artist.name
             params['track'] = track.name
-            self.__api._post_data(params)            
-        
+            self._api._post_data(params)
+
         @staticmethod
-        def hash_func(*args, **kwds):
+        def _hash_func(*args, **kwds):
             try:
                 return hash(kwds['id'])
             except KeyError:
                 raise InvalidParametersError("id has to be provided for hashing")
-            
+
         def __hash__(self):
-            return self.__class__.hash_func(id = self.id)
-        
+            return self.__class__._hash_func(id = self.id)
+
         def __repr__(self):
             return "<lastfm.User.Playlist: %s>" % self.title
-        
+
     class Library(object):
         """A class representing the music library of the user."""
         def __init__(self, api, user):
-            self.__api = api
-            self.__user = user
-            
+            self._api = api
+            self._user = user
+
         @property
         def user(self):
-            return self.__user
-            
+            return self._user
+
         def get_albums(self,
                       limit = None):
-            params = {'method': 'library.getAlbums', 'user': self.user.name}
+            params = self._default_params({'method': 'library.getAlbums'})
             if limit is not None:
                 params.update({'limit': limit})
-            
+
             @lazylist
             def gen(lst):
-                data = self.__api._fetch_data(params).find('albums')
+                data = self._api._fetch_data(params).find('albums')
                 total_pages = int(data.attrib['totalPages'])
-                
+
                 @lazylist
                 def gen2(lst, data):
                     for a in data.findall('album'):
                         yield Album(
-                                    self.__api,
+                                    self._api,
                                     subject = self,
                                     name = a.findtext('name'),
                                     artist = Artist(
-                                                    self.__api,
+                                                    self._api,
                                                     subject = self,
                                                     name = a.findtext('artist/name'),
                                                     mbid = a.findtext('artist/mbid'),
@@ -646,41 +653,41 @@ class User(LastfmBase):
                                                   playcount = int(a.findtext('playcount')),
                                                   )
                                     )
-                               
-                
+
+
                 for a in gen2(data):
                     yield a
-                
+
                 for page in xrange(2, total_pages+1):
                     params.update({'page': page})
                     try:
-                        data = self.__api._fetch_data(params).find('albums')
+                        data = self._api._fetch_data(params).find('albums')
                     except Error:
                         continue
                     for a in gen2(data):
-                        yield a            
+                        yield a
             return gen()
-            
-        @LastfmBase.cachedProperty
+
+        @LastfmBase.cached_property
         def albums(self):
             return self.get_albums()
 
         def get_artists(self,
                        limit = None):
-            params = {'method': 'library.getArtists', 'user': self.user.name}
+            params = self._default_params({'method': 'library.getArtists'})
             if limit is not None:
                 params.update({'limit': limit})
-            
+
             @lazylist
             def gen(lst):
-                data = self.__api._fetch_data(params).find('artists')
+                data = self._api._fetch_data(params).find('artists')
                 total_pages = int(data.attrib['totalPages'])
-                
+
                 @lazylist
                 def gen2(lst, data):
                     for a in data.findall('artist'):
                         yield Artist(
-                                     self.__api,
+                                     self._api,
                                      subject = self,
                                      name = a.findtext('name'),
                                      mbid = a.findtext('mbid'),
@@ -692,45 +699,45 @@ class User(LastfmBase):
                                      url = a.findtext('url'),
                                      streamable = (a.findtext('streamable') == "1"),
                                      image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
-                                     )                               
-                
+                                     )
+
                 for a in gen2(data):
                     yield a
-                
+
                 for page in xrange(2, total_pages+1):
                     params.update({'page': page})
                     try:
-                        data = self.__api._fetch_data(params).find('artists')
+                        data = self._api._fetch_data(params).find('artists')
                     except Error:
                         continue
                     for a in gen2(data):
-                        yield a            
+                        yield a
             return gen()
-            
-        @LastfmBase.cachedProperty
+
+        @LastfmBase.cached_property
         def artists(self):
             return self.get_artists()
-        
+
         def get_tracks(self,
                       limit = None):
-            params = {'method': 'library.getTracks', 'user': self.user.name}
+            params = self._default_params({'method': 'library.getTracks'})
             if limit is not None:
                 params.update({'limit': limit})
-            
+
             @lazylist
             def gen(lst):
-                data = self.__api._fetch_data(params).find('tracks')
-                totalPages = int(data.attrib['totalPages'])
-                
+                data = self._api._fetch_data(params).find('tracks')
+                total_pages = int(data.attrib['totalPages'])
+
                 @lazylist
                 def gen2(lst, data):
                     for t in data.findall('track'):
                         yield Track(
-                                    self.__api,
+                                    self._api,
                                     subject = self,
                                     name = t.findtext('name'),
                                     artist = Artist(
-                                                    self.__api,
+                                                    self._api,
                                                     subject = self,
                                                     name = t.findtext('artist/name'),
                                                     mbid = t.findtext('artist/mbid'),
@@ -743,38 +750,45 @@ class User(LastfmBase):
                                                   tagcount = t.findtext('tagcount') and int(t.findtext('tagcount')) or None
                                                   ),
                                     streamable = (t.findtext('streamable') == '1'),
-                                    fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                                    full_track = (t.find('streamable').attrib['fulltrack'] == '1'),
                                     image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
-                                    )                            
-                
+                                    )
+
                 for t in gen2(data):
                     yield t
-                
-                for page in xrange(2, totalPages+1):
+
+                for page in xrange(2, total_pages+1):
                     params.update({'page': page})
                     data = None
                     try:
-                        data = self.__api._fetch_data(params).find('tracks')
+                        data = self._api._fetch_data(params).find('tracks')
                     except Error:
                         continue
                     for t in gen2(data):
-                        yield t            
+                        yield t
             return gen()
-        
-        @LastfmBase.cachedProperty
+
+        @LastfmBase.cached_property
         def tracks(self):
             return self.get_tracks()
-        
+
+        def _default_params(self, extra_params = {}):
+            if not self.user.name:
+                raise InvalidParametersError("user has to be provided.")
+            params = {'user': self.user.name}
+            params.update(extra_params)
+            return params
+
         @staticmethod
-        def hash_func(*args, **kwds):
+        def _hash_func(*args, **kwds):
             try:
                 return hash(kwds['user'])
             except KeyError:
                 raise InvalidParametersError("user has to be provided for hashing")
-    
+
         def __hash__(self):
-            return self.__class__.hash_func(user = self.user)
-            
+            return self.__class__._hash_func(user = self.user)
+
         def __repr__(self):
             return "<lastfm.User.Library: for user '%s'>" % self.user.name
 

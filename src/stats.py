@@ -17,67 +17,67 @@ class Stats(object):
                  weight = None,
                  attendance = None,
                  reviews = None,):
-        self.__subject = subject
-        self.__listeners = listeners
-        self.__playcount = playcount
-        self.__tagcount = tagcount
-        self.__count = count
-        self.__match = match
-        self.__rank = rank
-        self.__weight = weight
-        self.__attendance = attendance
-        self.__reviews = reviews
+        self._subject = subject
+        self._listeners = listeners
+        self._playcount = playcount
+        self._tagcount = tagcount
+        self._count = count
+        self._match = match
+        self._rank = rank
+        self._weight = weight
+        self._attendance = attendance
+        self._reviews = reviews
 
     @property
     def subject(self):
         """subject of the stats"""
-        return self.__subject
+        return self._subject
 
     @property
     def rank(self):
         """rank of the subject"""
-        return self.__rank
+        return self._rank
 
     @property
     def listeners(self):
         """number of listeners of the subject"""
-        return self.__listeners
+        return self._listeners
 
     @property
     def playcount(self):
         """playcount of the subject"""
-        return self.__playcount
+        return self._playcount
 
     @property
     def tagcount(self):
         """tagcount of the subject"""
-        return self.__tagcount
+        return self._tagcount
     
     @property
     def count(self):
         """count of the subject"""
-        return self.__count
+        return self._count
         
     @property
     def match(self):
         """match of the subject"""
-        return self.__match
+        return self._match
 
     @property
     def weight(self):
         """weight of the subject"""
-        return self.__weight
+        return self._weight
 
     @property
     def attendance(self):
         """attendance of the subject"""
-        return self.__attendance
+        return self._attendance
 
     @property
     def reviews(self):
         """reviews of the subject"""
-        return self.__reviews
+        return self._reviews
 
     def __repr__(self):
-        return "<lastfm.Stats: for '%s'>" % self.__subject.name
+        return "<lastfm.Stats: for '%s'>" % self._subject.name
     

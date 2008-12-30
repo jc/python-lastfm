@@ -10,16 +10,16 @@ class BaseError(Exception):
                  message = None,
                  code = None):
         super(BaseError, self).__init__()
-        self.__code = code
-        self.__message = message
+        self._code = code
+        self._message = message
 
     @property
     def code(self):
-        return self.__code
+        return self._code
 
     @property
     def message(self):
-        return self.__message
+        return self._message
     
     def __str__(self):
         return "%s" % self.message
@@ -65,7 +65,7 @@ class TokenNotAuthorizedError(BaseError):#14
 class TokenExpiredError(BaseError):#15
     pass
 
-errorMap = {
+error_map = {
             1: Error,
             2: InvalidServiceError,
             3: InvalidMethodError,

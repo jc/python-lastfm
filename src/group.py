@@ -14,35 +14,35 @@ class Group(LastfmBase):
                  name = None):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
-        self.__api = api
-        self.__name = name
+        self._api = api
+        self._name = name
 
     @property
     def name(self):
-        return self.__name
+        return self._name
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def weekly_chart_list(self):
-        params = {'method': 'group.getWeeklyChartList', 'group': self.name}
-        data = self.__api._fetch_data(params).find('weeklychartlist')
+        params = self._default_params({'method': 'group.getWeeklyChartList'})
+        data = self._api._fetch_data(params).find('weeklychartlist')
         return [
-                WeeklyChart.create_from_data(self.__api, self, c)
+                WeeklyChart.create_from_data(self._api, self, c)
                 for c in data.findall('chart')
                 ]
 
     def get_weekly_album_chart(self,
                              start = None,
                              end = None):
-        params = {'method': 'group.getWeeklyAlbumChart', 'group': self.name}
+        params = self._default_params({'method': 'group.getWeeklyAlbumChart'})
         params = WeeklyChart._check_weekly_chart_params(params, start, end)
-        data = self.__api._fetch_data(params).find('weeklyalbumchart')
-        return WeeklyAlbumChart.create_from_data(self.__api, self, data)
+        data = self._api._fetch_data(params).find('weeklyalbumchart')
+        return WeeklyAlbumChart.create_from_data(self._api, self, data)
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def recent_weekly_album_chart(self):
         return self.get_weekly_album_chart()
     
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def weekly_album_chart_list(self):
         wcl = list(self.weekly_chart_list)
         wcl.reverse()
@@ -55,16 +55,16 @@ class Group(LastfmBase):
     def get_weekly_artist_chart(self,
                              start = None,
                              end = None):
-        params = {'method': 'group.getWeeklyArtistChart', 'group': self.name}
+        params = self._default_params({'method': 'group.getWeeklyArtistChart'})
         params = WeeklyChart._check_weekly_chart_params(params, start, end)
-        data = self.__api._fetch_data(params).find('weeklyartistchart')
-        return WeeklyArtistChart.create_from_data(self.__api, self, data)
+        data = self._api._fetch_data(params).find('weeklyartistchart')
+        return WeeklyArtistChart.create_from_data(self._api, self, data)
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def recent_weekly_artist_chart(self):
         return self.get_weekly_artist_chart()
     
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def weekly_artist_chart_list(self):
         wcl = list(self.weekly_chart_list)
         wcl.reverse()
@@ -77,16 +77,16 @@ class Group(LastfmBase):
     def get_weekly_track_chart(self,
                              start = None,
                              end = None):
-        params = {'method': 'group.getWeeklyTrackChart', 'group': self.name}
+        params = self._default_params({'method': 'group.getWeeklyTrackChart'})
         params = WeeklyChart._check_weekly_chart_params(params, start, end)
-        data = self.__api._fetch_data(params).find('weeklytrackchart')
-        return WeeklyTrackChart.create_from_data(self.__api, self, data)
+        data = self._api._fetch_data(params).find('weeklytrackchart')
+        return WeeklyTrackChart.create_from_data(self._api, self, data)
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def recent_weekly_track_chart(self):
         return self.get_weekly_track_chart()
     
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def weekly_track_chart_list(self):
         wcl = list(self.weekly_chart_list)
         wcl.reverse()
@@ -96,15 +96,22 @@ class Group(LastfmBase):
                 yield self.get_weekly_track_chart(wc.start, wc.end)
         return gen()
 
+    def _default_params(self, extra_params = {}):
+        if not self.name:
+            raise InvalidParametersError("group has to be provided.")
+        params = {'group': self.name}
+        params.update(extra_params)
+        return params
+    
     @staticmethod
-    def hash_func(*args, **kwds):
+    def _hash_func(*args, **kwds):
         try:
             return hash(kwds['name'])
         except KeyError:
             raise InvalidParametersError("name has to be provided for hashing")
 
     def __hash__(self):
-        return self.__class__.hash_func(name = self.name)
+        return self.__class__._hash_func(name = self.name)
 
     def __eq__(self, other):
         return self.name == other.name

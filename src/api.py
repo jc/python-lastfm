@@ -22,9 +22,9 @@ class Api(object):
                  request_headers=None,
                  no_cache = False,
                  debug = False):
-        self.__api_key = api_key
-        self.__secret = secret
-        self.__session_key = session_key
+        self._api_key = api_key
+        self._secret = secret
+        self._session_key = session_key
         self._cache = FileCache()
         self._urllib = urllib2
         self._cache_timeout = Api.DEFAULT_CACHE_TIMEOUT
@@ -37,36 +37,36 @@ class Api(object):
 
     @property
     def api_key(self):
-        return self.__api_key
-    
+        return self._api_key
+
     @property
     def secret(self):
-        return self.__secret
-    
+        return self._secret
+
     @property
     def session_key(self):
-        return self.__session_key
-    
+        return self._session_key
+
     def set_session_key(self):
         params = {'method': 'auth.getSession', 'token': self.auth_token}
-        self.__session_key = self._fetch_data(params, sign = True).findtext('session/key')
-        self.__auth_token = None
-    
-    @LastfmBase.cachedProperty
+        self._session_key = self._fetch_data(params, sign = True).findtext('session/key')
+        self._auth_token = None
+
+    @LastfmBase.cached_property
     def auth_token(self):
         params = {'method': 'auth.getToken'}
         return self._fetch_data(params, sign = True).findtext('token')
-    
-    @LastfmBase.cachedProperty
+
+    @LastfmBase.cached_property
     def auth_url(self):
         return "http://www.last.fm/api/auth/?api_key=%s&token=%s" % (self.api_key, self.auth_token)
-    
-    
+
+
     def set_cache(self, cache):
         '''Override the default cache.  Set to None to prevent caching.
 
         Args:
-            cache: an instance that supports the same API as the audioscrobblerws.FileCache
+            cache: an instance that supports the same API as the lastfm.FileCache
         '''
         self._cache = cache
 
@@ -124,7 +124,7 @@ class Api(object):
     def get_group(self, name):
         return Group(self, name = name)
 
-    def fetch_playlist(self, url):
+    def get_playlist(self, url):
         return Playlist.fetch(self, url)
 
     def get_tag(self, name):
@@ -165,7 +165,7 @@ class Api(object):
         except Error, e:
             raise e
         return user
-    
+
     def get_authenticated_user(self):
         if self.session_key is not None:
             return User.get_authenticated_user(self)
@@ -238,7 +238,7 @@ class Api(object):
             keys = parameters.keys()
             keys.sort()
             return urllib.urlencode([(k, self._encode(parameters[k])) for k in keys if parameters[k] is not None])
-        
+
     def _read_url_data(self, opener, url, data = None):
             now = datetime.now()
             delta = now - self._last_fetch_time
@@ -247,8 +247,8 @@ class Api(object):
                 time.sleep(Api.FETCH_INTERVAL - delta)
             url_data = opener.open(url, data).read()
             self._last_fetch_time = datetime.now()
-            return url_data        
-    
+            return url_data
+
     def _fetch_url(self,
                   url,
                   parameters = None,
@@ -303,19 +303,19 @@ class Api(object):
                    session = False,
                    no_cache = False):
         params['api_key'] = self.api_key
-        
+
         if session:
             if self.session_key is not None:
                 params['sk'] = self.session_key
             else:
                 raise AuthenticationFailedError("session key must be present to call this method")
-            
+
         if sign:
             params['api_sig'] = self._get_api_sig(params)
-           
+
         xml = self._fetch_url(Api.API_ROOT_URL, params, no_cache = self._no_cache or no_cache)
-        return self._check_XML(xml)
-    
+        return self._check_xml(xml)
+
     def _post_url(self,
                  url,
                  parameters):
@@ -326,24 +326,24 @@ class Api(object):
         opener = self._get_opener(url)
         url_data = self._read_url_data(opener, url, data)
         return url_data
-    
+
     def _post_data(self, params):
         params['api_key'] = self.api_key
-        
+
         if self.session_key is not None:
             params['sk'] = self.session_key
         else:
             raise AuthenticationFailedError("session key must be present to call this method")
-        
-        params['api_sig'] = self._get_api_sig(params)       
+
+        params['api_sig'] = self._get_api_sig(params)
         xml = self._post_url(Api.API_ROOT_URL, params)
-        return self._check_XML(xml)
-    
+        return self._check_xml(xml)
+
     def _get_api_sig(self, params):
         if self.secret is not None:
                 keys = params.keys()[:]
                 keys.sort()
-                sig = unicode() 
+                sig = unicode()
                 for name in keys:
                     sig += ("%s%s" % (name, params[name]))
                 sig += self.secret
@@ -352,7 +352,7 @@ class Api(object):
         else:
             raise AuthenticationFailedError("api secret must be present to call this method")
 
-    def _check_XML(self, xml):
+    def _check_xml(self, xml):
         data = None
         try:
             data = ElementTree.XML(xml)
@@ -361,18 +361,18 @@ class Api(object):
         if data.get('status') != "ok":
             code = int(data.find("error").get('code'))
             message = data.findtext('error')
-            if code in errorMap.keys():
-                raise errorMap[code](message, code)
+            if code in error_map.keys():
+                raise error_map[code](message, code)
             else:
                 raise Error(message, code)
         return data
 
     def __repr__(self):
-        return "<lastfm.Api: %s>" % self.__api_key
+        return "<lastfm.Api: %s>" % self._api_key
 
 from datetime import datetime
 import md5
-import platform
+import sys
 import time
 import urllib
 import urllib2
@@ -380,7 +380,7 @@ import urlparse
 
 from album import Album
 from artist import Artist
-from error import errorMap, Error, OperationFailedError, AuthenticationFailedError
+from error import error_map, Error, OperationFailedError, AuthenticationFailedError
 from event import Event
 from filecache import FileCache
 from geo import Location, Country
@@ -391,8 +391,7 @@ from tasteometer import Tasteometer
 from track import Track
 from user import User
 
-python_version = platform.python_version_tuple()
-if python_version[0] == 2 and python_version[1] >= 5:
+if sys.version_info >= (2, 5):
     import xml.etree.cElementTree as ElementTree
 else:
     try:

@@ -6,7 +6,7 @@ __license__ = "GNU Lesser General Public License"
 
 class Sharable(object):
     def init(self, api):
-        self.__api = api
+        self._api = api
         
     def share(self, recipient, message = None):
         from user import User
@@ -21,4 +21,7 @@ class Sharable(object):
             if isinstance(recipient[i], User):
                 recipient[i] = recipient[i].name
         params['recipient'] = ",".join(recipient)
-        self.__api._post_data(params)
+        self._api._post_data(params)
+        
+    def _default_params(self, extra_params = {}):
+        return extra_params

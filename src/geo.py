@@ -18,28 +18,28 @@ class Geo(object):
         params = {'method': 'geo.getEvents', 'location': location}
         if distance is not None:
             params.update({'distance': distance})
-            
+
         if latitude is not None and longitude is not None:
             params.update({'latitude': latitude, 'longitude': longitude})
-        
+
         @lazylist
         def gen(lst):
             data = api._fetch_data(params).find('events')
-            totalPages = int(data.attrib['totalpages'])
-            
+            total_pages = int(data.attrib['totalpages'])
+
             @lazylist
             def gen2(lst, data):
                 for e in data.findall('event'):
                     yield Event.create_from_data(api, e)
-            
+
             for e in gen2(data):
                 yield e
-            
-            for page in xrange(2, totalPages+1):
+
+            for page in xrange(2, total_pages+1):
                 params.update({'page': page})
                 data = api._fetch_data(params).find('events')
                 for e in gen2(data):
-                    yield e            
+                    yield e
         return gen()
 
     @staticmethod
@@ -67,7 +67,7 @@ class Geo(object):
         params = {'method': 'geo.getTopTracks', 'country': country}
         if location is not None:
             params.update({'location': location})
-            
+
         data = api._fetch_data(params).find('toptracks')
         return [
                 Track(
@@ -86,7 +86,7 @@ class Geo(object):
                                      playcount = int(t.findtext('playcount'))
                                      ),
                        streamable = (t.findtext('streamable') == '1'),
-                       fullTrack = (t.find('streamable').attrib['fulltrack'] == '1'),
+                       full_track = (t.find('streamable').attrib['fulltrack'] == '1'),
                        url = 'http://' + t.findtext('url'),
                        image = {'large': t.findtext('image')}
                        )
@@ -99,34 +99,34 @@ class Venue(LastfmBase):
                  name = None,
                  location = None,
                  url = None):
-        self.__name = name
-        self.__location = location
-        self.__url = url
+        self._name = name
+        self._location = location
+        self._url = url
 
     @property
     def name(self):
         """name of the venue"""
-        return self.__name
+        return self._name
 
     @property
     def location(self):
         """location of the event"""
-        return self.__location
+        return self._location
 
     @property
     def url(self):
         """url of the event's page"""
-        return self.__url
+        return self._url
 
     @staticmethod
-    def hash_func(*args, **kwds):
+    def _hash_func(*args, **kwds):
         try:
             return hash(kwds['url'])
         except KeyError:
             raise InvalidParametersError("url has to be provided for hashing")
 
     def __hash__(self):
-        return self.__class__.hash_func(url = self.url)
+        return self.__class__._hash_func(url = self.url)
 
     def __eq__(self, other):
         return self.url == other.url
@@ -152,77 +152,77 @@ class Location(LastfmBase):
                  timezone = None):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
-        self.__api = api
-        self.__city = city
-        self.__country = country
-        self.__street = street
-        self.__postalCode = postal_code
-        self.__latitude = latitude
-        self.__longitude = longitude
-        self.__timezone = timezone
+        self._api = api
+        self._city = city
+        self._country = country
+        self._street = street
+        self._postal_code = postal_code
+        self._latitude = latitude
+        self._longitude = longitude
+        self._timezone = timezone
 
     @property
     def city(self):
         """city in which the location is situated"""
-        return self.__city
+        return self._city
 
     @property
     def country(self):
         """country in which the location is situated"""
-        return self.__country
+        return self._country
 
     @property
     def street(self):
         """street in which the location is situated"""
-        return self.__street
+        return self._street
 
     @property
-    def postalCode(self):
+    def postal_code(self):
         """postal code of the location"""
-        return self.__postalCode
+        return self._postal_code
 
     @property
     def latitude(self):
         """latitude of the location"""
-        return self.__latitude
+        return self._latitude
 
     @property
     def longitude(self):
         """longitude of the location"""
-        return self.__longitude
+        return self._longitude
 
     @property
     def timezone(self):
         """timezone in which the location is situated"""
-        return self.__timezone
-    
-    @LastfmBase.cachedProperty
+        return self._timezone
+
+    @LastfmBase.cached_property
     def top_tracks(self):
         """top tracks of the location"""
         if self.country is None or self.city is None:
             raise InvalidParametersError("country and city of this location are required for calling this method")
-        return Geo.get_top_tracks(self.__api, self.country.name, self.city)
-    
-    @LastfmBase.topProperty("top_tracks")
+        return Geo.get_top_tracks(self._api, self.country.name, self.city)
+
+    @LastfmBase.top_property("top_tracks")
     def top_track(self):
         """top track of the location"""
         pass
-    
+
     def get_events(self,
                   distance = None):
-        return Geo.get_events(self.__api,
+        return Geo.get_events(self._api,
                              self.city,
                              self.latitude,
                              self.longitude,
                              distance)
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def events(self):
         """events taking place at/around the location"""
         return self.get_events()
-        
+
     @staticmethod
-    def hash_func(*args, **kwds):
+    def _hash_func(*args, **kwds):
         try:
             return hash("latlong%s%s" % (kwds['latitude'], kwds['longitude']))
         except KeyError:
@@ -233,11 +233,11 @@ class Location(LastfmBase):
 
     def __hash__(self):
         if not self.city:
-            return self.__class__.hash_func(
+            return self.__class__._hash_func(
                                            latitude = self.latitude,
                                            longitude = self.longitude)
         else:
-            return self.__class__.hash_func(name = self.city)
+            return self.__class__._hash_func(name = self.city)
 
     def __eq__(self, other):
         return self.latitude == other.latitude and self.longitude == other.longitude
@@ -261,51 +261,51 @@ class Country(LastfmBase):
                  name = None):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
-        self.__api = api
-        self.__name = name
+        self._api = api
+        self._name = name
 
     @property
     def name(self):
         """name of the country"""
-        return self.__name
+        return self._name
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def top_artists(self):
         """top artists of the country"""
-        return Geo.get_top_artists(self.__api, self.name)
-        
-    @LastfmBase.topProperty("top_artists")
+        return Geo.get_top_artists(self._api, self.name)
+
+    @LastfmBase.top_property("top_artists")
     def top_artist(self):
         """top artist of the country"""
         pass
 
     def get_top_tracks(self, location = None):
-        return Geo.get_top_tracks(self.__api, self.name, location)
-    
-    @LastfmBase.cachedProperty
+        return Geo.get_top_tracks(self._api, self.name, location)
+
+    @LastfmBase.cached_property
     def top_tracks(self):
         """top tracks of the country"""
         return self.get_top_tracks()
-    
-    @LastfmBase.topProperty("top_tracks")
+
+    @LastfmBase.top_property("top_tracks")
     def top_track(self):
         """top track of the country"""
         pass
 
-    @LastfmBase.cachedProperty
+    @LastfmBase.cached_property
     def events(self):
         """events taking place at/around the location"""
-        return Geo.get_events(self.__api, self.name)
-        
+        return Geo.get_events(self._api, self.name)
+
     @staticmethod
-    def hash_func(*args, **kwds):
+    def _hash_func(*args, **kwds):
         try:
             return hash(kwds['name'])
         except KeyError:
             raise InvalidParametersError("name has to be provided for hashing")
 
     def __hash__(self):
-        return self.__class__.hash_func(name = self.name)
+        return self.__class__._hash_func(name = self.name)
 
     def __eq__(self, other):
         return self.name == other.name
