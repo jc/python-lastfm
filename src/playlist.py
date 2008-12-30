@@ -62,5 +62,5 @@ else:
         try:
             import ElementTree
         except ImportError:
-            from error import Error
-            raise Error("Install ElementTree package for using python-lastfm")
+            from error import LastfmError
+            raise LastfmError("Install ElementTree package for using python-lastfm")

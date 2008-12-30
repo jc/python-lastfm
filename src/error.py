@@ -4,12 +4,12 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-class BaseError(Exception):
+class LastfmError(Exception):
     """Base class for Lastfm errors"""
     def __init__(self,                 
                  message = None,
                  code = None):
-        super(BaseError, self).__init__()
+        super(LastfmError, self).__init__()
         self._code = code
         self._message = message
 
@@ -23,50 +23,48 @@ class BaseError(Exception):
     
     def __str__(self):
         return "%s" % self.message
-class Error(BaseError):
+
+class InvalidServiceError(LastfmError):#2
     pass
 
-class InvalidServiceError(BaseError):#2
+class InvalidMethodError(LastfmError):#3
     pass
 
-class InvalidMethodError(BaseError):#3
+class AuthenticationFailedError(LastfmError):#4
     pass
 
-class AuthenticationFailedError(BaseError):#4
+class InvalidFormatError(LastfmError):#5
     pass
 
-class InvalidFormatError(BaseError):#5
+class InvalidParametersError(LastfmError):#6
     pass
 
-class InvalidParametersError(BaseError):#6
+class InvalidResourceError(LastfmError):#7
     pass
 
-class InvalidResourceError(BaseError):#7
+class OperationFailedError(LastfmError):#8
     pass
 
-class OperationFailedError(BaseError):#8
+class InvalidSessionKeyError(LastfmError):#9
     pass
 
-class InvalidSessionKeyError(BaseError):#9
+class InvalidApiKeyError(LastfmError):#10
     pass
 
-class InvalidApiKeyError(BaseError):#10
+class ServiceOfflineError(LastfmError):#11
     pass
 
-class ServiceOfflineError(BaseError):#11
+class SubscribersOnlyError(LastfmError):#12
     pass
 
-class SubscribersOnlyError(BaseError):#12
+class TokenNotAuthorizedError(LastfmError):#14
     pass
 
-class TokenNotAuthorizedError(BaseError):#14
-    pass
-
-class TokenExpiredError(BaseError):#15
+class TokenExpiredError(LastfmError):#15
     pass
 
 error_map = {
-            1: Error,
+            1: LastfmError,
             2: InvalidServiceError,
             3: InvalidMethodError,
             4: AuthenticationFailedError,

@@ -162,7 +162,7 @@ class Api(object):
         try:
             user = User(self, name = name)
             user.friends
-        except Error, e:
+        except LastfmError, e:
             raise e
         return user
 
@@ -364,7 +364,7 @@ class Api(object):
             if code in error_map.keys():
                 raise error_map[code](message, code)
             else:
-                raise Error(message, code)
+                raise LastfmError(message, code)
         return data
 
     def __repr__(self):
@@ -380,7 +380,7 @@ import urlparse
 
 from album import Album
 from artist import Artist
-from error import error_map, Error, OperationFailedError, AuthenticationFailedError
+from error import error_map, LastfmError, OperationFailedError, AuthenticationFailedError
 from event import Event
 from filecache import FileCache
 from geo import Location, Country
@@ -400,4 +400,4 @@ else:
         try:
             import ElementTree
         except ImportError:
-            raise Error("Install ElementTree package for using python-lastfm")
+            raise LastfmError("Install ElementTree package for using python-lastfm")

@@ -75,7 +75,7 @@ class LastfmBase(object):
             try:
                 cp = copy.copy(cache_attribute)
                 return cp
-            except Error:
+            except LastfmError:
                 return cache_attribute
 
         return property(fget = wrapper, doc = func.__doc__)
@@ -93,4 +93,4 @@ class LastfmBase(object):
         return not self.__gt__(other)
 
 import copy
-from error import Error
+from error import LastfmError

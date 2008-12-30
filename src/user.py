@@ -451,7 +451,7 @@ class User(LastfmBase):
             for wc in wcl:
                 try:
                     yield self.get_weekly_album_chart(wc.start, wc.end)
-                except Error:
+                except LastfmError:
                     pass
         return gen()
 
@@ -476,7 +476,7 @@ class User(LastfmBase):
             for wc in wcl:
                 try:
                     yield self.get_weekly_artist_chart(wc.start, wc.end)
-                except Error:
+                except LastfmError:
                     pass
         return gen()
 
@@ -501,7 +501,7 @@ class User(LastfmBase):
             for wc in wcl:
                 try:
                     yield self.get_weekly_track_chart(wc.start, wc.end)
-                except Error:
+                except LastfmError:
                     pass
         return gen()
 
@@ -662,7 +662,7 @@ class User(LastfmBase):
                     params.update({'page': page})
                     try:
                         data = self._api._fetch_data(params).find('albums')
-                    except Error:
+                    except LastfmError:
                         continue
                     for a in gen2(data):
                         yield a
@@ -708,7 +708,7 @@ class User(LastfmBase):
                     params.update({'page': page})
                     try:
                         data = self._api._fetch_data(params).find('artists')
-                    except Error:
+                    except LastfmError:
                         continue
                     for a in gen2(data):
                         yield a
@@ -762,7 +762,7 @@ class User(LastfmBase):
                     data = None
                     try:
                         data = self._api._fetch_data(params).find('tracks')
-                    except Error:
+                    except LastfmError:
                         continue
                     for t in gen2(data):
                         yield t
@@ -798,7 +798,7 @@ import time
 from api import Api
 from artist import Artist
 from album import Album
-from error import Error, InvalidParametersError
+from error import LastfmError, InvalidParametersError
 from event import Event
 from geo import Country
 from stats import Stats
