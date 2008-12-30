@@ -4,77 +4,80 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-class LastfmError(Exception):
-	"""Base class for Lastfm errors"""
-	def __init__(self,				 
-				 message = None,
-				 code = None):
-		self.__code = code
-		self.__message = message
+class BaseError(Exception):
+    """Base class for Lastfm errors"""
+    def __init__(self,                 
+                 message = None,
+                 code = None):
+        super(BaseError, self).__init__()
+        self.__code = code
+        self.__message = message
 
-	@property
-	def code(self):
-		return self.__code
+    @property
+    def code(self):
+        return self.__code
 
-	@property
-	def message(self):
-		return self.__message
-	
-	def __str__(self):
-		return "%s" % self.message
+    @property
+    def message(self):
+        return self.__message
+    
+    def __str__(self):
+        return "%s" % self.message
+class Error(BaseError):
+    pass
 
-class LastfmInvalidServiceError(LastfmError):#2
-	pass
+class InvalidServiceError(BaseError):#2
+    pass
 
-class LastfmInvalidMethodError(LastfmError):#3
-	pass
+class InvalidMethodError(BaseError):#3
+    pass
 
-class LastfmAuthenticationFailedError(LastfmError):#4
-	pass
+class AuthenticationFailedError(BaseError):#4
+    pass
 
-class LastfmInvalidFormatError(LastfmError):#5
-	pass
+class InvalidFormatError(BaseError):#5
+    pass
 
-class LastfmInvalidParametersError(LastfmError):#6
-	pass
+class InvalidParametersError(BaseError):#6
+    pass
 
-class LastfmInvalidResourceError(LastfmError):#7
-	pass
+class InvalidResourceError(BaseError):#7
+    pass
 
-class LastfmOperationFailedError(LastfmError):#8
-	pass
+class OperationFailedError(BaseError):#8
+    pass
 
-class LastfmInvalidSessionKeyError(LastfmError):#9
-	pass
+class InvalidSessionKeyError(BaseError):#9
+    pass
 
-class LastfmInvalidApiKeyError(LastfmError):#10
-	pass
+class InvalidApiKeyError(BaseError):#10
+    pass
 
-class LastfmServiceOfflineError(LastfmError):#11
-	pass
+class ServiceOfflineError(BaseError):#11
+    pass
 
-class LastfmSubscribersOnlyError(LastfmError):#12
-	pass
+class SubscribersOnlyError(BaseError):#12
+    pass
 
-class LastfmTokenNotAuthorizedError(LastfmError):#14
-	pass
+class TokenNotAuthorizedError(BaseError):#14
+    pass
 
-class LastfmTokenExpiredError(LastfmError):#15
-	pass
+class TokenExpiredError(BaseError):#15
+    pass
 
 errorMap = {
-		    1: LastfmError,
-			2: LastfmInvalidServiceError,
-			3: LastfmInvalidMethodError,
-			4: LastfmAuthenticationFailedError,
-			5: LastfmInvalidFormatError,
-			6: LastfmInvalidParametersError,
-			7: LastfmInvalidResourceError,
-			8: LastfmOperationFailedError,
-			9: LastfmInvalidSessionKeyError,
-			10: LastfmInvalidApiKeyError,
-			11: LastfmServiceOfflineError,
-			12: LastfmSubscribersOnlyError,
-			14: LastfmTokenNotAuthorizedError,
-			15: LastfmTokenExpiredError
-		   }	
+            1: Error,
+            2: InvalidServiceError,
+            3: InvalidMethodError,
+            4: AuthenticationFailedError,
+            5: InvalidFormatError,
+            6: InvalidParametersError,
+            7: InvalidResourceError,
+            8: OperationFailedError,
+            9: InvalidSessionKeyError,
+            10: InvalidApiKeyError,
+            11: ServiceOfflineError,
+            12: SubscribersOnlyError,
+            14: TokenNotAuthorizedError,
+            15: TokenExpiredError
+           }    

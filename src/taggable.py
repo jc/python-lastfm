@@ -14,8 +14,8 @@ class Taggable(object):
     @LastfmBase.cachedProperty
     def tags(self):
         from tag import Tag
-        params = self._defaultParams({'method': '%s.getTags' % self.__class__.__name__.lower()})
-        data = self.__api._fetchData(params, sign = True, session = True, no_cache = True).find('tags')
+        params = self._default_params({'method': '%s.getTags' % self.__class__.__name__.lower()})
+        data = self.__api._fetch_data(params, sign = True, session = True, no_cache = True).find('tags')
         return SafeList([
                        Tag(
                            self.__api,
@@ -24,14 +24,14 @@ class Taggable(object):
                            )
                        for t in data.findall('tag')
                        ],
-                       self.addTags, self.removeTag)
+                       self.add_tags, self.remove_tag)
     
-    def addTags(self, tags):
+    def add_tags(self, tags):
         from tag import Tag
         while(len(tags) > 10):
                         section = tags[0:9]
                         tags = tags[9:]
-                        self.addTags(section)
+                        self.add_tags(section)
         
         if len(tags) == 0: return
 
@@ -42,21 +42,24 @@ class Taggable(object):
             elif isinstance(tag, str):
                 tagnames.append(tag)
         
-        params = self._defaultParams({
+        params = self._default_params({
             'method': '%s.addTags' % self.__class__.__name__.lower(),
             'tags': ",".join(tagnames)
             })       
-        self.__api._postData(params)
+        self.__api._post_data(params)
         self.__tags = None
         
-    def removeTag(self, tag):
+    def remove_tag(self, tag):
         from tag import Tag
         if isinstance(tag, Tag):
             tag = tag.name
             
-        params = self._defaultParams({
+        params = self._default_params({
             'method': '%s.removeTag' % self.__class__.__name__.lower(),
             'tag': tag
             })
-        self.__api._postData(params)
+        self.__api._post_data(params)
         self.__tags = None
+        
+    def _default_params(self, extra_params):
+        pass

@@ -17,7 +17,7 @@ class Tag(LastfmBase, Searchable):
                  streamable = None,
                  stats = None):
         if not isinstance(api, Api):
-            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
+            raise InvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__url = url
@@ -50,7 +50,7 @@ class Tag(LastfmBase, Searchable):
     def similar(self):
         """tags similar to this tag"""
         params = {'method': 'tag.getSimilar', 'tag': self.name}
-        data = self.__api._fetchData(params).find('similartags')
+        data = self.__api._fetch_data(params).find('similartags')
         return [
                 Tag(
                     self.__api,
@@ -63,15 +63,15 @@ class Tag(LastfmBase, Searchable):
                 ]
     
     @LastfmBase.topProperty("similar")
-    def mostSimilar(self):
+    def most_similar(self):
         """most similar tag to this tag"""
         pass
     
     @LastfmBase.cachedProperty
-    def topAlbums(self):
+    def top_albums(self):
         """top albums for the tag"""
         params = {'method': 'tag.getTopAlbums', 'tag': self.name}
-        data = self.__api._fetchData(params).find('topalbums')
+        data = self.__api._fetch_data(params).find('topalbums')
         return [
                 Album(
                       self.__api,
@@ -96,16 +96,16 @@ class Tag(LastfmBase, Searchable):
                 for a in data.findall('album')
                 ]
 
-    @LastfmBase.topProperty("topAlbums")
-    def topAlbum(self):
+    @LastfmBase.topProperty("top_albums")
+    def top_album(self):
         """top album for the tag"""
         pass
     
     @LastfmBase.cachedProperty
-    def topArtists(self):
+    def top_artists(self):
         """top artists for the tag"""
         params = {'method': 'tag.getTopArtists', 'tag': self.name}
-        data = self.__api._fetchData(params).find('topartists')
+        data = self.__api._fetch_data(params).find('topartists')
         return [
                 Artist(
                        self.__api,
@@ -124,16 +124,16 @@ class Tag(LastfmBase, Searchable):
                 for a in data.findall('artist')
                 ]
 
-    @LastfmBase.topProperty("topArtists")
-    def topArtist(self):
+    @LastfmBase.topProperty("top_artists")
+    def top_artist(self):
         """top artist for the tag"""
         pass
     
     @LastfmBase.cachedProperty
-    def topTracks(self):
+    def top_tracks(self):
         """top tracks for the tag"""
         params = {'method': 'tag.getTopTracks', 'tag': self.name}
-        data = self.__api._fetchData(params).find('toptracks')
+        data = self.__api._fetch_data(params).find('toptracks')
         return [
                 Track(
                       self.__api,
@@ -159,8 +159,8 @@ class Tag(LastfmBase, Searchable):
                 for t in data.findall('track')
                 ]
 
-    @LastfmBase.topProperty("topTracks")
-    def topTrack(self):
+    @LastfmBase.topProperty("top_tracks")
+    def top_track(self):
         """top track for the tag"""
         pass
     
@@ -170,9 +170,9 @@ class Tag(LastfmBase, Searchable):
                               "lastfm://playlist/tag/%s/freetracks" % self.name)
     
     @staticmethod
-    def getTopTags(api):
+    def get_top_tags(api):
         params = {'method': 'tag.getTopTags'}
-        data = api._fetchData(params).find('toptags')
+        data = api._fetch_data(params).find('toptags')
         return [
                 Tag(
                     api,
@@ -187,7 +187,7 @@ class Tag(LastfmBase, Searchable):
                 ]
     
     @staticmethod
-    def _searchYieldFunc(api, tag):
+    def _search_yield_func(api, tag):
         return Tag(
                    api,
                    name = tag.findtext('name'),
@@ -199,14 +199,14 @@ class Tag(LastfmBase, Searchable):
                     )
     
     @staticmethod
-    def hashFunc(*args, **kwds):
+    def hash_func(*args, **kwds):
         try:
             return hash(kwds['name'])
         except KeyError:
-            raise LastfmInvalidParametersError("name has to be provided for hashing")
+            raise InvalidParametersError("name has to be provided for hashing")
         
     def __hash__(self):
-        return self.__class__.hashFunc(name = self.name)
+        return self.__class__.hash_func(name = self.name)
     
     def __eq__(self, other):
         return self.name == other.name
@@ -220,7 +220,7 @@ class Tag(LastfmBase, Searchable):
 from album import Album
 from api import Api
 from artist import Artist
-from error import LastfmInvalidParametersError
+from error import InvalidParametersError
 from playlist import Playlist
 from stats import Stats
 from track import Track

@@ -20,15 +20,14 @@ class Event(LastfmBase, Sharable):
                  artists = None,
                  headliner = None,
                  venue = None,
-                 startDate = None,
-                 startTime = None,
+                 start_date = None,
                  description = None,
                  image = None,
                  url = None,
                  stats = None,
                  tag = None):
         if not isinstance(api, Api):
-            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
+            raise InvalidParametersError("api reference must be supplied as an argument")
         Sharable.init(self, api)
         self.__api = api
         self.__id = id
@@ -36,7 +35,7 @@ class Event(LastfmBase, Sharable):
         self.__artists = artists
         self.__headliner = headliner
         self.__venue = venue
-        self.__startDate = startDate
+        self.__start_date = start_date
         self.__description = description
         self.__image = image
         self.__url = url
@@ -73,9 +72,9 @@ class Event(LastfmBase, Sharable):
         return self.__venue
 
     @property
-    def startDate(self):
+    def start_date(self):
         """start date of the event"""
-        return self.__startDate
+        return self.__start_date
 
     @property
     def description(self):
@@ -104,30 +103,30 @@ class Event(LastfmBase, Sharable):
     
     def attend(self, status = STATUS_ATTENDING):
         if status not in [Event.STATUS_ATTENDING, Event.STATUS_MAYBE, Event.STATUS_NOT]:
-            LastfmInvalidParametersError("status has to be 0, 1 or 2")
-        params = self._defaultParams({'method': 'event.attend', 'status': status})
-        self.__api._postData(params)
+            InvalidParametersError("status has to be 0, 1 or 2")
+        params = self._default_params({'method': 'event.attend', 'status': status})
+        self.__api._post_data(params)
     
-    def _defaultParams(self, extraParams = None):
+    def _default_params(self, extra_params = None):
         if not self.id:
-            raise LastfmInvalidParametersError("id has to be provided.")
+            raise InvalidParametersError("id has to be provided.")
         params = {'event': self.id}
-        if extraParams is not None:
-            params.update(extraParams)
+        if extra_params is not None:
+            params.update(extra_params)
         return params
 
     @staticmethod
-    def getInfo(api, event):
+    def get_info(api, event):
         params = {'method': 'event.getInfo', 'event': event}
-        data = api._fetchData(params).find('event')
-        return Event.createFromData(api, data)
+        data = api._fetch_data(params).find('event')
+        return Event.create_from_data(api, data)
 
     @staticmethod
-    def createFromData(api, data):
-        startDate = None
+    def create_from_data(api, data):
+        start_date = None
 
         if data.findtext('startTime') is not None:
-            startDate = datetime(*(
+            start_date = datetime(*(
                 time.strptime(
                     "%s %s" % (
                         data.findtext('startDate').strip(),
@@ -138,7 +137,7 @@ class Event(LastfmBase, Sharable):
             )
         else:
             try:
-                startDate = datetime(*(
+                start_date = datetime(*(
                     time.strptime(
                         data.findtext('startDate').strip(),
                         '%a, %d %b %Y %H:%M:%S'
@@ -146,7 +145,7 @@ class Event(LastfmBase, Sharable):
                 )
             except ValueError:
                 try:
-                    startDate = datetime(*(
+                    start_date = datetime(*(
                         time.strptime(
                             data.findtext('startDate').strip(),
                             '%a, %d %b %Y'
@@ -174,16 +173,16 @@ class Event(LastfmBase, Sharable):
                                                        street = data.findtext('venue/location/street'),
                                                        postalCode = data.findtext('venue/location/postalcode'),
                                                        latitude = float(data.findtext(
-                                                           'venue/location/{%s}point/{%s}lat' % ((Location.xmlns,)*2)
+                                                           'venue/location/{%s}point/{%s}lat' % ((Location.XMLNS,)*2)
                                                            )),
                                                        longitude = float(data.findtext(
-                                                           'venue/location/{%s}point/{%s}long' % ((Location.xmlns,)*2)
+                                                           'venue/location/{%s}point/{%s}long' % ((Location.XMLNS,)*2)
                                                            )),
                                                        timezone = data.findtext('venue/location/timezone')
                                                        ),
                                    url = data.findtext('venue/url')
                                    ),
-                     startDate = startDate,
+                     start_date = start_date,
                      description = data.findtext('description'),
                      image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
                      url = data.findtext('url'),
@@ -196,29 +195,29 @@ class Event(LastfmBase, Sharable):
                     )
 
     @staticmethod
-    def hashFunc(*args, **kwds):
+    def hash_func(*args, **kwds):
         try:
             return hash(kwds['id'])
         except KeyError:
-            raise LastfmInvalidParametersError("id has to be provided for hashing")
+            raise InvalidParametersError("id has to be provided for hashing")
 
     def __hash__(self):
-        return Event.hashFunc(id = self.id)
+        return Event.hash_func(id = self.id)
 
     def __eq__(self, other):
         return self.id == other.id
 
     def __lt__(self, other):
-        return self.startDate < other.startDate
+        return self.start_date < other.start_date
 
     def __repr__(self):
-        return "<lastfm.Event: %s at %s on %s>" % (self.title, self.venue.name, self.startDate.strftime("%x"))
+        return "<lastfm.Event: %s at %s on %s>" % (self.title, self.venue.name, self.start_date.strftime("%x"))
 
 from datetime import datetime
 import time
 
 from api import Api
 from artist import Artist
-from error import LastfmInvalidParametersError
+from error import InvalidParametersError
 from geo import Venue, Location, Country
 from stats import Stats

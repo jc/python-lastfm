@@ -19,17 +19,17 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
                  url = None,
                  duration = None,
                  streamable = None,
-                 fullTrack = None,
+                 full_track = None,
                  artist = None,
                  album = None,
                  position = None,
                  image = None,
                  stats = None,
-                 playedOn = None,
-                 lovedOn = None,
+                 played_on = None,
+                 loved_on = None,
                  wiki = None):
         if not isinstance(api, Api):
-            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
+            raise InvalidParametersError("api reference must be supplied as an argument")
         Taggable.init(self, api)
         Sharable.init(self, api)
         self.__api = api
@@ -39,7 +39,7 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
         self.__url = url
         self.__duration = duration
         self.__streamable = streamable
-        self.__fullTrack = fullTrack
+        self.__full_track = full_track
         self.__artist = artist
         self.__album = album
         self.__position = position
@@ -51,8 +51,8 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
                              rank = stats.rank,
                              listeners = stats.listeners,
                             )
-        self.__playedOn = playedOn
-        self.__lovedOn = lovedOn
+        self.__played_on = played_on
+        self.__loved_on = loved_on
         self.__wiki = wiki and Wiki(
                          subject = self,
                          published = wiki.published,
@@ -89,15 +89,15 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
     def streamable(self):
         """is the track streamable"""
         if self.__streamable is None:
-            self._fillInfo()
+            self._fill_info()
         return self.__streamable
 
     @property
-    def fullTrack(self):
+    def full_track(self):
         """is the full track streamable"""
-        if self.__fullTrack is None:
-            self._fillInfo()
-        return self.__fullTrack
+        if self.__full_track is None:
+            self._fill_info()
+        return self.__full_track
     
     @property
     def artist(self):
@@ -108,14 +108,14 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
     def album(self):
         """artist of the track"""
         if self.__album is None:
-            self._fillInfo()
+            self._fill_info()
         return self.__album
 
     @property
     def position(self):
         """position of the track"""
         if self.__position is None:
-            self._fillInfo()
+            self._fill_info()
         return self.__position
     
     @property
@@ -131,12 +131,12 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
     @property
     def playedOn(self):
         """datetime the track was last played"""
-        return self.__playedOn
+        return self.__played_on
 
     @property
     def lovedOn(self):
         """datetime the track was marked 'loved'"""
-        return self.__lovedOn
+        return self.__loved_on
     
     @property
     def wiki(self):
@@ -144,27 +144,27 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
         if self.__wiki == "na":
             return None
         if self.__wiki is None:
-            self._fillInfo()
+            self._fill_info()
         return self.__wiki
     
-    def _defaultParams(self, extraParams = None):
+    def _default_params(self, extra_params = None):
         if not (self.artist and self.name):
-            raise LastfmInvalidParametersError("artist and track have to be provided.")
+            raise InvalidParametersError("artist and track have to be provided.")
         params = {'artist': self.artist.name, 'track': self.name}
-        if extraParams is not None:
-            params.update(extraParams)
+        if extra_params is not None:
+            params.update(extra_params)
         return params
 
     @LastfmBase.cachedProperty
     def similar(self):
         """tracks similar to this track"""
-        params = Track._checkParams(
+        params = Track._check_params(
                                     {'method': 'track.getSimilar'},
                                     self.artist.name,
                                     self.name,
                                     self.mbid
                                     )
-        data = self.__api._fetchData(params).find('similartracks')
+        data = self.__api._fetch_data(params).find('similartracks')
         return [
                 Track(
                       self.__api,
@@ -190,20 +190,20 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
                 ]
 
     @LastfmBase.topProperty("similar")
-    def mostSimilar(self):
+    def most_similar(self):
         """track most similar to this track"""
         pass
 
     @LastfmBase.cachedProperty
-    def topFans(self):
+    def top_fans(self):
         """top fans of the track"""
-        params = Track._checkParams(
+        params = Track._check_params(
                                     {'method': 'track.getTopFans'},
                                     self.artist.name,
                                     self.name,
                                     self.mbid
                                     )
-        data = self.__api._fetchData(params).find('topfans')
+        data = self.__api._fetch_data(params).find('topfans')
         return [
                 User(
                      self.__api,
@@ -219,21 +219,21 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
                 for u in data.findall('user')
                 ]
 
-    @LastfmBase.topProperty("topFans")
-    def topFan(self):
+    @LastfmBase.topProperty("top_fans")
+    def top_fan(self):
         """topmost fan of the track"""
         pass
 
     @LastfmBase.cachedProperty
-    def topTags(self):
+    def top_tags(self):
         """top tags for the track"""
-        params = Track._checkParams(
+        params = Track._check_params(
                                     {'method': 'track.getTopTags'},
                                     self.artist.name,
                                     self.name,
                                     self.mbid
                                     )
-        data = self.__api._fetchData(params).find('toptags')
+        data = self.__api._fetch_data(params).find('toptags')
         return [
                 Tag(
                     self.__api,
@@ -248,21 +248,21 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
                 for t in data.findall('tag')
                 ]
 
-    @LastfmBase.topProperty("topTags")
-    def topTag(self):
+    @LastfmBase.topProperty("top_tags")
+    def top_tag(self):
         """topmost tag for the track"""
         pass
     
     def love(self):
-        params = self._defaultParams({'method': 'track.love'})
-        self.__api._postData(params)
+        params = self._default_params({'method': 'track.love'})
+        self.__api._post_data(params)
         
     def ban(self):
-        params = self._defaultParams({'method': 'track.ban'})
-        self.__api._postData(params)
+        params = self._default_params({'method': 'track.ban'})
+        self.__api._post_data(params)
 
     @staticmethod
-    def _searchYieldFunc(api, track):
+    def _search_yield_func(api, track):
         return Track(
                      api,
                      name = track.findtext('name'),
@@ -281,21 +281,21 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
                     )
         
     @staticmethod
-    def _fetchData(api,
+    def _fetch_data(api,
                 artist = None,
                 track = None,
                 mbid = None):
-        params = Track._checkParams({'method': 'track.getInfo'}, artist, track, mbid)
-        return api._fetchData(params).find('track')
+        params = Track._check_params({'method': 'track.getInfo'}, artist, track, mbid)
+        return api._fetch_data(params).find('track')
     
-    def _fillInfo(self):
-        data = Track._fetchData(self.__api, self.artist.name, self.name)
+    def _fill_info(self):
+        data = Track._fetch_data(self.__api, self.artist.name, self.name)
         self.__id = int(data.findtext('id'))
         self.__mbid = data.findtext('mbid')
         self.__url = data.findtext('url')
         self.__duration = int(data.findtext('duration'))
         self.__streamable = (data.findtext('streamable') == '1'),
-        self.__fullTrack = (data.find('streamable').attrib['fulltrack'] == '1'),
+        self.__full_track = (data.find('streamable').attrib['fulltrack'] == '1'),
                                 
         self.__image = dict([(i.get('size'), i.text) for i in data.findall('image')])
         self.__stats = Stats(
@@ -332,11 +332,11 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
             self.__wiki = 'na'
                          
     @staticmethod
-    def getInfo(api,
+    def get_info(api,
                 artist = None,
                 track = None,
                 mbid = None):
-        data = Track._fetchData(api, artist, track, mbid)
+        data = Track._fetch_data(api, artist, track, mbid)
         t = Track(
                   api,
                   name = data.findtext('name'),
@@ -345,16 +345,16 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
                                   name = data.findtext('artist/name'),
                                   ),
                   )
-        t._fillInfo()
+        t._fill_info()
         return t
 
     @staticmethod
-    def _checkParams(params,
+    def _check_params(params,
                       artist = None,
                       track = None,
                       mbid = None):
         if not ((artist and track) or mbid):
-            raise LastfmInvalidParametersError("either (artist and track) or mbid has to be given as argument.")
+            raise InvalidParametersError("either (artist and track) or mbid has to be given as argument.")
 
         if artist and track:
             params.update({'artist': artist, 'track': track})
@@ -363,14 +363,14 @@ class Track(LastfmBase, Taggable, Sharable, Searchable):
         return params
 
     @staticmethod
-    def hashFunc(*args, **kwds):
+    def hash_func(*args, **kwds):
         try:
             return hash("%s%s" % (kwds['name'], hash(kwds['artist'])))
         except KeyError:
-            raise LastfmInvalidParametersError("name and artist have to be provided for hashing")
+            raise InvalidParametersError("name and artist have to be provided for hashing")
 
     def __hash__(self):
-        return self.__class__.hashFunc(name = self.name, artist = self.artist)
+        return self.__class__.hash_func(name = self.name, artist = self.artist)
 
     def __eq__(self, other):
         if self.mbid and other.mbid:
@@ -393,7 +393,7 @@ from datetime import datetime
 from api import Api
 from artist import Artist
 from album import Album
-from error import LastfmInvalidParametersError
+from error import InvalidParametersError
 from stats import Stats
 from tag import Tag
 from user import User

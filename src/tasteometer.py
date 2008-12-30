@@ -43,7 +43,7 @@ class Tasteometer(object):
                   }
         if limit is not None:
             params.update({'limit': limit})
-        data = api._fetchData(params).find('comparison/result')
+        data = api._fetch_data(params).find('comparison/result')
         return Tasteometer(
                            score = float(data.findtext('score')),
                            matches = int(data.find('artists').attrib['matches']),

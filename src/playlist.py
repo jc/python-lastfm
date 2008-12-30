@@ -18,7 +18,7 @@ class Playlist(LastfmBase):
         """playlist's data"""
         params = {'method': 'playlist.fetch', 'playlistURL': self.__url}
         tmp = StringIO.StringIO()
-        ElementTree.ElementTree(self.__api._fetchData(params)[0]).write(tmp)
+        ElementTree.ElementTree(self.__api._fetch_data(params)[0]).write(tmp)
         return tmp.getvalue()
     
     @property
@@ -31,14 +31,14 @@ class Playlist(LastfmBase):
         return Playlist(api, url = url)
     
     @staticmethod
-    def hashFunc(*args, **kwds):
+    def hash_func(*args, **kwds):
         try:
             return hash(kwds['url'])
         except KeyError:
-            raise LastfmInvalidParametersError("url has to be provided for hashing")
+            raise InvalidParametersError("url has to be provided for hashing")
         
     def __hash__(self):
-        return self.__class__.hashFunc(url = self.url)
+        return self.__class__.hash_func(url = self.url)
     
     def __eq__(self, other):
         return self.url == other.url
@@ -51,7 +51,7 @@ class Playlist(LastfmBase):
 
 import StringIO
 import platform
-from error import LastfmInvalidParametersError
+from error import InvalidParametersError
 
 python_version = platform.python_version_tuple()
 if python_version[0] == 2 and python_version[1] >= 5:
@@ -63,5 +63,5 @@ else:
         try:
             import ElementTree
         except ImportError:
-            from error import LastfmError
-            raise LastfmError("Install ElementTree package for using python-lastfm")
+            from error import Error
+            raise Error("Install ElementTree package for using python-lastfm")

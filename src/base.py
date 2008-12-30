@@ -27,7 +27,7 @@ class LastfmBase(object):
                 inst.init(*args, **kwds)
                 return inst
 
-        key = cls.hashFunc(*args, **kwds)
+        key = cls.hash_func(*args, **kwds)
         if subject is not None:
             key = (hash(subject), key)
             
@@ -77,7 +77,7 @@ class LastfmBase(object):
             try:
                 cp = copy.copy(cacheAttribute)
                 return cp
-            except LastfmError:
+            except Error:
                 return cacheAttribute
         
         return property(fget = wrapper, doc = func.__doc__)
@@ -96,4 +96,4 @@ class LastfmBase(object):
 
 import sys
 import copy
-from error import LastfmError
+from error import Error

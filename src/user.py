@@ -22,7 +22,7 @@ class User(LastfmBase):
                  gender = None,
                  subscriber = None):
         if not isinstance(api, Api):
-            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
+            raise InvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
         self.__url = url
@@ -88,14 +88,14 @@ class User(LastfmBase):
     @LastfmBase.cachedProperty
     def events(self):
         params = {'method': 'user.getEvents', 'user': self.name}
-        data = self.__api._fetchData(params).find('events')
+        data = self.__api._fetch_data(params).find('events')
 
         return [
-                Event.createFromData(self.__api, e)
+                Event.create_from_data(self.__api, e)
                 for e in data.findall('event')
                 ]
         
-    def getPastEvents(self,
+    def get_past_events(self,
                       limit = None):
         params = {'method': 'user.getPastEvents', 'user': self.name}
         if limit is not None:
@@ -103,34 +103,34 @@ class User(LastfmBase):
                 
         @lazylist
         def gen(lst):
-            data = self.__api._fetchData(params).find('events')
+            data = self.__api._fetch_data(params).find('events')
             totalPages = int(data.attrib['totalPages'])
             
             @lazylist
             def gen2(lst, data):
                 for e in data.findall('event'):
-                    yield Event.createFromData(self.__api, e)
+                    yield Event.create_from_data(self.__api, e)
             
             for e in gen2(data):
                 yield e
             
             for page in xrange(2, totalPages+1):
                 params.update({'page': page})
-                data = self.__api._fetchData(params).find('events')
+                data = self.__api._fetch_data(params).find('events')
                 for e in gen2(data):
                     yield e            
         return gen()
         
     @LastfmBase.cachedProperty
-    def pastEvents(self):
-        return self.getPastEvents()
+    def past_events(self):
+        return self.get_past_events()
 
-    def getFriends(self,
+    def get_friends(self,
                    limit = None):
         params = {'method': 'user.getFriends', 'user': self.name}
         if limit is not None:
             params.update({'limit': limit})
-        data = self.__api._fetchData(params).find('friends')
+        data = self.__api._fetch_data(params).find('friends')
         return [
             User(
                 self.__api,
@@ -146,13 +146,13 @@ class User(LastfmBase):
     @LastfmBase.cachedProperty
     def friends(self):
         """friends of the user"""
-        return self.getFriends()
+        return self.get_friends()
         
-    def getNeighbours(self, limit = None):
+    def get_neighbours(self, limit = None):
         params = {'method': 'user.getNeighbours', 'user': self.name}
         if limit is not None:
             params.update({'limit': limit})
-        data = self.__api._fetchData(params).find('neighbours')
+        data = self.__api._fetch_data(params).find('neighbours')
         return [
                 User(
                     self.__api,
@@ -171,10 +171,10 @@ class User(LastfmBase):
     @LastfmBase.cachedProperty
     def neighbours(self):
         """neighbours of the user"""
-        return self.getNeighbours()
+        return self.get_neighbours()
     
     @LastfmBase.topProperty("neighbours")
-    def nearestNeighbour(self):
+    def nearest_neighbour(self):
         """nearest neightbour of the user"""
         pass
     
@@ -182,7 +182,7 @@ class User(LastfmBase):
     def playlists(self):
         """playlists of the user"""
         params = {'method': 'user.getPlaylists', 'user': self.name}
-        data = self.__api._fetchData(params).find('playlists')
+        data = self.__api._fetch_data(params).find('playlists')
         return [
                 User.Playlist(
                               self.__api,
@@ -201,9 +201,9 @@ class User(LastfmBase):
                 ]
 
     @LastfmBase.cachedProperty
-    def lovedTracks(self):
+    def loved_tracks(self):
         params = {'method': 'user.getLovedTracks', 'user': self.name}
-        data = self.__api._fetchData(params).find('lovedtracks')
+        data = self.__api._fetch_data(params).find('lovedtracks')
         return [
                 Track(
                     self.__api,
@@ -228,9 +228,9 @@ class User(LastfmBase):
                 for t in data.findall('track')
                 ]
         
-    def getRecentTracks(self, limit = None):
+    def get_recent_tracks(self, limit = None):
         params = {'method': 'user.getRecentTracks', 'user': self.name}
-        data = self.__api._fetchData(params, no_cache = True).find('recenttracks')
+        data = self.__api._fetch_data(params, no_cache = True).find('recenttracks')
         return [
                 Track(
                       self.__api,
@@ -269,20 +269,20 @@ class User(LastfmBase):
                       ]
 
     @property
-    def recentTracks(self):
+    def recent_tracks(self):
         """recent tracks played by the user"""
-        return self.getRecentTracks()
+        return self.get_recent_tracks()
 
-    @LastfmBase.topProperty("recentTracks")
-    def mostRecentTrack(self):
+    @LastfmBase.topProperty("recent_tracks")
+    def most_recent_track(self):
         """most recent track played by the user"""
         pass
 
-    def getTopAlbums(self, period = None):
+    def get_top_albums(self, period = None):
         params = {'method': 'user.getTopAlbums', 'user': self.name}
         if period is not None:
             params.update({'period': period})
-        data = self.__api._fetchData(params).find('topalbums')
+        data = self.__api._fetch_data(params).find('topalbums')
 
         return [
                 Album(
@@ -309,20 +309,20 @@ class User(LastfmBase):
                 ]
 
     @LastfmBase.cachedProperty
-    def topAlbums(self):
+    def top_albums(self):
         """overall top albums of the user"""
-        return self.getTopAlbums()
+        return self.get_top_albums()
         
-    @LastfmBase.topProperty("topAlbums")
-    def topAlbum(self):
+    @LastfmBase.topProperty("top_albums")
+    def top_album(self):
         """overall top most album of the user"""
         pass
 
-    def getTopArtists(self, period = None):
+    def get_top_artists(self, period = None):
         params = {'method': 'user.getTopArtists', 'user': self.name}
         if period is not None:
             params.update({'period': period})
-        data = self.__api._fetchData(params).find('topartists')
+        data = self.__api._fetch_data(params).find('topartists')
         
         return [
                 Artist(
@@ -343,20 +343,20 @@ class User(LastfmBase):
                 ]
 
     @LastfmBase.cachedProperty
-    def topArtists(self):
+    def top_artists(self):
         """top artists of the user"""
-        return self.getTopArtists()
+        return self.get_top_artists()
         
-    @LastfmBase.topProperty("topArtists")
-    def topArtist(self):
+    @LastfmBase.topProperty("top_artists")
+    def top_artist(self):
         """top artist of the user"""
         pass
 
-    def getTopTracks(self, period = None):
+    def get_top_tracks(self, period = None):
         params = {'method': 'user.getTopTracks', 'user': self.name}
         if period is not None:
             params.update({'period': period})
-        data = self.__api._fetchData(params).find('toptracks')
+        data = self.__api._fetch_data(params).find('toptracks')
         return [
                 Track(
                       self.__api,
@@ -383,20 +383,20 @@ class User(LastfmBase):
                 ]
 
     @LastfmBase.cachedProperty
-    def topTracks(self):
+    def top_tracks(self):
         """top tracks of the user"""
-        return self.getTopTracks()
+        return self.get_top_tracks()
         
-    @LastfmBase.topProperty("topTracks")
-    def topTrack(self):
+    @LastfmBase.topProperty("top_tracks")
+    def top_track(self):
         """top track of the user"""
-        return (len(self.topTracks) and self.topTracks[0] or None)
+        return (len(self.top_tracks) and self.top_tracks[0] or None)
 
-    def getTopTags(self, limit = None):
+    def get_top_tags(self, limit = None):
         params = {'method': 'user.getTopTags', 'user': self.name}
         if limit is not None:
             params.update({'limit': limit})
-        data = self.__api._fetchData(params).find('toptags')
+        data = self.__api._fetch_data(params).find('toptags')
         return [
                 Tag(
                     self.__api,
@@ -412,96 +412,96 @@ class User(LastfmBase):
                 ]
 
     @LastfmBase.cachedProperty
-    def topTags(self):
+    def top_tags(self):
         """top tags of the user"""
-        return self.getTopTags()
+        return self.get_top_tags()
         
-    @LastfmBase.topProperty("topTags")
-    def topTag(self):
+    @LastfmBase.topProperty("top_tags")
+    def top_tag(self):
         """top tag of the user"""
         pass
 
     @LastfmBase.cachedProperty
-    def weeklyChartList(self):
+    def weekly_chart_list(self):
         params = {'method': 'user.getWeeklyChartList', 'user': self.name}
-        data = self.__api._fetchData(params).find('weeklychartlist')
+        data = self.__api._fetch_data(params).find('weeklychartlist')
         return [
-                WeeklyChart.createFromData(self.__api, self, c)
+                WeeklyChart.create_from_data(self.__api, self, c)
                 for c in data.findall('chart')
                 ]
             
-    def getWeeklyAlbumChart(self,
+    def get_weekly_album_chart(self,
                              start = None,
                              end = None):
         params = {'method': 'user.getWeeklyAlbumChart', 'user': self.name}
-        params = WeeklyChart._checkWeeklyChartParams(params, start, end)            
-        data = self.__api._fetchData(params).find('weeklyalbumchart')   
-        return WeeklyAlbumChart.createFromData(self.__api, self, data)
+        params = WeeklyChart._check_weekly_chart_params(params, start, end)            
+        data = self.__api._fetch_data(params).find('weeklyalbumchart')   
+        return WeeklyAlbumChart.create_from_data(self.__api, self, data)
 
     @LastfmBase.cachedProperty
-    def recentWeeklyAlbumChart(self):
-        return self.getWeeklyAlbumChart()
+    def recent_weekly_album_chart(self):
+        return self.get_weekly_album_chart()
     
     @LastfmBase.cachedProperty
-    def weeklyAlbumChartList(self):
-        wcl = list(self.weeklyChartList)
+    def weekly_album_chart_list(self):
+        wcl = list(self.weekly_chart_list)
         wcl.reverse()
         @lazylist
         def gen(lst):
             for wc in wcl:
                 try:
-                    yield self.getWeeklyAlbumChart(wc.start, wc.end)
-                except LastfmError:
+                    yield self.get_weekly_album_chart(wc.start, wc.end)
+                except Error:
                     pass
         return gen()
 
-    def getWeeklyArtistChart(self,
+    def get_weekly_artist_chart(self,
                              start = None,
                              end = None):
         params = {'method': 'user.getWeeklyArtistChart', 'user': self.name}
-        params = WeeklyChart._checkWeeklyChartParams(params, start, end)
-        data = self.__api._fetchData(params).find('weeklyartistchart')   
-        return WeeklyArtistChart.createFromData(self.__api, self, data)
+        params = WeeklyChart._check_weekly_chart_params(params, start, end)
+        data = self.__api._fetch_data(params).find('weeklyartistchart')   
+        return WeeklyArtistChart.create_from_data(self.__api, self, data)
 
     @LastfmBase.cachedProperty
-    def recentWeeklyArtistChart(self):
-        return self.getWeeklyArtistChart()
+    def recent_weekly_artist_chart(self):
+        return self.get_weekly_artist_chart()
     
     @LastfmBase.cachedProperty
-    def weeklyArtistChartList(self):
-        wcl = list(self.weeklyChartList)
+    def weekly_artist_chart_list(self):
+        wcl = list(self.weekly_chart_list)
         wcl.reverse()
         @lazylist
         def gen(lst):
             for wc in wcl:
                 try:
-                    yield self.getWeeklyArtistChart(wc.start, wc.end)
-                except LastfmError:
+                    yield self.get_weekly_artist_chart(wc.start, wc.end)
+                except Error:
                     pass
         return gen()
 
-    def getWeeklyTrackChart(self,
+    def get_weekly_track_chart(self,
                              start = None,
                              end = None):
         params = {'method': 'user.getWeeklyTrackChart', 'user': self.name}
-        params = WeeklyChart._checkWeeklyChartParams(params, start, end)
-        data = self.__api._fetchData(params).find('weeklytrackchart')   
-        return WeeklyTrackChart.createFromData(self.__api, self, data)
+        params = WeeklyChart._check_weekly_chart_params(params, start, end)
+        data = self.__api._fetch_data(params).find('weeklytrackchart')   
+        return WeeklyTrackChart.create_from_data(self.__api, self, data)
 
     @LastfmBase.cachedProperty
-    def recentWeeklyTrackChart(self):
-        return self.getWeeklyTrackChart()
+    def recent_weekly_track_chart(self):
+        return self.get_weekly_track_chart()
     
     @LastfmBase.cachedProperty
-    def weeklyTrackChartList(self):
-        wcl = list(self.weeklyChartList)
+    def weekly_track_chart_list(self):
+        wcl = list(self.weekly_chart_list)
         wcl.reverse()
         @lazylist
         def gen(lst):
             for wc in wcl:
                 try:
-                    yield self.getWeeklyTrackChart(wc.start, wc.end)
-                except LastfmError:
+                    yield self.get_weekly_track_chart(wc.start, wc.end)
+                except Error:
                     pass
         return gen()
     
@@ -515,8 +515,8 @@ class User(LastfmBase):
         return self.__library
     
     @staticmethod
-    def getAuthenticatedUser(api):
-        data = api._fetchData({'method': 'user.getInfo'}, sign = True, session = True).find('user')
+    def get_authenticated_user(api):
+        data = api._fetch_data({'method': 'user.getInfo'}, sign = True, session = True).find('user')
         return User(
                 api,
                 name = data.findtext('name'),
@@ -533,14 +533,14 @@ class User(LastfmBase):
             )
 
     @staticmethod
-    def hashFunc(*args, **kwds):
+    def hash_func(*args, **kwds):
         try:
             return hash(kwds['name'])
         except KeyError:
-            raise LastfmInvalidParametersError("name has to be provided for hashing")
+            raise InvalidParametersError("name has to be provided for hashing")
 
     def __hash__(self):
-        return self.__class__.hashFunc(name = self.name)
+        return self.__class__.hash_func(name = self.name)
 
     def __eq__(self, other):
         return self.name == other.name
@@ -584,21 +584,21 @@ class User(LastfmBase):
         def addTrack(self, track):
             params = {'method': 'playlist.addTrack', 'playlistID': self.id}
             if not isinstance(track, Track):
-                track = self.__api.searchTrack(track)[0]
+                track = self.__api.search_track(track)[0]
             
             params['artist'] = track.artist.name
             params['track'] = track.name
-            self.__api._postData(params)            
+            self.__api._post_data(params)            
         
         @staticmethod
-        def hashFunc(*args, **kwds):
+        def hash_func(*args, **kwds):
             try:
                 return hash(kwds['id'])
             except KeyError:
-                raise LastfmInvalidParametersError("id has to be provided for hashing")
+                raise InvalidParametersError("id has to be provided for hashing")
             
         def __hash__(self):
-            return self.__class__.hashFunc(id = self.id)
+            return self.__class__.hash_func(id = self.id)
         
         def __repr__(self):
             return "<lastfm.User.Playlist: %s>" % self.title
@@ -613,7 +613,7 @@ class User(LastfmBase):
         def user(self):
             return self.__user
             
-        def getAlbums(self,
+        def get_albums(self,
                       limit = None):
             params = {'method': 'library.getAlbums', 'user': self.user.name}
             if limit is not None:
@@ -621,8 +621,8 @@ class User(LastfmBase):
             
             @lazylist
             def gen(lst):
-                data = self.__api._fetchData(params).find('albums')
-                totalPages = int(data.attrib['totalPages'])
+                data = self.__api._fetch_data(params).find('albums')
+                total_pages = int(data.attrib['totalPages'])
                 
                 @lazylist
                 def gen2(lst, data):
@@ -651,11 +651,11 @@ class User(LastfmBase):
                 for a in gen2(data):
                     yield a
                 
-                for page in xrange(2, totalPages+1):
+                for page in xrange(2, total_pages+1):
                     params.update({'page': page})
                     try:
-                        data = self.__api._fetchData(params).find('albums')
-                    except LastfmError:
+                        data = self.__api._fetch_data(params).find('albums')
+                    except Error:
                         continue
                     for a in gen2(data):
                         yield a            
@@ -663,9 +663,9 @@ class User(LastfmBase):
             
         @LastfmBase.cachedProperty
         def albums(self):
-            return self.getAlbums()
+            return self.get_albums()
 
-        def getArtists(self,
+        def get_artists(self,
                        limit = None):
             params = {'method': 'library.getArtists', 'user': self.user.name}
             if limit is not None:
@@ -673,8 +673,8 @@ class User(LastfmBase):
             
             @lazylist
             def gen(lst):
-                data = self.__api._fetchData(params).find('artists')
-                totalPages = int(data.attrib['totalPages'])
+                data = self.__api._fetch_data(params).find('artists')
+                total_pages = int(data.attrib['totalPages'])
                 
                 @lazylist
                 def gen2(lst, data):
@@ -697,11 +697,11 @@ class User(LastfmBase):
                 for a in gen2(data):
                     yield a
                 
-                for page in xrange(2, totalPages+1):
+                for page in xrange(2, total_pages+1):
                     params.update({'page': page})
                     try:
-                        data = self.__api._fetchData(params).find('artists')
-                    except LastfmError:
+                        data = self.__api._fetch_data(params).find('artists')
+                    except Error:
                         continue
                     for a in gen2(data):
                         yield a            
@@ -709,9 +709,9 @@ class User(LastfmBase):
             
         @LastfmBase.cachedProperty
         def artists(self):
-            return self.getArtists()
+            return self.get_artists()
         
-        def getTracks(self,
+        def get_tracks(self,
                       limit = None):
             params = {'method': 'library.getTracks', 'user': self.user.name}
             if limit is not None:
@@ -719,7 +719,7 @@ class User(LastfmBase):
             
             @lazylist
             def gen(lst):
-                data = self.__api._fetchData(params).find('tracks')
+                data = self.__api._fetch_data(params).find('tracks')
                 totalPages = int(data.attrib['totalPages'])
                 
                 @lazylist
@@ -754,8 +754,8 @@ class User(LastfmBase):
                     params.update({'page': page})
                     data = None
                     try:
-                        data = self.__api._fetchData(params).find('tracks')
-                    except LastfmError:
+                        data = self.__api._fetch_data(params).find('tracks')
+                    except Error:
                         continue
                     for t in gen2(data):
                         yield t            
@@ -763,17 +763,17 @@ class User(LastfmBase):
         
         @LastfmBase.cachedProperty
         def tracks(self):
-            return self.getTracks()
+            return self.get_tracks()
         
         @staticmethod
-        def hashFunc(*args, **kwds):
+        def hash_func(*args, **kwds):
             try:
                 return hash(kwds['user'])
             except KeyError:
-                raise LastfmInvalidParametersError("user has to be provided for hashing")
+                raise InvalidParametersError("user has to be provided for hashing")
     
         def __hash__(self):
-            return self.__class__.hashFunc(user = self.user)
+            return self.__class__.hash_func(user = self.user)
             
         def __repr__(self):
             return "<lastfm.User.Library: for user '%s'>" % self.user.name
@@ -784,7 +784,7 @@ import time
 from api import Api
 from artist import Artist
 from album import Album
-from error import LastfmError, LastfmInvalidParametersError
+from error import Error, InvalidParametersError
 from event import Event
 from geo import Country
 from stats import Stats

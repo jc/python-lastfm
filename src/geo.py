@@ -10,7 +10,7 @@ from lazylist import lazylist
 class Geo(object):
     """A class representing an geographic location."""
     @staticmethod
-    def getEvents(api,
+    def get_events(api,
                   location,
                   latitude = None,
                   longitude = None,
@@ -24,28 +24,28 @@ class Geo(object):
         
         @lazylist
         def gen(lst):
-            data = api._fetchData(params).find('events')
+            data = api._fetch_data(params).find('events')
             totalPages = int(data.attrib['totalpages'])
             
             @lazylist
             def gen2(lst, data):
                 for e in data.findall('event'):
-                    yield Event.createFromData(api, e)
+                    yield Event.create_from_data(api, e)
             
             for e in gen2(data):
                 yield e
             
             for page in xrange(2, totalPages+1):
                 params.update({'page': page})
-                data = api._fetchData(params).find('events')
+                data = api._fetch_data(params).find('events')
                 for e in gen2(data):
                     yield e            
         return gen()
 
     @staticmethod
-    def getTopArtists(api, country):
+    def get_top_artists(api, country):
         params = {'method': 'geo.getTopArtists', 'country': country}
-        data = api._fetchData(params).find('topartists')
+        data = api._fetch_data(params).find('topartists')
         return [
                 Artist(
                        api,
@@ -63,12 +63,12 @@ class Geo(object):
                 ]
 
     @staticmethod
-    def getTopTracks(api, country, location = None):
+    def get_top_tracks(api, country, location = None):
         params = {'method': 'geo.getTopTracks', 'country': country}
         if location is not None:
             params.update({'location': location})
             
-        data = api._fetchData(params).find('toptracks')
+        data = api._fetch_data(params).find('toptracks')
         return [
                 Track(
                        api,
@@ -119,14 +119,14 @@ class Venue(LastfmBase):
         return self.__url
 
     @staticmethod
-    def hashFunc(*args, **kwds):
+    def hash_func(*args, **kwds):
         try:
             return hash(kwds['url'])
         except KeyError:
-            raise LastfmInvalidParametersError("url has to be provided for hashing")
+            raise InvalidParametersError("url has to be provided for hashing")
 
     def __hash__(self):
-        return self.__class__.hashFunc(url = self.url)
+        return self.__class__.hash_func(url = self.url)
 
     def __eq__(self, other):
         return self.url == other.url
@@ -139,24 +139,24 @@ class Venue(LastfmBase):
 
 class Location(LastfmBase):
     """A class representing a location of an event"""
-    xmlns = "http://www.w3.org/2003/01/geo/wgs84_pos#"
+    XMLNS = "http://www.w3.org/2003/01/geo/wgs84_pos#"
 
     def init(self,
                  api,
                  city = None,
                  country = None,
                  street = None,
-                 postalCode = None,
+                 postal_code = None,
                  latitude = None,
                  longitude = None,
                  timezone = None):
         if not isinstance(api, Api):
-            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
+            raise InvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
         self.__city = city
         self.__country = country
         self.__street = street
-        self.__postalCode = postalCode
+        self.__postalCode = postal_code
         self.__latitude = latitude
         self.__longitude = longitude
         self.__timezone = timezone
@@ -197,20 +197,20 @@ class Location(LastfmBase):
         return self.__timezone
     
     @LastfmBase.cachedProperty
-    def topTracks(self):
+    def top_tracks(self):
         """top tracks of the location"""
         if self.country is None or self.city is None:
-            raise LastfmInvalidParametersError("country and city of this location are required for calling this method")
-        return Geo.getTopTracks(self.__api, self.country.name, self.city)
+            raise InvalidParametersError("country and city of this location are required for calling this method")
+        return Geo.get_top_tracks(self.__api, self.country.name, self.city)
     
-    @LastfmBase.topProperty("topTracks")
-    def topTrack(self):
+    @LastfmBase.topProperty("top_tracks")
+    def top_track(self):
         """top track of the location"""
         pass
     
-    def getEvents(self,
+    def get_events(self,
                   distance = None):
-        return Geo.getEvents(self.__api,
+        return Geo.get_events(self.__api,
                              self.city,
                              self.latitude,
                              self.longitude,
@@ -219,25 +219,25 @@ class Location(LastfmBase):
     @LastfmBase.cachedProperty
     def events(self):
         """events taking place at/around the location"""
-        return self.getEvents()
+        return self.get_events()
         
     @staticmethod
-    def hashFunc(*args, **kwds):
+    def hash_func(*args, **kwds):
         try:
             return hash("latlong%s%s" % (kwds['latitude'], kwds['longitude']))
         except KeyError:
             try:
                 return hash("name%s" % kwds['city'])
             except KeyError:
-                raise LastfmInvalidParametersError("either latitude and longitude or city has to be provided for hashing")
+                raise InvalidParametersError("either latitude and longitude or city has to be provided for hashing")
 
     def __hash__(self):
-        if not self.name:
-            return self.__class__.hashFunc(
+        if not self.city:
+            return self.__class__.hash_func(
                                            latitude = self.latitude,
                                            longitude = self.longitude)
         else:
-            return self.__class__.hashFunc(name = self.city)
+            return self.__class__.hash_func(name = self.city)
 
     def __eq__(self, other):
         return self.latitude == other.latitude and self.longitude == other.longitude
@@ -260,7 +260,7 @@ class Country(LastfmBase):
                  api,
                  name = None):
         if not isinstance(api, Api):
-            raise LastfmInvalidParametersError("api reference must be supplied as an argument")
+            raise InvalidParametersError("api reference must be supplied as an argument")
         self.__api = api
         self.__name = name
 
@@ -270,42 +270,42 @@ class Country(LastfmBase):
         return self.__name
 
     @LastfmBase.cachedProperty
-    def topArtists(self):
+    def top_artists(self):
         """top artists of the country"""
-        return Geo.getTopArtists(self.__api, self.name)
+        return Geo.get_top_artists(self.__api, self.name)
         
-    @LastfmBase.topProperty("topArtists")
-    def topArtist(self):
+    @LastfmBase.topProperty("top_artists")
+    def top_artist(self):
         """top artist of the country"""
         pass
 
-    def getTopTracks(self, location = None):
-        return Geo.getTopTracks(self.__api, self.name, location)
+    def get_top_tracks(self, location = None):
+        return Geo.get_top_tracks(self.__api, self.name, location)
     
     @LastfmBase.cachedProperty
-    def topTracks(self):
+    def top_tracks(self):
         """top tracks of the country"""
-        return self.getTopTracks()
+        return self.get_top_tracks()
     
-    @LastfmBase.topProperty("topTracks")
-    def topTrack(self):
+    @LastfmBase.topProperty("top_tracks")
+    def top_track(self):
         """top track of the country"""
         pass
 
     @LastfmBase.cachedProperty
     def events(self):
         """events taking place at/around the location"""
-        return Geo.getEvents(self.__api, self.name)
+        return Geo.get_events(self.__api, self.name)
         
     @staticmethod
-    def hashFunc(*args, **kwds):
+    def hash_func(*args, **kwds):
         try:
             return hash(kwds['name'])
         except KeyError:
-            raise LastfmInvalidParametersError("name has to be provided for hashing")
+            raise InvalidParametersError("name has to be provided for hashing")
 
     def __hash__(self):
-        return self.__class__.hashFunc(name = self.name)
+        return self.__class__.hash_func(name = self.name)
 
     def __eq__(self, other):
         return self.name == other.name
@@ -318,7 +318,7 @@ class Country(LastfmBase):
 
 from api import Api
 from artist import Artist
-from error import LastfmInvalidParametersError
+from error import InvalidParametersError
 from event import Event
 from stats import Stats
 from track import Track

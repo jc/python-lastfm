@@ -10,7 +10,7 @@ class Sharable(object):
         
     def share(self, recipient, message = None):
         from user import User
-        params = self._defaultParams({'method': '%s.share' % self.__class__.__name__.lower()})
+        params = self._default_params({'method': '%s.share' % self.__class__.__name__.lower()})
         if message is not None:
             params['message'] = message
         
@@ -21,4 +21,4 @@ class Sharable(object):
             if isinstance(recipient[i], User):
                 recipient[i] = recipient[i].name
         params['recipient'] = ",".join(recipient)
-        self.__api._postData(params)
+        self.__api._post_data(params)

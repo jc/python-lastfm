@@ -33,7 +33,7 @@ class WeeklyChart(LastfmBase):
         return self.__stats
     
     @staticmethod
-    def createFromData(api, subject, data):
+    def create_from_data(api, subject, data):
         return WeeklyChart(
                            subject = subject,
                            start = datetime.utcfromtimestamp(int(data.attrib['from'])),
@@ -41,9 +41,9 @@ class WeeklyChart(LastfmBase):
                            )
     
     @staticmethod
-    def _checkWeeklyChartParams(params, start = None, end = None):
+    def _check_weekly_chart_params(params, start = None, end = None):
         if (start is not None and end is None) or (start is None and end is not None):
-            raise LastfmInvalidParametersError("both start and end have to be provided.")
+            raise InvalidParametersError("both start and end have to be provided.")
         if start is not None and end is not None:
             if isinstance(start, datetime) and isinstance(end, datetime):
                 params.update({
@@ -51,12 +51,12 @@ class WeeklyChart(LastfmBase):
                                'to': int(calendar.timegm(end.timetuple()))
                                })
             else:
-                raise LastfmInvalidParametersError("start and end must be datetime.datetime instances")
+                raise InvalidParametersError("start and end must be datetime.datetime instances")
             
         return params
     
     @staticmethod
-    def hashFunc(*args, **kwds):
+    def hash_func(*args, **kwds):
         try:
             return hash("%s%s%s%s" % (
                                       kwds['subject'].__class__.__name__,
@@ -65,10 +65,10 @@ class WeeklyChart(LastfmBase):
                                       kwds['end']
                                ))
         except KeyError:
-            raise LastfmInvalidParametersError("subject, start and end have to be provided for hashing")
+            raise InvalidParametersError("subject, start and end have to be provided for hashing")
         
     def __hash__(self):
-        return self.__class__.hashFunc(
+        return self.__class__.hash_func(
                                        subject = self.subject,
                                        start = self.start,
                                        end = self.end
@@ -109,7 +109,7 @@ class WeeklyAlbumChart(WeeklyChart):
         return self.__albums
     
     @staticmethod
-    def createFromData(api, subject, data):
+    def create_from_data(api, subject, data):
         w = WeeklyChart(
                         subject = subject,
                         start = datetime.utcfromtimestamp(int(data.attrib['from'])),
@@ -163,7 +163,7 @@ class WeeklyArtistChart(WeeklyChart):
         return self.__artists
     
     @staticmethod
-    def createFromData(api, subject, data):
+    def create_from_data(api, subject, data):
         w = WeeklyChart(
                         subject = subject,
                         start = datetime.utcfromtimestamp(int(data.attrib['from'])),
@@ -211,7 +211,7 @@ class WeeklyTrackChart(WeeklyChart):
         return self.__tracks
     
     @staticmethod
-    def createFromData(api, subject, data):
+    def create_from_data(api, subject, data):
         w = WeeklyChart(
                         subject = subject,
                         start = datetime.utcfromtimestamp(int(data.attrib['from'])),
@@ -258,6 +258,6 @@ import calendar
 
 from album import Album
 from artist import Artist
-from error import LastfmInvalidParametersError
+from error import InvalidParametersError
 from stats import Stats
 from track import Track
