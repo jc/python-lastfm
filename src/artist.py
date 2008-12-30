@@ -284,7 +284,8 @@ class Artist(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
         self._url = data.findtext('url')
         self._image = dict([(i.get('size'), i.text) for i in data.findall('image')])
         self._streamable = (data.findtext('streamable') == 1)
-        self._stats = Stats(
+        if not self._stats:
+            self._stats = Stats(
                              subject = self,
                              listeners = int(data.findtext('stats/listeners')),
                              playcount = int(data.findtext('stats/playcount'))

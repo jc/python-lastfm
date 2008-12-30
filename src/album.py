@@ -167,7 +167,8 @@ class Album(LastfmBase, Cacheable, Taggable):
         self._release_date = data.findtext('releasedate') and data.findtext('releasedate').strip() and \
                             datetime(*(time.strptime(data.findtext('releasedate').strip(), '%d %b %Y, 00:00')[0:6]))
         self._image = dict([(i.get('size'), i.text) for i in data.findall('image')])
-        self._stats = Stats(
+        if not self._stats:
+            self._stats = Stats(
                        subject = self,
                        listeners = int(data.findtext('listeners')),
                        playcount = int(data.findtext('playcount')),
