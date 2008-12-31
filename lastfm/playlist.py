@@ -4,8 +4,8 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-from base import LastfmBase
-from cacheable import Cacheable
+from lastfm.base import LastfmBase
+from lastfm.mixins import Cacheable
 
 class Playlist(LastfmBase, Cacheable):
     """A class representing an XPSF playlist."""
@@ -52,7 +52,7 @@ class Playlist(LastfmBase, Cacheable):
 
 import StringIO
 import sys
-from error import InvalidParametersError
+from lastfm.error import InvalidParametersError
 
 if sys.version_info >= (2, 5):
     import xml.etree.cElementTree as ElementTree

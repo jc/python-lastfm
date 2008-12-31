@@ -9,7 +9,7 @@ class Sharable(object):
         self._api = api
         
     def share(self, recipient, message = None):
-        from user import User
+        from lastfm.user import User
         params = self._default_params({'method': '%s.share' % self.__class__.__name__.lower()})
         if message is not None:
             params['message'] = message

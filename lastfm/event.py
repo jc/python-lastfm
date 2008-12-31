@@ -4,11 +4,10 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-from base import LastfmBase
-from cacheable import Cacheable
-from sharable import Sharable
+from lastfm.base import LastfmBase
+from lastfm.mixins import Cacheable, Sharable, Shoutable
 
-class Event(LastfmBase, Cacheable, Sharable):
+class Event(LastfmBase, Cacheable, Sharable, Shoutable):
     """A class representing an event."""
     STATUS_ATTENDING = 0
     STATUS_MAYBE = 1
@@ -30,6 +29,8 @@ class Event(LastfmBase, Cacheable, Sharable):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         Sharable.init(self, api)
+        Shoutable.init(self, api)
+        
         self._api = api
         self._id = id
         self._title = title
@@ -216,8 +217,8 @@ class Event(LastfmBase, Cacheable, Sharable):
 from datetime import datetime
 import time
 
-from api import Api
-from artist import Artist
-from error import InvalidParametersError
-from geo import Venue, Location, Country
-from stats import Stats
+from lastfm.api import Api
+from lastfm.artist import Artist
+from lastfm.error import InvalidParametersError
+from lastfm.geo import Venue, Location, Country
+from lastfm.stats import Stats

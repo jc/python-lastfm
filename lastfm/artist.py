@@ -4,14 +4,11 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-from base import LastfmBase
-from cacheable import Cacheable
-from taggable import Taggable
-from sharable import Sharable
-from searchable import Searchable
-from lazylist import lazylist
+from lastfm.base import LastfmBase
+from lastfm.mixins import Cacheable, Searchable, Sharable, Shoutable, Taggable
+from lastfm.lazylist import lazylist
 
-class Artist(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
+class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
     """A class representing an artist."""
     def init(self,
                  api,
@@ -26,8 +23,10 @@ class Artist(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
                  bio = None):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
-        Taggable.init(self, api)
         Sharable.init(self, api)
+        Shoutable.init(self, api)
+        Taggable.init(self, api)
+        
         self._api = api
         self._name = name
         self._mbid = mbid
@@ -358,12 +357,12 @@ class Artist(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
 from datetime import datetime
 import time
 
-from album import Album
-from api import Api
-from error import InvalidParametersError
-from event import Event
-from stats import Stats
-from tag import Tag
-from track import Track
-from user import User
-from wiki import Wiki
+from lastfm.album import Album
+from lastfm.api import Api
+from lastfm.error import InvalidParametersError
+from lastfm.event import Event
+from lastfm.stats import Stats
+from lastfm.tag import Tag
+from lastfm.track import Track
+from lastfm.user import User
+from lastfm.wiki import Wiki

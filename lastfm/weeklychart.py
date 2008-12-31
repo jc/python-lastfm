@@ -4,8 +4,8 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-from base import LastfmBase
-from cacheable import Cacheable
+from lastfm.base import LastfmBase
+from lastfm.mixins import Cacheable
 
 class WeeklyChart(LastfmBase, Cacheable):
     """A class for representing the weekly charts"""
@@ -257,8 +257,8 @@ class WeeklyTrackChart(WeeklyChart):
 from datetime import datetime
 import calendar
 
-from album import Album
-from artist import Artist
-from error import InvalidParametersError
-from stats import Stats
-from track import Track
+from lastfm.album import Album
+from lastfm.artist import Artist
+from lastfm.error import InvalidParametersError
+from lastfm.stats import Stats
+from lastfm.track import Track

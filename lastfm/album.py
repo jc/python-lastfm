@@ -4,9 +4,8 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-from base import LastfmBase
-from taggable import Taggable
-from cacheable import Cacheable
+from lastfm.base import LastfmBase
+from lastfm.mixins import Cacheable, Taggable
 
 class Album(LastfmBase, Cacheable, Taggable):
     """A class representing an album."""
@@ -214,9 +213,9 @@ class Album(LastfmBase, Cacheable, Taggable):
 from datetime import datetime
 import time
 
-from api import Api
-from artist import Artist
-from error import InvalidParametersError
-from playlist import Playlist
-from stats import Stats
-from tag import Tag
+from lastfm.api import Api
+from lastfm.artist import Artist
+from lastfm.error import InvalidParametersError
+from lastfm.playlist import Playlist
+from lastfm.stats import Stats
+from lastfm.tag import Tag

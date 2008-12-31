@@ -4,8 +4,8 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-from base import LastfmBase
-from safelist import SafeList
+from lastfm.base import LastfmBase
+from lastfm.safelist import SafeList
 
 class Taggable(object):
     def init(self, api):
@@ -13,7 +13,7 @@ class Taggable(object):
         
     @LastfmBase.cached_property
     def tags(self):
-        from tag import Tag
+        from lastfm.tag import Tag
         params = self._default_params({'method': '%s.getTags' % self.__class__.__name__.lower()})
         data = self._api._fetch_data(params, sign = True, session = True, no_cache = True).find('tags')
         return SafeList([
@@ -27,7 +27,7 @@ class Taggable(object):
                        self.add_tags, self.remove_tag)
     
     def add_tags(self, tags):
-        from tag import Tag
+        from lastfm.tag import Tag
         while(len(tags) > 10):
                         section = tags[0:9]
                         tags = tags[9:]
@@ -50,7 +50,7 @@ class Taggable(object):
         self._tags = None
         
     def remove_tag(self, tag):
-        from tag import Tag
+        from lastfm.tag import Tag
         if isinstance(tag, Tag):
             tag = tag.name
             

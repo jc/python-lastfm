@@ -4,12 +4,12 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-from base import LastfmBase
-from cacheable import Cacheable
-from lazylist import lazylist
-import playlist
+from lastfm.base import LastfmBase
+from lastfm.mixins import Cacheable, Shoutable
+from lastfm.lazylist import lazylist
+import lastfm.playlist
 
-class User(LastfmBase, Cacheable):
+class User(LastfmBase, Cacheable, Shoutable):
     """A class representing an user."""
     def init(self,
                  api,
@@ -24,6 +24,7 @@ class User(LastfmBase, Cacheable):
                  subscriber = None):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
+        Shoutable.init(self, api)
         self._api = api
         self._name = name
         self._url = url
@@ -559,7 +560,7 @@ class User(LastfmBase, Cacheable):
     def __repr__(self):
         return "<lastfm.User: %s>" % self.name
 
-    class Playlist(playlist.Playlist):
+    class Playlist(lastfm.playlist.Playlist):
         """A class representing a playlist belonging to the user."""
         def init(self, api, id, title, date, size, creator):
             super(User.Playlist, self).init(api, "lastfm://playlist/%s" % id)
@@ -796,14 +797,14 @@ class User(LastfmBase, Cacheable):
 from datetime import datetime
 import time
 
-from api import Api
-from artist import Artist
-from album import Album
-from error import LastfmError, InvalidParametersError
-from event import Event
-from geo import Country
-from stats import Stats
-from tag import Tag
-from tasteometer import Tasteometer
-from track import Track
-from weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
+from lastfm.api import Api
+from lastfm.artist import Artist
+from lastfm.album import Album
+from lastfm.error import LastfmError, InvalidParametersError
+from lastfm.event import Event
+from lastfm.geo import Country
+from lastfm.stats import Stats
+from lastfm.tag import Tag
+from lastfm.tasteometer import Tasteometer
+from lastfm.track import Track
+from lastfm.weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart

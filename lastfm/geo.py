@@ -4,9 +4,9 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-from base import LastfmBase
-from cacheable import Cacheable
-from lazylist import lazylist
+from lastfm.base import LastfmBase
+from lastfm.mixins import Cacheable
+from lastfm.lazylist import lazylist
 
 class Geo(object):
     """A class representing an geographic location."""
@@ -317,9 +317,9 @@ class Country(LastfmBase, Cacheable):
     def __repr__(self):
         return "<lastfm.geo.Country: %s>" % self.name
 
-from api import Api
-from artist import Artist
-from error import InvalidParametersError
-from event import Event
-from stats import Stats
-from track import Track
+from lastfm.api import Api
+from lastfm.artist import Artist
+from lastfm.error import InvalidParametersError
+from lastfm.event import Event
+from lastfm.stats import Stats
+from lastfm.track import Track

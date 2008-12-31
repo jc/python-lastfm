@@ -4,10 +4,9 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-from base import LastfmBase
-from searchable import Searchable
-from cacheable import Cacheable
-from lazylist import lazylist
+from lastfm.base import LastfmBase
+from lastfm.mixins import Cacheable, Searchable
+from lastfm.lazylist import lazylist
 
 class Tag(LastfmBase, Cacheable, Searchable):
     """"A class representing a tag."""
@@ -225,10 +224,10 @@ class Tag(LastfmBase, Cacheable, Searchable):
     def __repr__(self):
         return "<lastfm.Tag: %s>" % self.name
 
-from album import Album
-from api import Api
-from artist import Artist
-from error import InvalidParametersError
-from playlist import Playlist
-from stats import Stats
-from track import Track
+from lastfm.album import Album
+from lastfm.api import Api
+from lastfm.artist import Artist
+from lastfm.error import InvalidParametersError
+from lastfm.playlist import Playlist
+from lastfm.stats import Stats
+from lastfm.track import Track

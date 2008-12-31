@@ -3,7 +3,8 @@
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
-from lazylist import lazylist
+
+from lastfm.lazylist import lazylist
 
 class Searchable(object):
     @classmethod
@@ -12,7 +13,7 @@ class Searchable(object):
                search_item,
                limit = None,
                **kwds):
-        from api import Api
+        from lastfm.api import Api
         cls_name = cls.__name__.lower()
         params = {
                   'method': '%s.search'%cls_name,

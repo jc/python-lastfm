@@ -63,4 +63,4 @@ class Tasteometer(object):
     def __repr__(self):
         return "<lastfm.Tasteometer: %s%% match>" % (self.score*100)
         
-from artist import Artist
+from lastfm.artist import Artist

@@ -4,7 +4,7 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-from base import LastfmBase
+from lastfm.base import LastfmBase
 
 class Api(object):
     """The class representing the last.fm web services API."""
@@ -378,18 +378,18 @@ import urllib
 import urllib2
 import urlparse
 
-from album import Album
-from artist import Artist
-from error import error_map, LastfmError, OperationFailedError, AuthenticationFailedError
-from event import Event
-from filecache import FileCache
-from geo import Location, Country
-from group import Group
-from playlist import Playlist
-from tag import Tag
-from tasteometer import Tasteometer
-from track import Track
-from user import User
+from lastfm.album import Album
+from lastfm.artist import Artist
+from lastfm.error import error_map, LastfmError, OperationFailedError, AuthenticationFailedError
+from lastfm.event import Event
+from lastfm.filecache import FileCache
+from lastfm.geo import Location, Country
+from lastfm.group import Group
+from lastfm.playlist import Playlist
+from lastfm.tag import Tag
+from lastfm.tasteometer import Tasteometer
+from lastfm.track import Track
+from lastfm.user import User
 
 if sys.version_info >= (2, 5):
     import xml.etree.cElementTree as ElementTree

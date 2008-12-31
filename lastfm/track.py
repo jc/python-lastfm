@@ -4,12 +4,9 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-from base import LastfmBase
-from cacheable import Cacheable
-from taggable import Taggable
-from sharable import Sharable
-from searchable import Searchable
-from lazylist import lazylist
+from lastfm.base import LastfmBase
+from lastfm.mixins import Cacheable, Searchable, Sharable, Taggable
+from lastfm.lazylist import lazylist
 
 class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
     """A class representing a track."""
@@ -390,11 +387,11 @@ class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
 import time
 from datetime import datetime
 
-from api import Api
-from artist import Artist
-from album import Album
-from error import InvalidParametersError
-from stats import Stats
-from tag import Tag
-from user import User
-from wiki import Wiki
+from lastfm.api import Api
+from lastfm.artist import Artist
+from lastfm.album import Album
+from lastfm.error import InvalidParametersError
+from lastfm.stats import Stats
+from lastfm.tag import Tag
+from lastfm.user import User
+from lastfm.wiki import Wiki

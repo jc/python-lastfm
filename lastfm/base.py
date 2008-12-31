@@ -47,4 +47,4 @@ class LastfmBase(object):
         return not self.__gt__(other)
 
 import copy
-from error import LastfmError
+from lastfm.error import LastfmError

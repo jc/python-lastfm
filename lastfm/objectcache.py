@@ -4,18 +4,18 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-from album import Album
-from artist import Artist
-from cacheable import Cacheable
-from error import InvalidParametersError
-from event import Event
-from geo import Location, Country
-from group import Group
-from playlist import Playlist
-from tag import Tag
-from track import Track
-from user import User
-from weeklychart import WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
+from lastfm.album import Album
+from lastfm.artist import Artist
+from lastfm.mixins import Cacheable
+from lastfm.error import InvalidParametersError
+from lastfm.event import Event
+from lastfm.geo import Location, Country
+from lastfm.group import Group
+from lastfm.playlist import Playlist
+from lastfm.tag import Tag
+from lastfm.track import Track
+from lastfm.user import User
+from lastfm.weeklychart import WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
 
 class ObjectCache(object):
     """The registry to contain all the entities"""

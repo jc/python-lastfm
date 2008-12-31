@@ -4,9 +4,9 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-from base import LastfmBase
-from cacheable import Cacheable
-from lazylist import lazylist
+from lastfm.base import LastfmBase
+from lastfm.mixins import Cacheable
+from lastfm.lazylist import lazylist
 
 class Group(LastfmBase, Cacheable):
     """A class representing a group on last.fm."""
@@ -123,6 +123,6 @@ class Group(LastfmBase, Cacheable):
     def __repr__(self):
         return "<lastfm.Group: %s>" % self.name
 
-from api import Api
-from error import InvalidParametersError
-from weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
+from lastfm.api import Api
+from lastfm.error import InvalidParametersError
+from lastfm.weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
