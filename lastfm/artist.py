@@ -37,6 +37,7 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
                              subject = self,
                              listeners = stats.listeners,
                              playcount = stats.playcount,
+                             weight = stats.weight,
                              match = stats.match,
                              rank = stats.rank
                             )

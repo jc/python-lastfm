@@ -245,14 +245,14 @@ class Api(object):
             return urllib.urlencode([(k, self._encode(parameters[k])) for k in keys if parameters[k] is not None])
 
     def _read_url_data(self, opener, url, data = None):
-            now = datetime.now()
-            delta = now - self._last_fetch_time
-            delta = delta.seconds + float(delta.microseconds)/1000000
-            if delta < Api.FETCH_INTERVAL:
-                time.sleep(Api.FETCH_INTERVAL - delta)
-            url_data = opener.open(url, data).read()
-            self._last_fetch_time = datetime.now()
-            return url_data
+        now = datetime.now()
+        delta = now - self._last_fetch_time
+        delta = delta.seconds + float(delta.microseconds)/1000000
+        if delta < Api.FETCH_INTERVAL:
+            time.sleep(Api.FETCH_INTERVAL - delta)
+        url_data = opener.open(url, data).read()
+        self._last_fetch_time = datetime.now()
+        return url_data
 
     def _fetch_url(self,
                   url,
@@ -307,6 +307,7 @@ class Api(object):
                    sign = False,
                    session = False,
                    no_cache = False):
+        params = params.copy()
         params['api_key'] = self.api_key
 
         if session:
@@ -325,9 +326,9 @@ class Api(object):
                  url,
                  parameters):
         url = self._build_url(url)
-        if self._debug:
-            print url
         data = self._encode_parameters(parameters)
+        if self._debug:
+            print data
         opener = self._get_opener(url)
         url_data = self._read_url_data(opener, url, data)
         return url_data
@@ -350,6 +351,7 @@ class Api(object):
                 keys.sort()
                 sig = unicode()
                 for name in keys:
+                    if name == 'api_sig': continue
                     sig += ("%s%s" % (name, params[name]))
                 sig += self.secret
                 hashed_sig = md5.new(sig).hexdigest()

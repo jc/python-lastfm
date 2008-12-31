@@ -14,19 +14,16 @@ class User(LastfmBase, Cacheable, Shoutable):
     def init(self,
                  api,
                  name = None,
+                 real_name = None,
                  url = None,
                  image = None,
-                 stats = None,
-                 language = None,
-                 country = None,
-                 age = None,
-                 gender = None,
-                 subscriber = None):
+                 stats = None):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         Shoutable.init(self, api)
         self._api = api
         self._name = name
+        self._real_name = real_name
         self._url = url
         self._image = image
         self._stats = stats and Stats(
@@ -36,17 +33,17 @@ class User(LastfmBase, Cacheable, Shoutable):
                              playcount = stats.playcount
                             )
         self._library = User.Library(api, self)
-        self._language = language
-        self._country = country
-        self._age = age
-        self._gender = gender
-        self._subscriber = subscriber
 
     @property
     def name(self):
         """name of the user"""
         return self._name
 
+    @property
+    def real_name(self):
+        """real name of the user"""
+        return self._real_name
+    
     @property
     def url(self):
         """url of the user's page"""
@@ -63,29 +60,39 @@ class User(LastfmBase, Cacheable, Shoutable):
         return self._stats
 
     @property
+    @LastfmBase.autheticate
     def language(self):
         """lang for the user"""
         return self._language
 
     @property
+    @LastfmBase.autheticate
     def country(self):
         """country for the user"""
         return self._country
 
     @property
+    @LastfmBase.autheticate
     def age(self):
         """age for the user"""
         return self._age
 
     @property
+    @LastfmBase.autheticate
     def gender(self):
         """stats for the user"""
         return self._gender
 
     @property
+    @LastfmBase.autheticate
     def subscriber(self):
         """is the user a subscriber"""
         return self._subscriber
+    
+    @property
+    def autheticated(self):
+        """is the user autheticated"""
+        return self._api.get_authenticated_user() == self
 
     @LastfmBase.cached_property
     def events(self):
@@ -126,7 +133,37 @@ class User(LastfmBase, Cacheable, Shoutable):
     @LastfmBase.cached_property
     def past_events(self):
         return self.get_past_events()
+    
+    @LastfmBase.autheticate
+    def get_recommended_events(self, limit = None):
+        params = {'method': 'user.getRecommendedEvents'}
+        if limit is not None:
+            params.update({'limit': limit})
 
+        @lazylist
+        def gen(lst):
+            data = self._api._fetch_data(params, sign = True, session = True).find('events')
+            total_pages = int(data.attrib['totalPages'])
+
+            @lazylist
+            def gen2(lst, data):
+                for e in data.findall('event'):
+                    yield Event.create_from_data(self._api, e)
+
+            for e in gen2(data):
+                yield e
+
+            for page in xrange(2, total_pages+1):
+                params.update({'page': page})
+                data = self._api._fetch_data(params, sign = True, session = True).find('events')
+                for e in gen2(data):
+                    yield e
+        return gen()
+
+    @LastfmBase.cached_property
+    def recommended_events(self):
+        return self.get_recommended_events()
+    
     def get_friends(self,
                    limit = None):
         params = self._default_params({'method': 'user.getFriends'})
@@ -202,6 +239,15 @@ class User(LastfmBase, Cacheable, Shoutable):
                 for p in data.findall('playlist')
                 ]
 
+    @LastfmBase.autheticate
+    def create_playlist(self, title, description = None):
+        params = {'method': 'playlist.create',
+                  'title': title}
+        if description is not None:
+            params['description'] = description
+        self._api._post_data(params)
+        self._playlists = None
+    
     @LastfmBase.cached_property
     def loved_tracks(self):
         params = self._default_params({'method': 'user.getLovedTracks'})
@@ -353,7 +399,39 @@ class User(LastfmBase, Cacheable, Shoutable):
     def top_artist(self):
         """top artist of the user"""
         pass
+    
+    @LastfmBase.cached_property
+    @LastfmBase.autheticate
+    def recommended_artists(self):
+        params = {'method': 'user.getRecommendedArtists'}
+        
+        @lazylist
+        def gen(lst):
+            data = self._api._fetch_data(params, sign = True, session = True).find('recommendations')
+            total_pages = int(data.attrib['totalPages'])
 
+            @lazylist
+            def gen2(lst, data):
+                for a in data.findall('artist'):
+                    yield Artist(
+                                 self._api,
+                                 name = a.findtext('name'),
+                                 mbid = a.findtext('mbid'),
+                                 url = a.findtext('url'),
+                                 streamable = (a.findtext('streamable') == "1"),
+                                 image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                                 )
+
+            for a in gen2(data):
+                yield a
+
+            for page in xrange(2, total_pages+1):
+                params.update({'page': page})
+                data = self._api._fetch_data(params, sign = True, session = True).find('recommendations')
+                for a in gen2(data):
+                    yield a
+        return gen()
+    
     def get_top_tracks(self, period = None):
         params = self._default_params({'method': 'user.getTopTracks'})
         if period is not None:
@@ -516,24 +594,23 @@ class User(LastfmBase, Cacheable, Shoutable):
     def library(self):
         return self._library
 
+    
     @staticmethod
     def get_authenticated_user(api):
         data = api._fetch_data({'method': 'user.getInfo'}, sign = True, session = True).find('user')
-        return User(
+        user = User(
                 api,
                 name = data.findtext('name'),
                 url = data.findtext('url'),
-                language = data.findtext('lang'),
-                country = Country(api, name = data.findtext('country')),
-                age = int(data.findtext('age')),
-                gender = data.findtext('gender'),
-                subscriber = (data.findtext('subscriber') == '1'),
-                stats = Stats(
-                              subject = data.findtext('name'),
-                              playcount = data.findtext('playcount')
-                              )
             )
-
+        user._language = data.findtext('lang')
+        user._country = Country(api, name = Country.ISO_CODES[data.findtext('country')])
+        user._age = int(data.findtext('age'))
+        user._gender = data.findtext('gender')
+        user._subscriber = (data.findtext('subscriber') == "1")
+        user._stats = Stats(subject = user, playcount = data.findtext('playcount'))
+        return user
+        
     def _default_params(self, extra_params = {}):
         if not self.name:
             raise InvalidParametersError("user has to be provided.")
@@ -589,15 +666,27 @@ class User(LastfmBase, Cacheable, Shoutable):
         @property
         def creator(self):
             return self._creator
+        
+        @property
+        def user(self):
+            return self._creator
 
-        def add_track(self, track):
+        @LastfmBase.autheticate
+        def add_track(self, track, artist = None):
             params = {'method': 'playlist.addTrack', 'playlistID': self.id}
-            if not isinstance(track, Track):
-                track = self._api.search_track(track)[0]
-
-            params['artist'] = track.artist.name
-            params['track'] = track.name
+            if isinstance(track, Track):
+                params['artist'] = track.artist.name
+                params['track'] = track.name
+            else:
+                if artist is None:
+                    track = self._api.search_track(track)[0]
+                    params['artist'] = track.artist.name
+                    params['track'] = track.name
+                else:
+                    params['artist'] = isinstance(artist, Artist) and artist.name or artist
+                    params['track'] = track
             self._api._post_data(params)
+            self._data = None
 
         @staticmethod
         def _hash_func(*args, **kwds):
@@ -673,7 +762,25 @@ class User(LastfmBase, Cacheable, Shoutable):
         @LastfmBase.cached_property
         def albums(self):
             return self.get_albums()
-
+        
+        @LastfmBase.autheticate
+        def add_album(self, album, artist = None):
+            params = {'method': 'library.addAlbum'}
+            if isinstance(album, Album):
+                params['artist'] = album.artist.name
+                params['album'] = album.name
+            else:
+                if artist is None:
+                    album = self._api.search_album(album)[0]
+                    params['artist'] = album.artist.name
+                    params['album'] = album.name
+                else:
+                    params['artist'] = isinstance(artist, Artist) and artist.name or artist
+                    params['album'] = album
+                        
+            self._api._post_data(params)
+            self._albums = None
+            
         def get_artists(self,
                        limit = None):
             params = self._default_params({'method': 'library.getArtists'})
@@ -719,6 +826,16 @@ class User(LastfmBase, Cacheable, Shoutable):
         @LastfmBase.cached_property
         def artists(self):
             return self.get_artists()
+
+        @LastfmBase.autheticate
+        def add_artist(self, artist):
+            params = {'method': 'library.addArtist'}
+            if isinstance(artist, Artist):
+                params['artist'] = artist.name
+            else:
+                params['artist'] = artist
+            self._api._post_data(params)
+            self._artists = None
 
         def get_tracks(self,
                       limit = None):
@@ -773,6 +890,23 @@ class User(LastfmBase, Cacheable, Shoutable):
         @LastfmBase.cached_property
         def tracks(self):
             return self.get_tracks()
+
+        @LastfmBase.autheticate
+        def add_track(self, track, artist = None):
+            params = {'method': 'library.addTrack'}
+            if isinstance(track, Track):
+                params['artist'] = track.artist.name
+                params['track'] = track.name
+            else:
+                if artist is None:
+                    track = self._api.search_track(track)[0]
+                    params['artist'] = track.artist.name
+                    params['track'] = track.name
+                else:
+                    params['artist'] = isinstance(artist, Artist) and artist.name or artist
+                    params['track'] = track
+            self._api._post_data(params)
+            self._tracks = None
 
         def _default_params(self, extra_params = {}):
             if not self.user.name:

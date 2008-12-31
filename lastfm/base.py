@@ -33,6 +33,24 @@ class LastfmBase(object):
                 return cache_attribute
 
         return property(fget = wrapper, doc = func.__doc__)
+    
+    @staticmethod
+    def autheticate(func):
+        def wrapper(self, *args, **kwargs):
+            from lastfm.user import User
+            user = None
+            if isinstance(self, User):
+                user = self.name
+                if self.autheticated:
+                   return func(self, *args, **kwargs)
+            elif hasattr(self, 'user'):
+                user = self.user.name
+                if self.user.autheticated:
+                   return func(self, *args, **kwargs)
+                
+            raise AuthenticationFailedError(
+                "user '%s' does not have permissions to access the service" % user)
+        return wrapper
 
     def __gt__(self, other):
         return not (self.__lt__(other) or self.__eq(other))
@@ -47,4 +65,4 @@ class LastfmBase(object):
         return not self.__gt__(other)
 
 import copy
-from lastfm.error import LastfmError
+from lastfm.error import LastfmError, AuthenticationFailedError

@@ -97,6 +97,36 @@ class Group(LastfmBase, Cacheable):
                 yield self.get_weekly_track_chart(wc.start, wc.end)
         return gen()
 
+    @LastfmBase.cached_property
+    def members(self):
+        params = self._default_params({'method': 'group.getMembers'})
+        
+        @lazylist
+        def gen(lst):
+            data = self._api._fetch_data(params).find('members')
+            total_pages = int(data.attrib['totalPages'])
+
+            @lazylist
+            def gen2(lst, data):
+                for u in data.findall('user'):
+                    yield User(
+                               self._api,
+                               name = u.findtext('name'),
+                               real_name = u.findtext('realname'),
+                               image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
+                               url = u.findtext('url')
+                               )
+
+            for u in gen2(data):
+                yield u
+
+            for page in xrange(1, total_pages+1):
+                params.update({'page': page})
+                data = self._api._fetch_data(params).find('members')
+                for u in gen2(data):
+                    yield u
+        return gen()
+        
     def _default_params(self, extra_params = {}):
         if not self.name:
             raise InvalidParametersError("group has to be provided.")
@@ -125,4 +155,5 @@ class Group(LastfmBase, Cacheable):
 
 from lastfm.api import Api
 from lastfm.error import InvalidParametersError
+from lastfm.user import User
 from lastfm.weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart

@@ -57,6 +57,9 @@ class ServiceOfflineError(LastfmError):#11
 class SubscribersOnlyError(LastfmError):#12
     pass
 
+class InvalidMethodSignatureError(LastfmError):#13
+    pass
+
 class TokenNotAuthorizedError(LastfmError):#14
     pass
 
@@ -76,6 +79,7 @@ error_map = {
             10: InvalidApiKeyError,
             11: ServiceOfflineError,
             12: SubscribersOnlyError,
+            13: InvalidMethodSignatureError,
             14: TokenNotAuthorizedError,
             15: TokenExpiredError
            }    

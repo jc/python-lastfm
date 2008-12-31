@@ -96,9 +96,7 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
     
     @property
     def streamable(self):
-        """is the artist streamable"""
-        if self._streamable is None:
-            self._fill_info()
+        """is the album streamable"""
         return self._streamable
 
     @LastfmBase.cached_property

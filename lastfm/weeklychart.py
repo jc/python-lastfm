@@ -170,19 +170,19 @@ class WeeklyArtistChart(WeeklyChart):
                         start = datetime.utcfromtimestamp(int(data.attrib['from'])),
                         end = datetime.utcfromtimestamp(int(data.attrib['to'])),
                         )
+        count_attribute = data.find('artist').findtext('playcount') and 'playcount' or 'weight'
+        def get_count_attribute(artist):
+            return {count_attribute: int(eval(artist.findtext(count_attribute)))}
+        def get_count_attribute_sum(artists):
+            return {count_attribute: reduce(lambda x,y:(x + int(eval(y.findtext(count_attribute)))), artists, 0)}
+            
         return WeeklyArtistChart(
                            subject = subject,
                            start = datetime.utcfromtimestamp(int(data.attrib['from'])),
                            end = datetime.utcfromtimestamp(int(data.attrib['to'])),
                            stats = Stats(
                                          subject = subject,
-                                         playcount = reduce(
-                                                            lambda x,y:(
-                                                                        x + int(y.findtext('playcount'))
-                                                                        ),
-                                                            data.findall('artist'),
-                                                            0
-                                          )
+                                         **get_count_attribute_sum(data.findall('artist'))
                                     ),
                            artists = [
                                      Artist(
@@ -193,7 +193,7 @@ class WeeklyArtistChart(WeeklyChart):
                                            stats = Stats(
                                                          subject = a.findtext('name'),
                                                          rank = int(a.attrib['rank']),
-                                                         playcount = int(a.findtext('playcount')),
+                                                         **get_count_attribute(a)
                                                          ),
                                            url = a.findtext('url'),
                                            )
