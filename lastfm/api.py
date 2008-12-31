@@ -102,6 +102,11 @@ class Api(object):
             artist = artist.name
         return Album.get_info(self, artist, album, mbid)
 
+    def search_album(self,
+                     album,
+                     limit = None):
+        return Album.search(self, search_item = album, limit = limit)
+
     def get_artist(self,
                   artist = None,
                   mbid = None):

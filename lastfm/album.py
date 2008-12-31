@@ -5,9 +5,9 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import Cacheable, Taggable
+from lastfm.mixins import Cacheable, Searchable, Taggable
 
-class Album(LastfmBase, Cacheable, Taggable):
+class Album(LastfmBase, Cacheable, Searchable, Taggable):
     """A class representing an album."""
     def init(self,
                  api,
@@ -19,7 +19,8 @@ class Album(LastfmBase, Cacheable, Taggable):
                  release_date = None,
                  image = None,
                  stats = None,
-                 top_tags = None):
+                 top_tags = None,
+                 streamable = None):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         Taggable.init(self, api)
@@ -39,6 +40,7 @@ class Album(LastfmBase, Cacheable, Taggable):
                              rank = stats.rank
                             )
         self._top_tags = top_tags
+        self._streamable = streamable
     
     @property
     def name(self):
@@ -91,6 +93,13 @@ class Album(LastfmBase, Cacheable, Taggable):
         if self._stats is None:
             self._fill_info()
         return self._stats
+    
+    @property
+    def streamable(self):
+        """is the artist streamable"""
+        if self._streamable is None:
+            self._fill_info()
+        return self._streamable
 
     @LastfmBase.cached_property
     def top_tags(self):
@@ -182,6 +191,21 @@ class Album(LastfmBase, Cacheable, Taggable):
                     for t in data.findall('toptags/tag')
                     ]
                          
+    @staticmethod
+    def _search_yield_func(api, album):
+        return Album(
+                      api,
+                      name = album.findtext('name'),
+                      artist = Artist(
+                                      api,
+                                      name = album.findtext('artist')
+                                      ),
+                      id = int(album.findtext('id')),
+                      url = album.findtext('url'),
+                      image = dict([(i.get('size'), i.text) for i in album.findall('image')]),
+                      streamable = (album.findtext('streamable') == '1'),
+                      )
+    
     @staticmethod
     def _hash_func(*args, **kwds):
         try:
