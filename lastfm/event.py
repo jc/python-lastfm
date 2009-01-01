@@ -172,7 +172,7 @@ class Event(LastfmBase, Cacheable, Sharable, Shoutable):
                                                        longitude = float(data.findtext(
                                                            'venue/location/{%s}point/{%s}long' % ((Location.XMLNS,)*2)
                                                            )),
-                                                       timezone = data.findtext('venue/location/timezone')
+                                                       #timezone = data.findtext('venue/location/timezone')
                                                        ),
                                    url = data.findtext('venue/url')
                                    ),
@@ -220,5 +220,6 @@ import time
 from lastfm.api import Api
 from lastfm.artist import Artist
 from lastfm.error import InvalidParametersError
-from lastfm.geo import Venue, Location, Country
+from lastfm.geo import Location, Country
 from lastfm.stats import Stats
+from lastfm.venue import Venue

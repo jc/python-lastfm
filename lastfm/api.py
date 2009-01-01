@@ -175,6 +175,12 @@ class Api(object):
         if self.session_key is not None:
             return User.get_authenticated_user(self)
         return None
+    
+    def get_venue(self, venue):
+        return self.search_venue(venue)[0]
+    
+    def search_venue(self, venue):
+        return Venue.search(self, search_item = venue)
 
     def _build_url(self, url, path_elements=None, extra_params=None):
         # Break url into consituent parts
@@ -397,6 +403,7 @@ from lastfm.tag import Tag
 from lastfm.tasteometer import Tasteometer
 from lastfm.track import Track
 from lastfm.user import User
+from lastfm.venue import Venue
 
 if sys.version_info >= (2, 5):
     import xml.etree.cElementTree as ElementTree

@@ -94,50 +94,6 @@ class Geo(object):
                 for t in data.findall('track')
                 ]
 
-class Venue(LastfmBase, Cacheable):
-    """A class representing a venue of an event"""
-    def init(self,
-                 name = None,
-                 location = None,
-                 url = None):
-        self._name = name
-        self._location = location
-        self._url = url
-
-    @property
-    def name(self):
-        """name of the venue"""
-        return self._name
-
-    @property
-    def location(self):
-        """location of the event"""
-        return self._location
-
-    @property
-    def url(self):
-        """url of the event's page"""
-        return self._url
-
-    @staticmethod
-    def _hash_func(*args, **kwds):
-        try:
-            return hash(kwds['url'])
-        except KeyError:
-            raise InvalidParametersError("url has to be provided for hashing")
-
-    def __hash__(self):
-        return self.__class__._hash_func(url = self.url)
-
-    def __eq__(self, other):
-        return self.url == other.url
-
-    def __lt__(self, other):
-        return self.name < other.name
-
-    def __repr__(self):
-        return "<lastfm.geo.Venue: %s, %s>" % (self.name, self.location.city)
-
 class Location(LastfmBase, Cacheable):
     """A class representing a location of an event"""
     XMLNS = "http://www.w3.org/2003/01/geo/wgs84_pos#"

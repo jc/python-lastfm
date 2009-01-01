@@ -21,7 +21,8 @@ from lastfm.tag import Tag
 from lastfm.tasteometer import Tasteometer
 from lastfm.track import Track
 from lastfm.user import User
+from lastfm.venue import Venue
 
 __all__ = ['LastfmError', 'Api', 'Album', 'Artist', 'Event',
            'Location', 'Country', 'Group', 'Playlist', 'Tag',
-           'Tasteometer', 'Track', 'User', 'ObjectCache']
+           'Tasteometer', 'Track', 'User', 'Venue', 'ObjectCache']
