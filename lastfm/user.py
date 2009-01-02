@@ -589,7 +589,7 @@ class User(LastfmBase, Cacheable, Shoutable):
                              start = None,
                              end = None):
         WeeklyChart._check_weekly_chart_params({}, start, end)
-        return WeeklyTagChart.get(self._api, self, start, end)
+        return WeeklyTagChart.create_from_data(self._api, self, start, end)
 
     @LastfmBase.cached_property
     def recent_weekly_tag_chart(self):

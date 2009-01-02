@@ -265,7 +265,7 @@ class WeeklyTagChart(WeeklyChart):
         return self._tags
     
     @staticmethod
-    def get(api, subject, start, end):
+    def create_from_data(api, subject, start, end):
         w = WeeklyChart(
                         subject = subject,
                         start = start,
