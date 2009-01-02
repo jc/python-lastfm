@@ -584,6 +584,29 @@ class User(LastfmBase, Cacheable, Shoutable):
                 except LastfmError:
                     pass
         return gen()
+    
+    def get_weekly_tag_chart(self,
+                             start = None,
+                             end = None):
+        WeeklyChart._check_weekly_chart_params({}, start, end)
+        return WeeklyTagChart.get(self._api, self, start, end)
+
+    @LastfmBase.cached_property
+    def recent_weekly_tag_chart(self):
+        return self.get_weekly_tag_chart()
+
+    @LastfmBase.cached_property
+    def weekly_tag_chart_list(self):
+        wcl = list(self.weekly_chart_list)
+        wcl.reverse()
+        @lazylist
+        def gen(lst):
+            for wc in wcl:
+                try:
+                    yield self.get_weekly_tag_chart(wc.start, wc.end)
+                except LastfmError:
+                    pass
+        return gen()
 
     def compare(self, other, limit = None):
         return Tasteometer.compare(self._api,
@@ -941,4 +964,4 @@ from lastfm.stats import Stats
 from lastfm.tag import Tag
 from lastfm.tasteometer import Tasteometer
 from lastfm.track import Track
-from lastfm.weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
+from lastfm.weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart, WeeklyTagChart

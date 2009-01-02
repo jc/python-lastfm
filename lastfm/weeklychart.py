@@ -253,6 +253,98 @@ class WeeklyTrackChart(WeeklyChart):
                                      for t in data.findall('track')
                                      ]
                            )
+        
+class WeeklyTagChart(WeeklyChart):
+    """A class for representing the weekly tag charts"""
+    def init(self, subject, start, end, tags, stats):
+        super(WeeklyTagChart, self).init(subject, start, end, stats)
+        self._tags = tags
+        
+    @property
+    def tags(self):
+        return self._tags
+    
+    @staticmethod
+    def get(api, subject, start, end):
+        w = WeeklyChart(
+                        subject = subject,
+                        start = start,
+                        end = end,
+                        )
+        max_tag_count = 3
+        global_top_tags = api.get_global_top_tags()
+        from collections import defaultdict
+
+        wac = subject.get_weekly_artist_chart(start, end)
+        all_tags = defaultdict(lambda:0)
+        tag_weights = defaultdict(lambda:0)
+        total_playcount = 0
+        artist_count = 0
+        for artist in wac.artists:
+            artist_count += 1
+            total_playcount += artist.stats.playcount
+            tag_count = 0
+            for tag in artist.top_tags:
+                if tag not in global_top_tags: continue
+                if tag_count >= max_tag_count: break
+                all_tags[tag] += 1
+                tag_count += 1
+                
+            artist_pp = artist.stats.playcount/float(wac.stats.playcount)
+            cumulative_pp = total_playcount/float(wac.stats.playcount)
+            if (cumulative_pp > 0.75 or artist_pp < 0.01) and artist_count > 10:
+                break
+        
+        for artist in wac.artists[:artist_count]:
+            artist_pp = artist.stats.playcount/float(wac.stats.playcount)
+            tf = 1/float(max_tag_count)
+            tag_count = 0
+            weighted_tfidfs = {}
+            for tag in artist.top_tags:
+                if tag not in global_top_tags: continue
+                if tag_count >= max_tag_count: break            
+                
+                df = all_tags[tag]/float(artist_count)
+                tfidf = tf/df
+                weighted_tfidf = float(max_tag_count - tag_count)*tfidf
+                weighted_tfidfs[tag.name] = weighted_tfidf
+                tag_count += 1
+                
+            sum_weighted_tfidfs = sum(weighted_tfidfs.values())
+            for tag in weighted_tfidfs:
+                tag_weights[tag] += weighted_tfidfs[tag]/sum_weighted_tfidfs*artist_pp            
+            
+            artist_pp = artist.stats.playcount/float(wac.stats.playcount)
+                
+        tag_weights_sum = sum(tag_weights.values())
+        tag_weights = tag_weights.items()
+        tag_weights.sort(key=lambda x:x[1], reverse=True)
+        for i in xrange(len(tag_weights)):
+            tag, weight = tag_weights[i]
+            tag_weights[i] = (tag, weight, i+1)
+        
+        return WeeklyTagChart(
+           subject = subject,
+           start = wac.start,
+           end = wac.end,
+           stats = Stats(
+                         subject = subject,
+                         playcount = 1000
+                         ),
+           tags = [
+                     Tag(
+                           api,
+                           subject = w,
+                           name = tag,
+                           stats = Stats(
+                                         subject = tag,
+                                         rank = rank,
+                                         count = int(round(1000*weight/tag_weights_sum)),
+                                         )
+                           )
+                     for (tag, weight, rank) in tag_weights
+                     ]
+           )
     
 from datetime import datetime
 import calendar
@@ -262,3 +354,4 @@ from lastfm.artist import Artist
 from lastfm.error import InvalidParametersError
 from lastfm.stats import Stats
 from lastfm.track import Track
+from lastfm.tag import Tag

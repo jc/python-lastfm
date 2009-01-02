@@ -24,7 +24,8 @@ class Tag(LastfmBase, Cacheable, Searchable):
         self._streamable = streamable
         self._stats = stats and Stats(
                              subject = self,
-                             count = stats.count
+                             count = stats.count,
+                             rank = stats.rank
                              )
 
     @property
