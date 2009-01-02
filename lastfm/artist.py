@@ -311,7 +311,8 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
                           ]
         self._bio = Wiki(
                          self,
-                         published = datetime(*(time.strptime(
+                         published = data.findtext('bio/published').strip() and
+                                        datetime(*(time.strptime(
                                                               data.findtext('bio/published').strip(),
                                                               '%a, %d %b %Y %H:%M:%S +0000'
                                                               )[0:6])),

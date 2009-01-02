@@ -177,7 +177,10 @@ class Api(object):
         return None
     
     def get_venue(self, venue):
-        return self.search_venue(venue)[0]
+        try:
+            return self.search_venue(venue)[0]
+        except IndexError:
+            return None
     
     def search_venue(self, venue):
         return Venue.search(self, search_item = venue)
