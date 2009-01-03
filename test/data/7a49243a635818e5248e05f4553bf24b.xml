@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<results for="alternative" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query role="request" searchTerms="alternative" startPage="1" />
+<opensearch:totalResults>8368</opensearch:totalResults>
+<opensearch:startIndex>0</opensearch:startIndex>
+<opensearch:itemsPerPage>20</opensearch:itemsPerPage>
+<tagmatches>
+<tag>
+    <name>alternative</name>
+    <count>1121849</count>
+    <url>www.last.fm/tag/alternative</url>
+</tag>
+<tag>
+    <name>alternative rock</name>
+    <count>521455</count>
+    <url>www.last.fm/tag/alternative%20rock</url>
+</tag>
+<tag>
+    <name>alternative metal</name>
+    <count>60883</count>
+    <url>www.last.fm/tag/alternative%20metal</url>
+</tag>
+<tag>
+    <name>alternative pop</name>
+    <count>10392</count>
+    <url>www.last.fm/tag/alternative%20pop</url>
+</tag>
+<tag>
+    <name>alternative dance</name>
+    <count>3190</count>
+    <url>www.last.fm/tag/alternative%20dance</url>
+</tag>
+<tag>
+    <name>alternative rap</name>
+    <count>5459</count>
+    <url>www.last.fm/tag/alternative%20rap</url>
+</tag>
+<tag>
+    <name>alternative country</name>
+    <count>5652</count>
+    <url>www.last.fm/tag/alternative%20country</url>
+</tag>
+<tag>
+    <name>adult alternative</name>
+    <count>5327</count>
+    <url>www.last.fm/tag/adult%20alternative</url>
+</tag>
+<tag>
+    <name>alternative hip-hop</name>
+    <count>2601</count>
+    <url>www.last.fm/tag/alternative%20hip-hop</url>
+</tag>
+<tag>
+    <name>alternative folk</name>
+    <count>4853</count>
+    <url>www.last.fm/tag/alternative%20folk</url>
+</tag>
+<tag>
+    <name>russian alternative</name>
+    <count>9058</count>
+    <url>www.last.fm/tag/russian%20alternative</url>
+</tag>
+<tag>
+    <name>rock alternative</name>
+    <count>1189</count>
+    <url>www.last.fm/tag/rock%20alternative</url>
+</tag>
+<tag>
+    <name>alternative pop-rock</name>
+    <count>3666</count>
+    <url>www.last.fm/tag/alternative%20pop-rock</url>
+</tag>
+<tag>
+    <name>alternative punk</name>
+    <count>1602</count>
+    <url>www.last.fm/tag/alternative%20punk</url>
+</tag>
+<tag>
+    <name>90s alternative</name>
+    <count>1737</count>
+    <url>www.last.fm/tag/90s%20alternative</url>
+</tag>
+<tag>
+    <name>polish alternative</name>
+    <count>1113</count>
+    <url>www.last.fm/tag/polish%20alternative</url>
+</tag>
+<tag>
+    <name>alternative  punk</name>
+    <count>23683</count>
+    <url>www.last.fm/tag/alternative%20%20punk</url>
+</tag>
+<tag>
+    <name>alternative country-rock</name>
+    <count>1379</count>
+    <url>www.last.fm/tag/alternative%20country-rock</url>
+</tag>
+<tag>
+    <name>latin alternative</name>
+    <count>1158</count>
+    <url>www.last.fm/tag/latin%20alternative</url>
+</tag>
+<tag>
+    <name>christian alternative</name>
+    <count>726</count>
+    <url>www.last.fm/tag/christian%20alternative</url>
+</tag>
+</tagmatches>
+</results></lfm>

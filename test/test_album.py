@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+
+__author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
+__version__ = "0.2"
+__license__ = "GNU Lesser General Public License"
+
 import unittest
 import datetime
 import sys
@@ -10,7 +16,7 @@ install_opener()
 wsgi_intercept.add_wsgi_intercept('ws.audioscrobbler.com', 80, create_wsgi_app)
     
 sys.path.append("..")
-from src import Api
+from lastfm import Api
 
 class TestAlbum(unittest.TestCase):
     """ A test class for the Album module. """
@@ -18,7 +24,7 @@ class TestAlbum(unittest.TestCase):
     def setUp(self):
         apikey = "152a230561e72192b8b0f3e42362c6ff"        
         self.api = Api(apikey, no_cache = True)
-        self.album = self.api.getAlbum("Oasis", "Supersonic")
+        self.album = self.api.get_album("Oasis", "Supersonic")
         
     def tearDown(self):
         pass
@@ -42,7 +48,7 @@ class TestAlbum(unittest.TestCase):
         
     def testAlbumReleaseDate(self):
         date = datetime.datetime(1994, 7, 28, 0, 0)
-        self.assertEqual(self.album.releaseDate, date)
+        self.assertEqual(self.album.release_date, date)
         
     def testAlbumImage(self):
         self.assertEqual(self.album.image['small'], "http://userserve-ak.last.fm/serve/34/11846565.jpg")
@@ -61,7 +67,25 @@ class TestAlbum(unittest.TestCase):
         pass
     
     def testAlbumPlaylist(self):
-        self.assertEqual(self.album.playlist.url, "lastfm://playlist/album/2038492")        
-    
+        self.assertEqual(self.album.playlist.url, "lastfm://playlist/album/2038492")
+        
+    def testAlbumSearch(self):
+        albums = [('return to paradice', 'Waldeck'),
+                 ('Paradice is Empty', 'I-Disagree'),
+                 ('Paradice', 'The Mods'),
+                 ('paradice slave', 'flower of flesh and blood'),
+                 ('return to paradice', 'Flunk'),
+                 ('return to paradice', 'Nostalgia 77'),
+                 ('return to paradice', 'Katalyst'),
+                 ('return to paradice', 'Ennio Morricone'),
+                 ('return to paradice', 'Cornucopia'),
+                 ('return to paradice', 'Lost Balance')]
+        self.assertEqual(
+            [(album.name, album.artist.name) for album in self.api.search_album("paradice")[:10]],
+            albums
+        )
+
+test_suite = unittest.TestLoader().loadTestsFromTestCase(TestAlbum)
+
 if __name__ == '__main__':
     unittest.main()

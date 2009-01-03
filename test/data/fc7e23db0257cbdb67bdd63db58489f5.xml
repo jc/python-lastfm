@@ -1,0 +1,705 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<topalbums tag="alternative" >
+
+<album  rank="">
+    <name>OK Computer</name>
+    <tagcount>174</tagcount>
+    <mbid>fba5f8fe-c6c8-4511-8562-c9febf482674</mbid>
+    <url>http://www.last.fm/music/Radiohead/OK+Computer</url>
+            <artist>
+        <name>Radiohead</name>
+        <mbid>a74b1b7f-71a5-4011-9441-d0b5e4122711</mbid>
+        <url>http://www.last.fm/music/Radiohead</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/11396311.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/11396311.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/11396311.jpg</image>
+</album>
+<album  rank="">
+    <name>Nevermind</name>
+    <tagcount>105</tagcount>
+    <mbid>c12262e2-7185-4942-87ee-da27ddd45ddf</mbid>
+    <url>http://www.last.fm/music/Nirvana/Nevermind</url>
+            <artist>
+        <name>Nirvana</name>
+        <mbid>5b11f4ce-a62d-471e-81fc-a69a8278c7da</mbid>
+        <url>http://www.last.fm/music/Nirvana</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8590151.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8590151.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8590151.jpg</image>
+</album>
+<album  rank="">
+    <name>In Rainbows</name>
+    <tagcount>97</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Radiohead/In+Rainbows</url>
+            <artist>
+        <name>Radiohead</name>
+        <mbid>a74b1b7f-71a5-4011-9441-d0b5e4122711</mbid>
+        <url>http://www.last.fm/music/Radiohead</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/12441259.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/12441259.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/12441259.jpg</image>
+</album>
+<album  rank="">
+    <name>Absolution</name>
+    <tagcount>96</tagcount>
+    <mbid>a0a2b395-7989-4ec7-99f9-9bc9425c53b7</mbid>
+    <url>http://www.last.fm/music/Muse/Absolution</url>
+            <artist>
+        <name>Muse</name>
+        <mbid>9c9f1380-2516-4fc9-a3e6-f9f61941d090</mbid>
+        <url>http://www.last.fm/music/Muse</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8600369.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8600369.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8600369.jpg</image>
+</album>
+<album  rank="">
+    <name>Kid A</name>
+    <tagcount>91</tagcount>
+    <mbid>e1bdf797-8b89-4d4c-8986-bcb0974d9726</mbid>
+    <url>http://www.last.fm/music/Radiohead/Kid+A</url>
+            <artist>
+        <name>Radiohead</name>
+        <mbid>a74b1b7f-71a5-4011-9441-d0b5e4122711</mbid>
+        <url>http://www.last.fm/music/Radiohead</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/11408327.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/11408327.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/11408327.jpg</image>
+</album>
+<album  rank="">
+    <name>InTRO</name>
+    <tagcount>90</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Bruno+Sanfilippo/InTRO</url>
+            <artist>
+        <name>Bruno Sanfilippo</name>
+        <mbid>8716f569-77ce-4044-a578-26c2f142c67a</mbid>
+        <url>http://www.last.fm/music/Bruno+Sanfilippo</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/9775925.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/9775925.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/9775925.jpg</image>
+</album>
+<album  rank="">
+    <name>A Long And Ugly Road (European edition)</name>
+    <tagcount>88</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/June+Madrona/A+Long+And+Ugly+Road+%28European+edition%29</url>
+            <artist>
+        <name>June Madrona</name>
+        <mbid></mbid>
+        <url>http://www.last.fm/music/June+Madrona</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/9968601.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/9968601.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/9968601.jpg</image>
+</album>
+<album  rank="">
+    <name>The Bends</name>
+    <tagcount>71</tagcount>
+    <mbid>c9bd3da3-ee62-4c3e-a48e-a1b20ae7d0ed</mbid>
+    <url>http://www.last.fm/music/Radiohead/The+Bends</url>
+            <artist>
+        <name>Radiohead</name>
+        <mbid>a74b1b7f-71a5-4011-9441-d0b5e4122711</mbid>
+        <url>http://www.last.fm/music/Radiohead</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/14192921.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/14192921.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/14192921.jpg</image>
+</album>
+<album  rank="">
+    <name>A Rush of Blood to the Head</name>
+    <tagcount>70</tagcount>
+    <mbid>b83b32dd-aa1a-4f18-a5af-00e418041617</mbid>
+    <url>http://www.last.fm/music/Coldplay/A+Rush+of+Blood+to+the+Head</url>
+            <artist>
+        <name>Coldplay</name>
+        <mbid>cc197bad-dc9c-440d-a5b5-d52ba2e14234</mbid>
+        <url>http://www.last.fm/music/Coldplay</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/14245401.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/14245401.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/14245401.jpg</image>
+</album>
+<album  rank="">
+    <name>Black Holes And Revelations</name>
+    <tagcount>70</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Muse/Black+Holes+And+Revelations</url>
+            <artist>
+        <name>Muse</name>
+        <mbid>9c9f1380-2516-4fc9-a3e6-f9f61941d090</mbid>
+        <url>http://www.last.fm/music/Muse</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8855843.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8855843.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8855843.jpg</image>
+</album>
+<album  rank="">
+    <name>Franz Ferdinand</name>
+    <tagcount>67</tagcount>
+    <mbid>35fd1780-fe47-4e69-a74d-1fd8a0f07dd5</mbid>
+    <url>http://www.last.fm/music/Franz+Ferdinand/Franz+Ferdinand</url>
+            <artist>
+        <name>Franz Ferdinand</name>
+        <mbid>aa7a2827-f74b-473c-bd79-03d065835cf7</mbid>
+        <url>http://www.last.fm/music/Franz+Ferdinand</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/19815833.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/19815833.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/19815833.jpg</image>
+</album>
+<album  rank="">
+    <name>Hapless</name>
+    <tagcount>65</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Flowers+From+The+Man+Who+Shot+Your+Cousin/Hapless</url>
+            <artist>
+        <name>Flowers From The Man Who Shot Your Cousin</name>
+        <mbid>84fd990d-7889-406c-845c-5af0cfb7c4a5</mbid>
+        <url>http://www.last.fm/music/Flowers+From+The+Man+Who+Shot+Your+Cousin</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/9585953.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/9585953.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/9585953.jpg</image>
+</album>
+<album  rank="">
+    <name>Fallen</name>
+    <tagcount>60</tagcount>
+    <mbid>afc4be52-b92e-4a6e-99e4-decde16d7ee7</mbid>
+    <url>http://www.last.fm/music/Evanescence/Fallen</url>
+            <artist>
+        <name>Evanescence</name>
+        <mbid>f4a31f0a-51dd-4fa7-986d-3095c40c5ed9</mbid>
+        <url>http://www.last.fm/music/Evanescence</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/19743737.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/19743737.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/19743737.jpg</image>
+</album>
+<album  rank="">
+    <name>Demon Days</name>
+    <tagcount>60</tagcount>
+    <mbid>be144352-0bad-4dd6-b4e7-95e5ef43522a</mbid>
+    <url>http://www.last.fm/music/Gorillaz/Demon+Days</url>
+            <artist>
+        <name>Gorillaz</name>
+        <mbid>e21857d5-3256-4547-afb3-4b6ded592596</mbid>
+        <url>http://www.last.fm/music/Gorillaz</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/11453045.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/11453045.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/11453045.jpg</image>
+</album>
+<album  rank="">
+    <name>Songs &amp; Circuits</name>
+    <tagcount>60</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Capsula/Songs%2B%2526%2BCircuits</url>
+            <artist>
+        <name>Capsula</name>
+        <mbid>2209c9f8-7063-4f34-8227-c8c76a9b2e12</mbid>
+        <url>http://www.last.fm/music/Capsula</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/10311065.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/10311065.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/10311065.jpg</image>
+</album>
+<album  rank="">
+    <name>Odelay</name>
+    <tagcount>59</tagcount>
+    <mbid>99da9256-3e47-453b-b33a-f7c4c36012bf</mbid>
+    <url>http://www.last.fm/music/Beck/Odelay</url>
+            <artist>
+        <name>Beck</name>
+        <mbid>309c62ba-7a22-4277-9f67-4a162526d18a</mbid>
+        <url>http://www.last.fm/music/Beck</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8593437.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8593437.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8593437.jpg</image>
+</album>
+<album  rank="">
+    <name>Hail to the Thief</name>
+    <tagcount>58</tagcount>
+    <mbid>f470c26b-0beb-44d0-b49e-4caa02379b76</mbid>
+    <url>http://www.last.fm/music/Radiohead/Hail+to+the+Thief</url>
+            <artist>
+        <name>Radiohead</name>
+        <mbid>a74b1b7f-71a5-4011-9441-d0b5e4122711</mbid>
+        <url>http://www.last.fm/music/Radiohead</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/11380865.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/11380865.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/11380865.jpg</image>
+</album>
+<album  rank="">
+    <name>Californication</name>
+    <tagcount>56</tagcount>
+    <mbid>a5429e73-586a-4247-a6e2-4bde73205069</mbid>
+    <url>http://www.last.fm/music/Red+Hot+Chili+Peppers/Californication</url>
+            <artist>
+        <name>Red Hot Chili Peppers</name>
+        <mbid>8bfac288-ccc5-448d-9573-c33ea2aa5c30</mbid>
+        <url>http://www.last.fm/music/Red+Hot+Chili+Peppers</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8593509.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8593509.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8593509.jpg</image>
+</album>
+<album  rank="">
+    <name>Stadium Arcadium</name>
+    <tagcount>53</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Red+Hot+Chili+Peppers/Stadium+Arcadium</url>
+            <artist>
+        <name>Red Hot Chili Peppers</name>
+        <mbid>8bfac288-ccc5-448d-9573-c33ea2aa5c30</mbid>
+        <url>http://www.last.fm/music/Red+Hot+Chili+Peppers</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8810061.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8810061.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8810061.jpg</image>
+</album>
+<album  rank="">
+    <name>Garbage</name>
+    <tagcount>52</tagcount>
+    <mbid>6af59248-2aa1-413d-88a3-1f08e9e14222</mbid>
+    <url>http://www.last.fm/music/Garbage/Garbage</url>
+            <artist>
+        <name>Garbage</name>
+        <mbid>f9ef7a22-4262-4596-a2a8-1d19345b8e50</mbid>
+        <url>http://www.last.fm/music/Garbage</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8593715.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8593715.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8593715.jpg</image>
+</album>
+<album  rank="">
+    <name>Folks Pop In at the Waterhouse</name>
+    <tagcount>52</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Various+Artists/Folks+Pop+In+at+the+Waterhouse</url>
+            <artist>
+        <name>Various Artists</name>
+        <mbid>89ad4ac3-39f7-470e-963a-56509c546377</mbid>
+        <url>http://www.last.fm/music/Various+Artists</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/9628021.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/9628021.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/9628021.jpg</image>
+</album>
+<album  rank="">
+    <name>Hot Fuss</name>
+    <tagcount>51</tagcount>
+    <mbid>3127c6af-617f-4d82-9002-6cc74ab8648d</mbid>
+    <url>http://www.last.fm/music/The+Killers/Hot+Fuss</url>
+            <artist>
+        <name>The Killers</name>
+        <mbid>95e1ead9-4d31-4808-a7ac-32c3614c116b</mbid>
+        <url>http://www.last.fm/music/The+Killers</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8634917.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8634917.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8634917.jpg</image>
+</album>
+<album  rank="">
+    <name>Origin of Symmetry</name>
+    <tagcount>49</tagcount>
+    <mbid>2a7a193e-c148-48fa-a39c-8d17e5cf3443</mbid>
+    <url>http://www.last.fm/music/Muse/Origin+of+Symmetry</url>
+            <artist>
+        <name>Muse</name>
+        <mbid>9c9f1380-2516-4fc9-a3e6-f9f61941d090</mbid>
+        <url>http://www.last.fm/music/Muse</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8634859.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8634859.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8634859.jpg</image>
+</album>
+<album  rank="">
+    <name>Begin to Hope</name>
+    <tagcount>49</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Regina+Spektor/Begin+to+Hope</url>
+            <artist>
+        <name>Regina Spektor</name>
+        <mbid>fbb375f9-48bb-4635-824e-4120273b3ba7</mbid>
+        <url>http://www.last.fm/music/Regina+Spektor</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8840795.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8840795.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8840795.jpg</image>
+</album>
+<album  rank="">
+    <name>Alpha Generation</name>
+    <tagcount>48</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Olspur/Alpha+Generation</url>
+            <artist>
+        <name>Olspur</name>
+        <mbid>a2eed440-6894-44d2-ae9b-d6a3748d139e</mbid>
+        <url>http://www.last.fm/music/Olspur</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/13282459.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/13282459.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/13282459.jpg</image>
+</album>
+<album  rank="">
+    <name>Minutes To Midnight</name>
+    <tagcount>48</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Linkin+Park/Minutes+To+Midnight</url>
+            <artist>
+        <name>Linkin Park</name>
+        <mbid>f59c5520-5f46-4d2c-b2c4-822eabf53419</mbid>
+        <url>http://www.last.fm/music/Linkin+Park</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/9150945.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/9150945.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/9150945.jpg</image>
+</album>
+<album  rank="">
+    <name>Goodbye Different Oceans</name>
+    <tagcount>48</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Christina+Antipa/Goodbye+Different+Oceans</url>
+            <artist>
+        <name>Christina Antipa</name>
+        <mbid></mbid>
+        <url>http://www.last.fm/music/Christina+Antipa</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/9628345.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/9628345.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/9628345.jpg</image>
+</album>
+<album  rank="">
+    <name>The Winged Life (European edition)</name>
+    <tagcount>48</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/June+Madrona/The+Winged+Life+%28European+edition%29</url>
+            <artist>
+        <name>June Madrona</name>
+        <mbid></mbid>
+        <url>http://www.last.fm/music/June+Madrona</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/10119031.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/10119031.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/10119031.jpg</image>
+</album>
+<album  rank="">
+    <name>Rage Against the Machine</name>
+    <tagcount>47</tagcount>
+    <mbid>e956c901-acb7-48d6-9dc6-389a5f91f372</mbid>
+    <url>http://www.last.fm/music/Rage+Against+the+Machine/Rage+Against+the+Machine</url>
+            <artist>
+        <name>Rage Against the Machine</name>
+        <mbid>3798b104-01cb-484c-a3b0-56adc6399b80</mbid>
+        <url>http://www.last.fm/music/Rage+Against+the+Machine</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/19784479.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/19784479.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/19784479.jpg</image>
+</album>
+<album  rank="">
+    <name>Parachutes</name>
+    <tagcount>47</tagcount>
+    <mbid>8fb50f96-279e-4d44-92aa-d49ea56f5c08</mbid>
+    <url>http://www.last.fm/music/Coldplay/Parachutes</url>
+            <artist>
+        <name>Coldplay</name>
+        <mbid>cc197bad-dc9c-440d-a5b5-d52ba2e14234</mbid>
+        <url>http://www.last.fm/music/Coldplay</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/14225619.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/14225619.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/14225619.jpg</image>
+</album>
+<album  rank="">
+    <name>Showbiz</name>
+    <tagcount>47</tagcount>
+    <mbid>4b812512-5dc1-4f61-9104-7d3289390395</mbid>
+    <url>http://www.last.fm/music/Muse/Showbiz</url>
+            <artist>
+        <name>Muse</name>
+        <mbid>9c9f1380-2516-4fc9-a3e6-f9f61941d090</mbid>
+        <url>http://www.last.fm/music/Muse</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8597641.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8597641.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8597641.jpg</image>
+</album>
+<album  rank="">
+    <name>Chapel Hill</name>
+    <tagcount>47</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/My+Broken+Frame/Chapel+Hill</url>
+            <artist>
+        <name>My Broken Frame</name>
+        <mbid></mbid>
+        <url>http://www.last.fm/music/My+Broken+Frame</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/11912025.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/11912025.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/11912025.jpg</image>
+</album>
+<album  rank="">
+    <name>ad libitum</name>
+    <tagcount>46</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Bruno+Sanfilippo/ad+libitum</url>
+            <artist>
+        <name>Bruno Sanfilippo</name>
+        <mbid>8716f569-77ce-4044-a578-26c2f142c67a</mbid>
+        <url>http://www.last.fm/music/Bruno+Sanfilippo</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/11990039.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/11990039.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/11990039.jpg</image>
+</album>
+<album  rank="">
+    <name>Elephant</name>
+    <tagcount>45</tagcount>
+    <mbid>9bf86596-1ef0-4bd4-8f5e-bb205a77b075</mbid>
+    <url>http://www.last.fm/music/The+White+Stripes/Elephant</url>
+            <artist>
+        <name>The White Stripes</name>
+        <mbid>11ae9fbb-f3d7-4a47-936f-4c0a04d3b3b5</mbid>
+        <url>http://www.last.fm/music/The+White+Stripes</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8594965.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8594965.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8594965.jpg</image>
+</album>
+<album  rank="">
+    <name>Pablo Honey</name>
+    <tagcount>44</tagcount>
+    <mbid>661e10a1-8a01-4201-8f1b-e3a42684739d</mbid>
+    <url>http://www.last.fm/music/Radiohead/Pablo+Honey</url>
+            <artist>
+        <name>Radiohead</name>
+        <mbid>a74b1b7f-71a5-4011-9441-d0b5e4122711</mbid>
+        <url>http://www.last.fm/music/Radiohead</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/11498407.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/11498407.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/11498407.jpg</image>
+</album>
+<album  rank="">
+    <name>Post</name>
+    <tagcount>44</tagcount>
+    <mbid>095b8e2c-b4b9-45e7-b393-0f8e60062a68</mbid>
+    <url>http://www.last.fm/music/Bj%C3%B6rk/Post</url>
+            <artist>
+        <name>Björk</name>
+        <mbid>87c5dedd-371d-4a53-9f7f-80522fb7f3cb</mbid>
+        <url>http://www.last.fm/music/Bj%C3%B6rk</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8681249.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8681249.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8681249.jpg</image>
+</album>
+<album  rank="">
+    <name>Meds</name>
+    <tagcount>44</tagcount>
+    <mbid>d67c1834-59d7-4422-82b2-b1de8582fc60</mbid>
+    <url>http://www.last.fm/music/Placebo/Meds</url>
+            <artist>
+        <name>Placebo</name>
+        <mbid>847e8284-8582-4b0e-9c26-b042a4f49e57</mbid>
+        <url>http://www.last.fm/music/Placebo</url>
+    </artist>
+    <image size="small">http://images.amazon.com/images/P/B000EBEHR2.01.MZZZZZZZ.jpg</image>
+    <image size="medium">http://images.amazon.com/images/P/B000EBEHR2.01.MZZZZZZZ.jpg</image>
+    <image size="large">http://images.amazon.com/images/P/B000EBEHR2.01.MZZZZZZZ.jpg</image>
+</album>
+<album  rank="">
+    <name>ER-1035 on Elefant Records</name>
+    <tagcount>44</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Loons/ER-1035+on+Elefant+Records</url>
+            <artist>
+        <name>Loons</name>
+        <mbid>7319c7fd-396c-4a3c-bd02-eeff759b4c2d</mbid>
+        <url>http://www.last.fm/music/Loons</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/11913479.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/11913479.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/11913479.jpg</image>
+</album>
+<album  rank="">
+    <name>Amnesiac</name>
+    <tagcount>42</tagcount>
+    <mbid>530abf13-be96-4467-b8d5-bdbaa56a1b12</mbid>
+    <url>http://www.last.fm/music/Radiohead/Amnesiac</url>
+            <artist>
+        <name>Radiohead</name>
+        <mbid>a74b1b7f-71a5-4011-9441-d0b5e4122711</mbid>
+        <url>http://www.last.fm/music/Radiohead</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/11487267.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/11487267.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/11487267.jpg</image>
+</album>
+<album  rank="">
+    <name>Morning View</name>
+    <tagcount>42</tagcount>
+    <mbid>f1edc40a-a2a0-4396-b088-3714f964e11b</mbid>
+    <url>http://www.last.fm/music/Incubus/Morning+View</url>
+            <artist>
+        <name>Incubus</name>
+        <mbid>e3e0abcd-7671-4482-a9d8-462f5acc9be5</mbid>
+        <url>http://www.last.fm/music/Incubus</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/19681051.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/19681051.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/19681051.jpg</image>
+</album>
+<album  rank="">
+    <name>X&amp;Y</name>
+    <tagcount>42</tagcount>
+    <mbid>a45b3f71-8ff1-4498-8a7a-e2d18a2f6aa8</mbid>
+    <url>http://www.last.fm/music/Coldplay/X%2526Y</url>
+            <artist>
+        <name>Coldplay</name>
+        <mbid>cc197bad-dc9c-440d-a5b5-d52ba2e14234</mbid>
+        <url>http://www.last.fm/music/Coldplay</url>
+    </artist>
+    <image size="small">http://images.amazon.com/images/P/B0006L16N8.01.MZZZZZZZ.jpg</image>
+    <image size="medium">http://images.amazon.com/images/P/B0006L16N8.01.MZZZZZZZ.jpg</image>
+    <image size="large">http://images.amazon.com/images/P/B0006L16N8.01.MZZZZZZZ.jpg</image>
+</album>
+<album  rank="">
+    <name>Momentum</name>
+    <tagcount>42</tagcount>
+    <mbid></mbid>
+    <url>http://www.last.fm/music/Furiosa+Curiosa/Momentum</url>
+            <artist>
+        <name>Furiosa Curiosa</name>
+        <mbid></mbid>
+        <url>http://www.last.fm/music/Furiosa+Curiosa</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/10890403.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/10890403.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/10890403.jpg</image>
+</album>
+<album  rank="">
+    <name>Jagged Little Pill</name>
+    <tagcount>41</tagcount>
+    <mbid>3b58a643-6152-4785-bc35-7bb7a08f8dad</mbid>
+    <url>http://www.last.fm/music/Alanis+Morissette/Jagged+Little+Pill</url>
+            <artist>
+        <name>Alanis Morissette</name>
+        <mbid>4bdcee62-4902-4773-8cd1-e252e2e31225</mbid>
+        <url>http://www.last.fm/music/Alanis+Morissette</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8593421.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8593421.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8593421.jpg</image>
+</album>
+<album  rank="">
+    <name>Blood Sugar Sex Magik</name>
+    <tagcount>39</tagcount>
+    <mbid>8b69a5f2-d3de-4df0-ae61-54b2227862c8</mbid>
+    <url>http://www.last.fm/music/Red+Hot+Chili+Peppers/Blood+Sugar+Sex+Magik</url>
+            <artist>
+        <name>Red Hot Chili Peppers</name>
+        <mbid>8bfac288-ccc5-448d-9573-c33ea2aa5c30</mbid>
+        <url>http://www.last.fm/music/Red+Hot+Chili+Peppers</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8590485.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8590485.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8590485.jpg</image>
+</album>
+<album  rank="">
+    <name>Siamese Dream</name>
+    <tagcount>39</tagcount>
+    <mbid>60c4b799-d564-47d5-a77f-9f95c03fdf8e</mbid>
+    <url>http://www.last.fm/music/The+Smashing+Pumpkins/Siamese+Dream</url>
+            <artist>
+        <name>The Smashing Pumpkins</name>
+        <mbid>ba0d6274-db14-4ef5-b28d-657ebde1a396</mbid>
+        <url>http://www.last.fm/music/The+Smashing+Pumpkins</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/15185749.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/15185749.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/15185749.jpg</image>
+</album>
+<album  rank="">
+    <name>In Utero</name>
+    <tagcount>39</tagcount>
+    <mbid>1cbfd7e6-a888-4184-924d-e59a9f0c621c</mbid>
+    <url>http://www.last.fm/music/Nirvana/In+Utero</url>
+            <artist>
+        <name>Nirvana</name>
+        <mbid>5b11f4ce-a62d-471e-81fc-a69a8278c7da</mbid>
+        <url>http://www.last.fm/music/Nirvana</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8624587.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8624587.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8624587.jpg</image>
+</album>
+<album  rank="">
+    <name>By the Way</name>
+    <tagcount>38</tagcount>
+    <mbid>3f66063a-e91b-4025-9582-1adb1695123b</mbid>
+    <url>http://www.last.fm/music/Red+Hot+Chili+Peppers/By+the+Way</url>
+            <artist>
+        <name>Red Hot Chili Peppers</name>
+        <mbid>8bfac288-ccc5-448d-9573-c33ea2aa5c30</mbid>
+        <url>http://www.last.fm/music/Red+Hot+Chili+Peppers</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8593331.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8593331.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8593331.jpg</image>
+</album>
+<album  rank="">
+    <name>What Would the Community Think</name>
+    <tagcount>38</tagcount>
+    <mbid>cb552dc7-b0fe-4bcd-b864-1b3940baee8c</mbid>
+    <url>http://www.last.fm/music/Cat+Power/What+Would+the+Community+Think</url>
+            <artist>
+        <name>Cat Power</name>
+        <mbid>05755bf1-380c-487f-983f-d1a02401fa28</mbid>
+        <url>http://www.last.fm/music/Cat+Power</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/19142719.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/19142719.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/19142719.jpg</image>
+</album>
+<album  rank="">
+    <name>Guero</name>
+    <tagcount>38</tagcount>
+    <mbid>705ed05b-074d-4e14-91dc-09e5a0b5b0f6</mbid>
+    <url>http://www.last.fm/music/Beck/Guero</url>
+            <artist>
+        <name>Beck</name>
+        <mbid>309c62ba-7a22-4277-9f67-4a162526d18a</mbid>
+        <url>http://www.last.fm/music/Beck</url>
+    </artist>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/8672877.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/8672877.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/8672877.jpg</image>
+</album>
+<album  rank="">
+    <name>Gorillaz</name>
+    <tagcount>38</tagcount>
+    <mbid>d6b71621-f939-4abd-b99c-6b57d86e7f95</mbid>
+    <url>http://www.last.fm/music/Gorillaz/Gorillaz</url>
+            <artist>
+        <name>Gorillaz</name>
+        <mbid>e21857d5-3256-4547-afb3-4b6ded592596</mbid>
+        <url>http://www.last.fm/music/Gorillaz</url>
+    </artist>
+    <image size="small">http://images.amazon.com/images/P/B00005LMBK.01.MZZZZZZZ.jpg</image>
+    <image size="medium">http://images.amazon.com/images/P/B00005LMBK.01.MZZZZZZZ.jpg</image>
+    <image size="large">http://images.amazon.com/images/P/B00005LMBK.01.MZZZZZZZ.jpg</image>
+</album>
+</topalbums></lfm>

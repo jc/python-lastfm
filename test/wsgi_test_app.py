@@ -20,7 +20,6 @@ def test_app(environ, start_response):
                        environ['QUERY_STRING'],
                        ''
                        ))
-    #print "intercepted: %s" % url
     key = md5.new(url).hexdigest()
     status = '200 OK'
     response_headers = [('Content-type','text/xml')]
@@ -29,7 +28,12 @@ def test_app(environ, start_response):
     global _app_was_hit
     _app_was_hit = True
     
-    filedata = unicode(open(os.path.join(os.path.dirname(__file__), 'data', "%s.xml" % key)).read())
+    try:
+        filedata = open(os.path.join(os.path.dirname(__file__), 'data', "%s.xml" % key)).read()
+    except IOError:
+        print "\nintercepted: %s" % url
+        print "key:", key 
+        raise
     return [filedata]
 
 def create_wsgi_app():
