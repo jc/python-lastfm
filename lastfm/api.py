@@ -363,7 +363,7 @@ class Api(object):
                     if name == 'api_sig': continue
                     sig += ("%s%s" % (name, params[name]))
                 sig += self.secret
-                hashed_sig = md5.new(sig).hexdigest()
+                hashed_sig = md5hash(sig)
                 return hashed_sig
         else:
             raise AuthenticationFailedError("api secret must be present to call this method")
@@ -387,7 +387,6 @@ class Api(object):
         return "<lastfm.Api: %s>" % self._api_key
 
 from datetime import datetime
-import md5
 import sys
 import time
 import urllib
@@ -408,6 +407,15 @@ from lastfm.track import Track
 from lastfm.user import User
 from lastfm.venue import Venue
 
+if sys.version < '2.6':
+    import md5
+    def md5hash(string):
+        return md5.new(string).hexdigest()
+else:
+    from hashlib import md5
+    def md5hash(string):
+        return md5(string).hexdigest()
+    
 if sys.version_info >= (2, 5):
     import xml.etree.cElementTree as ElementTree
 else:

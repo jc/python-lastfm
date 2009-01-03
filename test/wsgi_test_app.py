@@ -1,6 +1,14 @@
 from urlparse import urlunparse
-import md5
 import os
+import sys
+if sys.version < '2.6':
+    import md5
+    def md5hash(string):
+        return md5.new(string).hexdigest()
+else:
+    from hashlib import md5
+    def md5hash(string):
+        return md5(string).hexdigest()
 """
 A simple WSGI application for testing.
 """
@@ -20,7 +28,7 @@ def test_app(environ, start_response):
                        environ['QUERY_STRING'],
                        ''
                        ))
-    key = md5.new(url).hexdigest()
+    key = md5hash(url)
     status = '200 OK'
     response_headers = [('Content-type','text/xml')]
     start_response(status, response_headers)

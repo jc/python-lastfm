@@ -4,7 +4,16 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
-import md5
+import sys
+if sys.version < '2.6':
+    import md5
+    def md5hash(string):
+        return md5.new(string).hexdigest()
+else:
+    from hashlib import md5
+    def md5hash(string):
+        return md5(string).hexdigest()
+    
 import os
 import tempfile
 
@@ -83,7 +92,7 @@ class FileCache(object):
 		self._root_directory = root_directory
 
 	def _GetPath(self,key):
-		hashed_key = md5.new(key).hexdigest()
+		hashed_key = md5hash(key)
 		return os.path.join(self._root_directory,
 							self._GetPrefix(hashed_key),
 							hashed_key)
