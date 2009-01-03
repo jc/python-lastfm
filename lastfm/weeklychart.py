@@ -323,7 +323,7 @@ class WeeklyTagChart(WeeklyChart):
             tag, weight = tag_weights[i]
             tag_weights[i] = (tag, weight, i+1)
         
-        return WeeklyTagChart(
+        wtc = WeeklyTagChart(
            subject = subject,
            start = wac.start,
            end = wac.end,
@@ -345,6 +345,8 @@ class WeeklyTagChart(WeeklyChart):
                      for (tag, weight, rank) in tag_weights
                      ]
            )
+        wtc._artist_spectrum_analyzed = 100*total_playcount/float(wac.stats.playcount)
+        return wtc
     
 from datetime import datetime
 import calendar
