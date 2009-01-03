@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<events artist="Bon Jovi" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" total="1">
+<event>
+    <id>642495</id>
+  <title>Festival de Viña del Mar 2009, Chile</title>
+  <artists>
+    <artist>Miley Cyrus</artist>
+    <artist>Bon Jovi</artist>
+    <artist>Santana</artist>
+    <artist>Juanes</artist>
+    <artist>Simply Red</artist>
+    <artist>Daddy Yankee</artist>
+    <artist>KC and the Sunshine Band</artist>
+    <artist>Julieta Venegas</artist>
+    <artist>Los Fabulosos Cadillacs</artist>
+    <artist>Marc Anthony</artist>
+    <artist>Hannah Montana</artist>
+    <artist>Camila</artist>
+    <artist>Joan Manuel Serrat</artist>
+    <artist>Luis Fonsi</artist>
+    <artist>Roger Hodgson</artist>
+    <artist>La Noche</artist>
+    <artist>Natalino</artist>
+    <artist>R.K.M &amp; Ken-Y</artist>
+    <headliner>Miley Cyrus</headliner>
+  </artists>
+  <venue>
+    <name>Quinta Vergara</name>
+    <location>
+      <city>Viña del Mar</city>
+      <country>Chile</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>-33.0080556</geo:lat>
+         <geo:long>-71.5197222</geo:long>
+      </geo:point>
+              <timezone>CLT</timezone>
+          </location>
+    <url>http://www.last.fm/venue/8783448</url>
+  </venue>
+  <startDate>Mon, 23 Feb 2009</startDate>
+  <endDate>Sat, 28 Feb 2009</endDate>
+  <description><![CDATA[El L Festival Internacional de la Canción de Viña del Mar se va celebrar en el Anfiteatro de la Quinta Vergara, en la ciudad chilena de Viña del Mar, entre los días 18 y 23 de febrero de 2009. Los animadores serán Felipe Camiroaga, de Televisión Nacional de Chile, y la periodista Soledad Onetto, de Canal 13.<br />
+<br />
+La Lira de Oro <br />
+<br />
+La Lira de Oro es el premio que se entregará a la canción vencedora de este año en las competencias folclórica e internacional.[1] Debido a que en el 2009 se celebra la quincuagésima versión del festival, se decidió que todas las canciones participantes sean las que, desde el 2001, obtuvieron el prmer lugar de ambas competencias, y como todas ellas ya ganaron la Gaviota de Plata, el trofeo será esta vez la Lira de Oro.<br />
+<br />
+Artistas confirmados<br />
+    * Juanes<br />
+    * Los Fabulosos Cadillacs<br />
+    * Julieta Venegas<br />
+    * Joan Manuel Serrat<br />
+    * Simply Red<br />
+    * Santana<br />
+    * KC and The Sunshine Band<br />
+    * Roger Hodgson<br />
+    * R.K.M &amp; Ken-Y<br />
+    * Camila<br />
+    * Dinamita Show<br />
+    * Marc Anthony<br />
+    * Daddy Yankee<br />
+    * La Noche[9]<br />
+    * Natalino[9]<br />
+    * Luis Fonsi[9]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/19895073.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/19895073.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/19895073.jpg</image>
+   <attendance>34</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=642495</tag>    
+  <url>http://www.last.fm/event/642495</url>
+</event>
+</events></lfm>

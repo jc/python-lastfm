@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<event xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" >
+  <id>216156</id>
+  <title>Aerosmith</title>
+  <artists>
+    <artist>Aerosmith</artist>
+    <headliner>Aerosmith</headliner>
+  </artists>
+  <venue>
+    <name>Palace Grounds</name>
+    <location>
+      <city>Bangalore</city>
+      <country>India</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>12.9833333</geo:lat>
+         <geo:long>77.5833333</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8807822</url>
+  </venue>
+  <startDate>Sat, 02 Jun 2007 20:00:00</startDate>
+  <description><![CDATA[Tickets priced at 1,800 and 1,200.]]></description>
+     <image size="small">http://userserve-ak.last.fm/serve/34/300793.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/300793.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/300793.jpg</image>
+  <url>http://www.last.fm/event/216156</url> 
+  <attendance>48</attendance>
+   <reviews>1</reviews>
+   <tag>lastfm:event=216156</tag>
+</event></lfm>

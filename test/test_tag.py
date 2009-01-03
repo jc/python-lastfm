@@ -19,11 +19,11 @@ sys.path.append("..")
 from lastfm import Api
 
 class TestTag(unittest.TestCase):
-    """ A test class for the Album module. """
+    """ A test class for the Tag module. """
     
     def setUp(self):
         apikey = "152a230561e72192b8b0f3e42362c6ff"        
-        self.api = Api(apikey, no_cache = True)#, debug = True)
+        self.api = Api(apikey, no_cache = True)
         self.tag = self.api.get_tag("rock").most_similar
         
     def tearDown(self):
