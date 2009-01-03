@@ -156,6 +156,7 @@ class Event(LastfmBase, Cacheable, Sharable, Shoutable):
                      artists = [Artist(api, name = a.text) for a in data.findall('artists/artist')],
                      headliner = Artist(api, name = data.findtext('artists/headliner')),
                      venue = Venue(
+                                   api,
                                    name = data.findtext('venue/name'),
                                    location = Location(
                                                        api,
