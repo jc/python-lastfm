@@ -79,5 +79,8 @@ class Stats(object):
         return self._reviews
 
     def __repr__(self):
-        return "<lastfm.Stats: for '%s'>" % self._subject.name
+        if hasattr(self._subject, 'name'):
+            return "<lastfm.Stats: for '%s'>" % self._subject.name
+        else:
+            return "<lastfm.Stats: for '%s'>" % self._subject
     
