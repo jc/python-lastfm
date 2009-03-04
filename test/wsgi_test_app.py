@@ -36,12 +36,18 @@ def test_app(environ, start_response):
     global _app_was_hit
     _app_was_hit = True
     
+    data_file = os.path.join(os.path.dirname(__file__), 'data', "%s.xml" % key)
+    
     try:
-        filedata = open(os.path.join(os.path.dirname(__file__), 'data', "%s.xml" % key)).read()
+        filedata = open(data_file).read()
     except IOError:
-        print "\nintercepted: %s" % url
-        print "key:", key 
-        raise
+        #print "\nintercepted: %s" % url
+        #print "key:", key 
+        import wsgi_intercept
+        wsgi_intercept.remove_wsgi_intercept('ws.audioscrobbler.com', 80)
+        import urllib2
+        filedata = urllib2.urlopen(url).read()
+        open(data_file, "w").write(filedata)
     return [filedata]
 
 def create_wsgi_app():
