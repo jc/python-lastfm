@@ -95,8 +95,8 @@ class Api(object):
         self._request_headers['User-Agent'] = user_agent
 
     def get_album(self,
-                 artist = None,
                  album = None,
+                 artist = None,
                  mbid = None):
         if isinstance(artist, Artist):
             artist = artist.name
@@ -120,8 +120,8 @@ class Api(object):
     def get_event(self, event):
         return Event.get_info(self, event)
 
-    def get_location(self, name):
-        return Location(self, name = name)
+    def get_location(self, city):
+        return Location(self, city = city)
 
     def get_country(self, name):
         return Country(self, name = name)

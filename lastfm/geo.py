@@ -504,7 +504,7 @@ class Country(LastfmBase, Cacheable):
     @staticmethod
     def _hash_func(*args, **kwds):
         try:
-            return hash(kwds['name'])
+            return hash(kwds['name'].lower())
         except KeyError:
             raise InvalidParametersError("name has to be provided for hashing")
 
@@ -512,7 +512,7 @@ class Country(LastfmBase, Cacheable):
         return self.__class__._hash_func(name = self.name)
 
     def __eq__(self, other):
-        return self.name == other.name
+        return self.name.lower() == other.name.lower()
 
     def __lt__(self, other):
         return self.name < other.name

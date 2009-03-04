@@ -308,8 +308,8 @@ class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
         self._mbid = data.findtext('mbid')
         self._url = data.findtext('url')
         self._duration = int(data.findtext('duration'))
-        self._streamable = (data.findtext('streamable') == '1'),
-        self._full_track = (data.find('streamable').attrib['fulltrack'] == '1'),
+        self._streamable = (data.findtext('streamable') == '1')
+        self._full_track = (data.find('streamable').attrib['fulltrack'] == '1')
 
         self._image = dict([(i.get('size'), i.text) for i in data.findall('image')])
         self._stats = Stats(
@@ -323,15 +323,17 @@ class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
                         mbid = data.findtext('artist/mbid'),
                         url = data.findtext('artist/url')
                         )
-        self._album = Album(
-                             self._api,
-                             artist = self._artist,
-                             name = data.findtext('album/title'),
-                             mbid = data.findtext('album/mbid'),
-                             url = data.findtext('album/url'),
-                             image = dict([(i.get('size'), i.text) for i in data.findall('album/image')])
-                             )
-        self._position = int(data.find('album').attrib['position'])
+        if data.find('album') is not None:
+            self._album = Album(
+                                 self._api,
+                                 artist = self._artist,
+                                 name = data.findtext('album/title'),
+                                 mbid = data.findtext('album/mbid'),
+                                 url = data.findtext('album/url'),
+                                 image = dict([(i.get('size'), i.text) for i in data.findall('album/image')])
+                                 )
+            self._position = data.find('album').attrib['position'].strip() \
+                and int(data.find('album').attrib['position'])
         if data.find('wiki') is not None:
             self._wiki = Wiki(
                          self,
