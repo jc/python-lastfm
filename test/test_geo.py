@@ -22,33 +22,19 @@ class TestGeo(unittest.TestCase):
     """ A test class for the Geo module. """
     
     def setUp(self):
-        apikey = "152a230561e72192b8b0f3e42362c6ff"        
-        self.api = Api(apikey, no_cache = True)
-        venue = self.api.get_venue('tokyo dome')
+        venue = api.get_venue('tokyo dome')
         self.location = venue.location
         self.country = venue.location.country
         
     def tearDown(self):
         pass
         
-    def testLocationCity(self):
-        self.assertEqual(self.location.city, "Tokyo")
-        
-    def testLocationCountry(self):
-        self.assertEqual(self.location.country, self.api.get_country("Japan"))
-    
-    def testLocationStreet(self):
-        self.assertEqual(self.location.street, '1-3-61, Koraku, Bunkyo-ku')
-        
-    def testLocationPostalCode(self):
-        self.assertEqual(self.location.postal_code, '112-8562')
-        
     def testLocationLatitude(self):
         self.assertAlmostEqual(self.location.latitude, 35.685, 3)
         
     def testLocationLongitude(self):
-        self.assertAlmostEqual(self.location.longitude, 139.7514, 4)
-
+        self.assertAlmostEqual(self.location.longitude, 139.7514, 4)    
+                
     def testLocationTopTracks(self):
         tracks = [('Viva la Vida', 'Coldplay'),
                  ('Ulysses', 'Franz Ferdinand'),
@@ -63,7 +49,7 @@ class TestGeo(unittest.TestCase):
         self.assertEqual(
             [(track.name, track.artist.name) for track in self.location.top_tracks[:10]],
             tracks)
-        
+    
     def testLocationTopTrack(self):
         top_track = self.location.top_track
         self.assertEqual((top_track.name, top_track.artist.name), ('Viva la Vida', 'Coldplay'))
@@ -108,7 +94,21 @@ class TestGeo(unittest.TestCase):
        event_ids = [961510, 925636, 959392, 875466, 951038,
                     950520, 957543, 930614, 871240, 857063]
        self.assertEqual([e.id for e in self.country.events[:10]], event_ids)
-        
+    
+apikey = "152a230561e72192b8b0f3e42362c6ff"        
+api = Api(apikey, no_cache = True)
+data = {
+    'city': "Tokyo",
+    'country': api.get_country("Japan"),
+    'street': '1-3-61, Koraku, Bunkyo-ku',
+    'postal_code': '112-8562'
+}
+
+for k,v in data.iteritems():
+    def testFunc(self):
+        self.assertEqual(getattr(self.location, k), v)
+    setattr(TestGeo, "testLocation%s" % k.replace('_', ' ').title().replace(' ', ''), testFunc)
+    
 test_suite = unittest.TestLoader().loadTestsFromTestCase(TestGeo)
 
 if __name__ == '__main__':

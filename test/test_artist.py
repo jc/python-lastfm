@@ -22,31 +22,11 @@ class TestArtist(unittest.TestCase):
     """ A test class for the Artist module. """
     
     def setUp(self):
-        apikey = "152a230561e72192b8b0f3e42362c6ff"        
-        self.api = Api(apikey, no_cache = True)
-        self.artist = self.api.get_artist("Bon Jovi")
+        self.artist = api.get_artist("Bon Jovi")
         
     def tearDown(self):
         pass
-        
-    def testArtistName(self):
-        self.assertEqual(self.artist.name, 'Bon Jovi')
-    
-    def testArtistMbid(self):
-        self.assertEqual(self.artist.mbid, '5dcdb5eb-cb72-4e6e-9e63-b7bace604965')
-    
-    def testArtistUrl(self):
-        self.assertEqual(self.artist.url, 'http://www.last.fm/music/Bon+Jovi')
-    
-    def testArtistImage(self):
-        self.assertEqual(self.artist.image,
-            {'large': 'http://userserve-ak.last.fm/serve/126/24125.jpg',
-             'medium': 'http://userserve-ak.last.fm/serve/64/24125.jpg',
-             'small': 'http://userserve-ak.last.fm/serve/34/24125.jpg'})
-    
-    def testArtistStreamable(self):
-        self.assertFalse(self.artist.streamable)
-    
+            
     def testArtistStats(self):
          self.assertEqual(self.artist.stats.listeners, 718040)
          self.assertEqual(self.artist.stats.playcount, 15353197)
@@ -88,7 +68,7 @@ class TestArtist(unittest.TestCase):
         self.assertEqual(self.artist.bio.published, datetime(2009, 1, 2, 23, 53, 53))
         
     def testArtistEvents(self):
-        self.assertEqual(self.artist.events, [self.api.get_event(642495)])
+        self.assertEqual(self.artist.events, [api.get_event(642495)])
     
     def testArtistShouts(self):
         shouts = [('jessicahelwig', 'Fri Jan  2 18:44:43 2009'),
@@ -119,7 +99,7 @@ class TestArtist(unittest.TestCase):
                    'Bon Jovi Feat. Big & Rich',
                    'Bon Jovi feat. LeAnn Rimes',
                    'Bon Jovi - Forever Young']
-        self.assertEqual([artist.name for artist in self.api.search_artist("Bon Jovi")[:10]],
+        self.assertEqual([artist.name for artist in api.search_artist("Bon Jovi")[:10]],
                          artists)
     
     def testArtistTopAlbums(self):
@@ -166,10 +146,29 @@ class TestArtist(unittest.TestCase):
                   'Bad Medicine',
                   'Keep the Faith']
         self.assertEqual([track.name for track in self.artist.top_tracks[:10]], tracks)
-    
+        
     def testArtistTopTrack(self):
         self.assertEqual(self.artist.top_track.name, 'You Give Love a Bad Name')
-        
+    
+
+apikey = "152a230561e72192b8b0f3e42362c6ff"        
+api = Api(apikey, no_cache = True)
+   
+data = {
+    'name': 'Bon Jovi',
+    'mbid': '5dcdb5eb-cb72-4e6e-9e63-b7bace604965',
+    'url': 'http://www.last.fm/music/Bon+Jovi',
+    'image': {'large': 'http://userserve-ak.last.fm/serve/126/24125.jpg',
+             'medium': 'http://userserve-ak.last.fm/serve/64/24125.jpg',
+             'small': 'http://userserve-ak.last.fm/serve/34/24125.jpg'},
+    'streamable': False
+}
+
+for k,v in data.iteritems():
+    def testFunc(self):
+        self.assertEqual(getattr(self.artist, k), v)
+    setattr(TestArtist, "testArtist%s" % k.replace('_', ' ').title().replace(' ', ''), testFunc)   
+    
 test_suite = unittest.TestLoader().loadTestsFromTestCase(TestArtist)
 
 if __name__ == '__main__':

@@ -22,22 +22,11 @@ class TestEvent(unittest.TestCase):
     """ A test class for the Event module. """
     
     def setUp(self):
-        apikey = "152a230561e72192b8b0f3e42362c6ff"        
-        self.api = Api(apikey, no_cache = True)
-        self.event = self.api.get_event(216156)
+        self.event = api.get_event(216156)
         
     def tearDown(self):
         pass
-        
-    def testEventId(self):
-        self.assertEqual(self.event.id, 216156)
-        
-    def testEventTitle(self):
-        self.assertEqual(self.event.title, 'Aerosmith')
-        
-    def testEventDescription(self):
-        self.assertEqual(self.event.description, 'Tickets priced at 1,800 and 1,200.')
-        
+                
     def testEventArtists(self):
         artists = ['Aerosmith']
         self.assertEqual([artist.name for artist in self.event.artists], artists)
@@ -45,23 +34,10 @@ class TestEvent(unittest.TestCase):
     def testEventHeadliner(self):
         self.assertEqual(self.event.headliner.name, 'Aerosmith')
         
-    def testEventImage(self):
-        self.assertEqual(self.event.image, 
-            {'large': 'http://userserve-ak.last.fm/serve/126/300793.jpg',
-             'medium': 'http://userserve-ak.last.fm/serve/64/300793.jpg',
-             'small': 'http://userserve-ak.last.fm/serve/34/300793.jpg'}
-        )
-        
     def testEventStats(self):
         self.assertEqual(self.event.stats.attendance, 48)
         self.assertEqual(self.event.stats.reviews, 1)
         
-    def testEventTag(self):
-        self.assertEqual(self.event.tag, 'lastfm:event=216156')
-    
-    def testEventUrl(self):
-        self.assertEqual(self.event.url, 'http://www.last.fm/event/216156')
-    
     def testEventShouts(self):
         shouts = [('Aeromaniac21280',
                    'It was a brillian show still jealous at some ppl who could meet them  video of joe perry banging the guitar in youtube, in between u will see a devils hand with the thorny black heavy metal wrist band, that hand IS MINE LOL!!!'),
@@ -83,7 +59,26 @@ class TestEvent(unittest.TestCase):
         self.assertEqual((shout.author.name, shout.body),
                          ('Aeromaniac21280',
                           'It was a brillian show still jealous at some ppl who could meet them  video of joe perry banging the guitar in youtube, in between u will see a devils hand with the thorny black heavy metal wrist band, that hand IS MINE LOL!!!'))
+        
+apikey = "152a230561e72192b8b0f3e42362c6ff"        
+api = Api(apikey, no_cache = True)
+
+data = {
+    'id': 216156,
+    'title': 'Aerosmith',
+    'description': 'Tickets priced at 1,800 and 1,200.',
+    'image': {'large': 'http://userserve-ak.last.fm/serve/126/300793.jpg',
+             'medium': 'http://userserve-ak.last.fm/serve/64/300793.jpg',
+             'small': 'http://userserve-ak.last.fm/serve/34/300793.jpg'},
+    'tag': 'lastfm:event=216156',
+    'url': 'http://www.last.fm/event/216156'
+}
     
+for k,v in data.iteritems():
+    def testFunc(self):
+        self.assertEqual(getattr(self.event, k), v)
+    setattr(TestEvent, "testEvent%s" % k.replace('_', ' ').title().replace(' ', ''), testFunc)          
+
 test_suite = unittest.TestLoader().loadTestsFromTestCase(TestEvent)
 
 if __name__ == '__main__':
