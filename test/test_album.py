@@ -24,7 +24,7 @@ class TestAlbum(unittest.TestCase):
     def setUp(self):
         apikey = "152a230561e72192b8b0f3e42362c6ff"        
         self.api = Api(apikey, no_cache = True)
-        self.album = self.api.get_album("Oasis", "Supersonic")
+        self.album = self.api.get_album("Supersonic", "Oasis")
         
     def tearDown(self):
         pass

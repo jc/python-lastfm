@@ -47,6 +47,7 @@ def test_app(environ, start_response):
         wsgi_intercept.remove_wsgi_intercept('ws.audioscrobbler.com', 80)
         import urllib2
         filedata = urllib2.urlopen(url).read()
+        wsgi_intercept.add_wsgi_intercept('ws.audioscrobbler.com', 80, create_wsgi_app)
         open(data_file, "w").write(filedata)
     return [filedata]
 
