@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""Module for calling Album related last.fm web services API methods"""
 
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
@@ -21,6 +22,35 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
                  stats = None,
                  top_tags = None,
                  streamable = None):
+        """
+        Create an Album object by providing all the data related to it.
+        
+        @param api:             an instance of L{Api}
+        @type api:              L{Api}
+        @param name:            the album name
+        @type name:             str
+        @param artist:          the album artist name 
+        @type artist:           L{Artist}
+        @param id:              the album ID
+        @type id:               str
+        @param mbid:            MBID of the album
+        @type mbid:             str
+        @param url:             URL of the album on last.fm
+        @type url:              str
+        @param release_date:    release date of the album
+        @type release_date:     datetime.datetime
+        @param image:           the cover images of the album in various sizes
+        @type image:            dict
+        @param stats:           the album statistics
+        @type stats:            L{Stats}
+        @param top_tags:        top tags of the album
+        @type top_tags:         list of L{Tag}
+        @param streamable:      flag indicating if the album is streamable
+        @type streamable:       bool
+        
+        @raise InvalidParametersError: If an instance of L{Api} is not provided as the first
+                                       parameter then an Exception is raised.
+        """
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         Taggable.init(self, api)
@@ -125,6 +155,7 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
     
     @LastfmBase.cached_property
     def playlist(self):
+        """playlist for the album"""
         return Playlist.fetch(self._api, "lastfm://playlist/album/%s" % self.id)
     
     @staticmethod
@@ -132,6 +163,27 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
                 artist = None,
                 album = None,
                 mbid = None):
+        """
+        Get the data for the album.
+        
+        @param api:      an instance of L{Api}
+        @type api:       L{Api}
+        @param artist:   the album artist name 
+        @type artist:    str OR L{Artist}
+        @param album:    the album name
+        @type album:     str
+        @param mbid:     MBID of the album
+        @type mbid:      str
+        
+        @return:         an Album object corresponding the provided album name
+        @rtype:          L{Album}
+        
+        @raise lastfm.InvalidParametersError: Either album and artist parameters or 
+                                              mbid parameter has to be provided. 
+                                              Otherwise exception is raised.
+        
+        @note: Use the L{Api.get_album} method instead of using this method directly.
+        """
         data = Album._fetch_data(api, artist, album, mbid)
         a = Album(
                   api,

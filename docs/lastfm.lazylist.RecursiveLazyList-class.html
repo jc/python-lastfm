@@ -34,7 +34,7 @@
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            >python-lastfm</th>
+            ><a class="navbar" target="_top" href="http://code.google.com/p/python-lastfm/">python-lastfm</a></th>
           </tr></table></th>
   </tr>
 </table>
@@ -127,13 +127,6 @@ object --+
   </tr>
   <tr>
     <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lastfm.lazylist.LazyList-class.html">LazyList</a></code></b>:
-      <code><a href="lastfm.lazylist.LazyList-class.html#__getitem__">__getitem__</a></code>,
-      <code><a href="lastfm.lazylist.LazyList-class.html#__iter__">__iter__</a></code>,
-      <code><a href="lastfm.lazylist.LazyList-class.html#__len__">__len__</a></code>,
-      <code><a href="lastfm.lazylist.LazyList-class.html#computed">computed</a></code>,
-      <code><a href="lastfm.lazylist.LazyList-class.html#exhaust">exhaust</a></code>
-      </p>
     <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
       <code>__delattr__</code>,
       <code>__format__</code>,
@@ -147,6 +140,98 @@ object --+
       <code>__str__</code>,
       <code>__subclasshook__</code>
       </p>
+    </td>
+  </tr>
+<tr bgcolor="#e8f0f8" >
+  <th colspan="2" class="group-header"
+    >&nbsp;&nbsp;&nbsp;&nbsp;Inherited from <a href="lastfm.lazylist.LazyList-class.html">LazyList</a></th></tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.lazylist.LazyList-class.html#__getitem__" class="summary-sig-name">__getitem__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">i</span>)</span><br />
+      Get an item from a LazyList.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.lazylist-pysrc.html#LazyList.__getitem__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__iter__"></a><span class="summary-sig-name">__iter__</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      return an iterator over each value in the sequence, whether it has 
+      been computed yet or not.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.lazylist-pysrc.html#LazyList.__iter__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="__len__"></a><span class="summary-sig-name">__len__</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the length of a LazyList's computed data.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.lazylist-pysrc.html#LazyList.__len__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="computed"></a><span class="summary-sig-name">computed</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Return an iterator over the values in a LazyList that have already 
+      been computed.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.lazylist-pysrc.html#LazyList.computed">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.lazylist.LazyList-class.html#exhaust" class="summary-sig-name">exhaust</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">index</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Exhaust the iterator generating this LazyList's values.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.lazylist-pysrc.html#LazyList.exhaust">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
     </td>
   </tr>
 </table>
@@ -270,14 +355,14 @@ object --+
       <th class="navbar" align="right" width="100%">
         <table border="0" cellpadding="0" cellspacing="0">
           <tr><th class="navbar" align="center"
-            >python-lastfm</th>
+            ><a class="navbar" target="_top" href="http://code.google.com/p/python-lastfm/">python-lastfm</a></th>
           </tr></table></th>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu Mar 05 00:14:32 2009
+    Generated by Epydoc 3.0.1 on Thu Mar 05 01:36:22 2009
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
