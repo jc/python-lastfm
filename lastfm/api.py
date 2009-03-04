@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""The last.fm webservice API access functionalities"""
 
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
@@ -10,8 +11,14 @@ class Api(object):
     """The class representing the last.fm web services API."""
 
     DEFAULT_CACHE_TIMEOUT = 3600 # cache for 1 hour
+    """Default file cache timeout, in seconds"""
+    
     API_ROOT_URL = "http://ws.audioscrobbler.com/2.0/"
+    """URL of the webservice API root"""
+    
     FETCH_INTERVAL = 1
+    """The minimum interval between successive HTTP request, in seconds"""
+    
     SEARCH_XMLNS = "http://a9.com/-/spec/opensearch/1.1/"
 
     def __init__(self,
@@ -22,6 +29,28 @@ class Api(object):
                  request_headers=None,
                  no_cache = False,
                  debug = False):
+        """
+        Create an Api object to access the last.fm webservice API. Use this object as a
+        starting point for accessing all the webservice methods.
+        
+        @param api_key:            last.fm API key
+        @type api_key:             str
+        @param secret:             last.fm API secret (optional, required only for
+                                   authenticated webservice methods)
+        @type secret:              str
+        @param session_key:        session key for the authenticated session (optional,
+                                   required only for authenticated webservice methods)
+        @type session_key:         str
+        @param input_encoding:     encoding of the input data (optional)
+        @type input_encoding:      str
+        @param request_headers:    HTTP headers for the requests to last.fm webservices
+                                   (optional)
+        @type request_headers:     dict
+        @param no_cache:           flag to switch off file cache (optional)
+        @type no_cache:            bool
+        @param debug:              flag to switch on debugging (optional)
+        @type debug:               bool
+        """
         self._api_key = api_key
         self._secret = secret
         self._session_key = session_key
@@ -37,67 +66,98 @@ class Api(object):
 
     @property
     def api_key(self):
+        """The last.fm API key"""
         return self._api_key
 
     @property
     def secret(self):
+        """The last.fm API secret"""
         return self._secret
 
     @property
     def session_key(self):
+        """Session key for the authenticated session."""
         return self._session_key
 
     def set_session_key(self):
+        """
+        Set the session key for the authenticated session.
+        @raise lastfm.AuthenticationFailedError: API secret must be present to call this method.
+        """
         params = {'method': 'auth.getSession', 'token': self.auth_token}
         self._session_key = self._fetch_data(params, sign = True).findtext('session/key')
         self._auth_token = None
 
     @LastfmBase.cached_property
     def auth_token(self):
+        """The authenication token for the authenticated session."""
         params = {'method': 'auth.getToken'}
         return self._fetch_data(params, sign = True).findtext('token')
 
     @LastfmBase.cached_property
     def auth_url(self):
+        """The authenication URL for the authenticated session."""
         return "http://www.last.fm/api/auth/?api_key=%s&token=%s" % (self.api_key, self.auth_token)
 
-
     def set_cache(self, cache):
-        '''Override the default cache.  Set to None to prevent caching.
-
-        Args:
-            cache: an instance that supports the same API as the lastfm.FileCache
-        '''
+        """
+        Override the default cache.  Set to None to prevent caching.
+        
+        @param cache: an instance that supports the same API as the L{FileCache}
+        @type cache: L{FileCache}
+        """
         self._cache = cache
 
     def set_urllib(self, urllib):
-        '''Override the default urllib implementation.
+        """
+        Override the default urllib implementation.
 
-        Args:
-            urllib: an instance that supports the same API as the urllib2 module
-        '''
+        @param urllib: an instance that supports the same API as the urllib2 module
+        @type urllib: urllib2
+        """
         self._urllib = urllib
 
     def set_cache_timeout(self, cache_timeout):
-        '''Override the default cache timeout.
+        """
+        Override the default cache timeout.
 
-        Args:
-            cache_timeout: time, in seconds, that responses should be reused.
-        '''
+        @param cache_timeout: time, in seconds, that responses should be reused
+        @type cache_timeout: int
+        """
         self._cache_timeout = cache_timeout
 
     def set_user_agent(self, user_agent):
-        '''Override the default user agent
+        """
+        Override the default user agent.
 
-        Args:
-        user_agent: a string that should be send to the server as the User-agent
-        '''
+        @param user_agent: a string that should be send to the server as the User-agent
+        @type user_agent: str
+        """
         self._request_headers['User-Agent'] = user_agent
 
     def get_album(self,
                  album = None,
                  artist = None,
                  mbid = None):
+        """
+        Get an album object.
+        
+        @param album:    the album name
+        @type album:     str
+        @param artist:   the album artist name 
+        @type artist:    str OR L{Artist}
+        @param mbid:     MBID of the album
+        @type mbid:      str
+        
+        @return:         an Album object corresponding the provided album name
+        @rtype:          L{Album}
+        
+        @raise lastfm.InvalidParametersError: Either album and artist parameters or 
+                                              mbid parameter has to be provided. 
+                                              Otherwise exception is raised.
+                                              
+        @see:            L{Album.get_info}
+        """
         if isinstance(artist, Artist):
             artist = artist.name
         return Album.get_info(self, artist, album, mbid)
@@ -105,51 +165,211 @@ class Api(object):
     def search_album(self,
                      album,
                      limit = None):
+        """
+        Search for an album by name.
+        
+        @param album:     the album name
+        @type album:      str
+        @param limit:     maximum number of results returned (optional)
+        @type limit:      int
+        
+        @return:          matches sorted by relevance
+        @rtype:           L{lazylist} of L{Album}
+        
+        @see:             L{Album.search}
+        """
         return Album.search(self, search_item = album, limit = limit)
 
     def get_artist(self,
                   artist = None,
                   mbid = None):
+        """
+        Get an artist object.
+        
+        @param artist:    the artist name
+        @type artist:     str
+        @param mbid:      MBID of the artist
+        @type mbid:       str
+        
+        @return:         an Artist object corresponding the provided artist name
+        @rtype:          L{Artist}
+        
+        @raise lastfm.InvalidParametersError: either artist or mbid parameter has
+                                              to be provided. Otherwise exception is raised.
+                                              
+        @see:            L{Artist.get_info}
+        """
         return Artist.get_info(self, artist, mbid)
 
     def search_artist(self,
                      artist,
                      limit = None):
+        """
+        Search for an artist by name.
+        
+        @param artist:    the artist name
+        @type artist:     str
+        @param limit:     maximum number of results returned (optional)
+        @type limit:      int
+        
+        @return:          matches sorted by relevance
+        @rtype:           L{lazylist} of L{Artist}
+        
+        @see:             L{Artist.search}
+        """
         return Artist.search(self, search_item = artist, limit = limit)
 
     def get_event(self, event):
+        """
+        Get an event object.
+        
+        @param event:     the event id
+        @type event:      int
+        
+        @return:          an event object corresponding to the event id provided
+        @rtype:           L{Event}
+        
+        @raise InvalidParametersError: Exception is raised if an invalid event id is supplied.
+        
+        @see:             L{Event.get_info}
+        """
         return Event.get_info(self, event)
 
     def get_location(self, city):
+        """
+        Get a location object.
+        
+        @param city:    the city name
+        @type city:     str
+        
+        @return:        a location object corresponding to the city name provided
+        @rtype:         L{Location}
+        """
         return Location(self, city = city)
 
     def get_country(self, name):
+        """
+        Get a country object.
+        
+        @param name:    the country name
+        @type name:     str
+        
+        @return:        a country object corresponding to the country name provided
+        @rtype:         L{Country}
+        """
         return Country(self, name = name)
 
     def get_group(self, name):
+        """
+        Get a group object.
+        
+        @param name:    the group name
+        @type name:     str
+        
+        @return:        a group object corresponding to the group name provided
+        @rtype:         L{Group}
+        """
         return Group(self, name = name)
 
     def get_playlist(self, url):
+        """
+        Get a playlist object.
+        
+        @param url:    lastfm url of the playlist
+        @type url:     str
+        
+        @return:        a playlist object corresponding to the playlist url provided
+        @rtype:         L{Playlist}
+        
+        @see:           L{Playlist.fetch}
+        """
         return Playlist.fetch(self, url)
 
     def get_tag(self, name):
+        """
+        Get a tag object.
+        
+        @param name:    the tag name
+        @type name:     str
+        
+        @return:        a tag object corresponding to the tag name provided
+        @rtype:         L{Tag}
+        """
         return Tag(self, name = name)
 
     def get_global_top_tags(self):
+        """
+        Get the top global tags on Last.fm, sorted by popularity (number of times used).
+        
+        @return:        a list of top global tags
+        @rtype:         list of L{Tag}
+        """
         return Tag.get_top_tags(self)
 
     def search_tag(self,
                   tag,
                   limit = None):
+        """
+        Search for a tag by name.
+        
+        @param tag:       the tag name
+        @type tag:        str
+        @param limit:     maximum number of results returned (optional)
+        @type limit:      int
+        
+        @return:          matches sorted by relevance
+        @rtype:           L{lazylist} of L{Tag}
+        
+        @see:             L{Tag.search}
+        """
         return Tag.search(self, search_item = tag, limit = limit)
 
     def compare_taste(self,
                      type1, type2,
                      value1, value2,
                      limit = None):
+        """
+        Get a Tasteometer score from two inputs, along with a list of
+        shared artists. If the input is a User or a Myspace URL, some 
+        additional information is returned. 
+        
+        @param type1:    'user' OR 'artists' OR 'myspace'
+        @type type1:     str  
+        @param type2:    'user' OR 'artists' OR 'myspace'
+        @type type2:     str
+        @param value1:   Last.fm username OR Comma-separated artist names OR MySpace profile URL
+        @type value1:    str
+        @param value2:   Last.fm username OR Comma-separated artist names OR MySpace profile URL 
+        @type value2:    str
+        @param limit:    maximum number of results returned (optional)
+        @type limit:     int
+        
+        @return:         the taste-o-meter score for the inputs
+        @rtype:          L{Tasteometer}
+        
+        @see:            L{Tasteometer.compare}
+        """
         return Tasteometer.compare(self, type1, type2, value1, value2, limit)
 
     def get_track(self, track, artist = None, mbid = None):
+        """
+        Get a track object.
+        
+        @param track:    the track name
+        @type track:     str
+        @param artist:   the track artist
+        @type artist:    str OR L{Artist}
+        @param mbid:     MBID of the track
+        @type mbid:      str
+        
+        @return:         a track object corresponding to the track name provided
+        @rtype:          L{Track}
+        
+        @raise lastfm.InvalidParametersError: either artist or mbid parameter has
+                                              to be provided. Otherwise exception is raised.
+                                              
+        @see:            L{Track.get_info}
+        """
         if isinstance(artist, Artist):
             artist = artist.name
         return Track.get_info(self, artist, track, mbid)
@@ -158,32 +378,91 @@ class Api(object):
                     track,
                     artist = None,
                     limit = None):
+        """
+        Search for a track by name.
+        
+        @param track:     the track name
+        @type track:      str
+        @param artist:    the track artist (optional)
+        @type artist:     str OR L{Artist}  
+        @param limit:     maximum number of results returned (optional)
+        @type limit:      int
+        
+        @return:          matches sorted by relevance
+        @rtype:           L{lazylist} of L{Track}
+        
+        @see:             L{Track.search}
+        """
         if isinstance(artist, Artist):
             artist = artist.name
         return Track.search(self, search_item = track, limit = limit, artist = artist)
 
     def get_user(self, name):
-        user = None
-        try:
-            user = User(self, name = name)
-            user.friends
-        except LastfmError, e:
-            raise e
+        """
+        Get an user object.
+        
+        @param name:    the last.fm user name
+        @type name:     str
+        
+        @return:        an user object corresponding to the user name provided
+        @rtype:         L{User}
+        
+        @raise InvalidParametersError: Exception is raised if an invalid user name is supplied.
+        """
+        user = User(self, name = name)
+        user.friends
         return user
 
     def get_authenticated_user(self):
+        """
+        Get the currently authenticated user.
+        
+        @return:     The currently authenticated user if the session is authenticated
+        @rtype:      L{User}
+        
+        @see:        L{User.get_authenticated_user}
+        """
         if self.session_key is not None:
             return User.get_authenticated_user(self)
         return None
     
     def get_venue(self, venue):
+        """
+        Get a venue object.
+        
+        @param venue:    the venue name
+        @type venue:     str
+        
+        @return:         a venue object corresponding to the venue name provided
+        @rtype:          L{Venue}
+        
+        @raise InvalidParametersError: Exception is raised if an non-existant venue name is supplied.
+        
+        @see:            L{search_venue}
+        """
         try:
             return self.search_venue(venue)[0]
         except IndexError:
-            return None
+            raise InvalidParametersError("No such venue exists")
     
-    def search_venue(self, venue):
-        return Venue.search(self, search_item = venue)
+    def search_venue(self, venue, limit = None, country = None):
+        """
+        Search for a venue by name.
+        
+        @param venue:     the venue name
+        @type venue:      str
+        @param country:   filter the results by country. Expressed as an ISO 3166-2 code.
+                          (optional)
+        @type country:    str  
+        @param limit:     maximum number of results returned (optional)
+        @type limit:      int
+        
+        @return:          matches sorted by relevance
+        @rtype:           L{lazylist} of L{Venue}
+        
+        @see:             L{Venue.search}
+        """
+        return Venue.search(self, search_item = venue, limit = limit, country = country)
 
     def _build_url(self, url, path_elements=None, extra_params=None):
         # Break url into consituent parts
@@ -235,17 +514,6 @@ class Api(object):
             return unicode(s).encode('utf-8')
 
     def _encode_parameters(self, parameters):
-        '''Return a string in key=value&key=value form
-
-            Values of None are not included in the output string.
-
-            Args:
-                parameters:
-                    A dict of (key, value) tuples, where value is encoded as
-                    specified by self._encoding
-            Returns:
-                A URL-encoded string in "key=value&key=value" form
-        '''
         if parameters is None:
             return None
         else:
@@ -267,17 +535,6 @@ class Api(object):
                   url,
                   parameters = None,
                   no_cache = False):
-        '''Fetch a URL, optionally caching for a specified time.
-
-        Args:
-            url: The URL to retrieve
-            parameters: A dict of key/value pairs that should added to
-                        the query string. [OPTIONAL]
-            no_cache: If true, overrides the cache on the current request
-
-        Returns:
-            A string containing the body of the response.
-        '''
         # Add key/value parameters to the query string of the url
         url = self._build_url(url, extra_params=parameters)
         if self._debug:

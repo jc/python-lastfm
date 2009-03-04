@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lastfm.wiki</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lastfm-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >python-lastfm</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lastfm-module.html">Package&nbsp;lastfm</a> ::
+        Module&nbsp;wiki
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lastfm.wiki-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lastfm.wiki-module.html" onclick="show_private();">Module lastfm.wiki</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-name">__author__</tt> <tt class="py-op">=</tt> <tt class="py-docstring">"Abhinav Sarkar &lt;abhinav@abhinavsarkar.net&gt;"</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-name">__version__</tt> <tt class="py-op">=</tt> <tt class="py-string">"0.2"</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-name">__license__</tt> <tt class="py-op">=</tt> <tt class="py-string">"GNU Lesser General Public License"</tt> </tt>
+<a name="Wiki"></a><div id="Wiki-def"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="Wiki-toggle" onclick="return toggle('Wiki');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lastfm.wiki.Wiki-class.html">Wiki</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Wiki-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Wiki-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">        <tt class="py-docstring">"""A class representing the information from the wiki of the subject."""</tt> </tt>
+<a name="Wiki.__init__"></a><div id="Wiki.__init__-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="Wiki.__init__-toggle" onclick="return toggle('Wiki.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.wiki.Wiki-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">                     <tt class="py-param">subject</tt><tt class="py-op">,</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">                     <tt class="py-param">published</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                     <tt class="py-param">summary</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">                     <tt class="py-param">content</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Wiki.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Wiki.__init__-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_subject</tt> <tt class="py-op">=</tt> <tt id="link-0" class="py-name" targets="Variable lastfm.stats.Stats.subject=lastfm.stats.Stats-class.html#subject,Variable lastfm.weeklychart.WeeklyChart.subject=lastfm.weeklychart.WeeklyChart-class.html#subject,Variable lastfm.wiki.Wiki.subject=lastfm.wiki.Wiki-class.html#subject"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-0', 'subject', 'link-0');">subject</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_published</tt> <tt class="py-op">=</tt> <tt id="link-1" class="py-name" targets="Variable lastfm.wiki.Wiki.published=lastfm.wiki.Wiki-class.html#published"><a title="lastfm.wiki.Wiki.published" class="py-name" href="#" onclick="return doclink('link-1', 'published', 'link-1');">published</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_summary</tt> <tt class="py-op">=</tt> <tt id="link-2" class="py-name" targets="Variable lastfm.wiki.Wiki.summary=lastfm.wiki.Wiki-class.html#summary"><a title="lastfm.wiki.Wiki.summary" class="py-name" href="#" onclick="return doclink('link-2', 'summary', 'link-2');">summary</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_content</tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name" targets="Variable lastfm.wiki.Wiki.content=lastfm.wiki.Wiki-class.html#content"><a title="lastfm.wiki.Wiki.content" class="py-name" href="#" onclick="return doclink('link-3', 'content', 'link-3');">content</a></tt> </tt>
+</div><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">     </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Wiki.subject"></a><div id="Wiki.subject-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="Wiki.subject-toggle" onclick="return toggle('Wiki.subject');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.wiki.Wiki-class.html#subject">subject</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Wiki.subject-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Wiki.subject-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">            <tt class="py-docstring">"""artist for which the biography is"""</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_subject</tt> </tt>
+</div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">     </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Wiki.published"></a><div id="Wiki.published-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="Wiki.published-toggle" onclick="return toggle('Wiki.published');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.wiki.Wiki-class.html#published">published</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Wiki.published-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Wiki.published-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">            <tt class="py-docstring">"""publication time of the biography"""</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_published</tt> </tt>
+</div><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">     </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Wiki.summary"></a><div id="Wiki.summary-def"><a name="L30"></a><tt class="py-lineno">30</tt> <a class="py-toggle" href="#" id="Wiki.summary-toggle" onclick="return toggle('Wiki.summary');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.wiki.Wiki-class.html#summary">summary</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Wiki.summary-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Wiki.summary-expanded"><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">            <tt class="py-docstring">"""summary of the biography"""</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_summary</tt> </tt>
+</div><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">     </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Wiki.content"></a><div id="Wiki.content-def"><a name="L35"></a><tt class="py-lineno">35</tt> <a class="py-toggle" href="#" id="Wiki.content-toggle" onclick="return toggle('Wiki.content');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.wiki.Wiki-class.html#content">content</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Wiki.content-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Wiki.content-expanded"><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">            <tt class="py-docstring">"""content of the biography"""</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_content</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">     </tt>
+<a name="Wiki.__repr__"></a><div id="Wiki.__repr__-def"><a name="L39"></a><tt class="py-lineno">39</tt> <a class="py-toggle" href="#" id="Wiki.__repr__-toggle" onclick="return toggle('Wiki.__repr__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.wiki.Wiki-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Wiki.__repr__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Wiki.__repr__-expanded"><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-string">"&lt;lastfm.Wiki: for %s '%s'&gt;"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-4', 'subject', 'link-0');">subject</a></tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-5', 'subject', 'link-0');">subject</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Variable lastfm.album.Album.name=lastfm.album.Album-class.html#name,Variable lastfm.artist.Artist.name=lastfm.artist.Artist-class.html#name,Variable lastfm.geo.Country.name=lastfm.geo.Country-class.html#name,Variable lastfm.group.Group.name=lastfm.group.Group-class.html#name,Variable lastfm.tag.Tag.name=lastfm.tag.Tag-class.html#name,Variable lastfm.track.Track.name=lastfm.track.Track-class.html#name,Variable lastfm.user.User.name=lastfm.user.User-class.html#name,Variable lastfm.venue.Venue.name=lastfm.venue.Venue-class.html#name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-6', 'name', 'link-6');">name</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lastfm-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >python-lastfm</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Mar 05 00:14:34 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

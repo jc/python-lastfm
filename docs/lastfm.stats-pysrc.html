@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lastfm.stats</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lastfm-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >python-lastfm</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lastfm-module.html">Package&nbsp;lastfm</a> ::
+        Module&nbsp;stats
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lastfm.stats-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lastfm.stats-module.html" onclick="show_private();">Module lastfm.stats</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-name">__author__</tt> <tt class="py-op">=</tt> <tt class="py-docstring">"Abhinav Sarkar &lt;abhinav@abhinavsarkar.net&gt;"</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-name">__version__</tt> <tt class="py-op">=</tt> <tt class="py-string">"0.2"</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-name">__license__</tt> <tt class="py-op">=</tt> <tt class="py-string">"GNU Lesser General Public License"</tt> </tt>
+<a name="Stats"></a><div id="Stats-def"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="Stats-toggle" onclick="return toggle('Stats');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lastfm.stats.Stats-class.html">Stats</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stats-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Stats-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-docstring">"""A class representing the stats of an artist."""</tt> </tt>
+<a name="Stats.__init__"></a><div id="Stats.__init__-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="Stats.__init__-toggle" onclick="return toggle('Stats.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.stats.Stats-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">                 <tt class="py-param">subject</tt><tt class="py-op">,</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">                 <tt class="py-param">listeners</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                 <tt class="py-param">playcount</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">                 <tt class="py-param">tagcount</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">                 <tt class="py-param">count</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">                 <tt class="py-param">match</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">                 <tt class="py-param">rank</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">                 <tt class="py-param">weight</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">                 <tt class="py-param">attendance</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">                 <tt class="py-param">reviews</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stats.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Stats.__init__-expanded"><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_subject</tt> <tt class="py-op">=</tt> <tt id="link-0" class="py-name" targets="Variable lastfm.stats.Stats.subject=lastfm.stats.Stats-class.html#subject,Variable lastfm.weeklychart.WeeklyChart.subject=lastfm.weeklychart.WeeklyChart-class.html#subject,Variable lastfm.wiki.Wiki.subject=lastfm.wiki.Wiki-class.html#subject"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-0', 'subject', 'link-0');">subject</a></tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_listeners</tt> <tt class="py-op">=</tt> <tt id="link-1" class="py-name" targets="Variable lastfm.stats.Stats.listeners=lastfm.stats.Stats-class.html#listeners"><a title="lastfm.stats.Stats.listeners" class="py-name" href="#" onclick="return doclink('link-1', 'listeners', 'link-1');">listeners</a></tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_playcount</tt> <tt class="py-op">=</tt> <tt id="link-2" class="py-name" targets="Variable lastfm.stats.Stats.playcount=lastfm.stats.Stats-class.html#playcount"><a title="lastfm.stats.Stats.playcount" class="py-name" href="#" onclick="return doclink('link-2', 'playcount', 'link-2');">playcount</a></tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_tagcount</tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name" targets="Variable lastfm.stats.Stats.tagcount=lastfm.stats.Stats-class.html#tagcount"><a title="lastfm.stats.Stats.tagcount" class="py-name" href="#" onclick="return doclink('link-3', 'tagcount', 'link-3');">tagcount</a></tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_count</tt> <tt class="py-op">=</tt> <tt id="link-4" class="py-name" targets="Variable lastfm.stats.Stats.count=lastfm.stats.Stats-class.html#count"><a title="lastfm.stats.Stats.count" class="py-name" href="#" onclick="return doclink('link-4', 'count', 'link-4');">count</a></tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_match</tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name" targets="Variable lastfm.stats.Stats.match=lastfm.stats.Stats-class.html#match"><a title="lastfm.stats.Stats.match" class="py-name" href="#" onclick="return doclink('link-5', 'match', 'link-5');">match</a></tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_rank</tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name" targets="Variable lastfm.stats.Stats.rank=lastfm.stats.Stats-class.html#rank"><a title="lastfm.stats.Stats.rank" class="py-name" href="#" onclick="return doclink('link-6', 'rank', 'link-6');">rank</a></tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_weight</tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name" targets="Variable lastfm.stats.Stats.weight=lastfm.stats.Stats-class.html#weight"><a title="lastfm.stats.Stats.weight" class="py-name" href="#" onclick="return doclink('link-7', 'weight', 'link-7');">weight</a></tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_attendance</tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name" targets="Variable lastfm.stats.Stats.attendance=lastfm.stats.Stats-class.html#attendance"><a title="lastfm.stats.Stats.attendance" class="py-name" href="#" onclick="return doclink('link-8', 'attendance', 'link-8');">attendance</a></tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_reviews</tt> <tt class="py-op">=</tt> <tt id="link-9" class="py-name" targets="Variable lastfm.stats.Stats.reviews=lastfm.stats.Stats-class.html#reviews"><a title="lastfm.stats.Stats.reviews" class="py-name" href="#" onclick="return doclink('link-9', 'reviews', 'link-9');">reviews</a></tt> </tt>
+</div><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Stats.subject"></a><div id="Stats.subject-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="Stats.subject-toggle" onclick="return toggle('Stats.subject');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.stats.Stats-class.html#subject">subject</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stats.subject-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Stats.subject-expanded"><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-docstring">"""subject of the stats"""</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_subject</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Stats.rank"></a><div id="Stats.rank-def"><a name="L37"></a><tt class="py-lineno">37</tt> <a class="py-toggle" href="#" id="Stats.rank-toggle" onclick="return toggle('Stats.rank');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.stats.Stats-class.html#rank">rank</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stats.rank-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Stats.rank-expanded"><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-docstring">"""rank of the subject"""</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_rank</tt> </tt>
+</div><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Stats.listeners"></a><div id="Stats.listeners-def"><a name="L42"></a><tt class="py-lineno">42</tt> <a class="py-toggle" href="#" id="Stats.listeners-toggle" onclick="return toggle('Stats.listeners');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.stats.Stats-class.html#listeners">listeners</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stats.listeners-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Stats.listeners-expanded"><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-docstring">"""number of listeners of the subject"""</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_listeners</tt> </tt>
+</div><a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Stats.playcount"></a><div id="Stats.playcount-def"><a name="L47"></a><tt class="py-lineno">47</tt> <a class="py-toggle" href="#" id="Stats.playcount-toggle" onclick="return toggle('Stats.playcount');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.stats.Stats-class.html#playcount">playcount</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stats.playcount-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Stats.playcount-expanded"><a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt class="py-docstring">"""playcount of the subject"""</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_playcount</tt> </tt>
+</div><a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Stats.tagcount"></a><div id="Stats.tagcount-def"><a name="L52"></a><tt class="py-lineno">52</tt> <a class="py-toggle" href="#" id="Stats.tagcount-toggle" onclick="return toggle('Stats.tagcount');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.stats.Stats-class.html#tagcount">tagcount</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stats.tagcount-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Stats.tagcount-expanded"><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt class="py-docstring">"""tagcount of the subject"""</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_tagcount</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">     </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Stats.count"></a><div id="Stats.count-def"><a name="L57"></a><tt class="py-lineno">57</tt> <a class="py-toggle" href="#" id="Stats.count-toggle" onclick="return toggle('Stats.count');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.stats.Stats-class.html#count">count</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stats.count-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Stats.count-expanded"><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-docstring">"""count of the subject"""</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_count</tt> </tt>
+</div><a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">         </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Stats.match"></a><div id="Stats.match-def"><a name="L62"></a><tt class="py-lineno">62</tt> <a class="py-toggle" href="#" id="Stats.match-toggle" onclick="return toggle('Stats.match');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.stats.Stats-class.html#match">match</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stats.match-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Stats.match-expanded"><a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt class="py-docstring">"""match of the subject"""</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_match</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Stats.weight"></a><div id="Stats.weight-def"><a name="L67"></a><tt class="py-lineno">67</tt> <a class="py-toggle" href="#" id="Stats.weight-toggle" onclick="return toggle('Stats.weight');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.stats.Stats-class.html#weight">weight</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stats.weight-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Stats.weight-expanded"><a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">        <tt class="py-docstring">"""weight of the subject"""</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_weight</tt> </tt>
+</div><a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Stats.attendance"></a><div id="Stats.attendance-def"><a name="L72"></a><tt class="py-lineno">72</tt> <a class="py-toggle" href="#" id="Stats.attendance-toggle" onclick="return toggle('Stats.attendance');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.stats.Stats-class.html#attendance">attendance</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stats.attendance-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Stats.attendance-expanded"><a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">        <tt class="py-docstring">"""attendance of the subject"""</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_attendance</tt> </tt>
+</div><a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Stats.reviews"></a><div id="Stats.reviews-def"><a name="L77"></a><tt class="py-lineno">77</tt> <a class="py-toggle" href="#" id="Stats.reviews-toggle" onclick="return toggle('Stats.reviews');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.stats.Stats-class.html#reviews">reviews</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stats.reviews-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Stats.reviews-expanded"><a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">        <tt class="py-docstring">"""reviews of the subject"""</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_reviews</tt> </tt>
+</div><a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line"> </tt>
+<a name="Stats.__repr__"></a><div id="Stats.__repr__-def"><a name="L81"></a><tt class="py-lineno">81</tt> <a class="py-toggle" href="#" id="Stats.__repr__-toggle" onclick="return toggle('Stats.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.stats.Stats-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Stats.__repr__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Stats.__repr__-expanded"><a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_subject</tt><tt class="py-op">,</tt> <tt class="py-string">'name'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-string">"&lt;lastfm.Stats: for '%s'&gt;"</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_subject</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Variable lastfm.album.Album.name=lastfm.album.Album-class.html#name,Variable lastfm.artist.Artist.name=lastfm.artist.Artist-class.html#name,Variable lastfm.geo.Country.name=lastfm.geo.Country-class.html#name,Variable lastfm.group.Group.name=lastfm.group.Group-class.html#name,Variable lastfm.tag.Tag.name=lastfm.tag.Tag-class.html#name,Variable lastfm.track.Track.name=lastfm.track.Track-class.html#name,Variable lastfm.user.User.name=lastfm.user.User-class.html#name,Variable lastfm.venue.Venue.name=lastfm.venue.Venue-class.html#name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-10', 'name', 'link-10');">name</a></tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-string">"&lt;lastfm.Stats: for '%s'&gt;"</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_subject</tt> </tt>
+</div></div><a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lastfm-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >python-lastfm</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Mar 05 00:14:33 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

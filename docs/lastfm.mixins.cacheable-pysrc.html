@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lastfm.mixins.cacheable</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lastfm-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >python-lastfm</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lastfm-module.html">Package&nbsp;lastfm</a> ::
+        <a href="lastfm.mixins-module.html" onclick="show_private();">Package&nbsp;mixins</a> ::
+        Module&nbsp;cacheable
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lastfm.mixins.cacheable-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lastfm.mixins.cacheable-module.html" onclick="show_private();">Module lastfm.mixins.cacheable</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-name">__author__</tt> <tt class="py-op">=</tt> <tt class="py-docstring">"Abhinav Sarkar &lt;abhinav@abhinavsarkar.net&gt;"</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-name">__version__</tt> <tt class="py-op">=</tt> <tt class="py-string">"0.2"</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-name">__license__</tt> <tt class="py-op">=</tt> <tt class="py-string">"GNU Lesser General Public License"</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">threading</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Lock</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">dummy_threading</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Lock</tt> </tt>
+<a name="Cacheable"></a><div id="Cacheable-def"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">     </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt> <a class="py-toggle" href="#" id="Cacheable-toggle" onclick="return toggle('Cacheable');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lastfm.mixins.cacheable.Cacheable-class.html">Cacheable</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cacheable-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Cacheable-expanded"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">    <tt id="link-0" class="py-name" targets="Variable lastfm.mixins.cacheable.Cacheable.registry=lastfm.mixins.cacheable.Cacheable-class.html#registry"><a title="lastfm.mixins.cacheable.Cacheable.registry" class="py-name" href="#" onclick="return doclink('link-0', 'registry', 'link-0');">registry</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt id="link-1" class="py-name" targets="Variable lastfm.mixins.cacheable.Cacheable._lock=lastfm.mixins.cacheable.Cacheable-class.html#_lock"><a title="lastfm.mixins.cacheable.Cacheable._lock" class="py-name" href="#" onclick="return doclink('link-1', '_lock', 'link-1');">_lock</a></tt> <tt class="py-op">=</tt> <tt class="py-name">Lock</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="Cacheable.__new__"></a><div id="Cacheable.__new__-def"><a name="L16"></a><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="Cacheable.__new__-toggle" onclick="return toggle('Cacheable.__new__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.mixins.cacheable.Cacheable-class.html#__new__">__new__</a><tt class="py-op">(</tt><tt class="py-param">cls</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwds</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cacheable.__new__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Cacheable.__new__-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt id="link-2" class="py-name" targets="Variable lastfm.stats.Stats.subject=lastfm.stats.Stats-class.html#subject,Variable lastfm.weeklychart.WeeklyChart.subject=lastfm.weeklychart.WeeklyChart-class.html#subject,Variable lastfm.wiki.Wiki.subject=lastfm.wiki.Wiki-class.html#subject"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-2', 'subject', 'link-2');">subject</a></tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">'subject'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">kwds</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'Weekly'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">            <tt id="link-3" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-3', 'subject', 'link-2');">subject</a></tt> <tt class="py-op">=</tt> <tt class="py-name">kwds</tt><tt class="py-op">[</tt><tt class="py-string">'subject'</tt><tt class="py-op">]</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">            <tt class="py-keyword">del</tt> <tt class="py-name">kwds</tt><tt class="py-op">[</tt><tt class="py-string">'subject'</tt><tt class="py-op">]</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">'bypass_registry'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">kwds</tt><tt class="py-op">:</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                <tt class="py-keyword">del</tt> <tt class="py-name">kwds</tt><tt class="py-op">[</tt><tt class="py-string">'bypass_registry'</tt><tt class="py-op">]</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">                <tt class="py-name">inst</tt> <tt class="py-op">=</tt> <tt class="py-name">object</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Static Method lastfm.mixins.cacheable.Cacheable.__new__()=lastfm.mixins.cacheable.Cacheable-class.html#__new__"><a title="lastfm.mixins.cacheable.Cacheable.__new__" class="py-name" href="#" onclick="return doclink('link-4', '__new__', 'link-4');">__new__</a></tt><tt class="py-op">(</tt><tt class="py-name">cls</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">                <tt class="py-name">inst</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method lastfm.album.Album.init()=lastfm.album.Album-class.html#init,Method lastfm.artist.Artist.init()=lastfm.artist.Artist-class.html#init,Method lastfm.event.Event.init()=lastfm.event.Event-class.html#init,Method lastfm.geo.Country.init()=lastfm.geo.Country-class.html#init,Method lastfm.geo.Location.init()=lastfm.geo.Location-class.html#init,Method lastfm.group.Group.init()=lastfm.group.Group-class.html#init,Method lastfm.mixins.sharable.Sharable.init()=lastfm.mixins.sharable.Sharable-class.html#init,Method lastfm.mixins.shoutable.Shoutable.init()=lastfm.mixins.shoutable.Shoutable-class.html#init,Method lastfm.mixins.taggable.Taggable.init()=lastfm.mixins.taggable.Taggable-class.html#init,Method lastfm.playlist.Playlist.init()=lastfm.playlist.Playlist-class.html#init,Method lastfm.shout.Shout.init()=lastfm.shout.Shout-class.html#init,Method lastfm.tag.Tag.init()=lastfm.tag.Tag-class.html#init,Method lastfm.track.Track.init()=lastfm.track.Track-class.html#init,Method lastfm.user.User.Playlist.init()=lastfm.user.User.Playlist-class.html#init,Method lastfm.user.User.init()=lastfm.user.User-class.html#init,Method lastfm.venue.Venue.init()=lastfm.venue.Venue-class.html#init,Method lastfm.weeklychart.WeeklyAlbumChart.init()=lastfm.weeklychart.WeeklyAlbumChart-class.html#init,Method lastfm.weeklychart.WeeklyArtistChart.init()=lastfm.weeklychart.WeeklyArtistChart-class.html#init,Method lastfm.weeklychart.WeeklyChart.init()=lastfm.weeklychart.WeeklyChart-class.html#init,Method lastfm.weeklychart.WeeklyTagChart.init()=lastfm.weeklychart.WeeklyTagChart-class.html#init,Method lastfm.weeklychart.WeeklyTrackChart.init()=lastfm.weeklychart.WeeklyTrackChart-class.html#init"><a title="lastfm.album.Album.init
+lastfm.artist.Artist.init
+lastfm.event.Event.init
+lastfm.geo.Country.init
+lastfm.geo.Location.init
+lastfm.group.Group.init
+lastfm.mixins.sharable.Sharable.init
+lastfm.mixins.shoutable.Shoutable.init
+lastfm.mixins.taggable.Taggable.init
+lastfm.playlist.Playlist.init
+lastfm.shout.Shout.init
+lastfm.tag.Tag.init
+lastfm.track.Track.init
+lastfm.user.User.Playlist.init
+lastfm.user.User.init
+lastfm.venue.Venue.init
+lastfm.weeklychart.WeeklyAlbumChart.init
+lastfm.weeklychart.WeeklyArtistChart.init
+lastfm.weeklychart.WeeklyChart.init
+lastfm.weeklychart.WeeklyTagChart.init
+lastfm.weeklychart.WeeklyTrackChart.init" class="py-name" href="#" onclick="return doclink('link-5', 'init', 'link-5');">init</a></tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwds</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">inst</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-name">key</tt> <tt class="py-op">=</tt> <tt class="py-name">cls</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Static Method lastfm.album.Album._hash_func()=lastfm.album.Album-class.html#_hash_func,Static Method lastfm.artist.Artist._hash_func()=lastfm.artist.Artist-class.html#_hash_func,Static Method lastfm.event.Event._hash_func()=lastfm.event.Event-class.html#_hash_func,Static Method lastfm.geo.Country._hash_func()=lastfm.geo.Country-class.html#_hash_func,Static Method lastfm.geo.Location._hash_func()=lastfm.geo.Location-class.html#_hash_func,Static Method lastfm.group.Group._hash_func()=lastfm.group.Group-class.html#_hash_func,Static Method lastfm.playlist.Playlist._hash_func()=lastfm.playlist.Playlist-class.html#_hash_func,Static Method lastfm.shout.Shout._hash_func()=lastfm.shout.Shout-class.html#_hash_func,Static Method lastfm.tag.Tag._hash_func()=lastfm.tag.Tag-class.html#_hash_func,Static Method lastfm.track.Track._hash_func()=lastfm.track.Track-class.html#_hash_func,Static Method lastfm.user.User.Library._hash_func()=lastfm.user.User.Library-class.html#_hash_func,Static Method lastfm.user.User.Playlist._hash_func()=lastfm.user.User.Playlist-class.html#_hash_func,Static Method lastfm.user.User._hash_func()=lastfm.user.User-class.html#_hash_func,Static Method lastfm.venue.Venue._hash_func()=lastfm.venue.Venue-class.html#_hash_func,Static Method lastfm.weeklychart.WeeklyChart._hash_func()=lastfm.weeklychart.WeeklyChart-class.html#_hash_func"><a title="lastfm.album.Album._hash_func
+lastfm.artist.Artist._hash_func
+lastfm.event.Event._hash_func
+lastfm.geo.Country._hash_func
+lastfm.geo.Location._hash_func
+lastfm.group.Group._hash_func
+lastfm.playlist.Playlist._hash_func
+lastfm.shout.Shout._hash_func
+lastfm.tag.Tag._hash_func
+lastfm.track.Track._hash_func
+lastfm.user.User.Library._hash_func
+lastfm.user.User.Playlist._hash_func
+lastfm.user.User._hash_func
+lastfm.venue.Venue._hash_func
+lastfm.weeklychart.WeeklyChart._hash_func" class="py-name" href="#" onclick="return doclink('link-6', '_hash_func', 'link-6');">_hash_func</a></tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwds</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-7" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-7', 'subject', 'link-2');">subject</a></tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">            <tt class="py-name">key</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">hash</tt><tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-8', 'subject', 'link-2');">subject</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt id="link-9" class="py-name" targets="Class lastfm.mixins.cacheable.Cacheable=lastfm.mixins.cacheable.Cacheable-class.html"><a title="lastfm.mixins.cacheable.Cacheable" class="py-name" href="#" onclick="return doclink('link-9', 'Cacheable', 'link-9');">Cacheable</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable._lock" class="py-name" href="#" onclick="return doclink('link-10', '_lock', 'link-1');">_lock</a></tt><tt class="py-op">.</tt><tt class="py-name">acquire</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">            <tt class="py-name">inst</tt><tt class="py-op">,</tt> <tt class="py-name">already_registered</tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable" class="py-name" href="#" onclick="return doclink('link-11', 'Cacheable', 'link-9');">Cacheable</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Static Method lastfm.mixins.cacheable.Cacheable.register()=lastfm.mixins.cacheable.Cacheable-class.html#register"><a title="lastfm.mixins.cacheable.Cacheable.register" class="py-name" href="#" onclick="return doclink('link-12', 'register', 'link-12');">register</a></tt><tt class="py-op">(</tt><tt class="py-name">object</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable.__new__" class="py-name" href="#" onclick="return doclink('link-13', '__new__', 'link-4');">__new__</a></tt><tt class="py-op">(</tt><tt class="py-name">cls</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">already_registered</tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">                <tt class="py-name">inst</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="lastfm.album.Album.init
+lastfm.artist.Artist.init
+lastfm.event.Event.init
+lastfm.geo.Country.init
+lastfm.geo.Location.init
+lastfm.group.Group.init
+lastfm.mixins.sharable.Sharable.init
+lastfm.mixins.shoutable.Shoutable.init
+lastfm.mixins.taggable.Taggable.init
+lastfm.playlist.Playlist.init
+lastfm.shout.Shout.init
+lastfm.tag.Tag.init
+lastfm.track.Track.init
+lastfm.user.User.Playlist.init
+lastfm.user.User.init
+lastfm.venue.Venue.init
+lastfm.weeklychart.WeeklyAlbumChart.init
+lastfm.weeklychart.WeeklyArtistChart.init
+lastfm.weeklychart.WeeklyChart.init
+lastfm.weeklychart.WeeklyTagChart.init
+lastfm.weeklychart.WeeklyTrackChart.init" class="py-name" href="#" onclick="return doclink('link-14', 'init', 'link-5');">init</a></tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwds</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-keyword">finally</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">            <tt id="link-15" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable" class="py-name" href="#" onclick="return doclink('link-15', 'Cacheable', 'link-9');">Cacheable</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable._lock" class="py-name" href="#" onclick="return doclink('link-16', '_lock', 'link-1');">_lock</a></tt><tt class="py-op">.</tt><tt class="py-name">release</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">inst</tt> </tt>
+</div><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="Cacheable.register"></a><div id="Cacheable.register-def"><a name="L42"></a><tt class="py-lineno">42</tt> <a class="py-toggle" href="#" id="Cacheable.register-toggle" onclick="return toggle('Cacheable.register');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.mixins.cacheable.Cacheable-class.html#register">register</a><tt class="py-op">(</tt><tt class="py-param">ob</tt><tt class="py-op">,</tt> <tt class="py-param">key</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cacheable.register-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Cacheable.register-expanded"><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">ob</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt> <tt class="py-keyword">in</tt> <tt id="link-17" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable" class="py-name" href="#" onclick="return doclink('link-17', 'Cacheable', 'link-9');">Cacheable</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable.registry" class="py-name" href="#" onclick="return doclink('link-18', 'registry', 'link-0');">registry</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">            <tt id="link-19" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable" class="py-name" href="#" onclick="return doclink('link-19', 'Cacheable', 'link-9');">Cacheable</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable.registry" class="py-name" href="#" onclick="return doclink('link-20', 'registry', 'link-0');">registry</a></tt><tt class="py-op">[</tt><tt class="py-name">ob</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">key</tt> <tt class="py-keyword">in</tt> <tt id="link-21" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable" class="py-name" href="#" onclick="return doclink('link-21', 'Cacheable', 'link-9');">Cacheable</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable.registry" class="py-name" href="#" onclick="return doclink('link-22', 'registry', 'link-0');">registry</a></tt><tt class="py-op">[</tt><tt class="py-name">ob</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">            <tt class="py-name">ob</tt> <tt class="py-op">=</tt> <tt id="link-23" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable" class="py-name" href="#" onclick="return doclink('link-23', 'Cacheable', 'link-9');">Cacheable</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable.registry" class="py-name" href="#" onclick="return doclink('link-24', 'registry', 'link-0');">registry</a></tt><tt class="py-op">[</tt><tt class="py-name">ob</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">]</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">            <tt class="py-comment">#print "already registered: %s" % repr(ob)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">ob</tt><tt class="py-op">,</tt> <tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">            <tt class="py-comment">#print "not already registered: %s" % ob.__class__</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">            <tt id="link-25" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable" class="py-name" href="#" onclick="return doclink('link-25', 'Cacheable', 'link-9');">Cacheable</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="lastfm.mixins.cacheable.Cacheable.registry" class="py-name" href="#" onclick="return doclink('link-26', 'registry', 'link-0');">registry</a></tt><tt class="py-op">[</tt><tt class="py-name">ob</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">key</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">ob</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">ob</tt><tt class="py-op">,</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lastfm-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >python-lastfm</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Mar 05 00:14:34 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,1158 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lastfm.track</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lastfm-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >python-lastfm</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lastfm-module.html">Package&nbsp;lastfm</a> ::
+        Module&nbsp;track
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lastfm.track-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lastfm.track-module.html" onclick="show_private();">Module lastfm.track</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-name">__author__</tt> <tt class="py-op">=</tt> <tt class="py-docstring">"Abhinav Sarkar &lt;abhinav@abhinavsarkar.net&gt;"</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-name">__version__</tt> <tt class="py-op">=</tt> <tt class="py-string">"0.2"</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-name">__license__</tt> <tt class="py-op">=</tt> <tt class="py-string">"GNU Lesser General Public License"</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lastfm=lastfm-module.html"><a title="lastfm" class="py-name" href="#" onclick="return doclink('link-0', 'lastfm', 'link-0');">lastfm</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module lastfm.base=lastfm.base-module.html"><a title="lastfm.base" class="py-name" href="#" onclick="return doclink('link-1', 'base', 'link-1');">base</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class lastfm.base.LastfmBase=lastfm.base.LastfmBase-class.html"><a title="lastfm.base.LastfmBase" class="py-name" href="#" onclick="return doclink('link-2', 'LastfmBase', 'link-2');">LastfmBase</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-3" class="py-name"><a title="lastfm" class="py-name" href="#" onclick="return doclink('link-3', 'lastfm', 'link-0');">lastfm</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Package lastfm.mixins=lastfm.mixins-module.html"><a title="lastfm.mixins" class="py-name" href="#" onclick="return doclink('link-4', 'mixins', 'link-4');">mixins</a></tt> <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Class lastfm.mixins.cacheable.Cacheable=lastfm.mixins.cacheable.Cacheable-class.html"><a title="lastfm.mixins.cacheable.Cacheable" class="py-name" href="#" onclick="return doclink('link-5', 'Cacheable', 'link-5');">Cacheable</a></tt><tt class="py-op">,</tt> <tt id="link-6" class="py-name" targets="Class lastfm.mixins.searchable.Searchable=lastfm.mixins.searchable.Searchable-class.html"><a title="lastfm.mixins.searchable.Searchable" class="py-name" href="#" onclick="return doclink('link-6', 'Searchable', 'link-6');">Searchable</a></tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name" targets="Class lastfm.mixins.sharable.Sharable=lastfm.mixins.sharable.Sharable-class.html"><a title="lastfm.mixins.sharable.Sharable" class="py-name" href="#" onclick="return doclink('link-7', 'Sharable', 'link-7');">Sharable</a></tt><tt class="py-op">,</tt> <tt id="link-8" class="py-name" targets="Class lastfm.mixins.taggable.Taggable=lastfm.mixins.taggable.Taggable-class.html"><a title="lastfm.mixins.taggable.Taggable" class="py-name" href="#" onclick="return doclink('link-8', 'Taggable', 'link-8');">Taggable</a></tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-9" class="py-name"><a title="lastfm" class="py-name" href="#" onclick="return doclink('link-9', 'lastfm', 'link-0');">lastfm</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Module lastfm.lazylist=lastfm.lazylist-module.html,Function lastfm.lazylist.lazylist()=lastfm.lazylist-module.html#lazylist"><a title="lastfm.lazylist
+lastfm.lazylist.lazylist" class="py-name" href="#" onclick="return doclink('link-10', 'lazylist', 'link-10');">lazylist</a></tt> <tt class="py-keyword">import</tt> <tt id="link-11" class="py-name"><a title="lastfm.lazylist
+lastfm.lazylist.lazylist" class="py-name" href="#" onclick="return doclink('link-11', 'lazylist', 'link-10');">lazylist</a></tt> </tt>
+<a name="Track"></a><div id="Track-def"><a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt> <a class="py-toggle" href="#" id="Track-toggle" onclick="return toggle('Track');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lastfm.track.Track-class.html">Track</a><tt class="py-op">(</tt><tt class="py-base-class">LastfmBase</tt><tt class="py-op">,</tt> <tt class="py-base-class">Cacheable</tt><tt class="py-op">,</tt> <tt class="py-base-class">Sharable</tt><tt class="py-op">,</tt> <tt class="py-base-class">Searchable</tt><tt class="py-op">,</tt> <tt class="py-base-class">Taggable</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Track-expanded"><a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-docstring">"""A class representing a track."""</tt> </tt>
+<a name="Track.init"></a><div id="Track.init-def"><a name="L13"></a><tt class="py-lineno"> 13</tt> <a class="py-toggle" href="#" id="Track.init-toggle" onclick="return toggle('Track.init');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#init">init</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">                 <tt class="py-param">api</tt><tt class="py-op">,</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">                 <tt class="py-param">name</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">                 <tt class="py-param">mbid</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">                 <tt class="py-param">url</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">                 <tt class="py-param">duration</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">                 <tt class="py-param">streamable</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">                 <tt class="py-param">full_track</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">                 <tt class="py-param">artist</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">                 <tt class="py-param">album</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">                 <tt class="py-param">position</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">                 <tt class="py-param">image</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">                 <tt class="py-param">stats</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">                 <tt class="py-param">played_on</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">                 <tt class="py-param">loved_on</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">                 <tt class="py-param">wiki</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.init-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.init-expanded"><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt id="link-12" class="py-name" targets="Module lastfm.api=lastfm.api-module.html"><a title="lastfm.api" class="py-name" href="#" onclick="return doclink('link-12', 'api', 'link-12');">api</a></tt><tt class="py-op">,</tt> <tt id="link-13" class="py-name" targets="Class lastfm.api.Api=lastfm.api.Api-class.html"><a title="lastfm.api.Api" class="py-name" href="#" onclick="return doclink('link-13', 'Api', 'link-13');">Api</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-14" class="py-name" targets="Class lastfm.error.InvalidParametersError=lastfm.error.InvalidParametersError-class.html"><a title="lastfm.error.InvalidParametersError" class="py-name" href="#" onclick="return doclink('link-14', 'InvalidParametersError', 'link-14');">InvalidParametersError</a></tt><tt class="py-op">(</tt><tt class="py-string">"api reference must be supplied as an argument"</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt id="link-15" class="py-name"><a title="lastfm.mixins.taggable.Taggable" class="py-name" href="#" onclick="return doclink('link-15', 'Taggable', 'link-8');">Taggable</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method lastfm.album.Album.init()=lastfm.album.Album-class.html#init,Method lastfm.artist.Artist.init()=lastfm.artist.Artist-class.html#init,Method lastfm.event.Event.init()=lastfm.event.Event-class.html#init,Method lastfm.geo.Country.init()=lastfm.geo.Country-class.html#init,Method lastfm.geo.Location.init()=lastfm.geo.Location-class.html#init,Method lastfm.group.Group.init()=lastfm.group.Group-class.html#init,Method lastfm.mixins.sharable.Sharable.init()=lastfm.mixins.sharable.Sharable-class.html#init,Method lastfm.mixins.shoutable.Shoutable.init()=lastfm.mixins.shoutable.Shoutable-class.html#init,Method lastfm.mixins.taggable.Taggable.init()=lastfm.mixins.taggable.Taggable-class.html#init,Method lastfm.playlist.Playlist.init()=lastfm.playlist.Playlist-class.html#init,Method lastfm.shout.Shout.init()=lastfm.shout.Shout-class.html#init,Method lastfm.tag.Tag.init()=lastfm.tag.Tag-class.html#init,Method lastfm.track.Track.init()=lastfm.track.Track-class.html#init,Method lastfm.user.User.Playlist.init()=lastfm.user.User.Playlist-class.html#init,Method lastfm.user.User.init()=lastfm.user.User-class.html#init,Method lastfm.venue.Venue.init()=lastfm.venue.Venue-class.html#init,Method lastfm.weeklychart.WeeklyAlbumChart.init()=lastfm.weeklychart.WeeklyAlbumChart-class.html#init,Method lastfm.weeklychart.WeeklyArtistChart.init()=lastfm.weeklychart.WeeklyArtistChart-class.html#init,Method lastfm.weeklychart.WeeklyChart.init()=lastfm.weeklychart.WeeklyChart-class.html#init,Method lastfm.weeklychart.WeeklyTagChart.init()=lastfm.weeklychart.WeeklyTagChart-class.html#init,Method lastfm.weeklychart.WeeklyTrackChart.init()=lastfm.weeklychart.WeeklyTrackChart-class.html#init"><a title="lastfm.album.Album.init
+lastfm.artist.Artist.init
+lastfm.event.Event.init
+lastfm.geo.Country.init
+lastfm.geo.Location.init
+lastfm.group.Group.init
+lastfm.mixins.sharable.Sharable.init
+lastfm.mixins.shoutable.Shoutable.init
+lastfm.mixins.taggable.Taggable.init
+lastfm.playlist.Playlist.init
+lastfm.shout.Shout.init
+lastfm.tag.Tag.init
+lastfm.track.Track.init
+lastfm.user.User.Playlist.init
+lastfm.user.User.init
+lastfm.venue.Venue.init
+lastfm.weeklychart.WeeklyAlbumChart.init
+lastfm.weeklychart.WeeklyArtistChart.init
+lastfm.weeklychart.WeeklyChart.init
+lastfm.weeklychart.WeeklyTagChart.init
+lastfm.weeklychart.WeeklyTrackChart.init" class="py-name" href="#" onclick="return doclink('link-16', 'init', 'link-16');">init</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name"><a title="lastfm.api" class="py-name" href="#" onclick="return doclink('link-17', 'api', 'link-12');">api</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt id="link-18" class="py-name"><a title="lastfm.mixins.sharable.Sharable" class="py-name" href="#" onclick="return doclink('link-18', 'Sharable', 'link-7');">Sharable</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="lastfm.album.Album.init
+lastfm.artist.Artist.init
+lastfm.event.Event.init
+lastfm.geo.Country.init
+lastfm.geo.Location.init
+lastfm.group.Group.init
+lastfm.mixins.sharable.Sharable.init
+lastfm.mixins.shoutable.Shoutable.init
+lastfm.mixins.taggable.Taggable.init
+lastfm.playlist.Playlist.init
+lastfm.shout.Shout.init
+lastfm.tag.Tag.init
+lastfm.track.Track.init
+lastfm.user.User.Playlist.init
+lastfm.user.User.init
+lastfm.venue.Venue.init
+lastfm.weeklychart.WeeklyAlbumChart.init
+lastfm.weeklychart.WeeklyArtistChart.init
+lastfm.weeklychart.WeeklyChart.init
+lastfm.weeklychart.WeeklyTagChart.init
+lastfm.weeklychart.WeeklyTrackChart.init" class="py-name" href="#" onclick="return doclink('link-19', 'init', 'link-16');">init</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt id="link-20" class="py-name"><a title="lastfm.api" class="py-name" href="#" onclick="return doclink('link-20', 'api', 'link-12');">api</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_api</tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="lastfm.api" class="py-name" href="#" onclick="return doclink('link-21', 'api', 'link-12');">api</a></tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_id</tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name" targets="Variable lastfm.album.Album.id=lastfm.album.Album-class.html#id,Variable lastfm.event.Event.id=lastfm.event.Event-class.html#id,Variable lastfm.track.Track.id=lastfm.track.Track-class.html#id,Variable lastfm.user.User.Playlist.id=lastfm.user.User.Playlist-class.html#id,Variable lastfm.venue.Venue.id=lastfm.venue.Venue-class.html#id"><a title="lastfm.album.Album.id
+lastfm.event.Event.id
+lastfm.track.Track.id
+lastfm.user.User.Playlist.id
+lastfm.venue.Venue.id" class="py-name" href="#" onclick="return doclink('link-22', 'id', 'link-22');">id</a></tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_name</tt> <tt class="py-op">=</tt> <tt id="link-23" class="py-name" targets="Variable lastfm.album.Album.name=lastfm.album.Album-class.html#name,Variable lastfm.artist.Artist.name=lastfm.artist.Artist-class.html#name,Variable lastfm.geo.Country.name=lastfm.geo.Country-class.html#name,Variable lastfm.group.Group.name=lastfm.group.Group-class.html#name,Variable lastfm.tag.Tag.name=lastfm.tag.Tag-class.html#name,Variable lastfm.track.Track.name=lastfm.track.Track-class.html#name,Variable lastfm.user.User.name=lastfm.user.User-class.html#name,Variable lastfm.venue.Venue.name=lastfm.venue.Venue-class.html#name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-23', 'name', 'link-23');">name</a></tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_mbid</tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name" targets="Variable lastfm.album.Album.mbid=lastfm.album.Album-class.html#mbid,Variable lastfm.artist.Artist.mbid=lastfm.artist.Artist-class.html#mbid,Variable lastfm.track.Track.mbid=lastfm.track.Track-class.html#mbid"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-24', 'mbid', 'link-24');">mbid</a></tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_url</tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name" targets="Variable lastfm.album.Album.url=lastfm.album.Album-class.html#url,Variable lastfm.artist.Artist.url=lastfm.artist.Artist-class.html#url,Variable lastfm.event.Event.url=lastfm.event.Event-class.html#url,Variable lastfm.playlist.Playlist.url=lastfm.playlist.Playlist-class.html#url,Variable lastfm.tag.Tag.url=lastfm.tag.Tag-class.html#url,Variable lastfm.track.Track.url=lastfm.track.Track-class.html#url,Variable lastfm.user.User.url=lastfm.user.User-class.html#url,Variable lastfm.venue.Venue.url=lastfm.venue.Venue-class.html#url"><a title="lastfm.album.Album.url
+lastfm.artist.Artist.url
+lastfm.event.Event.url
+lastfm.playlist.Playlist.url
+lastfm.tag.Tag.url
+lastfm.track.Track.url
+lastfm.user.User.url
+lastfm.venue.Venue.url" class="py-name" href="#" onclick="return doclink('link-25', 'url', 'link-25');">url</a></tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_duration</tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name" targets="Variable lastfm.track.Track.duration=lastfm.track.Track-class.html#duration"><a title="lastfm.track.Track.duration" class="py-name" href="#" onclick="return doclink('link-26', 'duration', 'link-26');">duration</a></tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_streamable</tt> <tt class="py-op">=</tt> <tt id="link-27" class="py-name" targets="Variable lastfm.album.Album.streamable=lastfm.album.Album-class.html#streamable,Variable lastfm.artist.Artist.streamable=lastfm.artist.Artist-class.html#streamable,Variable lastfm.tag.Tag.streamable=lastfm.tag.Tag-class.html#streamable,Variable lastfm.track.Track.streamable=lastfm.track.Track-class.html#streamable"><a title="lastfm.album.Album.streamable
+lastfm.artist.Artist.streamable
+lastfm.tag.Tag.streamable
+lastfm.track.Track.streamable" class="py-name" href="#" onclick="return doclink('link-27', 'streamable', 'link-27');">streamable</a></tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_full_track</tt> <tt class="py-op">=</tt> <tt id="link-28" class="py-name" targets="Variable lastfm.track.Track.full_track=lastfm.track.Track-class.html#full_track"><a title="lastfm.track.Track.full_track" class="py-name" href="#" onclick="return doclink('link-28', 'full_track', 'link-28');">full_track</a></tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_artist</tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name" targets="Variable lastfm.album.Album.artist=lastfm.album.Album-class.html#artist,Module lastfm.artist=lastfm.artist-module.html,Variable lastfm.track.Track.artist=lastfm.track.Track-class.html#artist"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-29', 'artist', 'link-29');">artist</a></tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_album</tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name" targets="Module lastfm.album=lastfm.album-module.html,Variable lastfm.track.Track.album=lastfm.track.Track-class.html#album"><a title="lastfm.album
+lastfm.track.Track.album" class="py-name" href="#" onclick="return doclink('link-30', 'album', 'link-30');">album</a></tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_position</tt> <tt class="py-op">=</tt> <tt id="link-31" class="py-name" targets="Variable lastfm.track.Track.position=lastfm.track.Track-class.html#position"><a title="lastfm.track.Track.position" class="py-name" href="#" onclick="return doclink('link-31', 'position', 'link-31');">position</a></tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_image</tt> <tt class="py-op">=</tt> <tt id="link-32" class="py-name" targets="Variable lastfm.album.Album.image=lastfm.album.Album-class.html#image,Variable lastfm.artist.Artist.image=lastfm.artist.Artist-class.html#image,Variable lastfm.event.Event.image=lastfm.event.Event-class.html#image,Variable lastfm.track.Track.image=lastfm.track.Track-class.html#image,Variable lastfm.user.User.image=lastfm.user.User-class.html#image"><a title="lastfm.album.Album.image
+lastfm.artist.Artist.image
+lastfm.event.Event.image
+lastfm.track.Track.image
+lastfm.user.User.image" class="py-name" href="#" onclick="return doclink('link-32', 'image', 'link-32');">image</a></tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt> <tt class="py-op">=</tt> <tt id="link-33" class="py-name" targets="Variable lastfm.album.Album.stats=lastfm.album.Album-class.html#stats,Variable lastfm.artist.Artist.stats=lastfm.artist.Artist-class.html#stats,Variable lastfm.event.Event.stats=lastfm.event.Event-class.html#stats,Module lastfm.stats=lastfm.stats-module.html,Variable lastfm.tag.Tag.stats=lastfm.tag.Tag-class.html#stats,Variable lastfm.track.Track.stats=lastfm.track.Track-class.html#stats,Variable lastfm.user.User.stats=lastfm.user.User-class.html#stats,Variable lastfm.weeklychart.WeeklyChart.stats=lastfm.weeklychart.WeeklyChart-class.html#stats"><a title="lastfm.album.Album.stats
+lastfm.artist.Artist.stats
+lastfm.event.Event.stats
+lastfm.stats
+lastfm.tag.Tag.stats
+lastfm.track.Track.stats
+lastfm.user.User.stats
+lastfm.weeklychart.WeeklyChart.stats" class="py-name" href="#" onclick="return doclink('link-33', 'stats', 'link-33');">stats</a></tt> <tt class="py-keyword">and</tt> <tt id="link-34" class="py-name" targets="Class lastfm.stats.Stats=lastfm.stats.Stats-class.html"><a title="lastfm.stats.Stats" class="py-name" href="#" onclick="return doclink('link-34', 'Stats', 'link-34');">Stats</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                             <tt id="link-35" class="py-name" targets="Variable lastfm.stats.Stats.subject=lastfm.stats.Stats-class.html#subject,Variable lastfm.weeklychart.WeeklyChart.subject=lastfm.weeklychart.WeeklyChart-class.html#subject,Variable lastfm.wiki.Wiki.subject=lastfm.wiki.Wiki-class.html#subject"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-35', 'subject', 'link-35');">subject</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                             <tt id="link-36" class="py-name" targets="Variable lastfm.stats.Stats.match=lastfm.stats.Stats-class.html#match"><a title="lastfm.stats.Stats.match" class="py-name" href="#" onclick="return doclink('link-36', 'match', 'link-36');">match</a></tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name"><a title="lastfm.album.Album.stats
+lastfm.artist.Artist.stats
+lastfm.event.Event.stats
+lastfm.stats
+lastfm.tag.Tag.stats
+lastfm.track.Track.stats
+lastfm.user.User.stats
+lastfm.weeklychart.WeeklyChart.stats" class="py-name" href="#" onclick="return doclink('link-37', 'stats', 'link-33');">stats</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="lastfm.stats.Stats.match" class="py-name" href="#" onclick="return doclink('link-38', 'match', 'link-36');">match</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">                             <tt id="link-39" class="py-name" targets="Variable lastfm.stats.Stats.playcount=lastfm.stats.Stats-class.html#playcount"><a title="lastfm.stats.Stats.playcount" class="py-name" href="#" onclick="return doclink('link-39', 'playcount', 'link-39');">playcount</a></tt> <tt class="py-op">=</tt> <tt id="link-40" class="py-name"><a title="lastfm.album.Album.stats
+lastfm.artist.Artist.stats
+lastfm.event.Event.stats
+lastfm.stats
+lastfm.tag.Tag.stats
+lastfm.track.Track.stats
+lastfm.user.User.stats
+lastfm.weeklychart.WeeklyChart.stats" class="py-name" href="#" onclick="return doclink('link-40', 'stats', 'link-33');">stats</a></tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="lastfm.stats.Stats.playcount" class="py-name" href="#" onclick="return doclink('link-41', 'playcount', 'link-39');">playcount</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                             <tt id="link-42" class="py-name" targets="Variable lastfm.stats.Stats.rank=lastfm.stats.Stats-class.html#rank"><a title="lastfm.stats.Stats.rank" class="py-name" href="#" onclick="return doclink('link-42', 'rank', 'link-42');">rank</a></tt> <tt class="py-op">=</tt> <tt id="link-43" class="py-name"><a title="lastfm.album.Album.stats
+lastfm.artist.Artist.stats
+lastfm.event.Event.stats
+lastfm.stats
+lastfm.tag.Tag.stats
+lastfm.track.Track.stats
+lastfm.user.User.stats
+lastfm.weeklychart.WeeklyChart.stats" class="py-name" href="#" onclick="return doclink('link-43', 'stats', 'link-33');">stats</a></tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="lastfm.stats.Stats.rank" class="py-name" href="#" onclick="return doclink('link-44', 'rank', 'link-42');">rank</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                             <tt id="link-45" class="py-name" targets="Variable lastfm.stats.Stats.listeners=lastfm.stats.Stats-class.html#listeners"><a title="lastfm.stats.Stats.listeners" class="py-name" href="#" onclick="return doclink('link-45', 'listeners', 'link-45');">listeners</a></tt> <tt class="py-op">=</tt> <tt id="link-46" class="py-name"><a title="lastfm.album.Album.stats
+lastfm.artist.Artist.stats
+lastfm.event.Event.stats
+lastfm.stats
+lastfm.tag.Tag.stats
+lastfm.track.Track.stats
+lastfm.user.User.stats
+lastfm.weeklychart.WeeklyChart.stats" class="py-name" href="#" onclick="return doclink('link-46', 'stats', 'link-33');">stats</a></tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="lastfm.stats.Stats.listeners" class="py-name" href="#" onclick="return doclink('link-47', 'listeners', 'link-45');">listeners</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                            <tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_played_on</tt> <tt class="py-op">=</tt> <tt id="link-48" class="py-name" targets="Variable lastfm.track.Track.played_on=lastfm.track.Track-class.html#played_on"><a title="lastfm.track.Track.played_on" class="py-name" href="#" onclick="return doclink('link-48', 'played_on', 'link-48');">played_on</a></tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_loved_on</tt> <tt class="py-op">=</tt> <tt id="link-49" class="py-name" targets="Variable lastfm.track.Track.loved_on=lastfm.track.Track-class.html#loved_on"><a title="lastfm.track.Track.loved_on" class="py-name" href="#" onclick="return doclink('link-49', 'loved_on', 'link-49');">loved_on</a></tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_wiki</tt> <tt class="py-op">=</tt> <tt id="link-50" class="py-name" targets="Variable lastfm.track.Track.wiki=lastfm.track.Track-class.html#wiki,Module lastfm.wiki=lastfm.wiki-module.html"><a title="lastfm.track.Track.wiki
+lastfm.wiki" class="py-name" href="#" onclick="return doclink('link-50', 'wiki', 'link-50');">wiki</a></tt> <tt class="py-keyword">and</tt> <tt id="link-51" class="py-name" targets="Class lastfm.wiki.Wiki=lastfm.wiki.Wiki-class.html"><a title="lastfm.wiki.Wiki" class="py-name" href="#" onclick="return doclink('link-51', 'Wiki', 'link-51');">Wiki</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                         <tt id="link-52" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-52', 'subject', 'link-35');">subject</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">                         <tt id="link-53" class="py-name" targets="Variable lastfm.wiki.Wiki.published=lastfm.wiki.Wiki-class.html#published"><a title="lastfm.wiki.Wiki.published" class="py-name" href="#" onclick="return doclink('link-53', 'published', 'link-53');">published</a></tt> <tt class="py-op">=</tt> <tt id="link-54" class="py-name"><a title="lastfm.track.Track.wiki
+lastfm.wiki" class="py-name" href="#" onclick="return doclink('link-54', 'wiki', 'link-50');">wiki</a></tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="lastfm.wiki.Wiki.published" class="py-name" href="#" onclick="return doclink('link-55', 'published', 'link-53');">published</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                         <tt id="link-56" class="py-name" targets="Variable lastfm.wiki.Wiki.summary=lastfm.wiki.Wiki-class.html#summary"><a title="lastfm.wiki.Wiki.summary" class="py-name" href="#" onclick="return doclink('link-56', 'summary', 'link-56');">summary</a></tt> <tt class="py-op">=</tt> <tt id="link-57" class="py-name"><a title="lastfm.track.Track.wiki
+lastfm.wiki" class="py-name" href="#" onclick="return doclink('link-57', 'wiki', 'link-50');">wiki</a></tt><tt class="py-op">.</tt><tt id="link-58" class="py-name"><a title="lastfm.wiki.Wiki.summary" class="py-name" href="#" onclick="return doclink('link-58', 'summary', 'link-56');">summary</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                         <tt id="link-59" class="py-name" targets="Variable lastfm.wiki.Wiki.content=lastfm.wiki.Wiki-class.html#content"><a title="lastfm.wiki.Wiki.content" class="py-name" href="#" onclick="return doclink('link-59', 'content', 'link-59');">content</a></tt> <tt class="py-op">=</tt> <tt id="link-60" class="py-name"><a title="lastfm.track.Track.wiki
+lastfm.wiki" class="py-name" href="#" onclick="return doclink('link-60', 'wiki', 'link-50');">wiki</a></tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="lastfm.wiki.Wiki.content" class="py-name" href="#" onclick="return doclink('link-61', 'content', 'link-59');">content</a></tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">                        <tt class="py-op">)</tt> </tt>
+</div><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.id"></a><div id="Track.id-def"><a name="L62"></a><tt class="py-lineno"> 62</tt> <a class="py-toggle" href="#" id="Track.id-toggle" onclick="return toggle('Track.id');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#id">id</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.id-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.id-expanded"><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-docstring">"""id of the track"""</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_id</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.name"></a><div id="Track.name-def"><a name="L67"></a><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="Track.name-toggle" onclick="return toggle('Track.name');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#name">name</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.name-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.name-expanded"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-docstring">"""name of the track"""</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_name</tt> </tt>
+</div><a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.mbid"></a><div id="Track.mbid-def"><a name="L72"></a><tt class="py-lineno"> 72</tt> <a class="py-toggle" href="#" id="Track.mbid-toggle" onclick="return toggle('Track.mbid');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#mbid">mbid</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.mbid-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.mbid-expanded"><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-docstring">"""mbid of the track"""</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_mbid</tt> </tt>
+</div><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.url"></a><div id="Track.url-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="Track.url-toggle" onclick="return toggle('Track.url');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#url">url</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.url-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.url-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-docstring">"""url of the tracks's page"""</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_url</tt> </tt>
+</div><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.duration"></a><div id="Track.duration-def"><a name="L82"></a><tt class="py-lineno"> 82</tt> <a class="py-toggle" href="#" id="Track.duration-toggle" onclick="return toggle('Track.duration');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#duration">duration</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.duration-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.duration-expanded"><a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-docstring">"""duration of the tracks's page"""</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_duration</tt> </tt>
+</div><a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.streamable"></a><div id="Track.streamable-def"><a name="L87"></a><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="Track.streamable-toggle" onclick="return toggle('Track.streamable');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#streamable">streamable</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.streamable-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.streamable-expanded"><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-docstring">"""is the track streamable"""</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_streamable</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name" targets="Method lastfm.album.Album._fill_info()=lastfm.album.Album-class.html#_fill_info,Method lastfm.artist.Artist._fill_info()=lastfm.artist.Artist-class.html#_fill_info,Method lastfm.track.Track._fill_info()=lastfm.track.Track-class.html#_fill_info"><a title="lastfm.album.Album._fill_info
+lastfm.artist.Artist._fill_info
+lastfm.track.Track._fill_info" class="py-name" href="#" onclick="return doclink('link-62', '_fill_info', 'link-62');">_fill_info</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_streamable</tt> </tt>
+</div><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.full_track"></a><div id="Track.full_track-def"><a name="L94"></a><tt class="py-lineno"> 94</tt> <a class="py-toggle" href="#" id="Track.full_track-toggle" onclick="return toggle('Track.full_track');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#full_track">full_track</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.full_track-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.full_track-expanded"><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-docstring">"""is the full track streamable"""</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_full_track</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-63" class="py-name"><a title="lastfm.album.Album._fill_info
+lastfm.artist.Artist._fill_info
+lastfm.track.Track._fill_info" class="py-name" href="#" onclick="return doclink('link-63', '_fill_info', 'link-62');">_fill_info</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_full_track</tt> </tt>
+</div><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.artist"></a><div id="Track.artist-def"><a name="L101"></a><tt class="py-lineno">101</tt> <a class="py-toggle" href="#" id="Track.artist-toggle" onclick="return toggle('Track.artist');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#artist">artist</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.artist-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.artist-expanded"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-docstring">"""artist of the track"""</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_artist</tt> </tt>
+</div><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.album"></a><div id="Track.album-def"><a name="L106"></a><tt class="py-lineno">106</tt> <a class="py-toggle" href="#" id="Track.album-toggle" onclick="return toggle('Track.album');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#album">album</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.album-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.album-expanded"><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-docstring">"""artist of the track"""</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_album</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="lastfm.album.Album._fill_info
+lastfm.artist.Artist._fill_info
+lastfm.track.Track._fill_info" class="py-name" href="#" onclick="return doclink('link-64', '_fill_info', 'link-62');">_fill_info</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_album</tt> </tt>
+</div><a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.position"></a><div id="Track.position-def"><a name="L113"></a><tt class="py-lineno">113</tt> <a class="py-toggle" href="#" id="Track.position-toggle" onclick="return toggle('Track.position');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#position">position</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.position-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.position-expanded"><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-docstring">"""position of the track"""</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_position</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-65" class="py-name"><a title="lastfm.album.Album._fill_info
+lastfm.artist.Artist._fill_info
+lastfm.track.Track._fill_info" class="py-name" href="#" onclick="return doclink('link-65', '_fill_info', 'link-62');">_fill_info</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_position</tt> </tt>
+</div><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.image"></a><div id="Track.image-def"><a name="L120"></a><tt class="py-lineno">120</tt> <a class="py-toggle" href="#" id="Track.image-toggle" onclick="return toggle('Track.image');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#image">image</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.image-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.image-expanded"><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-docstring">"""image of the track's album cover"""</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_image</tt> </tt>
+</div><a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.stats"></a><div id="Track.stats-def"><a name="L125"></a><tt class="py-lineno">125</tt> <a class="py-toggle" href="#" id="Track.stats-toggle" onclick="return toggle('Track.stats');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#stats">stats</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.stats-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.stats-expanded"><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-docstring">"""stats of the track"""</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt> </tt>
+</div><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.played_on"></a><div id="Track.played_on-def"><a name="L130"></a><tt class="py-lineno">130</tt> <a class="py-toggle" href="#" id="Track.played_on-toggle" onclick="return toggle('Track.played_on');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#played_on">played_on</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.played_on-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.played_on-expanded"><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-docstring">"""datetime the track was last played"""</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_played_on</tt> </tt>
+</div><a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.loved_on"></a><div id="Track.loved_on-def"><a name="L135"></a><tt class="py-lineno">135</tt> <a class="py-toggle" href="#" id="Track.loved_on-toggle" onclick="return toggle('Track.loved_on');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#loved_on">loved_on</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.loved_on-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.loved_on-expanded"><a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-docstring">"""datetime the track was marked 'loved'"""</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_loved_on</tt> </tt>
+</div><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Track.wiki"></a><div id="Track.wiki-def"><a name="L140"></a><tt class="py-lineno">140</tt> <a class="py-toggle" href="#" id="Track.wiki-toggle" onclick="return toggle('Track.wiki');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#wiki">wiki</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.wiki-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.wiki-expanded"><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-docstring">"""wiki of the track"""</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_wiki</tt> <tt class="py-op">==</tt> <tt class="py-string">"na"</tt><tt class="py-op">:</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_wiki</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-66" class="py-name"><a title="lastfm.album.Album._fill_info
+lastfm.artist.Artist._fill_info
+lastfm.track.Track._fill_info" class="py-name" href="#" onclick="return doclink('link-66', '_fill_info', 'link-62');">_fill_info</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_wiki</tt> </tt>
+</div><a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">LastfmBase</tt><tt class="py-op">.</tt><tt id="link-67" class="py-name" targets="Static Method lastfm.base.LastfmBase.cached_property()=lastfm.base.LastfmBase-class.html#cached_property"><a title="lastfm.base.LastfmBase.cached_property" class="py-name" href="#" onclick="return doclink('link-67', 'cached_property', 'link-67');">cached_property</a></tt> </tt>
+<a name="Track.similar"></a><div id="Track.similar-def"><a name="L149"></a><tt class="py-lineno">149</tt> <a class="py-toggle" href="#" id="Track.similar-toggle" onclick="return toggle('Track.similar');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#similar">similar</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.similar-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.similar-expanded"><a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-docstring">"""tracks similar to this track"""</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-name">params</tt> <tt class="py-op">=</tt> <tt id="link-68" class="py-name" targets="Class lastfm.track.Track=lastfm.track.Track-class.html"><a title="lastfm.track.Track" class="py-name" href="#" onclick="return doclink('link-68', 'Track', 'link-68');">Track</a></tt><tt class="py-op">.</tt><tt id="link-69" class="py-name" targets="Static Method lastfm.track.Track._check_params()=lastfm.track.Track-class.html#_check_params"><a title="lastfm.track.Track._check_params" class="py-name" href="#" onclick="return doclink('link-69', '_check_params', 'link-69');">_check_params</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">                                    <tt class="py-op">{</tt><tt class="py-string">'method'</tt><tt class="py-op">:</tt> <tt class="py-string">'track.getSimilar'</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">                                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-70" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-70', 'artist', 'link-29');">artist</a></tt><tt class="py-op">.</tt><tt id="link-71" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-71', 'name', 'link-23');">name</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">                                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-72" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-72', 'name', 'link-23');">name</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">                                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-73" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-73', 'mbid', 'link-24');">mbid</a></tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">                                    <tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt id="link-74" class="py-name" targets="Variable lastfm.playlist.Playlist.data=lastfm.playlist.Playlist-class.html#data"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-74', 'data', 'link-74');">data</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_api</tt><tt class="py-op">.</tt><tt id="link-75" class="py-name" targets="Static Method lastfm.album.Album._fetch_data()=lastfm.album.Album-class.html#_fetch_data,Method lastfm.api.Api._fetch_data()=lastfm.api.Api-class.html#_fetch_data,Static Method lastfm.artist.Artist._fetch_data()=lastfm.artist.Artist-class.html#_fetch_data,Static Method lastfm.track.Track._fetch_data()=lastfm.track.Track-class.html#_fetch_data"><a title="lastfm.album.Album._fetch_data
+lastfm.api.Api._fetch_data
+lastfm.artist.Artist._fetch_data
+lastfm.track.Track._fetch_data" class="py-name" href="#" onclick="return doclink('link-75', '_fetch_data', 'link-75');">_fetch_data</a></tt><tt class="py-op">(</tt><tt class="py-name">params</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">'similartracks'</tt><tt class="py-op">)</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">[</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">                <tt id="link-76" class="py-name"><a title="lastfm.track.Track" class="py-name" href="#" onclick="return doclink('link-76', 'Track', 'link-68');">Track</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">                      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_api</tt><tt class="py-op">,</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">                      <tt id="link-77" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-77', 'subject', 'link-35');">subject</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">                      <tt id="link-78" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-78', 'name', 'link-23');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'name'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">                      <tt id="link-79" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-79', 'artist', 'link-29');">artist</a></tt> <tt class="py-op">=</tt> <tt id="link-80" class="py-name" targets="Class lastfm.artist.Artist=lastfm.artist.Artist-class.html"><a title="lastfm.artist.Artist" class="py-name" href="#" onclick="return doclink('link-80', 'Artist', 'link-80');">Artist</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">                                      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_api</tt><tt class="py-op">,</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">                                      <tt id="link-81" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-81', 'subject', 'link-35');">subject</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">                                      <tt id="link-82" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-82', 'name', 'link-23');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'artist/name'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">                                      <tt id="link-83" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-83', 'mbid', 'link-24');">mbid</a></tt> <tt class="py-op">=</tt> <tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'artist/mbid'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">                                      <tt id="link-84" class="py-name"><a title="lastfm.album.Album.url
+lastfm.artist.Artist.url
+lastfm.event.Event.url
+lastfm.playlist.Playlist.url
+lastfm.tag.Tag.url
+lastfm.track.Track.url
+lastfm.user.User.url
+lastfm.venue.Venue.url" class="py-name" href="#" onclick="return doclink('link-84', 'url', 'link-25');">url</a></tt> <tt class="py-op">=</tt> <tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'artist/url'</tt><tt class="py-op">)</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">                                      <tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">                      <tt id="link-85" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-85', 'mbid', 'link-24');">mbid</a></tt> <tt class="py-op">=</tt> <tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'mbid'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">                      <tt id="link-86" class="py-name"><a title="lastfm.album.Album.stats
+lastfm.artist.Artist.stats
+lastfm.event.Event.stats
+lastfm.stats
+lastfm.tag.Tag.stats
+lastfm.track.Track.stats
+lastfm.user.User.stats
+lastfm.weeklychart.WeeklyChart.stats" class="py-name" href="#" onclick="return doclink('link-86', 'stats', 'link-33');">stats</a></tt> <tt class="py-op">=</tt> <tt id="link-87" class="py-name"><a title="lastfm.stats.Stats" class="py-name" href="#" onclick="return doclink('link-87', 'Stats', 'link-34');">Stats</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">                                    <tt id="link-88" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-88', 'subject', 'link-35');">subject</a></tt> <tt class="py-op">=</tt> <tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'name'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">                                    <tt id="link-89" class="py-name"><a title="lastfm.stats.Stats.match" class="py-name" href="#" onclick="return doclink('link-89', 'match', 'link-36');">match</a></tt> <tt class="py-op">=</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'match'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">                                    <tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">                      <tt id="link-90" class="py-name"><a title="lastfm.album.Album.streamable
+lastfm.artist.Artist.streamable
+lastfm.tag.Tag.streamable
+lastfm.track.Track.streamable" class="py-name" href="#" onclick="return doclink('link-90', 'streamable', 'link-27');">streamable</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'streamable'</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">'1'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">                      <tt id="link-91" class="py-name"><a title="lastfm.track.Track.full_track" class="py-name" href="#" onclick="return doclink('link-91', 'full_track', 'link-28');">full_track</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">'streamable'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">attrib</tt><tt class="py-op">[</tt><tt class="py-string">'fulltrack'</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">'1'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">                      <tt id="link-92" class="py-name"><a title="lastfm.album.Album.image
+lastfm.artist.Artist.image
+lastfm.event.Event.image
+lastfm.track.Track.image
+lastfm.user.User.image" class="py-name" href="#" onclick="return doclink('link-92', 'image', 'link-32');">image</a></tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'size'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt class="py-string">'image'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">                      <tt class="py-op">)</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">t</tt> <tt class="py-keyword">in</tt> <tt id="link-93" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-93', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt class="py-string">'track'</tt><tt class="py-op">)</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">                <tt class="py-op">]</tt> </tt>
+</div><a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">LastfmBase</tt><tt class="py-op">.</tt><tt id="link-94" class="py-name" targets="Static Method lastfm.base.LastfmBase.top_property()=lastfm.base.LastfmBase-class.html#top_property"><a title="lastfm.base.LastfmBase.top_property" class="py-name" href="#" onclick="return doclink('link-94', 'top_property', 'link-94');">top_property</a></tt><tt class="py-op">(</tt><tt class="py-string">"similar"</tt><tt class="py-op">)</tt> </tt>
+<a name="Track.most_similar"></a><div id="Track.most_similar-def"><a name="L183"></a><tt class="py-lineno">183</tt> <a class="py-toggle" href="#" id="Track.most_similar-toggle" onclick="return toggle('Track.most_similar');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#most_similar">most_similar</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.most_similar-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.most_similar-expanded"><a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">        <tt class="py-docstring">"""track most similar to this track"""</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">LastfmBase</tt><tt class="py-op">.</tt><tt id="link-95" class="py-name"><a title="lastfm.base.LastfmBase.cached_property" class="py-name" href="#" onclick="return doclink('link-95', 'cached_property', 'link-67');">cached_property</a></tt> </tt>
+<a name="Track.top_fans"></a><div id="Track.top_fans-def"><a name="L188"></a><tt class="py-lineno">188</tt> <a class="py-toggle" href="#" id="Track.top_fans-toggle" onclick="return toggle('Track.top_fans');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#top_fans">top_fans</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.top_fans-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.top_fans-expanded"><a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">        <tt class="py-docstring">"""top fans of the track"""</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">        <tt class="py-name">params</tt> <tt class="py-op">=</tt> <tt id="link-96" class="py-name"><a title="lastfm.track.Track" class="py-name" href="#" onclick="return doclink('link-96', 'Track', 'link-68');">Track</a></tt><tt class="py-op">.</tt><tt id="link-97" class="py-name"><a title="lastfm.track.Track._check_params" class="py-name" href="#" onclick="return doclink('link-97', '_check_params', 'link-69');">_check_params</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">                                    <tt class="py-op">{</tt><tt class="py-string">'method'</tt><tt class="py-op">:</tt> <tt class="py-string">'track.getTopFans'</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">                                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-98" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-98', 'artist', 'link-29');">artist</a></tt><tt class="py-op">.</tt><tt id="link-99" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-99', 'name', 'link-23');">name</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">                                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-100" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-100', 'name', 'link-23');">name</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">                                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-101" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-101', 'mbid', 'link-24');">mbid</a></tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">                                    <tt class="py-op">)</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">        <tt id="link-102" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-102', 'data', 'link-74');">data</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_api</tt><tt class="py-op">.</tt><tt id="link-103" class="py-name"><a title="lastfm.album.Album._fetch_data
+lastfm.api.Api._fetch_data
+lastfm.artist.Artist._fetch_data
+lastfm.track.Track._fetch_data" class="py-name" href="#" onclick="return doclink('link-103', '_fetch_data', 'link-75');">_fetch_data</a></tt><tt class="py-op">(</tt><tt class="py-name">params</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">'topfans'</tt><tt class="py-op">)</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">[</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">                <tt id="link-104" class="py-name" targets="Class lastfm.user.User=lastfm.user.User-class.html"><a title="lastfm.user.User" class="py-name" href="#" onclick="return doclink('link-104', 'User', 'link-104');">User</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">                     <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_api</tt><tt class="py-op">,</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">                     <tt id="link-105" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-105', 'subject', 'link-35');">subject</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">                     <tt id="link-106" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-106', 'name', 'link-23');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">u</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'name'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">                     <tt id="link-107" class="py-name"><a title="lastfm.album.Album.url
+lastfm.artist.Artist.url
+lastfm.event.Event.url
+lastfm.playlist.Playlist.url
+lastfm.tag.Tag.url
+lastfm.track.Track.url
+lastfm.user.User.url
+lastfm.venue.Venue.url" class="py-name" href="#" onclick="return doclink('link-107', 'url', 'link-25');">url</a></tt> <tt class="py-op">=</tt> <tt class="py-name">u</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'url'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">                     <tt id="link-108" class="py-name"><a title="lastfm.album.Album.image
+lastfm.artist.Artist.image
+lastfm.event.Event.image
+lastfm.track.Track.image
+lastfm.user.User.image" class="py-name" href="#" onclick="return doclink('link-108', 'image', 'link-32');">image</a></tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'size'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">u</tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt class="py-string">'image'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">                     <tt id="link-109" class="py-name"><a title="lastfm.album.Album.stats
+lastfm.artist.Artist.stats
+lastfm.event.Event.stats
+lastfm.stats
+lastfm.tag.Tag.stats
+lastfm.track.Track.stats
+lastfm.user.User.stats
+lastfm.weeklychart.WeeklyChart.stats" class="py-name" href="#" onclick="return doclink('link-109', 'stats', 'link-33');">stats</a></tt> <tt class="py-op">=</tt> <tt id="link-110" class="py-name"><a title="lastfm.stats.Stats" class="py-name" href="#" onclick="return doclink('link-110', 'Stats', 'link-34');">Stats</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">                                   <tt id="link-111" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-111', 'subject', 'link-35');">subject</a></tt> <tt class="py-op">=</tt> <tt class="py-name">u</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'name'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">                                   <tt id="link-112" class="py-name" targets="Variable lastfm.stats.Stats.weight=lastfm.stats.Stats-class.html#weight"><a title="lastfm.stats.Stats.weight" class="py-name" href="#" onclick="return doclink('link-112', 'weight', 'link-112');">weight</a></tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">u</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'weight'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">                                   <tt class="py-op">)</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">                     <tt class="py-op">)</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">u</tt> <tt class="py-keyword">in</tt> <tt id="link-113" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-113', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt class="py-string">'user'</tt><tt class="py-op">)</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">                <tt class="py-op">]</tt> </tt>
+</div><a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line"> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">LastfmBase</tt><tt class="py-op">.</tt><tt id="link-114" class="py-name"><a title="lastfm.base.LastfmBase.top_property" class="py-name" href="#" onclick="return doclink('link-114', 'top_property', 'link-94');">top_property</a></tt><tt class="py-op">(</tt><tt class="py-string">"top_fans"</tt><tt class="py-op">)</tt> </tt>
+<a name="Track.top_fan"></a><div id="Track.top_fan-def"><a name="L213"></a><tt class="py-lineno">213</tt> <a class="py-toggle" href="#" id="Track.top_fan-toggle" onclick="return toggle('Track.top_fan');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#top_fan">top_fan</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.top_fan-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.top_fan-expanded"><a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">        <tt class="py-docstring">"""topmost fan of the track"""</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line"> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">LastfmBase</tt><tt class="py-op">.</tt><tt id="link-115" class="py-name"><a title="lastfm.base.LastfmBase.cached_property" class="py-name" href="#" onclick="return doclink('link-115', 'cached_property', 'link-67');">cached_property</a></tt> </tt>
+<a name="Track.top_tags"></a><div id="Track.top_tags-def"><a name="L218"></a><tt class="py-lineno">218</tt> <a class="py-toggle" href="#" id="Track.top_tags-toggle" onclick="return toggle('Track.top_tags');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#top_tags">top_tags</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.top_tags-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.top_tags-expanded"><a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">        <tt class="py-docstring">"""top tags for the track"""</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">        <tt class="py-name">params</tt> <tt class="py-op">=</tt> <tt id="link-116" class="py-name"><a title="lastfm.track.Track" class="py-name" href="#" onclick="return doclink('link-116', 'Track', 'link-68');">Track</a></tt><tt class="py-op">.</tt><tt id="link-117" class="py-name"><a title="lastfm.track.Track._check_params" class="py-name" href="#" onclick="return doclink('link-117', '_check_params', 'link-69');">_check_params</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">                                    <tt class="py-op">{</tt><tt class="py-string">'method'</tt><tt class="py-op">:</tt> <tt class="py-string">'track.getTopTags'</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">                                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-118" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-118', 'artist', 'link-29');">artist</a></tt><tt class="py-op">.</tt><tt id="link-119" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-119', 'name', 'link-23');">name</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">                                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-120" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-120', 'name', 'link-23');">name</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">                                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-121" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-121', 'mbid', 'link-24');">mbid</a></tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">                                    <tt class="py-op">)</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">        <tt id="link-122" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-122', 'data', 'link-74');">data</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_api</tt><tt class="py-op">.</tt><tt id="link-123" class="py-name"><a title="lastfm.album.Album._fetch_data
+lastfm.api.Api._fetch_data
+lastfm.artist.Artist._fetch_data
+lastfm.track.Track._fetch_data" class="py-name" href="#" onclick="return doclink('link-123', '_fetch_data', 'link-75');">_fetch_data</a></tt><tt class="py-op">(</tt><tt class="py-name">params</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">'toptags'</tt><tt class="py-op">)</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">[</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">                <tt id="link-124" class="py-name" targets="Class lastfm.tag.Tag=lastfm.tag.Tag-class.html"><a title="lastfm.tag.Tag" class="py-name" href="#" onclick="return doclink('link-124', 'Tag', 'link-124');">Tag</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_api</tt><tt class="py-op">,</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">                    <tt id="link-125" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-125', 'subject', 'link-35');">subject</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">                    <tt id="link-126" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-126', 'name', 'link-23');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'name'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">                    <tt id="link-127" class="py-name"><a title="lastfm.album.Album.url
+lastfm.artist.Artist.url
+lastfm.event.Event.url
+lastfm.playlist.Playlist.url
+lastfm.tag.Tag.url
+lastfm.track.Track.url
+lastfm.user.User.url
+lastfm.venue.Venue.url" class="py-name" href="#" onclick="return doclink('link-127', 'url', 'link-25');">url</a></tt> <tt class="py-op">=</tt> <tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'url'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">                    <tt id="link-128" class="py-name"><a title="lastfm.album.Album.stats
+lastfm.artist.Artist.stats
+lastfm.event.Event.stats
+lastfm.stats
+lastfm.tag.Tag.stats
+lastfm.track.Track.stats
+lastfm.user.User.stats
+lastfm.weeklychart.WeeklyChart.stats" class="py-name" href="#" onclick="return doclink('link-128', 'stats', 'link-33');">stats</a></tt> <tt class="py-op">=</tt> <tt id="link-129" class="py-name"><a title="lastfm.stats.Stats" class="py-name" href="#" onclick="return doclink('link-129', 'Stats', 'link-34');">Stats</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">                                  <tt id="link-130" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-130', 'subject', 'link-35');">subject</a></tt> <tt class="py-op">=</tt> <tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'name'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">                                  <tt id="link-131" class="py-name" targets="Variable lastfm.stats.Stats.count=lastfm.stats.Stats-class.html#count"><a title="lastfm.stats.Stats.count" class="py-name" href="#" onclick="return doclink('link-131', 'count', 'link-131');">count</a></tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'count'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">                                  <tt class="py-op">)</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">                    <tt class="py-op">)</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">t</tt> <tt class="py-keyword">in</tt> <tt id="link-132" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-132', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt class="py-string">'tag'</tt><tt class="py-op">)</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">                <tt class="py-op">]</tt> </tt>
+</div><a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line"> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">LastfmBase</tt><tt class="py-op">.</tt><tt id="link-133" class="py-name"><a title="lastfm.base.LastfmBase.top_property" class="py-name" href="#" onclick="return doclink('link-133', 'top_property', 'link-94');">top_property</a></tt><tt class="py-op">(</tt><tt class="py-string">"top_tags"</tt><tt class="py-op">)</tt> </tt>
+<a name="Track.top_tag"></a><div id="Track.top_tag-def"><a name="L242"></a><tt class="py-lineno">242</tt> <a class="py-toggle" href="#" id="Track.top_tag-toggle" onclick="return toggle('Track.top_tag');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#top_tag">top_tag</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.top_tag-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.top_tag-expanded"><a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">        <tt class="py-docstring">"""topmost tag for the track"""</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line"> </tt>
+<a name="Track.love"></a><div id="Track.love-def"><a name="L246"></a><tt class="py-lineno">246</tt> <a class="py-toggle" href="#" id="Track.love-toggle" onclick="return toggle('Track.love');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#love">love</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.love-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.love-expanded"><a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">        <tt class="py-name">params</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-134" class="py-name" targets="Method lastfm.album.Album._default_params()=lastfm.album.Album-class.html#_default_params,Method lastfm.artist.Artist._default_params()=lastfm.artist.Artist-class.html#_default_params,Method lastfm.event.Event._default_params()=lastfm.event.Event-class.html#_default_params,Method lastfm.group.Group._default_params()=lastfm.group.Group-class.html#_default_params,Method lastfm.mixins.sharable.Sharable._default_params()=lastfm.mixins.sharable.Sharable-class.html#_default_params,Method lastfm.mixins.shoutable.Shoutable._default_params()=lastfm.mixins.shoutable.Shoutable-class.html#_default_params,Method lastfm.mixins.taggable.Taggable._default_params()=lastfm.mixins.taggable.Taggable-class.html#_default_params,Method lastfm.tag.Tag._default_params()=lastfm.tag.Tag-class.html#_default_params,Method lastfm.track.Track._default_params()=lastfm.track.Track-class.html#_default_params,Method lastfm.user.User.Library._default_params()=lastfm.user.User.Library-class.html#_default_params,Method lastfm.user.User._default_params()=lastfm.user.User-class.html#_default_params,Method lastfm.venue.Venue._default_params()=lastfm.venue.Venue-class.html#_default_params"><a title="lastfm.album.Album._default_params
+lastfm.artist.Artist._default_params
+lastfm.event.Event._default_params
+lastfm.group.Group._default_params
+lastfm.mixins.sharable.Sharable._default_params
+lastfm.mixins.shoutable.Shoutable._default_params
+lastfm.mixins.taggable.Taggable._default_params
+lastfm.tag.Tag._default_params
+lastfm.track.Track._default_params
+lastfm.user.User.Library._default_params
+lastfm.user.User._default_params
+lastfm.venue.Venue._default_params" class="py-name" href="#" onclick="return doclink('link-134', '_default_params', 'link-134');">_default_params</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">'method'</tt><tt class="py-op">:</tt> <tt class="py-string">'track.love'</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_api</tt><tt class="py-op">.</tt><tt id="link-135" class="py-name" targets="Method lastfm.api.Api._post_data()=lastfm.api.Api-class.html#_post_data"><a title="lastfm.api.Api._post_data" class="py-name" href="#" onclick="return doclink('link-135', '_post_data', 'link-135');">_post_data</a></tt><tt class="py-op">(</tt><tt class="py-name">params</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line"> </tt>
+<a name="Track.ban"></a><div id="Track.ban-def"><a name="L250"></a><tt class="py-lineno">250</tt> <a class="py-toggle" href="#" id="Track.ban-toggle" onclick="return toggle('Track.ban');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#ban">ban</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.ban-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.ban-expanded"><a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">        <tt class="py-name">params</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-136" class="py-name"><a title="lastfm.album.Album._default_params
+lastfm.artist.Artist._default_params
+lastfm.event.Event._default_params
+lastfm.group.Group._default_params
+lastfm.mixins.sharable.Sharable._default_params
+lastfm.mixins.shoutable.Shoutable._default_params
+lastfm.mixins.taggable.Taggable._default_params
+lastfm.tag.Tag._default_params
+lastfm.track.Track._default_params
+lastfm.user.User.Library._default_params
+lastfm.user.User._default_params
+lastfm.venue.Venue._default_params" class="py-name" href="#" onclick="return doclink('link-136', '_default_params', 'link-134');">_default_params</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">'method'</tt><tt class="py-op">:</tt> <tt class="py-string">'track.ban'</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_api</tt><tt class="py-op">.</tt><tt id="link-137" class="py-name"><a title="lastfm.api.Api._post_data" class="py-name" href="#" onclick="return doclink('link-137', '_post_data', 'link-135');">_post_data</a></tt><tt class="py-op">(</tt><tt class="py-name">params</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line"> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="Track.get_info"></a><div id="Track.get_info-def"><a name="L255"></a><tt class="py-lineno">255</tt> <a class="py-toggle" href="#" id="Track.get_info-toggle" onclick="return toggle('Track.get_info');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#get_info">get_info</a><tt class="py-op">(</tt><tt class="py-param">api</tt><tt class="py-op">,</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">                <tt class="py-param">artist</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">                <tt class="py-param">track</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">                <tt class="py-param">mbid</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.get_info-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.get_info-expanded"><a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">        <tt id="link-138" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-138', 'data', 'link-74');">data</a></tt> <tt class="py-op">=</tt> <tt id="link-139" class="py-name"><a title="lastfm.track.Track" class="py-name" href="#" onclick="return doclink('link-139', 'Track', 'link-68');">Track</a></tt><tt class="py-op">.</tt><tt id="link-140" class="py-name"><a title="lastfm.album.Album._fetch_data
+lastfm.api.Api._fetch_data
+lastfm.artist.Artist._fetch_data
+lastfm.track.Track._fetch_data" class="py-name" href="#" onclick="return doclink('link-140', '_fetch_data', 'link-75');">_fetch_data</a></tt><tt class="py-op">(</tt><tt id="link-141" class="py-name"><a title="lastfm.api" class="py-name" href="#" onclick="return doclink('link-141', 'api', 'link-12');">api</a></tt><tt class="py-op">,</tt> <tt id="link-142" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-142', 'artist', 'link-29');">artist</a></tt><tt class="py-op">,</tt> <tt id="link-143" class="py-name" targets="Module lastfm.track=lastfm.track-module.html"><a title="lastfm.track" class="py-name" href="#" onclick="return doclink('link-143', 'track', 'link-143');">track</a></tt><tt class="py-op">,</tt> <tt id="link-144" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-144', 'mbid', 'link-24');">mbid</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">        <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt id="link-145" class="py-name"><a title="lastfm.track.Track" class="py-name" href="#" onclick="return doclink('link-145', 'Track', 'link-68');">Track</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">                  <tt id="link-146" class="py-name"><a title="lastfm.api" class="py-name" href="#" onclick="return doclink('link-146', 'api', 'link-12');">api</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">                  <tt id="link-147" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-147', 'name', 'link-23');">name</a></tt> <tt class="py-op">=</tt> <tt id="link-148" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-148', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'name'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">                  <tt id="link-149" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-149', 'artist', 'link-29');">artist</a></tt> <tt class="py-op">=</tt> <tt id="link-150" class="py-name"><a title="lastfm.artist.Artist" class="py-name" href="#" onclick="return doclink('link-150', 'Artist', 'link-80');">Artist</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line">                                  <tt id="link-151" class="py-name"><a title="lastfm.api" class="py-name" href="#" onclick="return doclink('link-151', 'api', 'link-12');">api</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">                                  <tt id="link-152" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-152', 'name', 'link-23');">name</a></tt> <tt class="py-op">=</tt> <tt id="link-153" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-153', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'artist/name'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">                                  <tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line">                  <tt class="py-op">)</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">        <tt class="py-name">t</tt><tt class="py-op">.</tt><tt id="link-154" class="py-name"><a title="lastfm.album.Album._fill_info
+lastfm.artist.Artist._fill_info
+lastfm.track.Track._fill_info" class="py-name" href="#" onclick="return doclink('link-154', '_fill_info', 'link-62');">_fill_info</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">t</tt> </tt>
+</div><a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line"> </tt>
+<a name="Track._default_params"></a><div id="Track._default_params-def"><a name="L271"></a><tt class="py-lineno">271</tt> <a class="py-toggle" href="#" id="Track._default_params-toggle" onclick="return toggle('Track._default_params');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#_default_params">_default_params</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">extra_params</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track._default_params-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track._default_params-expanded"><a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-155" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-155', 'artist', 'link-29');">artist</a></tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-156" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-156', 'name', 'link-23');">name</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-157" class="py-name"><a title="lastfm.error.InvalidParametersError" class="py-name" href="#" onclick="return doclink('link-157', 'InvalidParametersError', 'link-14');">InvalidParametersError</a></tt><tt class="py-op">(</tt><tt class="py-string">"artist and track have to be provided."</tt><tt class="py-op">)</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">        <tt class="py-name">params</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-string">'artist'</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-158" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-158', 'artist', 'link-29');">artist</a></tt><tt class="py-op">.</tt><tt id="link-159" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-159', 'name', 'link-23');">name</a></tt><tt class="py-op">,</tt> <tt class="py-string">'track'</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-160" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-160', 'name', 'link-23');">name</a></tt><tt class="py-op">}</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">        <tt class="py-name">params</tt><tt class="py-op">.</tt><tt class="py-name">update</tt><tt class="py-op">(</tt><tt class="py-name">extra_params</tt><tt class="py-op">)</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">params</tt> </tt>
+</div><a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line"> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="Track._search_yield_func"></a><div id="Track._search_yield_func-def"><a name="L279"></a><tt class="py-lineno">279</tt> <a class="py-toggle" href="#" id="Track._search_yield_func-toggle" onclick="return toggle('Track._search_yield_func');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#_search_yield_func">_search_yield_func</a><tt class="py-op">(</tt><tt class="py-param">api</tt><tt class="py-op">,</tt> <tt class="py-param">track</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track._search_yield_func-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track._search_yield_func-expanded"><a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-161" class="py-name"><a title="lastfm.track.Track" class="py-name" href="#" onclick="return doclink('link-161', 'Track', 'link-68');">Track</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line">                     <tt id="link-162" class="py-name"><a title="lastfm.api" class="py-name" href="#" onclick="return doclink('link-162', 'api', 'link-12');">api</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">                     <tt id="link-163" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-163', 'name', 'link-23');">name</a></tt> <tt class="py-op">=</tt> <tt id="link-164" class="py-name"><a title="lastfm.track" class="py-name" href="#" onclick="return doclink('link-164', 'track', 'link-143');">track</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'name'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line">                     <tt id="link-165" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-165', 'artist', 'link-29');">artist</a></tt> <tt class="py-op">=</tt> <tt id="link-166" class="py-name"><a title="lastfm.artist.Artist" class="py-name" href="#" onclick="return doclink('link-166', 'Artist', 'link-80');">Artist</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">                                     <tt id="link-167" class="py-name"><a title="lastfm.api" class="py-name" href="#" onclick="return doclink('link-167', 'api', 'link-12');">api</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">                                     <tt id="link-168" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-168', 'name', 'link-23');">name</a></tt><tt class="py-op">=</tt><tt id="link-169" class="py-name"><a title="lastfm.track" class="py-name" href="#" onclick="return doclink('link-169', 'track', 'link-143');">track</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'artist'</tt><tt class="py-op">)</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line">                                     <tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line">                    <tt id="link-170" class="py-name"><a title="lastfm.album.Album.url
+lastfm.artist.Artist.url
+lastfm.event.Event.url
+lastfm.playlist.Playlist.url
+lastfm.tag.Tag.url
+lastfm.track.Track.url
+lastfm.user.User.url
+lastfm.venue.Venue.url" class="py-name" href="#" onclick="return doclink('link-170', 'url', 'link-25');">url</a></tt> <tt class="py-op">=</tt> <tt id="link-171" class="py-name"><a title="lastfm.track" class="py-name" href="#" onclick="return doclink('link-171', 'track', 'link-143');">track</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'url'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line">                    <tt id="link-172" class="py-name"><a title="lastfm.album.Album.stats
+lastfm.artist.Artist.stats
+lastfm.event.Event.stats
+lastfm.stats
+lastfm.tag.Tag.stats
+lastfm.track.Track.stats
+lastfm.user.User.stats
+lastfm.weeklychart.WeeklyChart.stats" class="py-name" href="#" onclick="return doclink('link-172', 'stats', 'link-33');">stats</a></tt> <tt class="py-op">=</tt> <tt id="link-173" class="py-name"><a title="lastfm.stats.Stats" class="py-name" href="#" onclick="return doclink('link-173', 'Stats', 'link-34');">Stats</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line">                                  <tt id="link-174" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-174', 'subject', 'link-35');">subject</a></tt><tt class="py-op">=</tt><tt id="link-175" class="py-name"><a title="lastfm.track" class="py-name" href="#" onclick="return doclink('link-175', 'track', 'link-143');">track</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'name'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line">                                  <tt id="link-176" class="py-name"><a title="lastfm.stats.Stats.listeners" class="py-name" href="#" onclick="return doclink('link-176', 'listeners', 'link-45');">listeners</a></tt><tt class="py-op">=</tt><tt class="py-name">int</tt><tt class="py-op">(</tt><tt id="link-177" class="py-name"><a title="lastfm.track" class="py-name" href="#" onclick="return doclink('link-177', 'track', 'link-143');">track</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'listeners'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line">                                  <tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line">                    <tt id="link-178" class="py-name"><a title="lastfm.album.Album.streamable
+lastfm.artist.Artist.streamable
+lastfm.tag.Tag.streamable
+lastfm.track.Track.streamable" class="py-name" href="#" onclick="return doclink('link-178', 'streamable', 'link-27');">streamable</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt id="link-179" class="py-name"><a title="lastfm.track" class="py-name" href="#" onclick="return doclink('link-179', 'track', 'link-143');">track</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'streamable'</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">'1'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line">                    <tt id="link-180" class="py-name"><a title="lastfm.track.Track.full_track" class="py-name" href="#" onclick="return doclink('link-180', 'full_track', 'link-28');">full_track</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt id="link-181" class="py-name"><a title="lastfm.track" class="py-name" href="#" onclick="return doclink('link-181', 'track', 'link-143');">track</a></tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">'streamable'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">attrib</tt><tt class="py-op">[</tt><tt class="py-string">'fulltrack'</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">'1'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line">                    <tt id="link-182" class="py-name"><a title="lastfm.album.Album.image
+lastfm.artist.Artist.image
+lastfm.event.Event.image
+lastfm.track.Track.image
+lastfm.user.User.image" class="py-name" href="#" onclick="return doclink('link-182', 'image', 'link-32');">image</a></tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'size'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt id="link-183" class="py-name"><a title="lastfm.track" class="py-name" href="#" onclick="return doclink('link-183', 'track', 'link-143');">track</a></tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt class="py-string">'image'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line">                    <tt class="py-op">)</tt> </tt>
+</div><a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line"> </tt>
+<a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="Track._fetch_data"></a><div id="Track._fetch_data-def"><a name="L298"></a><tt class="py-lineno">298</tt> <a class="py-toggle" href="#" id="Track._fetch_data-toggle" onclick="return toggle('Track._fetch_data');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#_fetch_data">_fetch_data</a><tt class="py-op">(</tt><tt class="py-param">api</tt><tt class="py-op">,</tt> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line">                <tt class="py-param">artist</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line">                <tt class="py-param">track</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line">                <tt class="py-param">mbid</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track._fetch_data-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track._fetch_data-expanded"><a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line">        <tt class="py-name">params</tt> <tt class="py-op">=</tt> <tt id="link-184" class="py-name"><a title="lastfm.track.Track" class="py-name" href="#" onclick="return doclink('link-184', 'Track', 'link-68');">Track</a></tt><tt class="py-op">.</tt><tt id="link-185" class="py-name"><a title="lastfm.track.Track._check_params" class="py-name" href="#" onclick="return doclink('link-185', '_check_params', 'link-69');">_check_params</a></tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">'method'</tt><tt class="py-op">:</tt> <tt class="py-string">'track.getInfo'</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> <tt id="link-186" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-186', 'artist', 'link-29');">artist</a></tt><tt class="py-op">,</tt> <tt id="link-187" class="py-name"><a title="lastfm.track" class="py-name" href="#" onclick="return doclink('link-187', 'track', 'link-143');">track</a></tt><tt class="py-op">,</tt> <tt id="link-188" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-188', 'mbid', 'link-24');">mbid</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-189" class="py-name"><a title="lastfm.api" class="py-name" href="#" onclick="return doclink('link-189', 'api', 'link-12');">api</a></tt><tt class="py-op">.</tt><tt id="link-190" class="py-name"><a title="lastfm.album.Album._fetch_data
+lastfm.api.Api._fetch_data
+lastfm.artist.Artist._fetch_data
+lastfm.track.Track._fetch_data" class="py-name" href="#" onclick="return doclink('link-190', '_fetch_data', 'link-75');">_fetch_data</a></tt><tt class="py-op">(</tt><tt class="py-name">params</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">'track'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line"> </tt>
+<a name="Track._fill_info"></a><div id="Track._fill_info-def"><a name="L305"></a><tt class="py-lineno">305</tt> <a class="py-toggle" href="#" id="Track._fill_info-toggle" onclick="return toggle('Track._fill_info');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#_fill_info">_fill_info</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track._fill_info-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track._fill_info-expanded"><a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line">        <tt id="link-191" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-191', 'data', 'link-74');">data</a></tt> <tt class="py-op">=</tt> <tt id="link-192" class="py-name"><a title="lastfm.track.Track" class="py-name" href="#" onclick="return doclink('link-192', 'Track', 'link-68');">Track</a></tt><tt class="py-op">.</tt><tt id="link-193" class="py-name"><a title="lastfm.album.Album._fetch_data
+lastfm.api.Api._fetch_data
+lastfm.artist.Artist._fetch_data
+lastfm.track.Track._fetch_data" class="py-name" href="#" onclick="return doclink('link-193', '_fetch_data', 'link-75');">_fetch_data</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_api</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-194" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-194', 'artist', 'link-29');">artist</a></tt><tt class="py-op">.</tt><tt id="link-195" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-195', 'name', 'link-23');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-196" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-196', 'name', 'link-23');">name</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_id</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt id="link-197" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-197', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'id'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_mbid</tt> <tt class="py-op">=</tt> <tt id="link-198" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-198', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'mbid'</tt><tt class="py-op">)</tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_url</tt> <tt class="py-op">=</tt> <tt id="link-199" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-199', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'url'</tt><tt class="py-op">)</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_duration</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt id="link-200" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-200', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'duration'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_streamable</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt id="link-201" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-201', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'streamable'</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">'1'</tt><tt class="py-op">)</tt> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_full_track</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt id="link-202" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-202', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">'streamable'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">attrib</tt><tt class="py-op">[</tt><tt class="py-string">'fulltrack'</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">'1'</tt><tt class="py-op">)</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line"> </tt>
+<a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_image</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'size'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt id="link-203" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-203', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt class="py-string">'image'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_stats</tt> <tt class="py-op">=</tt> <tt id="link-204" class="py-name"><a title="lastfm.stats.Stats" class="py-name" href="#" onclick="return doclink('link-204', 'Stats', 'link-34');">Stats</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">                       <tt id="link-205" class="py-name"><a title="lastfm.stats.Stats.subject
+lastfm.weeklychart.WeeklyChart.subject
+lastfm.wiki.Wiki.subject" class="py-name" href="#" onclick="return doclink('link-205', 'subject', 'link-35');">subject</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">,</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">                       <tt id="link-206" class="py-name"><a title="lastfm.stats.Stats.listeners" class="py-name" href="#" onclick="return doclink('link-206', 'listeners', 'link-45');">listeners</a></tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt id="link-207" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-207', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'listeners'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line">                       <tt id="link-208" class="py-name"><a title="lastfm.stats.Stats.playcount" class="py-name" href="#" onclick="return doclink('link-208', 'playcount', 'link-39');">playcount</a></tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt id="link-209" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-209', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'playcount'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line">                       <tt class="py-op">)</tt> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_artist</tt> <tt class="py-op">=</tt> <tt id="link-210" class="py-name"><a title="lastfm.artist.Artist" class="py-name" href="#" onclick="return doclink('link-210', 'Artist', 'link-80');">Artist</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_api</tt><tt class="py-op">,</tt> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line">                        <tt id="link-211" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-211', 'name', 'link-23');">name</a></tt> <tt class="py-op">=</tt> <tt id="link-212" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-212', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'artist/name'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line">                        <tt id="link-213" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-213', 'mbid', 'link-24');">mbid</a></tt> <tt class="py-op">=</tt> <tt id="link-214" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-214', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'artist/mbid'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line">                        <tt id="link-215" class="py-name"><a title="lastfm.album.Album.url
+lastfm.artist.Artist.url
+lastfm.event.Event.url
+lastfm.playlist.Playlist.url
+lastfm.tag.Tag.url
+lastfm.track.Track.url
+lastfm.user.User.url
+lastfm.venue.Venue.url" class="py-name" href="#" onclick="return doclink('link-215', 'url', 'link-25');">url</a></tt> <tt class="py-op">=</tt> <tt id="link-216" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-216', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'artist/url'</tt><tt class="py-op">)</tt> </tt>
+<a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line">                        <tt class="py-op">)</tt> </tt>
+<a name="L326"></a><tt class="py-lineno">326</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-217" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-217', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">'album'</tt><tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_album</tt> <tt class="py-op">=</tt> <tt id="link-218" class="py-name" targets="Class lastfm.album.Album=lastfm.album.Album-class.html"><a title="lastfm.album.Album" class="py-name" href="#" onclick="return doclink('link-218', 'Album', 'link-218');">Album</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line">                                 <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_api</tt><tt class="py-op">,</tt> </tt>
+<a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line">                                 <tt id="link-219" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-219', 'artist', 'link-29');">artist</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_artist</tt><tt class="py-op">,</tt> </tt>
+<a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line">                                 <tt id="link-220" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-220', 'name', 'link-23');">name</a></tt> <tt class="py-op">=</tt> <tt id="link-221" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-221', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'album/title'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line">                                 <tt id="link-222" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-222', 'mbid', 'link-24');">mbid</a></tt> <tt class="py-op">=</tt> <tt id="link-223" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-223', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'album/mbid'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line">                                 <tt id="link-224" class="py-name"><a title="lastfm.album.Album.url
+lastfm.artist.Artist.url
+lastfm.event.Event.url
+lastfm.playlist.Playlist.url
+lastfm.tag.Tag.url
+lastfm.track.Track.url
+lastfm.user.User.url
+lastfm.venue.Venue.url" class="py-name" href="#" onclick="return doclink('link-224', 'url', 'link-25');">url</a></tt> <tt class="py-op">=</tt> <tt id="link-225" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-225', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'album/url'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line">                                 <tt id="link-226" class="py-name"><a title="lastfm.album.Album.image
+lastfm.artist.Artist.image
+lastfm.event.Event.image
+lastfm.track.Track.image
+lastfm.user.User.image" class="py-name" href="#" onclick="return doclink('link-226', 'image', 'link-32');">image</a></tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'size'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt id="link-227" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-227', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt class="py-string">'album/image'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L334"></a><tt class="py-lineno">334</tt>  <tt class="py-line">                                 <tt class="py-op">)</tt> </tt>
+<a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_position</tt> <tt class="py-op">=</tt> <tt id="link-228" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-228', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">'album'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">attrib</tt><tt class="py-op">[</tt><tt class="py-string">'position'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> \ </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line">                <tt class="py-keyword">and</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt id="link-229" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-229', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">'album'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">attrib</tt><tt class="py-op">[</tt><tt class="py-string">'position'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-230" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-230', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">find</tt><tt class="py-op">(</tt><tt class="py-string">'wiki'</tt><tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_wiki</tt> <tt class="py-op">=</tt> <tt id="link-231" class="py-name"><a title="lastfm.wiki.Wiki" class="py-name" href="#" onclick="return doclink('link-231', 'Wiki', 'link-51');">Wiki</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L339"></a><tt class="py-lineno">339</tt>  <tt class="py-line">                         <tt class="py-name">self</tt><tt class="py-op">,</tt> </tt>
+<a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line">                         <tt id="link-232" class="py-name"><a title="lastfm.wiki.Wiki.published" class="py-name" href="#" onclick="return doclink('link-232', 'published', 'link-53');">published</a></tt> <tt class="py-op">=</tt> <tt class="py-name">datetime</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-op">(</tt><tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">strptime</tt><tt class="py-op">(</tt> </tt>
+<a name="L341"></a><tt class="py-lineno">341</tt>  <tt class="py-line">                                                              <tt id="link-233" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-233', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'wiki/published'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line">                                                              <tt class="py-string">'%a, %d %b %Y %H:%M:%S +0000'</tt> </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line">                                                              <tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">:</tt><tt class="py-number">6</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line">                         <tt id="link-234" class="py-name"><a title="lastfm.wiki.Wiki.summary" class="py-name" href="#" onclick="return doclink('link-234', 'summary', 'link-56');">summary</a></tt> <tt class="py-op">=</tt> <tt id="link-235" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-235', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'wiki/summary'</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L345"></a><tt class="py-lineno">345</tt>  <tt class="py-line">                         <tt id="link-236" class="py-name"><a title="lastfm.wiki.Wiki.content" class="py-name" href="#" onclick="return doclink('link-236', 'content', 'link-59');">content</a></tt> <tt class="py-op">=</tt> <tt id="link-237" class="py-name"><a title="lastfm.playlist.Playlist.data" class="py-name" href="#" onclick="return doclink('link-237', 'data', 'link-74');">data</a></tt><tt class="py-op">.</tt><tt class="py-name">findtext</tt><tt class="py-op">(</tt><tt class="py-string">'wiki/content'</tt><tt class="py-op">)</tt> </tt>
+<a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line">                         <tt class="py-op">)</tt> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L348"></a><tt class="py-lineno">348</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_wiki</tt> <tt class="py-op">=</tt> <tt class="py-string">'na'</tt> </tt>
+</div><a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line"> </tt>
+<a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="Track._check_params"></a><div id="Track._check_params-def"><a name="L351"></a><tt class="py-lineno">351</tt> <a class="py-toggle" href="#" id="Track._check_params-toggle" onclick="return toggle('Track._check_params');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#_check_params">_check_params</a><tt class="py-op">(</tt><tt class="py-param">params</tt><tt class="py-op">,</tt> </tt>
+<a name="L352"></a><tt class="py-lineno">352</tt>  <tt class="py-line">                      <tt class="py-param">artist</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L353"></a><tt class="py-lineno">353</tt>  <tt class="py-line">                      <tt class="py-param">track</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L354"></a><tt class="py-lineno">354</tt>  <tt class="py-line">                      <tt class="py-param">mbid</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track._check_params-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track._check_params-expanded"><a name="L355"></a><tt class="py-lineno">355</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-op">(</tt><tt class="py-op">(</tt><tt id="link-238" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-238', 'artist', 'link-29');">artist</a></tt> <tt class="py-keyword">and</tt> <tt id="link-239" class="py-name"><a title="lastfm.track" class="py-name" href="#" onclick="return doclink('link-239', 'track', 'link-143');">track</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt id="link-240" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-240', 'mbid', 'link-24');">mbid</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L356"></a><tt class="py-lineno">356</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-241" class="py-name"><a title="lastfm.error.InvalidParametersError" class="py-name" href="#" onclick="return doclink('link-241', 'InvalidParametersError', 'link-14');">InvalidParametersError</a></tt><tt class="py-op">(</tt><tt class="py-string">"either (artist and track) or mbid has to be given as argument."</tt><tt class="py-op">)</tt> </tt>
+<a name="L357"></a><tt class="py-lineno">357</tt>  <tt class="py-line"> </tt>
+<a name="L358"></a><tt class="py-lineno">358</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-242" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-242', 'artist', 'link-29');">artist</a></tt> <tt class="py-keyword">and</tt> <tt id="link-243" class="py-name"><a title="lastfm.track" class="py-name" href="#" onclick="return doclink('link-243', 'track', 'link-143');">track</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L359"></a><tt class="py-lineno">359</tt>  <tt class="py-line">            <tt class="py-name">params</tt><tt class="py-op">.</tt><tt class="py-name">update</tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">'artist'</tt><tt class="py-op">:</tt> <tt id="link-244" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-244', 'artist', 'link-29');">artist</a></tt><tt class="py-op">,</tt> <tt class="py-string">'track'</tt><tt class="py-op">:</tt> <tt id="link-245" class="py-name"><a title="lastfm.track" class="py-name" href="#" onclick="return doclink('link-245', 'track', 'link-143');">track</a></tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L360"></a><tt class="py-lineno">360</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt id="link-246" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-246', 'mbid', 'link-24');">mbid</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L361"></a><tt class="py-lineno">361</tt>  <tt class="py-line">            <tt class="py-name">params</tt><tt class="py-op">.</tt><tt class="py-name">update</tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">'mbid'</tt><tt class="py-op">:</tt> <tt id="link-247" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-247', 'mbid', 'link-24');">mbid</a></tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L362"></a><tt class="py-lineno">362</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">params</tt> </tt>
+</div><a name="L363"></a><tt class="py-lineno">363</tt>  <tt class="py-line"> </tt>
+<a name="L364"></a><tt class="py-lineno">364</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="Track._hash_func"></a><div id="Track._hash_func-def"><a name="L365"></a><tt class="py-lineno">365</tt> <a class="py-toggle" href="#" id="Track._hash_func-toggle" onclick="return toggle('Track._hash_func');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#_hash_func">_hash_func</a><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwds</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track._hash_func-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track._hash_func-expanded"><a name="L366"></a><tt class="py-lineno">366</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L367"></a><tt class="py-lineno">367</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">hash</tt><tt class="py-op">(</tt><tt class="py-string">"%s%s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">kwds</tt><tt class="py-op">[</tt><tt class="py-string">'name'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">hash</tt><tt class="py-op">(</tt><tt class="py-name">kwds</tt><tt class="py-op">[</tt><tt class="py-string">'artist'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L368"></a><tt class="py-lineno">368</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">KeyError</tt><tt class="py-op">:</tt> </tt>
+<a name="L369"></a><tt class="py-lineno">369</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-248" class="py-name"><a title="lastfm.error.InvalidParametersError" class="py-name" href="#" onclick="return doclink('link-248', 'InvalidParametersError', 'link-14');">InvalidParametersError</a></tt><tt class="py-op">(</tt><tt class="py-string">"name and artist have to be provided for hashing"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L370"></a><tt class="py-lineno">370</tt>  <tt class="py-line"> </tt>
+<a name="Track.__hash__"></a><div id="Track.__hash__-def"><a name="L371"></a><tt class="py-lineno">371</tt> <a class="py-toggle" href="#" id="Track.__hash__-toggle" onclick="return toggle('Track.__hash__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#__hash__">__hash__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.__hash__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.__hash__-expanded"><a name="L372"></a><tt class="py-lineno">372</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">.</tt><tt id="link-249" class="py-name" targets="Static Method lastfm.album.Album._hash_func()=lastfm.album.Album-class.html#_hash_func,Static Method lastfm.artist.Artist._hash_func()=lastfm.artist.Artist-class.html#_hash_func,Static Method lastfm.event.Event._hash_func()=lastfm.event.Event-class.html#_hash_func,Static Method lastfm.geo.Country._hash_func()=lastfm.geo.Country-class.html#_hash_func,Static Method lastfm.geo.Location._hash_func()=lastfm.geo.Location-class.html#_hash_func,Static Method lastfm.group.Group._hash_func()=lastfm.group.Group-class.html#_hash_func,Static Method lastfm.playlist.Playlist._hash_func()=lastfm.playlist.Playlist-class.html#_hash_func,Static Method lastfm.shout.Shout._hash_func()=lastfm.shout.Shout-class.html#_hash_func,Static Method lastfm.tag.Tag._hash_func()=lastfm.tag.Tag-class.html#_hash_func,Static Method lastfm.track.Track._hash_func()=lastfm.track.Track-class.html#_hash_func,Static Method lastfm.user.User.Library._hash_func()=lastfm.user.User.Library-class.html#_hash_func,Static Method lastfm.user.User.Playlist._hash_func()=lastfm.user.User.Playlist-class.html#_hash_func,Static Method lastfm.user.User._hash_func()=lastfm.user.User-class.html#_hash_func,Static Method lastfm.venue.Venue._hash_func()=lastfm.venue.Venue-class.html#_hash_func,Static Method lastfm.weeklychart.WeeklyChart._hash_func()=lastfm.weeklychart.WeeklyChart-class.html#_hash_func"><a title="lastfm.album.Album._hash_func
+lastfm.artist.Artist._hash_func
+lastfm.event.Event._hash_func
+lastfm.geo.Country._hash_func
+lastfm.geo.Location._hash_func
+lastfm.group.Group._hash_func
+lastfm.playlist.Playlist._hash_func
+lastfm.shout.Shout._hash_func
+lastfm.tag.Tag._hash_func
+lastfm.track.Track._hash_func
+lastfm.user.User.Library._hash_func
+lastfm.user.User.Playlist._hash_func
+lastfm.user.User._hash_func
+lastfm.venue.Venue._hash_func
+lastfm.weeklychart.WeeklyChart._hash_func" class="py-name" href="#" onclick="return doclink('link-249', '_hash_func', 'link-249');">_hash_func</a></tt><tt class="py-op">(</tt><tt id="link-250" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-250', 'name', 'link-23');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-251" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-251', 'name', 'link-23');">name</a></tt><tt class="py-op">,</tt> <tt id="link-252" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-252', 'artist', 'link-29');">artist</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-253" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-253', 'artist', 'link-29');">artist</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L373"></a><tt class="py-lineno">373</tt>  <tt class="py-line"> </tt>
+<a name="Track.__eq__"></a><div id="Track.__eq__-def"><a name="L374"></a><tt class="py-lineno">374</tt> <a class="py-toggle" href="#" id="Track.__eq__-toggle" onclick="return toggle('Track.__eq__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#__eq__">__eq__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">other</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.__eq__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.__eq__-expanded"><a name="L375"></a><tt class="py-lineno">375</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-254" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-254', 'mbid', 'link-24');">mbid</a></tt> <tt class="py-keyword">and</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-255" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-255', 'mbid', 'link-24');">mbid</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L376"></a><tt class="py-lineno">376</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-256" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-256', 'mbid', 'link-24');">mbid</a></tt> <tt class="py-op">==</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-257" class="py-name"><a title="lastfm.album.Album.mbid
+lastfm.artist.Artist.mbid
+lastfm.track.Track.mbid" class="py-name" href="#" onclick="return doclink('link-257', 'mbid', 'link-24');">mbid</a></tt> </tt>
+<a name="L377"></a><tt class="py-lineno">377</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-258" class="py-name"><a title="lastfm.album.Album.url
+lastfm.artist.Artist.url
+lastfm.event.Event.url
+lastfm.playlist.Playlist.url
+lastfm.tag.Tag.url
+lastfm.track.Track.url
+lastfm.user.User.url
+lastfm.venue.Venue.url" class="py-name" href="#" onclick="return doclink('link-258', 'url', 'link-25');">url</a></tt> <tt class="py-keyword">and</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-259" class="py-name"><a title="lastfm.album.Album.url
+lastfm.artist.Artist.url
+lastfm.event.Event.url
+lastfm.playlist.Playlist.url
+lastfm.tag.Tag.url
+lastfm.track.Track.url
+lastfm.user.User.url
+lastfm.venue.Venue.url" class="py-name" href="#" onclick="return doclink('link-259', 'url', 'link-25');">url</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L378"></a><tt class="py-lineno">378</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-260" class="py-name"><a title="lastfm.album.Album.url
+lastfm.artist.Artist.url
+lastfm.event.Event.url
+lastfm.playlist.Playlist.url
+lastfm.tag.Tag.url
+lastfm.track.Track.url
+lastfm.user.User.url
+lastfm.venue.Venue.url" class="py-name" href="#" onclick="return doclink('link-260', 'url', 'link-25');">url</a></tt> <tt class="py-op">==</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-261" class="py-name"><a title="lastfm.album.Album.url
+lastfm.artist.Artist.url
+lastfm.event.Event.url
+lastfm.playlist.Playlist.url
+lastfm.tag.Tag.url
+lastfm.track.Track.url
+lastfm.user.User.url
+lastfm.venue.Venue.url" class="py-name" href="#" onclick="return doclink('link-261', 'url', 'link-25');">url</a></tt> </tt>
+<a name="L379"></a><tt class="py-lineno">379</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-262" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-262', 'name', 'link-23');">name</a></tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-263" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-263', 'artist', 'link-29');">artist</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-264" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-264', 'name', 'link-23');">name</a></tt> <tt class="py-keyword">and</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-265" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-265', 'artist', 'link-29');">artist</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L380"></a><tt class="py-lineno">380</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-266" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-266', 'name', 'link-23');">name</a></tt> <tt class="py-op">==</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-267" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-267', 'name', 'link-23');">name</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-268" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-268', 'artist', 'link-29');">artist</a></tt> <tt class="py-op">==</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-269" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-269', 'artist', 'link-29');">artist</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L381"></a><tt class="py-lineno">381</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-270" class="py-name"><a title="lastfm.track.Track" class="py-name" href="#" onclick="return doclink('link-270', 'Track', 'link-68');">Track</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-271" class="py-name" targets="Method lastfm.album.Album.__eq__()=lastfm.album.Album-class.html#__eq__,Method lastfm.artist.Artist.__eq__()=lastfm.artist.Artist-class.html#__eq__,Method lastfm.event.Event.__eq__()=lastfm.event.Event-class.html#__eq__,Method lastfm.geo.Country.__eq__()=lastfm.geo.Country-class.html#__eq__,Method lastfm.geo.Location.__eq__()=lastfm.geo.Location-class.html#__eq__,Method lastfm.group.Group.__eq__()=lastfm.group.Group-class.html#__eq__,Method lastfm.playlist.Playlist.__eq__()=lastfm.playlist.Playlist-class.html#__eq__,Method lastfm.shout.Shout.__eq__()=lastfm.shout.Shout-class.html#__eq__,Method lastfm.tag.Tag.__eq__()=lastfm.tag.Tag-class.html#__eq__,Method lastfm.track.Track.__eq__()=lastfm.track.Track-class.html#__eq__,Method lastfm.user.User.__eq__()=lastfm.user.User-class.html#__eq__,Method lastfm.venue.Venue.__eq__()=lastfm.venue.Venue-class.html#__eq__,Method lastfm.weeklychart.WeeklyChart.__eq__()=lastfm.weeklychart.WeeklyChart-class.html#__eq__"><a title="lastfm.album.Album.__eq__
+lastfm.artist.Artist.__eq__
+lastfm.event.Event.__eq__
+lastfm.geo.Country.__eq__
+lastfm.geo.Location.__eq__
+lastfm.group.Group.__eq__
+lastfm.playlist.Playlist.__eq__
+lastfm.shout.Shout.__eq__
+lastfm.tag.Tag.__eq__
+lastfm.track.Track.__eq__
+lastfm.user.User.__eq__
+lastfm.venue.Venue.__eq__
+lastfm.weeklychart.WeeklyChart.__eq__" class="py-name" href="#" onclick="return doclink('link-271', '__eq__', 'link-271');">__eq__</a></tt><tt class="py-op">(</tt><tt class="py-name">other</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L382"></a><tt class="py-lineno">382</tt>  <tt class="py-line"> </tt>
+<a name="Track.__lt__"></a><div id="Track.__lt__-def"><a name="L383"></a><tt class="py-lineno">383</tt> <a class="py-toggle" href="#" id="Track.__lt__-toggle" onclick="return toggle('Track.__lt__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#__lt__">__lt__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">other</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.__lt__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.__lt__-expanded"><a name="L384"></a><tt class="py-lineno">384</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-272" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-272', 'name', 'link-23');">name</a></tt> <tt class="py-op">&lt;</tt> <tt class="py-name">other</tt><tt class="py-op">.</tt><tt id="link-273" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-273', 'name', 'link-23');">name</a></tt> </tt>
+</div><a name="L385"></a><tt class="py-lineno">385</tt>  <tt class="py-line"> </tt>
+<a name="Track.__repr__"></a><div id="Track.__repr__-def"><a name="L386"></a><tt class="py-lineno">386</tt> <a class="py-toggle" href="#" id="Track.__repr__-toggle" onclick="return toggle('Track.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.track.Track-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Track.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Track.__repr__-expanded"><a name="L387"></a><tt class="py-lineno">387</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"&lt;lastfm.Track: '%s' by %s&gt;"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-274" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-274', 'name', 'link-23');">name</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-275" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-275', 'artist', 'link-29');">artist</a></tt><tt class="py-op">.</tt><tt id="link-276" class="py-name"><a title="lastfm.album.Album.name
+lastfm.artist.Artist.name
+lastfm.geo.Country.name
+lastfm.group.Group.name
+lastfm.tag.Tag.name
+lastfm.track.Track.name
+lastfm.user.User.name
+lastfm.venue.Venue.name" class="py-name" href="#" onclick="return doclink('link-276', 'name', 'link-23');">name</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L388"></a><tt class="py-lineno">388</tt>  <tt class="py-line"> </tt>
+<a name="L389"></a><tt class="py-lineno">389</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">time</tt> </tt>
+<a name="L390"></a><tt class="py-lineno">390</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">datetime</tt> <tt class="py-keyword">import</tt> <tt class="py-name">datetime</tt> </tt>
+<a name="L391"></a><tt class="py-lineno">391</tt>  <tt class="py-line"> </tt>
+<a name="L392"></a><tt class="py-lineno">392</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-277" class="py-name"><a title="lastfm" class="py-name" href="#" onclick="return doclink('link-277', 'lastfm', 'link-0');">lastfm</a></tt><tt class="py-op">.</tt><tt id="link-278" class="py-name"><a title="lastfm.api" class="py-name" href="#" onclick="return doclink('link-278', 'api', 'link-12');">api</a></tt> <tt class="py-keyword">import</tt> <tt id="link-279" class="py-name"><a title="lastfm.api.Api" class="py-name" href="#" onclick="return doclink('link-279', 'Api', 'link-13');">Api</a></tt> </tt>
+<a name="L393"></a><tt class="py-lineno">393</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-280" class="py-name"><a title="lastfm" class="py-name" href="#" onclick="return doclink('link-280', 'lastfm', 'link-0');">lastfm</a></tt><tt class="py-op">.</tt><tt id="link-281" class="py-name"><a title="lastfm.album.Album.artist
+lastfm.artist
+lastfm.track.Track.artist" class="py-name" href="#" onclick="return doclink('link-281', 'artist', 'link-29');">artist</a></tt> <tt class="py-keyword">import</tt> <tt id="link-282" class="py-name"><a title="lastfm.artist.Artist" class="py-name" href="#" onclick="return doclink('link-282', 'Artist', 'link-80');">Artist</a></tt> </tt>
+<a name="L394"></a><tt class="py-lineno">394</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-283" class="py-name"><a title="lastfm" class="py-name" href="#" onclick="return doclink('link-283', 'lastfm', 'link-0');">lastfm</a></tt><tt class="py-op">.</tt><tt id="link-284" class="py-name"><a title="lastfm.album
+lastfm.track.Track.album" class="py-name" href="#" onclick="return doclink('link-284', 'album', 'link-30');">album</a></tt> <tt class="py-keyword">import</tt> <tt id="link-285" class="py-name"><a title="lastfm.album.Album" class="py-name" href="#" onclick="return doclink('link-285', 'Album', 'link-218');">Album</a></tt> </tt>
+<a name="L395"></a><tt class="py-lineno">395</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-286" class="py-name"><a title="lastfm" class="py-name" href="#" onclick="return doclink('link-286', 'lastfm', 'link-0');">lastfm</a></tt><tt class="py-op">.</tt><tt id="link-287" class="py-name" targets="Module lastfm.error=lastfm.error-module.html"><a title="lastfm.error" class="py-name" href="#" onclick="return doclink('link-287', 'error', 'link-287');">error</a></tt> <tt class="py-keyword">import</tt> <tt id="link-288" class="py-name"><a title="lastfm.error.InvalidParametersError" class="py-name" href="#" onclick="return doclink('link-288', 'InvalidParametersError', 'link-14');">InvalidParametersError</a></tt> </tt>
+<a name="L396"></a><tt class="py-lineno">396</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-289" class="py-name"><a title="lastfm" class="py-name" href="#" onclick="return doclink('link-289', 'lastfm', 'link-0');">lastfm</a></tt><tt class="py-op">.</tt><tt id="link-290" class="py-name"><a title="lastfm.album.Album.stats
+lastfm.artist.Artist.stats
+lastfm.event.Event.stats
+lastfm.stats
+lastfm.tag.Tag.stats
+lastfm.track.Track.stats
+lastfm.user.User.stats
+lastfm.weeklychart.WeeklyChart.stats" class="py-name" href="#" onclick="return doclink('link-290', 'stats', 'link-33');">stats</a></tt> <tt class="py-keyword">import</tt> <tt id="link-291" class="py-name"><a title="lastfm.stats.Stats" class="py-name" href="#" onclick="return doclink('link-291', 'Stats', 'link-34');">Stats</a></tt> </tt>
+<a name="L397"></a><tt class="py-lineno">397</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-292" class="py-name"><a title="lastfm" class="py-name" href="#" onclick="return doclink('link-292', 'lastfm', 'link-0');">lastfm</a></tt><tt class="py-op">.</tt><tt id="link-293" class="py-name" targets="Variable lastfm.event.Event.tag=lastfm.event.Event-class.html#tag,Module lastfm.tag=lastfm.tag-module.html"><a title="lastfm.event.Event.tag
+lastfm.tag" class="py-name" href="#" onclick="return doclink('link-293', 'tag', 'link-293');">tag</a></tt> <tt class="py-keyword">import</tt> <tt id="link-294" class="py-name"><a title="lastfm.tag.Tag" class="py-name" href="#" onclick="return doclink('link-294', 'Tag', 'link-124');">Tag</a></tt> </tt>
+<a name="L398"></a><tt class="py-lineno">398</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-295" class="py-name"><a title="lastfm" class="py-name" href="#" onclick="return doclink('link-295', 'lastfm', 'link-0');">lastfm</a></tt><tt class="py-op">.</tt><tt id="link-296" class="py-name" targets="Module lastfm.user=lastfm.user-module.html,Variable lastfm.user.User.Library.user=lastfm.user.User.Library-class.html#user,Variable lastfm.user.User.Playlist.user=lastfm.user.User.Playlist-class.html#user"><a title="lastfm.user
+lastfm.user.User.Library.user
+lastfm.user.User.Playlist.user" class="py-name" href="#" onclick="return doclink('link-296', 'user', 'link-296');">user</a></tt> <tt class="py-keyword">import</tt> <tt id="link-297" class="py-name"><a title="lastfm.user.User" class="py-name" href="#" onclick="return doclink('link-297', 'User', 'link-104');">User</a></tt> </tt>
+<a name="L399"></a><tt class="py-lineno">399</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-298" class="py-name"><a title="lastfm" class="py-name" href="#" onclick="return doclink('link-298', 'lastfm', 'link-0');">lastfm</a></tt><tt class="py-op">.</tt><tt id="link-299" class="py-name"><a title="lastfm.track.Track.wiki
+lastfm.wiki" class="py-name" href="#" onclick="return doclink('link-299', 'wiki', 'link-50');">wiki</a></tt> <tt class="py-keyword">import</tt> <tt id="link-300" class="py-name"><a title="lastfm.wiki.Wiki" class="py-name" href="#" onclick="return doclink('link-300', 'Wiki', 'link-51');">Wiki</a></tt> </tt>
+<a name="L400"></a><tt class="py-lineno">400</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lastfm-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >python-lastfm</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Mar 05 00:14:32 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

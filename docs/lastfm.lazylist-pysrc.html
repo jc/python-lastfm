@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lastfm.lazylist</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lastfm-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >python-lastfm</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lastfm-module.html">Package&nbsp;lastfm</a> ::
+        Module&nbsp;lazylist
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lastfm.lazylist-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lastfm.lazylist-module.html" onclick="show_private();">Module lastfm.lazylist</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-docstring">"""Module for the creation and use of iterator-based lazy lists.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">this module defines a class LazyList which can be used to represent sequences</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">of values generated lazily. One can also create recursively defined lazy lists</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring">that generate their values based on ones previously generated.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">Backport to python 2.5 by Michael Pust</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-name">__author__</tt> <tt class="py-op">=</tt> <tt class="py-string">'Dan Spitz'</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-string">'LazyList'</tt><tt class="py-op">,</tt> <tt class="py-string">'RecursiveLazyList'</tt><tt class="py-op">,</tt> <tt class="py-string">'lazylist'</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">itertools</tt> </tt>
+<a name="LazyList"></a><div id="LazyList-def"><a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt> <a class="py-toggle" href="#" id="LazyList-toggle" onclick="return toggle('LazyList');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lastfm.lazylist.LazyList-class.html">LazyList</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LazyList-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="LazyList-expanded"><a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-docstring">"""A Sequence whose values are computed lazily by an iterator.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="LazyList.__init__"></a><div id="LazyList.__init__-def"><a name="L17"></a><tt class="py-lineno"> 17</tt> <a class="py-toggle" href="#" id="LazyList.__init__-toggle" onclick="return toggle('LazyList.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.lazylist.LazyList-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">iterable</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LazyList.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LazyList.__init__-expanded"><a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_exhausted</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_iterator</tt> <tt class="py-op">=</tt> <tt class="py-name">iter</tt><tt class="py-op">(</tt><tt class="py-name">iterable</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_data</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="LazyList.__len__"></a><div id="LazyList.__len__-def"><a name="L22"></a><tt class="py-lineno"> 22</tt> <a class="py-toggle" href="#" id="LazyList.__len__-toggle" onclick="return toggle('LazyList.__len__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.lazylist.LazyList-class.html#__len__">__len__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LazyList.__len__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LazyList.__len__-expanded"><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">        <tt class="py-docstring">"""Get the length of a LazyList's computed data."""</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_data</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">     </tt>
+<a name="LazyList.__getitem__"></a><div id="LazyList.__getitem__-def"><a name="L26"></a><tt class="py-lineno"> 26</tt> <a class="py-toggle" href="#" id="LazyList.__getitem__-toggle" onclick="return toggle('LazyList.__getitem__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.lazylist.LazyList-class.html#__getitem__">__getitem__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">i</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LazyList.__getitem__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LazyList.__getitem__-expanded"><a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">        <tt class="py-docstring">"""Get an item from a LazyList.</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">        i should be a positive integer or a slice object."""</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">            <tt class="py-comment">#index has not yet been yielded by iterator (or iterator exhausted</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">            <tt class="py-comment">#before reaching that index)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">i</tt> <tt class="py-op">&gt;=</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Method lastfm.lazylist.LazyList.exhaust()=lastfm.lazylist.LazyList-class.html#exhaust"><a title="lastfm.lazylist.LazyList.exhaust" class="py-name" href="#" onclick="return doclink('link-0', 'exhaust', 'link-0');">exhaust</a></tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">i</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'cannot index LazyList with negative number'</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_data</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-comment">#LazyList slices are iterators over a portion of the list.</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">slice</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">            <tt id="link-1" class="py-name" targets="Variable lastfm.weeklychart.WeeklyChart.start=lastfm.weeklychart.WeeklyChart-class.html#start"><a title="lastfm.weeklychart.WeeklyChart.start" class="py-name" href="#" onclick="return doclink('link-1', 'start', 'link-1');">start</a></tt><tt class="py-op">,</tt> <tt class="py-name">stop</tt><tt class="py-op">,</tt> <tt class="py-name">step</tt> <tt class="py-op">=</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name"><a title="lastfm.weeklychart.WeeklyChart.start" class="py-name" href="#" onclick="return doclink('link-2', 'start', 'link-1');">start</a></tt><tt class="py-op">,</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">stop</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">step</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">any</tt><tt class="py-op">(</tt><tt class="py-name">x</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt class="py-name">x</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">0</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-op">(</tt><tt id="link-3" class="py-name"><a title="lastfm.weeklychart.WeeklyChart.start" class="py-name" href="#" onclick="return doclink('link-3', 'start', 'link-1');">start</a></tt><tt class="py-op">,</tt> <tt class="py-name">stop</tt><tt class="py-op">,</tt> <tt class="py-name">step</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'cannot index or step through a LazyList with'</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">                                 <tt class="py-string">'a negative number'</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">            <tt class="py-comment">#set start and step to their integer defaults if they are None.</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-4" class="py-name"><a title="lastfm.weeklychart.WeeklyChart.start" class="py-name" href="#" onclick="return doclink('link-4', 'start', 'link-1');">start</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                <tt id="link-5" class="py-name"><a title="lastfm.weeklychart.WeeklyChart.start" class="py-name" href="#" onclick="return doclink('link-5', 'start', 'link-1');">start</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">step</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">                <tt class="py-name">step</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">            <tt class="py-keyword">def</tt> <tt class="py-def-name">LazyListIterator</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                <tt id="link-6" class="py-name" targets="Variable lastfm.stats.Stats.count=lastfm.stats.Stats-class.html#count"><a title="lastfm.stats.Stats.count" class="py-name" href="#" onclick="return doclink('link-6', 'count', 'link-6');">count</a></tt> <tt class="py-op">=</tt> <tt id="link-7" class="py-name"><a title="lastfm.weeklychart.WeeklyChart.start" class="py-name" href="#" onclick="return doclink('link-7', 'start', 'link-1');">start</a></tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">                <tt class="py-name">predicate</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">stop</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-op">(</tt><tt class="py-keyword">lambda</tt><tt class="py-op">:</tt> <tt class="py-name">True</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt class="py-op">(</tt><tt class="py-keyword">lambda</tt><tt class="py-op">:</tt> <tt id="link-8" class="py-name"><a title="lastfm.stats.Stats.count" class="py-name" href="#" onclick="return doclink('link-8', 'count', 'link-6');">count</a></tt> <tt class="py-op">&lt;</tt> <tt class="py-name">stop</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">                <tt class="py-keyword">while</tt> <tt class="py-name">predicate</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                        <tt class="py-keyword">yield</tt> <tt class="py-name">self</tt><tt class="py-op">[</tt><tt id="link-9" class="py-name"><a title="lastfm.stats.Stats.count" class="py-name" href="#" onclick="return doclink('link-9', 'count', 'link-6');">count</a></tt><tt class="py-op">]</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">                    <tt class="py-comment">#slices can go out of actual index range without raising an</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                    <tt class="py-comment">#error</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                    <tt class="py-keyword">except</tt> <tt class="py-name">IndexError</tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">                        <tt class="py-keyword">break</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                    <tt id="link-10" class="py-name"><a title="lastfm.stats.Stats.count" class="py-name" href="#" onclick="return doclink('link-10', 'count', 'link-6');">count</a></tt> <tt class="py-op">+=</tt> <tt class="py-name">step</tt> </tt>
+</div><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">LazyListIterator</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">TypeError</tt><tt class="py-op">(</tt><tt class="py-string">'i must be an integer or slice'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="LazyList.__iter__"></a><div id="LazyList.__iter__-def"><a name="L65"></a><tt class="py-lineno"> 65</tt> <a class="py-toggle" href="#" id="LazyList.__iter__-toggle" onclick="return toggle('LazyList.__iter__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.lazylist.LazyList-class.html#__iter__">__iter__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LazyList.__iter__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LazyList.__iter__-expanded"><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-docstring">"""return an iterator over each value in the sequence,</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-docstring">        whether it has been computed yet or not."""</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="LazyList.computed"></a><div id="LazyList.computed-def"><a name="L70"></a><tt class="py-lineno"> 70</tt> <a class="py-toggle" href="#" id="LazyList.computed-toggle" onclick="return toggle('LazyList.computed');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.lazylist.LazyList-class.html#computed">computed</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LazyList.computed-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LazyList.computed-expanded"><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-docstring">"""Return an iterator over the values in a LazyList that have</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">        already been computed."""</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<a name="LazyList.exhaust"></a><div id="LazyList.exhaust-def"><a name="L75"></a><tt class="py-lineno"> 75</tt> <a class="py-toggle" href="#" id="LazyList.exhaust-toggle" onclick="return toggle('LazyList.exhaust');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.lazylist.LazyList-class.html#exhaust">exhaust</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">index</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LazyList.exhaust-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LazyList.exhaust-expanded"><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-docstring">"""Exhaust the iterator generating this LazyList's values.</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">        if index is None, this will exhaust the iterator completely.</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">        Otherwise, it will iterate over the iterator until either the list</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">        has a value for index or the iterator is exhausted.</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_exhausted</tt><tt class="py-op">:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-11" class="py-name" targets="Method lastfm.safelist.SafeList.index()=lastfm.safelist.SafeList-class.html#index"><a title="lastfm.safelist.SafeList.index" class="py-name" href="#" onclick="return doclink('link-11', 'index', 'link-11');">index</a></tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">            <tt class="py-name">ind_range</tt> <tt class="py-op">=</tt> <tt class="py-name">itertools</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="lastfm.stats.Stats.count" class="py-name" href="#" onclick="return doclink('link-12', 'count', 'link-6');">count</a></tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-name">ind_range</tt> <tt class="py-op">=</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-13" class="py-name"><a title="lastfm.safelist.SafeList.index" class="py-name" href="#" onclick="return doclink('link-13', 'index', 'link-11');">index</a></tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">ind</tt> <tt class="py-keyword">in</tt> <tt class="py-name">ind_range</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_data</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_iterator</tt><tt class="py-op">.</tt><tt class="py-name">next</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">StopIteration</tt><tt class="py-op">:</tt> <tt class="py-comment">#iterator is fully exhausted</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_exhausted</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                <tt class="py-keyword">break</tt> </tt>
+</div></div><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="RecursiveLazyList"></a><div id="RecursiveLazyList-def"><a name="L95"></a><tt class="py-lineno"> 95</tt> <a class="py-toggle" href="#" id="RecursiveLazyList-toggle" onclick="return toggle('RecursiveLazyList');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lastfm.lazylist.RecursiveLazyList-class.html">RecursiveLazyList</a><tt class="py-op">(</tt><tt class="py-base-class">LazyList</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RecursiveLazyList-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="RecursiveLazyList-expanded"><a name="RecursiveLazyList.__init__"></a><div id="RecursiveLazyList.__init__-def"><a name="L96"></a><tt class="py-lineno"> 96</tt> <a class="py-toggle" href="#" id="RecursiveLazyList.__init__-toggle" onclick="return toggle('RecursiveLazyList.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.lazylist.RecursiveLazyList-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">prod</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwds</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RecursiveLazyList.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="RecursiveLazyList.__init__-expanded"><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-14" class="py-name" targets="Class lastfm.lazylist.RecursiveLazyList=lastfm.lazylist.RecursiveLazyList-class.html"><a title="lastfm.lazylist.RecursiveLazyList" class="py-name" href="#" onclick="return doclink('link-14', 'RecursiveLazyList', 'link-14');">RecursiveLazyList</a></tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method lastfm.api.Api.__init__()=lastfm.api.Api-class.html#__init__,Method lastfm.error.LastfmError.__init__()=lastfm.error.LastfmError-class.html#__init__,Method lastfm.filecache.FileCache.__init__()=lastfm.filecache.FileCache-class.html#__init__,Method lastfm.lazylist.LazyList.__init__()=lastfm.lazylist.LazyList-class.html#__init__,Method lastfm.lazylist.RecursiveLazyList.__init__()=lastfm.lazylist.RecursiveLazyList-class.html#__init__,Method lastfm.lazylist.RecursiveLazyListFactory.__init__()=lastfm.lazylist.RecursiveLazyListFactory-class.html#__init__,Method lastfm.safelist.SafeList.__init__()=lastfm.safelist.SafeList-class.html#__init__,Method lastfm.stats.Stats.__init__()=lastfm.stats.Stats-class.html#__init__,Method lastfm.tasteometer.Tasteometer.__init__()=lastfm.tasteometer.Tasteometer-class.html#__init__,Method lastfm.user.User.Library.__init__()=lastfm.user.User.Library-class.html#__init__,Method lastfm.wiki.Wiki.__init__()=lastfm.wiki.Wiki-class.html#__init__"><a title="lastfm.api.Api.__init__
+lastfm.error.LastfmError.__init__
+lastfm.filecache.FileCache.__init__
+lastfm.lazylist.LazyList.__init__
+lastfm.lazylist.RecursiveLazyList.__init__
+lastfm.lazylist.RecursiveLazyListFactory.__init__
+lastfm.safelist.SafeList.__init__
+lastfm.stats.Stats.__init__
+lastfm.tasteometer.Tasteometer.__init__
+lastfm.user.User.Library.__init__
+lastfm.wiki.Wiki.__init__" class="py-name" href="#" onclick="return doclink('link-15', '__init__', 'link-15');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">prod</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwds</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">         </tt>
+<a name="RecursiveLazyList.__repr__"></a><div id="RecursiveLazyList.__repr__-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="RecursiveLazyList.__repr__-toggle" onclick="return toggle('RecursiveLazyList.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.lazylist.RecursiveLazyList-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RecursiveLazyList.__repr__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="RecursiveLazyList.__repr__-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">"&lt;lastfm.lazylist&gt;"</tt> </tt>
+</div></div><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="RecursiveLazyListFactory"></a><div id="RecursiveLazyListFactory-def"><a name="L102"></a><tt class="py-lineno">102</tt> <a class="py-toggle" href="#" id="RecursiveLazyListFactory-toggle" onclick="return toggle('RecursiveLazyListFactory');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lastfm.lazylist.RecursiveLazyListFactory-class.html">RecursiveLazyListFactory</a><tt class="py-op">:</tt> </tt>
+</div><div id="RecursiveLazyListFactory-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="RecursiveLazyListFactory-expanded"><a name="RecursiveLazyListFactory.__init__"></a><div id="RecursiveLazyListFactory.__init__-def"><a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="RecursiveLazyListFactory.__init__-toggle" onclick="return toggle('RecursiveLazyListFactory.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.lazylist.RecursiveLazyListFactory-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">producer</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RecursiveLazyListFactory.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="RecursiveLazyListFactory.__init__-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_gen</tt> <tt class="py-op">=</tt> <tt class="py-name">producer</tt> </tt>
+</div><a name="RecursiveLazyListFactory.__call__"></a><div id="RecursiveLazyListFactory.__call__-def"><a name="L105"></a><tt class="py-lineno">105</tt> <a class="py-toggle" href="#" id="RecursiveLazyListFactory.__call__-toggle" onclick="return toggle('RecursiveLazyListFactory.__call__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.lazylist.RecursiveLazyListFactory-class.html#__call__">__call__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-op">*</tt><tt class="py-param">a</tt><tt class="py-op">,</tt><tt class="py-op">**</tt><tt class="py-param">kw</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="RecursiveLazyListFactory.__call__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="RecursiveLazyListFactory.__call__-expanded"><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-16" class="py-name"><a title="lastfm.lazylist.RecursiveLazyList" class="py-name" href="#" onclick="return doclink('link-16', 'RecursiveLazyList', 'link-14');">RecursiveLazyList</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_gen</tt><tt class="py-op">,</tt><tt class="py-op">*</tt><tt class="py-name">a</tt><tt class="py-op">,</tt><tt class="py-op">**</tt><tt class="py-name">kw</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="lazylist"></a><div id="lazylist-def"><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt> <a class="py-toggle" href="#" id="lazylist-toggle" onclick="return toggle('lazylist');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.lazylist-module.html#lazylist">lazylist</a><tt class="py-op">(</tt><tt class="py-param">gen</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="lazylist-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="lazylist-expanded"><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-docstring">"""Decorator for creating a RecursiveLazyList subclass.</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">    This should decorate a generator function taking the LazyList object as its</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">    first argument which yields the contents of the list in order.</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt id="link-17" class="py-name" targets="Class lastfm.lazylist.RecursiveLazyListFactory=lastfm.lazylist.RecursiveLazyListFactory-class.html"><a title="lastfm.lazylist.RecursiveLazyListFactory" class="py-name" href="#" onclick="return doclink('link-17', 'RecursiveLazyListFactory', 'link-17');">RecursiveLazyListFactory</a></tt><tt class="py-op">(</tt><tt class="py-name">gen</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-comment">#two examples</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-comment">#fibonnacci sequence in a lazy list.</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">lazylist</tt> </tt>
+<a name="fibgen"></a><div id="fibgen-def"><a name="L120"></a><tt class="py-lineno">120</tt> <a class="py-toggle" href="#" id="fibgen-toggle" onclick="return toggle('fibgen');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.lazylist-module.html#fibgen">fibgen</a><tt class="py-op">(</tt><tt class="py-param">lst</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="fibgen-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="fibgen-expanded"><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-keyword">yield</tt> <tt class="py-number">0</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">        <tt class="py-keyword">yield</tt> <tt class="py-number">1</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">a</tt><tt class="py-op">,</tt> <tt class="py-name">b</tt> <tt class="py-keyword">in</tt> <tt class="py-name">itertools</tt><tt class="py-op">.</tt><tt class="py-name">izip</tt><tt class="py-op">(</tt><tt class="py-name">lst</tt><tt class="py-op">,</tt> <tt class="py-name">lst</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">            <tt class="py-keyword">yield</tt> <tt class="py-name">a</tt> <tt class="py-op">+</tt> <tt class="py-name">b</tt> </tt>
+</div><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">    <tt class="py-name">fibs</tt> <tt class="py-op">=</tt> <tt class="py-name">fibgen</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-comment">#now fibs can be indexed or iterated over as if it were</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">                    <tt class="py-comment">#an infinitely long list containing the fibonnaci sequence</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">    <tt class="py-comment">#prime numbers in a lazy list.</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">lazylist</tt> </tt>
+<a name="primegen"></a><div id="primegen-def"><a name="L131"></a><tt class="py-lineno">131</tt> <a class="py-toggle" href="#" id="primegen-toggle" onclick="return toggle('primegen');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lastfm.lazylist-module.html#primegen">primegen</a><tt class="py-op">(</tt><tt class="py-param">lst</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="primegen-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="primegen-expanded"><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-keyword">yield</tt> <tt class="py-number">2</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">candidate</tt> <tt class="py-keyword">in</tt> <tt class="py-name">itertools</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="lastfm.stats.Stats.count" class="py-name" href="#" onclick="return doclink('link-18', 'count', 'link-6');">count</a></tt><tt class="py-op">(</tt><tt class="py-number">3</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-comment">#start at next number after 2</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">            <tt class="py-comment">#if candidate is not divisible by any smaller prime numbers,</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">            <tt class="py-comment">#it is a prime.</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">all</tt><tt class="py-op">(</tt><tt class="py-name">candidate</tt> <tt class="py-op">%</tt> <tt class="py-name">p</tt> <tt class="py-keyword">for</tt> <tt class="py-name">p</tt> <tt class="py-keyword">in</tt> <tt class="py-name">lst</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method lastfm.lazylist.LazyList.computed()=lastfm.lazylist.LazyList-class.html#computed"><a title="lastfm.lazylist.LazyList.computed" class="py-name" href="#" onclick="return doclink('link-19', 'computed', 'link-19');">computed</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">                <tt class="py-keyword">yield</tt> <tt class="py-name">candidate</tt> </tt>
+</div><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">    <tt class="py-name">primes</tt> <tt class="py-op">=</tt> <tt class="py-name">primegen</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-comment">#same for primes- treat it like an infinitely long list</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">                        <tt class="py-comment">#containing all prime numbers.</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-name">fibs</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">fibs</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">fibs</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">primes</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">primes</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">primes</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">fibs</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">10</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">primes</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">10</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lastfm-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >python-lastfm</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Mar 05 00:14:33 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

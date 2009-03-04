@@ -1,0 +1,1919 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lastfm.api.Api</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lastfm-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >python-lastfm</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lastfm-module.html">Package&nbsp;lastfm</a> ::
+        <a href="lastfm.api-module.html" onclick="show_private();">Module&nbsp;api</a> ::
+        Class&nbsp;Api
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lastfm.api.Api-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Api</h1><p class="nomargin-top"><span class="codelink"><a href="lastfm.api-pysrc.html#Api">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+object --+
+         |
+        <strong class="uidshort">Api</strong>
+</pre>
+
+<hr />
+<p>The class representing the last.fm web services API.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">api_key</span>,
+        <span class="summary-sig-arg">secret</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">session_key</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">input_encoding</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">request_headers</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">no_cache</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">debug</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Create an Api object to access the last.fm webservice API.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#set_session_key" class="summary-sig-name">set_session_key</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Set the session key for the authenticated session.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_session_key">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#set_cache" class="summary-sig-name">set_cache</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cache</span>)</span><br />
+      Override the default cache.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_cache">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#set_urllib" class="summary-sig-name">set_urllib</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">urllib</span>)</span><br />
+      Override the default urllib implementation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_urllib">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#set_cache_timeout" class="summary-sig-name">set_cache_timeout</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">cache_timeout</span>)</span><br />
+      Override the default cache timeout.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_cache_timeout">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#set_user_agent" class="summary-sig-name">set_user_agent</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">user_agent</span>)</span><br />
+      Override the default user agent.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_user_agent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.album.Album-class.html" class="link">Album</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#get_album" class="summary-sig-name">get_album</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">album</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">artist</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">mbid</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Get an album object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_album">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.lazylist-module.html" class="link" 
+      onclick="show_private();">lazylist</a> of <a 
+      href="lastfm.album.Album-class.html" class="link">Album</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#search_album" class="summary-sig-name">search_album</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">album</span>,
+        <span class="summary-sig-arg">limit</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Search for an album by name.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.search_album">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.artist.Artist-class.html" class="link">Artist</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#get_artist" class="summary-sig-name">get_artist</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">artist</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">mbid</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Get an artist object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_artist">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.lazylist-module.html" class="link" 
+      onclick="show_private();">lazylist</a> of <a 
+      href="lastfm.artist.Artist-class.html" class="link">Artist</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#search_artist" class="summary-sig-name">search_artist</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">artist</span>,
+        <span class="summary-sig-arg">limit</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Search for an artist by name.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.search_artist">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.event.Event-class.html" class="link">Event</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#get_event" class="summary-sig-name">get_event</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">event</span>)</span><br />
+      Get an event object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_event">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.geo.Location-class.html" class="link">Location</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#get_location" class="summary-sig-name">get_location</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">city</span>)</span><br />
+      Get a location object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_location">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.geo.Country-class.html" class="link">Country</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#get_country" class="summary-sig-name">get_country</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>)</span><br />
+      Get a country object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_country">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.group.Group-class.html" class="link">Group</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#get_group" class="summary-sig-name">get_group</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>)</span><br />
+      Get a group object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_group">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.playlist.Playlist-class.html" 
+      class="link">Playlist</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#get_playlist" class="summary-sig-name">get_playlist</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">url</span>)</span><br />
+      Get a playlist object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_playlist">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.tag.Tag-class.html" class="link">Tag</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#get_tag" class="summary-sig-name">get_tag</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>)</span><br />
+      Get a tag object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">list of <a href="lastfm.tag.Tag-class.html" class="link">Tag</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#get_global_top_tags" class="summary-sig-name">get_global_top_tags</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the top global tags on Last.fm, sorted by popularity (number of 
+      times used).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_global_top_tags">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.lazylist-module.html" class="link" 
+      onclick="show_private();">lazylist</a> of <a 
+      href="lastfm.tag.Tag-class.html" class="link">Tag</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#search_tag" class="summary-sig-name">search_tag</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tag</span>,
+        <span class="summary-sig-arg">limit</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Search for a tag by name.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.search_tag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.tasteometer.Tasteometer-class.html" 
+      class="link">Tasteometer</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#compare_taste" class="summary-sig-name">compare_taste</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">type1</span>,
+        <span class="summary-sig-arg">type2</span>,
+        <span class="summary-sig-arg">value1</span>,
+        <span class="summary-sig-arg">value2</span>,
+        <span class="summary-sig-arg">limit</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Get a Tasteometer score from two inputs, along with a list of shared 
+      artists.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.compare_taste">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.track.Track-class.html" class="link">Track</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#get_track" class="summary-sig-name">get_track</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">track</span>,
+        <span class="summary-sig-arg">artist</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">mbid</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Get a track object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_track">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.lazylist-module.html" class="link" 
+      onclick="show_private();">lazylist</a> of <a 
+      href="lastfm.track.Track-class.html" class="link">Track</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#search_track" class="summary-sig-name">search_track</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">track</span>,
+        <span class="summary-sig-arg">artist</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">limit</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Search for a track by name.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.search_track">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.user.User-class.html" class="link">User</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#get_user" class="summary-sig-name">get_user</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>)</span><br />
+      Get an user object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_user">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.user.User-class.html" class="link">User</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#get_authenticated_user" class="summary-sig-name">get_authenticated_user</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Get the currently authenticated user.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_authenticated_user">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.venue.Venue-class.html" class="link">Venue</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#get_venue" class="summary-sig-name">get_venue</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">venue</span>)</span><br />
+      Get a venue object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_venue">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type"><a href="lastfm.lazylist-module.html" class="link" 
+      onclick="show_private();">lazylist</a> of <a 
+      href="lastfm.venue.Venue-class.html" class="link">Venue</a></span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#search_venue" class="summary-sig-name">search_venue</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">venue</span>,
+        <span class="summary-sig-arg">limit</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">country</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Search for a venue by name.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.search_venue">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_build_url"></a><span class="summary-sig-name">_build_url</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">url</span>,
+        <span class="summary-sig-arg">path_elements</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">extra_params</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api._build_url">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_initialize_request_headers"></a><span class="summary-sig-name">_initialize_request_headers</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">request_headers</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api._initialize_request_headers">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_initialize_user_agent"></a><span class="summary-sig-name">_initialize_user_agent</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api._initialize_user_agent">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_get_opener"></a><span class="summary-sig-name">_get_opener</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">url</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api._get_opener">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_encode"></a><span class="summary-sig-name">_encode</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">s</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api._encode">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_encode_parameters"></a><span class="summary-sig-name">_encode_parameters</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">parameters</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api._encode_parameters">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_read_url_data"></a><span class="summary-sig-name">_read_url_data</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">opener</span>,
+        <span class="summary-sig-arg">url</span>,
+        <span class="summary-sig-arg">data</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api._read_url_data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_fetch_url"></a><span class="summary-sig-name">_fetch_url</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">url</span>,
+        <span class="summary-sig-arg">parameters</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">no_cache</span>=<span class="summary-sig-default">False</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api._fetch_url">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_fetch_data"></a><span class="summary-sig-name">_fetch_data</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">params</span>,
+        <span class="summary-sig-arg">sign</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">session</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">no_cache</span>=<span class="summary-sig-default">False</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api._fetch_data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_post_url"></a><span class="summary-sig-name">_post_url</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">url</span>,
+        <span class="summary-sig-arg">parameters</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api._post_url">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_post_data"></a><span class="summary-sig-name">_post_data</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">params</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api._post_data">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_get_api_sig"></a><span class="summary-sig-name">_get_api_sig</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">params</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api._get_api_sig">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_check_xml"></a><span class="summary-sig-name">_check_xml</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">xml</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api._check_xml">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#__repr__" class="summary-sig-name">__repr__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      repr(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.__repr__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="DEFAULT_CACHE_TIMEOUT"></a><span class="summary-name">DEFAULT_CACHE_TIMEOUT</span> = <code title="3600">3600</code><br />
+      Default file cache timeout, in seconds
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="API_ROOT_URL"></a><span class="summary-name">API_ROOT_URL</span> = <code title="'http://ws.audioscrobbler.com/2.0/'"><code class="variable-quote">'</code><code class="variable-string">http://ws.audioscrobbler.com/2.0/</code><code class="variable-quote">'</code></code><br />
+      URL of the webservice API root
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="FETCH_INTERVAL"></a><span class="summary-name">FETCH_INTERVAL</span> = <code title="1">1</code><br />
+      The minimum interval between successive HTTP request, in seconds
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SEARCH_XMLNS"></a><span class="summary-name">SEARCH_XMLNS</span> = <code title="'http://a9.com/-/spec/opensearch/1.1/'"><code class="variable-quote">'</code><code class="variable-string">http://a9.com/-/spec/opensearch/1.1/</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lastfm.api.Api-class.html#api_key" class="summary-name">api_key</a><br />
+      The last.fm API key
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lastfm.api.Api-class.html#secret" class="summary-name">secret</a><br />
+      The last.fm API secret
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lastfm.api.Api-class.html#session_key" class="summary-name">session_key</a><br />
+      Session key for the authenticated session.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lastfm.api.Api-class.html#auth_token" class="summary-name">auth_token</a><br />
+      The authenication token for the authenticated session.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="lastfm.api.Api-class.html#auth_url" class="summary-name">auth_url</a><br />
+      The authenication URL for the authenticated session.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">api_key</span>,
+        <span class="sig-arg">secret</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">session_key</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">input_encoding</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">request_headers</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">no_cache</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">debug</span>=<span class="sig-default">False</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Create an Api object to access the last.fm webservice API. Use this 
+  object as a starting point for accessing all the webservice methods.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>api_key</code></strong> (str) - last.fm API key</li>
+        <li><strong class="pname"><code>secret</code></strong> (str) - last.fm API secret (optional, required only for authenticated 
+          webservice methods)</li>
+        <li><strong class="pname"><code>session_key</code></strong> (str) - session key for the authenticated session (optional, required 
+          only for authenticated webservice methods)</li>
+        <li><strong class="pname"><code>input_encoding</code></strong> (str) - encoding of the input data (optional)</li>
+        <li><strong class="pname"><code>request_headers</code></strong> (dict) - HTTP headers for the requests to last.fm webservices (optional)</li>
+        <li><strong class="pname"><code>no_cache</code></strong> (bool) - flag to switch off file cache (optional)</li>
+        <li><strong class="pname"><code>debug</code></strong> (bool) - flag to switch on debugging (optional)</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_session_key"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_session_key</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_session_key">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set the session key for the authenticated session.</p>
+  <dl class="fields">
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="lastfm.error.AuthenticationFailedError-class.html">lastfm.AuthenticationFailedError</a></strong></code> - API secret must be present to call this method.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_cache"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_cache</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cache</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_cache">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Override the default cache.  Set to None to prevent caching.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>cache</code></strong> (<a href="lastfm.filecache.FileCache-class.html" 
+          class="link">FileCache</a>) - an instance that supports the same API as the <a 
+          href="lastfm.filecache.FileCache-class.html" 
+          class="link">FileCache</a></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_urllib"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_urllib</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">urllib</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_urllib">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Override the default urllib implementation.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>urllib</code></strong> (urllib2) - an instance that supports the same API as the urllib2 module</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_cache_timeout"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_cache_timeout</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">cache_timeout</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_cache_timeout">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Override the default cache timeout.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>cache_timeout</code></strong> (int) - time, in seconds, that responses should be reused</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_user_agent"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_user_agent</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">user_agent</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_user_agent">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Override the default user agent.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>user_agent</code></strong> (str) - a string that should be send to the server as the User-agent</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_album"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_album</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">album</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">artist</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">mbid</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_album">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get an album object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>album</code></strong> (str) - the album name</li>
+        <li><strong class="pname"><code>artist</code></strong> (str OR <a href="lastfm.artist.Artist-class.html" 
+          class="link">Artist</a>) - the album artist name</li>
+        <li><strong class="pname"><code>mbid</code></strong> (str) - MBID of the album</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.album.Album-class.html" class="link">Album</a></dt>
+        <dd>an Album object corresponding the provided album name</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="lastfm.error.InvalidParametersError-class.html">lastfm.InvalidParametersError</a></strong></code> - Either album and artist parameters or mbid parameter has to be 
+        provided. Otherwise exception is raised.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="lastfm.album.Album-class.html#get_info" 
+        class="link">Album.get_info</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="search_album"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">search_album</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">album</span>,
+        <span class="sig-arg">limit</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.search_album">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Search for an album by name.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>album</code></strong> (str) - the album name</li>
+        <li><strong class="pname"><code>limit</code></strong> (int) - maximum number of results returned (optional)</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.lazylist-module.html" class="link" 
+      onclick="show_private();">lazylist</a> of <a 
+      href="lastfm.album.Album-class.html" class="link">Album</a></dt>
+        <dd>matches sorted by relevance</dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="lastfm.mixins.searchable.Searchable-class.html#search" 
+        class="link">Album.search</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="get_artist"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_artist</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">artist</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">mbid</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_artist">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get an artist object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>artist</code></strong> (str) - the artist name</li>
+        <li><strong class="pname"><code>mbid</code></strong> (str) - MBID of the artist</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.artist.Artist-class.html" class="link">Artist</a></dt>
+        <dd>an Artist object corresponding the provided artist name</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="lastfm.error.InvalidParametersError-class.html">lastfm.InvalidParametersError</a></strong></code> - either artist or mbid parameter has to be provided. Otherwise 
+        exception is raised.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="lastfm.artist.Artist-class.html#get_info" 
+        class="link">Artist.get_info</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="search_artist"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">search_artist</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">artist</span>,
+        <span class="sig-arg">limit</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.search_artist">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Search for an artist by name.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>artist</code></strong> (str) - the artist name</li>
+        <li><strong class="pname"><code>limit</code></strong> (int) - maximum number of results returned (optional)</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.lazylist-module.html" class="link" 
+      onclick="show_private();">lazylist</a> of <a 
+      href="lastfm.artist.Artist-class.html" class="link">Artist</a></dt>
+        <dd>matches sorted by relevance</dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="lastfm.mixins.searchable.Searchable-class.html#search" 
+        class="link">Artist.search</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="get_event"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_event</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">event</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_event">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get an event object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>event</code></strong> (int) - the event id</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.event.Event-class.html" class="link">Event</a></dt>
+        <dd>an event object corresponding to the event id provided</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="lastfm.error.InvalidParametersError-class.html">InvalidParametersError</a></strong></code> - Exception is raised if an invalid event id is supplied.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="lastfm.event.Event-class.html#get_info" 
+        class="link">Event.get_info</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="get_location"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_location</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">city</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_location">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get a location object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>city</code></strong> (str) - the city name</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.geo.Location-class.html" class="link">Location</a></dt>
+        <dd>a location object corresponding to the city name provided</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_country"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_country</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_country">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get a country object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>name</code></strong> (str) - the country name</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.geo.Country-class.html" class="link">Country</a></dt>
+        <dd>a country object corresponding to the country name provided</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_group"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_group</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_group">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get a group object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>name</code></strong> (str) - the group name</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.group.Group-class.html" class="link">Group</a></dt>
+        <dd>a group object corresponding to the group name provided</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_playlist"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_playlist</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">url</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_playlist">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get a playlist object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>url</code></strong> (str) - lastfm url of the playlist</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.playlist.Playlist-class.html" 
+      class="link">Playlist</a></dt>
+        <dd>a playlist object corresponding to the playlist url provided</dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="lastfm.playlist.Playlist-class.html#fetch" 
+        class="link">Playlist.fetch</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="get_tag"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_tag</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_tag">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get a tag object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>name</code></strong> (str) - the tag name</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.tag.Tag-class.html" class="link">Tag</a></dt>
+        <dd>a tag object corresponding to the tag name provided</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_global_top_tags"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_global_top_tags</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_global_top_tags">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the top global tags on Last.fm, sorted by popularity (number of 
+  times used).</p>
+  <dl class="fields">
+    <dt>Returns: list of <a href="lastfm.tag.Tag-class.html" class="link">Tag</a></dt>
+        <dd>a list of top global tags</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="search_tag"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">search_tag</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tag</span>,
+        <span class="sig-arg">limit</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.search_tag">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Search for a tag by name.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>tag</code></strong> (str) - the tag name</li>
+        <li><strong class="pname"><code>limit</code></strong> (int) - maximum number of results returned (optional)</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.lazylist-module.html" class="link" 
+      onclick="show_private();">lazylist</a> of <a 
+      href="lastfm.tag.Tag-class.html" class="link">Tag</a></dt>
+        <dd>matches sorted by relevance</dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="lastfm.mixins.searchable.Searchable-class.html#search" 
+        class="link">Tag.search</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="compare_taste"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">compare_taste</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">type1</span>,
+        <span class="sig-arg">type2</span>,
+        <span class="sig-arg">value1</span>,
+        <span class="sig-arg">value2</span>,
+        <span class="sig-arg">limit</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.compare_taste">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get a Tasteometer score from two inputs, along with a list of shared 
+  artists. If the input is a User or a Myspace URL, some additional 
+  information is returned.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>type1</code></strong> (str) - 'user' OR 'artists' OR 'myspace'</li>
+        <li><strong class="pname"><code>type2</code></strong> (str) - 'user' OR 'artists' OR 'myspace'</li>
+        <li><strong class="pname"><code>value1</code></strong> (str) - Last.fm username OR Comma-separated artist names OR MySpace 
+          profile URL</li>
+        <li><strong class="pname"><code>value2</code></strong> (str) - Last.fm username OR Comma-separated artist names OR MySpace 
+          profile URL</li>
+        <li><strong class="pname"><code>limit</code></strong> (int) - maximum number of results returned (optional)</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.tasteometer.Tasteometer-class.html" 
+      class="link">Tasteometer</a></dt>
+        <dd>the taste-o-meter score for the inputs</dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="lastfm.tasteometer.Tasteometer-class.html#compare" 
+        class="link">Tasteometer.compare</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="get_track"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_track</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">track</span>,
+        <span class="sig-arg">artist</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">mbid</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_track">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get a track object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>track</code></strong> (str) - the track name</li>
+        <li><strong class="pname"><code>artist</code></strong> (str OR <a href="lastfm.artist.Artist-class.html" 
+          class="link">Artist</a>) - the track artist</li>
+        <li><strong class="pname"><code>mbid</code></strong> (str) - MBID of the track</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.track.Track-class.html" class="link">Track</a></dt>
+        <dd>a track object corresponding to the track name provided</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="lastfm.error.InvalidParametersError-class.html">lastfm.InvalidParametersError</a></strong></code> - either artist or mbid parameter has to be provided. Otherwise 
+        exception is raised.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="lastfm.track.Track-class.html#get_info" 
+        class="link">Track.get_info</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="search_track"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">search_track</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">track</span>,
+        <span class="sig-arg">artist</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">limit</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.search_track">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Search for a track by name.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>track</code></strong> (str) - the track name</li>
+        <li><strong class="pname"><code>artist</code></strong> (str OR <a href="lastfm.artist.Artist-class.html" 
+          class="link">Artist</a>) - the track artist (optional)</li>
+        <li><strong class="pname"><code>limit</code></strong> (int) - maximum number of results returned (optional)</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.lazylist-module.html" class="link" 
+      onclick="show_private();">lazylist</a> of <a 
+      href="lastfm.track.Track-class.html" class="link">Track</a></dt>
+        <dd>matches sorted by relevance</dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="lastfm.mixins.searchable.Searchable-class.html#search" 
+        class="link">Track.search</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="get_user"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_user</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_user">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get an user object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>name</code></strong> (str) - the last.fm user name</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.user.User-class.html" class="link">User</a></dt>
+        <dd>an user object corresponding to the user name provided</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="lastfm.error.InvalidParametersError-class.html">InvalidParametersError</a></strong></code> - Exception is raised if an invalid user name is supplied.</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="get_authenticated_user"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_authenticated_user</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_authenticated_user">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the currently authenticated user.</p>
+  <dl class="fields">
+    <dt>Returns: <a href="lastfm.user.User-class.html" class="link">User</a></dt>
+        <dd>The currently authenticated user if the session is authenticated</dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="lastfm.user.User-class.html#get_authenticated_user" 
+        class="link">User.get_authenticated_user</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="get_venue"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">get_venue</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">venue</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.get_venue">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get a venue object.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>venue</code></strong> (str) - the venue name</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.venue.Venue-class.html" class="link">Venue</a></dt>
+        <dd>a venue object corresponding to the venue name provided</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="lastfm.error.InvalidParametersError-class.html">InvalidParametersError</a></strong></code> - Exception is raised if an non-existant venue name is supplied.</li>
+    </ul></dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="lastfm.api.Api-class.html#search_venue" 
+        class="link">search_venue</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="search_venue"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">search_venue</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">venue</span>,
+        <span class="sig-arg">limit</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">country</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.search_venue">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Search for a venue by name.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>venue</code></strong> (str) - the venue name</li>
+        <li><strong class="pname"><code>country</code></strong> (str) - filter the results by country. Expressed as an ISO 3166-2 code. 
+          (optional)</li>
+        <li><strong class="pname"><code>limit</code></strong> (int) - maximum number of results returned (optional)</li>
+    </ul></dd>
+    <dt>Returns: <a href="lastfm.lazylist-module.html" class="link" 
+      onclick="show_private();">lazylist</a> of <a 
+      href="lastfm.venue.Venue-class.html" class="link">Venue</a></dt>
+        <dd>matches sorted by relevance</dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="lastfm.mixins.searchable.Searchable-class.html#search" 
+        class="link">Venue.search</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="__repr__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__repr__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.__repr__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>repr(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__repr__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Property Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-PropertyDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="api_key"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">api_key</h3>
+  <p>The last.fm API key</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.api_key(<span class="summary-sig-arg">self</span>)</span>
+        - The last.fm API key
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="secret"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">secret</h3>
+  <p>The last.fm API secret</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.secret(<span class="summary-sig-arg">self</span>)</span>
+        - The last.fm API secret
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="session_key"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">session_key</h3>
+  <p>Session key for the authenticated session.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.session_key(<span class="summary-sig-arg">self</span>)</span>
+        - Session key for the authenticated session.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="auth_token"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">auth_token</h3>
+  <p>The authenication token for the authenticated session.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.wrapper(<span class="summary-sig-arg">ob</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="auth_url"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">auth_url</h3>
+  <p>The authenication URL for the authenticated session.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.wrapper(<span class="summary-sig-arg">ob</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="lastfm-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >python-lastfm</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Mar 05 00:14:32 2009
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
