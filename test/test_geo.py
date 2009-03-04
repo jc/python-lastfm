@@ -6,7 +6,7 @@ __license__ = "GNU Lesser General Public License"
 
 import unittest
 import datetime
-import sys
+import sys, os
 
 from wsgi_intercept.urllib2_intercept import install_opener
 import wsgi_intercept
@@ -15,7 +15,7 @@ from wsgi_test_app import create_wsgi_app
 install_opener()
 wsgi_intercept.add_wsgi_intercept('ws.audioscrobbler.com', 80, create_wsgi_app)
     
-sys.path.append("..")
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from lastfm import Api
 
 class TestGeo(unittest.TestCase):
