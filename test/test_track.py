@@ -83,8 +83,7 @@ class TestTrack(unittest.TestCase):
                      ("I Can't Quit You Baby", 'Led Zeppelin'),
                      ('Baby Britain', 'Elliott Smith')]
         self.assertEqual([(t.name, t.artist.name) for t 
-                          in list(api.search_track('baby')[:10])],
-                         tracks)
+                          in list(api.search_track('baby')[:10])], tracks)
 
 apikey = "152a230561e72192b8b0f3e42362c6ff"        
 api = Api(apikey, no_cache = True)

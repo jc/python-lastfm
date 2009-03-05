@@ -24,7 +24,6 @@ class TestPlaylist(unittest.TestCase):
     def setUp(self):
         apikey = "152a230561e72192b8b0f3e42362c6ff"        
         self.api = Api(apikey, no_cache = True)
-        venue = self.api.get_venue('tokyo dome')
         self.playlist = self.api.get_playlist('lastfm://playlist/album/2287667')
         
     def tearDown(self):

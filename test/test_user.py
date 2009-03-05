@@ -211,6 +211,25 @@ class TestUser(unittest.TestCase):
         self.assertEqual([a.name for a in tm.artists],
             ['Coldplay', 'Red Hot Chili Peppers', 'The Killers', 'The Beatles', 'U2'])
         
+    def testUserShouts(self):
+        shouts = [('phillip360', 'Thu Mar  5 00:09:40 2009'),
+                 ('newkid7', 'Tue Mar  3 05:09:25 2009'),
+                 ('SZEKLER', 'Mon Mar  2 20:56:43 2009'),
+                 ('JRoar', 'Sun Feb 22 16:25:41 2009'),
+                 ('j0hnj0nes', 'Sat Feb 21 15:53:30 2009'),
+                 ('Hloppering', 'Wed Feb 18 12:14:08 2009'),
+                 ('Aramaki_', 'Mon Feb 16 19:01:13 2009'),
+                 ('ANTIQCOOL', 'Sat Feb  7 04:07:33 2009'),
+                 ('da-sha-sha', 'Wed Feb  4 22:21:36 2009'),
+                 ('HaTeNL', 'Sun Feb  1 13:42:43 2009')]
+        self.assertEqual([(shout.author.name, shout.date.ctime()) for shout
+                          in self.user.shouts[:10]], shouts)
+    
+    def testUserRecentShout(self):
+        shout = self.user.recent_shout
+        self.assertEqual((shout.author.name, shout.date.ctime()),
+                         ('phillip360', 'Thu Mar  5 00:09:40 2009'))
+        
     def testUserLibraryAlbums(self):
         albums = [('Dire Straits', 'Dire Straits', 126),
                  ('The History of Rock', 'Kid Rock', 125),

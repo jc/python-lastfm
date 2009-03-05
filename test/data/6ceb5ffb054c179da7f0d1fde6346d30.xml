@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<results for="stadium" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
+<opensearch:Query role="request" searchTerms="stadium" startPage="1" />
+<opensearch:totalResults>515</opensearch:totalResults>
+<opensearch:startIndex>0</opensearch:startIndex>
+<opensearch:itemsPerPage>50</opensearch:itemsPerPage>
+<venuematches>
+    <venue>
+       <id>8881428</id>
+    <name>Stadium</name>
+    <location>
+      <city></city>
+      <country>Serbia</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>43.7766667</geo:lat>
+         <geo:long>20.2252778</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8881428</url>
+  </venue>
+    <venue>
+       <id>8887127</id>
+    <name>Stade Vélodrome</name>
+    <location>
+      <city>Marseille</city>
+      <country>France</country>
+      <street>3, Boulevard Michelet</street>
+      <postalcode>13008</postalcode>
+      <geo:point>
+         <geo:lat>43.269488</geo:lat>
+         <geo:long>5.394683</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8887127</url>
+  </venue>
+    <venue>
+       <id>8894829</id>
+    <name>Stadium</name>
+    <location>
+      <city>Marseille</city>
+      <country>France</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>43.3016959425888</geo:lat>
+         <geo:long>5.37849426269531</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8894829</url>
+  </venue>
+    <venue>
+       <id>8899152</id>
+    <name>Stadium</name>
+    <location>
+      <city>Sioux Falls</city>
+      <country>United States</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>43.609465</geo:lat>
+         <geo:long>-96.710837</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8899152</url>
+  </venue>
+    <venue>
+       <id>8938738</id>
+    <name>Stadium</name>
+    <location>
+      <city>Bucharest</city>
+      <country>Romania</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>44.4333333</geo:lat>
+         <geo:long>26.1</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8938738</url>
+  </venue>
+    <venue>
+       <id>8778901</id>
+    <name>Millennium Stadium</name>
+    <location>
+      <city>Caerdydd</city>
+      <country>United Kingdom</country>
+      <street>Westgate Street</street>
+      <postalcode>CF10 1JA</postalcode>
+      <geo:point>
+         <geo:lat>51.479029</geo:lat>
+         <geo:long>-3.17857</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8778901</url>
+  </venue>
+    <venue>
+       <id>8779255</id>
+    <name>Hughes Stadium</name>
+    <location>
+      <city>Fort Collins</city>
+      <country>United States</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>40.560529</geo:lat>
+         <geo:long>-105.141246</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8779255</url>
+  </venue>
+    <venue>
+       <id>8779726</id>
+    <name>Meadowbank Stadium</name>
+    <location>
+      <city>Edinburgh</city>
+      <country>United Kingdom</country>
+      <street>139 London Road</street>
+      <postalcode>EH7 6AE</postalcode>
+      <geo:point>
+         <geo:lat>55.95</geo:lat>
+         <geo:long>-3.2</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8779726</url>
+  </venue>
+    <venue>
+       <id>8802306</id>
+    <name>Challenge Stadium</name>
+    <location>
+      <city>Perth</city>
+      <country>Australia</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>-31.952595</geo:lat>
+         <geo:long>115.784974</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8802306</url>
+  </venue>
+    <venue>
+       <id>8781168</id>
+    <name>Aloha Stadium</name>
+    <location>
+      <city>Honolulu</city>
+      <country>United States</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>21.30694</geo:lat>
+         <geo:long>-157.85833</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8781168</url>
+  </venue>
+    <venue>
+       <id>8781328</id>
+    <name>Madejski Stadium</name>
+    <location>
+      <city>Reading</city>
+      <country>United Kingdom</country>
+      <street>Junction 11 M4</street>
+      <postalcode>RG2 0FL</postalcode>
+      <geo:point>
+         <geo:lat>51.4333333</geo:lat>
+         <geo:long>-1</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8781328</url>
+  </venue>
+    <venue>
+       <id>8899552</id>
+    <name>Sydney Football Stadium</name>
+    <location>
+      <city>Sydney</city>
+      <country>Australia</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>-33.8833333</geo:lat>
+         <geo:long>151.2166667</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8899552</url>
+  </venue>
+    <venue>
+       <id>8782071</id>
+    <name>ANZ Stadium</name>
+    <location>
+      <city>South Brisbane</city>
+      <country>Australia</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>-27.4833333</geo:lat>
+         <geo:long>153.0166667</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8782071</url>
+  </venue>
+    <venue>
+       <id>8894968</id>
+    <name>ANZ Stadium</name>
+    <location>
+      <city>Sydney</city>
+      <country>Australia</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>-33.8833333</geo:lat>
+         <geo:long>151.2166667</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8894968</url>
+  </venue>
+    <venue>
+       <id>8782525</id>
+    <name>105 Stadium</name>
+    <location>
+      <city>Rimini</city>
+      <country>Italy</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>44.0633333</geo:lat>
+         <geo:long>12.5808333</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8782525</url>
+  </venue>
+    <venue>
+       <id>8782543</id>
+    <name>Murrayfield Stadium</name>
+    <location>
+      <city>Edinburgh</city>
+      <country>United Kingdom</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>55.95</geo:lat>
+         <geo:long>-3.2</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8782543</url>
+  </venue>
+    <venue>
+       <id>8782557</id>
+    <name>Ibrox Stadium</name>
+    <location>
+      <city>Glasgow</city>
+      <country>United Kingdom</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>55.853205</geo:lat>
+         <geo:long>-4.309173</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8782557</url>
+  </venue>
+    <venue>
+       <id>8782706</id>
+    <name>Stadium Merdeka</name>
+    <location>
+      <city>Kuala Lumpur</city>
+      <country>Malaysia</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>3.1666667</geo:lat>
+         <geo:long>101.7</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8782706</url>
+  </venue>
+    <venue>
+       <id>8888106</id>
+    <name>Viking Stadion</name>
+    <location>
+      <city>Stavanger</city>
+      <country>Norway</country>
+      <street>Jåttåvågen 7</street>
+      <postalcode>4020</postalcode>
+      <geo:point>
+         <geo:lat>58.914665</geo:lat>
+         <geo:long>5.728144</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8888106</url>
+  </venue>
+    <venue>
+       <id>8782973</id>
+    <name>Wembley Stadium</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>Empire Way</street>
+      <postalcode>HA9 0WS</postalcode>
+      <geo:point>
+         <geo:lat>51.556701</geo:lat>
+         <geo:long>-0.279666</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8782973</url>
+  </venue>
+    <venue>
+       <id>8783736</id>
+    <name>Reebok Stadium</name>
+    <location>
+      <city>Bolton</city>
+      <country>United Kingdom</country>
+      <street></street>
+      <postalcode>BL6 6JW</postalcode>
+      <geo:point>
+         <geo:lat>53.5833333</geo:lat>
+         <geo:long>-2.4333333</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8783736</url>
+  </venue>
+    <venue>
+       <id>8783853</id>
+    <name>National Stadium</name>
+    <location>
+      <city>Baile Átha Cliath</city>
+      <country>Ireland</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>53.3330556</geo:lat>
+         <geo:long>-6.2488889</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8783853</url>
+  </venue>
+    <venue>
+       <id>8784187</id>
+    <name>Silver Stadium</name>
+    <location>
+      <city>Rochester</city>
+      <country>United States</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>43.158431</geo:lat>
+         <geo:long>-77.620292</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8784187</url>
+  </venue>
+    <venue>
+       <id>8784211</id>
+    <name>Dodger Stadium</name>
+    <location>
+      <city>Los Angeles</city>
+      <country>United States</country>
+      <street>1000 Elysian Park Ave</street>
+      <postalcode>90026</postalcode>
+      <geo:point>
+         <geo:lat>34.07263</geo:lat>
+         <geo:long>-118.244384</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8784211</url>
+  </venue>
+    <venue>
+       <id>8785289</id>
+    <name>Rich Stadium</name>
+    <location>
+      <city>Buffalo</city>
+      <country>United States</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>42.88639</geo:lat>
+         <geo:long>-78.87861</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8785289</url>
+  </venue>
+    <venue>
+       <id>8789756</id>
+    <name>Meadowlands Sports Complex</name>
+    <location>
+      <city>East Rutherford</city>
+      <country>United States</country>
+      <street>850 Route 120</street>
+      <postalcode>07073</postalcode>
+      <geo:point>
+         <geo:lat>40.815747</geo:lat>
+         <geo:long>-74.075453</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8789756</url>
+  </venue>
+    <venue>
+       <id>8785616</id>
+    <name>Foxboro Stadium</name>
+    <location>
+      <city>Foxboro</city>
+      <country>United States</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>42.05833</geo:lat>
+         <geo:long>-71.25</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8785616</url>
+  </venue>
+    <venue>
+       <id>8785979</id>
+    <name>AAMI Stadium</name>
+    <location>
+      <city>Adelaide</city>
+      <country>Australia</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>-34.9333333</geo:lat>
+         <geo:long>138.6</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8785979</url>
+  </venue>
+    <venue>
+       <id>8785980</id>
+    <name>Suncorp Stadium</name>
+    <location>
+      <city>Brisbane</city>
+      <country>Australia</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>-27.5</geo:lat>
+         <geo:long>153.0166667</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8785980</url>
+  </venue>
+    <venue>
+       <id>8786759</id>
+    <name>Beroe Stadium</name>
+    <location>
+      <city>Stara Zagora</city>
+      <country>Bulgaria</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>42.4327778</geo:lat>
+         <geo:long>25.6419444</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8786759</url>
+  </venue>
+    <venue>
+       <id>8786964</id>
+    <name>Westpac Stadium</name>
+    <location>
+      <city>Wellington</city>
+      <country>New Zealand</country>
+      <street>Waterloo Quay</street>
+      <postalcode>6011</postalcode>
+      <geo:point>
+         <geo:lat>-41.281737</geo:lat>
+         <geo:long>174.779049</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8786964</url>
+  </venue>
+    <venue>
+       <id>8802120</id>
+    <name>Kaliakra Stadium</name>
+    <location>
+      <city>Kavarna</city>
+      <country>Bulgaria</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>43.4333333</geo:lat>
+         <geo:long>28.3333333</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8802120</url>
+  </venue>
+    <venue>
+       <id>8787312</id>
+    <name>Twickenham Stadium</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>51.447881</geo:lat>
+         <geo:long>-0.355958</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8787312</url>
+  </venue>
+    <venue>
+       <id>8837749</id>
+    <name>Stadium Lokomotiv</name>
+    <location>
+      <city>Sofiya</city>
+      <country>Bulgaria</country>
+      <street>st.&quot;Rozhen&quot; 23</street>
+      <postalcode>1220</postalcode>
+      <geo:point>
+         <geo:lat>42.737192</geo:lat>
+         <geo:long>23.315841</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8837749</url>
+  </venue>
+    <venue>
+       <id>8788970</id>
+    <name>Ohio Stadium</name>
+    <location>
+      <city>Columbus</city>
+      <country>United States</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>39.96111</geo:lat>
+         <geo:long>-82.99889</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8788970</url>
+  </venue>
+    <venue>
+       <id>8789236</id>
+    <name>Dolphin Stadium</name>
+    <location>
+      <city>Miami Gardens</city>
+      <country>United States</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>25.954436</geo:lat>
+         <geo:long>-80.236654</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8789236</url>
+  </venue>
+    <venue>
+       <id>8789452</id>
+    <name>Veterans Stadium</name>
+    <location>
+      <city>Philadelphia</city>
+      <country>United States</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>39.900518</geo:lat>
+         <geo:long>-75.167255</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8789452</url>
+  </venue>
+    <venue>
+       <id>8806845</id>
+    <name>Stadion Śląski</name>
+    <location>
+      <city>Chorzów</city>
+      <country>Poland</country>
+      <street>ul.Katowicka 10</street>
+      <postalcode>41-500</postalcode>
+      <geo:point>
+         <geo:lat>50.287258</geo:lat>
+         <geo:long>18.968099</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8806845</url>
+  </venue>
+    <venue>
+       <id>8789599</id>
+    <name>Thunderbird Stadium</name>
+    <location>
+      <city>Vancouver</city>
+      <country>Canada</country>
+      <street>6288 Stadium Rd</street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>49.257771</geo:lat>
+         <geo:long>-123.238245</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8789599</url>
+  </venue>
+    <venue>
+       <id>8893356</id>
+    <name>ODTÜ Stadyumu</name>
+    <location>
+      <city>Ankara</city>
+      <country>Turkey</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>39.9272222</geo:lat>
+         <geo:long>32.8644444</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8893356</url>
+  </venue>
+    <venue>
+       <id>8784117</id>
+    <name>Olympiastadion</name>
+    <location>
+      <city>Berlin</city>
+      <country>Germany</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>52.514765</geo:lat>
+         <geo:long>13.244534</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8784117</url>
+  </venue>
+    <venue>
+       <id>8791511</id>
+    <name>Apollo Stadium</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>51.5</geo:lat>
+         <geo:long>-0.1166667</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8791511</url>
+  </venue>
+    <venue>
+       <id>8793201</id>
+    <name>KC Stadium</name>
+    <location>
+      <city>Kingston upon Hull</city>
+      <country>United Kingdom</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>53.7166667</geo:lat>
+         <geo:long>-0.3333333</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8793201</url>
+  </venue>
+    <venue>
+       <id>8793322</id>
+    <name>GSP Stadium</name>
+    <location>
+      <city>Nicosia</city>
+      <country>Cyprus</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>35.1666667</geo:lat>
+         <geo:long>33.3666667</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8793322</url>
+  </venue>
+    <venue>
+       <id>8793323</id>
+    <name>Makarios Stadium</name>
+    <location>
+      <city>Nicosia</city>
+      <country>Cyprus</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>35.1666667</geo:lat>
+         <geo:long>33.3666667</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8793323</url>
+  </venue>
+    <venue>
+       <id>8793374</id>
+    <name>Yankee Stadium</name>
+    <location>
+      <city>Bronx</city>
+      <country>United States</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>40.85</geo:lat>
+         <geo:long>-73.86667</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8793374</url>
+  </venue>
+    <venue>
+       <id>8793420</id>
+    <name>Memorial Stadium</name>
+    <location>
+      <city>Saint John's</city>
+      <country>Canada</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>47.575888</geo:lat>
+         <geo:long>-52.702631</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8793420</url>
+  </venue>
+    <venue>
+       <id>8793421</id>
+    <name>Memorial Stadium</name>
+    <location>
+      <city>Saint John's</city>
+      <country>Canada</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>47.575888</geo:lat>
+         <geo:long>-52.702631</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8793421</url>
+  </venue>
+    <venue>
+       <id>8782484</id>
+    <name>Olympiastadion</name>
+    <location>
+      <city>München</city>
+      <country>Germany</country>
+      <street>Spiridon-Louis-Ring 21</street>
+      <postalcode>80809</postalcode>
+      <geo:point>
+         <geo:lat>49.55</geo:lat>
+         <geo:long>11.5833333</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8782484</url>
+  </venue>
+    <venue>
+       <id>8794852</id>
+    <name>Akademik Stadium</name>
+    <location>
+      <city>Sofiya</city>
+      <country>Bulgaria</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>42.663456</geo:lat>
+         <geo:long>23.317202</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8794852</url>
+  </venue>
+</venuematches>
+</results></lfm>
