@@ -92,7 +92,11 @@ class User(LastfmBase, Cacheable, Shoutable):
     @property
     def autheticated(self):
         """is the user autheticated"""
-        return self._api.get_authenticated_user() == self
+        try:
+            auth_user = self._api.get_authenticated_user()
+            return auth_user == self
+        except AuthenticationFailedError:
+            return False        
 
     @LastfmBase.cached_property
     def events(self):
@@ -175,6 +179,7 @@ class User(LastfmBase, Cacheable, Shoutable):
                 self._api,
                 subject = self,
                 name = u.findtext('name'),
+                real_name = u.findtext('realname'),
                 image = dict([(i.get('size'), i.text) for i in u.findall('image')]),
                 url = u.findtext('url'),
             )
@@ -197,6 +202,7 @@ class User(LastfmBase, Cacheable, Shoutable):
                     self._api,
                     subject = self,
                     name = u.findtext('name'),
+                    real_name = u.findtext('realname'),
                     image = {'medium': u.findtext('image')},
                     url = u.findtext('url'),
                     stats = Stats(
@@ -609,15 +615,27 @@ class User(LastfmBase, Cacheable, Shoutable):
         return gen()
 
     def compare(self, other, limit = None):
+        if isinstance(other, User):
+            other = other.name
         return Tasteometer.compare(self._api,
                                    'user', 'user',
-                                   self.name, other.name,
+                                   self.name, other,
                                    limit)
     @property
     def library(self):
         return self._library
 
-    
+    @staticmethod
+    def get_info(api, name):
+        user = User(api, name = name)
+        friends = user.friends
+        if len(friends) == 0:
+            return user
+        else:
+            f = friends[0]
+            user = [a for a in f.friends if a.name == user.name][0]
+            return user
+        
     @staticmethod
     def get_authenticated_user(api):
         data = api._fetch_data({'method': 'user.getInfo'}, sign = True, session = True).find('user')
@@ -957,7 +975,7 @@ import time
 from lastfm.api import Api
 from lastfm.artist import Artist
 from lastfm.album import Album
-from lastfm.error import LastfmError, InvalidParametersError
+from lastfm.error import LastfmError, InvalidParametersError, AuthenticationFailedError
 from lastfm.event import Event
 from lastfm.geo import Country
 from lastfm.stats import Stats

@@ -6,3 +6,4 @@ import test_geo
 import test_group
 import test_playlist
 import test_track
+import test_user

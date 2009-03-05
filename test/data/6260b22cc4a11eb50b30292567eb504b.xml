@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<events user="RJ" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" page="1" perPage="50" total="13" totalPages="1">
+<event>
+  <id>755511</id>
+  <title>Fairport Convention</title>
+
+  <artists>
+    <artist>Fairport Convention</artist>
+    <headliner>Fairport Convention</headliner>
+  </artists>
+  <venue>
+    <name>Union Chapel</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>Compton Terrace</street>
+      <postalcode>N1 2UN</postalcode>
+      <geo:point>
+         <geo:lat>51.543724</geo:lat>
+         <geo:long>-0.102365</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8778259</url>
+  </venue>
+  <startDate>Sat, 07 Feb 2009 20:00:00</startDate>
+  <description></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/13164427.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/13164427.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/13164427.jpg</image>
+   <attendance>14</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=755511</tag>    
+  <url>http://www.last.fm/event/755511</url>
+</event>
+<event>
+  <id>879065</id>
+  <title>Mad Dog McRea Gig</title>
+
+  <artists>
+    <artist>Mad Dog McRea</artist>
+    <headliner>Mad Dog McRea</headliner>
+  </artists>
+  <venue>
+    <name>Annabels</name>
+    <location>
+      <city>Plymouth</city>
+      <country>United Kingdom</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>50.36861</geo:lat>
+         <geo:long>-4.13504</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8992290</url>
+  </venue>
+  <startDate>Sat, 27 Dec 2008 21:00:00</startDate>
+  <description><![CDATA[<div class="bbcode">Mad Dog McRea play at Annabels, nr Barbican in Plymouth</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/81311.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/81311.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/81311.jpg</image>
+   <attendance>1</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=879065</tag>    
+  <url>http://www.last.fm/event/879065</url>
+</event>
+<event>
+  <id>842991</id>
+  <title>Smash, Bang, X-Mas Party!</title>
+
+  <artists>
+    <artist>RTX</artist>
+    <artist>Sian Alice Group</artist>
+    <artist>The Invisible</artist>
+    <artist>Love's Tru Flavour</artist>
+    <artist>Last.fm DJ Team</artist>
+    <artist>Tack! Tack! Tack! DJs</artist>
+    <artist>High Heels Lowlives</artist>
+    <headliner>RTX</headliner>
+  </artists>
+  <venue>
+    <name>Bloomsbury Bowling Lanes</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>Bedford Way</street>
+      <postalcode>WC1H 9EU</postalcode>
+      <geo:point>
+         <geo:lat>51.5</geo:lat>
+         <geo:long>-0.1166667</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8780845</url>
+  </venue>
+  <startDate>Wed, 10 Dec 2008 20:00:00</startDate>
+  <description><![CDATA[<div class="bbcode">&lt;style type=&quot;text/css&quot;&gt;<br />
+div.fiflufi div.leftColWrapper <br />
+{<br />
+<br />
+	position:relative;<br />
+	padding:165px 15px 15px;<br />
+	<br />
+}<br />
+							<br />
+.festivalink <br />
+{<br />
+	margin-top: 10px;<br />
+	margin-left: 0px;<br />
+	color: #333333;	<br />
+	font-size:12px;<br />
+	max-width: 490px;<br />
+}<br />
+	<br />
+div.fiflufi div.leftColWrapper .clickthrutop <br />
+{<br />
+	position:absolute;<br />
+	width:100%;<br />
+	top:0; left:0;<br />
+	height:200px;<br />
+<br />
+}<br />
+<br />
+div.fiflufi div.leftColWrapper .clickthrutop a<br />
+{<br />
+	text-indent: -9999px;<br />
+	margin: 15px 15px 0 15px;<br />
+	display:block;	<br />
+	height: 130px;<br />
+	background: transparent url(<a href="http://cdn.last.fm/customisation/2008_xmassmashbang/event_header.jpg">http://cdn.last.fm/customisation/2008_xmassmashbang/event_header.jpg</a>) no-repeat scroll left top;<br />
+}<br />
+<br />
+&lt;/style&gt;<br />
+<br />
+						<br />
+&lt;div class=&quot;clickthrutop&quot;&gt;&lt;a href=&quot;<a href="http://www.last.fm/presents&quot">http://www.last.fm/presents&quot</a>; &gt;las.tfm presents&lt;/a&gt;&lt;/div&gt;</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/363010.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/363010.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/363010.jpg</image>
+   <attendance>108</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=842991</tag>    
+  <url>http://www.last.fm/event/842991</url>
+</event>
+<event>
+  <id>457062</id>
+  <title>Glastonbury Festival of Contemporary Performing Arts</title>
+
+  <artists>
+    <artist>Massive Attack</artist>
+    <artist>Amy Winehouse</artist>
+    <artist>The Verve</artist>
+    <artist>Goldfrapp</artist>
+    <artist>James Blunt</artist>
+    <artist>Fatboy Slim</artist>
+    <artist>Kings of Leon</artist>
+    <artist>Panic! At the Disco</artist>
+    <artist>Tenacious D</artist>
+    <artist>Groove Armada</artist>
+    <artist>KT Tunstall</artist>
+    <artist>Editors</artist>
+    <artist>Jay-Z</artist>
+    <artist>MGMT</artist>
+    <artist>The Fratellis</artist>
+    <artist>Hot Chip</artist>
+    <artist>Manu Chao</artist>
+    <artist>Stars</artist>
+    <artist>Leonard Cohen</artist>
+    <artist>Ben Folds</artist>
+    <artist>Kate Nash</artist>
+    <artist>The Ting Tings</artist>
+    <artist>The Futureheads</artist>
+    <artist>UNKLE</artist>
+    <artist>Duffy</artist>
+    <artist>The Raconteurs</artist>
+    <artist>Sinéad O'Connor</artist>
+    <artist>The Zutons</artist>
+    <artist>Elbow</artist>
+    <artist>The Subways</artist>
+    <artist>The National</artist>
+    <artist>Ciara</artist>
+    <artist>Band of Horses</artist>
+    <artist>Cut Copy</artist>
+    <artist>Dirty Pretty Things</artist>
+    <artist>My Morning Jacket</artist>
+    <artist>Vampire Weekend</artist>
+    <artist>Kosheen</artist>
+    <artist>Crowded House</artist>
+    <artist>Squarepusher</artist>
+    <artist>Pendulum</artist>
+    <artist>Simian Mobile Disco</artist>
+    <artist>The Kills</artist>
+    <artist>CSS</artist>
+    <artist>Crystal Castles</artist>
+    <artist>The Feeling</artist>
+    <artist>The Cribs</artist>
+    <artist>Amy Macdonald</artist>
+    <artist>The Gossip</artist>
+    <artist>Neil Diamond</artist>
+    <artist>The Pigeon Detectives</artist>
+    <artist>Cansei de Ser Sexy</artist>
+    <artist>Mark Ronson</artist>
+    <artist>Foals</artist>
+    <artist>The Presets</artist>
+    <artist>Panic at the Disco</artist>
+    <artist>The Wombats</artist>
+    <artist>Joan Baez</artist>
+    <artist>Jimmy Cliff</artist>
+    <artist>Black Kids</artist>
+    <artist>Chris Rea</artist>
+    <artist>Battles</artist>
+    <artist>Caribou</artist>
+    <artist>Santogold</artist>
+    <artist>The Hold Steady</artist>
+    <artist>Laura Marling</artist>
+    <artist>Estelle</artist>
+    <artist>Dizzee Rascal</artist>
+    <artist>Róisín Murphy</artist>
+    <artist>Booka Shade</artist>
+    <artist>Audio Bullys</artist>
+    <artist>Mystery Jets</artist>
+    <artist>Los Campesinos!</artist>
+    <artist>Does It Offend You, Yeah?</artist>
+    <artist>Alphabeat</artist>
+    <artist>Spiritualized</artist>
+    <artist>British Sea Power</artist>
+    <artist>The Hoosiers</artist>
+    <artist>Fun Lovin' Criminals</artist>
+    <artist>Newton Faulkner</artist>
+    <artist>The Music</artist>
+    <artist>The Rocket Summer</artist>
+    <artist>Be Your Own Pet</artist>
+    <artist>Lykke Li</artist>
+    <artist>The Proclaimers</artist>
+    <artist>The Teenagers</artist>
+    <artist>Martina Topley-Bird</artist>
+    <artist>Biffy Clyro</artist>
+    <artist>Jamie Lidell</artist>
+    <artist>Midnight Juggernauts</artist>
+    <artist>Buddy Guy</artist>
+    <artist>The Enemy</artist>
+    <artist>Freestylers</artist>
+    <artist>Blood Red Shoes</artist>
+    <artist>Scouting for Girls</artist>
+    <artist>Way Out West</artist>
+    <artist>Jamie T</artist>
+    <artist>Will Young</artist>
+    <artist>The Script</artist>
+    <artist>Vetiver</artist>
+    <artist>Banco de Gaia</artist>
+    <artist>Roni Size</artist>
+    <artist>Sam Sparro</artist>
+    <artist>The Holloways</artist>
+    <artist>The Whip</artist>
+    <artist>The Black Ghosts</artist>
+    <artist>Ladyhawke</artist>
+    <artist>St. Vincent</artist>
+    <artist>The Brian Jonestown Massacre</artist>
+    <artist>Hercules and Love Affair</artist>
+    <artist>Glasvegas</artist>
+    <artist>Solomon Burke</artist>
+    <artist>The Courteeners</artist>
+    <artist>Friendly Fires</artist>
+    <artist>Tunng</artist>
+    <artist>Ron Sexsmith</artist>
+    <artist>The Paddingtons</artist>
+    <artist>Sons and Daughters</artist>
+    <artist>The Bluetones</artist>
+    <artist>Get Cape. Wear Cape. Fly</artist>
+    <artist>Joan Armatrading</artist>
+    <artist>Black Mountain</artist>
+    <artist>Yeasayer</artist>
+    <artist>Eddy Grant</artist>
+    <artist>Nizlopi</artist>
+    <artist>Edwyn Collins</artist>
+    <artist>Noah and the Whale</artist>
+    <artist>Ozomatli</artist>
+    <artist>The Rascals</artist>
+    <artist>X-Press 2</artist>
+    <artist>Alabama 3</artist>
+    <artist>Reverend and The Makers</artist>
+    <artist>The Duke Spirit</artist>
+    <artist>A Guy Called Gerald</artist>
+    <artist>Shakin' Stevens</artist>
+    <artist>Lightspeed Champion</artist>
+    <artist>Infadels</artist>
+    <artist>Holy Fuck</artist>
+    <artist>Balkan Beat Box</artist>
+    <artist>Operator Please</artist>
+    <artist>Rex the Dog</artist>
+    <artist>Utah Saints</artist>
+    <artist>Make Model</artist>
+    <artist>Candi Staton</artist>
+    <artist>The Black Dog</artist>
+    <artist>Black Lips</artist>
+    <artist>Stephen Fretwell</artist>
+    <artist>The Slackers</artist>
+    <artist>Levellers</artist>
+    <artist>Kraak &amp; Smaak</artist>
+    <artist>Patrick Watson</artist>
+    <artist>Cicada</artist>
+    <artist>DJ Format</artist>
+    <artist>Metronomy</artist>
+    <artist>Emmy the Great</artist>
+    <artist>Teddy Thompson</artist>
+    <artist>Zion Train</artist>
+    <artist>Dengue Fever</artist>
+    <artist>Florence and The Machine</artist>
+    <artist>Gilbert O'Sullivan</artist>
+    <artist>The Handsome Family</artist>
+    <artist>Seasick Steve</artist>
+    <artist>Frank Turner</artist>
+    <artist>Hayseed Dixie</artist>
+    <artist>Dreadzone</artist>
+    <artist>Hilltop Hoods</artist>
+    <artist>Stanton Warriors</artist>
+    <artist>Royworld</artist>
+    <artist>The Car Is on Fire</artist>
+    <artist>Neon Neon</artist>
+    <artist>Yoav</artist>
+    <artist>System 7</artist>
+    <artist>Shitmat</artist>
+    <artist>Tom Baxter</artist>
+    <artist>autoKratz</artist>
+    <artist>Kid Sister</artist>
+    <artist>Seth Lakeman</artist>
+    <artist>Soulsavers</artist>
+    <artist>Tift Merritt</artist>
+    <artist>Soul of Man</artist>
+    <artist>Derrick May</artist>
+    <artist>Captain</artist>
+    <artist>Cadence Weapon</artist>
+    <artist>White Denim</artist>
+    <artist>The Pietasters</artist>
+    <artist>Jack Peñate</artist>
+    <artist>Punks Jump Up</artist>
+    <artist>Lemon</artist>
+    <artist>Erol Alkan</artist>
+    <artist>Pivot</artist>
+    <artist>Pete Doherty</artist>
+    <artist>Appleblim</artist>
+    <artist>Jason Forrest</artist>
+    <artist>Atomic Hooligan</artist>
+    <artist>James Zabiela</artist>
+    <artist>N-Dubz</artist>
+    <artist>Lee Coombs</artist>
+    <artist>Cagedbaby</artist>
+    <artist>Rusko</artist>
+    <artist>Dr Rubberfunk</artist>
+    <artist>Sky Larkin</artist>
+    <artist>Benga &amp; Skream</artist>
+    <artist>Six by Seven</artist>
+    <artist>Slyde</artist>
+    <artist>Hazel O'Connor</artist>
+    <artist>Kid Harpoon</artist>
+    <artist>DJ Die</artist>
+    <artist>Bass Clef</artist>
+    <artist>Eric Bibb</artist>
+    <artist>Caspa</artist>
+    <artist>Cerys Matthews</artist>
+    <artist>The King Blues</artist>
+    <artist>Eugene McGuinness</artist>
+    <artist>Blak Twang</artist>
+    <artist>Million Dan</artist>
+    <artist>Rodney P</artist>
+    <artist>Example</artist>
+    <artist>Caspa &amp; Rusko</artist>
+    <artist>Team Waterpolo</artist>
+    <artist>Magnetic Man</artist>
+    <artist>Natty</artist>
+    <artist>Dynamite MC</artist>
+    <artist>Joe Lean and the Jing Jang Jong</artist>
+    <artist>The Wurzels</artist>
+    <artist>Modern Skirts</artist>
+    <artist>Nick Warren</artist>
+    <artist>Subfocus</artist>
+    <artist>28 Costumes</artist>
+    <artist>Alex Metric</artist>
+    <artist>Young Knives</artist>
+    <artist>DJ Clipz</artist>
+    <artist>These United States</artist>
+    <artist>The Count &amp; Sinden</artist>
+    <artist>Portico Quartet</artist>
+    <artist>Kathy Diamond</artist>
+    <artist>Elle S'appelle</artist>
+    <artist>The Voodoo Trombone Quartet</artist>
+    <artist>Deekline &amp; Wizard</artist>
+    <artist>Vandaveer</artist>
+    <artist>Mirror System</artist>
+    <artist>Rachel Unthank &amp; The Winterset</artist>
+    <artist>Ethiopiques</artist>
+    <artist>John Tams</artist>
+    <artist>Crystal Distortion</artist>
+    <artist>Toby Tobias</artist>
+    <artist>Samsara</artist>
+    <artist>Räfven</artist>
+    <artist>Neil Cowley Trio</artist>
+    <artist>Babel</artist>
+    <artist>Bison</artist>
+    <artist>BabyHead</artist>
+    <artist>Voodoo Trombone Quartet</artist>
+    <artist>Amsterdam</artist>
+    <artist>Officer Kicks</artist>
+    <artist>Beber &amp; Tamra</artist>
+    <artist>Attila the Stockbroker</artist>
+    <artist>Magic Wands</artist>
+    <artist>Toddla T</artist>
+    <artist>Ebony Bones</artist>
+    <artist>DJ Dee Kline</artist>
+    <artist>Annie Mac</artist>
+    <artist>Magistrates</artist>
+    <artist>JAPANESE POPSTARS</artist>
+    <artist>Dub Colossus</artist>
+    <artist>Dawn Kinnard</artist>
+    <artist>Queens of Noize</artist>
+    <artist>Size 9</artist>
+    <artist>Luke Wright</artist>
+    <artist>The Blessing</artist>
+    <artist>Eliza Doolittle</artist>
+    <artist>Annie Nightingale</artist>
+    <artist>Rod Thomas</artist>
+    <artist>Dr. Alex Patterson</artist>
+    <artist>Sian Evans &amp; Simon Kingman</artist>
+    <artist>Revere</artist>
+    <artist>Red Letter Day</artist>
+    <artist>Stackridge</artist>
+    <artist>Sheelanagig</artist>
+    <artist>Beggars</artist>
+    <artist>360</artist>
+    <artist>Robert Logan</artist>
+    <artist>Phantom Limb</artist>
+    <artist>Orphan Boy</artist>
+    <artist>Seize The Day</artist>
+    <artist>12 Stone Toddler</artist>
+    <artist>Mumford And Sons</artist>
+    <artist>The Travelling Band</artist>
+    <artist>The Unstoppable Team</artist>
+    <artist>Black Cherry</artist>
+    <artist>Swimming</artist>
+    <artist>The Franks</artist>
+    <artist>SMASH N GRAB</artist>
+    <artist>Pronghorn</artist>
+    <artist>Shantel &amp; Bucovina Club Orkestar</artist>
+    <artist>Kool Keith &amp; Kutmasta Kurt</artist>
+    <artist>Dead Silence</artist>
+    <artist>Mama Shamone</artist>
+    <artist>Sicknote</artist>
+    <artist>The Mirettes</artist>
+    <artist>The Seal Cub Clubbing Club</artist>
+    <artist>Mully</artist>
+    <artist>Massukos</artist>
+    <artist>Mankala</artist>
+    <artist>3 Daft Monkeys</artist>
+    <artist>Dr Meaker</artist>
+    <artist>The Imagined Village</artist>
+    <artist>Dynamo's Rhythm Aces</artist>
+    <artist>Blazin' Fiddles</artist>
+    <artist>The Daisy Riots</artist>
+    <artist>Pete Gooding</artist>
+    <artist>BeardyMan</artist>
+    <artist>i!AMYOU</artist>
+    <artist>Melancholy Moose Society</artist>
+    <artist>Alex Paterson</artist>
+    <artist>The Golden Silvers</artist>
+    <artist>Siyaya</artist>
+    <artist>Bad Science</artist>
+    <artist>Diane Charlemagne</artist>
+    <artist>Los Albertos</artist>
+    <artist>Almasala</artist>
+    <artist>Beat Torrent</artist>
+    <artist>Audioporn</artist>
+    <artist>The Lightyears</artist>
+    <artist>Dogtanion</artist>
+    <artist>Katharine Blake</artist>
+    <artist>Grinny Grandad</artist>
+    <artist>The Urban Voodoo Machine</artist>
+    <artist>The Moody Boyz</artist>
+    <artist>Mungos Hi Fi</artist>
+    <artist>Bone-Box</artist>
+    <artist>MC Xander</artist>
+    <artist>The Mentalists</artist>
+    <artist>Nomad Jones</artist>
+    <artist>Yes Sir Boss</artist>
+    <artist>MC Wrec</artist>
+    <artist>Wichita</artist>
+    <artist>Digidub</artist>
+    <artist>the she creatures</artist>
+    <artist>Married to the Sea</artist>
+    <artist>Ilya K</artist>
+    <artist>Dirty Weekend</artist>
+    <artist>Dan Donnelly</artist>
+    <artist>digs</artist>
+    <artist>James Zabelia</artist>
+    <artist>Three Daft Monkeys</artist>
+    <artist>Evi Vine</artist>
+    <artist>soul immigrants</artist>
+    <artist>Whoosh</artist>
+    <artist>Andrew Motion</artist>
+    <artist>Alan Tyler &amp; The Lost Sons of Littlefield</artist>
+    <artist>holestar</artist>
+    <artist>Myth of Unity</artist>
+    <artist>Paprika Balkanicus</artist>
+    <artist>Trevor Fung</artist>
+    <artist>Johnny Action Finger</artist>
+    <artist>roland the bastard</artist>
+    <artist>Russ Jones</artist>
+    <artist>The Krak</artist>
+    <artist>Eddy Temple Morris</artist>
+    <artist>Yes Sir Boss!!!</artist>
+    <artist>Glitzy Bag Hags</artist>
+    <artist>The Undercover Hippy</artist>
+    <artist>Nuala &amp; The Alchemy Quartet</artist>
+    <artist>Nicky Holloway</artist>
+    <artist>Hollis Greene</artist>
+    <artist>DJ Tayo</artist>
+    <artist>The Black Bloc</artist>
+    <artist>Derek May</artist>
+    <artist>Hattie Hatstar</artist>
+    <artist>Plaster Of Paris</artist>
+    <artist>Fundamental Skillz</artist>
+    <artist>Bass Cleff</artist>
+    <artist>Healer Selecta</artist>
+    <artist>Sex Slaves From Hell</artist>
+    <artist>Shlomo and the Vocal Orchestra</artist>
+    <artist>Young Runaways</artist>
+    <artist>The Boat Band</artist>
+    <artist>Dub Pistols Soundsystem</artist>
+    <artist>Horse Meat Disco</artist>
+    <artist>Cock 'n' Bull Kid</artist>
+    <artist>4Fifteen</artist>
+    <artist>FOS Brothers</artist>
+    <artist>20/20 Soundsystem</artist>
+    <artist>Port Erin</artist>
+    <artist>Sense of Sound Choir</artist>
+    <artist>Brothers Bab</artist>
+    <artist>Alec Townsend</artist>
+    <artist>Andy Hickie</artist>
+    <artist>Demon Cabbage</artist>
+    <artist>East Of Ealing</artist>
+    <artist>Dubblehead</artist>
+    <artist>Dj Ipek</artist>
+    <artist>Miss Behave</artist>
+    <artist>Biggles Wartime Band</artist>
+    <artist>The Rusticles</artist>
+    <artist>Sean Rowley</artist>
+    <artist>Juldeh Camara</artist>
+    <artist>Red Route</artist>
+    <artist>Don Bradmans</artist>
+    <artist>Keth</artist>
+    <artist>Cuttashine</artist>
+    <artist>carrivick sisters</artist>
+    <artist>Hobo Jones and the Junkyard Dogs</artist>
+    <artist>We Don't Play</artist>
+    <artist>Davide Rossi</artist>
+    <artist>joe ling and the jing jang jong</artist>
+    <artist>Simon Atkinson and the Ben Marcato Trio</artist>
+    <headliner>Massive Attack</headliner>
+  </artists>
+  <venue>
+    <name>Worthy Farm</name>
+    <location>
+      <city>Shepton Mallet</city>
+      <country>United Kingdom</country>
+      <street>Pilton</street>
+      <postalcode>BA4 4BY</postalcode>
+      <geo:point>
+         <geo:lat>51.159843</geo:lat>
+         <geo:long>-2.585621</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8783201</url>
+  </venue>
+  <startDate>Fri, 27 Jun 2008 22:51:01</startDate>
+  <endDate>Sun, 29 Jun 2008 22:51:01</endDate>
+  <description><![CDATA[<div class="bbcode"><strong>Glastonbury Festival of Contemporary Performing Arts</strong><br />
+<br />
+The next Glastonbury Festival will be held on the weekend of 27th, 28th and 29th June 2008<br />
+<br />
+You can camp from Wednesday 25th June 2008<br />
+<br />
+Glastonbury 2008 Tickets<br />
+<br />
+2008 will see the return of Glastonbury’s award winning registration process and photo tickets. Full details regarding ticket purchase and how to register will be published here, on the official website by the middle of January, so watch this space for details.<br />
+<br />
+Performing at Glastonbury 2008<br />
+<br />
+Agents for artists signed with major labels can contact the Festival in the usual manner.  Only digital submissions are accepted for Pyramid, Other and John Peel stages. Please do not send in CDs.<br />
+<br />
+For Acoustic Stage please send CDs to Glastonbury Acoustic Stage, Asgard, 125 Parkway, Regents Park, London, NW1 7PS and for Dance Village - CDs to Glastonbury Dance Village, P O Box 1132, Bristol, BS99 2JZ or EPKs to the usual address.<br />
+<br />
+For other peformers, the Festival is again running the Glastonbury New Talent Competition. Over 50 performers or groups that entered the competition last year played at Glastonbury 2007, with the winner, Liz Green, having a spot on the Pyramid Stage.<br />
+<br />
+<img src="http://icons.primail.ch/arrows/arr04.gif" />Glastonbury Festival Line-Up 2008 can be found <a href="http://www.glastonburyfestivals.co.uk/performance.aspx?id=2179" rel="nofollow">here</a>.</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/5599198.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/5599198.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/5599198.jpg</image>
+   <attendance>848</attendance>
+   <reviews>21</reviews>
+   <tag>lastfm:event=457062</tag>    
+  <url>http://www.last.fm/event/457062</url>
+</event>
+<event>
+  <id>394026</id>
+  <title>Matthew Ogle</title>
+
+  <artists>
+    <artist>Matthew Ogle</artist>
+    <headliner>Matthew Ogle</headliner>
+  </artists>
+  <venue>
+    <name>Wenlock Arms</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>26 Wenlock Road</street>
+      <postalcode>N1 7TA</postalcode>
+      <geo:point>
+         <geo:lat>51.4916446565303</geo:lat>
+         <geo:long>-0.17852783203125</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8820178</url>
+  </venue>
+  <startDate>Fri, 26 Oct 2007 19:00:00</startDate>
+  <description></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/394648.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/394648.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/394648.jpg</image>
+   <attendance>21</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=394026</tag>    
+  <url>http://www.last.fm/event/394026</url>
+</event>
+<event>
+  <id>318269</id>
+  <title>Hot Chip DJs</title>
+
+  <artists>
+    <artist>Hot Chip DJs</artist>
+    <artist>Everyone to the Anderson</artist>
+    <artist>Lost Penguin</artist>
+    <artist>Agaskodo Teliverek</artist>
+    <artist>Turbowolf</artist>
+    <artist>Mica Levi</artist>
+    <artist>The Last.fm User Generated DJ Team</artist>
+    <headliner>Hot Chip DJs</headliner>
+  </artists>
+  <venue>
+    <name>The Spitz</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>109 Commercial Street, Old Spitalfields Market</street>
+      <postalcode>E1 6BG</postalcode>
+      <geo:point>
+         <geo:lat>51.519176</geo:lat>
+         <geo:long>-0.075927</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8778213</url>
+  </venue>
+  <startDate>Tue, 11 Sep 2007 18:00:00</startDate>
+  <description><![CDATA[<div class="bbcode">Thanks for coming out!<br />
+<br />
+	        Back in the early zeroes, two of the three founders of Last.fm used to put on events at The Spitz, an East London venue thatÕs been showcasing new bands almost as long as Spitalfields has had a market (which is 369 years, fact fans). Then they got distracted by all this web start-up malarkey.<br />
+<br />
+But on the 11th September 2007 they returned Ð with the rest of us, plus five amazing bands, our finest Last.fm deck-wreckers, and special guest DJs Hot Chip.<br />
+<br />
+Altogether, we rocked the place and in the process raised £1,600 on the door alone (not to mention the bar which was practically drunk dry!). Anyway enough typing check out the footage below for yourselves...</div>]]></description>
+  <image size="small"></image>
+  <image size="medium"></image>
+  <image size="large"></image>
+   <attendance>299</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=318269</tag>    
+  <url>http://www.last.fm/event/318269</url>
+</event>
+<event>
+  <id>172767</id>
+  <title>The Police</title>
+
+  <artists>
+    <artist>The Police</artist>
+    <artist>Maxïmo Park</artist>
+    <artist>Fiction Plane</artist>
+    <headliner>The Police</headliner>
+  </artists>
+  <venue>
+    <name>Twickenham Stadium</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>51.447881</geo:lat>
+         <geo:long>-0.355958</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8787312</url>
+  </venue>
+  <startDate>Sun, 09 Sep 2007 16:30:00</startDate>
+  <description></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/21470781.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/21470781.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/21470781.jpg</image>
+   <attendance>72</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=172767</tag>    
+  <url>http://www.last.fm/event/172767</url>
+</event>
+<event>
+  <id>223495</id>
+  <title>Roof Party/BBQ 2007.1</title>
+
+  <artists>
+    <artist>Erik Jälevik</artist>
+    <artist>The Singing Microwave</artist>
+    <artist>Mokele</artist>
+    <artist>Matthew Ogle</artist>
+    <artist>Norman Casagrande</artist>
+    <headliner>Erik Jälevik</headliner>
+  </artists>
+  <venue>
+    <name>Last.fm Office</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>1-11 Baches Street</street>
+      <postalcode>N1 6DL</postalcode>
+      <geo:point>
+         <geo:lat>51.527555</geo:lat>
+         <geo:long>-0.085916</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8778225</url>
+  </venue>
+  <startDate>Fri, 27 Apr 2007 20:00:00</startDate>
+  <description><![CDATA[<div class="bbcode">Impromptu roof bbq party.. Steve announced it a couple of hours before, and everyone sprang into action. There was team sausages, team beer, team electric...</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/294903.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/294903.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/294903.jpg</image>
+   <attendance>14</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=223495</tag>    
+  <url>http://www.last.fm/event/223495</url>
+</event>
+<event>
+  <id>139097</id>
+  <title>Matthew Ogle</title>
+
+  <artists>
+    <artist>Matthew Ogle</artist>
+    <artist>David Hasselhoff</artist>
+    <artist>Mokele</artist>
+    <artist>Norman Casagrande</artist>
+    <headliner>Matthew Ogle</headliner>
+  </artists>
+  <venue>
+    <name>The Prince Arthur</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>49, Brunswick Place</street>
+      <postalcode>N1 4DL</postalcode>
+      <geo:point>
+         <geo:lat>51.5436532272676</geo:lat>
+         <geo:long>-0.0802746133284284</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8798239</url>
+  </venue>
+  <startDate>Fri, 09 Feb 2007 19:00:00</startDate>
+  <description><![CDATA[<div class="bbcode">Matthew The Ogle has been pushing up the beta very hard and will be ready for party-ing.</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/394648.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/394648.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/394648.jpg</image>
+   <attendance>17</attendance>
+   <reviews>2</reviews>
+   <tag>lastfm:event=139097</tag>    
+  <url>http://www.last.fm/event/139097</url>
+</event>
+<event>
+  <id>127518</id>
+  <title>Mokele</title>
+
+  <artists>
+    <artist>Mokele</artist>
+    <artist>Matthew Ogle</artist>
+    <artist>Norman Casagrande</artist>
+    <artist>'å &amp; ö' / Muz &quot;Muzwald&quot; Titten</artist>
+    <headliner>Mokele</headliner>
+  </artists>
+  <venue>
+    <name>The Prince Arthur</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>49, Brunswick Place</street>
+      <postalcode>N1 4DL</postalcode>
+      <geo:point>
+         <geo:lat>51.5436532272676</geo:lat>
+         <geo:long>-0.0802746133284284</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8798239</url>
+  </venue>
+  <startDate>Thu, 01 Feb 2007 19:00:00</startDate>
+  <description><![CDATA[<div class="bbcode">This is a birthday bash with a special surprise!<br />
+<br />
+N-Dog has been hard at work, spitting out some fresh licks from his upcoming vinyl.<br />
+<br />
+The Ogle is returning, in true style. He left you savouring for more after his Silent Night rendition, and boy, he ain't going to disappoint.<br />
+<br />
+The Hoff, as always, in there on hand should it get wet and wild!</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/3639628.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/3639628.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/3639628.jpg</image>
+   <attendance>21</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=127518</tag>    
+  <url>http://www.last.fm/event/127518</url>
+</event>
+<event>
+  <id>81969</id>
+  <title>Donald Byrd</title>
+
+  <artists>
+    <artist>Donald Byrd</artist>
+    <headliner>Donald Byrd</headliner>
+  </artists>
+  <venue>
+    <name>Jazz Cafe</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>5 Parkway, Camden</street>
+      <postalcode>NW1 7PG</postalcode>
+      <geo:point>
+         <geo:lat>51.513528</geo:lat>
+         <geo:long>-0.131467</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8778292</url>
+  </venue>
+  <startDate>Sun, 07 Jan 2007 19:00:00</startDate>
+  <description><![CDATA[<div class="bbcode"><strong><span style="color:red">CANCELLED :(</span></strong> (see ticket link)</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/347133.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/347133.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/347133.jpg</image>
+   <attendance>2</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=81969</tag>    
+  <url>http://www.last.fm/event/81969</url>
+</event>
+<event>
+  <id>17877</id>
+  <title>Jurassic 5</title>
+
+  <artists>
+    <artist>Jurassic 5</artist>
+    <headliner>Jurassic 5</headliner>
+  </artists>
+  <venue>
+    <name>Carling Academy Brixton</name>
+    <location>
+      <city>London</city>
+      <country>United Kingdom</country>
+      <street>211 Stockwell Road</street>
+      <postalcode>SW9 9SL</postalcode>
+      <geo:point>
+         <geo:lat>51.465373</geo:lat>
+         <geo:long>-0.115206</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8777911</url>
+  </venue>
+  <startDate>Sat, 30 Sep 2006 19:30:00</startDate>
+  <description><![CDATA[<div class="bbcode">J5 are awesome live, go see!</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/269347.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/269347.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/269347.jpg</image>
+   <attendance>4</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=17877</tag>    
+  <url>http://www.last.fm/event/17877</url>
+</event>
+<event>
+  <id>6810</id>
+  <title>Zero 7</title>
+
+  <artists>
+    <artist>Zero 7</artist>
+    <headliner>Zero 7</headliner>
+  </artists>
+  <venue>
+    <name>Rock City</name>
+    <location>
+      <city>Nottingham</city>
+      <country>United Kingdom</country>
+      <street>8 Talbot Street</street>
+      <postalcode>NG1 5GG</postalcode>
+      <geo:point>
+         <geo:lat>52.9561548201744</geo:lat>
+         <geo:long>-1.15430083692082</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8777130</url>
+  </venue>
+  <startDate>Thu, 25 May 2006 19:30:00</startDate>
+  <description></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/246136.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/246136.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/246136.jpg</image>
+   <attendance>3</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=6810</tag>    
+  <url>http://www.last.fm/event/6810</url>
+</event>
+</events></lfm>

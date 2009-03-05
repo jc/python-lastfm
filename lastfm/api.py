@@ -423,10 +423,10 @@ class Api(object):
         @rtype:         L{User}
         
         @raise InvalidParametersError: Exception is raised if an invalid user name is supplied.
+        
+        @see:           L{User.get_info}
         """
-        user = User(self, name = name)
-        user.friends
-        return user
+        return User.get_info(self, name = name)
 
     def get_authenticated_user(self):
         """
@@ -439,7 +439,8 @@ class Api(object):
         """
         if self.session_key is not None:
             return User.get_authenticated_user(self)
-        return None
+        else:
+            raise AuthenticationFailedError("session key must be present to call this method")
     
     def get_venue(self, venue):
         """

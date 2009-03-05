@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<events user="RJ" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" total="1">
+<event status="1">
+  <id>834368</id>
+  <title>The Gaslight Anthem</title>
+
+  <artists>
+    <artist>The Gaslight Anthem</artist>
+    <artist>Frank Turner</artist>
+    <artist>Polar Bear Club</artist>
+    <headliner>The Gaslight Anthem</headliner>
+  </artists>
+  <venue>
+    <id>8887925</id>
+    <name>Academy</name>
+    <location>
+      <city>Dublin</city>
+      <country>Ireland</country>
+      <street>57 Middle Abbey Street</street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>53.352461</geo:lat>
+         <geo:long>-6.259799</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8887925</url>
+  </venue>
+  <startDate>Wed, 04 Mar 2009 14:38:01</startDate>
+  <description><![CDATA[<div class="bbcode">The Gaslight Anthem for Dublin<br />
+New Jersey folk-punks The Gaslight Anthem will play Dublin in 2009.<br />
+<br />
+The quartet, beloved of Tom Petty and Bruce Springsteen fans, will play The Academy on March 4th, in support of their second full-length album 'The '59 Sound', which is out now.<br />
+<br />
+Tickets are €17.50 and on sale from usual outlets soon.</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/7454839.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/7454839.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/7454839.jpg</image>
+   <attendance>38</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=834368</tag>    
+  <url>http://www.last.fm/event/834368</url>
+</event>
+</events>
+</lfm>

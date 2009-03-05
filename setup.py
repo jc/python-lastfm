@@ -16,6 +16,7 @@ located at http://ws.audioscrobbler.com/2.0/ .""",
 	maintainer_email="abhinav.sarkar@gmail.com",
 	url="http://python-lastfm.googlecode.com/svn/trunk/dist/",
 	packages=['lastfm'],
+    package_data = {'doc':['*.txt', '*.htm', '*.css', '*.js', '*.png']},
 	license="GNU Lesser General Public License",
 	keywords="audioscrobbler webservice api last.fm",
 )
@@ -23,6 +24,7 @@ located at http://ws.audioscrobbler.com/2.0/ .""",
 SETUPTOOLS_METADATA = dict(
 	install_requires = ['setuptools'],
 	include_package_data = True,
+    tests_require = ['wsgi_intercept'],
 	classifiers = [
 		'Development Status :: 3 - Alpha',
 		'Intended Audience :: Developers',

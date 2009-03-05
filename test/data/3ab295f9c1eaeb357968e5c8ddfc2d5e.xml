@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+    <comparison>
+        <result>
+            <score>0.81405720173183</score>
+            <artists matches="65">
+                <artist>
+                    <name>Coldplay</name>
+                    <url>http://www.last.fm/music/Coldplay</url>
+                    <image size="large">http://userserve-ak.last.fm/serve/126/5735261.jpg</image>
+                    <image size="medium">http://userserve-ak.last.fm/serve/64/5735261.jpg</image>
+                    <image size="small">http://userserve-ak.last.fm/serve/34/5735261.jpg</image>
+                </artist>
+                <artist>
+                    <name>Red Hot Chili Peppers</name>
+                    <url>http://www.last.fm/music/Red+Hot+Chili+Peppers</url>
+                    <image size="large">http://userserve-ak.last.fm/serve/126/403312.jpg</image>
+                    <image size="medium">http://userserve-ak.last.fm/serve/64/403312.jpg</image>
+                    <image size="small">http://userserve-ak.last.fm/serve/34/403312.jpg</image>
+                </artist>
+                <artist>
+                    <name>The Killers</name>
+                    <url>http://www.last.fm/music/The+Killers</url>
+                    <image size="large">http://userserve-ak.last.fm/serve/126/12895249.jpg</image>
+                    <image size="medium">http://userserve-ak.last.fm/serve/64/12895249.jpg</image>
+                    <image size="small">http://userserve-ak.last.fm/serve/34/12895249.jpg</image>
+                </artist>
+                <artist>
+                    <name>The Beatles</name>
+                    <url>http://www.last.fm/music/The+Beatles</url>
+                    <image size="large">http://userserve-ak.last.fm/serve/126/100199.jpg</image>
+                    <image size="medium">http://userserve-ak.last.fm/serve/64/100199.jpg</image>
+                    <image size="small">http://userserve-ak.last.fm/serve/34/100199.jpg</image>
+                </artist>
+                <artist>
+                    <name>U2</name>
+                    <url>http://www.last.fm/music/U2</url>
+                    <image size="large">http://userserve-ak.last.fm/serve/126/416726.jpg</image>
+                    <image size="medium">http://userserve-ak.last.fm/serve/64/416726.jpg</image>
+                    <image size="small">http://userserve-ak.last.fm/serve/34/416726.jpg</image>
+                </artist>
+            </artists>
+        </result>
+        <input>
+            <user>
+                <name>RJ</name>
+                <url>http://www.last.fm/user/RJ</url>
+                <image size="large">http://userserve-ak.last.fm/serve/126/8270359.jpg</image>
+                <image size="medium">http://userserve-ak.last.fm/serve/64/8270359.jpg</image>
+                <image size="small">http://userserve-ak.last.fm/serve/34/8270359.jpg</image>
+            </user>
+            <user>
+                <name>abhin4v</name>
+                <url>http://www.last.fm/user/abhin4v</url>
+                <image size="large">http://userserve-ak.last.fm/serve/126/1572487.jpg</image>
+                <image size="medium">http://userserve-ak.last.fm/serve/64/1572487.jpg</image>
+                <image size="small">http://userserve-ak.last.fm/serve/34/1572487.jpg</image>
+            </user>
+        </input>
+    </comparison>
+</lfm>
