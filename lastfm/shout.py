@@ -8,7 +8,7 @@ from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable
 
 class Shout(LastfmBase, Cacheable):
-    """"A class representing a shout."""
+    """A class representing a shout."""
 
     def init(self,
              body = None,

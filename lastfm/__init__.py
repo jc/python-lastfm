@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""A python interface to the last.fm web services API"""
 
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
@@ -22,6 +23,7 @@ from lastfm.tasteometer import Tasteometer
 from lastfm.track import Track
 from lastfm.user import User
 from lastfm.venue import Venue
+from lastfm.shout import Shout
 
 __all__ = ['LastfmError', 'Api', 'Album', 'Artist', 'Event',
            'Location', 'Country', 'Group', 'Playlist', 'Tag',

@@ -81,5 +81,5 @@ error_map = {
             12: SubscribersOnlyError,
             13: InvalidMethodSignatureError,
             14: TokenNotAuthorizedError,
-            15: TokenExpiredError
-           }    
+            15: TokenExpiredError,
+}

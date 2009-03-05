@@ -9,7 +9,7 @@ from lastfm.mixins import Cacheable, Searchable
 from lastfm.lazylist import lazylist
 
 class Tag(LastfmBase, Cacheable, Searchable):
-    """"A class representing a tag."""
+    """A class representing a tag."""
     def init(self,
                  api,
                  name = None,

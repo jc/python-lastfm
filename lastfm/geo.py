@@ -459,7 +459,7 @@ class Country(LastfmBase, Cacheable):
          'YT': 'Mayotte',
          'ZA': 'South Africa',
          'ZM': 'Zambia',
- 'ZW': 'Zimbabwe'}
+         'ZW': 'Zimbabwe'}
     def init(self,
                  api,
                  name = None):
