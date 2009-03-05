@@ -15,12 +15,13 @@ from lastfm.playlist import Playlist
 from lastfm.tag import Tag
 from lastfm.track import Track
 from lastfm.user import User
+from lastfm.venue import Venue
 from lastfm.weeklychart import WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
 
 class ObjectCache(object):
     """The registry to contain all the entities"""
     keys = [c.__name__ for c in [Album, Artist, Event, Location, Country, Group, 
-            Playlist, Tag, Track, User, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart]]
+            Playlist, Tag, Track, User, Venue, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart]]
     
     def __getitem__(self, name):
         if name not in ObjectCache.keys:
