@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""The last.fm webservice API access functionalities"""
+"""The last.fm web service API access functionalities"""
 
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
@@ -34,22 +34,22 @@ class Api(object):
         starting point for accessing all the webservice methods.
         
         @param api_key:            last.fm API key
-        @type api_key:             str
+        @type api_key:             L{str}
         @param secret:             last.fm API secret (optional, required only for
                                    authenticated webservice methods)
-        @type secret:              str
+        @type secret:              L{str}
         @param session_key:        session key for the authenticated session (optional,
                                    required only for authenticated webservice methods)
-        @type session_key:         str
+        @type session_key:         L{str}
         @param input_encoding:     encoding of the input data (optional)
-        @type input_encoding:      str
+        @type input_encoding:      L{str}
         @param request_headers:    HTTP headers for the requests to last.fm webservices
                                    (optional)
-        @type request_headers:     dict
+        @type request_headers:     L{dict}
         @param no_cache:           flag to switch off file cache (optional)
-        @type no_cache:            bool
+        @type no_cache:            L{bool}
         @param debug:              flag to switch on debugging (optional)
-        @type debug:               bool
+        @type debug:               L{bool}
         """
         self._api_key = api_key
         self._secret = secret
@@ -66,17 +66,26 @@ class Api(object):
 
     @property
     def api_key(self):
-        """The last.fm API key"""
+        """
+        The last.fm API key
+        @rtype: L{str}
+        """
         return self._api_key
 
     @property
     def secret(self):
-        """The last.fm API secret"""
+        """
+        The last.fm API secret
+        @rtype: L{str}
+        """
         return self._secret
 
     @property
     def session_key(self):
-        """Session key for the authenticated session."""
+        """
+        Session key for the authenticated session
+        @rtype: L{str}
+        """
         return self._session_key
 
     def set_session_key(self):
@@ -90,13 +99,19 @@ class Api(object):
 
     @LastfmBase.cached_property
     def auth_token(self):
-        """The authenication token for the authenticated session."""
+        """
+        The authenication token for the authenticated session.
+        @rtype: L{str}
+        """
         params = {'method': 'auth.getToken'}
         return self._fetch_data(params, sign = True).findtext('token')
 
     @LastfmBase.cached_property
     def auth_url(self):
-        """The authenication URL for the authenticated session."""
+        """
+        The authenication URL for the authenticated session.
+        @rtype: L{str}
+        """
         return "http://www.last.fm/api/auth/?api_key=%s&token=%s" % (self.api_key, self.auth_token)
 
     def set_cache(self, cache):
@@ -122,7 +137,7 @@ class Api(object):
         Override the default cache timeout.
 
         @param cache_timeout: time, in seconds, that responses should be reused
-        @type cache_timeout: int
+        @type cache_timeout: L{int}
         """
         self._cache_timeout = cache_timeout
 
@@ -131,7 +146,7 @@ class Api(object):
         Override the default user agent.
 
         @param user_agent: a string that should be send to the server as the User-agent
-        @type user_agent: str
+        @type user_agent: L{str}
         """
         self._request_headers['User-Agent'] = user_agent
 
@@ -143,11 +158,11 @@ class Api(object):
         Get an album object.
         
         @param album:    the album name
-        @type album:     str
+        @type album:     L{str}
         @param artist:   the album artist name 
-        @type artist:    str OR L{Artist}
+        @type artist:    L{str} OR L{Artist}
         @param mbid:     MBID of the album
-        @type mbid:      str
+        @type mbid:      L{str}
         
         @return:         an Album object corresponding the provided album name
         @rtype:          L{Album}
@@ -169,9 +184,9 @@ class Api(object):
         Search for an album by name.
         
         @param album:     the album name
-        @type album:      str
+        @type album:      L{str}
         @param limit:     maximum number of results returned (optional)
-        @type limit:      int
+        @type limit:      L{int}
         
         @return:          matches sorted by relevance
         @rtype:           L{lazylist} of L{Album}
@@ -187,9 +202,9 @@ class Api(object):
         Get an artist object.
         
         @param artist:    the artist name
-        @type artist:     str
+        @type artist:     L{str}
         @param mbid:      MBID of the artist
-        @type mbid:       str
+        @type mbid:       L{str}
         
         @return:         an Artist object corresponding the provided artist name
         @rtype:          L{Artist}
@@ -208,9 +223,9 @@ class Api(object):
         Search for an artist by name.
         
         @param artist:    the artist name
-        @type artist:     str
+        @type artist:     L{str}
         @param limit:     maximum number of results returned (optional)
-        @type limit:      int
+        @type limit:      L{int}
         
         @return:          matches sorted by relevance
         @rtype:           L{lazylist} of L{Artist}
@@ -224,7 +239,7 @@ class Api(object):
         Get an event object.
         
         @param event:     the event id
-        @type event:      int
+        @type event:      L{int}
         
         @return:          an event object corresponding to the event id provided
         @rtype:           L{Event}
@@ -240,7 +255,7 @@ class Api(object):
         Get a location object.
         
         @param city:    the city name
-        @type city:     str
+        @type city:     L{str}
         
         @return:        a location object corresponding to the city name provided
         @rtype:         L{Location}
@@ -252,7 +267,7 @@ class Api(object):
         Get a country object.
         
         @param name:    the country name
-        @type name:     str
+        @type name:     L{str}
         
         @return:        a country object corresponding to the country name provided
         @rtype:         L{Country}
@@ -264,7 +279,7 @@ class Api(object):
         Get a group object.
         
         @param name:    the group name
-        @type name:     str
+        @type name:     L{str}
         
         @return:        a group object corresponding to the group name provided
         @rtype:         L{Group}
@@ -276,7 +291,7 @@ class Api(object):
         Get a playlist object.
         
         @param url:    lastfm url of the playlist
-        @type url:     str
+        @type url:     L{str}
         
         @return:        a playlist object corresponding to the playlist url provided
         @rtype:         L{Playlist}
@@ -290,7 +305,7 @@ class Api(object):
         Get a tag object.
         
         @param name:    the tag name
-        @type name:     str
+        @type name:     L{str}
         
         @return:        a tag object corresponding to the tag name provided
         @rtype:         L{Tag}
@@ -302,7 +317,7 @@ class Api(object):
         Get the top global tags on Last.fm, sorted by popularity (number of times used).
         
         @return:        a list of top global tags
-        @rtype:         list of L{Tag}
+        @rtype:         L{list} of L{Tag}
         """
         return Tag.get_top_tags(self)
 
@@ -313,9 +328,9 @@ class Api(object):
         Search for a tag by name.
         
         @param tag:       the tag name
-        @type tag:        str
+        @type tag:        L{str}
         @param limit:     maximum number of results returned (optional)
-        @type limit:      int
+        @type limit:      L{int}
         
         @return:          matches sorted by relevance
         @rtype:           L{lazylist} of L{Tag}
@@ -334,15 +349,15 @@ class Api(object):
         additional information is returned. 
         
         @param type1:    'user' OR 'artists' OR 'myspace'
-        @type type1:     str  
+        @type type1:     L{str}  
         @param type2:    'user' OR 'artists' OR 'myspace'
-        @type type2:     str
+        @type type2:     L{str}
         @param value1:   Last.fm username OR Comma-separated artist names OR MySpace profile URL
-        @type value1:    str
+        @type value1:    L{str}
         @param value2:   Last.fm username OR Comma-separated artist names OR MySpace profile URL 
-        @type value2:    str
+        @type value2:    L{str}
         @param limit:    maximum number of results returned (optional)
-        @type limit:     int
+        @type limit:     L{int}
         
         @return:         the taste-o-meter score for the inputs
         @rtype:          L{Tasteometer}
@@ -356,11 +371,11 @@ class Api(object):
         Get a track object.
         
         @param track:    the track name
-        @type track:     str
+        @type track:     L{str}
         @param artist:   the track artist
-        @type artist:    str OR L{Artist}
+        @type artist:    L{str} OR L{Artist}
         @param mbid:     MBID of the track
-        @type mbid:      str
+        @type mbid:      L{str}
         
         @return:         a track object corresponding to the track name provided
         @rtype:          L{Track}
@@ -382,11 +397,11 @@ class Api(object):
         Search for a track by name.
         
         @param track:     the track name
-        @type track:      str
+        @type track:      L{str}
         @param artist:    the track artist (optional)
-        @type artist:     str OR L{Artist}  
+        @type artist:     L{str} OR L{Artist}  
         @param limit:     maximum number of results returned (optional)
-        @type limit:      int
+        @type limit:      L{int}
         
         @return:          matches sorted by relevance
         @rtype:           L{lazylist} of L{Track}
@@ -402,7 +417,7 @@ class Api(object):
         Get an user object.
         
         @param name:    the last.fm user name
-        @type name:     str
+        @type name:     L{str}
         
         @return:        an user object corresponding to the user name provided
         @rtype:         L{User}
@@ -431,7 +446,7 @@ class Api(object):
         Get a venue object.
         
         @param venue:    the venue name
-        @type venue:     str
+        @type venue:     L{str}
         
         @return:         a venue object corresponding to the venue name provided
         @rtype:          L{Venue}
@@ -450,12 +465,12 @@ class Api(object):
         Search for a venue by name.
         
         @param venue:     the venue name
-        @type venue:      str
+        @type venue:      L{str}
         @param country:   filter the results by country. Expressed as an ISO 3166-2 code.
                           (optional)
-        @type country:    str  
+        @type country:    L{str}  
         @param limit:     maximum number of results returned (optional)
-        @type limit:      int
+        @type limit:      L{int}
         
         @return:          matches sorted by relevance
         @rtype:           L{lazylist} of L{Venue}

@@ -393,7 +393,8 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">list of <a href="lastfm.tag.Tag-class.html" class="link">Tag</a></span>
+      <span class="summary-type"><code class="link">list</code> of <a href="lastfm.tag.Tag-class.html"
+      class="link">Tag</a></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -904,7 +905,7 @@ object --+
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
         <a href="lastfm.api.Api-class.html#api_key" class="summary-name">api_key</a><br />
       The last.fm API key
@@ -912,7 +913,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
         <a href="lastfm.api.Api-class.html#secret" class="summary-name">secret</a><br />
       The last.fm API secret
@@ -920,15 +921,15 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
         <a href="lastfm.api.Api-class.html#session_key" class="summary-name">session_key</a><br />
-      Session key for the authenticated session.
+      Session key for the authenticated session
     </td>
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
         <a href="lastfm.api.Api-class.html#auth_token" class="summary-name">auth_token</a><br />
       The authenication token for the authenticated session.
@@ -936,7 +937,7 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
         <a href="lastfm.api.Api-class.html#auth_url" class="summary-name">auth_url</a><br />
       The authenication URL for the authenticated session.
@@ -995,15 +996,15 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>api_key</code></strong> (str) - last.fm API key</li>
-        <li><strong class="pname"><code>secret</code></strong> (str) - last.fm API secret (optional, required only for authenticated 
+        <li><strong class="pname"><code>api_key</code></strong> (<code class="link">str</code>) - last.fm API key</li>
+        <li><strong class="pname"><code>secret</code></strong> (<code class="link">str</code>) - last.fm API secret (optional, required only for authenticated 
           webservice methods)</li>
-        <li><strong class="pname"><code>session_key</code></strong> (str) - session key for the authenticated session (optional, required 
+        <li><strong class="pname"><code>session_key</code></strong> (<code class="link">str</code>) - session key for the authenticated session (optional, required 
           only for authenticated webservice methods)</li>
-        <li><strong class="pname"><code>input_encoding</code></strong> (str) - encoding of the input data (optional)</li>
-        <li><strong class="pname"><code>request_headers</code></strong> (dict) - HTTP headers for the requests to last.fm webservices (optional)</li>
-        <li><strong class="pname"><code>no_cache</code></strong> (bool) - flag to switch off file cache (optional)</li>
-        <li><strong class="pname"><code>debug</code></strong> (bool) - flag to switch on debugging (optional)</li>
+        <li><strong class="pname"><code>input_encoding</code></strong> (<code class="link">str</code>) - encoding of the input data (optional)</li>
+        <li><strong class="pname"><code>request_headers</code></strong> (<code class="link">dict</code>) - HTTP headers for the requests to last.fm webservices (optional)</li>
+        <li><strong class="pname"><code>no_cache</code></strong> (<code class="link">bool</code>) - flag to switch off file cache (optional)</li>
+        <li><strong class="pname"><code>debug</code></strong> (<code class="link">bool</code>) - flag to switch on debugging (optional)</li>
     </ul></dd>
     <dt>Overrides:
         object.__init__
@@ -1104,7 +1105,7 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>cache_timeout</code></strong> (int) - time, in seconds, that responses should be reused</li>
+        <li><strong class="pname"><code>cache_timeout</code></strong> (<code class="link">int</code>) - time, in seconds, that responses should be reused</li>
     </ul></dd>
   </dl>
 </td></tr></table>
@@ -1128,7 +1129,7 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>user_agent</code></strong> (str) - a string that should be send to the server as the User-agent</li>
+        <li><strong class="pname"><code>user_agent</code></strong> (<code class="link">str</code>) - a string that should be send to the server as the User-agent</li>
     </ul></dd>
   </dl>
 </td></tr></table>
@@ -1154,10 +1155,10 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>album</code></strong> (str) - the album name</li>
-        <li><strong class="pname"><code>artist</code></strong> (str OR <a href="lastfm.artist.Artist-class.html" 
-          class="link">Artist</a>) - the album artist name</li>
-        <li><strong class="pname"><code>mbid</code></strong> (str) - MBID of the album</li>
+        <li><strong class="pname"><code>album</code></strong> (<code class="link">str</code>) - the album name</li>
+        <li><strong class="pname"><code>artist</code></strong> (<code class="link">str</code> OR <a 
+          href="lastfm.artist.Artist-class.html" class="link">Artist</a>) - the album artist name</li>
+        <li><strong class="pname"><code>mbid</code></strong> (<code class="link">str</code>) - MBID of the album</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.album.Album-class.html" class="link">Album</a></dt>
         <dd>an Album object corresponding the provided album name</dd>
@@ -1193,8 +1194,8 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>album</code></strong> (str) - the album name</li>
-        <li><strong class="pname"><code>limit</code></strong> (int) - maximum number of results returned (optional)</li>
+        <li><strong class="pname"><code>album</code></strong> (<code class="link">str</code>) - the album name</li>
+        <li><strong class="pname"><code>limit</code></strong> (<code class="link">int</code>) - maximum number of results returned (optional)</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.lazylist-module.html" class="link" 
       onclick="show_private();">lazylist</a> of <a 
@@ -1227,8 +1228,8 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>artist</code></strong> (str) - the artist name</li>
-        <li><strong class="pname"><code>mbid</code></strong> (str) - MBID of the artist</li>
+        <li><strong class="pname"><code>artist</code></strong> (<code class="link">str</code>) - the artist name</li>
+        <li><strong class="pname"><code>mbid</code></strong> (<code class="link">str</code>) - MBID of the artist</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.artist.Artist-class.html" class="link">Artist</a></dt>
         <dd>an Artist object corresponding the provided artist name</dd>
@@ -1264,8 +1265,8 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>artist</code></strong> (str) - the artist name</li>
-        <li><strong class="pname"><code>limit</code></strong> (int) - maximum number of results returned (optional)</li>
+        <li><strong class="pname"><code>artist</code></strong> (<code class="link">str</code>) - the artist name</li>
+        <li><strong class="pname"><code>limit</code></strong> (<code class="link">int</code>) - maximum number of results returned (optional)</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.lazylist-module.html" class="link" 
       onclick="show_private();">lazylist</a> of <a 
@@ -1297,7 +1298,7 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>event</code></strong> (int) - the event id</li>
+        <li><strong class="pname"><code>event</code></strong> (<code class="link">int</code>) - the event id</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.event.Event-class.html" class="link">Event</a></dt>
         <dd>an event object corresponding to the event id provided</dd>
@@ -1331,7 +1332,7 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>city</code></strong> (str) - the city name</li>
+        <li><strong class="pname"><code>city</code></strong> (<code class="link">str</code>) - the city name</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.geo.Location-class.html" class="link">Location</a></dt>
         <dd>a location object corresponding to the city name provided</dd>
@@ -1357,7 +1358,7 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>name</code></strong> (str) - the country name</li>
+        <li><strong class="pname"><code>name</code></strong> (<code class="link">str</code>) - the country name</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.geo.Country-class.html" class="link">Country</a></dt>
         <dd>a country object corresponding to the country name provided</dd>
@@ -1383,7 +1384,7 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>name</code></strong> (str) - the group name</li>
+        <li><strong class="pname"><code>name</code></strong> (<code class="link">str</code>) - the group name</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.group.Group-class.html" class="link">Group</a></dt>
         <dd>a group object corresponding to the group name provided</dd>
@@ -1409,7 +1410,7 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>url</code></strong> (str) - lastfm url of the playlist</li>
+        <li><strong class="pname"><code>url</code></strong> (<code class="link">str</code>) - lastfm url of the playlist</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.playlist.Playlist-class.html" 
       class="link">Playlist</a></dt>
@@ -1440,7 +1441,7 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>name</code></strong> (str) - the tag name</li>
+        <li><strong class="pname"><code>name</code></strong> (<code class="link">str</code>) - the tag name</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.tag.Tag-class.html" class="link">Tag</a></dt>
         <dd>a tag object corresponding to the tag name provided</dd>
@@ -1464,7 +1465,8 @@ object --+
   <p>Get the top global tags on Last.fm, sorted by popularity (number of 
   times used).</p>
   <dl class="fields">
-    <dt>Returns: list of <a href="lastfm.tag.Tag-class.html" class="link">Tag</a></dt>
+    <dt>Returns: <code class="link">list</code> of <a href="lastfm.tag.Tag-class.html"
+      class="link">Tag</a></dt>
         <dd>a list of top global tags</dd>
   </dl>
 </td></tr></table>
@@ -1489,8 +1491,8 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>tag</code></strong> (str) - the tag name</li>
-        <li><strong class="pname"><code>limit</code></strong> (int) - maximum number of results returned (optional)</li>
+        <li><strong class="pname"><code>tag</code></strong> (<code class="link">str</code>) - the tag name</li>
+        <li><strong class="pname"><code>limit</code></strong> (<code class="link">int</code>) - maximum number of results returned (optional)</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.lazylist-module.html" class="link" 
       onclick="show_private();">lazylist</a> of <a 
@@ -1528,13 +1530,13 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>type1</code></strong> (str) - 'user' OR 'artists' OR 'myspace'</li>
-        <li><strong class="pname"><code>type2</code></strong> (str) - 'user' OR 'artists' OR 'myspace'</li>
-        <li><strong class="pname"><code>value1</code></strong> (str) - Last.fm username OR Comma-separated artist names OR MySpace 
+        <li><strong class="pname"><code>type1</code></strong> (<code class="link">str</code>) - 'user' OR 'artists' OR 'myspace'</li>
+        <li><strong class="pname"><code>type2</code></strong> (<code class="link">str</code>) - 'user' OR 'artists' OR 'myspace'</li>
+        <li><strong class="pname"><code>value1</code></strong> (<code class="link">str</code>) - Last.fm username OR Comma-separated artist names OR MySpace 
           profile URL</li>
-        <li><strong class="pname"><code>value2</code></strong> (str) - Last.fm username OR Comma-separated artist names OR MySpace 
+        <li><strong class="pname"><code>value2</code></strong> (<code class="link">str</code>) - Last.fm username OR Comma-separated artist names OR MySpace 
           profile URL</li>
-        <li><strong class="pname"><code>limit</code></strong> (int) - maximum number of results returned (optional)</li>
+        <li><strong class="pname"><code>limit</code></strong> (<code class="link">int</code>) - maximum number of results returned (optional)</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.tasteometer.Tasteometer-class.html" 
       class="link">Tasteometer</a></dt>
@@ -1567,10 +1569,10 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>track</code></strong> (str) - the track name</li>
-        <li><strong class="pname"><code>artist</code></strong> (str OR <a href="lastfm.artist.Artist-class.html" 
-          class="link">Artist</a>) - the track artist</li>
-        <li><strong class="pname"><code>mbid</code></strong> (str) - MBID of the track</li>
+        <li><strong class="pname"><code>track</code></strong> (<code class="link">str</code>) - the track name</li>
+        <li><strong class="pname"><code>artist</code></strong> (<code class="link">str</code> OR <a 
+          href="lastfm.artist.Artist-class.html" class="link">Artist</a>) - the track artist</li>
+        <li><strong class="pname"><code>mbid</code></strong> (<code class="link">str</code>) - MBID of the track</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.track.Track-class.html" class="link">Track</a></dt>
         <dd>a track object corresponding to the track name provided</dd>
@@ -1607,10 +1609,10 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>track</code></strong> (str) - the track name</li>
-        <li><strong class="pname"><code>artist</code></strong> (str OR <a href="lastfm.artist.Artist-class.html" 
-          class="link">Artist</a>) - the track artist (optional)</li>
-        <li><strong class="pname"><code>limit</code></strong> (int) - maximum number of results returned (optional)</li>
+        <li><strong class="pname"><code>track</code></strong> (<code class="link">str</code>) - the track name</li>
+        <li><strong class="pname"><code>artist</code></strong> (<code class="link">str</code> OR <a 
+          href="lastfm.artist.Artist-class.html" class="link">Artist</a>) - the track artist (optional)</li>
+        <li><strong class="pname"><code>limit</code></strong> (<code class="link">int</code>) - maximum number of results returned (optional)</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.lazylist-module.html" class="link" 
       onclick="show_private();">lazylist</a> of <a 
@@ -1642,7 +1644,7 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>name</code></strong> (str) - the last.fm user name</li>
+        <li><strong class="pname"><code>name</code></strong> (<code class="link">str</code>) - the last.fm user name</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.user.User-class.html" class="link">User</a></dt>
         <dd>an user object corresponding to the user name provided</dd>
@@ -1697,7 +1699,7 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>venue</code></strong> (str) - the venue name</li>
+        <li><strong class="pname"><code>venue</code></strong> (<code class="link">str</code>) - the venue name</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.venue.Venue-class.html" class="link">Venue</a></dt>
         <dd>a venue object corresponding to the venue name provided</dd>
@@ -1733,10 +1735,10 @@ object --+
   <dl class="fields">
     <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>venue</code></strong> (str) - the venue name</li>
-        <li><strong class="pname"><code>country</code></strong> (str) - filter the results by country. Expressed as an ISO 3166-2 code. 
+        <li><strong class="pname"><code>venue</code></strong> (<code class="link">str</code>) - the venue name</li>
+        <li><strong class="pname"><code>country</code></strong> (<code class="link">str</code>) - filter the results by country. Expressed as an ISO 3166-2 code. 
           (optional)</li>
-        <li><strong class="pname"><code>limit</code></strong> (int) - maximum number of results returned (optional)</li>
+        <li><strong class="pname"><code>limit</code></strong> (<code class="link">int</code>) - maximum number of results returned (optional)</li>
     </ul></dd>
     <dt>Returns: <a href="lastfm.lazylist-module.html" class="link" 
       onclick="show_private();">lazylist</a> of <a 
@@ -1804,6 +1806,8 @@ object --+
     <dd class="value"><span class="summary-sig"><i>unreachable</i>.api_key(<span class="summary-sig-arg">self</span>)</span>
         - The last.fm API key
     </dd>
+    <dt>Type:</dt>
+      <dd><code class="link">str</code></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -1819,6 +1823,8 @@ object --+
     <dd class="value"><span class="summary-sig"><i>unreachable</i>.secret(<span class="summary-sig-arg">self</span>)</span>
         - The last.fm API secret
     </dd>
+    <dt>Type:</dt>
+      <dd><code class="link">str</code></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -1828,12 +1834,14 @@ object --+
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">session_key</h3>
-  <p>Session key for the authenticated session.</p>
+  <p>Session key for the authenticated session</p>
   <dl class="fields">
     <dt>Get Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>.session_key(<span class="summary-sig-arg">self</span>)</span>
-        - Session key for the authenticated session.
+        - Session key for the authenticated session
     </dd>
+    <dt>Type:</dt>
+      <dd><code class="link">str</code></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -1848,6 +1856,8 @@ object --+
     <dt>Get Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>.wrapper(<span class="summary-sig-arg">ob</span>)</span>
     </dd>
+    <dt>Type:</dt>
+      <dd><code class="link">str</code></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -1862,6 +1872,8 @@ object --+
     <dt>Get Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>.wrapper(<span class="summary-sig-arg">ob</span>)</span>
     </dd>
+    <dt>Type:</dt>
+      <dd><code class="link">str</code></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -1897,7 +1909,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Thu Mar 05 01:36:22 2009
+    Generated by Epydoc 3.0.1 on Thu Mar 05 10:03:24 2009
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

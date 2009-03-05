@@ -28,25 +28,25 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
         @param api:             an instance of L{Api}
         @type api:              L{Api}
         @param name:            the album name
-        @type name:             str
+        @type name:             L{str}
         @param artist:          the album artist name 
         @type artist:           L{Artist}
         @param id:              the album ID
-        @type id:               str
+        @type id:               L{str}
         @param mbid:            MBID of the album
-        @type mbid:             str
+        @type mbid:             L{str}
         @param url:             URL of the album on last.fm
-        @type url:              str
+        @type url:              L{str}
         @param release_date:    release date of the album
-        @type release_date:     datetime.datetime
+        @type release_date:     C{datetime.datetime}
         @param image:           the cover images of the album in various sizes
-        @type image:            dict
+        @type image:            L{dict}
         @param stats:           the album statistics
         @type stats:            L{Stats}
         @param top_tags:        top tags of the album
-        @type top_tags:         list of L{Tag}
+        @type top_tags:         L{list} of L{Tag}
         @param streamable:      flag indicating if the album is streamable
-        @type streamable:       bool
+        @type streamable:       L{bool}
         
         @raise InvalidParametersError: If an instance of L{Api} is not provided as the first
                                        parameter then an Exception is raised.
@@ -74,64 +74,94 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
     
     @property
     def name(self):
-        """name of the album"""
+        """
+        name of the album
+        @rtype: L{str}
+        """
         return self._name
     
     @property
     def artist(self):
-        """artist of the album"""
+        """
+        artist of the album
+        @rtype: L{Artist}
+        """
         return self._artist
     
     @property
     def id(self):
-        """id of the album"""
+        """
+        id of the album
+        @rtype: L{int}
+        """
         if self._id is None:
             self._fill_info()
         return self._id
 
     @property
     def mbid(self):
-        """mbid of the album"""
+        """
+        mbid of the album
+        @rtype: L{str}
+        """
         if self._mbid is None:
             self._fill_info()
         return self._mbid
 
     @property
     def url(self):
-        """url of the album's page"""
+        """
+        url of the album's page
+        @rtype: L{str}
+        """
         if self._url is None:
             self._fill_info()
         return self._url
 
     @property
     def release_date(self):
-        """release date of the album"""
+        """
+        release date of the album
+        @rtype: C{datetime.datetime}
+        """
         if self._release_date is None:
             self._fill_info()
         return self._release_date
 
     @property
     def image(self):
-        """cover images of the album"""
+        """
+        cover images of the album
+        @rtype: L{dict}
+        """
         if self._image is None:
             self._fill_info()
         return self._image
 
     @property
     def stats(self):
-        """stats related to the album"""
+        """
+        stats related to the album
+        @rtype: L{Stats}
+        """
         if self._stats is None:
             self._fill_info()
         return self._stats
     
     @property
     def streamable(self):
-        """is the album streamable"""
+        """
+        is the album streamable
+        @rtype: L{bool}
+        """
         return self._streamable
 
     @LastfmBase.cached_property
     def top_tags(self):
-        """top tags for the album"""
+        """
+        top tags for the album
+        @rtype: L{list} of L{Tag}
+        """
         params = {'method': 'album.getInfo'}
         if self.artist and self.name:
             params.update({'artist': self.artist.name, 'album': self.name})
@@ -150,12 +180,18 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
 
     @LastfmBase.top_property("top_tags")
     def top_tag(self):
-        """top tag for the album"""
+        """
+        top tag for the album
+        @rtype: L{Tag}
+        """
         pass
     
     @LastfmBase.cached_property
     def playlist(self):
-        """playlist for the album"""
+        """
+        playlist for the album
+        @rtype: L{Playlist}
+        """
         return Playlist.fetch(self._api, "lastfm://playlist/album/%s" % self.id)
     
     @staticmethod
@@ -169,11 +205,11 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
         @param api:      an instance of L{Api}
         @type api:       L{Api}
         @param artist:   the album artist name 
-        @type artist:    str OR L{Artist}
+        @type artist:    L{str} OR L{Artist}
         @param album:    the album name
-        @type album:     str
+        @type album:     L{str}
         @param mbid:     MBID of the album
-        @type mbid:      str
+        @type mbid:      L{str}
         
         @return:         an Album object corresponding the provided album name
         @rtype:          L{Album}
