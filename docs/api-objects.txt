@@ -670,6 +670,7 @@ lastfm.user.User.Playlist	lastfm.user.User.Playlist-class.html
 lastfm.base.LastfmBase.__ne__	lastfm.base.LastfmBase-class.html#__ne__
 lastfm.user.User.library	lastfm.user.User-class.html#library
 lastfm.user.User.top_album	lastfm.user.User-class.html#top_album
+lastfm.user.User.get_info	lastfm.user.User-class.html#get_info
 lastfm.user.User.get_weekly_album_chart	lastfm.user.User-class.html#get_weekly_album_chart
 lastfm.user.User.top_tag	lastfm.user.User-class.html#top_tag
 lastfm.user.User.get_top_tracks	lastfm.user.User-class.html#get_top_tracks

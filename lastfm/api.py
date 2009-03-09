@@ -177,9 +177,7 @@ class Api(object):
             artist = artist.name
         return Album.get_info(self, artist, album, mbid)
 
-    def search_album(self,
-                     album,
-                     limit = None):
+    def search_album(self, album, limit = None):
         """
         Search for an album by name.
         

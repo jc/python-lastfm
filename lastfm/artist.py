@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""Module for calling Artist related last.fm web services API methods"""
 
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
@@ -21,6 +22,33 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
                  similar = None,
                  top_tags = None,
                  bio = None):
+        """
+        Create an Artist object by providing all the data related to it.
+        
+        @param api:             an instance of L{Api}
+        @type api:              L{Api}
+        @param name:            the artist name
+        @type name:             L{str}
+        @param mbid:            MBID of the artist
+        @type mbid:             L{str}
+        @param url:             URL of the artist on last.fm
+        @type url:              L{str}
+        @param image:           the images of the artist in various sizes
+        @type image:            L{dict}
+        @param streamable:      flag indicating if the artist is streamable from last.fm
+        @type streamable:       L{bool}
+        @param stats:           the artist statistics
+        @type stats:            L{Stats}
+        @param similar:         artists similar to the provided artist
+        @type similar:          L{list} of L{Artist}
+        @param top_tags:        top tags for the artist
+        @type top_tags:         L{list} of L{Tag}
+        @param bio:             biography of the artist
+        @type bio:              L{Wiki}
+        
+        @raise InvalidParametersError: If an instance of L{Api} is not provided as the first
+                                       parameter then an Exception is raised.
+        """
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         Sharable.init(self, api)
@@ -52,45 +80,72 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
 
     @property
     def name(self):
-        """name of the artist"""
+        """
+        name of the artist
+        @rtype: L{str}
+        """
         return self._name
 
     @property
     def mbid(self):
-        """mbid of the artist"""
+        """
+        MBID of the artist
+        @rtype: L{str}
+        """
         if self._mbid is None:
             self._fill_info()
         return self._mbid
 
     @property
     def url(self):
-        """url of the artist's page"""
+        """
+        url of the artist's page
+        @rtype: L{str}
+        """
         if self._url is None:
             self._fill_info()
         return self._url
 
     @property
     def image(self):
-        """images of the artist"""
+        """
+        images of the artist
+        @rtype: L{dict}
+        """
         if self._image is None:
             self._fill_info()
         return self._image
 
     @property
     def streamable(self):
-        """is the artist streamable"""
+        """
+        is the artist streamable on last.fm
+        @rtype: L{bool}
+        """
         if self._streamable is None:
             self._fill_info()
         return self._streamable
 
     @property
     def stats(self):
-        """stats for the artist"""
+        """
+        stats for the artist
+        @rtype: L{Stats}
+        """
         if self._stats is None:
             self._fill_info()
         return self._stats
 
     def get_similar(self, limit = None):
+        """
+        Get the artists similar to this artist.
+        
+        @param limit: the number of artists returned (optional)
+        @type limit:  L{int}
+        
+        @return:      artists similar to this artist
+        @rtype:       L{list} of L{Artist}
+        """
         params = self._default_params({'method': 'artist.getSimilar'})
         if limit is not None:
             params.update({'limit': limit})
@@ -114,19 +169,28 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
 
     @property
     def similar(self):
-        """artists similar to this artist"""
+        """
+        artists similar to this artist
+        @rtype: L{list} of L{Artist}
+        """
         if self._similar is None or len(self._similar) < 6:
             return self.get_similar()
         return self._similar[:]
 
     @LastfmBase.top_property("similar")
     def most_similar(self):
-        """artist most similar to this artist"""
+        """
+        artist most similar to this artist
+        @rtype: L{Artist}
+        """
         pass
 
     @property
     def top_tags(self):
-        """top tags for the artist"""
+        """
+        top tags for the artist
+        @rtype: L{list} of L{Tag}
+        """
         if self._top_tags is None or len(self._top_tags) < 6:
             params = self._default_params({'method': 'artist.getTopTags'})
             data = self._api._fetch_data(params).find('toptags')
@@ -143,19 +207,28 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
 
     @LastfmBase.top_property("top_tags")
     def top_tag(self):
-        """top tag for the artist"""
+        """
+        top tag for the artist
+        @rtype: L{Tag}
+        """
         pass
 
     @property
     def bio(self):
-        """biography of the artist"""
+        """
+        biography of the artist
+        @rtype: L{Wiki}
+        """
         if self._bio is None:
             self._fill_info()
         return self._bio
 
     @LastfmBase.cached_property
     def events(self):
-        """events for the artist"""
+        """
+        events for the artist
+        @rtype: L{lazylist} of L{Event}
+        """
         params = self._default_params({'method': 'artist.getEvents'})
         data = self._api._fetch_data(params).find('events')
 
@@ -166,7 +239,10 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
 
     @LastfmBase.cached_property
     def top_albums(self):
-        """top albums of the artist"""
+        """
+        top albums of the artist
+        @rtype: L{list} of L{Album}
+        """
         params = self._default_params({'method': 'artist.getTopAlbums'})
         data = self._api._fetch_data(params).find('topalbums')
 
@@ -190,12 +266,18 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
 
     @LastfmBase.top_property("top_albums")
     def top_album(self):
-        """top album of the artist"""
+        """
+        top album of the artist
+        @rtype: L{Album}
+        """
         pass
 
     @LastfmBase.cached_property
     def top_fans(self):
-        """top fans of the artist"""
+        """
+        top fans of the artist
+        @rtype: L{list} of L{User}
+        """
         params = self._default_params({'method': 'artist.getTopFans'})
         data = self._api._fetch_data(params).find('topfans')
         return [
@@ -215,12 +297,17 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
 
     @LastfmBase.top_property("top_fans")
     def top_fan(self):
-        """top fan of the artist"""
+        """
+        top fan of the artist
+        @rtype: L{User}"""
         pass
 
     @LastfmBase.cached_property
     def top_tracks(self):
-        """top tracks of the artist"""
+        """
+        top tracks of the artist
+        @rtype: L{list} of L{Track}
+        """
         params = self._default_params({'method': 'artist.getTopTracks'})
         data = self._api._fetch_data(params).find('toptracks')
         return [
@@ -244,13 +331,32 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
 
     @LastfmBase.top_property("top_tracks")
     def top_track(self):
-        """topmost fan of the artist"""
+        """
+        topmost track of the artist
+        @rtype: L{Track}
+        """
         pass
 
     @staticmethod
-    def get_info(api,
-                artist = None,
-                mbid = None):
+    def get_info(api, artist = None, mbid = None):
+        """
+        Get the data for the artist.
+        
+        @param api:      an instance of L{Api}
+        @type api:       L{Api}
+        @param artist:   the name of the artist
+        @type artist:    L{str}
+        @param mbid:     MBID of the artist
+        @type mbid:      L{str}
+        
+        @return:         an Artist object corresponding the provided artist name
+        @rtype:          L{Artist}
+        
+        @raise lastfm.InvalidParametersError: Either artist or mbid parameter has to 
+                                              be provided. Otherwise exception is raised.
+        
+        @note: Use the L{Api.get_artist} method instead of using this method directly.
+        """
         data = Artist._fetch_data(api, artist, mbid)
 
         a = Artist(api, name = data.findtext('name'))

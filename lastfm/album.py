@@ -43,9 +43,9 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
         @type image:            L{dict}
         @param stats:           the album statistics
         @type stats:            L{Stats}
-        @param top_tags:        top tags of the album
+        @param top_tags:        top tags for the album
         @type top_tags:         L{list} of L{Tag}
-        @param streamable:      flag indicating if the album is streamable
+        @param streamable:      flag indicating if the album is streamable from last.fm
         @type streamable:       L{bool}
         
         @raise InvalidParametersError: If an instance of L{Api} is not provided as the first
@@ -101,7 +101,7 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
     @property
     def mbid(self):
         """
-        mbid of the album
+        MBID of the album
         @rtype: L{str}
         """
         if self._mbid is None:
@@ -151,7 +151,7 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
     @property
     def streamable(self):
         """
-        is the album streamable
+        is the album streamable on last.fm
         @rtype: L{bool}
         """
         return self._streamable
@@ -195,10 +195,7 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
         return Playlist.fetch(self._api, "lastfm://playlist/album/%s" % self.id)
     
     @staticmethod
-    def get_info(api,
-                artist = None,
-                album = None,
-                mbid = None):
+    def get_info(api, artist = None, album = None, mbid = None):
         """
         Get the data for the album.
         
