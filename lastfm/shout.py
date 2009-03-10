@@ -6,6 +6,7 @@ __license__ = "GNU Lesser General Public License"
 
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable
+from lastfm.decorators import cached_property
 
 class Shout(LastfmBase, Cacheable):
     """A class representing a shout."""
@@ -13,20 +14,21 @@ class Shout(LastfmBase, Cacheable):
     def init(self,
              body = None,
              author = None,
-             date = None):
+             date = None,
+             **kwargs):
         self._body = body
         self._author = author
         self._date = date
     
-    @LastfmBase.cached_property
+    @cached_property
     def body(self):
         return self._body
 
-    @LastfmBase.cached_property
+    @cached_property
     def author(self):
         return self._author
 
-    @LastfmBase.cached_property
+    @cached_property
     def date(self):
         return self._date
     

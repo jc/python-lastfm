@@ -6,6 +6,7 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from lastfm.base import LastfmBase
+from lastfm.decorators import cached_property
 
 class Api(object):
     """The class representing the last.fm web services API."""
@@ -79,6 +80,15 @@ class Api(object):
         @rtype: L{str}
         """
         return self._secret
+    
+    def set_secret(self, secret):
+        """
+        Set the last.fm API secret.
+        
+        @param secret:    the secret
+        @type secret:     L{str}
+        """
+        self._secret = secret
 
     @property
     def session_key(self):
@@ -88,28 +98,37 @@ class Api(object):
         """
         return self._session_key
 
-    def set_session_key(self):
+    def set_session_key(self, session_key = None):
         """
         Set the session key for the authenticated session.
-        @raise lastfm.AuthenticationFailedError: API secret must be present to call this method.
+        
+        @param session_key: the session key for authentication (optional). If not provided then
+                            a new one is fetched from last.fm
+        @type session_key: L{str}
+        
+        @raise lastfm.AuthenticationFailedError: Either session_key should be provided or 
+                                                 API secret must be present.
         """
-        params = {'method': 'auth.getSession', 'token': self.auth_token}
-        self._session_key = self._fetch_data(params, sign = True).findtext('session/key')
-        self._auth_token = None
+        if session_key is not None:
+            self._session_key = session_key
+        else:
+            params = {'method': 'auth.getSession', 'token': self.auth_token}
+            self._session_key = self._fetch_data(params, sign = True).findtext('session/key')
+            self._auth_token = None
 
-    @LastfmBase.cached_property
+    @cached_property
     def auth_token(self):
         """
-        The authenication token for the authenticated session.
+        The authentication token for the authenticated session.
         @rtype: L{str}
         """
         params = {'method': 'auth.getToken'}
         return self._fetch_data(params, sign = True).findtext('token')
 
-    @LastfmBase.cached_property
+    @cached_property
     def auth_url(self):
         """
-        The authenication URL for the authenticated session.
+        The authentication URL for the authenticated session.
         @rtype: L{str}
         """
         return "http://www.last.fm/api/auth/?api_key=%s&token=%s" % (self.api_key, self.auth_token)

@@ -8,6 +8,7 @@ __license__ = "GNU Lesser General Public License"
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable, Searchable, Sharable, Shoutable, Taggable
 from lastfm.lazylist import lazylist
+from lastfm.decorators import cached_property, top_property
 
 class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
     """A class representing an artist."""
@@ -21,7 +22,8 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
                  stats = None,
                  similar = None,
                  top_tags = None,
-                 bio = None):
+                 bio = None,
+                 subject = None):
         """
         Create an Artist object by providing all the data related to it.
         
@@ -45,6 +47,8 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
         @type top_tags:         L{list} of L{Tag}
         @param bio:             biography of the artist
         @type bio:              L{Wiki}
+        @param subject:         the subject to which this instance belongs to
+        @type subject:          L{User} OR L{Artist} OR L{Tag} OR L{Track} OR L{WeeklyChart}
         
         @raise InvalidParametersError: If an instance of L{Api} is not provided as the first
                                        parameter then an Exception is raised.
@@ -77,6 +81,7 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
                          summary = bio.summary,
                          content = bio.content
                         )
+        self._subject = subject
 
     @property
     def name(self):
@@ -177,7 +182,7 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
             return self.get_similar()
         return self._similar[:]
 
-    @LastfmBase.top_property("similar")
+    @top_property("similar")
     def most_similar(self):
         """
         artist most similar to this artist
@@ -205,7 +210,7 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
                               ]
         return self._top_tags[:]
 
-    @LastfmBase.top_property("top_tags")
+    @top_property("top_tags")
     def top_tag(self):
         """
         top tag for the artist
@@ -223,7 +228,7 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
             self._fill_info()
         return self._bio
 
-    @LastfmBase.cached_property
+    @cached_property
     def events(self):
         """
         events for the artist
@@ -237,7 +242,7 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
                 for e in data.findall('event')
                 ]
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_albums(self):
         """
         top albums of the artist
@@ -264,7 +269,7 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
                 for a in data.findall('album')
                 ]
 
-    @LastfmBase.top_property("top_albums")
+    @top_property("top_albums")
     def top_album(self):
         """
         top album of the artist
@@ -272,7 +277,7 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
         """
         pass
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_fans(self):
         """
         top fans of the artist
@@ -295,14 +300,14 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
                 for u in data.findall('user')
                 ]
 
-    @LastfmBase.top_property("top_fans")
+    @top_property("top_fans")
     def top_fan(self):
         """
         top fan of the artist
         @rtype: L{User}"""
         pass
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_tracks(self):
         """
         top tracks of the artist
@@ -329,7 +334,7 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
                 for t in data.findall('track')
                 ]
 
-    @LastfmBase.top_property("top_tracks")
+    @top_property("top_tracks")
     def top_track(self):
         """
         topmost track of the artist

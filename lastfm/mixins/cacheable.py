@@ -17,7 +17,7 @@ class Cacheable(object):
         subject = None
         if 'subject' in kwds and not cls.__name__.startswith('Weekly'):
             subject = kwds['subject']
-            del kwds['subject']
+            #del kwds['subject']
 
         if 'bypass_registry' in kwds:
                 del kwds['bypass_registry']

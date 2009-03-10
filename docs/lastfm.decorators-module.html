@@ -3,7 +3,7 @@
           "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>lastfm.mixins.taggable.Taggable</title>
+  <title>lastfm.decorators</title>
   <link rel="stylesheet" href="epydoc.css" type="text/css" />
   <script type="text/javascript" src="epydoc.js"></script>
 </head>
@@ -43,9 +43,7 @@
     <td width="100%">
       <span class="breadcrumbs">
         <a href="lastfm-module.html">Package&nbsp;lastfm</a> ::
-        <a href="lastfm.mixins-module.html" onclick="show_private();">Package&nbsp;mixins</a> ::
-        <a href="lastfm.mixins.taggable-module.html" onclick="show_private();">Module&nbsp;taggable</a> ::
-        Class&nbsp;Taggable
+        Module&nbsp;decorators
       </span>
     </td>
     <td>
@@ -55,38 +53,37 @@
     onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
         <tr><td align="right"><span class="options"
             >[<a href="frames.html" target="_top">frames</a
-            >]&nbsp;|&nbsp;<a href="lastfm.mixins.taggable.Taggable-class.html"
+            >]&nbsp;|&nbsp;<a href="lastfm.decorators-module.html"
             target="_top">no&nbsp;frames</a>]</span></td></tr>
       </table>
     </td>
   </tr>
 </table>
-<!-- ==================== CLASS DESCRIPTION ==================== -->
-<h1 class="epydoc">Class Taggable</h1><p class="nomargin-top"><span class="codelink"><a href="lastfm.mixins.taggable-pysrc.html#Taggable">source&nbsp;code</a></span></p>
-<pre class="base-tree">
-object --+
-         |
-        <strong class="uidshort">Taggable</strong>
-</pre>
-
-<dl><dt>Known Subclasses:</dt>
-<dd>
-      <ul class="subclass-list">
-<li><a href="lastfm.album.Album-class.html">album.Album</a></li><li>, <a href="lastfm.artist.Artist-class.html">artist.Artist</a></li><li>, <a href="lastfm.track.Track-class.html">track.Track</a></li>  </ul>
-</dd></dl>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module decorators</h1><p class="nomargin-top"><span class="codelink"><a href="lastfm.decorators-pysrc.html">source&nbsp;code</a></span></p>
+<p>Module containting the decorators used in the package</p>
 
 <hr />
-<!-- ==================== INSTANCE METHODS ==================== -->
-<a name="section-InstanceMethods"></a>
+<div class="fields">      <p><strong>Version:</strong>
+        0.2
+      </p>
+      <p><strong>Author:</strong>
+        Abhinav Sarkar &lt;abhinav@abhinavsarkar.net&gt;
+      </p>
+      <p><strong>License:</strong>
+        GNU Lesser General Public License
+      </p>
+</div><!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
 <table class="summary" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr bgcolor="#70b0f0" class="table-header">
   <td colspan="2" class="table-header">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr valign="top">
-        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="left"><span class="table-header">Functions</span></td>
         <td align="right" valign="top"
-         ><span class="options">[<a href="#section-InstanceMethods"
+         ><span class="options">[<a href="#section-Functions"
          class="privatelink" onclick="toggle_private();"
          >hide private</a>]</span></td>
       </tr>
@@ -95,14 +92,15 @@ object --+
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><code class="link">property</code></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="init"></a><span class="summary-sig-name">init</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">api</span>)</span></td>
+          <td><span class="summary-sig"><a href="lastfm.decorators-module.html#top_property" class="summary-sig-name">top_property</a>(<span class="summary-sig-arg">list_property_name</span>)</span><br />
+      A decorator to return a property that returns the first value of list
+      attribute corresponding to the provided list property name.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.mixins.taggable-pysrc.html#Taggable.init">source&nbsp;code</a></span>
+            <span class="codelink"><a href="lastfm.decorators-pysrc.html#top_property">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -112,15 +110,14 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><code class="link">property</code></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="lastfm.mixins.taggable.Taggable-class.html#add_tags" class="summary-sig-name">add_tags</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">*args</span>,
-        <span class="summary-sig-arg">**kwargs</span>)</span></td>
+          <td><span class="summary-sig"><a href="lastfm.decorators-module.html#cached_property" class="summary-sig-name">cached_property</a>(<span class="summary-sig-arg">func</span>)</span><br />
+      A decorator to cache the atrribute of the object.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.decorators-pysrc.html">source&nbsp;code</a></span>
+            <span class="codelink"><a href="lastfm.decorators-pysrc.html#cached_property">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -130,70 +127,33 @@ object --+
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><code>function</code></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="lastfm.mixins.taggable.Taggable-class.html#remove_tag" class="summary-sig-name">remove_tag</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">*args</span>,
-        <span class="summary-sig-arg">**kwargs</span>)</span></td>
+          <td><span class="summary-sig"><a href="lastfm.decorators-module.html#authenticate" class="summary-sig-name">authenticate</a>(<span class="summary-sig-arg">func</span>)</span><br />
+      A decorator to check if the current user is authenticated or not.</td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.decorators-pysrc.html">source&nbsp;code</a></span>
+            <span class="codelink"><a href="lastfm.decorators-pysrc.html#authenticate">source&nbsp;code</a></span>
             
           </td>
         </tr>
       </table>
       
-    </td>
-  </tr>
-<tr class="private">
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="_default_params"></a><span class="summary-sig-name">_default_params</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">extra_params</span>=<span class="summary-sig-default"><code class="variable-group">{</code><code class="variable-group">}</code></span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.mixins.taggable-pysrc.html#Taggable._default_params">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
-      <code>__delattr__</code>,
-      <code>__format__</code>,
-      <code>__getattribute__</code>,
-      <code>__hash__</code>,
-      <code>__init__</code>,
-      <code>__new__</code>,
-      <code>__reduce__</code>,
-      <code>__reduce_ex__</code>,
-      <code>__repr__</code>,
-      <code>__setattr__</code>,
-      <code>__sizeof__</code>,
-      <code>__str__</code>,
-      <code>__subclasshook__</code>
-      </p>
     </td>
   </tr>
 </table>
-<!-- ==================== PROPERTIES ==================== -->
-<a name="section-Properties"></a>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
 <table class="summary" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr bgcolor="#70b0f0" class="table-header">
   <td colspan="2" class="table-header">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr valign="top">
-        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="left"><span class="table-header">Variables</span></td>
         <td align="right" valign="top"
-         ><span class="options">[<a href="#section-Properties"
+         ><span class="options">[<a href="#section-Variables"
          class="privatelink" onclick="toggle_private();"
          >hide private</a>]</span></td>
       </tr>
@@ -204,28 +164,26 @@ object --+
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="lastfm.mixins.taggable.Taggable-class.html#tags" class="summary-name">tags</a>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" class="summary">
-    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
-      <code>__class__</code>
-      </p>
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="'lastfm'"><code class="variable-quote">'</code><code class="variable-string">lastfm</code><code class="variable-quote">'</code></code>
     </td>
   </tr>
 </table>
-<!-- ==================== METHOD DETAILS ==================== -->
-<a name="section-MethodDetails"></a>
+<p class="indent-wrapped-lines"><b>Imports:</b>
+  <span title="copy">copy</span>,
+  <a href="lastfm.error.LastfmError-class.html" title="lastfm.error.LastfmError">LastfmError</a>,
+  <a href="lastfm.error.AuthenticationFailedError-class.html" title="lastfm.error.AuthenticationFailedError">AuthenticationFailedError</a>
+</p><br />
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr bgcolor="#70b0f0" class="table-header">
   <td colspan="2" class="table-header">
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
       <tr valign="top">
-        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="left"><span class="table-header">Function Details</span></td>
         <td align="right" valign="top"
-         ><span class="options">[<a href="#section-MethodDetails"
+         ><span class="options">[<a href="#section-FunctionDetails"
          class="privatelink" onclick="toggle_private();"
          >hide private</a>]</span></td>
       </tr>
@@ -233,86 +191,91 @@ object --+
   </td>
 </tr>
 </table>
-<a name="add_tags"></a>
+<a name="top_property"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">add_tags</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">*args</span>,
-        <span class="sig-arg">**kwargs</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">top_property</span>(<span class="sig-arg">list_property_name</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="lastfm.decorators-pysrc.html">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="lastfm.decorators-pysrc.html#top_property">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  
+  <p>A decorator to return a property that returns the first value of list 
+  attribute corresponding to the provided list property name.</p>
+  <p>For example, if the list property is top_albums, then the decorator 
+  returns a property that returns the first (top most) album.</p>
   <dl class="fields">
-    <dt>Decorators:</dt>
+    <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><code>@authenticate</code></li>
+        <li><strong class="pname"><code>list_property_name</code></strong> (<code class="link">str</code>) - the name of the list property. Like 'top_albums'.</li>
     </ul></dd>
+    <dt>Returns: <code class="link">property</code></dt>
+        <dd>a property that returns the first value of list attribute 
+          corresponding to the provided list property name</dd>
   </dl>
 </td></tr></table>
 </div>
-<a name="remove_tag"></a>
+<a name="cached_property"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">remove_tag</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">*args</span>,
-        <span class="sig-arg">**kwargs</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cached_property</span>(<span class="sig-arg">func</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="lastfm.decorators-pysrc.html">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="lastfm.decorators-pysrc.html#cached_property">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  
+  <p>A decorator to cache the atrribute of the object. When called for the 
+  first time, the value of the attribute is retrived and saved in an 
+  instance variable. Later calls return the copy of the cached value, so 
+  that the original cached value cannot be modified.</p>
   <dl class="fields">
-    <dt>Decorators:</dt>
+    <dt>Parameters:</dt>
     <dd><ul class="nomargin-top">
-        <li><code>@authenticate</code></li>
+        <li><strong class="pname"><code>func</code></strong> (<code>function</code>) - the getter function of the attribute</li>
     </ul></dd>
+    <dt>Returns: <code class="link">property</code></dt>
+        <dd>a property that wraps the getter function of the attribute</dd>
   </dl>
 </td></tr></table>
 </div>
-<br />
-<!-- ==================== PROPERTY DETAILS ==================== -->
-<a name="section-PropertyDetails"></a>
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr bgcolor="#70b0f0" class="table-header">
-  <td colspan="2" class="table-header">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-      <tr valign="top">
-        <td align="left"><span class="table-header">Property Details</span></td>
-        <td align="right" valign="top"
-         ><span class="options">[<a href="#section-PropertyDetails"
-         class="privatelink" onclick="toggle_private();"
-         >hide private</a>]</span></td>
-      </tr>
-    </table>
-  </td>
-</tr>
-</table>
-<a name="tags"></a>
+<a name="authenticate"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">tags</h3>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">authenticate</span>(<span class="sig-arg">func</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.decorators-pysrc.html#authenticate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
   
+  <p>A decorator to check if the current user is authenticated or not. Used
+  only on the functions that need authentication. If not authenticated then
+  an exception is raised.</p>
   <dl class="fields">
-    <dt>Get Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>.wrapper(<span class="summary-sig-arg">ob</span>)</span>
-    </dd>
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>func</code></strong> (<code>function</code>) - a function that needs to be authentication, for being called</li>
+    </ul></dd>
+    <dt>Returns: <code>function</code></dt>
+        <dd>a function that wraps the original function</dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="lastfm.error.AuthenticationFailedError-class.html">AuthenticationFailedError</a></strong></code> - If the user is not authenticated, then an exception is raised.</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>

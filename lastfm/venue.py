@@ -7,6 +7,7 @@ __license__ = "GNU Lesser General Public License"
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable, Searchable
 from lastfm.lazylist import lazylist
+from lastfm.decorators import cached_property
 
 class Venue(LastfmBase, Cacheable, Searchable):
     """A class representing a venue of an event"""
@@ -15,7 +16,8 @@ class Venue(LastfmBase, Cacheable, Searchable):
              id = None,
              name = None,
              location = None,
-             url = None):
+             url = None,
+             **kwargs):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         self._api = api
@@ -44,7 +46,7 @@ class Venue(LastfmBase, Cacheable, Searchable):
         """url of the event's page"""
         return self._url
 
-    @LastfmBase.cached_property
+    @cached_property
     def events(self):
         params = self._default_params({'method': 'venue.getEvents'})
         data = self._api._fetch_data(params).find('events')
@@ -80,7 +82,7 @@ class Venue(LastfmBase, Cacheable, Searchable):
                     yield e
         return gen()
 
-    @LastfmBase.cached_property
+    @cached_property
     def past_events(self):
         return self.get_past_events()
     

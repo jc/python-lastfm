@@ -5,12 +5,13 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 from lastfm.base import LastfmBase
+from lastfm.decorators import cached_property, top_property
 
 class Shoutable(object):
     def init(self, api):
         self._api = api
         
-    @LastfmBase.cached_property
+    @cached_property
     def shouts(self):
         """shouts for this ssubject"""
         from lastfm.shout import Shout
@@ -27,7 +28,7 @@ class Shoutable(object):
                 for s in data.findall('shout')
                 ]
     
-    @LastfmBase.top_property("shouts")
+    @top_property("shouts")
     def recent_shout(self):
         """recent shout for this subject"""
         pass

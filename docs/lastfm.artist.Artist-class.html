@@ -126,7 +126,8 @@
         <span class="summary-sig-arg">stats</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">similar</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">top_tags</span>=<span class="summary-sig-default">None</span>,
-        <span class="summary-sig-arg">bio</span>=<span class="summary-sig-default">None</span>)</span><br />
+        <span class="summary-sig-arg">bio</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">subject</span>=<span class="summary-sig-default">None</span>)</span><br />
       Create an Artist object by providing all the data related to it.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="lastfm.artist-pysrc.html#Artist.init">source&nbsp;code</a></span>
@@ -353,11 +354,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="share"></a><span class="summary-sig-name">share</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">recipient</span>,
-        <span class="summary-sig-arg">message</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td><span class="summary-sig"><a href="lastfm.mixins.sharable.Sharable-class.html#share" class="summary-sig-name">share</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.mixins.sharable-pysrc.html#Sharable.share">source&nbsp;code</a></span>
+            <span class="codelink"><a href="lastfm.decorators-pysrc.html">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -374,10 +375,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="add_tags"></a><span class="summary-sig-name">add_tags</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">tags</span>)</span></td>
+          <td><span class="summary-sig"><a href="lastfm.mixins.taggable.Taggable-class.html#add_tags" class="summary-sig-name">add_tags</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.mixins.taggable-pysrc.html#Taggable.add_tags">source&nbsp;code</a></span>
+            <span class="codelink"><a href="lastfm.decorators-pysrc.html">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -391,10 +393,11 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="remove_tag"></a><span class="summary-sig-name">remove_tag</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">tag</span>)</span></td>
+          <td><span class="summary-sig"><a href="lastfm.mixins.taggable.Taggable-class.html#remove_tag" class="summary-sig-name">remove_tag</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">*args</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.mixins.taggable-pysrc.html#Taggable.remove_tag">source&nbsp;code</a></span>
+            <span class="codelink"><a href="lastfm.decorators-pysrc.html">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -525,57 +528,6 @@
         <span class="summary-sig-arg">**kwds</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="lastfm.artist-pysrc.html#Artist._hash_func">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr bgcolor="#e8f0f8" >
-  <th colspan="2" class="group-header"
-    >&nbsp;&nbsp;&nbsp;&nbsp;Inherited from <a href="lastfm.base.LastfmBase-class.html">base.LastfmBase</a></th></tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="autheticate"></a><span class="summary-sig-name">autheticate</span>(<span class="summary-sig-arg">func</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.base-pysrc.html#LastfmBase.autheticate">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="cached_property"></a><span class="summary-sig-name">cached_property</span>(<span class="summary-sig-arg">func</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.base-pysrc.html#LastfmBase.cached_property">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="top_property"></a><span class="summary-sig-name">top_property</span>(<span class="summary-sig-arg">list_property_name</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.base-pysrc.html#LastfmBase.top_property">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -897,7 +849,8 @@
         <span class="sig-arg">stats</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">similar</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">top_tags</span>=<span class="sig-default">None</span>,
-        <span class="sig-arg">bio</span>=<span class="sig-default">None</span>)</span>
+        <span class="sig-arg">bio</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">subject</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="lastfm.artist-pysrc.html#Artist.init">source&nbsp;code</a></span>&nbsp;
@@ -921,6 +874,12 @@
         <li><strong class="pname"><code>top_tags</code></strong> (<code class="link">list</code> of <a 
           href="lastfm.tag.Tag-class.html" class="link">Tag</a>) - top tags for the artist</li>
         <li><strong class="pname"><code>bio</code></strong> (<a href="lastfm.wiki.Wiki-class.html" class="link">Wiki</a>) - biography of the artist</li>
+        <li><strong class="pname"><code>subject</code></strong> (<a href="lastfm.user.User-class.html" class="link">User</a> OR <a
+          href="lastfm.artist.Artist-class.html" class="link">Artist</a> OR
+          <a href="lastfm.tag.Tag-class.html" class="link">Tag</a> OR <a 
+          href="lastfm.track.Track-class.html" class="link">Track</a> OR <a
+          href="lastfm.weeklychart.WeeklyChart-class.html" 
+          class="link">WeeklyChart</a>) - the subject to which this instance belongs to</li>
     </ul></dd>
     <dt>Raises:</dt>
     <dd><ul class="nomargin-top">
@@ -1452,7 +1411,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Mar 09 17:56:40 2009
+    Generated by Epydoc 3.0.1 on Tue Mar 10 11:14:34 2009
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

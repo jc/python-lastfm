@@ -6,15 +6,16 @@ __license__ = "GNU Lesser General Public License"
 
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable
+from lastfm.decorators import cached_property
 
 class Playlist(LastfmBase, Cacheable):
     """A class representing an XPSF playlist."""
-    def init(self, api, url):
+    def init(self, api, url, **kwargs):
         self._api = api
         self._data = None
         self._url = url
 
-    @LastfmBase.cached_property
+    @cached_property
     def data(self):
         """playlist's data"""
         params = {'method': 'playlist.fetch', 'playlistURL': self._url}

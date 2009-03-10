@@ -7,6 +7,7 @@ __license__ = "GNU Lesser General Public License"
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable, Searchable
 from lastfm.lazylist import lazylist
+from lastfm.decorators import cached_property, top_property
 
 class Tag(LastfmBase, Cacheable, Searchable):
     """A class representing a tag."""
@@ -15,7 +16,8 @@ class Tag(LastfmBase, Cacheable, Searchable):
                  name = None,
                  url = None,
                  streamable = None,
-                 stats = None):
+                 stats = None,
+                 **kwargs):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         self._api = api
@@ -47,7 +49,7 @@ class Tag(LastfmBase, Cacheable, Searchable):
     def stats(self):
         return self._stats
 
-    @LastfmBase.cached_property
+    @cached_property
     def similar(self):
         """tags similar to this tag"""
         params = self._default_params({'method': 'tag.getSimilar'})
@@ -63,12 +65,12 @@ class Tag(LastfmBase, Cacheable, Searchable):
                 for t in data.findall('tag')
                 ]
 
-    @LastfmBase.top_property("similar")
+    @top_property("similar")
     def most_similar(self):
         """most similar tag to this tag"""
         pass
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_albums(self):
         """top albums for the tag"""
         params = self._default_params({'method': 'tag.getTopAlbums'})
@@ -97,12 +99,12 @@ class Tag(LastfmBase, Cacheable, Searchable):
                 for a in data.findall('album')
                 ]
 
-    @LastfmBase.top_property("top_albums")
+    @top_property("top_albums")
     def top_album(self):
         """top album for the tag"""
         pass
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_artists(self):
         """top artists for the tag"""
         params = self._default_params({'method': 'tag.getTopArtists'})
@@ -125,12 +127,12 @@ class Tag(LastfmBase, Cacheable, Searchable):
                 for a in data.findall('artist')
                 ]
 
-    @LastfmBase.top_property("top_artists")
+    @top_property("top_artists")
     def top_artist(self):
         """top artist for the tag"""
         pass
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_tracks(self):
         """top tracks for the tag"""
         params = self._default_params({'method': 'tag.getTopTracks'})
@@ -160,17 +162,17 @@ class Tag(LastfmBase, Cacheable, Searchable):
                 for t in data.findall('track')
                 ]
 
-    @LastfmBase.top_property("top_tracks")
+    @top_property("top_tracks")
     def top_track(self):
         """top track for the tag"""
         pass
 
-    @LastfmBase.cached_property
+    @cached_property
     def playlist(self):
         return Playlist.fetch(self._api,
                               "lastfm://playlist/tag/%s/freetracks" % self.name)
 
-    @LastfmBase.cached_property
+    @cached_property
     def weekly_chart_list(self):
         params = self._default_params({'method': 'tag.getWeeklyChartList'})
         data = self._api._fetch_data(params).find('weeklychartlist')
@@ -190,11 +192,11 @@ class Tag(LastfmBase, Cacheable, Searchable):
         data = self._api._fetch_data(params).find('weeklyartistchart')
         return WeeklyArtistChart.create_from_data(self._api, self, data)
 
-    @LastfmBase.cached_property
+    @cached_property
     def recent_weekly_artist_chart(self):
         return self.get_weekly_artist_chart()
 
-    @LastfmBase.cached_property
+    @cached_property
     def weekly_artist_chart_list(self):
         wcl = list(self.weekly_chart_list)
         wcl.reverse()

@@ -7,6 +7,7 @@ __license__ = "GNU Lesser General Public License"
 
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable, Searchable, Taggable
+from lastfm.decorators import cached_property, top_property
 
 class Album(LastfmBase, Cacheable, Searchable, Taggable):
     """A class representing an album."""
@@ -21,7 +22,8 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
                  image = None,
                  stats = None,
                  top_tags = None,
-                 streamable = None):
+                 streamable = None,
+                 subject = None):
         """
         Create an Album object by providing all the data related to it.
         
@@ -47,6 +49,8 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
         @type top_tags:         L{list} of L{Tag}
         @param streamable:      flag indicating if the album is streamable from last.fm
         @type streamable:       L{bool}
+        @param subject:         the subject to which this instance belongs to
+        @type subject:          L{User} OR L{Artist} OR L{Tag} OR L{WeeklyChart}
         
         @raise InvalidParametersError: If an instance of L{Api} is not provided as the first
                                        parameter then an Exception is raised.
@@ -71,6 +75,7 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
                             )
         self._top_tags = top_tags
         self._streamable = streamable
+        self._subject = subject
     
     @property
     def name(self):
@@ -156,7 +161,7 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
         """
         return self._streamable
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_tags(self):
         """
         top tags for the album
@@ -178,7 +183,7 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
                 for t in data.findall('toptags/tag')
                 ]
 
-    @LastfmBase.top_property("top_tags")
+    @top_property("top_tags")
     def top_tag(self):
         """
         top tag for the album
@@ -186,7 +191,7 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
         """
         pass
     
-    @LastfmBase.cached_property
+    @cached_property
     def playlist(self):
         """
         playlist for the album

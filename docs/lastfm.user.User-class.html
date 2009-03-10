@@ -144,7 +144,8 @@
         <span class="summary-sig-arg">real_name</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">url</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">image</span>=<span class="summary-sig-default">None</span>,
-        <span class="summary-sig-arg">stats</span>=<span class="summary-sig-default">None</span>)</span></td>
+        <span class="summary-sig-arg">stats</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">**kwargs</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="lastfm.user-pysrc.html#User.init">source&nbsp;code</a></span>
             
@@ -181,7 +182,7 @@
         <span class="summary-sig-arg">*args</span>,
         <span class="summary-sig-arg">**kwargs</span>)</span></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.base-pysrc.html">source&nbsp;code</a></span>
+            <span class="codelink"><a href="lastfm.decorators-pysrc.html">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -233,7 +234,7 @@
         <span class="summary-sig-arg">*args</span>,
         <span class="summary-sig-arg">**kwargs</span>)</span></td>
           <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.base-pysrc.html">source&nbsp;code</a></span>
+            <span class="codelink"><a href="lastfm.decorators-pysrc.html">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -658,57 +659,6 @@
   </tr>
 <tr bgcolor="#e8f0f8" >
   <th colspan="2" class="group-header"
-    >&nbsp;&nbsp;&nbsp;&nbsp;Inherited from <a href="lastfm.base.LastfmBase-class.html">base.LastfmBase</a></th></tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="autheticate"></a><span class="summary-sig-name">autheticate</span>(<span class="summary-sig-arg">func</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.base-pysrc.html#LastfmBase.autheticate">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="cached_property"></a><span class="summary-sig-name">cached_property</span>(<span class="summary-sig-arg">func</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.base-pysrc.html#LastfmBase.cached_property">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr>
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a name="top_property"></a><span class="summary-sig-name">top_property</span>(<span class="summary-sig-arg">list_property_name</span>)</span></td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="lastfm.base-pysrc.html#LastfmBase.top_property">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr bgcolor="#e8f0f8" >
-  <th colspan="2" class="group-header"
     >&nbsp;&nbsp;&nbsp;&nbsp;Inherited from <a href="lastfm.mixins.cacheable.Cacheable-class.html">mixins.cacheable.Cacheable</a></th></tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
@@ -877,8 +827,8 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="lastfm.user.User-class.html#autheticated" class="summary-name">autheticated</a><br />
-      is the user autheticated
+        <a href="lastfm.user.User-class.html#authenticated" class="summary-name">authenticated</a><br />
+      is the user authenticated
     </td>
   </tr>
 <tr>
@@ -1156,7 +1106,8 @@
         <span class="sig-arg">real_name</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">url</span>=<span class="sig-default">None</span>,
         <span class="sig-arg">image</span>=<span class="sig-default">None</span>,
-        <span class="sig-arg">stats</span>=<span class="sig-default">None</span>)</span>
+        <span class="sig-arg">stats</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">**kwargs</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="lastfm.user-pysrc.html#User.init">source&nbsp;code</a></span>&nbsp;
@@ -1183,7 +1134,7 @@
         <span class="sig-arg">**kwargs</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="lastfm.base-pysrc.html">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="lastfm.decorators-pysrc.html">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -1191,7 +1142,7 @@
   <dl class="fields">
     <dt>Decorators:</dt>
     <dd><ul class="nomargin-top">
-        <li><code>@LastfmBase.autheticate</code></li>
+        <li><code>@authenticate</code></li>
     </ul></dd>
   </dl>
 </td></tr></table>
@@ -1208,7 +1159,7 @@
         <span class="sig-arg">**kwargs</span>)</span>
   </h3>
   </td><td align="right" valign="top"
-    ><span class="codelink"><a href="lastfm.base-pysrc.html">source&nbsp;code</a></span>&nbsp;
+    ><span class="codelink"><a href="lastfm.decorators-pysrc.html">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
@@ -1216,7 +1167,7 @@
   <dl class="fields">
     <dt>Decorators:</dt>
     <dd><ul class="nomargin-top">
-        <li><code>@LastfmBase.autheticate</code></li>
+        <li><code>@authenticate</code></li>
     </ul></dd>
   </dl>
 </td></tr></table>
@@ -1466,17 +1417,17 @@
   </dl>
 </td></tr></table>
 </div>
-<a name="autheticated"></a>
+<a name="authenticated"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
-  <h3 class="epydoc">autheticated</h3>
-  <p>is the user autheticated</p>
+  <h3 class="epydoc">authenticated</h3>
+  <p>is the user authenticated</p>
   <dl class="fields">
     <dt>Get Method:</dt>
-    <dd class="value"><span class="summary-sig"><i>unreachable</i>.autheticated(<span class="summary-sig-arg">self</span>)</span>
-        - is the user autheticated
+    <dd class="value"><span class="summary-sig"><i>unreachable</i>.authenticated(<span class="summary-sig-arg">self</span>)</span>
+        - is the user authenticated
     </dd>
   </dl>
 </td></tr></table>
@@ -1920,7 +1871,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Mar 09 17:56:41 2009
+    Generated by Epydoc 3.0.1 on Tue Mar 10 11:14:35 2009
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

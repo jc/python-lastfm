@@ -7,6 +7,7 @@ __license__ = "GNU Lesser General Public License"
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable, Searchable, Sharable, Taggable
 from lastfm.lazylist import lazylist
+from lastfm.decorators import cached_property, top_property
 
 class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
     """A class representing a track."""
@@ -25,7 +26,8 @@ class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
                  stats = None,
                  played_on = None,
                  loved_on = None,
-                 wiki = None):
+                 wiki = None,
+                 subject = None):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         Taggable.init(self, api)
@@ -57,6 +59,7 @@ class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
                          summary = wiki.summary,
                          content = wiki.content
                         )
+        self._subject = subject
 
     @property
     def id(self):
@@ -145,7 +148,7 @@ class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
             self._fill_info()
         return self._wiki
 
-    @LastfmBase.cached_property
+    @cached_property
     def similar(self):
         """tracks similar to this track"""
         params = Track._check_params(
@@ -179,12 +182,12 @@ class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
                 for t in data.findall('track')
                 ]
 
-    @LastfmBase.top_property("similar")
+    @top_property("similar")
     def most_similar(self):
         """track most similar to this track"""
         pass
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_fans(self):
         """top fans of the track"""
         params = Track._check_params(
@@ -209,12 +212,12 @@ class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
                 for u in data.findall('user')
                 ]
 
-    @LastfmBase.top_property("top_fans")
+    @top_property("top_fans")
     def top_fan(self):
         """topmost fan of the track"""
         pass
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_tags(self):
         """top tags for the track"""
         params = Track._check_params(
@@ -238,7 +241,7 @@ class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
                 for t in data.findall('tag')
                 ]
 
-    @LastfmBase.top_property("top_tags")
+    @top_property("top_tags")
     def top_tag(self):
         """topmost tag for the track"""
         pass

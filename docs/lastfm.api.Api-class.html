@@ -118,7 +118,26 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#set_session_key" class="summary-sig-name">set_session_key</a>(<span class="summary-sig-arg">self</span>)</span><br />
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#set_secret" class="summary-sig-name">set_secret</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">secret</span>)</span><br />
+      Set the last.fm API secret.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_secret">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lastfm.api.Api-class.html#set_session_key" class="summary-sig-name">set_session_key</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">session_key</span>=<span class="summary-sig-default">None</span>)</span><br />
       Set the session key for the authenticated session.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_session_key">source&nbsp;code</a></span>
@@ -932,7 +951,7 @@ object --+
       <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
         <a href="lastfm.api.Api-class.html#auth_token" class="summary-name">auth_token</a><br />
-      The authenication token for the authenticated session.
+      The authentication token for the authenticated session.
     </td>
   </tr>
 <tr>
@@ -940,7 +959,7 @@ object --+
       <span class="summary-type"><code class="link">str</code></span>
     </td><td class="summary">
         <a href="lastfm.api.Api-class.html#auth_url" class="summary-name">auth_url</a><br />
-      The authenication URL for the authenticated session.
+      The authentication URL for the authenticated session.
     </td>
   </tr>
   <tr>
@@ -1012,6 +1031,30 @@ object --+
   </dl>
 </td></tr></table>
 </div>
+<a name="set_secret"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_secret</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">secret</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_secret">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Set the last.fm API secret.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>secret</code></strong> (<code class="link">str</code>) - the secret</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
 <a name="set_session_key"></a>
 <div>
 <table class="details" border="1" cellpadding="3"
@@ -1019,7 +1062,8 @@ object --+
 <tr><td>
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_session_key</span>(<span class="sig-arg">self</span>)</span>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_session_key</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">session_key</span>=<span class="sig-default">None</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="lastfm.api-pysrc.html#Api.set_session_key">source&nbsp;code</a></span>&nbsp;
@@ -1028,9 +1072,15 @@ object --+
   
   <p>Set the session key for the authenticated session.</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>session_key</code></strong> (<code class="link">str</code>) - the session key for authentication (optional). If not provided 
+          then a new one is fetched from last.fm</li>
+    </ul></dd>
     <dt>Raises:</dt>
     <dd><ul class="nomargin-top">
-        <li><code><strong class='fraise'><a href="lastfm.error.AuthenticationFailedError-class.html">lastfm.AuthenticationFailedError</a></strong></code> - API secret must be present to call this method.</li>
+        <li><code><strong class='fraise'><a href="lastfm.error.AuthenticationFailedError-class.html">lastfm.AuthenticationFailedError</a></strong></code> - Either session_key should be provided or API secret must be 
+        present.</li>
     </ul></dd>
   </dl>
 </td></tr></table>
@@ -1855,7 +1905,7 @@ object --+
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">auth_token</h3>
-  <p>The authenication token for the authenticated session.</p>
+  <p>The authentication token for the authenticated session.</p>
   <dl class="fields">
     <dt>Get Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>.wrapper(<span class="summary-sig-arg">ob</span>)</span>
@@ -1871,7 +1921,7 @@ object --+
        cellspacing="0" width="100%" bgcolor="white">
 <tr><td>
   <h3 class="epydoc">auth_url</h3>
-  <p>The authenication URL for the authenticated session.</p>
+  <p>The authentication URL for the authenticated session.</p>
   <dl class="fields">
     <dt>Get Method:</dt>
     <dd class="value"><span class="summary-sig"><i>unreachable</i>.wrapper(<span class="summary-sig-arg">ob</span>)</span>
@@ -1913,7 +1963,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon Mar 09 17:56:40 2009
+    Generated by Epydoc 3.0.1 on Tue Mar 10 11:14:34 2009
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

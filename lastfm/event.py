@@ -25,7 +25,8 @@ class Event(LastfmBase, Cacheable, Sharable, Shoutable):
                  image = None,
                  url = None,
                  stats = None,
-                 tag = None):
+                 tag = None,
+                 subject = None):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         Sharable.init(self, api)
@@ -47,6 +48,7 @@ class Event(LastfmBase, Cacheable, Sharable, Shoutable):
                              reviews = stats.reviews
                             )
         self._tag = tag
+        self._subject = subject
 
     @property
     def id(self):

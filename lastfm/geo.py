@@ -7,6 +7,7 @@ __license__ = "GNU Lesser General Public License"
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable
 from lastfm.lazylist import lazylist
+from lastfm.decorators import cached_property, top_property
 
 class Geo(object):
     """A class representing an geographic location."""
@@ -106,7 +107,8 @@ class Location(LastfmBase, Cacheable):
                  postal_code = None,
                  latitude = None,
                  longitude = None,
-                 timezone = None):
+                 timezone = None,
+                 **kwargs):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         self._api = api
@@ -153,14 +155,14 @@ class Location(LastfmBase, Cacheable):
         """timezone in which the location is situated"""
         return self._timezone
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_tracks(self):
         """top tracks of the location"""
         if self.country is None or self.city is None:
             raise InvalidParametersError("country and city of this location are required for calling this method")
         return Geo.get_top_tracks(self._api, self.country.name, self.city)
 
-    @LastfmBase.top_property("top_tracks")
+    @top_property("top_tracks")
     def top_track(self):
         """top track of the location"""
         pass
@@ -173,7 +175,7 @@ class Location(LastfmBase, Cacheable):
                              self.longitude,
                              distance)
 
-    @LastfmBase.cached_property
+    @cached_property
     def events(self):
         """events taking place at/around the location"""
         return self.get_events()
@@ -462,7 +464,8 @@ class Country(LastfmBase, Cacheable):
          'ZW': 'Zimbabwe'}
     def init(self,
                  api,
-                 name = None):
+                 name = None,
+                 **kwargs):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         self._api = api
@@ -473,12 +476,12 @@ class Country(LastfmBase, Cacheable):
         """name of the country"""
         return self._name
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_artists(self):
         """top artists of the country"""
         return Geo.get_top_artists(self._api, self.name)
 
-    @LastfmBase.top_property("top_artists")
+    @top_property("top_artists")
     def top_artist(self):
         """top artist of the country"""
         pass
@@ -486,17 +489,17 @@ class Country(LastfmBase, Cacheable):
     def get_top_tracks(self, location = None):
         return Geo.get_top_tracks(self._api, self.name, location)
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_tracks(self):
         """top tracks of the country"""
         return self.get_top_tracks()
 
-    @LastfmBase.top_property("top_tracks")
+    @top_property("top_tracks")
     def top_track(self):
         """top track of the country"""
         pass
 
-    @LastfmBase.cached_property
+    @cached_property
     def events(self):
         """events taking place at/around the location"""
         return Geo.get_events(self._api, self.name)

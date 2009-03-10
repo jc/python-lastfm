@@ -6,12 +6,14 @@ __license__ = "GNU Lesser General Public License"
 
 from lastfm.base import LastfmBase
 from lastfm.safelist import SafeList
+from lastfm.decorators import cached_property, authenticate
 
 class Taggable(object):
     def init(self, api):
         self._api = api
         
-    @LastfmBase.cached_property
+    @cached_property
+    @authenticate
     def tags(self):
         from lastfm.tag import Tag
         params = self._default_params({'method': '%s.getTags' % self.__class__.__name__.lower()})
@@ -26,6 +28,7 @@ class Taggable(object):
                        ],
                        self.add_tags, self.remove_tag)
     
+    @authenticate
     def add_tags(self, tags):
         from lastfm.tag import Tag
         while(len(tags) > 10):
@@ -49,6 +52,7 @@ class Taggable(object):
         self._api._post_data(params)
         self._tags = None
         
+    @authenticate
     def remove_tag(self, tag):
         from lastfm.tag import Tag
         if isinstance(tag, Tag):

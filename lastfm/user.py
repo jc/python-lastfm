@@ -8,6 +8,7 @@ from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable, Shoutable
 from lastfm.lazylist import lazylist
 import lastfm.playlist
+from lastfm.decorators import cached_property, top_property, authenticate
 
 class User(LastfmBase, Cacheable, Shoutable):
     """A class representing an user."""
@@ -17,7 +18,8 @@ class User(LastfmBase, Cacheable, Shoutable):
                  real_name = None,
                  url = None,
                  image = None,
-                 stats = None):
+                 stats = None,
+                 **kwargs):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         Shoutable.init(self, api)
@@ -60,45 +62,45 @@ class User(LastfmBase, Cacheable, Shoutable):
         return self._stats
 
     @property
-    @LastfmBase.autheticate
+    @authenticate
     def language(self):
         """lang for the user"""
         return self._language
 
     @property
-    @LastfmBase.autheticate
+    @authenticate
     def country(self):
         """country for the user"""
         return self._country
 
     @property
-    @LastfmBase.autheticate
+    @authenticate
     def age(self):
         """age for the user"""
         return self._age
 
     @property
-    @LastfmBase.autheticate
+    @authenticate
     def gender(self):
         """stats for the user"""
         return self._gender
 
     @property
-    @LastfmBase.autheticate
+    @authenticate
     def subscriber(self):
         """is the user a subscriber"""
         return self._subscriber
     
     @property
-    def autheticated(self):
-        """is the user autheticated"""
+    def authenticated(self):
+        """is the user authenticated"""
         try:
             auth_user = self._api.get_authenticated_user()
             return auth_user == self
         except AuthenticationFailedError:
             return False        
 
-    @LastfmBase.cached_property
+    @cached_property
     def events(self):
         params = self._default_params({'method': 'user.getEvents'})
         data = self._api._fetch_data(params).find('events')
@@ -134,11 +136,11 @@ class User(LastfmBase, Cacheable, Shoutable):
                     yield e
         return gen()
 
-    @LastfmBase.cached_property
+    @cached_property
     def past_events(self):
         return self.get_past_events()
     
-    @LastfmBase.autheticate
+    @authenticate
     def get_recommended_events(self, limit = None):
         params = {'method': 'user.getRecommendedEvents'}
         if limit is not None:
@@ -164,7 +166,7 @@ class User(LastfmBase, Cacheable, Shoutable):
                     yield e
         return gen()
 
-    @LastfmBase.cached_property
+    @cached_property
     def recommended_events(self):
         return self.get_recommended_events()
     
@@ -187,7 +189,7 @@ class User(LastfmBase, Cacheable, Shoutable):
         ]
 
 
-    @LastfmBase.cached_property
+    @cached_property
     def friends(self):
         """friends of the user"""
         return self.get_friends()
@@ -213,17 +215,17 @@ class User(LastfmBase, Cacheable, Shoutable):
                 for u in data.findall('user')
             ]
 
-    @LastfmBase.cached_property
+    @cached_property
     def neighbours(self):
         """neighbours of the user"""
         return self.get_neighbours()
 
-    @LastfmBase.top_property("neighbours")
+    @top_property("neighbours")
     def nearest_neighbour(self):
         """nearest neightbour of the user"""
         pass
 
-    @LastfmBase.cached_property
+    @cached_property
     def playlists(self):
         """playlists of the user"""
         params = self._default_params({'method': 'user.getPlaylists'})
@@ -245,7 +247,7 @@ class User(LastfmBase, Cacheable, Shoutable):
                 for p in data.findall('playlist')
                 ]
 
-    @LastfmBase.autheticate
+    @authenticate
     def create_playlist(self, title, description = None):
         params = {'method': 'playlist.create',
                   'title': title}
@@ -254,7 +256,7 @@ class User(LastfmBase, Cacheable, Shoutable):
         self._api._post_data(params)
         self._playlists = None
     
-    @LastfmBase.cached_property
+    @cached_property
     def loved_tracks(self):
         params = self._default_params({'method': 'user.getLovedTracks'})
         data = self._api._fetch_data(params).find('lovedtracks')
@@ -327,7 +329,7 @@ class User(LastfmBase, Cacheable, Shoutable):
         """recent tracks played by the user"""
         return self.get_recent_tracks()
 
-    @LastfmBase.top_property("recent_tracks")
+    @top_property("recent_tracks")
     def most_recent_track(self):
         """most recent track played by the user"""
         pass
@@ -362,12 +364,12 @@ class User(LastfmBase, Cacheable, Shoutable):
                 for a in data.findall('album')
                 ]
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_albums(self):
         """overall top albums of the user"""
         return self.get_top_albums()
 
-    @LastfmBase.top_property("top_albums")
+    @top_property("top_albums")
     def top_album(self):
         """overall top most album of the user"""
         pass
@@ -396,18 +398,18 @@ class User(LastfmBase, Cacheable, Shoutable):
                 for a in data.findall('artist')
                 ]
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_artists(self):
         """top artists of the user"""
         return self.get_top_artists()
 
-    @LastfmBase.top_property("top_artists")
+    @top_property("top_artists")
     def top_artist(self):
         """top artist of the user"""
         pass
     
-    @LastfmBase.cached_property
-    @LastfmBase.autheticate
+    @cached_property
+    @authenticate
     def recommended_artists(self):
         params = {'method': 'user.getRecommendedArtists'}
         
@@ -468,12 +470,12 @@ class User(LastfmBase, Cacheable, Shoutable):
                 for t in data.findall('track')
                 ]
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_tracks(self):
         """top tracks of the user"""
         return self.get_top_tracks()
 
-    @LastfmBase.top_property("top_tracks")
+    @top_property("top_tracks")
     def top_track(self):
         """top track of the user"""
         return (len(self.top_tracks) and self.top_tracks[0] or None)
@@ -497,17 +499,17 @@ class User(LastfmBase, Cacheable, Shoutable):
                 for t in data.findall('tag')
                 ]
 
-    @LastfmBase.cached_property
+    @cached_property
     def top_tags(self):
         """top tags of the user"""
         return self.get_top_tags()
 
-    @LastfmBase.top_property("top_tags")
+    @top_property("top_tags")
     def top_tag(self):
         """top tag of the user"""
         pass
 
-    @LastfmBase.cached_property
+    @cached_property
     def weekly_chart_list(self):
         params = self._default_params({'method': 'user.getWeeklyChartList'})
         data = self._api._fetch_data(params).find('weeklychartlist')
@@ -524,11 +526,11 @@ class User(LastfmBase, Cacheable, Shoutable):
         data = self._api._fetch_data(params).find('weeklyalbumchart')
         return WeeklyAlbumChart.create_from_data(self._api, self, data)
 
-    @LastfmBase.cached_property
+    @cached_property
     def recent_weekly_album_chart(self):
         return self.get_weekly_album_chart()
 
-    @LastfmBase.cached_property
+    @cached_property
     def weekly_album_chart_list(self):
         wcl = list(self.weekly_chart_list)
         wcl.reverse()
@@ -549,11 +551,11 @@ class User(LastfmBase, Cacheable, Shoutable):
         data = self._api._fetch_data(params).find('weeklyartistchart')
         return WeeklyArtistChart.create_from_data(self._api, self, data)
 
-    @LastfmBase.cached_property
+    @cached_property
     def recent_weekly_artist_chart(self):
         return self.get_weekly_artist_chart()
 
-    @LastfmBase.cached_property
+    @cached_property
     def weekly_artist_chart_list(self):
         wcl = list(self.weekly_chart_list)
         wcl.reverse()
@@ -574,11 +576,11 @@ class User(LastfmBase, Cacheable, Shoutable):
         data = self._api._fetch_data(params).find('weeklytrackchart')
         return WeeklyTrackChart.create_from_data(self._api, self, data)
 
-    @LastfmBase.cached_property
+    @cached_property
     def recent_weekly_track_chart(self):
         return self.get_weekly_track_chart()
 
-    @LastfmBase.cached_property
+    @cached_property
     def weekly_track_chart_list(self):
         wcl = list(self.weekly_chart_list)
         wcl.reverse()
@@ -597,11 +599,11 @@ class User(LastfmBase, Cacheable, Shoutable):
         WeeklyChart._check_weekly_chart_params({}, start, end)
         return WeeklyTagChart.create_from_data(self._api, self, start, end)
 
-    @LastfmBase.cached_property
+    @cached_property
     def recent_weekly_tag_chart(self):
         return self.get_weekly_tag_chart()
 
-    @LastfmBase.cached_property
+    @cached_property
     def weekly_tag_chart_list(self):
         wcl = list(self.weekly_chart_list)
         wcl.reverse()
@@ -712,7 +714,7 @@ class User(LastfmBase, Cacheable, Shoutable):
         def user(self):
             return self._creator
 
-        @LastfmBase.autheticate
+        @authenticate
         def add_track(self, track, artist = None):
             params = {'method': 'playlist.addTrack', 'playlistID': self.id}
             if isinstance(track, Track):
@@ -800,11 +802,11 @@ class User(LastfmBase, Cacheable, Shoutable):
                         yield a
             return gen()
 
-        @LastfmBase.cached_property
+        @cached_property
         def albums(self):
             return self.get_albums()
         
-        @LastfmBase.autheticate
+        @authenticate
         def add_album(self, album, artist = None):
             params = {'method': 'library.addAlbum'}
             if isinstance(album, Album):
@@ -864,11 +866,11 @@ class User(LastfmBase, Cacheable, Shoutable):
                         yield a
             return gen()
 
-        @LastfmBase.cached_property
+        @cached_property
         def artists(self):
             return self.get_artists()
 
-        @LastfmBase.autheticate
+        @authenticate
         def add_artist(self, artist):
             params = {'method': 'library.addArtist'}
             if isinstance(artist, Artist):
@@ -928,11 +930,11 @@ class User(LastfmBase, Cacheable, Shoutable):
                         yield t
             return gen()
 
-        @LastfmBase.cached_property
+        @cached_property
         def tracks(self):
             return self.get_tracks()
 
-        @LastfmBase.autheticate
+        @authenticate
         def add_track(self, track, artist = None):
             params = {'method': 'library.addTrack'}
             if isinstance(track, Track):
