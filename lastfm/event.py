@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+"""Module for calling Event related last.fm web services API methods"""
 
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
+__package__ = "lastfm"
 
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable, Sharable, Shoutable
@@ -26,7 +28,35 @@ class Event(LastfmBase, Cacheable, Sharable, Shoutable):
                  url = None,
                  stats = None,
                  tag = None,
-                 subject = None):
+                 **kwargs):
+        """
+        Create an Event object by providing all the data related to it.
+        
+        @param api:             an instance of L{Api}
+        @type api:              L{Api}
+        @param id:              ID of the event
+        @type id:               L{int}
+        @param title:           title of the event
+        @type title:            L{str}
+        @param artists:         artists performing in the event
+        @type artists:          L{list} of L{Artist}
+        @param headliner:       headliner artist of the event
+        @type headliner:        L{Artist}
+        @param venue:           venue of the event
+        @type venue:            L{Venue}
+        @param start_date:      start date and time of the event
+        @type start_date:       C{datetime.datetime}
+        @param description:     description of the event
+        @type description:      L{str}
+        @param image:           poster images of the event in various sizes
+        @type image:            L{dict}
+        @param url:             URL of the event on last.fm
+        @type url:              L{str}
+        @param stats:           the statistics of the event (attendance and no. of reviews)
+        @type stats:            L{Stats}
+        @param tag:             tag for the event
+        @type tag:              L{str}
+        """
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         Sharable.init(self, api)
@@ -48,64 +78,106 @@ class Event(LastfmBase, Cacheable, Sharable, Shoutable):
                              reviews = stats.reviews
                             )
         self._tag = tag
-        self._subject = subject
 
     @property
     def id(self):
-        """id of the event"""
+        """
+        id of the event
+        @rtype: L{int}
+        """
         return self._id
 
     @property
     def title(self):
-        """title of the event"""
+        """
+        title of the event
+        @rtype: L{str}
+        """
         return self._title
 
     @property
     def artists(self):
-        """artists performing in the event"""
+        """
+        artists performing in the event
+        @rtype: L{list} of L{Artist}
+        """
         return self._artists
 
     @property
     def headliner(self):
-        """headliner artist of the event"""
+        """
+        headliner artist of the event
+        @rtype: L{Artist}
+        """
         return self._headliner
 
     @property
     def venue(self):
-        """venue of the event"""
+        """
+        venue of the event
+        @rtype: L{Venue}
+        """
         return self._venue
 
     @property
     def start_date(self):
-        """start date of the event"""
+        """
+        start date of the event
+        @rtype: C{datetime.datetime}
+        """
         return self._start_date
 
     @property
     def description(self):
-        """description of the event"""
+        """
+        description of the event
+        @rtype: L{str}
+        """
         return self._description
 
     @property
     def image(self):
-        """poster of the event"""
+        """
+        poster of the event
+        @rtype: L{dict}
+        """
         return self._image
 
     @property
     def url(self):
-        """url of the event's page"""
+        """
+        url of the event's page
+        @rtype: L{str}
+        """
         return self._url
 
     @property
     def stats(self):
-        """stats of the event"""
+        """
+        statistics for the event
+        @rtype: L{Stats}
+        """
         return self._stats
 
     @property
     def tag(self):
-        """tags for the event"""
+        """
+        tag for the event
+        @rtype: L{str}
+        """
         return self._tag
 
     def attend(self, status = STATUS_ATTENDING):
+        """
+        Set the attendance status of the authenticated user for this event.
+        
+        @param status:    attendance status, should be one of: 
+                          L{Event.STATUS_ATTENDING} OR L{Event.STATUS_MAYBE} OR L{Event.STATUS_NOT}
+        @type status:     L{int}
+        
+        @raise InvalidParametersError: If status parameters is not one of the allowed values
+                                       then an exception is raised.
+        """
         if status not in [Event.STATUS_ATTENDING, Event.STATUS_MAYBE, Event.STATUS_NOT]:
             InvalidParametersError("status has to be 0, 1 or 2")
         params = self._default_params({'method': 'event.attend', 'status': status})
@@ -113,12 +185,38 @@ class Event(LastfmBase, Cacheable, Sharable, Shoutable):
 
     @staticmethod
     def get_info(api, event):
+        """
+        Get the data for the event.
+        
+        @param api:      an instance of L{Api}
+        @type api:       L{Api}
+        @param event:    ID of the event
+        @type event:     L{int}
+        
+        @return:         an Event object corresponding to the provided event id
+        @rtype:          L{Event}
+        
+        @note: Use the L{Api.get_event} method instead of using this method directly.        
+        """
         params = {'method': 'event.getInfo', 'event': event}
         data = api._fetch_data(params).find('event')
         return Event.create_from_data(api, data)
 
     @staticmethod
     def create_from_data(api, data):
+        """
+        Create the Event object from the provided XML element.
+        
+        @param api:      an instance of L{Api}
+        @type api:       L{Api}
+        @param data:     XML element
+        @type data:      C{xml.etree.ElementTree.Element}
+        
+        @return:         an Event object corresponding to the provided XML element
+        @rtype:          L{Event}
+        
+        @note: Use the L{Api.get_event} method instead of using this method directly.
+        """
         start_date = None
 
         if data.findtext('startTime') is not None:
@@ -150,7 +248,9 @@ class Event(LastfmBase, Cacheable, Sharable, Shoutable):
                 except ValueError:
                     pass
 
-
+        latitude = data.findtext('venue/location/{%s}point/{%s}lat' % ((Location.XMLNS,)*2))
+        longitude = data.findtext('venue/location/{%s}point/{%s}long' % ((Location.XMLNS,)*2))
+        
         return Event(
                      api,
                      id = int(data.findtext('id')),
@@ -161,22 +261,18 @@ class Event(LastfmBase, Cacheable, Sharable, Shoutable):
                                    api,
                                    name = data.findtext('venue/name'),
                                    location = Location(
-                                                       api,
-                                                       city = data.findtext('venue/location/city'),
-                                                       country = Country(
-                                                            api,
-                                                            name = data.findtext('venue/location/country')
-                                                            ),
-                                                       street = data.findtext('venue/location/street'),
-                                                       postal_code = data.findtext('venue/location/postalcode'),
-                                                       latitude = float(data.findtext(
-                                                           'venue/location/{%s}point/{%s}lat' % ((Location.XMLNS,)*2)
-                                                           )),
-                                                       longitude = float(data.findtext(
-                                                           'venue/location/{%s}point/{%s}long' % ((Location.XMLNS,)*2)
-                                                           )),
-                                                       #timezone = data.findtext('venue/location/timezone')
-                                                       ),
+                                       api,
+                                       city = data.findtext('venue/location/city'),
+                                       country = Country(
+                                            api,
+                                            name = data.findtext('venue/location/country')
+                                            ),
+                                       street = data.findtext('venue/location/street'),
+                                       postal_code = data.findtext('venue/location/postalcode'),
+                                       latitude = (latitude.strip()!= '') and float(latitude) or None,
+                                       longitude = (longitude.strip()!= '') and float(longitude) or None,
+                                       #timezone = data.findtext('venue/location/timezone')
+                                       ),
                                    url = data.findtext('venue/url')
                                    ),
                      start_date = start_date,

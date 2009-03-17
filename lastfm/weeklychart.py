@@ -3,9 +3,11 @@
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
+__package__ = "lastfm"
 
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable
+from operator import xor
 
 class WeeklyChart(LastfmBase, Cacheable):
     """A class for representing the weekly charts"""
@@ -43,7 +45,7 @@ class WeeklyChart(LastfmBase, Cacheable):
     
     @staticmethod
     def _check_weekly_chart_params(params, start = None, end = None):
-        if (start is not None and end is None) or (start is None and end is not None):
+        if xor(start is None, end is None):
             raise InvalidParametersError("both start and end have to be provided.")
         if start is not None and end is not None:
             if isinstance(start, datetime) and isinstance(end, datetime):

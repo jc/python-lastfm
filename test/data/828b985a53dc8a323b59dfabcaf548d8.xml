@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<events location="Tokyo, Japan" page="1" totalpages="37" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" total="367">
+<event>
+  <id>920495</id>
+  <title>The Birthday</title>
+  <artists>
+    <artist>The Birthday</artist>
+    <headliner>The Birthday</headliner>
+  </artists>
+  <venue>
+    <name>大分 T.O.P.S</name>
+    <location>
+      <city>Japan</city>
+      <country>Japan</country>
+      <street>Oita</street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>35.7108378353001</geo:lat>
+         <geo:long>139.751586914062</geo:long>
+      </geo:point>
+              <timezone>JST</timezone>
+          </location>
+    <url>http://www.last.fm/venue/8941482</url>
+  </venue>
+  <startDate>Tue, 17 Mar 2009</startDate>
+  <description></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/557848.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/557848.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/557848.jpg</image>
+   <attendance>1</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=920495</tag>  
+  <url>http://www.last.fm/event/920495</url>
+</event>
+<event>
+  <id>929525</id>
+  <title>Lewis Furey</title>
+  <artists>
+    <artist>Lewis Furey</artist>
+    <headliner>Lewis Furey</headliner>
+  </artists>
+  <venue>
+    <name>高田馬場</name>
+    <location>
+      <city>tokyo</city>
+      <country>Japan</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>35.7108378353001</geo:lat>
+         <geo:long>139.751586914062</geo:long>
+      </geo:point>
+              <timezone>JST</timezone>
+          </location>
+    <url>http://www.last.fm/venue/9003318</url>
+  </venue>
+  <startDate>Tue, 17 Mar 2009</startDate>
+  <description></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/23760119.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/23760119.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/23760119.jpg</image>
+   <attendance>0</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=929525</tag>  
+  <url>http://www.last.fm/event/929525</url>
+</event>
+<event>
+  <id>828211</id>
+  <title>Duffy</title>
+  <artists>
+    <artist>Duffy</artist>
+    <headliner>Duffy</headliner>
+  </artists>
+  <venue>
+    <name>SHIBUYA-AX</name>
+    <location>
+      <city>Tōkyō</city>
+      <country>Japan</country>
+      <street>渋谷区神南2-1-1</street>
+      <postalcode>150-0041</postalcode>
+      <geo:point>
+         <geo:lat>35.685</geo:lat>
+         <geo:long>139.7513889</geo:long>
+      </geo:point>
+              <timezone>JST</timezone>
+          </location>
+    <url>http://www.last.fm/venue/8788725</url>
+  </venue>
+  <startDate>Tue, 17 Mar 2009</startDate>
+  <startTime>19:00</startTime>
+  <description></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/4893704.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/4893704.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/4893704.jpg</image>
+   <attendance>8</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=828211</tag>  
+  <url>http://www.last.fm/event/828211</url>
+</event>
+<event>
+  <id>876654</id>
+  <title>Mos Def</title>
+  <artists>
+    <artist>Mos Def</artist>
+    <headliner>Mos Def</headliner>
+  </artists>
+  <venue>
+    <name>Billboard Live</name>
+    <location>
+      <city>Tokyo</city>
+      <country>Japan</country>
+      <street>Tokyo Midtown Garden Terrace 4F, 7-4 Akasaka 9-chome, Minato-ku</street>
+      <postalcode>107-0052</postalcode>
+      <geo:point>
+         <geo:lat>35.7108378353001</geo:lat>
+         <geo:long>139.751586914062</geo:long>
+      </geo:point>
+              <timezone>JST</timezone>
+          </location>
+    <url>http://www.last.fm/venue/8830206</url>
+  </venue>
+  <startDate>Tue, 17 Mar 2009</startDate>
+  <startTime>19:00</startTime>
+  <description></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/4114471.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/4114471.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/4114471.jpg</image>
+   <attendance>4</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=876654</tag>  
+  <url>http://www.last.fm/event/876654</url>
+</event>
+<event>
+  <id>957549</id>
+  <title>No Charge!! Club Cyber Collection 2009</title>
+  <artists>
+    <artist>Ａｎｃｅｓｔｒａｌ</artist>
+    <artist>ＧＲｉＳＴ</artist>
+    <artist>Diprogram</artist>
+    <artist>Ziggrat</artist>
+    <artist>Mistes</artist>
+    <artist>カルト☆フィクション倶楽部</artist>
+    <artist>Ｃｌｏｕｄ．</artist>
+    <artist>ザ☆ビックマウス</artist>
+    <headliner>Ａｎｃｅｓｔｒａｌ</headliner>
+  </artists>
+  <venue>
+    <name>池袋CYBER</name>
+    <location>
+      <city>Tokyo</city>
+      <country>Japan</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>35.7108378353001</geo:lat>
+         <geo:long>139.751586914062</geo:long>
+      </geo:point>
+              <timezone>JST</timezone>
+          </location>
+    <url>http://www.last.fm/venue/8854834</url>
+  </venue>
+  <startDate>Wed, 18 Mar 2009</startDate>
+  <description><![CDATA[<div class="bbcode">Free live (drink 600 yens)</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/17811927.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/17811927.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/17811927.jpg</image>
+   <attendance>2</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=957549</tag>  
+  <url>http://www.last.fm/event/957549</url>
+</event>
+<event>
+  <id>888895</id>
+  <title>Ryuichi Sakamoto Playing The Piano 2009</title>
+  <artists>
+    <artist>坂本龍一</artist>
+    <headliner>坂本龍一</headliner>
+  </artists>
+  <venue>
+    <name>東京国際フォーラム ホールC</name>
+    <location>
+      <city>東京都</city>
+      <country>Japan</country>
+      <street>千代田区丸の内3-5-1</street>
+      <postalcode>100-0005</postalcode>
+      <geo:point>
+         <geo:lat>35.7108378353001</geo:lat>
+         <geo:long>139.751586914062</geo:long>
+      </geo:point>
+              <timezone>JST</timezone>
+          </location>
+    <url>http://www.last.fm/venue/8994410</url>
+  </venue>
+  <startDate>Wed, 18 Mar 2009</startDate>
+  <startTime>19:00</startTime>
+  <description></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/24067119.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/24067119.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/24067119.jpg</image>
+   <attendance>3</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=888895</tag>  
+  <url>http://www.last.fm/event/888895</url>
+</event>
+<event>
+  <id>948701</id>
+  <title>Crazy Die Amond Act.3</title>
+  <artists>
+    <artist>Tecda</artist>
+    <artist>Helmet</artist>
+    <artist>Asa</artist>
+    <artist>Sol</artist>
+    <artist>shino</artist>
+    <artist>Ein</artist>
+    <artist>Hisato</artist>
+    <artist>Yudai</artist>
+    <artist>starsoldier</artist>
+    <artist>koshi fujiyama</artist>
+    <artist>digital sato</artist>
+    <artist>shikaval</artist>
+    <artist>Suoiyo! Masarusan</artist>
+    <headliner>Tecda</headliner>
+  </artists>
+  <venue>
+    <name>Bitters Yokohama</name>
+    <location>
+      <city>Yokohama, Kanagawa</city>
+      <country>Japan</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>35.45</geo:lat>
+         <geo:long>139.65</geo:long>
+      </geo:point>
+              <timezone>UTC</timezone>
+          </location>
+    <url>http://www.last.fm/venue/8981623</url>
+  </venue>
+  <startDate>Thu, 19 Mar 2009</startDate>
+  <description><![CDATA[<div class="bbcode">2009.03.19.THU<br />
+<br />
+Solid De Acid Disco Party<br />
+<br />
+<strong>&quot;Crazy Die Amond Act.3″</strong><br />
+<br />
+@Studio Bitters yokohama<br />
+<br />
+door: 2000yen/1D<br />
+<br />
+w/f: 1500yen/1D<br />
+<br />
+Start: 22:00<br />
+<br />
+Live set<br />
+<br />
+<a href="http://ws.audioscrobbler.com/music/Tecda" class="bbcode_artist">Tecda</a>(shizukamura.net)<br />
+<br />
+Djz<br />
+<br />
+Digital Sato(PsycotroBeat)<br />
+<br />
+ASA(IMP, stonetemple)<br />
+<br />
+SOL(MACHiDA CYCHO)<br />
+<br />
+HELMET(dbc17)<br />
+<br />
+Yudai(crazy die amond)<br />
+<br />
+EIN(codekommando/Berlin)<br />
+<br />
+shikaval(closed)<br />
+<br />
+Sound System by 和泉中央<br />
+<br />
+Bar/パラレルラウンジ<br />
+<br />
+Djz<br />
+<br />
+shino(shizukamura.net)<br />
+<br />
+starsoldier(9we9 Sound)<br />
+<br />
+koshi fujiyama(最高変態)<br />
+<br />
+SOL(FirstClass)<br />
+<br />
+hisato<br />
+<br />
+sugoiyo!!masarusan(sexy command)<br />
+<br />
+INCENSE　SHOP『幻夢堂』<br />
+<br />
+危険物、法律で禁止されてる物の持ち込みは固くお断りします。<br />
+<br />
+２０歳以下の方は入場できません。<br />
+<br />
+尚、すべてのトラブル、事故等は責任を負いかねます。<br />
+<br />
+Studio Bitters yokohama<br />
+<br />
+〒231-0801 神奈川県横浜市中区新山下３－６－１４　１F<br />
+<br />
+TEL/FAX　045-623-6099<br />
+<br />
+※お車でお越しの方は最寄のパーキングをお使いください</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/24268155.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/24268155.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/24268155.jpg</image>
+   <attendance>1</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=948701</tag>  
+  <url>http://www.last.fm/event/948701</url>
+</event>
+<event>
+  <id>986029</id>
+  <title>Byte Size - Panophonic Downturn Special</title>
+  <artists>
+    <artist>skab/t</artist>
+    <headliner>skab/t</headliner>
+  </artists>
+  <venue>
+    <name>Bar Aoyama, Shibuya</name>
+    <location>
+      <city>Tokyo</city>
+      <country>Japan</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>35.7108378353001</geo:lat>
+         <geo:long>139.751586914062</geo:long>
+      </geo:point>
+              <timezone>JST</timezone>
+          </location>
+    <url>http://www.last.fm/venue/9015838</url>
+  </venue>
+  <startDate>Thu, 19 Mar 2009</startDate>
+  <description><![CDATA[<div class="bbcode"><a href="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;q=%E6%B8%8B%E8%B0%B7%E9%A7%85%EF%BC%88%E6%9D%B1%E4%BA%AC%EF%BC%89+station+Japan&amp;sll=35.614631,139.741032&amp;sspn=0.010309,0.015428&amp;ie=UTF8&amp;cd=1&amp;geocode=FRUbIAIdVqxTCA&amp;split=0&amp;ll=35.658463,139.709991&amp;spn=0.001288,0.001929&amp;z=19&amp;iwloc=addr&amp;layer=c&amp;cbll=35.658547,139.709204&amp;panoid=qY6u-voxAiSyqkvSTtiA9A&amp;cbp=12,355.2921180785233,,0,6.627260083449234" rel="nofollow">Map to Venue</a><br />
+<br />
+<img src="http://www.freeta.org/news/wp-content/gallery/flyers-and-posters/bs090319_web.png" /><br />
+Byte Size is back! Fighting the spiralling economy with beats and treats at Bar Aoyama in Shibuya. Fun starts at 10pm on Thursday the 19th of March (remember, Friday is a public holiday people!). We will bring you, as always, a rich selection of DJs and live electronic music from around Tokyo. No door/table charge, cheap drinks and a recently redecorated venue.</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/24739555.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/24739555.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/24739555.jpg</image>
+   <attendance>2</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=986029</tag>  
+  <url>http://www.last.fm/event/986029</url>
+</event>
+<event>
+  <id>846323</id>
+  <title>『Baggy Bogy Free Festival』</title>
+  <artists>
+    <artist>バギーボギー</artist>
+    <headliner>バギーボギー</headliner>
+  </artists>
+  <venue>
+    <name>池袋CYBER</name>
+    <location>
+      <city>Tokyo</city>
+      <country>Japan</country>
+      <street></street>
+      <postalcode></postalcode>
+      <geo:point>
+         <geo:lat>35.7108378353001</geo:lat>
+         <geo:long>139.751586914062</geo:long>
+      </geo:point>
+              <timezone>JST</timezone>
+          </location>
+    <url>http://www.last.fm/venue/8854834</url>
+  </venue>
+  <startDate>Thu, 19 Mar 2009</startDate>
+  <description><![CDATA[<div class="bbcode">OPEN/未定  START/未定<br />
+前売/￥0  当日/￥0<br />
+ドリンク/別</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/11871967.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/11871967.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/11871967.jpg</image>
+   <attendance>1</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=846323</tag>  
+  <url>http://www.last.fm/event/846323</url>
+</event>
+<event>
+  <id>951660</id>
+  <title>GAN-BAN NIGHT SPECIAL</title>
+  <artists>
+    <artist>電気グルーヴ</artist>
+    <artist>Fumiya Tanaka</artist>
+    <artist>Metalmouse</artist>
+    <artist>80KIDZ</artist>
+    <artist>田中フミヤ</artist>
+    <artist>DEXPISTOLS</artist>
+    <headliner>電気グルーヴ</headliner>
+  </artists>
+  <venue>
+    <name>ageHa@STUDIO COAST</name>
+    <location>
+      <city>Tokyo</city>
+      <country>Japan</country>
+      <street>2-2-10 Kotou-ku, Shinkiba</street>
+      <postalcode>136-0082</postalcode>
+      <geo:point>
+         <geo:lat>35.7108378353001</geo:lat>
+         <geo:long>139.751586914062</geo:long>
+      </geo:point>
+              <timezone>JST</timezone>
+          </location>
+    <url>http://www.last.fm/venue/8962708</url>
+  </venue>
+  <startDate>Thu, 19 Mar 2009</startDate>
+  <description></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/5928937.jpg</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/5928937.jpg</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/5928937.jpg</image>
+   <attendance>5</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=951660</tag>  
+  <url>http://www.last.fm/event/951660</url>
+</event>
+</events></lfm>

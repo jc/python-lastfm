@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+"""Module for calling Geo related last.fm web services API methods"""
 
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
+__package__ = "lastfm"
 
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable
@@ -10,19 +12,46 @@ from lastfm.lazylist import lazylist
 from lastfm.decorators import cached_property, top_property
 
 class Geo(object):
-    """A class representing an geographic location."""
+    """A class representing an geographic location"""
     @staticmethod
     def get_events(api,
                   location,
                   latitude = None,
                   longitude = None,
                   distance = None):
+        """
+        Get the events for a location.
+        
+        @param api:          an instance of L{Api}
+        @type api:           L{Api}
+        @param location:     location to retrieve events for (optional)
+        @type location:      L{str}
+        @param latitude:     latitude value to retrieve events for (optional)
+        @type latitude:      L{float}
+        @param longitude:    longitude value to retrieve events for (optional)
+        @type longitude:     L{float}
+        @param distance:     find events within a specified distance (optional)
+        @type distance:      L{float}
+        
+        @return:             events for the location
+        @rtype:              L{lazylist} of L{Event}
+        
+        @raise InvalidParametersError: Either location or latitude and longitude
+                                       has to be provided. Otherwise exception is
+                                       raised.
+        
+        @note: Use L{Location.events} instead of using this method directly.
+        """
+        if reduce(lambda x,y: x and y is None, [location, latitude, longitude], True):
+            raise InvalidParametersError(
+                "Either location or latitude and longitude has to be provided")
+        
         params = {'method': 'geo.getEvents', 'location': location}
         if distance is not None:
             params.update({'distance': distance})
 
         if latitude is not None and longitude is not None:
-            params.update({'latitude': latitude, 'longitude': longitude})
+            params.update({'lat': latitude, 'long': longitude})
 
         @lazylist
         def gen(lst):
@@ -46,6 +75,20 @@ class Geo(object):
 
     @staticmethod
     def get_top_artists(api, country):
+        """
+        Get the most popular artists on Last.fm by country
+        
+        @param api:          an instance of L{Api}
+        @type api:           L{Api}
+        @param country:      a country name, as defined by 
+                             the ISO 3166-1 country names standard
+        @type country:       L{str}
+        
+        @return:             most popular artists of the country
+        @rtype:              L{list} of L{Artist}
+        
+        @note: Use L{Country.top_artists} instead of using this method directly.
+        """
         params = {'method': 'geo.getTopArtists', 'country': country}
         data = api._fetch_data(params).find('topartists')
         return [
@@ -66,6 +109,23 @@ class Geo(object):
 
     @staticmethod
     def get_top_tracks(api, country, location = None):
+        """
+        Get the most popular tracks on Last.fm by country
+        
+        @param api:          an instance of L{Api}
+        @type api:           L{Api}
+        @param country:      a country name, as defined by 
+                             the ISO 3166-1 country names standard
+        @type country:       L{str}
+        @param location:     a metro name, to fetch the charts for 
+                            (must be within the country specified) (optional)
+        
+        @return:             most popular tracks of the country
+        @rtype:              L{list} of L{Track}
+        
+        @note: Use L{Country.top_tracks} and L{Country.get_top_tracks}
+               instead of using this method directly.
+        """
         params = {'method': 'geo.getTopTracks', 'country': country}
         if location is not None:
             params.update({'location': location})
@@ -109,6 +169,29 @@ class Location(LastfmBase, Cacheable):
                  longitude = None,
                  timezone = None,
                  **kwargs):
+        """
+        Create a Location object by providing all the data related to it.
+        
+        @param api:          an instance of L{Api}
+        @type api:           L{Api}
+        @param city:         city in which the location is situated
+        @type city:          L{str}
+        @param country:      country in which the location is situated
+        @type country:       L{Country}
+        @param street:       street in which the location is situated
+        @type street:        L{str}
+        @param postal_code:  postal code of the location
+        @type postal_code:   L{str}
+        @param latitude:     latitude of the location
+        @type latitude:      L{float}
+        @param longitude:    longitude of the location
+        @type longitude:     L{float}
+        @param timezone:     timezone in which the location is situated
+        @type timezone:      L{str}
+        
+        @raise InvalidParametersError: If an instance of L{Api} is not provided as the first
+                                       parameter then an Exception is raised.
+        """
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         self._api = api
@@ -122,53 +205,88 @@ class Location(LastfmBase, Cacheable):
 
     @property
     def city(self):
-        """city in which the location is situated"""
+        """
+        city in which the location is situated
+        @rtype: L{str}
+        """
         return self._city
 
     @property
     def country(self):
-        """country in which the location is situated"""
+        """
+        country in which the location is situated
+        @rtype: L{Country}
+        """
         return self._country
 
     @property
     def street(self):
-        """street in which the location is situated"""
+        """
+        street in which the location is situated
+        @rtype: L{str}
+        """
         return self._street
 
     @property
     def postal_code(self):
-        """postal code of the location"""
+        """
+        postal code of the location
+        @rtype: L{str}
+        """
         return self._postal_code
 
     @property
     def latitude(self):
-        """latitude of the location"""
+        """
+        latitude of the location
+        @rtype: L{float}
+        """
         return self._latitude
 
     @property
     def longitude(self):
-        """longitude of the location"""
+        """
+        longitude of the location
+        @rtype: L{float}
+        """
         return self._longitude
 
     @property
     def timezone(self):
-        """timezone in which the location is situated"""
+        """
+        timezone in which the location is situated
+        @rtype: L{str}
+        """
         return self._timezone
 
     @cached_property
     def top_tracks(self):
-        """top tracks of the location"""
+        """
+        top tracks for the location
+        @rtype: L{list} of L{Track}
+        """
         if self.country is None or self.city is None:
             raise InvalidParametersError("country and city of this location are required for calling this method")
         return Geo.get_top_tracks(self._api, self.country.name, self.city)
 
     @top_property("top_tracks")
     def top_track(self):
-        """top track of the location"""
+        """
+        top track for the location
+        @rtype: L{Track}
+        """
         pass
 
-    def get_events(self,
-                  distance = None):
+    def get_events(self, distance = None):
+        """
+        Get the events taking place at the location.
+        
+        @param distance:    find events within a specified distance (optional)
+        @type distance:     L{float}
+        
+        @return:            events taking place at the location
+        @rtype:             L{lazylist} of L{Event}
+        """
         return Geo.get_events(self._api,
                              self.city,
                              self.latitude,
@@ -177,7 +295,10 @@ class Location(LastfmBase, Cacheable):
 
     @cached_property
     def events(self):
-        """events taking place at/around the location"""
+        """
+        events taking place at/around the location
+        @rtype: L{lazylist} of L{Event}
+        """
         return self.get_events()
 
     @staticmethod
@@ -462,10 +583,18 @@ class Country(LastfmBase, Cacheable):
          'ZA': 'South Africa',
          'ZM': 'Zambia',
          'ZW': 'Zimbabwe'}
-    def init(self,
-                 api,
-                 name = None,
-                 **kwargs):
+    """ISO Codes of the countries"""
+    def init(self, api, name = None, **kwargs):
+        """
+        Create a Country object by providing all the data related to it.
+        @param api:    an instance of L{Api}
+        @type api:     L{Api}
+        @param name:   name of the country
+        @type name:    L{str}
+        
+        @raise InvalidParametersError: If an instance of L{Api} is not provided as the first
+                                       parameter then an Exception is raised.
+        """
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         self._api = api
@@ -473,35 +602,62 @@ class Country(LastfmBase, Cacheable):
 
     @property
     def name(self):
-        """name of the country"""
+        """
+        name of the country
+        @rtype: L{str}
+        """
         return self._name
 
     @cached_property
     def top_artists(self):
-        """top artists of the country"""
+        """
+        top artists of the country
+        @rtype: L{list} of L{Artist}
+        """
         return Geo.get_top_artists(self._api, self.name)
 
     @top_property("top_artists")
     def top_artist(self):
-        """top artist of the country"""
+        """
+        top artist of the country
+        @rtype: L{Artist}
+        """
         pass
 
     def get_top_tracks(self, location = None):
+        """
+        Get the top tracks for country.
+        
+        @param location:     a metro name, to fetch the charts for 
+                            (must be within the country specified) (optional)
+        
+        @return:             most popular tracks of the country
+        @rtype:              L{list} of L{Track}
+        """
         return Geo.get_top_tracks(self._api, self.name, location)
 
     @cached_property
     def top_tracks(self):
-        """top tracks of the country"""
+        """
+        top tracks of the country
+        @rtype: L{list} of L{Track}
+        """
         return self.get_top_tracks()
 
     @top_property("top_tracks")
     def top_track(self):
-        """top track of the country"""
+        """
+        top track of the country
+        @rtype: L{Track}
+        """
         pass
 
     @cached_property
     def events(self):
-        """events taking place at/around the location"""
+        """
+        events taking place in the country
+        @rtype: L{lazylist} of L{Event}
+        """
         return Geo.get_events(self._api, self.name)
 
     @staticmethod

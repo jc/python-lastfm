@@ -4,6 +4,7 @@
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
+__package__ = "lastfm"
 
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable, Searchable, Taggable
@@ -213,7 +214,7 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
         @param mbid:     MBID of the album
         @type mbid:      L{str}
         
-        @return:         an Album object corresponding the provided album name
+        @return:         an Album object corresponding to the provided album name
         @rtype:          L{Album}
         
         @raise lastfm.InvalidParametersError: Either album and artist parameters or 

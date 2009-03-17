@@ -1,9 +1,15 @@
 #!/usr/bin/env python
-"""A python interface to the last.fm web services API"""
+"""
+A python interface to the last.fm web services API at
+U{http://ws.audioscrobbler.com/2.0}.
+See U{the official documentation<http://www.last.fm/api/intro>}
+of the web service API methods for more information.
+"""
 
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
+__package__ = "lastfm"
 
 import sys
 import os

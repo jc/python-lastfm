@@ -3,6 +3,7 @@
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
+__package__ = "lastfm.mixins"
 
 from lastfm.decorators import authenticate
 
@@ -10,7 +11,6 @@ class Sharable(object):
     def init(self, api):
         self._api = api
     
-    @authenticate    
     def share(self, recipient, message = None):
         from lastfm.user import User
         params = self._default_params({'method': '%s.share' % self.__class__.__name__.lower()})

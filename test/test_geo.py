@@ -55,8 +55,8 @@ class TestGeo(unittest.TestCase):
         self.assertEqual((top_track.name, top_track.artist.name), ('Viva la Vida', 'Coldplay'))
         
     def testLocationEvents(self):
-        event_ids = [957543, 871240, 843216, 938214, 910474,
-                     875468, 863115, 954783, 890885, 843238]
+        event_ids = [920495, 929525, 828211, 876654, 957549,
+                     888895, 948701, 986029, 846323, 951660]
         self.assertEqual([e.id for e in self.location.events[:10]], event_ids)
         
     def testCountryName(self):
