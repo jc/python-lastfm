@@ -9,7 +9,7 @@ from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable, Shoutable
 from lastfm.lazylist import lazylist
 import lastfm.playlist
-from lastfm.decorators import cached_property, top_property, authenticate
+from lastfm.decorators import cached_property, top_property, authenticate, depaginate
 
 class User(LastfmBase, Cacheable, Shoutable):
     """A class representing an user."""
@@ -110,62 +110,38 @@ class User(LastfmBase, Cacheable, Shoutable):
                 Event.create_from_data(self._api, e)
                 for e in data.findall('event')
                 ]
-
-    def get_past_events(self,
-                      limit = None):
+        
+    @depaginate
+    def get_past_events(self, limit = None, page = None):
         params = self._default_params({'method': 'user.getPastEvents'})
         if limit is not None:
             params.update({'limit': limit})
+        if page is not None:
+            params.update({'page': page})
 
-        @lazylist
-        def gen(lst):
-            data = self._api._fetch_data(params).find('events')
-            total_pages = int(data.attrib['totalPages'])
-
-            @lazylist
-            def gen2(lst, data):
-                for e in data.findall('event'):
-                    yield Event.create_from_data(self._api, e)
-
-            for e in gen2(data):
-                yield e
-
-            for page in xrange(2, total_pages+1):
-                params.update({'page': page})
-                data = self._api._fetch_data(params).find('events')
-                for e in gen2(data):
-                    yield e
-        return gen()
+        data = self._api._fetch_data(params).find('events')
+        total_pages = int(data.attrib['totalPages'])
+        yield total_pages
+        for e in data.findall('event'):
+            yield Event.create_from_data(self._api, e)
 
     @cached_property
     def past_events(self):
         return self.get_past_events()
     
     @authenticate
-    def get_recommended_events(self, limit = None):
+    @depaginate
+    def get_recommended_events(self, limit = None, page = None):
         params = {'method': 'user.getRecommendedEvents'}
         if limit is not None:
             params.update({'limit': limit})
-
-        @lazylist
-        def gen(lst):
-            data = self._api._fetch_data(params, sign = True, session = True).find('events')
-            total_pages = int(data.attrib['totalPages'])
-
-            @lazylist
-            def gen2(lst, data):
-                for e in data.findall('event'):
-                    yield Event.create_from_data(self._api, e)
-
-            for e in gen2(data):
-                yield e
-
-            for page in xrange(2, total_pages+1):
-                params.update({'page': page})
-                data = self._api._fetch_data(params, sign = True, session = True).find('events')
-                for e in gen2(data):
-                    yield e
-        return gen()
+        if page is not None:
+            params.update({'page': page})
+        data = self._api._fetch_data(params, sign = True, session = True).find('events')
+        total_pages = int(data.attrib['totalPages'])
+        yield total_pages
+        for e in data.findall('event'):
+            yield Event.create_from_data(self._api, e)
 
     @cached_property
     def recommended_events(self):
@@ -411,35 +387,25 @@ class User(LastfmBase, Cacheable, Shoutable):
     
     @cached_property
     @authenticate
-    def recommended_artists(self):
+    @depaginate
+    def recommended_artists(self, page = None):
         params = {'method': 'user.getRecommendedArtists'}
-        
-        @lazylist
-        def gen(lst):
-            data = self._api._fetch_data(params, sign = True, session = True).find('recommendations')
-            total_pages = int(data.attrib['totalPages'])
+        if page is not None:
+            params.update({'page': page})
+            
+        data = self._api._fetch_data(params, sign = True, session = True).find('recommendations')
+        total_pages = int(data.attrib['totalPages'])
+        yield total_pages
 
-            @lazylist
-            def gen2(lst, data):
-                for a in data.findall('artist'):
-                    yield Artist(
-                                 self._api,
-                                 name = a.findtext('name'),
-                                 mbid = a.findtext('mbid'),
-                                 url = a.findtext('url'),
-                                 streamable = (a.findtext('streamable') == "1"),
-                                 image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
-                                 )
-
-            for a in gen2(data):
-                yield a
-
-            for page in xrange(2, total_pages+1):
-                params.update({'page': page})
-                data = self._api._fetch_data(params, sign = True, session = True).find('recommendations')
-                for a in gen2(data):
-                    yield a
-        return gen()
+        for a in data.findall('artist'):
+            yield Artist(
+                         self._api,
+                         name = a.findtext('name'),
+                         mbid = a.findtext('mbid'),
+                         url = a.findtext('url'),
+                         streamable = (a.findtext('streamable') == "1"),
+                         image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                         )
     
     def get_top_tracks(self, period = None):
         params = self._default_params({'method': 'user.getTopTracks'})
@@ -755,53 +721,41 @@ class User(LastfmBase, Cacheable, Shoutable):
         def user(self):
             return self._user
 
-        def get_albums(self,
-                      limit = None):
+        @depaginate
+        def get_albums(self, limit = None, page = None):
             params = self._default_params({'method': 'library.getAlbums'})
             if limit is not None:
                 params.update({'limit': limit})
+            if page is not None:
+                params.update({'page': page})
 
-            @lazylist
-            def gen(lst):
-                data = self._api._fetch_data(params).find('albums')
+            try:
+                data = self._api._fetch_data(params).find('albums')            
                 total_pages = int(data.attrib['totalPages'])
-
-                @lazylist
-                def gen2(lst, data):
-                    for a in data.findall('album'):
-                        yield Album(
-                                    self._api,
-                                    subject = self,
-                                    name = a.findtext('name'),
-                                    artist = Artist(
-                                                    self._api,
-                                                    subject = self,
-                                                    name = a.findtext('artist/name'),
-                                                    mbid = a.findtext('artist/mbid'),
-                                                    url = a.findtext('artist/url'),
-                                                    ),
-                                    mbid = a.findtext('mbid'),
-                                    url = a.findtext('url'),
-                                    image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
-                                    stats = Stats(
-                                                  subject = a.findtext('name'),
-                                                  playcount = int(a.findtext('playcount')),
-                                                  )
-                                    )
-
-
-                for a in gen2(data):
-                    yield a
-
-                for page in xrange(2, total_pages+1):
-                    params.update({'page': page})
-                    try:
-                        data = self._api._fetch_data(params).find('albums')
-                    except LastfmError:
-                        continue
-                    for a in gen2(data):
-                        yield a
-            return gen()
+                yield total_pages
+    
+                for a in data.findall('album'):
+                    yield Album(
+                                self._api,
+                                subject = self,
+                                name = a.findtext('name'),
+                                artist = Artist(
+                                                self._api,
+                                                subject = self,
+                                                name = a.findtext('artist/name'),
+                                                mbid = a.findtext('artist/mbid'),
+                                                url = a.findtext('artist/url'),
+                                                ),
+                                mbid = a.findtext('mbid'),
+                                url = a.findtext('url'),
+                                image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                                stats = Stats(
+                                              subject = a.findtext('name'),
+                                              playcount = int(a.findtext('playcount')),
+                                              )
+                                )
+            except LastfmError:
+                return
 
         @cached_property
         def albums(self):
@@ -825,47 +779,36 @@ class User(LastfmBase, Cacheable, Shoutable):
             self._api._post_data(params)
             self._albums = None
             
-        def get_artists(self,
-                       limit = None):
+        @depaginate
+        def get_artists(self, limit = None, page = None):
             params = self._default_params({'method': 'library.getArtists'})
             if limit is not None:
                 params.update({'limit': limit})
+            if page is not None:
+                params.update({'page': page})
 
-            @lazylist
-            def gen(lst):
+            try:
                 data = self._api._fetch_data(params).find('artists')
                 total_pages = int(data.attrib['totalPages'])
-
-                @lazylist
-                def gen2(lst, data):
-                    for a in data.findall('artist'):
-                        yield Artist(
-                                     self._api,
-                                     subject = self,
-                                     name = a.findtext('name'),
-                                     mbid = a.findtext('mbid'),
-                                     stats = Stats(
-                                                   subject = a.findtext('name'),
-                                                   playcount = a.findtext('playcount') and int(a.findtext('playcount')) or None,
-                                                   tagcount = a.findtext('tagcount') and int(a.findtext('tagcount')) or None
-                                                   ),
-                                     url = a.findtext('url'),
-                                     streamable = (a.findtext('streamable') == "1"),
-                                     image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
-                                     )
-
-                for a in gen2(data):
-                    yield a
-
-                for page in xrange(2, total_pages+1):
-                    params.update({'page': page})
-                    try:
-                        data = self._api._fetch_data(params).find('artists')
-                    except LastfmError:
-                        continue
-                    for a in gen2(data):
-                        yield a
-            return gen()
+                yield total_pages
+                
+                for a in data.findall('artist'):
+                    yield Artist(
+                                 self._api,
+                                 subject = self,
+                                 name = a.findtext('name'),
+                                 mbid = a.findtext('mbid'),
+                                 stats = Stats(
+                                               subject = a.findtext('name'),
+                                               playcount = a.findtext('playcount') and int(a.findtext('playcount')) or None,
+                                               tagcount = a.findtext('tagcount') and int(a.findtext('tagcount')) or None
+                                               ),
+                                 url = a.findtext('url'),
+                                 streamable = (a.findtext('streamable') == "1"),
+                                 image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
+                                 )
+            except LastfmError:
+                return
 
         @cached_property
         def artists(self):
@@ -881,55 +824,43 @@ class User(LastfmBase, Cacheable, Shoutable):
             self._api._post_data(params)
             self._artists = None
 
-        def get_tracks(self,
-                      limit = None):
+        @depaginate
+        def get_tracks(self, limit = None, page = None):
             params = self._default_params({'method': 'library.getTracks'})
             if limit is not None:
                 params.update({'limit': limit})
-
-            @lazylist
-            def gen(lst):
+            if page is not None:
+                params.update({'page': page})
+            
+            try:
                 data = self._api._fetch_data(params).find('tracks')
                 total_pages = int(data.attrib['totalPages'])
-
-                @lazylist
-                def gen2(lst, data):
-                    for t in data.findall('track'):
-                        yield Track(
-                                    self._api,
-                                    subject = self,
-                                    name = t.findtext('name'),
-                                    artist = Artist(
-                                                    self._api,
-                                                    subject = self,
-                                                    name = t.findtext('artist/name'),
-                                                    mbid = t.findtext('artist/mbid'),
-                                                    url = t.findtext('artist/url'),
-                                                    ),
-                                    mbid = t.findtext('mbid'),
-                                    stats = Stats(
-                                                  subject = t.findtext('name'),
-                                                  playcount = t.findtext('playcount') and int(t.findtext('playcount')) or None,
-                                                  tagcount = t.findtext('tagcount') and int(t.findtext('tagcount')) or None
-                                                  ),
-                                    streamable = (t.findtext('streamable') == '1'),
-                                    full_track = (t.find('streamable').attrib['fulltrack'] == '1'),
-                                    image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
-                                    )
-
-                for t in gen2(data):
-                    yield t
-
-                for page in xrange(2, total_pages+1):
-                    params.update({'page': page})
-                    data = None
-                    try:
-                        data = self._api._fetch_data(params).find('tracks')
-                    except LastfmError:
-                        continue
-                    for t in gen2(data):
-                        yield t
-            return gen()
+                yield total_pages
+                
+                for t in data.findall('track'):
+                    yield Track(
+                                self._api,
+                                subject = self,
+                                name = t.findtext('name'),
+                                artist = Artist(
+                                                self._api,
+                                                subject = self,
+                                                name = t.findtext('artist/name'),
+                                                mbid = t.findtext('artist/mbid'),
+                                                url = t.findtext('artist/url'),
+                                                ),
+                                mbid = t.findtext('mbid'),
+                                stats = Stats(
+                                              subject = t.findtext('name'),
+                                              playcount = t.findtext('playcount') and int(t.findtext('playcount')) or None,
+                                              tagcount = t.findtext('tagcount') and int(t.findtext('tagcount')) or None
+                                              ),
+                                streamable = (t.findtext('streamable') == '1'),
+                                full_track = (t.find('streamable').attrib['fulltrack'] == '1'),
+                                image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
+                                )
+            except LastfmError:
+                return
 
         @cached_property
         def tracks(self):

@@ -4,6 +4,7 @@
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
+__package__ = "lastfm"
 
 def top_property(list_property_name):
     """
@@ -95,6 +96,26 @@ def authenticate(func):
                 pass
         raise AuthenticationFailedError(
             "user '%s' does not have permissions to access the service" % username)
+    wrapper.__doc__ = func.__doc__
+    return wrapper
+
+def depaginate(func):
+    from lastfm.lazylist import lazylist
+    def wrapper(*args, **kwargs):
+        @lazylist
+        def generator(lst):
+            gen = func(*args, **kwargs)
+            total_pages = gen.next()
+            for e in gen:
+                yield e
+            for page in xrange(2, total_pages+1):
+                kwargs['page'] = page
+                gen = func(*args, **kwargs)
+                gen.next()
+                for e in gen:
+                    yield e
+        return generator()
+    wrapper.__doc__ = func.__doc__
     return wrapper
 
 import copy

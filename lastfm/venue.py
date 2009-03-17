@@ -7,8 +7,7 @@ __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable, Searchable
-from lastfm.lazylist import lazylist
-from lastfm.decorators import cached_property
+from lastfm.decorators import cached_property, depaginate
 
 class Venue(LastfmBase, Cacheable, Searchable):
     """A class representing a venue of an event"""
@@ -56,32 +55,21 @@ class Venue(LastfmBase, Cacheable, Searchable):
                 Event.create_from_data(self._api, e)
                 for e in data.findall('event')
                 ]
-
-    def get_past_events(self,
-                      limit = None):
+        
+    @depaginate
+    def get_past_events(self, limit = None, page = None):
         params = self._default_params({'method': 'venue.getPastEvents'})
         if limit is not None:
             params.update({'limit': limit})
+        if page is not None:
+            params.update({'page': page})
 
-        @lazylist
-        def gen(lst):
-            data = self._api._fetch_data(params).find('events')
-            total_pages = int(data.attrib['totalPages'])
+        data = self._api._fetch_data(params).find('events')
+        total_pages = int(data.attrib['totalPages'])
+        yield total_pages
 
-            @lazylist
-            def gen2(lst, data):
-                for e in data.findall('event'):
-                    yield Event.create_from_data(self._api, e)
-
-            for e in gen2(data):
-                yield e
-
-            for page in xrange(2, total_pages+1):
-                params.update({'page': page})
-                data = self._api._fetch_data(params).find('events')
-                for e in gen2(data):
-                    yield e
-        return gen()
+        for e in data.findall('event'):
+            yield Event.create_from_data(self._api, e)
 
     @cached_property
     def past_events(self):
@@ -96,6 +84,9 @@ class Venue(LastfmBase, Cacheable, Searchable):
     
     @staticmethod
     def _search_yield_func(api, venue):
+        latitude = venue.findtext('location/{%s}point/{%s}lat' % ((Location.XMLNS,)*2))
+        longitude = venue.findtext('location/{%s}point/{%s}long' % ((Location.XMLNS,)*2))
+        
         return Venue(
                      api,
                      id = int(venue.findtext('id')),
@@ -109,13 +100,9 @@ class Venue(LastfmBase, Cacheable, Searchable):
                                             ),
                                          street = venue.findtext('location/street'),
                                          postal_code = venue.findtext('location/postalcode'),
-                                         latitude = float(venue.findtext(
-                                             'location/{%s}point/{%s}lat' % ((Location.XMLNS,)*2)
-                                             )),
-                                         longitude = float(venue.findtext(
-                                             'location/{%s}point/{%s}long' % ((Location.XMLNS,)*2)
-                                             )),
-                                         ),
+                                         latitude = (latitude.strip()!= '') and float(latitude) or None,
+                                         longitude = (longitude.strip()!= '') and float(longitude) or None,
+                                       ),
                      url = venue.findtext('url')
                      )
     

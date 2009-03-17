@@ -8,17 +8,18 @@ __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable
-from lastfm.lazylist import lazylist
-from lastfm.decorators import cached_property, top_property
+from lastfm.decorators import cached_property, top_property, depaginate
 
 class Geo(object):
     """A class representing an geographic location"""
     @staticmethod
+    @depaginate
     def get_events(api,
                   location,
                   latitude = None,
                   longitude = None,
-                  distance = None):
+                  distance = None,
+                  page = None):
         """
         Get the events for a location.
         
@@ -52,26 +53,15 @@ class Geo(object):
 
         if latitude is not None and longitude is not None:
             params.update({'lat': latitude, 'long': longitude})
-
-        @lazylist
-        def gen(lst):
-            data = api._fetch_data(params).find('events')
-            total_pages = int(data.attrib['totalpages'])
-
-            @lazylist
-            def gen2(lst, data):
-                for e in data.findall('event'):
-                    yield Event.create_from_data(api, e)
-
-            for e in gen2(data):
-                yield e
-
-            for page in xrange(2, total_pages+1):
-                params.update({'page': page})
-                data = api._fetch_data(params).find('events')
-                for e in gen2(data):
-                    yield e
-        return gen()
+        if page is not None:
+            params.update({'page': page})
+            
+        data = api._fetch_data(params).find('events')
+        total_pages = int(data.attrib['totalpages'])
+        yield total_pages
+        
+        for e in data.findall('event'):
+            yield Event.create_from_data(api, e)
 
     @staticmethod
     def get_top_artists(api, country):
