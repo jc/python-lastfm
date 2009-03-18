@@ -7,7 +7,6 @@ __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable, Searchable, Sharable, Taggable
-from lastfm.lazylist import lazylist
 from lastfm.decorators import cached_property, top_property
 
 class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):

@@ -5,7 +5,6 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 import unittest
-import datetime
 import sys, os
 
 from wsgi_intercept.urllib2_intercept import install_opener
@@ -28,8 +27,8 @@ class TestArtist(unittest.TestCase):
         pass
             
     def testArtistStats(self):
-         self.assertEqual(self.artist.stats.listeners, 718040)
-         self.assertEqual(self.artist.stats.playcount, 15353197)
+        self.assertEqual(self.artist.stats.listeners, 718040)
+        self.assertEqual(self.artist.stats.playcount, 15353197)
     
     def testArtistSimilar(self):
         artists = ['Jon Bon Jovi',

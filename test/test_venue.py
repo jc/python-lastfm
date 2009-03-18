@@ -5,7 +5,6 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 import unittest
-import datetime
 import sys, os
 
 from wsgi_intercept.urllib2_intercept import install_opener
@@ -41,7 +40,7 @@ class TestVenue(unittest.TestCase):
     def testVenueSearch(self):
         venues = [8881428, 8887127, 8894829, 8899152, 8938738,
                   8778901, 8779255, 8779726, 8802306, 8781168]
-        self.assertEqual([v.id for v 
+        self.assertEqual([venue.id for venue 
                           in list(api.search_venue('stadium')[:10])], venues)
                 
 apikey = "152a230561e72192b8b0f3e42362c6ff"        

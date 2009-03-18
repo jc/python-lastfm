@@ -5,7 +5,6 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm.mixins"
 
-from lastfm.base import LastfmBase
 from lastfm.safelist import SafeList
 from lastfm.decorators import cached_property, authenticate
 
@@ -33,9 +32,9 @@ class Taggable(object):
     def add_tags(self, tags):
         from lastfm.tag import Tag
         while(len(tags) > 10):
-                        section = tags[0:9]
-                        tags = tags[9:]
-                        self.add_tags(section)
+            section = tags[0:9]
+            tags = tags[9:]
+            self.add_tags(section)
         
         if len(tags) == 0: return
 

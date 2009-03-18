@@ -5,8 +5,6 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm.mixins"
 
-from lastfm.decorators import authenticate
-
 class Sharable(object):
     def init(self, api):
         self._api = api

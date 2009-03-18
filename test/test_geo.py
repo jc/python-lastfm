@@ -5,7 +5,6 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 import unittest
-import datetime
 import sys, os
 
 from wsgi_intercept.urllib2_intercept import install_opener
@@ -91,9 +90,9 @@ class TestGeo(unittest.TestCase):
         self.assertEqual((top_track.name, top_track.artist.name), ('Dream Fighter', 'Perfume'))
    
     def testCountryEvents(self):
-       event_ids = [961510, 925636, 959392, 875466, 951038,
+        event_ids = [961510, 925636, 959392, 875466, 951038,
                     950520, 957543, 930614, 871240, 857063]
-       self.assertEqual([e.id for e in self.country.events[:10]], event_ids)
+        self.assertEqual([e.id for e in self.country.events[:10]], event_ids)
     
 apikey = "152a230561e72192b8b0f3e42362c6ff"        
 api = Api(apikey, no_cache = True)

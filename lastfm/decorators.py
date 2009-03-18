@@ -78,11 +78,11 @@ def authenticate(func):
         if isinstance(self, User):
             username = self.name
             if self.authenticated:
-               return func(self, *args, **kwargs)
+                return func(self, *args, **kwargs)
         elif hasattr(self, 'user'):
             username = self.user.name
             if self.user.authenticated:
-               return func(self, *args, **kwargs)
+                return func(self, *args, **kwargs)
         elif hasattr(self, '_subject') and isinstance(self._subject, User):
             username = self._subject.name
             if self._subject.authenticated:

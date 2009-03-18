@@ -5,7 +5,6 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm.mixins"
 
-from lastfm.base import LastfmBase
 from lastfm.decorators import cached_property, top_property
 
 class Shoutable(object):

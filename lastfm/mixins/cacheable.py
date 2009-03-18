@@ -21,10 +21,10 @@ class Cacheable(object):
             #del kwds['subject']
 
         if 'bypass_registry' in kwds:
-                del kwds['bypass_registry']
-                inst = object.__new__(cls)
-                inst.init(*args, **kwds)
-                return inst
+            del kwds['bypass_registry']
+            inst = object.__new__(cls)
+            inst.init(*args, **kwds)
+            return inst
 
         key = cls._hash_func(*args, **kwds)
         if subject is not None:

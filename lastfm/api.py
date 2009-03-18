@@ -6,7 +6,6 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
-from lastfm.base import LastfmBase
 from lastfm.decorators import cached_property
 
 class Api(object):
@@ -647,15 +646,15 @@ class Api(object):
 
     def _get_api_sig(self, params):
         if self.secret is not None:
-                keys = params.keys()[:]
-                keys.sort()
-                sig = unicode()
-                for name in keys:
-                    if name == 'api_sig': continue
-                    sig += ("%s%s" % (name, params[name]))
-                sig += self.secret
-                hashed_sig = md5hash(sig)
-                return hashed_sig
+            keys = params.keys()[:]
+            keys.sort()
+            sig = unicode()
+            for name in keys:
+                if name == 'api_sig': continue
+                sig += ("%s%s" % (name, params[name]))
+            sig += self.secret
+            hashed_sig = md5hash(sig)
+            return hashed_sig
         else:
             raise AuthenticationFailedError("api secret must be present to call this method")
 

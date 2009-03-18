@@ -5,7 +5,6 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 
 import unittest
-import datetime
 import sys, os
 
 from wsgi_intercept.urllib2_intercept import install_opener

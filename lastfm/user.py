@@ -263,6 +263,8 @@ class User(LastfmBase, Cacheable, Shoutable):
 
     def get_recent_tracks(self, limit = None):
         params = self._default_params({'method': 'user.getRecentTracks'})
+        if limit is not None:
+            params.update({'limit': limit})
         data = self._api._fetch_data(params, no_cache = True).find('recenttracks')
         return [
                 Track(

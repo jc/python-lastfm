@@ -9,7 +9,7 @@ __package__ = "lastfm"
 from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable
 from lastfm.lazylist import lazylist
-from lastfm.decorators import cached_property, top_property, depaginate
+from lastfm.decorators import cached_property, depaginate
 
 class Group(LastfmBase, Cacheable):
     """A class representing a group on last.fm."""
