@@ -686,7 +686,8 @@ import urlparse
 
 from lastfm.album import Album
 from lastfm.artist import Artist
-from lastfm.error import error_map, LastfmError, OperationFailedError, AuthenticationFailedError
+from lastfm.error import error_map, LastfmError, OperationFailedError, AuthenticationFailedError,\
+    InvalidParametersError
 from lastfm.event import Event
 from lastfm.filecache import FileCache
 from lastfm.geo import Location, Country

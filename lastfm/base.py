@@ -8,9 +8,15 @@ __package__ = "lastfm"
 
 class LastfmBase(object):
     """Base class for all the classes in this package"""
+    
+    def __eq__(self, other):
+        raise NotImplementedError("The subclass must override this method")
+    
+    def __lt__(self, other):
+        raise NotImplementedError("The subclass must override this method")
 
     def __gt__(self, other):
-        return not (self.__lt__(other) or self.__eq(other))
+        return not (self.__lt__(other) or self.__eq__(other))
 
     def __ne__(self, other):
         return not self.__eq__(other)

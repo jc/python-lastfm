@@ -26,5 +26,8 @@ class Sharable(object):
         params['recipient'] = ",".join(recipient)
         self._api._post_data(params)
         
-    def _default_params(self, extra_params = {}):
-        return extra_params
+    def _default_params(self, extra_params = None):
+        if extra_params is not None:
+            return extra_params
+        else:
+            return {}

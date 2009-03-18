@@ -227,11 +227,12 @@ class Tag(LastfmBase, Cacheable, Searchable):
                 for t in data.findall('tag')
                 ]
 
-    def _default_params(self, extra_params = {}):
+    def _default_params(self, extra_params = None):
         if not self.name:
             raise InvalidParametersError("tag has to be provided.")
         params = {'tag': self.name}
-        params.update(extra_params)
+        if extra_params is not None:
+            params.update(extra_params)
         return params
 
     @staticmethod

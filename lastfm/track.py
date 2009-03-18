@@ -272,11 +272,12 @@ class Track(LastfmBase, Cacheable, Sharable, Searchable, Taggable):
         t._fill_info()
         return t
 
-    def _default_params(self, extra_params = {}):
+    def _default_params(self, extra_params = None):
         if not (self.artist and self.name):
             raise InvalidParametersError("artist and track have to be provided.")
         params = {'artist': self.artist.name, 'track': self.name}
-        params.update(extra_params)
+        if extra_params is not None:
+            params.update(extra_params)
         return params
 
     @staticmethod

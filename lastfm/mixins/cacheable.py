@@ -51,3 +51,7 @@ class Cacheable(object):
             #print "not already registered: %s" % ob.__class__
             Cacheable.registry[ob.__class__][key] = ob
             return (ob, False)
+        
+    @staticmethod
+    def _hash_func(*args, **kwds):
+        raise NotImplementedError("The subclass must override this method")

@@ -287,11 +287,12 @@ class Event(LastfmBase, Cacheable, Sharable, Shoutable):
                      tag = data.findtext('tag')
                     )
 
-    def _default_params(self, extra_params = []):
+    def _default_params(self, extra_params = None):
         if not self.id:
             raise InvalidParametersError("id has to be provided.")
         params = {'event': self.id}
-        params.update(extra_params)
+        if extra_params is not None:
+            params.update(extra_params)
         return params
 
     @staticmethod

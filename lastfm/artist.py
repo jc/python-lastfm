@@ -369,11 +369,12 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
         a._fill_info()
         return a
 
-    def _default_params(self, extra_params = {}):
+    def _default_params(self, extra_params = None):
         if not self.name:
             raise InvalidParametersError("artist has to be provided.")
         params = {'artist': self.name}
-        params.update(extra_params)
+        if extra_params is not None:
+            params.update(extra_params)
         return params
 
     @staticmethod

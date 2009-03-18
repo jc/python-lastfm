@@ -621,11 +621,12 @@ class User(LastfmBase, Cacheable, Shoutable):
         user._stats = Stats(subject = user, playcount = data.findtext('playcount'))
         return user
         
-    def _default_params(self, extra_params = {}):
+    def _default_params(self, extra_params = None):
         if not self.name:
             raise InvalidParametersError("user has to be provided.")
         params = {'user': self.name}
-        params.update(extra_params)
+        if extra_params is not None:
+            params.update(extra_params)
         return params
 
     @staticmethod
@@ -883,11 +884,12 @@ class User(LastfmBase, Cacheable, Shoutable):
             self._api._post_data(params)
             self._tracks = None
 
-        def _default_params(self, extra_params = {}):
+        def _default_params(self, extra_params = None):
             if not self.user.name:
                 raise InvalidParametersError("user has to be provided.")
             params = {'user': self.user.name}
-            params.update(extra_params)
+            if extra_params is not None:
+                params.update(extra_params)
             return params
 
         @staticmethod
