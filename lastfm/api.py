@@ -6,7 +6,7 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
-from lastfm.decorators import cached_property
+from lastfm.decorators import cached_property, async_callback
 
 class Api(object):
     """The class representing the last.fm web services API."""
@@ -169,6 +169,7 @@ class Api(object):
         """
         self._request_headers['User-Agent'] = user_agent
 
+    @async_callback
     def get_album(self,
                  album = None,
                  artist = None,
@@ -196,6 +197,7 @@ class Api(object):
             artist = artist.name
         return Album.get_info(self, artist, album, mbid)
 
+    @async_callback
     def search_album(self, album, limit = None):
         """
         Search for an album by name.
@@ -212,6 +214,7 @@ class Api(object):
         """
         return Album.search(self, search_item = album, limit = limit)
 
+    @async_callback
     def get_artist(self,
                   artist = None,
                   mbid = None):
@@ -232,7 +235,8 @@ class Api(object):
         @see:            L{Artist.get_info}
         """
         return Artist.get_info(self, artist, mbid)
-
+    
+    @async_callback
     def search_artist(self,
                      artist,
                      limit = None):
@@ -251,6 +255,7 @@ class Api(object):
         """
         return Artist.search(self, search_item = artist, limit = limit)
 
+    @async_callback
     def get_event(self, event):
         """
         Get an event object.
@@ -266,7 +271,8 @@ class Api(object):
         @see:             L{Event.get_info}
         """
         return Event.get_info(self, event)
-
+    
+    @async_callback
     def get_location(self, city):
         """
         Get a location object.
@@ -279,6 +285,7 @@ class Api(object):
         """
         return Location(self, city = city)
 
+    @async_callback
     def get_country(self, name):
         """
         Get a country object.
@@ -290,7 +297,8 @@ class Api(object):
         @rtype:         L{Country}
         """
         return Country(self, name = name)
-
+    
+    @async_callback
     def get_group(self, name):
         """
         Get a group object.
@@ -303,6 +311,7 @@ class Api(object):
         """
         return Group(self, name = name)
 
+    @async_callback
     def get_playlist(self, url):
         """
         Get a playlist object.
@@ -316,7 +325,8 @@ class Api(object):
         @see:           L{Playlist.fetch}
         """
         return Playlist.fetch(self, url)
-
+    
+    @async_callback
     def get_tag(self, name):
         """
         Get a tag object.
@@ -329,6 +339,7 @@ class Api(object):
         """
         return Tag(self, name = name)
 
+    @async_callback
     def get_global_top_tags(self):
         """
         Get the top global tags on Last.fm, sorted by popularity (number of times used).
@@ -338,6 +349,7 @@ class Api(object):
         """
         return Tag.get_top_tags(self)
 
+    @async_callback
     def search_tag(self,
                   tag,
                   limit = None):
@@ -356,6 +368,7 @@ class Api(object):
         """
         return Tag.search(self, search_item = tag, limit = limit)
 
+    @async_callback
     def compare_taste(self,
                      type1, type2,
                      value1, value2,
@@ -383,6 +396,7 @@ class Api(object):
         """
         return Tasteometer.compare(self, type1, type2, value1, value2, limit)
 
+    @async_callback
     def get_track(self, track, artist = None, mbid = None):
         """
         Get a track object.
@@ -405,11 +419,9 @@ class Api(object):
         if isinstance(artist, Artist):
             artist = artist.name
         return Track.get_info(self, artist, track, mbid)
-
-    def search_track(self,
-                    track,
-                    artist = None,
-                    limit = None):
+    
+    @async_callback
+    def search_track(self, track, artist = None, limit = None):
         """
         Search for a track by name.
         
@@ -429,6 +441,7 @@ class Api(object):
             artist = artist.name
         return Track.search(self, search_item = track, limit = limit, artist = artist)
 
+    @async_callback
     def get_user(self, name):
         """
         Get an user object.
@@ -445,6 +458,7 @@ class Api(object):
         """
         return User.get_info(self, name = name)
 
+    @async_callback
     def get_authenticated_user(self):
         """
         Get the currently authenticated user.
@@ -459,6 +473,7 @@ class Api(object):
         else:
             raise AuthenticationFailedError("session key must be present to call this method")
     
+    @async_callback
     def get_venue(self, venue):
         """
         Get a venue object.
@@ -478,6 +493,7 @@ class Api(object):
         except IndexError:
             raise InvalidParametersError("No such venue exists")
     
+    @async_callback
     def search_venue(self, venue, limit = None, country = None):
         """
         Search for a venue by name.

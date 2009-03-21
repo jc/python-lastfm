@@ -119,41 +119,41 @@ class WeeklyAlbumChart(WeeklyChart):
                         end = datetime.utcfromtimestamp(int(data.attrib['to'])),
                         )
         return WeeklyAlbumChart(
-                           subject = subject,
-                           start = datetime.utcfromtimestamp(int(data.attrib['from'])),
-                           end = datetime.utcfromtimestamp(int(data.attrib['to'])),
-                           stats = Stats(
-                                         subject = subject,
-                                         playcount = reduce(
-                                                            lambda x,y:(
-                                                                        x + int(y.findtext('playcount'))
-                                                                        ),
-                                                            data.findall('album'),
-                                                            0
-                                          )
-                                    ),
-                           albums = [
-                                     Album(
-                                           api,
-                                           subject = w,
-                                           name = a.findtext('name'),
-                                           mbid = a.findtext('mbid'),
-                                           artist = Artist(
-                                                           api,
-                                                           subject = w,
-                                                           name = a.findtext('artist'),
-                                                           mbid = a.find('artist').attrib['mbid'],
-                                                           ),
-                                           stats = Stats(
-                                                         subject = a.findtext('name'),
-                                                         rank = int(a.attrib['rank']),
-                                                         playcount = int(a.findtext('playcount')),
-                                                         ),
-                                           url = a.findtext('url'),
-                                           )
-                                     for a in data.findall('album')
-                                     ]
-                           )
+            subject = subject,
+            start = datetime.utcfromtimestamp(int(data.attrib['from'])),
+            end = datetime.utcfromtimestamp(int(data.attrib['to'])),
+            stats = Stats(
+                subject = subject,
+                playcount = reduce(
+                    lambda x,y:(
+                        x + int(y.findtext('playcount'))
+                    ),
+                    data.findall('album'),
+                    0
+                )
+            ),
+            albums = [
+                Album(
+                      api,
+                      subject = w,
+                      name = a.findtext('name'),
+                      mbid = a.findtext('mbid'),
+                      artist = Artist(
+                          api,
+                          subject = w,
+                          name = a.findtext('artist'),
+                          mbid = a.find('artist').attrib['mbid'],
+                          ),
+                      stats = Stats(
+                          subject = a.findtext('name'),
+                          rank = int(a.attrib['rank']),
+                          playcount = int(a.findtext('playcount')),
+                          ),
+                      url = a.findtext('url'),
+                      )
+                for a in data.findall('album')
+                ]
+            )
     
 class WeeklyArtistChart(WeeklyChart):
     """A class for representing the weekly artist charts"""
@@ -176,32 +176,34 @@ class WeeklyArtistChart(WeeklyChart):
         def get_count_attribute(artist):
             return {count_attribute: int(eval(artist.findtext(count_attribute)))}
         def get_count_attribute_sum(artists):
-            return {count_attribute: reduce(lambda x,y:(x + int(eval(y.findtext(count_attribute)))), artists, 0)}
+            return {count_attribute: reduce(
+                        lambda x, y:(x + int(eval(y.findtext(count_attribute)))), artists, 0
+                    )}
             
         return WeeklyArtistChart(
-                           subject = subject,
-                           start = datetime.utcfromtimestamp(int(data.attrib['from'])),
-                           end = datetime.utcfromtimestamp(int(data.attrib['to'])),
-                           stats = Stats(
-                                         subject = subject,
-                                         **get_count_attribute_sum(data.findall('artist'))
-                                    ),
-                           artists = [
-                                     Artist(
-                                           api,
-                                           subject = w,
-                                           name = a.findtext('name'),
-                                           mbid = a.findtext('mbid'),
-                                           stats = Stats(
-                                                         subject = a.findtext('name'),
-                                                         rank = int(a.attrib['rank']),
-                                                         **get_count_attribute(a)
-                                                         ),
-                                           url = a.findtext('url'),
-                                           )
-                                     for a in data.findall('artist')
-                                     ]
-                           )
+            subject = subject,
+            start = datetime.utcfromtimestamp(int(data.attrib['from'])),
+            end = datetime.utcfromtimestamp(int(data.attrib['to'])),
+            stats = Stats(
+                          subject = subject,
+                          **get_count_attribute_sum(data.findall('artist'))
+                    ),
+            artists = [
+                      Artist(
+                            api,
+                            subject = w,
+                            name = a.findtext('name'),
+                            mbid = a.findtext('mbid'),
+                            stats = Stats(
+                                          subject = a.findtext('name'),
+                                          rank = int(a.attrib['rank']),
+                                          **get_count_attribute(a)
+                                          ),
+                            url = a.findtext('url'),
+                            )
+                      for a in data.findall('artist')
+                      ]
+            )
     
 class WeeklyTrackChart(WeeklyChart):
     """A class for representing the weekly track charts"""
@@ -216,45 +218,45 @@ class WeeklyTrackChart(WeeklyChart):
     @staticmethod
     def create_from_data(api, subject, data):
         w = WeeklyChart(
-                        subject = subject,
-                        start = datetime.utcfromtimestamp(int(data.attrib['from'])),
-                        end = datetime.utcfromtimestamp(int(data.attrib['to'])),
-                        )
+            subject = subject,
+            start = datetime.utcfromtimestamp(int(data.attrib['from'])),
+            end = datetime.utcfromtimestamp(int(data.attrib['to'])),
+            )
         return WeeklyTrackChart(
-                           subject = subject,
-                           start = datetime.utcfromtimestamp(int(data.attrib['from'])),
-                           end = datetime.utcfromtimestamp(int(data.attrib['to'])),
-                           stats = Stats(
-                                         subject = subject,
-                                         playcount = reduce(
-                                                            lambda x,y:(
-                                                                        x + int(y.findtext('playcount'))
-                                                                        ),
-                                                            data.findall('track'),
-                                                            0
-                                          )
-                                    ),
-                           tracks = [
-                                     Track(
-                                           api,
-                                           subject = w,
-                                           name = t.findtext('name'),
-                                           mbid = t.findtext('mbid'),
-                                           artist = Artist(
-                                                           api,
-                                                           name = t.findtext('artist'),
-                                                           mbid = t.find('artist').attrib['mbid'],
-                                                           ),
-                                           stats = Stats(
-                                                         subject = t.findtext('name'),
-                                                         rank = int(t.attrib['rank']),
-                                                         playcount = int(t.findtext('playcount')),
-                                                         ),
-                                           url = t.findtext('url'),
-                                           )
-                                     for t in data.findall('track')
-                                     ]
-                           )
+            subject = subject,
+            start = datetime.utcfromtimestamp(int(data.attrib['from'])),
+            end = datetime.utcfromtimestamp(int(data.attrib['to'])),
+            stats = Stats(
+                subject = subject,
+                playcount = reduce(
+                                   lambda x,y:(
+                                               x + int(y.findtext('playcount'))
+                                               ),
+                                   data.findall('track'),
+                                   0
+                )
+            ),
+            tracks = [
+                      Track(
+                            api,
+                            subject = w,
+                            name = t.findtext('name'),
+                            mbid = t.findtext('mbid'),
+                            artist = Artist(
+                                            api,
+                                            name = t.findtext('artist'),
+                                            mbid = t.find('artist').attrib['mbid'],
+                                            ),
+                            stats = Stats(
+                                          subject = t.findtext('name'),
+                                          rank = int(t.attrib['rank']),
+                                          playcount = int(t.findtext('playcount')),
+                                          ),
+                            url = t.findtext('url'),
+                            )
+                      for t in data.findall('track')
+                     ]
+           )
         
 class WeeklyTagChart(WeeklyChart):
     """A class for representing the weekly tag charts"""
