@@ -6,6 +6,8 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
+from decorator import decorator
+
 def top_property(list_property_name):
     """
     A decorator to return a property that returns the first value of list 
@@ -57,7 +59,8 @@ def cached_property(func):
 
     return property(fget = wrapper, doc = func.__doc__)
 
-def authenticate(func):
+@decorator
+def authenticate(func, *args, **kwargs):
     """
     A decorator to check if the current user is authenticated or not. Used only
     on the functions that need authentication. If not authenticated then an
@@ -72,34 +75,33 @@ def authenticate(func):
     @raise AuthenticationFailedError: If the user is not authenticated, then an
                                       exception is raised.
     """
-    def wrapper(self, *args, **kwargs):
-        from lastfm.user import User, Api
-        username = None
-        if isinstance(self, User):
-            username = self.name
-            if self.authenticated:
-                return func(self, *args, **kwargs)
-        elif hasattr(self, 'user'):
-            username = self.user.name
-            if self.user.authenticated:
-                return func(self, *args, **kwargs)
-        elif hasattr(self, '_subject') and isinstance(self._subject, User):
-            username = self._subject.name
-            if self._subject.authenticated:
-                return func(self, *args, **kwargs)
-        elif hasattr(self, '_api') and isinstance(self._api, Api):
-            try:
-                user = self._api.get_authenticated_user()
-                username = user.name
-                return func(self, *args, **kwargs)
-            except AuthenticationFailedError:
-                pass
-        raise AuthenticationFailedError(
-            "user '%s' does not have permissions to access the service" % username)
-    wrapper.__doc__ = func.__doc__
-    return wrapper
+    self = args[0]
+    from lastfm.user import User, Api
+    username = None
+    if isinstance(self, User):
+        username = self.name
+        if self.authenticated:
+            return func(self, *args, **kwargs)
+    elif hasattr(self, 'user'):
+        username = self.user.name
+        if self.user.authenticated:
+            return func(self, *args, **kwargs)
+    elif hasattr(self, '_subject') and isinstance(self._subject, User):
+        username = self._subject.name
+        if self._subject.authenticated:
+            return func(self, *args, **kwargs)
+    elif hasattr(self, '_api') and isinstance(self._api, Api):
+        try:
+            user = self._api.get_authenticated_user()
+            username = user.name
+            return func(self, *args, **kwargs)
+        except AuthenticationFailedError:
+            pass
+    raise AuthenticationFailedError(
+        "user '%s' does not have permissions to access the service" % username)
 
-def depaginate(func):
+@decorator
+def depaginate(func, *args, **kwargs):
     """
     A decorator to depaginate the search results.
     
@@ -111,24 +113,22 @@ def depaginate(func):
     @rtype:         C{function}
     """
     from lastfm.lazylist import lazylist
-    def wrapper(*args, **kwargs):
-        @lazylist
-        def generator(lst):
+    @lazylist
+    def generator(lst):
+        gen = func(*args, **kwargs)
+        total_pages = gen.next()
+        for e in gen:
+            yield e
+        for page in xrange(2, total_pages+1):
+            kwargs['page'] = page
             gen = func(*args, **kwargs)
-            total_pages = gen.next()
+            gen.next()
             for e in gen:
                 yield e
-            for page in xrange(2, total_pages+1):
-                kwargs['page'] = page
-                gen = func(*args, **kwargs)
-                gen.next()
-                for e in gen:
-                    yield e
-        return generator()
-    wrapper.__doc__ = func.__doc__
-    return wrapper
-
-def async_callback(func):
+    return generator()
+    
+@decorator
+def async_callback(func, *args, **kwargs):
     """
     A decorator to convert a synchronous (blocking) function into 
     an asynchronous (non-blocking) function.
@@ -154,56 +154,30 @@ def async_callback(func):
     @rtype:         C{function}
     """
     from threading import Thread
-    def wrapper(self, *args, **kwargs):
-        callback = None
-        for a in args:
-            if callable(a):
-                callback = a
-                args = list(args)
-                args.remove(a)
-                args = tuple(args)
-                break
-        if 'callback' in kwargs:
-            callback = kwargs['callback']
-            del kwargs['callback']
-            
-        if (callback is not None and callable(callback)):
-            def async_call():
-                result = None
-                try:
-                    result = func(self, *args, **kwargs)
-                except Exception, e:
-                    result = e
-                callback(result)
-            thread = Thread(target = async_call)
-            thread.start()
-            return
-        return func(self, *args, **kwargs)
-            
-    wrapper.__doc__ = "%s\n        @see: L{async_callback}" % func.__doc__
-    return wrapper
-
-def _get_arg_string(argspecs):
-    arg_str = ""    
-    args = argspecs.args
-    args.remove('self')
-    defaults = argspecs.defaults
+    callback = None
+    for a in args:
+        if callable(a):
+            callback = a
+            args = list(args)
+            args.remove(a)
+            args = tuple(args)
+            break
+    if 'callback' in kwargs:
+        callback = kwargs['callback']
+        del kwargs['callback']
     
-    if defaults is not None:
-        defargs = args[-len(defaults):]
-        nondefargs = args[:-len(defaults)]
-        nondefargs_str = ", ".join(nondefargs)
-        defargs_str = ", ".join(["%s = %s" % (defargs[i], defaults[i]) for i in xrange(len(defargs))])
-        if nondefargs_str != '' and defargs_str != '':
-            arg_str = "%s, %s" % (nondefargs_str, defargs_str)
-        elif nondefargs_str != '':
-            arg_str = nondefargs_str
-        elif defargs_str != '':
-            arg_str = defargs_str
-    else:
-        arg_str = ", ".join(args)
-    print arg_str
-    return arg_str
+    if callback is not None and callable(callback):
+        def async_call():
+            result = None
+            try:
+                result = func(*args, **kwargs)
+            except Exception, e:
+                result = e
+            callback(result)
+        thread = Thread(target = async_call)
+        thread.start()
+        return
+    return func(*args, **kwargs)
 
 import copy
 from lastfm.error import LastfmError, AuthenticationFailedError

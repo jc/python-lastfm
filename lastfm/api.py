@@ -173,7 +173,8 @@ class Api(object):
     def get_album(self,
                  album = None,
                  artist = None,
-                 mbid = None):
+                 mbid = None,
+                 callback = None):
         """
         Get an album object.
         
@@ -183,6 +184,8 @@ class Api(object):
         @type artist:    L{str} OR L{Artist}
         @param mbid:     MBID of the album
         @type mbid:      L{str}
+        @param callback: callback function for asynchronous invocation (optional)
+        @type callback:  C{function}
         
         @return:         an Album object corresponding the provided album name
         @rtype:          L{Album}
@@ -192,13 +195,14 @@ class Api(object):
                                               Otherwise exception is raised.
                                               
         @see:            L{Album.get_info}
+        @see:            L{async_callback}
         """
         if isinstance(artist, Artist):
             artist = artist.name
         return Album.get_info(self, artist, album, mbid)
 
     @async_callback
-    def search_album(self, album, limit = None):
+    def search_album(self, album, limit = None, callback = None):
         """
         Search for an album by name.
         
@@ -206,18 +210,19 @@ class Api(object):
         @type album:      L{str}
         @param limit:     maximum number of results returned (optional)
         @type limit:      L{int}
+        @param callback:  callback function for asynchronous invocation (optional)
+        @type callback:   C{function}
         
         @return:          matches sorted by relevance
         @rtype:           L{lazylist} of L{Album}
         
         @see:             L{Album.search}
+        @see:             L{async_callback}
         """
         return Album.search(self, search_item = album, limit = limit)
 
     @async_callback
-    def get_artist(self,
-                  artist = None,
-                  mbid = None):
+    def get_artist(self, artist = None, mbid = None, callback = None):
         """
         Get an artist object.
         
@@ -225,6 +230,8 @@ class Api(object):
         @type artist:     L{str}
         @param mbid:      MBID of the artist
         @type mbid:       L{str}
+        @param callback:  callback function for asynchronous invocation (optional)
+        @type callback:   C{function}
         
         @return:         an Artist object corresponding the provided artist name
         @rtype:          L{Artist}
@@ -233,13 +240,12 @@ class Api(object):
                                               to be provided. Otherwise exception is raised.
                                               
         @see:            L{Artist.get_info}
+        @see:            L{async_callback}
         """
         return Artist.get_info(self, artist, mbid)
     
     @async_callback
-    def search_artist(self,
-                     artist,
-                     limit = None):
+    def search_artist(self, artist, limit = None, callback = None):
         """
         Search for an artist by name.
         
@@ -247,21 +253,26 @@ class Api(object):
         @type artist:     L{str}
         @param limit:     maximum number of results returned (optional)
         @type limit:      L{int}
+        @param callback:  callback function for asynchronous invocation (optional)
+        @type callback:   C{function}
         
         @return:          matches sorted by relevance
         @rtype:           L{lazylist} of L{Artist}
         
         @see:             L{Artist.search}
+        @see:             L{async_callback}
         """
         return Artist.search(self, search_item = artist, limit = limit)
 
     @async_callback
-    def get_event(self, event):
+    def get_event(self, event, callback = None):
         """
         Get an event object.
         
         @param event:     the event id
         @type event:      L{int}
+        @param callback:  callback function for asynchronous invocation (optional)
+        @type callback:   C{function}
         
         @return:          an event object corresponding to the event id provided
         @rtype:           L{Event}
@@ -269,90 +280,113 @@ class Api(object):
         @raise InvalidParametersError: Exception is raised if an invalid event id is supplied.
         
         @see:             L{Event.get_info}
+        @see:             L{async_callback}
         """
         return Event.get_info(self, event)
     
     @async_callback
-    def get_location(self, city):
+    def get_location(self, city, callback = None):
         """
         Get a location object.
         
-        @param city:    the city name
-        @type city:     L{str}
+        @param city:        the city name
+        @type city:         L{str}
+        @param callback:    callback function for asynchronous invocation (optional)
+        @type callback:     C{function}
         
         @return:        a location object corresponding to the city name provided
         @rtype:         L{Location}
+        
+        @see:           L{async_callback}
         """
         return Location(self, city = city)
 
     @async_callback
-    def get_country(self, name):
+    def get_country(self, name, callback = None):
         """
         Get a country object.
         
-        @param name:    the country name
-        @type name:     L{str}
+        @param name:        the country name
+        @type name:         L{str}
+        @param callback:    callback function for asynchronous invocation (optional)
+        @type callback:     C{function}
         
         @return:        a country object corresponding to the country name provided
         @rtype:         L{Country}
+        
+        @see:           L{async_callback}
         """
         return Country(self, name = name)
     
     @async_callback
-    def get_group(self, name):
+    def get_group(self, name, callback = None):
         """
         Get a group object.
         
-        @param name:    the group name
-        @type name:     L{str}
+        @param name:        the group name
+        @type name:         L{str}
+        @param callback:    callback function for asynchronous invocation (optional)
+        @type callback:     C{function}
         
         @return:        a group object corresponding to the group name provided
         @rtype:         L{Group}
+        
+        @see:           L{async_callback}
         """
         return Group(self, name = name)
 
     @async_callback
-    def get_playlist(self, url):
+    def get_playlist(self, url, callback = None):
         """
         Get a playlist object.
         
-        @param url:    lastfm url of the playlist
-        @type url:     L{str}
+        @param url:        lastfm url of the playlist
+        @type url:         L{str}
+        @param callback:   callback function for asynchronous invocation (optional)
+        @type callback:    C{function}
         
         @return:        a playlist object corresponding to the playlist url provided
         @rtype:         L{Playlist}
         
         @see:           L{Playlist.fetch}
+        @see:           L{async_callback}
         """
         return Playlist.fetch(self, url)
     
     @async_callback
-    def get_tag(self, name):
+    def get_tag(self, name, callback = None):
         """
         Get a tag object.
         
-        @param name:    the tag name
-        @type name:     L{str}
+        @param name:        the tag name
+        @type name:         L{str}
+        @param callback:    callback function for asynchronous invocation (optional)
+        @type callback:     C{function}
         
         @return:        a tag object corresponding to the tag name provided
         @rtype:         L{Tag}
+        
+        @see:           L{async_callback}
         """
         return Tag(self, name = name)
 
     @async_callback
-    def get_global_top_tags(self):
+    def get_global_top_tags(self, callback = None):
         """
         Get the top global tags on Last.fm, sorted by popularity (number of times used).
         
+        @param callback: callback function for asynchronous invocation (optional)
+        @type callback:  C{function}
+        
         @return:        a list of top global tags
         @rtype:         L{list} of L{Tag}
+        
+        @see:           L{async_callback}
         """
         return Tag.get_top_tags(self)
 
     @async_callback
-    def search_tag(self,
-                  tag,
-                  limit = None):
+    def search_tag(self, tag, limit = None, callback = None):
         """
         Search for a tag by name.
         
@@ -360,11 +394,14 @@ class Api(object):
         @type tag:        L{str}
         @param limit:     maximum number of results returned (optional)
         @type limit:      L{int}
+        @param callback:  callback function for asynchronous invocation (optional)
+        @type callback:   C{function}
         
         @return:          matches sorted by relevance
         @rtype:           L{lazylist} of L{Tag}
         
         @see:             L{Tag.search}
+        @see:             L{async_callback}
         """
         return Tag.search(self, search_item = tag, limit = limit)
 
@@ -372,7 +409,8 @@ class Api(object):
     def compare_taste(self,
                      type1, type2,
                      value1, value2,
-                     limit = None):
+                     limit = None,
+                     callback = None):
         """
         Get a Tasteometer score from two inputs, along with a list of
         shared artists. If the input is a User or a Myspace URL, some 
@@ -388,16 +426,23 @@ class Api(object):
         @type value2:    L{str}
         @param limit:    maximum number of results returned (optional)
         @type limit:     L{int}
+        @param callback: callback function for asynchronous invocation (optional)
+        @type callback:  C{function}
         
         @return:         the taste-o-meter score for the inputs
         @rtype:          L{Tasteometer}
         
         @see:            L{Tasteometer.compare}
+        @see:            L{async_callback}
         """
         return Tasteometer.compare(self, type1, type2, value1, value2, limit)
 
     @async_callback
-    def get_track(self, track, artist = None, mbid = None):
+    def get_track(self,
+                  track,
+                  artist = None,
+                  mbid = None,
+                  callback = None):
         """
         Get a track object.
         
@@ -407,6 +452,8 @@ class Api(object):
         @type artist:    L{str} OR L{Artist}
         @param mbid:     MBID of the track
         @type mbid:      L{str}
+        @param callback: callback function for asynchronous invocation (optional)
+        @type callback:  C{function}
         
         @return:         a track object corresponding to the track name provided
         @rtype:          L{Track}
@@ -415,13 +462,18 @@ class Api(object):
                                               to be provided. Otherwise exception is raised.
                                               
         @see:            L{Track.get_info}
+        @see:            L{async_callback}
         """
         if isinstance(artist, Artist):
             artist = artist.name
         return Track.get_info(self, artist, track, mbid)
     
     @async_callback
-    def search_track(self, track, artist = None, limit = None):
+    def search_track(self,
+                     track, 
+                     artist = None, 
+                     limit = None, 
+                     callback = None):
         """
         Search for a track by name.
         
@@ -431,23 +483,28 @@ class Api(object):
         @type artist:     L{str} OR L{Artist}  
         @param limit:     maximum number of results returned (optional)
         @type limit:      L{int}
+        @param callback:  callback function for asynchronous invocation (optional)
+        @type callback:   C{function}
         
         @return:          matches sorted by relevance
         @rtype:           L{lazylist} of L{Track}
         
         @see:             L{Track.search}
+        @see:             L{async_callback}
         """
         if isinstance(artist, Artist):
             artist = artist.name
         return Track.search(self, search_item = track, limit = limit, artist = artist)
 
     @async_callback
-    def get_user(self, name):
+    def get_user(self, name, callback = None):
         """
         Get an user object.
         
-        @param name:    the last.fm user name
-        @type name:     L{str}
+        @param name:        the last.fm user name
+        @type name:         L{str}
+        @param callback:    callback function for asynchronous invocation (optional)
+        @type callback:     C{function}
         
         @return:        an user object corresponding to the user name provided
         @rtype:         L{User}
@@ -455,18 +512,23 @@ class Api(object):
         @raise InvalidParametersError: Exception is raised if an invalid user name is supplied.
         
         @see:           L{User.get_info}
+        @see:           L{async_callback}
         """
         return User.get_info(self, name = name)
 
     @async_callback
-    def get_authenticated_user(self):
+    def get_authenticated_user(self, callback = None):
         """
         Get the currently authenticated user.
+        
+        @param callback: callback function for asynchronous invocation (optional)
+        @type callback: C{function}
         
         @return:     The currently authenticated user if the session is authenticated
         @rtype:      L{User}
         
         @see:        L{User.get_authenticated_user}
+        @see:        L{async_callback}
         """
         if self.session_key is not None:
             return User.get_authenticated_user(self)
@@ -474,12 +536,14 @@ class Api(object):
             raise AuthenticationFailedError("session key must be present to call this method")
     
     @async_callback
-    def get_venue(self, venue):
+    def get_venue(self, venue, callback = None):
         """
         Get a venue object.
         
-        @param venue:    the venue name
-        @type venue:     L{str}
+        @param venue:        the venue name
+        @type venue:         L{str}
+        @param callback:     callback function for asynchronous invocation (optional)
+        @type callback:      C{function}
         
         @return:         a venue object corresponding to the venue name provided
         @rtype:          L{Venue}
@@ -487,6 +551,7 @@ class Api(object):
         @raise InvalidParametersError: Exception is raised if an non-existant venue name is supplied.
         
         @see:            L{search_venue}
+        @see:            L{async_callback}
         """
         try:
             return self.search_venue(venue)[0]
@@ -494,7 +559,11 @@ class Api(object):
             raise InvalidParametersError("No such venue exists")
     
     @async_callback
-    def search_venue(self, venue, limit = None, country = None):
+    def search_venue(self, 
+                     venue, 
+                     limit = None, 
+                     country = None,
+                     callback = None):
         """
         Search for a venue by name.
         
@@ -505,11 +574,14 @@ class Api(object):
         @type country:    L{str}  
         @param limit:     maximum number of results returned (optional)
         @type limit:      L{int}
+        @param callback:  callback function for asynchronous invocation (optional)
+        @type callback:   C{function}
         
         @return:          matches sorted by relevance
         @rtype:           L{lazylist} of L{Venue}
         
         @see:             L{Venue.search}
+        @see:             L{async_callback}
         """
         return Venue.search(self, search_item = venue, limit = limit, country = country)
 

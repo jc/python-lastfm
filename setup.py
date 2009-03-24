@@ -22,7 +22,7 @@ located at http://ws.audioscrobbler.com/2.0/ .""",
 )
 
 SETUPTOOLS_METADATA = dict(
-	install_requires = ['setuptools'],
+	install_requires = ['setuptools', 'decorator'],
 	include_package_data = True,
     tests_require = ['wsgi_intercept'],
 	classifiers = [
@@ -40,18 +40,18 @@ SETUPTOOLS_METADATA = dict(
 
 import sys
 if sys.version < '2.5':
-	SETUPTOOLS_METADATA['install_requires'].append('ElementTree')
-	SETUPTOOLS_METADATA['install_requires'].append('cElementTree')
+    SETUPTOOLS_METADATA['install_requires'].append('ElementTree')
+    SETUPTOOLS_METADATA['install_requires'].append('cElementTree')
 
 def Main():
-  # Use setuptools if available, otherwise fallback and use distutils
-  try:
-    import setuptools
-    METADATA.update(SETUPTOOLS_METADATA)
-    setuptools.setup(**METADATA)
-  except ImportError:
-    import distutils.core
-    distutils.core.setup(**METADATA)
+    # Use setuptools if available, otherwise fallback and use distutils
+    try:
+        import setuptools
+        METADATA.update(SETUPTOOLS_METADATA)
+        setuptools.setup(**METADATA)
+    except ImportError:
+        import distutils.core
+        distutils.core.setup(**METADATA)
 
 if __name__ == '__main__':
-  Main()
+    Main()
