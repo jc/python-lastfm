@@ -758,7 +758,7 @@ class User(LastfmBase, Cacheable, Shoutable):
                                               )
                                 )
             except LastfmError:
-                return
+                yield None
 
         @cached_property
         def albums(self):
@@ -811,7 +811,7 @@ class User(LastfmBase, Cacheable, Shoutable):
                                  image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
                                  )
             except LastfmError:
-                return
+                yield None
 
         @cached_property
         def artists(self):
@@ -863,7 +863,7 @@ class User(LastfmBase, Cacheable, Shoutable):
                                 image = dict([(i.get('size'), i.text) for i in t.findall('image')]),
                                 )
             except LastfmError:
-                return
+                yield None
 
         @cached_property
         def tracks(self):

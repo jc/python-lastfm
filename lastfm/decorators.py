@@ -81,20 +81,20 @@ def authenticate(func, *args, **kwargs):
     if isinstance(self, User):
         username = self.name
         if self.authenticated:
-            return func(self, *args, **kwargs)
+            return func(*args, **kwargs)
     elif hasattr(self, 'user'):
         username = self.user.name
         if self.user.authenticated:
-            return func(self, *args, **kwargs)
+            return func(*args, **kwargs)
     elif hasattr(self, '_subject') and isinstance(self._subject, User):
         username = self._subject.name
         if self._subject.authenticated:
-            return func(self, *args, **kwargs)
+            return func(*args, **kwargs)
     elif hasattr(self, '_api') and isinstance(self._api, Api):
         try:
             user = self._api.get_authenticated_user()
             username = user.name
-            return func(self, *args, **kwargs)
+            return func(*args, **kwargs)
         except AuthenticationFailedError:
             pass
     raise AuthenticationFailedError(
@@ -120,9 +120,12 @@ def depaginate(func, *args, **kwargs):
         for e in gen:
             yield e
         for page in xrange(2, total_pages+1):
-            kwargs['page'] = page
-            gen = func(*args, **kwargs)
-            gen.next()
+            new_args = list(args)
+            new_args[-1] = page
+            new_args = tuple(new_args)
+            gen = func(*new_args, **kwargs)
+            if gen.next() is None:
+                continue
             for e in gen:
                 yield e
     return generator()
