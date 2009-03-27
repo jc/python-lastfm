@@ -9,11 +9,10 @@ from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable
 from operator import xor
 
-class WeeklyChart(LastfmBase, Cacheable):
+class Chart(LastfmBase, Cacheable):
     """A class for representing the weekly charts"""
 
-    def init(self, subject, start, end,
-             stats = None):
+    def init(self, subject, start, end, stats = None):
         self._subject = subject
         self._start = start
         self._end = end
@@ -37,14 +36,14 @@ class WeeklyChart(LastfmBase, Cacheable):
     
     @staticmethod
     def create_from_data(api, subject, data):
-        return WeeklyChart(
-                           subject = subject,
-                           start = datetime.utcfromtimestamp(int(data.attrib['from'])),
-                           end = datetime.utcfromtimestamp(int(data.attrib['to']))
-                           )
+        return Chart(
+                     subject = subject,
+                     start = datetime.utcfromtimestamp(int(data.attrib['from'])),
+                     end = datetime.utcfromtimestamp(int(data.attrib['to']))
+                     )
     
     @staticmethod
-    def _check_weekly_chart_params(params, start = None, end = None):
+    def _check_chart_params(params, start = None, end = None):
         if xor(start is None, end is None):
             raise InvalidParametersError("both start and end have to be provided.")
         if start is not None and end is not None:
@@ -101,6 +100,10 @@ class WeeklyChart(LastfmBase, Cacheable):
              self.end.strftime("%x"),
             )
     
+class WeeklyChart(Chart):
+    def init(self, subject, start, end, stats = None):
+        super(WeeklyChart, self).init(subject, start, end, stats)
+
 class WeeklyAlbumChart(WeeklyChart):
     """A class for representing the weekly album charts"""
     def init(self, subject, start, end, stats, albums):
@@ -351,7 +354,82 @@ class WeeklyTagChart(WeeklyChart):
            )
         wtc._artist_spectrum_analyzed = 100*total_playcount/float(wac.stats.playcount)
         return wtc
-    
+
+class RollingChart(Chart):
+    pass
+
+class MonthlyChart(RollingChart):
+    pass
+
+class MonthlyAlbumChart(MonthlyChart):
+    pass
+
+class MonthlyArtistChart(MonthlyChart):
+    pass
+
+class MonthlyTrackChart(MonthlyChart):
+    pass
+
+class MonthlyTagChart(MonthlyChart):
+    pass
+
+class ThreeMonthlyChart(RollingChart):
+    pass
+
+class ThreeMonthlyAlbumChart(ThreeMonthlyChart):
+    pass
+
+class ThreeMonthlyArtistChart(ThreeMonthlyChart):
+    pass
+
+class ThreeMonthlyTrackChart(ThreeMonthlyChart):
+    pass
+
+class ThreeMonthlyTagChart(ThreeMonthlyChart):
+    pass
+
+class SixMonthlyChart(RollingChart):
+    pass
+
+class SixMonthlyAlbumChart(SixMonthlyChart):
+    pass
+
+class SixMonthlyArtistChart(SixMonthlyChart):
+    pass
+
+class SixMonthlyTrackChart(SixMonthlyChart):
+    pass
+
+class SixMonthlyTagChart(SixMonthlyChart):
+    pass
+
+class YearlyChart(RollingChart):
+    pass
+
+class YearlyAlbumChart(YearlyChart):
+    pass
+
+class YearlyArtistChart(YearlyChart):
+    pass
+
+class YearlyTrackChart(YearlyChart):
+    pass
+
+class YearlyTagChart(YearlyChart):
+    pass
+
+__all__ = [
+    'WeeklyChart',
+    'WeeklyAlbumChart', 'WeeklyArtistChart', 'WeeklyTrackChart', 'WeeklyTagChart',
+    'MonthlyChart',
+    'MonthlyAlbumChart', 'MonthlyArtistChart', 'MonthlyTrackChart', 'MonthlyTagChart', 
+    'ThreeMonthlyChart',
+    'ThreeMonthlyAlbumChart', 'ThreeMonthlyArtistChart', 'ThreeMonthlyTrackChart', 'ThreeMonthlyTagChart',
+    'SixMonthlyChart',
+    'SixMonthlyAlbumChart', 'SixMonthlyArtistChart', 'SixMonthlyTrackChart', 'SixMonthlyTagChart',
+    'YearlyChart',
+    'YearlyAlbumChart', 'YearlyArtistChart', 'YearlyTrackChart', 'YearlyTagChart'
+]
 from datetime import datetime
 import calendar
 

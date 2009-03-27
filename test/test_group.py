@@ -109,6 +109,24 @@ class TestGroup(unittest.TestCase):
              [(track.name, track.artist.name, track.stats.playcount)
                 for track in self.group.get_weekly_track_chart(wc.start, wc.end).tracks[:10]],
             tracks)
+        
+    def testGroupGetWeeklyTagChart(self):
+        tags = [('classic rock', 156),
+                ('rock', 154), 
+                ('alternative', 130), 
+                ('british', 112), 
+                ('alternative rock', 110), 
+                ('hard rock', 78), 
+                ('metal', 63), 
+                ('psychedelic', 61), 
+                ('thrash metal', 54), 
+                ('heavy metal', 47)]
+        wc = self.group.weekly_chart_list[0]
+        self.assertEqual(
+             [(tag.name, tag.stats.count)
+                for tag
+                in self.group.get_weekly_tag_chart(wc.start, wc.end).tags[:10]],
+            tags)
             
 test_suite = unittest.TestLoader().loadTestsFromTestCase(TestGroup)
 

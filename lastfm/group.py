@@ -70,7 +70,7 @@ class Group(LastfmBase, Cacheable):
                                        them will raise an exception.
         """
         params = self._default_params({'method': 'group.getWeeklyAlbumChart'})
-        params = WeeklyChart._check_weekly_chart_params(params, start, end)
+        params = WeeklyChart._check_chart_params(params, start, end)
         data = self._api._fetch_data(params).find('weeklyalbumchart')
         return WeeklyAlbumChart.create_from_data(self._api, self, data)
 
@@ -97,9 +97,7 @@ class Group(LastfmBase, Cacheable):
                 yield self.get_weekly_album_chart(wc.start, wc.end)
         return gen()
 
-    def get_weekly_artist_chart(self,
-                             start = None,
-                             end = None):
+    def get_weekly_artist_chart(self, start = None, end = None):
         """
         Get an artist chart for the group, for a given date range.
         If no date range is supplied, it will return the most 
@@ -118,7 +116,7 @@ class Group(LastfmBase, Cacheable):
                                        them will raise an exception.
         """
         params = self._default_params({'method': 'group.getWeeklyArtistChart'})
-        params = WeeklyChart._check_weekly_chart_params(params, start, end)
+        params = WeeklyChart._check_chart_params(params, start, end)
         data = self._api._fetch_data(params).find('weeklyartistchart')
         return WeeklyArtistChart.create_from_data(self._api, self, data)
 
@@ -145,9 +143,7 @@ class Group(LastfmBase, Cacheable):
                 yield self.get_weekly_artist_chart(wc.start, wc.end)
         return gen()
 
-    def get_weekly_track_chart(self,
-                             start = None,
-                             end = None):
+    def get_weekly_track_chart(self, start = None, end = None):
         """
         Get a track chart for the group, for a given date range.
         If no date range is supplied, it will return the most 
@@ -166,7 +162,7 @@ class Group(LastfmBase, Cacheable):
                                        them will raise an exception.
         """
         params = self._default_params({'method': 'group.getWeeklyTrackChart'})
-        params = WeeklyChart._check_weekly_chart_params(params, start, end)
+        params = WeeklyChart._check_chart_params(params, start, end)
         data = self._api._fetch_data(params).find('weeklytrackchart')
         return WeeklyTrackChart.create_from_data(self._api, self, data)
 
@@ -193,6 +189,58 @@ class Group(LastfmBase, Cacheable):
                 yield self.get_weekly_track_chart(wc.start, wc.end)
         return gen()
 
+    def get_weekly_tag_chart(self, start = None, end = None):
+        """
+        Get a tag chart for the group, for a given date range.
+        If no date range is supplied, it will return the most 
+        recent tag chart for the group. 
+        
+        @param start:    the date at which the chart should start from (optional)
+        @type start:     C{datetime.datetime}
+        @param end:      the date at which the chart should end on (optional)
+        @type end:       C{datetime.datetime}
+        
+        @return:         a tag chart for the group
+        @rtype:          L{WeeklyTagChart}
+        
+        @raise InvalidParametersError: Both start and end parameter have to be either
+                                       provided or not provided. Providing only one of
+                                       them will raise an exception.
+                                       
+        @note: This method is a composite method. It is not provided directly by the
+               last.fm API. It uses other methods to collect the data, analyzes it and
+               creates a chart. So this method is a little heavy to call, as it does
+               mulitple calls to the API. 
+        """
+        WeeklyChart._check_chart_params({}, start, end)
+        return WeeklyTagChart.create_from_data(self._api, self, start, end)
+
+    @cached_property
+    def recent_weekly_tag_chart(self):
+        """
+        most recent tag chart for the group
+        @rtype: L{WeeklyTagChart}
+        """
+        return self.get_weekly_tag_chart()
+
+    @cached_property
+    def weekly_tag_chart_list(self):
+        """
+        a list of all tag charts for this group in reverse-chronological
+        order. (that means 0th chart is the most recent chart)
+        @rtype: L{lazylist} of L{WeeklyTagChart}
+        """
+        wcl = list(self.weekly_chart_list)
+        wcl.reverse()
+        @lazylist
+        def gen(lst):
+            for wc in wcl:
+                try:
+                    yield self.get_weekly_tag_chart(wc.start, wc.end)
+                except LastfmError:
+                    pass
+        return gen()
+    
     @cached_property
     @depaginate
     def members(self, page = None):
@@ -243,6 +291,7 @@ class Group(LastfmBase, Cacheable):
         return "<lastfm.Group: %s>" % self.name
 
 from lastfm.api import Api
-from lastfm.error import InvalidParametersError
+from lastfm.error import InvalidParametersError, LastfmError
 from lastfm.user import User
-from lastfm.weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
+from lastfm.chart import (WeeklyChart, WeeklyAlbumChart, 
+    WeeklyArtistChart, WeeklyTrackChart, WeeklyTagChart)

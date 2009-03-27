@@ -9,7 +9,7 @@ from lastfm.base import LastfmBase
 from lastfm.mixins import Cacheable, Shoutable
 from lastfm.lazylist import lazylist
 import lastfm.playlist
-from lastfm.decorators import cached_property, top_property, authenticate, depaginate
+from lastfm.decorators import cached_property, top_property, authentication_required, depaginate
 
 class User(LastfmBase, Cacheable, Shoutable):
     """A class representing an user."""
@@ -63,31 +63,31 @@ class User(LastfmBase, Cacheable, Shoutable):
         return self._stats
 
     @property
-    @authenticate
+    @authentication_required
     def language(self):
         """lang for the user"""
         return self._language
 
     @property
-    @authenticate
+    @authentication_required
     def country(self):
         """country for the user"""
         return self._country
 
     @property
-    @authenticate
+    @authentication_required
     def age(self):
         """age for the user"""
         return self._age
 
     @property
-    @authenticate
+    @authentication_required
     def gender(self):
         """stats for the user"""
         return self._gender
 
     @property
-    @authenticate
+    @authentication_required
     def subscriber(self):
         """is the user a subscriber"""
         return self._subscriber
@@ -129,7 +129,7 @@ class User(LastfmBase, Cacheable, Shoutable):
     def past_events(self):
         return self.get_past_events()
     
-    @authenticate
+    @authentication_required
     @depaginate
     def get_recommended_events(self, limit = None, page = None):
         params = {'method': 'user.getRecommendedEvents'}
@@ -224,7 +224,7 @@ class User(LastfmBase, Cacheable, Shoutable):
                 for p in data.findall('playlist')
                 ]
 
-    @authenticate
+    @authentication_required
     def create_playlist(self, title, description = None):
         params = {'method': 'playlist.create',
                   'title': title}
@@ -388,7 +388,7 @@ class User(LastfmBase, Cacheable, Shoutable):
         pass
     
     @cached_property
-    @authenticate
+    @authentication_required
     @depaginate
     def recommended_artists(self, page = None):
         params = {'method': 'user.getRecommendedArtists'}
@@ -491,7 +491,7 @@ class User(LastfmBase, Cacheable, Shoutable):
                              start = None,
                              end = None):
         params = self._default_params({'method': 'user.getWeeklyAlbumChart'})
-        params = WeeklyChart._check_weekly_chart_params(params, start, end)
+        params = WeeklyChart._check_chart_params(params, start, end)
         data = self._api._fetch_data(params).find('weeklyalbumchart')
         return WeeklyAlbumChart.create_from_data(self._api, self, data)
 
@@ -516,7 +516,7 @@ class User(LastfmBase, Cacheable, Shoutable):
                              start = None,
                              end = None):
         params = self._default_params({'method': 'user.getWeeklyArtistChart'})
-        params = WeeklyChart._check_weekly_chart_params(params, start, end)
+        params = WeeklyChart._check_chart_params(params, start, end)
         data = self._api._fetch_data(params).find('weeklyartistchart')
         return WeeklyArtistChart.create_from_data(self._api, self, data)
 
@@ -541,7 +541,7 @@ class User(LastfmBase, Cacheable, Shoutable):
                              start = None,
                              end = None):
         params = self._default_params({'method': 'user.getWeeklyTrackChart'})
-        params = WeeklyChart._check_weekly_chart_params(params, start, end)
+        params = WeeklyChart._check_chart_params(params, start, end)
         data = self._api._fetch_data(params).find('weeklytrackchart')
         return WeeklyTrackChart.create_from_data(self._api, self, data)
 
@@ -565,7 +565,7 @@ class User(LastfmBase, Cacheable, Shoutable):
     def get_weekly_tag_chart(self,
                              start = None,
                              end = None):
-        WeeklyChart._check_weekly_chart_params({}, start, end)
+        WeeklyChart._check_chart_params({}, start, end)
         return WeeklyTagChart.create_from_data(self._api, self, start, end)
 
     @cached_property
@@ -684,7 +684,7 @@ class User(LastfmBase, Cacheable, Shoutable):
         def user(self):
             return self._creator
 
-        @authenticate
+        @authentication_required
         def add_track(self, track, artist = None):
             params = {'method': 'playlist.addTrack', 'playlistID': self.id}
             if isinstance(track, Track):
@@ -764,7 +764,7 @@ class User(LastfmBase, Cacheable, Shoutable):
         def albums(self):
             return self.get_albums()
         
-        @authenticate
+        @authentication_required
         def add_album(self, album, artist = None):
             params = {'method': 'library.addAlbum'}
             if isinstance(album, Album):
@@ -817,7 +817,7 @@ class User(LastfmBase, Cacheable, Shoutable):
         def artists(self):
             return self.get_artists()
 
-        @authenticate
+        @authentication_required
         def add_artist(self, artist):
             params = {'method': 'library.addArtist'}
             if isinstance(artist, Artist):
@@ -869,7 +869,7 @@ class User(LastfmBase, Cacheable, Shoutable):
         def tracks(self):
             return self.get_tracks()
 
-        @authenticate
+        @authentication_required
         def add_track(self, track, artist = None):
             params = {'method': 'library.addTrack'}
             if isinstance(track, Track):
@@ -920,4 +920,4 @@ from lastfm.stats import Stats
 from lastfm.tag import Tag
 from lastfm.tasteometer import Tasteometer
 from lastfm.track import Track
-from lastfm.weeklychart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart, WeeklyTagChart
+from lastfm.chart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart, WeeklyTagChart

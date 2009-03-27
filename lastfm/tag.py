@@ -189,7 +189,7 @@ class Tag(LastfmBase, Cacheable, Searchable):
         params = self._default_params({'method': 'tag.getWeeklyArtistChart'})
         if limit is not None:
             params['limit'] = limit
-        params = WeeklyArtistChart._check_weekly_chart_params(params, start, end)
+        params = WeeklyArtistChart._check_chart_params(params, start, end)
         data = self._api._fetch_data(params).find('weeklyartistchart')
         return WeeklyArtistChart.create_from_data(self._api, self, data)
 
@@ -273,4 +273,4 @@ from lastfm.error import LastfmError, InvalidParametersError
 from lastfm.playlist import Playlist
 from lastfm.stats import Stats
 from lastfm.track import Track
-from lastfm.weeklychart import WeeklyChart, WeeklyArtistChart
+from lastfm.chart import WeeklyChart, WeeklyArtistChart

@@ -17,7 +17,7 @@ from lastfm.tag import Tag
 from lastfm.track import Track
 from lastfm.user import User
 from lastfm.venue import Venue
-from lastfm.weeklychart import WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
+from lastfm.chart import WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
 
 class ObjectCache(object):
     """The registry to contain all the entities"""

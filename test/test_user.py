@@ -184,7 +184,8 @@ class TestUser(unittest.TestCase):
         wc = self.user.weekly_chart_list[0]
         self.assertEqual(
              [(album.name, album.artist.name, album.stats.playcount)
-                for album in self.user.get_weekly_album_chart(wc.start, wc.end).albums[:10]],
+                for album 
+                in self.user.get_weekly_album_chart(wc.start, wc.end).albums[:10]],
             albums)
         
     def testUserGetWeeklyTrackChart(self):
@@ -201,8 +202,27 @@ class TestUser(unittest.TestCase):
         wc = self.user.weekly_chart_list[0]
         self.assertEqual(
              [(track.name, track.artist.name, track.stats.playcount)
-                for track in self.user.get_weekly_track_chart(wc.start, wc.end).tracks[:10]],
+                for track 
+                in self.user.get_weekly_track_chart(wc.start, wc.end).tracks[:10]],
             tracks)
+        
+    def testUserGetWeeklyTagChart(self):
+        tags = [('alternative rock', 338), 
+                ('rock', 280), 
+                ('alternative', 169), 
+                ('metal', 160), 
+                ('heavy metal', 53), 
+                ('guitar virtuoso', 0), 
+                ('thrash metal', 0), 
+                ('hard rock', 0), 
+                ('baroque', 0), 
+                ('classic', 0)]
+        wc = self.user.weekly_chart_list[0]
+        self.assertEqual(
+             [(tag.name, tag.stats.count)
+                for tag
+                in self.user.get_weekly_tag_chart(wc.start, wc.end).tags[:10]],
+            tags)
         
     def testUserCompare(self):
         tm = self.user.compare('abhin4v')
