@@ -64,6 +64,7 @@ class Api(object):
         self._no_cache = no_cache
         self._debug = debug
         self._last_fetch_time = datetime.now()
+        self._lock = Lock()
 
     @property
     def api_key(self):
@@ -643,13 +644,14 @@ class Api(object):
             return urllib.urlencode([(k, self._encode(parameters[k])) for k in keys if parameters[k] is not None])
 
     def _read_url_data(self, opener, url, data = None):
-        now = datetime.now()
-        delta = now - self._last_fetch_time
-        delta = delta.seconds + float(delta.microseconds)/1000000
-        if delta < Api.FETCH_INTERVAL:
-            time.sleep(Api.FETCH_INTERVAL - delta)
-        url_data = opener.open(url, data).read()
-        self._last_fetch_time = datetime.now()
+        with self._lock:
+            now = datetime.now()
+            delta = now - self._last_fetch_time
+            delta = delta.seconds + float(delta.microseconds)/1000000
+            if delta < Api.FETCH_INTERVAL:
+                time.sleep(Api.FETCH_INTERVAL - delta)
+            url_data = opener.open(url, data).read()
+            self._last_fetch_time = datetime.now()
         return url_data
 
     def _fetch_url(self,
@@ -765,6 +767,7 @@ class Api(object):
         return "<lastfm.Api: %s>" % self._api_key
 
 from datetime import datetime
+from threading import Lock
 import sys
 import time
 import urllib

@@ -60,7 +60,7 @@ def cached_property(func):
     return property(fget = wrapper, doc = func.__doc__)
 
 @decorator
-def authenticate(func, *args, **kwargs):
+def authentication_required(func, *args, **kwargs):
     """
     A decorator to check if the current user is authenticated or not. Used only
     on the functions that need authentication. If not authenticated then an
