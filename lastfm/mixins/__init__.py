@@ -10,5 +10,8 @@ from lastfm.mixins.searchable import Searchable
 from lastfm.mixins.sharable import Sharable
 from lastfm.mixins.shoutable import Shoutable
 from lastfm.mixins.taggable import Taggable
+from lastfm.mixins.chartable import (
+    AlbumChartable, ArtistChartable, TrackChartable, TagChartable)
 
-__all__ = ['Cacheable', 'Searchable', 'Sharable', 'Shoutable', 'Taggable']
+__all__ = ['Cacheable', 'Searchable', 'Sharable', 'Shoutable', 'Taggable'
+           'AlbumChartable', 'ArtistChartable', 'TrackChartable', 'TagChartable']

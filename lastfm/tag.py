@@ -6,11 +6,11 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import Cacheable, Searchable
-from lastfm.lazylist import lazylist
+from lastfm.mixins import (
+    Cacheable, Searchable, ArtistChartable)
 from lastfm.decorators import cached_property, top_property
 
-class Tag(LastfmBase, Cacheable, Searchable):
+class Tag(LastfmBase, Cacheable, Searchable, ArtistChartable):
     """A class representing a tag."""
     def init(self,
                  api,
@@ -21,6 +21,8 @@ class Tag(LastfmBase, Cacheable, Searchable):
                  **kwargs):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
+        ArtistChartable.init(self, api)
+        
         self._api = api
         self._name = name
         self._url = url
@@ -172,44 +174,7 @@ class Tag(LastfmBase, Cacheable, Searchable):
     def playlist(self):
         return Playlist.fetch(self._api,
                               "lastfm://playlist/tag/%s/freetracks" % self.name)
-
-    @cached_property
-    def weekly_chart_list(self):
-        params = self._default_params({'method': 'tag.getWeeklyChartList'})
-        data = self._api._fetch_data(params).find('weeklychartlist')
-        return [
-                WeeklyChart.create_from_data(self._api, self, c)
-                for c in data.findall('chart')
-                ]
-
-    def get_weekly_artist_chart(self,
-                             start = None,
-                             end = None,
-                             limit = None):
-        params = self._default_params({'method': 'tag.getWeeklyArtistChart'})
-        if limit is not None:
-            params['limit'] = limit
-        params = WeeklyArtistChart._check_chart_params(params, start, end)
-        data = self._api._fetch_data(params).find('weeklyartistchart')
-        return WeeklyArtistChart.create_from_data(self._api, self, data)
-
-    @cached_property
-    def recent_weekly_artist_chart(self):
-        return self.get_weekly_artist_chart()
-
-    @cached_property
-    def weekly_artist_chart_list(self):
-        wcl = list(self.weekly_chart_list)
-        wcl.reverse()
-        @lazylist
-        def gen(lst):
-            for wc in wcl:
-                try:
-                    yield self.get_weekly_artist_chart(wc.start, wc.end)
-                except LastfmError:
-                    pass
-        return gen()
-    
+   
     @staticmethod
     def get_top_tags(api):
         params = {'method': 'tag.getTopTags'}

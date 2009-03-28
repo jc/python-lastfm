@@ -10,7 +10,7 @@ from lastfm.mixins import Cacheable
 from operator import xor
 
 class Chart(LastfmBase, Cacheable):
-    """A class for representing the weekly charts"""
+    """The base class for all the chart classes"""
 
     def init(self, subject, start, end, stats = None):
         self._subject = subject
@@ -35,26 +35,16 @@ class Chart(LastfmBase, Cacheable):
         return self._stats
     
     @staticmethod
-    def create_from_data(api, subject, data):
-        return Chart(
-                     subject = subject,
-                     start = datetime.utcfromtimestamp(int(data.attrib['from'])),
-                     end = datetime.utcfromtimestamp(int(data.attrib['to']))
-                     )
-    
-    @staticmethod
-    def _check_chart_params(params, start = None, end = None):
+    def _check_chart_params(params, subject, start = None, end = None):
         if xor(start is None, end is None):
             raise InvalidParametersError("both start and end have to be provided.")
         if start is not None and end is not None:
-            if isinstance(start, datetime) and isinstance(end, datetime):
-                params.update({
-                               'from': int(calendar.timegm(start.timetuple())),
-                               'to': int(calendar.timegm(end.timetuple()))
-                               })
-            else:
+            if not (isinstance(start, datetime) and isinstance(end, datetime)):
                 raise InvalidParametersError("start and end must be datetime.datetime instances")
-            
+            params.update({
+                           'from': int(calendar.timegm(start.timetuple())),
+                           'to': int(calendar.timegm(end.timetuple()))
+                           })
         return params
     
     @staticmethod
@@ -71,10 +61,10 @@ class Chart(LastfmBase, Cacheable):
         
     def __hash__(self):
         return self.__class__._hash_func(
-                                       subject = self.subject,
-                                       start = self.start,
-                                       end = self.end
-                                       )
+            subject = self.subject,
+            start = self.start,
+            end = self.end
+        )
     
     def __eq__(self, other):
         return self.subject == other.subject and \
@@ -99,21 +89,68 @@ class Chart(LastfmBase, Cacheable):
              self.start.strftime("%x"),
              self.end.strftime("%x"),
             )
-    
-class WeeklyChart(Chart):
-    def init(self, subject, start, end, stats = None):
-        super(WeeklyChart, self).init(subject, start, end, stats)
 
-class WeeklyAlbumChart(WeeklyChart):
-    """A class for representing the weekly album charts"""
+class AlbumChart(Chart):
     def init(self, subject, start, end, stats, albums):
-        super(WeeklyAlbumChart, self).init(subject, start, end, stats)
+        super(AlbumChart, self).init(subject, start, end, stats)
         self._albums = albums
         
     @property
     def albums(self):
         return self._albums
     
+class ArtistChart(Chart):
+    def init(self, subject, start, end, stats, artists):
+        super(ArtistChart, self).init(subject, start, end, stats)
+        self._artists = artists
+        
+    @property
+    def artists(self):
+        return self._artists
+    
+class TrackChart(Chart):
+    def init(self, subject, start, end, tracks, stats):
+        super(TrackChart, self).init(subject, start, end, stats)
+        self._tracks = tracks
+        
+    @property
+    def tracks(self):
+        return self._tracks
+
+class TagChart(Chart):
+    def init(self, subject, start, end, tags, stats):
+        super(TagChart, self).init(subject, start, end, stats)
+        self._tags = tags
+        
+    @property
+    def tags(self):
+        return self._tags
+   
+class WeeklyChart(Chart):
+    """A class for representing the weekly charts"""
+    @staticmethod
+    def create_from_data(api, subject, data):
+        return WeeklyChart(
+                     subject = subject,
+                     start = datetime.utcfromtimestamp(int(data.attrib['from'])),
+                     end = datetime.utcfromtimestamp(int(data.attrib['to']))
+                     )
+        
+    @staticmethod
+    def _check_chart_params(params, subject, start = None, end = None):
+        params = Chart._check_chart_params(params, subject, start, end)
+        if start is not None and end is not None:
+            wcl = subject.weekly_chart_list
+            is_valid = False
+            for wc in wcl:
+                if wc.start == start and wc.end == end:
+                    is_valid = True
+            if not is_valid:
+                raise InvalidParametersError("%s - %s chart dates are invalid" % (start, end))
+        return params       
+
+class WeeklyAlbumChart(AlbumChart, WeeklyChart):
+    """A class for representing the weekly album charts"""
     @staticmethod
     def create_from_data(api, subject, data):
         w = WeeklyChart(
@@ -158,16 +195,8 @@ class WeeklyAlbumChart(WeeklyChart):
                 ]
             )
     
-class WeeklyArtistChart(WeeklyChart):
+class WeeklyArtistChart(ArtistChart, WeeklyChart):
     """A class for representing the weekly artist charts"""
-    def init(self, subject, start, end, stats, artists):
-        super(WeeklyArtistChart, self).init(subject, start, end, stats)
-        self._artists = artists
-        
-    @property
-    def artists(self):
-        return self._artists
-    
     @staticmethod
     def create_from_data(api, subject, data):
         w = WeeklyChart(
@@ -208,16 +237,8 @@ class WeeklyArtistChart(WeeklyChart):
                       ]
             )
     
-class WeeklyTrackChart(WeeklyChart):
+class WeeklyTrackChart(TrackChart, WeeklyChart):
     """A class for representing the weekly track charts"""
-    def init(self, subject, start, end, tracks, stats):
-        super(WeeklyTrackChart, self).init(subject, start, end, stats)
-        self._tracks = tracks
-        
-    @property
-    def tracks(self):
-        return self._tracks
-    
     @staticmethod
     def create_from_data(api, subject, data):
         w = WeeklyChart(
@@ -261,16 +282,8 @@ class WeeklyTrackChart(WeeklyChart):
                      ]
            )
         
-class WeeklyTagChart(WeeklyChart):
+class WeeklyTagChart(TagChart, WeeklyChart):
     """A class for representing the weekly tag charts"""
-    def init(self, subject, start, end, tags, stats):
-        super(WeeklyTagChart, self).init(subject, start, end, stats)
-        self._tags = tags
-        
-    @property
-    def tags(self):
-        return self._tags
-    
     @staticmethod
     def create_from_data(api, subject, start, end):
         w = WeeklyChart(
@@ -356,77 +369,216 @@ class WeeklyTagChart(WeeklyChart):
         return wtc
 
 class RollingChart(Chart):
-    pass
+    """Base class for the rolling charts classes"""
+    @classmethod
+    def _check_chart_params(cls, params, subject, start = None, end = None):
+        duration = cls._period['duration']
+        params = Chart._check_chart_params(params, subject, start, end)
+        if start is not None and end is not None:
+            mcl = MonthlyChart.get_chart_list(subject)
+            is_valid = False
+            for i in xrange(len(mcl)-(duration-1)):
+                if mcl[i].start == start and mcl[i+(duration-1)].end == end:
+                    is_valid = True
+            if not is_valid:
+                raise InvalidParametersError("%s - %s chart dates are invalid" % (start, end))
+        return params
+
+    @classmethod
+    def create_from_data(cls, subject, key_func,
+                         start = None, end = None):
+        chart_type = cls.mro()[0]._chart_type
+        period = cls.mro()[3]._period
+        globals()["%slyChart" % period['name'].title().replace(' ','')]._check_chart_params({}, subject, start, end)
+        mcl = MonthlyChart.get_chart_list(subject)
+        if start is None and end is None:
+            start = mcl[-period['duration']].start
+            end = mcl[-1].end
+        wcl = subject.weekly_chart_list
+        period_wcl = [wc for wc in wcl
+            if start < wc.start < end or start < wc.end < end]
+        period_wacl = []
+        for wc in period_wcl:
+            try:
+                period_wacl.append(
+                    getattr(subject, "get_weekly_%s_chart" % chart_type)(wc.start, wc.end))
+            except LastfmError:
+                pass
+        stats_dict = period_wacl[0].__dict__["_%ss" % chart_type][0].stats.__dict__
+        count_attribute = [k for k in stats_dict.keys()
+                           if stats_dict[k] is not None and k not in ['_rank', '_subject']][0]
+        items = {}
+        for wac in period_wacl:
+            for item in wac.__dict__["_%ss" % chart_type]:
+                key = key_func(item)
+                mw_start = max(wac.start, start)
+                mw_end = min(wac.end, end)
+                count = item.stats.__dict__[count_attribute] * (mw_end - mw_start).days / 7.0
+                if key in items:
+                    items[key].stats.__dict__[count_attribute] += count
+                else:
+                    items[key] = item
+                    items[key].stats.__dict__[count_attribute] = count
+        items = items.values()
+        items = [a for a in items if a.stats.__dict__[count_attribute] >= 1]
+        items.sort(key = lambda a: a.stats.__dict__[count_attribute], reverse=True)
+        for i,item in enumerate(items):
+            item.stats._rank = i + 1
+            item.stats.__dict__[count_attribute] = int(item.stats.__dict__[count_attribute])
+        return globals()[
+            "%sly%sChart" % (
+                period['name'].title().replace(' ',''),
+                chart_type.capitalize()
+            )](
+            subject = subject,
+            start = start,
+            end = end,
+            stats = Stats(
+                subject = subject,
+                **{count_attribute[1:]: sum([a.stats.__dict__[count_attribute] for a in items])}
+            ),
+            **{"%ss" % chart_type: items}
+        )
+
+class RollingAlbumChart(AlbumChart):
+    @classmethod
+    def create_from_data(cls, subject, start = None, end = None):
+        key_func = lambda album: "::".join((album.name, album.artist.name))
+        return super(cls.mro()[3], cls).create_from_data(
+            subject, key_func, start, end)
+
+class RollingArtistChart(ArtistChart):
+    @classmethod
+    def create_from_data(cls, subject, start = None, end = None):
+        key_func = lambda artist: artist.name
+        return super(cls.mro()[3], cls).create_from_data(
+            subject, key_func, start, end)
+
+class RollingTrackChart(TrackChart):
+    @classmethod
+    def create_from_data(cls, subject, start = None, end = None):
+        key_func = lambda track: "::".join((track.name, track.artist.name))
+        return super(cls.mro()[3], cls).create_from_data(
+            subject, key_func, start, end)
+
+class RollingTagChart(TagChart):
+    @classmethod
+    def create_from_data(cls, subject, start = None, end = None):
+        key_func = lambda tag: tag.name
+        chart = super(cls.mro()[3], cls).create_from_data(
+            subject, key_func, start, end)
+        count_sum = sum([t.stats.count for t in chart.tags])
+        for t in chart.tags:
+            t.stats.__dict__['_count'] /= count_sum
+        return chart 
 
 class MonthlyChart(RollingChart):
-    pass
+    """A class for representing the monthly charts"""
+    _period = {'name': 'month', 'duration': 1}
+    
+    @staticmethod
+    def get_chart_list(subject):
+        wcl = subject.weekly_chart_list
+        months = set()
+        for l in wcl:
+            months.add(l.start.replace(day=1, hour=12, minute=0, second=0))
+        months = list(months)
+        months.sort()
+        months[0] = wcl[0].start.replace(hour=12, minute=0, second=0)
+        months.append(wcl[-1].end.replace(hour=12, minute=0, second=0))
 
-class MonthlyAlbumChart(MonthlyChart):
-    pass
+        return [MonthlyChart(
+                    subject=subject,
+                    start=months[i],
+                    end=months[i+1]
+                )
+               for i in xrange(len(months)-1)]
+        
+class MonthlyAlbumChart(RollingAlbumChart, MonthlyChart):
+    """A class for representing the monthly album charts"""
+    _chart_type = "album"
+        
+class MonthlyArtistChart(RollingArtistChart, MonthlyChart):
+    """A class for representing the monthly artist charts"""
+    _chart_type = "artist"
 
-class MonthlyArtistChart(MonthlyChart):
-    pass
+class MonthlyTrackChart(RollingTrackChart, MonthlyChart):
+    """A class for representing the monthly track charts"""
+    _chart_type = "track"
 
-class MonthlyTrackChart(MonthlyChart):
-    pass
+class MonthlyTagChart(RollingTagChart, MonthlyChart):
+    """A class for representing the monthly tag charts"""
+    _chart_type = "tag"
 
-class MonthlyTagChart(MonthlyChart):
-    pass
+class QuaterlyChart(RollingChart):
+    """A class for representing the three monthly charts"""
+    _period = {'name': 'quater', 'duration': 3}
 
-class ThreeMonthlyChart(RollingChart):
-    pass
+class QuaterlyAlbumChart(RollingAlbumChart, QuaterlyChart):
+    """A class for representing the three monthly album charts"""
+    _chart_type = "album"
 
-class ThreeMonthlyAlbumChart(ThreeMonthlyChart):
-    pass
+class QuaterlyArtistChart(RollingArtistChart, QuaterlyChart):
+    """A class for representing the three monthly artist charts"""
+    _chart_type = "artist"
 
-class ThreeMonthlyArtistChart(ThreeMonthlyChart):
-    pass
+class QuaterlyTrackChart(RollingTrackChart, QuaterlyChart):
+    """A class for representing the three monthly track charts"""
+    _chart_type = "track"
 
-class ThreeMonthlyTrackChart(ThreeMonthlyChart):
-    pass
+class QuaterlyTagChart(RollingTagChart, QuaterlyChart):
+    """A class for representing the three monthly tag charts"""
+    _chart_type = "tag"
 
-class ThreeMonthlyTagChart(ThreeMonthlyChart):
-    pass
+class HalfYearlyChart(RollingChart):
+    """A class for representing the six monthly charts"""
+    _period = {'name': 'half year', 'duration': 6}
 
-class SixMonthlyChart(RollingChart):
-    pass
+class HalfYearlyAlbumChart(RollingAlbumChart, HalfYearlyChart):
+    """A class for representing the six monthly album charts"""
+    _chart_type = "album"
 
-class SixMonthlyAlbumChart(SixMonthlyChart):
-    pass
+class HalfYearlyArtistChart(RollingArtistChart, HalfYearlyChart):
+    """A class for representing the six monthly artist charts"""
+    _chart_type = "artist"
 
-class SixMonthlyArtistChart(SixMonthlyChart):
-    pass
+class HalfYearlyTrackChart(RollingTrackChart, HalfYearlyChart):
+    """A class for representing the six monthly track charts"""
+    _chart_type = "track"
 
-class SixMonthlyTrackChart(SixMonthlyChart):
-    pass
-
-class SixMonthlyTagChart(SixMonthlyChart):
-    pass
+class HalfYearlyTagChart(RollingTagChart, HalfYearlyChart):
+    """A class for representing the six monthly tag charts"""
+    _chart_type = "tag"
 
 class YearlyChart(RollingChart):
-    pass
+    """A class for representing the yearly charts"""
+    _period = {'name': 'year', 'duration': 12}
 
-class YearlyAlbumChart(YearlyChart):
-    pass
+class YearlyAlbumChart(RollingAlbumChart, YearlyChart):
+    """A class for representing the yearly album charts"""
+    _chart_type = "album"
 
-class YearlyArtistChart(YearlyChart):
-    pass
+class YearlyArtistChart(RollingArtistChart, YearlyChart):
+    """A class for representing the yearly artist charts"""
+    _chart_type = "artist"
 
-class YearlyTrackChart(YearlyChart):
-    pass
+class YearlyTrackChart(RollingTrackChart, YearlyChart):
+    """A class for representing the yearly track charts"""
+    _chart_type = "track"
 
-class YearlyTagChart(YearlyChart):
-    pass
+class YearlyTagChart(RollingTagChart, YearlyChart):
+    """A class for representing the yearly tag charts"""
+    _chart_type = "tag"
 
 __all__ = [
     'WeeklyChart',
     'WeeklyAlbumChart', 'WeeklyArtistChart', 'WeeklyTrackChart', 'WeeklyTagChart',
     'MonthlyChart',
     'MonthlyAlbumChart', 'MonthlyArtistChart', 'MonthlyTrackChart', 'MonthlyTagChart', 
-    'ThreeMonthlyChart',
-    'ThreeMonthlyAlbumChart', 'ThreeMonthlyArtistChart', 'ThreeMonthlyTrackChart', 'ThreeMonthlyTagChart',
-    'SixMonthlyChart',
-    'SixMonthlyAlbumChart', 'SixMonthlyArtistChart', 'SixMonthlyTrackChart', 'SixMonthlyTagChart',
+    'QuaterlyChart',
+    'QuaterlyAlbumChart', 'QuaterlyArtistChart', 'QuaterlyTrackChart', 'QuaterlyTagChart',
+    'HalfYearlyChart',
+    'HalfYearlyAlbumChart', 'HalfYearlyArtistChart', 'HalfYearlyTrackChart', 'HalfYearlyTagChart',
     'YearlyChart',
     'YearlyAlbumChart', 'YearlyArtistChart', 'YearlyTrackChart', 'YearlyTagChart'
 ]
@@ -435,7 +587,7 @@ import calendar
 
 from lastfm.album import Album
 from lastfm.artist import Artist
-from lastfm.error import InvalidParametersError
+from lastfm.error import InvalidParametersError, LastfmError
 from lastfm.stats import Stats
 from lastfm.track import Track
 from lastfm.tag import Tag

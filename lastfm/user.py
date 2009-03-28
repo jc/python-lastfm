@@ -6,12 +6,16 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import Cacheable, Shoutable
-from lastfm.lazylist import lazylist
+from lastfm.mixins import (
+    Cacheable, Shoutable, AlbumChartable,
+    ArtistChartable, TrackChartable, TagChartable)
 import lastfm.playlist
-from lastfm.decorators import cached_property, top_property, authentication_required, depaginate
+from lastfm.decorators import (
+    cached_property, top_property, authentication_required, depaginate)
 
-class User(LastfmBase, Cacheable, Shoutable):
+class User(LastfmBase, Cacheable, Shoutable,
+           AlbumChartable, ArtistChartable,
+           TrackChartable, TagChartable):
     """A class representing an user."""
     def init(self,
                  api,
@@ -24,6 +28,11 @@ class User(LastfmBase, Cacheable, Shoutable):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         Shoutable.init(self, api)
+        AlbumChartable.init(self, api)
+        ArtistChartable.init(self, api)
+        TrackChartable.init(self, api)
+        TagChartable.init(self, api)
+        
         self._api = api
         self._name = name
         self._real_name = real_name
@@ -478,113 +487,6 @@ class User(LastfmBase, Cacheable, Shoutable):
         """top tag of the user"""
         pass
 
-    @cached_property
-    def weekly_chart_list(self):
-        params = self._default_params({'method': 'user.getWeeklyChartList'})
-        data = self._api._fetch_data(params).find('weeklychartlist')
-        return [
-                WeeklyChart.create_from_data(self._api, self, c)
-                for c in data.findall('chart')
-                ]
-
-    def get_weekly_album_chart(self,
-                             start = None,
-                             end = None):
-        params = self._default_params({'method': 'user.getWeeklyAlbumChart'})
-        params = WeeklyChart._check_chart_params(params, start, end)
-        data = self._api._fetch_data(params).find('weeklyalbumchart')
-        return WeeklyAlbumChart.create_from_data(self._api, self, data)
-
-    @cached_property
-    def recent_weekly_album_chart(self):
-        return self.get_weekly_album_chart()
-
-    @cached_property
-    def weekly_album_chart_list(self):
-        wcl = list(self.weekly_chart_list)
-        wcl.reverse()
-        @lazylist
-        def gen(lst):
-            for wc in wcl:
-                try:
-                    yield self.get_weekly_album_chart(wc.start, wc.end)
-                except LastfmError:
-                    pass
-        return gen()
-
-    def get_weekly_artist_chart(self,
-                             start = None,
-                             end = None):
-        params = self._default_params({'method': 'user.getWeeklyArtistChart'})
-        params = WeeklyChart._check_chart_params(params, start, end)
-        data = self._api._fetch_data(params).find('weeklyartistchart')
-        return WeeklyArtistChart.create_from_data(self._api, self, data)
-
-    @cached_property
-    def recent_weekly_artist_chart(self):
-        return self.get_weekly_artist_chart()
-
-    @cached_property
-    def weekly_artist_chart_list(self):
-        wcl = list(self.weekly_chart_list)
-        wcl.reverse()
-        @lazylist
-        def gen(lst):
-            for wc in wcl:
-                try:
-                    yield self.get_weekly_artist_chart(wc.start, wc.end)
-                except LastfmError:
-                    pass
-        return gen()
-
-    def get_weekly_track_chart(self,
-                             start = None,
-                             end = None):
-        params = self._default_params({'method': 'user.getWeeklyTrackChart'})
-        params = WeeklyChart._check_chart_params(params, start, end)
-        data = self._api._fetch_data(params).find('weeklytrackchart')
-        return WeeklyTrackChart.create_from_data(self._api, self, data)
-
-    @cached_property
-    def recent_weekly_track_chart(self):
-        return self.get_weekly_track_chart()
-
-    @cached_property
-    def weekly_track_chart_list(self):
-        wcl = list(self.weekly_chart_list)
-        wcl.reverse()
-        @lazylist
-        def gen(lst):
-            for wc in wcl:
-                try:
-                    yield self.get_weekly_track_chart(wc.start, wc.end)
-                except LastfmError:
-                    pass
-        return gen()
-    
-    def get_weekly_tag_chart(self,
-                             start = None,
-                             end = None):
-        WeeklyChart._check_chart_params({}, start, end)
-        return WeeklyTagChart.create_from_data(self._api, self, start, end)
-
-    @cached_property
-    def recent_weekly_tag_chart(self):
-        return self.get_weekly_tag_chart()
-
-    @cached_property
-    def weekly_tag_chart_list(self):
-        wcl = list(self.weekly_chart_list)
-        wcl.reverse()
-        @lazylist
-        def gen(lst):
-            for wc in wcl:
-                try:
-                    yield self.get_weekly_tag_chart(wc.start, wc.end)
-                except LastfmError:
-                    pass
-        return gen()
-
     def compare(self, other, limit = None):
         if isinstance(other, User):
             other = other.name
@@ -920,4 +822,3 @@ from lastfm.stats import Stats
 from lastfm.tag import Tag
 from lastfm.tasteometer import Tasteometer
 from lastfm.track import Track
-from lastfm.chart import WeeklyChart, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart, WeeklyTagChart

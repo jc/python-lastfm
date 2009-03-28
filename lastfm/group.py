@@ -7,11 +7,13 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import Cacheable
-from lastfm.lazylist import lazylist
+from lastfm.mixins import (
+    Cacheable, AlbumChartable, ArtistChartable,
+    TrackChartable, TagChartable)
 from lastfm.decorators import cached_property, depaginate
 
-class Group(LastfmBase, Cacheable):
+class Group(LastfmBase, Cacheable, AlbumChartable,
+            ArtistChartable, TrackChartable, TagChartable):
     """A class representing a group on last.fm."""
     def init(self, api, name = None, **kwargs):
         """
@@ -27,6 +29,11 @@ class Group(LastfmBase, Cacheable):
         """
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
+        AlbumChartable.init(self, api)
+        ArtistChartable.init(self, api)
+        TrackChartable.init(self, api)
+        TagChartable.init(self, api)
+        
         self._api = api
         self._name = name
 
@@ -37,209 +44,6 @@ class Group(LastfmBase, Cacheable):
         @rtype: L{str}
         """
         return self._name
-
-    @cached_property
-    def weekly_chart_list(self):
-        """
-        a list of available weekly charts for this group
-        @rtype: L{list} of L{WeeklyChart}
-        """
-        params = self._default_params({'method': 'group.getWeeklyChartList'})
-        data = self._api._fetch_data(params).find('weeklychartlist')
-        return [
-                WeeklyChart.create_from_data(self._api, self, c)
-                for c in data.findall('chart')
-                ]
-
-    def get_weekly_album_chart(self, start = None, end = None):
-        """
-        Get an album chart for the group, for a given date range.
-        If no date range is supplied, it will return the most 
-        recent album chart for the group. 
-        
-        @param start:    the date at which the chart should start from (optional)
-        @type start:     C{datetime.datetime}
-        @param end:      the date at which the chart should end on (optional)
-        @type end:       C{datetime.datetime}
-        
-        @return:         an album chart for the group
-        @rtype:          L{WeeklyAlbumChart}
-        
-        @raise InvalidParametersError: Both start and end parameter have to be either
-                                       provided or not provided. Providing only one of
-                                       them will raise an exception.
-        """
-        params = self._default_params({'method': 'group.getWeeklyAlbumChart'})
-        params = WeeklyChart._check_chart_params(params, start, end)
-        data = self._api._fetch_data(params).find('weeklyalbumchart')
-        return WeeklyAlbumChart.create_from_data(self._api, self, data)
-
-    @cached_property
-    def recent_weekly_album_chart(self):
-        """
-        most recent album chart for the group
-        @rtype: L{WeeklyAlbumChart}
-        """
-        return self.get_weekly_album_chart()
-    
-    @cached_property
-    def weekly_album_chart_list(self):
-        """
-        a list of all album charts for this group in reverse-chronological
-        order. (that means 0th chart is the most recent chart)
-        @rtype: L{lazylist} of L{WeeklyAlbumChart}
-        """
-        wcl = list(self.weekly_chart_list)
-        wcl.reverse()
-        @lazylist
-        def gen(lst):
-            for wc in wcl:
-                yield self.get_weekly_album_chart(wc.start, wc.end)
-        return gen()
-
-    def get_weekly_artist_chart(self, start = None, end = None):
-        """
-        Get an artist chart for the group, for a given date range.
-        If no date range is supplied, it will return the most 
-        recent artist chart for the group. 
-        
-        @param start:    the date at which the chart should start from (optional)
-        @type start:     C{datetime.datetime}
-        @param end:      the date at which the chart should end on (optional)
-        @type end:       C{datetime.datetime}
-        
-        @return:         an artist chart for the group
-        @rtype:          L{WeeklyArtistChart}
-        
-        @raise InvalidParametersError: Both start and end parameter have to be either
-                                       provided or not provided. Providing only one of
-                                       them will raise an exception.
-        """
-        params = self._default_params({'method': 'group.getWeeklyArtistChart'})
-        params = WeeklyChart._check_chart_params(params, start, end)
-        data = self._api._fetch_data(params).find('weeklyartistchart')
-        return WeeklyArtistChart.create_from_data(self._api, self, data)
-
-    @cached_property
-    def recent_weekly_artist_chart(self):
-        """
-        most recent artist chart for the group
-        @rtype: L{WeeklyArtistChart}
-        """
-        return self.get_weekly_artist_chart()
-    
-    @cached_property
-    def weekly_artist_chart_list(self):
-        """
-        a list of all artist charts for this group in reverse-chronological
-        order. (that means 0th chart is the most recent chart)
-        @rtype: L{lazylist} of L{WeeklyArtistChart}
-        """
-        wcl = list(self.weekly_chart_list)
-        wcl.reverse()
-        @lazylist
-        def gen(lst):
-            for wc in wcl:
-                yield self.get_weekly_artist_chart(wc.start, wc.end)
-        return gen()
-
-    def get_weekly_track_chart(self, start = None, end = None):
-        """
-        Get a track chart for the group, for a given date range.
-        If no date range is supplied, it will return the most 
-        recent artist chart for the group. 
-        
-        @param start:    the date at which the chart should start from (optional)
-        @type start:     C{datetime.datetime}
-        @param end:      the date at which the chart should end on (optional)
-        @type end:       C{datetime.datetime}
-        
-        @return:         a track chart for the group
-        @rtype:          L{WeeklyTrackChart}
-        
-        @raise InvalidParametersError: Both start and end parameter have to be either
-                                       provided or not provided. Providing only one of
-                                       them will raise an exception.
-        """
-        params = self._default_params({'method': 'group.getWeeklyTrackChart'})
-        params = WeeklyChart._check_chart_params(params, start, end)
-        data = self._api._fetch_data(params).find('weeklytrackchart')
-        return WeeklyTrackChart.create_from_data(self._api, self, data)
-
-    @cached_property
-    def recent_weekly_track_chart(self):
-        """
-        most recent track chart for the group
-        @rtype: L{WeeklyTrackChart}
-        """
-        return self.get_weekly_track_chart()
-    
-    @cached_property
-    def weekly_track_chart_list(self):
-        """
-        a list of all track charts for this group in reverse-chronological
-        order. (that means 0th chart is the most recent chart)
-        @rtype: L{lazylist} of L{WeeklyTrackChart}
-        """
-        wcl = list(self.weekly_chart_list)
-        wcl.reverse()
-        @lazylist
-        def gen(lst):
-            for wc in wcl:
-                yield self.get_weekly_track_chart(wc.start, wc.end)
-        return gen()
-
-    def get_weekly_tag_chart(self, start = None, end = None):
-        """
-        Get a tag chart for the group, for a given date range.
-        If no date range is supplied, it will return the most 
-        recent tag chart for the group. 
-        
-        @param start:    the date at which the chart should start from (optional)
-        @type start:     C{datetime.datetime}
-        @param end:      the date at which the chart should end on (optional)
-        @type end:       C{datetime.datetime}
-        
-        @return:         a tag chart for the group
-        @rtype:          L{WeeklyTagChart}
-        
-        @raise InvalidParametersError: Both start and end parameter have to be either
-                                       provided or not provided. Providing only one of
-                                       them will raise an exception.
-                                       
-        @note: This method is a composite method. It is not provided directly by the
-               last.fm API. It uses other methods to collect the data, analyzes it and
-               creates a chart. So this method is a little heavy to call, as it does
-               mulitple calls to the API. 
-        """
-        WeeklyChart._check_chart_params({}, start, end)
-        return WeeklyTagChart.create_from_data(self._api, self, start, end)
-
-    @cached_property
-    def recent_weekly_tag_chart(self):
-        """
-        most recent tag chart for the group
-        @rtype: L{WeeklyTagChart}
-        """
-        return self.get_weekly_tag_chart()
-
-    @cached_property
-    def weekly_tag_chart_list(self):
-        """
-        a list of all tag charts for this group in reverse-chronological
-        order. (that means 0th chart is the most recent chart)
-        @rtype: L{lazylist} of L{WeeklyTagChart}
-        """
-        wcl = list(self.weekly_chart_list)
-        wcl.reverse()
-        @lazylist
-        def gen(lst):
-            for wc in wcl:
-                try:
-                    yield self.get_weekly_tag_chart(wc.start, wc.end)
-                except LastfmError:
-                    pass
-        return gen()
     
     @cached_property
     @depaginate
