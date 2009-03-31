@@ -9,21 +9,9 @@ try:
     from threading import Lock
 except ImportError:
     from dummy_threading import Lock
-    
-registry = {}
-_lock = Lock()
+from lastfm.objectcache import ObjectCache
 
-def register(ob, key):
-    if not ob.__class__ in registry:
-        registry[ob.__class__] = {}
-    if key in registry[ob.__class__]:
-        ob = registry[ob.__class__][key]
-        #print "already registered: %s" % repr(ob)
-        return (ob, True)
-    else:
-        #print "not already registered: %s" % ob.__class__
-        registry[ob.__class__][key] = ob
-        return (ob, False)
+_lock = Lock()
 
 def cacheable(cls):
     @classmethod
@@ -45,7 +33,7 @@ def cacheable(cls):
             key = (hash(subject), key)
             
         with _lock:
-            inst, already_registered = register(object.__new__(cls), key)
+            inst, already_registered = ObjectCache.register(object.__new__(cls), key)
             if not already_registered:
                 inst.init(*args, **kwds)
         return inst
@@ -57,5 +45,9 @@ def cacheable(cls):
     cls.__new__ = __new__
     if not hasattr(cls, '_hash_func'):
         cls._hash_func = _hash_func
+        
+    if not hasattr(cls, '_mixins'):
+            cls._mixins = []
+    cls._mixins.append('__new__')
         
     return cls

@@ -4,36 +4,60 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
-
-from lastfm.album import Album
-from lastfm.artist import Artist
-from lastfm.mixins import _cacheable
-from lastfm.error import InvalidParametersError
-from lastfm.event import Event
-from lastfm.geo import Location, Country
-from lastfm.group import Group
-from lastfm.playlist import Playlist
-from lastfm.tag import Tag
-from lastfm.track import Track
-from lastfm.user import User
-from lastfm.venue import Venue
-from lastfm.chart import WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart
+    
+_registry = {}
 
 class ObjectCache(object):
     """The registry to contain all the entities"""
-    keys = [c.__name__ for c in [Album, Artist, Event, Location, Country, Group, 
-            Playlist, Tag, Track, User, Venue, WeeklyAlbumChart, WeeklyArtistChart, WeeklyTrackChart]]
+    keys = ['Album', 'Artist', 'Event', 'Location', 'Country', 'Group', 
+            'Playlist', 'Shout', 'Tag', 'Track', 'User', 'Venue',
+            'WeeklyChart',
+            'WeeklyAlbumChart', 'WeeklyArtistChart', 'WeeklyTrackChart', 'WeeklyTagChart',
+            'MonthlyChart',
+            'MonthlyAlbumChart', 'MonthlyArtistChart', 'MonthlyTrackChart', 'MonthlyTagChart',
+            'QuaterlyChart',
+            'QuaterlyAlbumChart', 'QuaterlyArtistChart', 'QuaterlyTrackChart', 'QuaterlyTagChart',
+            'HalfYearlyChart',
+            'HalfYearlyAlbumChart', 'HalfYearlyArtistChart', 'HalfYearlyTrackChart', 'HalfYearlyTagChart',
+            'YearlyChart',
+            'YearlyAlbumChart', 'YearlyArtistChart', 'YearlyTrackChart', 'YearlyTagChart'
+            ]
+    
+    @staticmethod
+    def register(ob, key):
+        cls_name = ob.__class__.__name__
+        if not cls_name in _registry:
+            _registry[cls_name] = WeakValueDictionary()
+        if key in _registry[cls_name]:
+            ob = _registry[cls_name][key]
+            print "already registered: %s" % repr(ob)
+            return (ob, True)
+        else:
+            print "not already registered: %s" % ob.__class__
+            _registry[cls_name][key] = ob
+            return (ob, False)
+
+    @property
+    def stats(self):
+        counts = {}
+        for k in ObjectCache.keys:
+            if k in _registry:
+                counts[k] = len(_registry[k])
+            else:
+                counts[k] = 0
+        return counts
     
     def __getitem__(self, name):
         if name not in ObjectCache.keys:
             raise InvalidParametersError("Key does not correspond to a valid class")
         else:
-            try:
-                vals = _cacheable.registry[eval(name)].values()
-                vals.sort()
-                return vals
-            except KeyError:
+            if name in _registry:
+                return sorted(_registry[name].values())
+            else:
                 return []
             
     def __repr__(self):
         return "<lastfm.ObjectCache>"
+
+from weakref import WeakValueDictionary
+from lastfm.error import InvalidParametersError
