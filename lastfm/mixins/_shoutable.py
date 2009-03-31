@@ -7,13 +7,10 @@ __package__ = "lastfm.mixins"
 
 from lastfm.decorators import cached_property, top_property
 
-class Shoutable(object):
-    def init(self, api):
-        self._api = api
-        
+def shoutable(cls):
     @cached_property
     def shouts(self):
-        """shouts for this ssubject"""
+        """shouts for this %s""" % cls.__name__.lower()
         from lastfm.shout import Shout
         from lastfm.user import User
         params = self._default_params({'method': '%s.getShouts' % self.__class__.__name__.lower()})
@@ -30,7 +27,7 @@ class Shoutable(object):
     
     @top_property("shouts")
     def recent_shout(self):
-        """recent shout for this subject"""
+        """recent shout for this %s""" % cls.__name__.lower()
         pass
     
     def _default_params(self, extra_params = None):
@@ -38,6 +35,13 @@ class Shoutable(object):
             return extra_params
         else:
             return {}
+        
+    cls.shouts = shouts
+    cls.recent_shout = recent_shout
+    if not hasattr(cls, '_default_params'):
+        cls._default_params = _default_params
     
+    return cls
+
 from datetime import datetime
 import time

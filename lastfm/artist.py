@@ -7,10 +7,15 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import Cacheable, Searchable, Sharable, Shoutable, Taggable
+from lastfm.mixins import cacheable, searchable, sharable, shoutable, taggable
 from lastfm.decorators import cached_property, top_property
 
-class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
+@shoutable
+@sharable
+@taggable
+@searchable
+@cacheable
+class Artist(LastfmBase):
     """A class representing an artist."""
     def init(self,
                  api,
@@ -55,9 +60,6 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
         """
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
-        Sharable.init(self, api)
-        Shoutable.init(self, api)
-        Taggable.init(self, api)
         
         self._api = api
         self._name = name
@@ -402,16 +404,16 @@ class Artist(LastfmBase, Cacheable, Sharable, Shoutable, Searchable, Taggable):
                              listeners = int(data.findtext('stats/listeners')),
                              playcount = int(data.findtext('stats/playcount'))
                              )
-        self._similar = [
-                          Artist(
-                                 self._api,
-                                 subject = self,
-                                 name = a.findtext('name'),
-                                 url = a.findtext('url'),
-                                 image = dict([(i.get('size'), i.text) for i in a.findall('image')])
-                                 )
-                          for a in data.findall('similar/artist')
-                          ]
+#        self._similar = [
+#                          Artist(
+#                                 self._api,
+#                                 subject = self,
+#                                 name = a.findtext('name'),
+#                                 url = a.findtext('url'),
+#                                 image = dict([(i.get('size'), i.text) for i in a.findall('image')])
+#                                 )
+#                          for a in data.findall('similar/artist')
+#                          ]
         self._top_tags = [
                           Tag(
                               self._api,

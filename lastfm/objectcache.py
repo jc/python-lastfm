@@ -7,7 +7,7 @@ __package__ = "lastfm"
 
 from lastfm.album import Album
 from lastfm.artist import Artist
-from lastfm.mixins import Cacheable
+from lastfm.mixins import _cacheable
 from lastfm.error import InvalidParametersError
 from lastfm.event import Event
 from lastfm.geo import Location, Country
@@ -29,7 +29,7 @@ class ObjectCache(object):
             raise InvalidParametersError("Key does not correspond to a valid class")
         else:
             try:
-                vals = Cacheable.registry[eval(name)].values()
+                vals = _cacheable.registry[eval(name)].values()
                 vals.sort()
                 return vals
             except KeyError:

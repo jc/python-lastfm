@@ -6,16 +6,15 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import (
-    Cacheable, Shoutable, AlbumChartable,
-    ArtistChartable, TrackChartable, TagChartable)
+from lastfm.mixins import cacheable, shoutable, chartable
 import lastfm.playlist
 from lastfm.decorators import (
     cached_property, top_property, authentication_required, depaginate)
 
-class User(LastfmBase, Cacheable, Shoutable,
-           AlbumChartable, ArtistChartable,
-           TrackChartable, TagChartable):
+@chartable(['album', 'artist', 'track', 'tag'])
+@shoutable
+@cacheable
+class User(LastfmBase):
     """A class representing an user."""
     def init(self,
                  api,
@@ -27,11 +26,6 @@ class User(LastfmBase, Cacheable, Shoutable,
                  **kwargs):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
-        Shoutable.init(self, api)
-        AlbumChartable.init(self, api)
-        ArtistChartable.init(self, api)
-        TrackChartable.init(self, api)
-        TagChartable.init(self, api)
         
         self._api = api
         self._name = name

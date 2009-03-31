@@ -7,9 +7,12 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import Cacheable, Sharable, Shoutable
+from lastfm.mixins import cacheable, sharable, shoutable
 
-class Event(LastfmBase, Cacheable, Sharable, Shoutable):
+@shoutable
+@sharable
+@cacheable
+class Event(LastfmBase):
     """A class representing an event."""
     STATUS_ATTENDING = 0
     STATUS_MAYBE = 1
@@ -59,8 +62,6 @@ class Event(LastfmBase, Cacheable, Sharable, Shoutable):
         """
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
-        Sharable.init(self, api)
-        Shoutable.init(self, api)
         
         self._api = api
         self._id = id

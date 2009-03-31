@@ -6,10 +6,12 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import Cacheable, Searchable
+from lastfm.mixins import cacheable, searchable
 from lastfm.decorators import cached_property, depaginate
 
-class Venue(LastfmBase, Cacheable, Searchable):
+@searchable
+@cacheable
+class Venue(LastfmBase):
     """A class representing a venue of an event"""
     def init(self,
              api,

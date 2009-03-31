@@ -8,10 +8,7 @@ __package__ = "lastfm.mixins"
 from lastfm.safelist import SafeList
 from lastfm.decorators import cached_property, authentication_required
 
-class Taggable(object):
-    def init(self, api):
-        self._api = api
-        
+def taggable(cls):
     @cached_property
     @authentication_required
     def tags(self):
@@ -70,3 +67,11 @@ class Taggable(object):
             return extra_params
         else:
             return {}
+        
+    cls.tags = tags
+    cls.add_tags = add_tags
+    cls.remove_tag = remove_tag
+    if not hasattr(cls, '_default_params'):
+        cls._default_params = _default_params
+    
+    return cls

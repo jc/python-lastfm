@@ -6,11 +6,13 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import (
-    Cacheable, Searchable, ArtistChartable)
+from lastfm.mixins import cacheable, searchable, chartable
 from lastfm.decorators import cached_property, top_property
 
-class Tag(LastfmBase, Cacheable, Searchable, ArtistChartable):
+@chartable(['artist'])
+@searchable
+@cacheable
+class Tag(LastfmBase):
     """A class representing a tag."""
     def init(self,
                  api,
@@ -21,7 +23,6 @@ class Tag(LastfmBase, Cacheable, Searchable, ArtistChartable):
                  **kwargs):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
-        ArtistChartable.init(self, api)
         
         self._api = api
         self._name = name

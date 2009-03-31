@@ -5,10 +5,7 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm.mixins"
 
-class Sharable(object):
-    def init(self, api):
-        self._api = api
-    
+def sharable(cls):
     def share(self, recipient, message = None):
         from lastfm.user import User
         params = self._default_params({'method': '%s.share' % self.__class__.__name__.lower()})
@@ -29,3 +26,9 @@ class Sharable(object):
             return extra_params
         else:
             return {}
+        
+    cls.share = share
+    if not hasattr(cls, '_default_params'):
+        cls._default_params = _default_params
+    
+    return cls

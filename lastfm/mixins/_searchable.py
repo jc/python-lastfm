@@ -7,7 +7,7 @@ __package__ = "lastfm.mixins"
 
 from lastfm.decorators import depaginate
 
-class Searchable(object):
+def searchable(cls):
     @classmethod
     @depaginate
     def search(cls,
@@ -40,4 +40,10 @@ class Searchable(object):
 
     @staticmethod
     def _search_yield_func(api, search_term):
-        pass
+        raise NotImplementedError("the subclass should implement this method")
+    
+    cls.search = search
+    if not hasattr(cls, '_search_yield_func'):
+        cls._search_yield_func = _search_yield_func
+        
+    return cls

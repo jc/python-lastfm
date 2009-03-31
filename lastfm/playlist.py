@@ -6,10 +6,11 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import Cacheable
+from lastfm.mixins import cacheable
 from lastfm.decorators import cached_property
 
-class Playlist(LastfmBase, Cacheable):
+@cacheable
+class Playlist(LastfmBase):
     """A class representing an XPSF playlist."""
     def init(self, api, url, **kwargs):
         self._api = api

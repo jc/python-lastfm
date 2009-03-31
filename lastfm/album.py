@@ -7,10 +7,13 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import Cacheable, Searchable, Taggable
+from lastfm.mixins import cacheable, searchable, taggable
 from lastfm.decorators import cached_property, top_property
 
-class Album(LastfmBase, Cacheable, Searchable, Taggable):
+@taggable
+@searchable
+@cacheable
+class Album(LastfmBase):
     """A class representing an album."""
     def init(self,
                  api,
@@ -58,7 +61,6 @@ class Album(LastfmBase, Cacheable, Searchable, Taggable):
         """
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
-        Taggable.init(self, api)
         self._api = api
         self._name = name
         self._artist = artist

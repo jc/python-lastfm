@@ -7,7 +7,7 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import Cacheable
+from lastfm.mixins import cacheable
 from lastfm.decorators import cached_property, top_property, depaginate
 
 class Geo(object):
@@ -145,7 +145,8 @@ class Geo(object):
                 for t in data.findall('track')
                 ]
 
-class Location(LastfmBase, Cacheable):
+@cacheable
+class Location(LastfmBase):
     """A class representing a location of an event"""
     XMLNS = "http://www.w3.org/2003/01/geo/wgs84_pos#"
 
@@ -324,7 +325,8 @@ class Location(LastfmBase, Cacheable):
         else:
             return "<lastfm.geo.Location: %s>" % self.city
 
-class Country(LastfmBase, Cacheable):
+@cacheable
+class Country(LastfmBase):
     """A class representing a country."""
     ISO_CODES = {
          'AD': 'Andorra',

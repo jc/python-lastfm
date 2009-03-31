@@ -7,13 +7,12 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import (
-    Cacheable, AlbumChartable, ArtistChartable,
-    TrackChartable, TagChartable)
+from lastfm.mixins import cacheable, chartable
 from lastfm.decorators import cached_property, depaginate
 
-class Group(LastfmBase, Cacheable, AlbumChartable,
-            ArtistChartable, TrackChartable, TagChartable):
+@chartable(['album', 'artist', 'track', 'tag'])
+@cacheable
+class Group(LastfmBase):
     """A class representing a group on last.fm."""
     def init(self, api, name = None, **kwargs):
         """
@@ -29,11 +28,7 @@ class Group(LastfmBase, Cacheable, AlbumChartable,
         """
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
-        AlbumChartable.init(self, api)
-        ArtistChartable.init(self, api)
-        TrackChartable.init(self, api)
-        TagChartable.init(self, api)
-        
+         
         self._api = api
         self._name = name
 

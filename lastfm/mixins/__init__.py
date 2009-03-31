@@ -5,13 +5,12 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm.mixins"
 
-from lastfm.mixins.cacheable import Cacheable
-from lastfm.mixins.searchable import Searchable
-from lastfm.mixins.sharable import Sharable
-from lastfm.mixins.shoutable import Shoutable
-from lastfm.mixins.taggable import Taggable
-from lastfm.mixins.chartable import (
-    AlbumChartable, ArtistChartable, TrackChartable, TagChartable)
+from lastfm.mixins._cacheable import cacheable
+from lastfm.mixins._searchable import searchable
+from lastfm.mixins._sharable import sharable
+from lastfm.mixins._shoutable import shoutable
+from lastfm.mixins._taggable import taggable
+from lastfm.mixins._chartable import chartable
 
-__all__ = ['Cacheable', 'Searchable', 'Sharable', 'Shoutable', 'Taggable'
-           'AlbumChartable', 'ArtistChartable', 'TrackChartable', 'TagChartable']
+__all__ = ['cacheable', 'searchable', 'sharable', 'shoutable', 'taggable'
+           'chartable']

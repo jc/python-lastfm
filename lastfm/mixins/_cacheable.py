@@ -10,11 +10,25 @@ try:
 except ImportError:
     from dummy_threading import Lock
     
-class Cacheable(object):
-    registry = {}
-    _lock = Lock()
+registry = {}
+_lock = Lock()
 
+def register(ob, key):
+    if not ob.__class__ in registry:
+        registry[ob.__class__] = {}
+    if key in registry[ob.__class__]:
+        ob = registry[ob.__class__][key]
+        #print "already registered: %s" % repr(ob)
+        return (ob, True)
+    else:
+        #print "not already registered: %s" % ob.__class__
+        registry[ob.__class__][key] = ob
+        return (ob, False)
+
+def cacheable(cls):
+    @classmethod
     def __new__(cls, *args, **kwds):
+        args = args[1:]
         subject = None
         if 'subject' in kwds and not cls.__name__.startswith('Weekly'):
             subject = kwds['subject']
@@ -29,29 +43,19 @@ class Cacheable(object):
         key = cls._hash_func(*args, **kwds)
         if subject is not None:
             key = (hash(subject), key)
-
-        Cacheable._lock.acquire()
-        try:
-            inst, already_registered = Cacheable.register(object.__new__(cls), key)
+            
+        with _lock:
+            inst, already_registered = register(object.__new__(cls), key)
             if not already_registered:
                 inst.init(*args, **kwds)
-        finally:
-            Cacheable._lock.release()
         return inst
-
-    @staticmethod
-    def register(ob, key):
-        if not ob.__class__ in Cacheable.registry:
-            Cacheable.registry[ob.__class__] = {}
-        if key in Cacheable.registry[ob.__class__]:
-            ob = Cacheable.registry[ob.__class__][key]
-            #print "already registered: %s" % repr(ob)
-            return (ob, True)
-        else:
-            #print "not already registered: %s" % ob.__class__
-            Cacheable.registry[ob.__class__][key] = ob
-            return (ob, False)
         
     @staticmethod
     def _hash_func(*args, **kwds):
         raise NotImplementedError("The subclass must override this method")
+    
+    cls.__new__ = __new__
+    if not hasattr(cls, '_hash_func'):
+        cls._hash_func = _hash_func
+        
+    return cls

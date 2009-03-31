@@ -6,10 +6,11 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import Cacheable
+from lastfm.mixins import cacheable
 from operator import xor
 
-class Chart(LastfmBase, Cacheable):
+@cacheable
+class Chart(LastfmBase):
     """The base class for all the chart classes"""
 
     def init(self, subject, start, end, stats = None):
@@ -435,7 +436,7 @@ class RollingChart(Chart):
             end = end,
             stats = Stats(
                 subject = subject,
-                **{count_attribute[1:]: sum([a.stats.__dict__[count_attribute] for a in items])}
+                **{count_attribute[1:]: sum(a.stats.__dict__[count_attribute] for a in items)}
             ),
             **{"%ss" % chart_type: items}
         )
@@ -467,7 +468,7 @@ class RollingTagChart(TagChart):
         key_func = lambda tag: tag.name
         chart = super(cls.mro()[3], cls).create_from_data(
             subject, key_func, start, end)
-        count_sum = sum([t.stats.count for t in chart.tags])
+        count_sum = sum(t.stats.count for t in chart.tags)
         for t in chart.tags:
             t.stats.__dict__['_count'] /= count_sum
         return chart 
