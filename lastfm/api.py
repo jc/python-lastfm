@@ -6,7 +6,9 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
+from threading import Lock
 from lastfm.decorators import cached_property, async_callback
+_lock = Lock()
 
 class Api(object):
     """The class representing the last.fm web services API."""
@@ -64,7 +66,6 @@ class Api(object):
         self._no_cache = no_cache
         self._debug = debug
         self._last_fetch_time = datetime.now()
-        self._lock = Lock()
 
     @property
     def api_key(self):
@@ -113,9 +114,10 @@ class Api(object):
         if session_key is not None:
             self._session_key = session_key
         else:
-            params = {'method': 'auth.getSession', 'token': self.auth_token}
-            self._session_key = self._fetch_data(params, sign = True).findtext('session/key')
-            self._auth_token = None
+            with _lock:
+                params = {'method': 'auth.getSession', 'token': self.auth_token}
+                self._session_key = self._fetch_data(params, sign = True).findtext('session/key')
+                self._auth_token = None
 
     @cached_property
     def auth_token(self):
@@ -644,7 +646,7 @@ class Api(object):
             return urllib.urlencode([(k, self._encode(parameters[k])) for k in keys if parameters[k] is not None])
 
     def _read_url_data(self, opener, url, data = None):
-        with self._lock:
+        with _lock:
             now = datetime.now()
             delta = now - self._last_fetch_time
             delta = delta.seconds + float(delta.microseconds)/1000000
@@ -767,7 +769,6 @@ class Api(object):
         return "<lastfm.Api: %s>" % self._api_key
 
 from datetime import datetime
-from threading import Lock
 import sys
 import time
 import urllib
