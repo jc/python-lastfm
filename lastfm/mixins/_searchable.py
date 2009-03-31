@@ -46,4 +46,8 @@ def searchable(cls):
     if not hasattr(cls, '_search_yield_func'):
         cls._search_yield_func = _search_yield_func
         
+    if not hasattr(cls, '_mixins'):
+            cls._mixins = []
+    cls._mixins.append('search')
+        
     return cls

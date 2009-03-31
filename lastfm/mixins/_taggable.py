@@ -73,5 +73,9 @@ def taggable(cls):
     cls.remove_tag = remove_tag
     if not hasattr(cls, '_default_params'):
         cls._default_params = _default_params
+        
+    if not hasattr(cls, '_mixins'):
+            cls._mixins = []
+    cls._mixins.extend(['tags', 'add_tags', 'remove_tag'])
     
     return cls

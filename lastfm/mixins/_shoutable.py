@@ -40,6 +40,10 @@ def shoutable(cls):
     cls.recent_shout = recent_shout
     if not hasattr(cls, '_default_params'):
         cls._default_params = _default_params
+        
+    if not hasattr(cls, '_mixins'):
+            cls._mixins = []
+    cls._mixins.extend(['shouts', 'recent_shout'])
     
     return cls
 

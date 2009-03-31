@@ -31,4 +31,8 @@ def sharable(cls):
     if not hasattr(cls, '_default_params'):
         cls._default_params = _default_params
     
+    if not hasattr(cls, '_mixins'):
+            cls._mixins = []
+    cls._mixins.append('share')
+    
     return cls

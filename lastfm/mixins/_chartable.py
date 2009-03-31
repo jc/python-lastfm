@@ -424,8 +424,13 @@ def chartable(chart_types):
         
         cls.weekly_chart_list = weekly_chart_list
         cls.monthly_chart_list = monthly_chart_list
+        
         if not hasattr(cls, '_default_params'):
             cls._default_params = _default_params
+        
+        if not hasattr(cls, '_mixins'):
+            cls._mixins = []
+        cls._mixins.extend(['weekly_chart_list', 'monthly_chart_list'])
         
         method_names = [
             'get_weekly_%s_chart', 'recent_weekly_%s_chart', 'weekly_%s_chart_list',
@@ -437,7 +442,8 @@ def chartable(chart_types):
         for chart_type in chart_types:
             for method_name in method_names:
                 setattr(cls, method_name % chart_type, locals()[method_name % chart_type])
-                
+                cls._mixins.append(method_name % chart_type)
+        
         return cls
     return wrapper
 
