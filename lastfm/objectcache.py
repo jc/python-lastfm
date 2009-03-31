@@ -30,10 +30,10 @@ class ObjectCache(object):
             _registry[cls_name] = WeakValueDictionary()
         if key in _registry[cls_name]:
             ob = _registry[cls_name][key]
-            print "already registered: %s" % repr(ob)
+            #print "already registered: %s" % repr(ob)
             return (ob, True)
         else:
-            print "not already registered: %s" % ob.__class__
+            #print "not already registered: %s" % ob.__class__
             _registry[cls_name][key] = ob
             return (ob, False)
 
