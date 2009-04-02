@@ -18,7 +18,7 @@ def cacheable(cls):
     def __new__(cls, *args, **kwds):
         args = args[1:]
         subject = None
-        if 'subject' in kwds and not cls.__name__.startswith('Weekly'):
+        if 'subject' in kwds and not 'Weekly' in cls.__name__:
             subject = kwds['subject']
             #del kwds['subject']
 

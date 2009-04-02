@@ -57,7 +57,7 @@ class ObjectCache(object):
                 return []
             
     def __repr__(self):
-        return "<lastfm.ObjectCache>"
+        return "<lastfm.ObjectCache: %s object(s) in cache>" % sum(self.stats.values())
 
 from weakref import WeakValueDictionary
 from lastfm.error import InvalidParametersError

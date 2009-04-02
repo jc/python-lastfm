@@ -202,7 +202,7 @@ class User(LastfmBase):
 
     @top_property("neighbours")
     def nearest_neighbour(self):
-        """nearest neightbour of the user"""
+        """nearest neighbour of the user"""
         pass
 
     @cached_property
@@ -450,7 +450,7 @@ class User(LastfmBase):
     @top_property("top_tracks")
     def top_track(self):
         """top track of the user"""
-        return (len(self.top_tracks) and self.top_tracks[0] or None)
+        pass
 
     def get_top_tags(self, limit = None):
         params = self._default_params({'method': 'user.getTopTags'})
@@ -500,8 +500,11 @@ class User(LastfmBase):
             return user
         else:
             f = friends[0]
-            user = [a for a in f.friends if a.name == user.name][0]
-            return user
+            try:
+                user = [a for a in f.friends if a.name == user.name][0]
+                return user
+            except IndexError:
+                return user
         
     @staticmethod
     def get_authenticated_user(api):
@@ -518,6 +521,11 @@ class User(LastfmBase):
         user._subscriber = (data.findtext('subscriber') == "1")
         user._stats = Stats(subject = user, playcount = data.findtext('playcount'))
         return user
+    
+    @classmethod
+    def get_all(cls,seed_user):
+        return super(User, cls).get_all(seed_user, ['name'],
+            lambda api, hsh: User(api, **hsh).neighbours)
         
     def _default_params(self, extra_params = None):
         if not self.name:

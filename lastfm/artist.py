@@ -369,6 +369,11 @@ class Artist(LastfmBase):
         a = Artist(api, name = data.findtext('name'))
         a._fill_info()
         return a
+    
+    @classmethod
+    def get_all(cls,seed_artist):
+        return super(Artist, cls).get_all(seed_artist, ['name'],
+            lambda api, hsh: Artist(api, **hsh).similar)
 
     def _default_params(self, extra_params = None):
         if not self.name:

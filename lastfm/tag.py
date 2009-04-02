@@ -193,6 +193,11 @@ class Tag(LastfmBase):
                 for t in data.findall('tag')
                 ]
 
+    @classmethod
+    def get_all(cls, seed_tag):
+        return super(Tag, cls).get_all(seed_tag, ['name'],
+            lambda api, hsh: Tag(api, **hsh).similar)
+    
     def _default_params(self, extra_params = None):
         if not self.name:
             raise InvalidParametersError("tag has to be provided.")

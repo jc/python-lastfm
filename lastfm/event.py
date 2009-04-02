@@ -288,6 +288,17 @@ class Event(LastfmBase):
                      tag = data.findtext('tag')
                     )
 
+    @classmethod
+    def get_all(cls, seed_event):
+        def gen():
+            for artist in Artist.get_all(seed_event.artists[0]):
+                for event in artist.events:
+                    yield event
+        
+        return super(Event, cls).get_all(seed_event, ['id'],
+            lambda api, hsh: gen())
+
+    
     def _default_params(self, extra_params = None):
         if not self.id:
             raise InvalidParametersError("id has to be provided.")

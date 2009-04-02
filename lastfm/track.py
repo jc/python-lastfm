@@ -272,6 +272,16 @@ class Track(LastfmBase):
                   )
         t._fill_info()
         return t
+    
+    @classmethod
+    def get_all(cls, seed_track):
+        def gen():
+            for artist in Artist.get_all(seed_track.artist):
+                for track in artist.top_tracks:
+                    yield track
+                    
+        return super(Track, cls).get_all(seed_track, ['name', 'artist'],
+            lambda api, hsh: gen())
 
     def _default_params(self, extra_params = None):
         if not (self.artist and self.name):
