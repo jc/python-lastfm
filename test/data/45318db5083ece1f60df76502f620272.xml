@@ -147,14 +147,14 @@
     <url>http://www.last.fm/tag/post-punk</url>
 </tag>
 <tag>
-    <name>emo</name> 
-    <count>1</count>
-    <url>http://www.last.fm/tag/emo</url>
-</tag>
-<tag>
     <name>Favourites</name> 
     <count>1</count>
     <url>http://www.last.fm/tag/favourites</url>
+</tag>
+<tag>
+    <name>emo</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/emo</url>
 </tag>
 <tag>
     <name>90s Rock</name> 
@@ -167,14 +167,14 @@
     <url>http://www.last.fm/tag/male%20vocalists</url>
 </tag>
 <tag>
-    <name>heavy metal</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/heavy%20metal</url>
-</tag>
-<tag>
     <name>industrial</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/industrial</url>
+</tag>
+<tag>
+    <name>heavy metal</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/heavy%20metal</url>
 </tag>
 <tag>
     <name>melancholy</name> 
@@ -192,19 +192,14 @@
     <url>http://www.last.fm/tag/love</url>
 </tag>
 <tag>
-    <name>dream pop</name> 
+    <name>chillout</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/dream%20pop</url>
+    <url>http://www.last.fm/tag/chillout</url>
 </tag>
 <tag>
     <name>singer-songwriter</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/singer-songwriter</url>
-</tag>
-<tag>
-    <name>chillout</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/chillout</url>
 </tag>
 <tag>
     <name>Favorite Bands</name> 
@@ -217,14 +212,14 @@
     <url>http://www.last.fm/tag/new%20wave</url>
 </tag>
 <tag>
+    <name>dream pop</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/dream%20pop</url>
+</tag>
+<tag>
     <name>Progressive</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/progressive</url>
-</tag>
-<tag>
-    <name>Illinois</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/illinois</url>
 </tag>
 <tag>
     <name>Gothic</name> 
@@ -232,9 +227,14 @@
     <url>http://www.last.fm/tag/gothic</url>
 </tag>
 <tag>
-    <name>experimental</name> 
+    <name>Illinois</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/experimental</url>
+    <url>http://www.last.fm/tag/illinois</url>
+</tag>
+<tag>
+    <name>Stoner Rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/stoner%20rock</url>
 </tag>
 <tag>
     <name>80s</name> 
@@ -242,9 +242,9 @@
     <url>http://www.last.fm/tag/80s</url>
 </tag>
 <tag>
-    <name>Stoner Rock</name> 
+    <name>experimental</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/stoner%20rock</url>
+    <url>http://www.last.fm/tag/experimental</url>
 </tag>
 <tag>
     <name>britpop</name> 
@@ -282,14 +282,14 @@
     <url>http://www.last.fm/tag/hip-hop</url>
 </tag>
 <tag>
-    <name>hardcore</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/hardcore</url>
-</tag>
-<tag>
     <name>beautiful</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/beautiful</url>
+</tag>
+<tag>
+    <name>hardcore</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/hardcore</url>
 </tag>
 <tag>
     <name>favourite artists</name> 
@@ -302,14 +302,14 @@
     <url>http://www.last.fm/tag/dance</url>
 </tag>
 <tag>
-    <name>pumpkins</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/pumpkins</url>
-</tag>
-<tag>
     <name>smashing</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/smashing</url>
+</tag>
+<tag>
+    <name>pumpkins</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/pumpkins</url>
 </tag>
 <tag>
     <name>Psychedelic Rock</name> 
@@ -322,9 +322,9 @@
     <url>http://www.last.fm/tag/00s</url>
 </tag>
 <tag>
-    <name>alternative metal</name> 
+    <name>Gothic Rock</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/alternative%20metal</url>
+    <url>http://www.last.fm/tag/gothic%20rock</url>
 </tag>
 <tag>
     <name>Favourite bands</name> 
@@ -337,9 +337,9 @@
     <url>http://www.last.fm/tag/gothic%20metal</url>
 </tag>
 <tag>
-    <name>Gothic Rock</name> 
+    <name>alternative metal</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/gothic%20rock</url>
+    <url>http://www.last.fm/tag/alternative%20metal</url>
 </tag>
 <tag>
     <name>seen live</name> 
@@ -347,9 +347,9 @@
     <url>http://www.last.fm/tag/seen%20live</url>
 </tag>
 <tag>
-    <name>my music</name> 
+    <name>jazz</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/my%20music</url>
+    <url>http://www.last.fm/tag/jazz</url>
 </tag>
 <tag>
     <name>favourite</name> 
@@ -357,14 +357,14 @@
     <url>http://www.last.fm/tag/favourite</url>
 </tag>
 <tag>
+    <name>my music</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/my%20music</url>
+</tag>
+<tag>
     <name>90's</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/90%27s</url>
-</tag>
-<tag>
-    <name>jazz</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/jazz</url>
 </tag>
 <tag>
     <name>goth</name> 
@@ -372,24 +372,14 @@
     <url>http://www.last.fm/tag/goth</url>
 </tag>
 <tag>
-    <name>guitar</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/guitar</url>
-</tag>
-<tag>
     <name>Soundtrack</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/soundtrack</url>
 </tag>
 <tag>
-    <name>pop rock</name> 
+    <name>guitar</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/pop%20rock</url>
-</tag>
-<tag>
-    <name>High School</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/high%20school</url>
+    <url>http://www.last.fm/tag/guitar</url>
 </tag>
 <tag>
     <name>ambient</name> 
@@ -402,39 +392,14 @@
     <url>http://www.last.fm/tag/melancholic</url>
 </tag>
 <tag>
-    <name>post-rock</name> 
+    <name>pop rock</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/post-rock</url>
+    <url>http://www.last.fm/tag/pop%20rock</url>
 </tag>
 <tag>
-    <name>japanese</name> 
+    <name>High School</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/japanese</url>
-</tag>
-<tag>
-    <name>space rock</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/space%20rock</url>
-</tag>
-<tag>
-    <name>rap</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/rap</url>
-</tag>
-<tag>
-    <name>art rock</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/art%20rock</url>
-</tag>
-<tag>
-    <name>amazing</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/amazing</url>
-</tag>
-<tag>
-    <name>90s alternative</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/90s%20alternative</url>
+    <url>http://www.last.fm/tag/high%20school</url>
 </tag>
 <tag>
     <name>dark</name> 
@@ -442,14 +407,49 @@
     <url>http://www.last.fm/tag/dark</url>
 </tag>
 <tag>
+    <name>space rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/space%20rock</url>
+</tag>
+<tag>
+    <name>japanese</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/japanese</url>
+</tag>
+<tag>
+    <name>post-rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/post-rock</url>
+</tag>
+<tag>
     <name>thrash metal</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/thrash%20metal</url>
 </tag>
 <tag>
+    <name>art rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/art%20rock</url>
+</tag>
+<tag>
     <name>Rock am Ring 2007</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/rock%20am%20ring%202007</url>
+</tag>
+<tag>
+    <name>rap</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/rap</url>
+</tag>
+<tag>
+    <name>90s alternative</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/90s%20alternative</url>
+</tag>
+<tag>
+    <name>amazing</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/amazing</url>
 </tag>
 <tag>
     <name>funk</name> 
@@ -477,19 +477,14 @@
     <url>http://www.last.fm/tag/ska</url>
 </tag>
 <tag>
-    <name>My Favorites</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/my%20favorites</url>
-</tag>
-<tag>
     <name>want to see live</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/want%20to%20see%20live</url>
 </tag>
 <tag>
-    <name>chill</name> 
+    <name>Mellow</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/chill</url>
+    <url>http://www.last.fm/tag/mellow</url>
 </tag>
 <tag>
     <name>good</name> 
@@ -497,8 +492,13 @@
     <url>http://www.last.fm/tag/good</url>
 </tag>
 <tag>
-    <name>Mellow</name> 
+    <name>My Favorites</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/mellow</url>
+    <url>http://www.last.fm/tag/my%20favorites</url>
+</tag>
+<tag>
+    <name>chill</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/chill</url>
 </tag>
 </toptags></lfm>

@@ -18,7 +18,7 @@
 </tag>
 <tag>
     <name>indie</name> 
-    <count>31</count>
+    <count>32</count>
     <url>http://www.last.fm/tag/indie</url>
 </tag>
 <tag>
@@ -112,6 +112,11 @@
     <url>http://www.last.fm/tag/indie%20pop</url>
 </tag>
 <tag>
+    <name>00s</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/00s</url>
+</tag>
+<tag>
     <name>Pop-Rock</name> 
     <count>1</count>
     <url>http://www.last.fm/tag/pop-rock</url>
@@ -120,11 +125,6 @@
     <name>georgia</name> 
     <count>1</count>
     <url>http://www.last.fm/tag/georgia</url>
-</tag>
-<tag>
-    <name>00s</name> 
-    <count>1</count>
-    <url>http://www.last.fm/tag/00s</url>
 </tag>
 <tag>
     <name>punk</name> 
@@ -192,9 +192,9 @@
     <url>http://www.last.fm/tag/electronica</url>
 </tag>
 <tag>
-    <name>R.E.M</name> 
+    <name>folk rock</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/r.e.m</url>
+    <url>http://www.last.fm/tag/folk%20rock</url>
 </tag>
 <tag>
     <name>punk rock</name> 
@@ -202,14 +202,14 @@
     <url>http://www.last.fm/tag/punk%20rock</url>
 </tag>
 <tag>
-    <name>folk rock</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/folk%20rock</url>
-</tag>
-<tag>
     <name>political</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/political</url>
+</tag>
+<tag>
+    <name>R.E.M</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/r.e.m</url>
 </tag>
 <tag>
     <name>female vocalists</name> 
@@ -247,16 +247,6 @@
     <url>http://www.last.fm/tag/oldies</url>
 </tag>
 <tag>
-    <name>Favorite Artists</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/favorite%20artists</url>
-</tag>
-<tag>
-    <name>Favourite bands</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/favourite%20bands</url>
-</tag>
-<tag>
     <name>melancholy</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/melancholy</url>
@@ -267,14 +257,24 @@
     <url>http://www.last.fm/tag/ambient</url>
 </tag>
 <tag>
+    <name>Favourite bands</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/favourite%20bands</url>
+</tag>
+<tag>
+    <name>Favorite Artists</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/favorite%20artists</url>
+</tag>
+<tag>
     <name>jazz</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/jazz</url>
 </tag>
 <tag>
-    <name>Awesome</name> 
+    <name>Hip-Hop</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/awesome</url>
+    <url>http://www.last.fm/tag/hip-hop</url>
 </tag>
 <tag>
     <name>Favorite</name> 
@@ -287,34 +287,14 @@
     <url>http://www.last.fm/tag/alternative%20pop</url>
 </tag>
 <tag>
-    <name>Hip-Hop</name> 
+    <name>Awesome</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/hip-hop</url>
+    <url>http://www.last.fm/tag/awesome</url>
 </tag>
 <tag>
     <name>seen live</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/seen%20live</url>
-</tag>
-<tag>
-    <name>sad</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/sad</url>
-</tag>
-<tag>
-    <name>Soundtrack</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/soundtrack</url>
-</tag>
-<tag>
-    <name>modern rock</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/modern%20rock</url>
-</tag>
-<tag>
-    <name>music</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/music</url>
 </tag>
 <tag>
     <name>Great Lyricists</name> 
@@ -325,6 +305,26 @@
     <name>soul</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/soul</url>
+</tag>
+<tag>
+    <name>music</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/music</url>
+</tag>
+<tag>
+    <name>Soundtrack</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/soundtrack</url>
+</tag>
+<tag>
+    <name>sad</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/sad</url>
+</tag>
+<tag>
+    <name>modern rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/modern%20rock</url>
 </tag>
 <tag>
     <name>gay</name> 
@@ -347,11 +347,6 @@
     <url>http://www.last.fm/tag/easy%20listening</url>
 </tag>
 <tag>
-    <name>male vocalist</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/male%20vocalist</url>
-</tag>
-<tag>
     <name>classic</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/classic</url>
@@ -370,6 +365,11 @@
     <name>favourite artists</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/favourite%20artists</url>
+</tag>
+<tag>
+    <name>male vocalist</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/male%20vocalist</url>
 </tag>
 <tag>
     <name>instrumental</name> 
@@ -482,14 +482,14 @@
     <url>http://www.last.fm/tag/post%20rock</url>
 </tag>
 <tag>
+    <name>british</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/british</url>
+</tag>
+<tag>
     <name>reggae</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/reggae</url>
-</tag>
-<tag>
-    <name>rap</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/rap</url>
 </tag>
 <tag>
     <name>band</name> 
@@ -497,8 +497,8 @@
     <url>http://www.last.fm/tag/band</url>
 </tag>
 <tag>
-    <name>british</name> 
+    <name>rap</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/british</url>
+    <url>http://www.last.fm/tag/rap</url>
 </tag>
 </toptags></lfm>

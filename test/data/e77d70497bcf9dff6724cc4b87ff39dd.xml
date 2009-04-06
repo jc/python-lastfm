@@ -18,12 +18,12 @@
 </tag>
 <tag>
     <name>hard rock</name> 
-    <count>33</count>
+    <count>34</count>
     <url>http://www.last.fm/tag/hard%20rock</url>
 </tag>
 <tag>
     <name>rock</name> 
-    <count>32</count>
+    <count>33</count>
     <url>http://www.last.fm/tag/rock</url>
 </tag>
 <tag>
@@ -72,14 +72,14 @@
     <url>http://www.last.fm/tag/alternative</url>
 </tag>
 <tag>
-    <name>alternative rock</name> 
-    <count>1</count>
-    <url>http://www.last.fm/tag/alternative%20rock</url>
-</tag>
-<tag>
     <name>USA</name> 
     <count>1</count>
     <url>http://www.last.fm/tag/usa</url>
+</tag>
+<tag>
+    <name>alternative rock</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/alternative%20rock</url>
 </tag>
 <tag>
     <name>heavy</name> 
@@ -147,29 +147,14 @@
     <url>http://www.last.fm/tag/awesome</url>
 </tag>
 <tag>
-    <name>Grunge</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/grunge</url>
-</tag>
-<tag>
     <name>guitar</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/guitar</url>
 </tag>
 <tag>
-    <name>Favourites</name> 
+    <name>Grunge</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/favourites</url>
-</tag>
-<tag>
-    <name>male vocalists</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/male%20vocalists</url>
-</tag>
-<tag>
-    <name>indie</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/indie</url>
+    <url>http://www.last.fm/tag/grunge</url>
 </tag>
 <tag>
     <name>legend</name> 
@@ -177,9 +162,19 @@
     <url>http://www.last.fm/tag/legend</url>
 </tag>
 <tag>
-    <name>California</name> 
+    <name>Favourites</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/california</url>
+    <url>http://www.last.fm/tag/favourites</url>
+</tag>
+<tag>
+    <name>indie</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/indie</url>
+</tag>
+<tag>
+    <name>male vocalists</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/male%20vocalists</url>
 </tag>
 <tag>
     <name>black metal</name> 
@@ -187,19 +182,14 @@
     <url>http://www.last.fm/tag/black%20metal</url>
 </tag>
 <tag>
-    <name>punk rock</name> 
+    <name>California</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/punk%20rock</url>
+    <url>http://www.last.fm/tag/california</url>
 </tag>
 <tag>
-    <name>Progressive rock</name> 
+    <name>Trash</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/progressive%20rock</url>
-</tag>
-<tag>
-    <name>Favorite Bands</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/favorite%20bands</url>
+    <url>http://www.last.fm/tag/trash</url>
 </tag>
 <tag>
     <name>80s metal</name> 
@@ -207,9 +197,19 @@
     <url>http://www.last.fm/tag/80s%20metal</url>
 </tag>
 <tag>
-    <name>Trash</name> 
+    <name>Progressive rock</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/trash</url>
+    <url>http://www.last.fm/tag/progressive%20rock</url>
+</tag>
+<tag>
+    <name>punk rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/punk%20rock</url>
+</tag>
+<tag>
+    <name>Favorite Bands</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/favorite%20bands</url>
 </tag>
 <tag>
     <name>bay area thrash metal</name> 
@@ -237,11 +237,6 @@
     <url>http://www.last.fm/tag/modern%20rock</url>
 </tag>
 <tag>
-    <name>James Hetfield</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/james%20hetfield</url>
-</tag>
-<tag>
     <name>Bay Area</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/bay%20area</url>
@@ -257,24 +252,14 @@
     <url>http://www.last.fm/tag/metalcore</url>
 </tag>
 <tag>
+    <name>James Hetfield</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/james%20hetfield</url>
+</tag>
+<tag>
     <name>seen live</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/seen%20live</url>
-</tag>
-<tag>
-    <name>alternative metal</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/alternative%20metal</url>
-</tag>
-<tag>
-    <name>classic</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/classic</url>
-</tag>
-<tag>
-    <name>Favorite Artists</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/favorite%20artists</url>
 </tag>
 <tag>
     <name>00s</name> 
@@ -282,14 +267,29 @@
     <url>http://www.last.fm/tag/00s</url>
 </tag>
 <tag>
-    <name>instrumental</name> 
+    <name>Favorite Artists</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/instrumental</url>
+    <url>http://www.last.fm/tag/favorite%20artists</url>
+</tag>
+<tag>
+    <name>classic</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/classic</url>
+</tag>
+<tag>
+    <name>alternative metal</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/alternative%20metal</url>
 </tag>
 <tag>
     <name>favourite</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/favourite</url>
+</tag>
+<tag>
+    <name>instrumental</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/instrumental</url>
 </tag>
 <tag>
     <name>sellout</name> 
@@ -322,19 +322,24 @@
     <url>http://www.last.fm/tag/my%20music</url>
 </tag>
 <tag>
+    <name>indie rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/indie%20rock</url>
+</tag>
+<tag>
     <name>Favourite bands</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/favourite%20bands</url>
 </tag>
 <tag>
+    <name>bay area thrash</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/bay%20area%20thrash</url>
+</tag>
+<tag>
     <name>Hard</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/hard</url>
-</tag>
-<tag>
-    <name>indie rock</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/indie%20rock</url>
 </tag>
 <tag>
     <name>electronic</name> 
@@ -345,11 +350,6 @@
     <name>gods</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/gods</url>
-</tag>
-<tag>
-    <name>bay area thrash</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/bay%20area%20thrash</url>
 </tag>
 <tag>
     <name>Cliff Burton</name> 
@@ -377,9 +377,9 @@
     <url>http://www.last.fm/tag/best</url>
 </tag>
 <tag>
-    <name>Gothic</name> 
+    <name>female vocalists</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/gothic</url>
+    <url>http://www.last.fm/tag/female%20vocalists</url>
 </tag>
 <tag>
     <name>Stoner Rock</name> 
@@ -387,14 +387,9 @@
     <url>http://www.last.fm/tag/stoner%20rock</url>
 </tag>
 <tag>
-    <name>female vocalists</name> 
+    <name>Gothic</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/female%20vocalists</url>
-</tag>
-<tag>
-    <name>Love</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/love</url>
+    <url>http://www.last.fm/tag/gothic</url>
 </tag>
 <tag>
     <name>oldies</name> 
@@ -407,14 +402,9 @@
     <url>http://www.last.fm/tag/angry</url>
 </tag>
 <tag>
-    <name>the best</name> 
+    <name>Love</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/the%20best</url>
-</tag>
-<tag>
-    <name>mainstream</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/mainstream</url>
+    <url>http://www.last.fm/tag/love</url>
 </tag>
 <tag>
     <name>sellouts</name> 
@@ -422,24 +412,14 @@
     <url>http://www.last.fm/tag/sellouts</url>
 </tag>
 <tag>
-    <name>Bands I have seen live</name> 
+    <name>sell outs</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/bands%20i%20have%20seen%20live</url>
+    <url>http://www.last.fm/tag/sell%20outs</url>
 </tag>
 <tag>
-    <name>rock n roll</name> 
+    <name>mainstream</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/rock%20n%20roll</url>
-</tag>
-<tag>
-    <name>english</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/english</url>
-</tag>
-<tag>
-    <name>good</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/good</url>
+    <url>http://www.last.fm/tag/mainstream</url>
 </tag>
 <tag>
     <name>rap</name> 
@@ -447,14 +427,24 @@
     <url>http://www.last.fm/tag/rap</url>
 </tag>
 <tag>
-    <name>favourite artists</name> 
+    <name>the best</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/favourite%20artists</url>
+    <url>http://www.last.fm/tag/the%20best</url>
 </tag>
 <tag>
-    <name>sell outs</name> 
+    <name>rock n roll</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/sell%20outs</url>
+    <url>http://www.last.fm/tag/rock%20n%20roll</url>
+</tag>
+<tag>
+    <name>Bands I have seen live</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/bands%20i%20have%20seen%20live</url>
+</tag>
+<tag>
+    <name>english</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/english</url>
 </tag>
 <tag>
     <name>heavy rock</name> 
@@ -462,29 +452,14 @@
     <url>http://www.last.fm/tag/heavy%20rock</url>
 </tag>
 <tag>
-    <name>Classical</name> 
+    <name>favourite artists</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/classical</url>
+    <url>http://www.last.fm/tag/favourite%20artists</url>
 </tag>
 <tag>
-    <name>jazz</name> 
+    <name>good</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/jazz</url>
-</tag>
-<tag>
-    <name>electronica</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/electronica</url>
-</tag>
-<tag>
-    <name>Hip-Hop</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/hip-hop</url>
-</tag>
-<tag>
-    <name>doom metal</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/doom%20metal</url>
+    <url>http://www.last.fm/tag/good</url>
 </tag>
 <tag>
     <name>Crap</name> 
@@ -492,9 +467,34 @@
     <url>http://www.last.fm/tag/crap</url>
 </tag>
 <tag>
+    <name>doom metal</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/doom%20metal</url>
+</tag>
+<tag>
     <name>Best Band EVER</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/best%20band%20ever</url>
+</tag>
+<tag>
+    <name>Classical</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/classical</url>
+</tag>
+<tag>
+    <name>electronica</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/electronica</url>
+</tag>
+<tag>
+    <name>jazz</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/jazz</url>
+</tag>
+<tag>
+    <name>Hip-Hop</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/hip-hop</url>
 </tag>
 <tag>
     <name>Nu-metal</name> 

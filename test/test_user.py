@@ -207,16 +207,16 @@ class TestUser(unittest.TestCase):
             tracks)
         
     def testUserGetWeeklyTagChart(self):
-        tags = [('alternative rock', 338), 
-                ('rock', 280), 
-                ('alternative', 169), 
-                ('metal', 160), 
-                ('heavy metal', 53), 
-                ('guitar virtuoso', 0), 
-                ('thrash metal', 0), 
-                ('hard rock', 0), 
-                ('baroque', 0), 
-                ('classic', 0)]
+        tags = [('rock', 134),
+                ('alternative', 126),
+                ('metal', 97),
+                ('alternative rock', 91), 
+                ('hard rock', 71), 
+                ('female vocalists', 62), 
+                ('classic rock', 54), 
+                ('jazz', 42), 
+                ('guitar virtuoso', 41), 
+                ('baroque', 37)]
         wc = self.user.weekly_chart_list[0]
         self.assertEqual(
              [(tag.name, tag.stats.count)

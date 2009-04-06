@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<toptags artist="Miles Davis">
+<tag>
+    <name>jazz</name> 
+    <count>100</count>
+    <url>http://www.last.fm/tag/jazz</url>
+</tag>
+<tag>
+    <name>trumpet</name> 
+    <count>25</count>
+    <url>http://www.last.fm/tag/trumpet</url>
+</tag>
+<tag>
+    <name>Fusion</name> 
+    <count>18</count>
+    <url>http://www.last.fm/tag/fusion</url>
+</tag>
+<tag>
+    <name>bebop</name> 
+    <count>15</count>
+    <url>http://www.last.fm/tag/bebop</url>
+</tag>
+<tag>
+    <name>blues</name> 
+    <count>11</count>
+    <url>http://www.last.fm/tag/blues</url>
+</tag>
+<tag>
+    <name>cool jazz</name> 
+    <count>7</count>
+    <url>http://www.last.fm/tag/cool%20jazz</url>
+</tag>
+<tag>
+    <name>instrumental</name> 
+    <count>5</count>
+    <url>http://www.last.fm/tag/instrumental</url>
+</tag>
+<tag>
+    <name>cool</name> 
+    <count>5</count>
+    <url>http://www.last.fm/tag/cool</url>
+</tag>
+<tag>
+    <name>miles davis</name> 
+    <count>4</count>
+    <url>http://www.last.fm/tag/miles%20davis</url>
+</tag>
+<tag>
+    <name>jazz fusion</name> 
+    <count>4</count>
+    <url>http://www.last.fm/tag/jazz%20fusion</url>
+</tag>
+<tag>
+    <name>free jazz</name> 
+    <count>2</count>
+    <url>http://www.last.fm/tag/free%20jazz</url>
+</tag>
+<tag>
+    <name>Hard Bop</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/hard%20bop</url>
+</tag>
+<tag>
+    <name>american</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/american</url>
+</tag>
+<tag>
+    <name>modal jazz</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/modal%20jazz</url>
+</tag>
+<tag>
+    <name>experimental</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/experimental</url>
+</tag>
+<tag>
+    <name>rock</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/rock</url>
+</tag>
+<tag>
+    <name>Avant-Garde</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/avant-garde</url>
+</tag>
+<tag>
+    <name>funk</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/funk</url>
+</tag>
+<tag>
+    <name>alternative</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/alternative</url>
+</tag>
+<tag>
+    <name>jazz-rock</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/jazz-rock</url>
+</tag>
+<tag>
+    <name>genius</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/genius</url>
+</tag>
+<tag>
+    <name>bop</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/bop</url>
+</tag>
+<tag>
+    <name>jazz-funk</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/jazz-funk</url>
+</tag>
+<tag>
+    <name>classic jazz</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/classic%20jazz</url>
+</tag>
+<tag>
+    <name>jazz trumpet</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/jazz%20trumpet</url>
+</tag>
+<tag>
+    <name>Post-Bop</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/post-bop</url>
+</tag>
+<tag>
+    <name>60s</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/60s</url>
+</tag>
+<tag>
+    <name>chill</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/chill</url>
+</tag>
+<tag>
+    <name>70s</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/70s</url>
+</tag>
+<tag>
+    <name>Jazz Rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/jazz%20rock</url>
+</tag>
+<tag>
+    <name>Miles</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/miles</url>
+</tag>
+<tag>
+    <name>chillout</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/chillout</url>
+</tag>
+<tag>
+    <name>jazzy</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/jazzy</url>
+</tag>
+<tag>
+    <name>electronic</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/electronic</url>
+</tag>
+<tag>
+    <name>Smooth Jazz</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/smooth%20jazz</url>
+</tag>
+<tag>
+    <name>acid jazz</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/acid%20jazz</url>
+</tag>
+<tag>
+    <name>indie</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/indie</url>
+</tag>
+<tag>
+    <name>50s</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/50s</url>
+</tag>
+<tag>
+    <name>legend</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/legend</url>
+</tag>
+<tag>
+    <name>psychedelic</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/psychedelic</url>
+</tag>
+<tag>
+    <name>80s</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/80s</url>
+</tag>
+<tag>
+    <name>composer</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/composer</url>
+</tag>
+<tag>
+    <name>soul</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/soul</url>
+</tag>
+<tag>
+    <name>swing</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/swing</url>
+</tag>
+<tag>
+    <name>classic rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/classic%20rock</url>
+</tag>
+<tag>
+    <name>modal music</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/modal%20music</url>
+</tag>
+<tag>
+    <name>oldies</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/oldies</url>
+</tag>
+<tag>
+    <name>USA</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/usa</url>
+</tag>
+<tag>
+    <name>indie rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/indie%20rock</url>
+</tag>
+<tag>
+    <name>contemporary jazz</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/contemporary%20jazz</url>
+</tag>
+<tag>
+    <name>Progressive rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/progressive%20rock</url>
+</tag>
+<tag>
+    <name>singer-songwriter</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/singer-songwriter</url>
+</tag>
+<tag>
+    <name>jazz funk</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/jazz%20funk</url>
+</tag>
+<tag>
+    <name>improvisation</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/improvisation</url>
+</tag>
+<tag>
+    <name>modern jazz</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/modern%20jazz</url>
+</tag>
+<tag>
+    <name>saxophone</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/saxophone</url>
+</tag>
+<tag>
+    <name>instrumental jazz</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/instrumental%20jazz</url>
+</tag>
+<tag>
+    <name>folk</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/folk</url>
+</tag>
+<tag>
+    <name>favorites</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/favorites</url>
+</tag>
+<tag>
+    <name>fusion jazz</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/fusion%20jazz</url>
+</tag>
+<tag>
+    <name>classic</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/classic</url>
+</tag>
+<tag>
+    <name>post-rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/post-rock</url>
+</tag>
+<tag>
+    <name>Hip-Hop</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/hip-hop</url>
+</tag>
+<tag>
+    <name>Favorite Artists</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/favorite%20artists</url>
+</tag>
+<tag>
+    <name>pop</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/pop</url>
+</tag>
+<tag>
+    <name>Love</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/love</url>
+</tag>
+<tag>
+    <name>electronica</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/electronica</url>
+</tag>
+<tag>
+    <name>Jam</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/jam</url>
+</tag>
+<tag>
+    <name>piano</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/piano</url>
+</tag>
+<tag>
+    <name>great jazz musicians</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/great%20jazz%20musicians</url>
+</tag>
+<tag>
+    <name>Modal</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/modal</url>
+</tag>
+<tag>
+    <name>ambient</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/ambient</url>
+</tag>
+<tag>
+    <name>jazz piano</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/jazz%20piano</url>
+</tag>
+<tag>
+    <name>punk</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/punk</url>
+</tag>
+<tag>
+    <name>bass</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/bass</url>
+</tag>
+<tag>
+    <name>Big Band</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/big%20band</url>
+</tag>
+<tag>
+    <name>god</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/god</url>
+</tag>
+<tag>
+    <name>Mellow</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/mellow</url>
+</tag>
+<tag>
+    <name>easy listening</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/easy%20listening</url>
+</tag>
+<tag>
+    <name>indie pop</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/indie%20pop</url>
+</tag>
+<tag>
+    <name>alternative rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/alternative%20rock</url>
+</tag>
+<tag>
+    <name>jazz-fusion</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/jazz-fusion</url>
+</tag>
+<tag>
+    <name>female vocalists</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/female%20vocalists</url>
+</tag>
+<tag>
+    <name>punk rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/punk%20rock</url>
+</tag>
+<tag>
+    <name>relaxing</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/relaxing</url>
+</tag>
+<tag>
+    <name>male</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/male</url>
+</tag>
+<tag>
+    <name>trip-hop</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/trip-hop</url>
+</tag>
+<tag>
+    <name>Electric Jazz</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/electric%20jazz</url>
+</tag>
+<tag>
+    <name>relax</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/relax</url>
+</tag>
+<tag>
+    <name>post-punk</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/post-punk</url>
+</tag>
+<tag>
+    <name>guitar</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/guitar</url>
+</tag>
+<tag>
+    <name>post rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/post%20rock</url>
+</tag>
+<tag>
+    <name>Progressive</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/progressive</url>
+</tag>
+<tag>
+    <name>latin</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/latin</url>
+</tag>
+<tag>
+    <name>acoustic</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/acoustic</url>
+</tag>
+<tag>
+    <name>hard rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/hard%20rock</url>
+</tag>
+<tag>
+    <name>legends</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/legends</url>
+</tag>
+<tag>
+    <name>sexy</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/sexy</url>
+</tag>
+<tag>
+    <name>Awesome</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/awesome</url>
+</tag>
+<tag>
+    <name>master</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/master</url>
+</tag>
+</toptags></lfm>

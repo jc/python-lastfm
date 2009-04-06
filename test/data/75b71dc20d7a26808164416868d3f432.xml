@@ -18,7 +18,7 @@
 </tag>
 <tag>
     <name>classic</name> 
-    <count>17</count>
+    <count>18</count>
     <url>http://www.last.fm/tag/classic</url>
 </tag>
 <tag>
@@ -102,14 +102,14 @@
     <url>http://www.last.fm/tag/classical%20period</url>
 </tag>
 <tag>
-    <name>Romantic Classical</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/romantic%20classical</url>
-</tag>
-<tag>
     <name>ambient</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/ambient</url>
+</tag>
+<tag>
+    <name>Romantic Classical</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/romantic%20classical</url>
 </tag>
 <tag>
     <name>orchestral</name> 
@@ -132,19 +132,9 @@
     <url>http://www.last.fm/tag/metal</url>
 </tag>
 <tag>
-    <name>wiener klassik</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/wiener%20klassik</url>
-</tag>
-<tag>
     <name>romanticism</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/romanticism</url>
-</tag>
-<tag>
-    <name>deutsch</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/deutsch</url>
 </tag>
 <tag>
     <name>classica</name> 
@@ -152,9 +142,14 @@
     <url>http://www.last.fm/tag/classica</url>
 </tag>
 <tag>
-    <name>orchestra</name> 
+    <name>wiener klassik</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/orchestra</url>
+    <url>http://www.last.fm/tag/wiener%20klassik</url>
+</tag>
+<tag>
+    <name>deutsch</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/deutsch</url>
 </tag>
 <tag>
     <name>alternative</name> 
@@ -162,14 +157,19 @@
     <url>http://www.last.fm/tag/alternative</url>
 </tag>
 <tag>
-    <name>amazing</name> 
+    <name>orchestra</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/amazing</url>
+    <url>http://www.last.fm/tag/orchestra</url>
 </tag>
 <tag>
     <name>classicism</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/classicism</url>
+</tag>
+<tag>
+    <name>amazing</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/amazing</url>
 </tag>
 <tag>
     <name>indie</name> 
@@ -182,24 +182,19 @@
     <url>http://www.last.fm/tag/18th%20century</url>
 </tag>
 <tag>
-    <name>beautiful</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/beautiful</url>
-</tag>
-<tag>
     <name>emotional</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/emotional</url>
 </tag>
 <tag>
+    <name>beautiful</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/beautiful</url>
+</tag>
+<tag>
     <name>Favorite</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/favorite</url>
-</tag>
-<tag>
-    <name>favorites</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/favorites</url>
 </tag>
 <tag>
     <name>classic rock</name> 
@@ -212,24 +207,24 @@
     <url>http://www.last.fm/tag/chamber%20music</url>
 </tag>
 <tag>
-    <name>german composer</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/german%20composer</url>
-</tag>
-<tag>
     <name>Klassische Musik</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/klassische%20musik</url>
 </tag>
 <tag>
-    <name>violin</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/violin</url>
-</tag>
-<tag>
     <name>19th century</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/19th%20century</url>
+</tag>
+<tag>
+    <name>german composer</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/german%20composer</url>
+</tag>
+<tag>
+    <name>favorites</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/favorites</url>
 </tag>
 <tag>
     <name>european</name> 
@@ -252,9 +247,9 @@
     <url>http://www.last.fm/tag/austrian</url>
 </tag>
 <tag>
-    <name>Awesome</name> 
+    <name>classical composer</name> 
     <count>0</count>
-    <url>http://www.last.fm/tag/awesome</url>
+    <url>http://www.last.fm/tag/classical%20composer</url>
 </tag>
 <tag>
     <name>punk</name> 
@@ -262,14 +257,19 @@
     <url>http://www.last.fm/tag/punk</url>
 </tag>
 <tag>
+    <name>Awesome</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/awesome</url>
+</tag>
+<tag>
+    <name>violin</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/violin</url>
+</tag>
+<tag>
     <name>deaf</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/deaf</url>
-</tag>
-<tag>
-    <name>classical composer</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/classical%20composer</url>
 </tag>
 <tag>
     <name>Soundtrack</name> 
@@ -282,6 +282,11 @@
     <url>http://www.last.fm/tag/epic</url>
 </tag>
 <tag>
+    <name>heavy metal</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/heavy%20metal</url>
+</tag>
+<tag>
     <name>post-rock</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/post-rock</url>
@@ -290,11 +295,6 @@
     <name>Austria</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/austria</url>
-</tag>
-<tag>
-    <name>heavy metal</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/heavy%20metal</url>
 </tag>
 <tag>
     <name>romantic period</name> 
@@ -307,14 +307,14 @@
     <url>http://www.last.fm/tag/musique%20classique</url>
 </tag>
 <tag>
+    <name>classics</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/classics</url>
+</tag>
+<tag>
     <name>Progressive rock</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/progressive%20rock</url>
-</tag>
-<tag>
-    <name>Love</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/love</url>
 </tag>
 <tag>
     <name>classical era</name> 
@@ -347,6 +347,11 @@
     <url>http://www.last.fm/tag/alternative%20rock</url>
 </tag>
 <tag>
+    <name>Love</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/love</url>
+</tag>
+<tag>
     <name>chillout</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/chillout</url>
@@ -355,11 +360,6 @@
     <name>Musica Classica</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/musica%20classica</url>
-</tag>
-<tag>
-    <name>classics</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/classics</url>
 </tag>
 <tag>
     <name>electronic</name> 
@@ -377,14 +377,14 @@
     <url>http://www.last.fm/tag/dead</url>
 </tag>
 <tag>
-    <name>brilliant</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/brilliant</url>
-</tag>
-<tag>
     <name>pop</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/pop</url>
+</tag>
+<tag>
+    <name>brilliant</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/brilliant</url>
 </tag>
 <tag>
     <name>Klassiek</name> 
@@ -442,14 +442,14 @@
     <url>http://www.last.fm/tag/progressive</url>
 </tag>
 <tag>
-    <name>new wave</name> 
-    <count>0</count>
-    <url>http://www.last.fm/tag/new%20wave</url>
-</tag>
-<tag>
     <name>indie rock</name> 
     <count>0</count>
     <url>http://www.last.fm/tag/indie%20rock</url>
+</tag>
+<tag>
+    <name>new wave</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/new%20wave</url>
 </tag>
 <tag>
     <name>industrial</name> 
