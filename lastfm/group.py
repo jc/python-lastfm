@@ -7,7 +7,7 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import cacheable, chartable
+from lastfm.mixin import cacheable, chartable
 from lastfm.decorators import cached_property, depaginate
 
 @chartable(['album', 'artist', 'track', 'tag'])

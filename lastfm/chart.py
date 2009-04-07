@@ -7,7 +7,7 @@ __package__ = "lastfm"
 
 from functools import reduce
 from lastfm.base import LastfmBase
-from lastfm.mixins import cacheable
+from lastfm.mixin import cacheable
 from operator import xor
 
 @cacheable

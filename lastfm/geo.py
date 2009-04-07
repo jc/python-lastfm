@@ -8,7 +8,7 @@ __package__ = "lastfm"
 
 from functools import reduce
 from lastfm.base import LastfmBase
-from lastfm.mixins import cacheable, crawlable
+from lastfm.mixin import cacheable, crawlable
 from lastfm.decorators import cached_property, top_property, depaginate
 
 class Geo(object):

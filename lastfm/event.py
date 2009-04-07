@@ -7,7 +7,7 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import cacheable, sharable, shoutable, crawlable
+from lastfm.mixin import cacheable, sharable, shoutable, crawlable
 
 @crawlable
 @shoutable

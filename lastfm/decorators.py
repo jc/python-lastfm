@@ -112,7 +112,7 @@ def depaginate(func, *args, **kwargs):
                     a L{lazylist} of all search results (all pages)
     @rtype:         C{function}
     """
-    from lastfm.lazylist import lazylist
+    from lastfm.util import lazylist
     @lazylist
     def generator(lst):
         gen = func(*args, **kwargs)

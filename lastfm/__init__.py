@@ -23,7 +23,7 @@ from lastfm.event import Event
 from lastfm.geo import Location, Country
 from lastfm.group import Group
 from lastfm.playlist import Playlist
-from lastfm.objectcache import ObjectCache
+from lastfm.util import ObjectCache
 from lastfm.tag import Tag
 from lastfm.tasteometer import Tasteometer
 from lastfm.track import Track

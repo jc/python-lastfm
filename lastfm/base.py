@@ -6,8 +6,6 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
-from lastfm.lazylist import lazylist
-
 class LastfmBase(object):
     """Base class for all the classes in this package"""
     

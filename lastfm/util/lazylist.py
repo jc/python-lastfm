@@ -8,6 +8,7 @@ Backport to python 2.5 by Michael Pust
 
 __author__ = 'Dan Spitz'
 __all__ = ('LazyList', 'RecursiveLazyList', 'lazylist')
+__package__ = "lastfm.util"
 
 import itertools
 

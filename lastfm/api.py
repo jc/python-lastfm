@@ -656,10 +656,7 @@ class Api(object):
             self._last_fetch_time = datetime.now()
         return url_data
 
-    def _fetch_url(self,
-                  url,
-                  parameters = None,
-                  no_cache = False):
+    def _fetch_url(self, url, parameters = None, no_cache = False):
         # Add key/value parameters to the query string of the url
         url = self._build_url(url, extra_params=parameters)
         if self._debug:
@@ -780,7 +777,7 @@ from lastfm.artist import Artist
 from lastfm.error import error_map, LastfmError, OperationFailedError, AuthenticationFailedError,\
     InvalidParametersError
 from lastfm.event import Event
-from lastfm.filecache import FileCache
+from lastfm.util import FileCache
 from lastfm.geo import Location, Country
 from lastfm.group import Group
 from lastfm.playlist import Playlist
