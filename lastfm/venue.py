@@ -6,9 +6,10 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import cacheable, searchable
+from lastfm.mixins import cacheable, searchable, crawlable
 from lastfm.decorators import cached_property, depaginate
 
+@crawlable
 @searchable
 @cacheable
 class Venue(LastfmBase):
@@ -76,6 +77,15 @@ class Venue(LastfmBase):
     @cached_property
     def past_events(self):
         return self.get_past_events()
+    
+    @staticmethod
+    def _get_all(seed_venue):
+        def gen():
+            for event in Event.get_all(seed_venue.past_events[0]):
+                yield event.venue
+        
+        return (seed_venue, ['id'], lambda api, hsh: gen())
+
     
     def _default_params(self, extra_params = {}):
         if not self.id:

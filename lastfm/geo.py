@@ -6,8 +6,9 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
+from functools import reduce
 from lastfm.base import LastfmBase
-from lastfm.mixins import cacheable
+from lastfm.mixins import cacheable, crawlable
 from lastfm.decorators import cached_property, top_property, depaginate
 
 class Geo(object):
@@ -145,6 +146,7 @@ class Geo(object):
                 for t in data.findall('track')
                 ]
 
+@crawlable
 @cacheable
 class Location(LastfmBase):
     """A class representing a location of an event"""
@@ -293,6 +295,14 @@ class Location(LastfmBase):
         return self.get_events()
 
     @staticmethod
+    def _get_all(seed_location):
+        def gen():
+            for event in Event.get_all(seed_location.events[0]):
+                yield event.venue.location
+        
+        return (seed_location, ['city', 'country'], lambda api, hsh: gen())
+        
+    @staticmethod
     def _hash_func(*args, **kwds):
         try:
             return hash("latlong%s%s" % (kwds['latitude'], kwds['longitude']))
@@ -325,6 +335,7 @@ class Location(LastfmBase):
         else:
             return "<lastfm.geo.Location: %s>" % self.city
 
+@crawlable
 @cacheable
 class Country(LastfmBase):
     """A class representing a country."""
@@ -652,6 +663,11 @@ class Country(LastfmBase):
         """
         return Geo.get_events(self._api, self.name)
 
+    @staticmethod
+    def _get_all(seed_country):
+        return (seed_country, ['name'],
+            lambda api, hsh: (Country(api, name = c) for c in Country.ISO_CODES.itervalues()))
+        
     @staticmethod
     def _hash_func(*args, **kwds):
         try:

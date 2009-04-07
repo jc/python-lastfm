@@ -7,8 +7,9 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import cacheable, sharable, shoutable
+from lastfm.mixins import cacheable, sharable, shoutable, crawlable
 
+@crawlable
 @shoutable
 @sharable
 @cacheable
@@ -260,6 +261,7 @@ class Event(LastfmBase):
                      headliner = Artist(api, name = data.findtext('artists/headliner')),
                      venue = Venue(
                                    api,
+                                   id = int(data.findtext('venue/url').split('/')[-1]),
                                    name = data.findtext('venue/name'),
                                    location = Location(
                                        api,
@@ -288,17 +290,15 @@ class Event(LastfmBase):
                      tag = data.findtext('tag')
                     )
 
-    @classmethod
-    def get_all(cls, seed_event):
+    @staticmethod
+    def _get_all(seed_event):
         def gen():
             for artist in Artist.get_all(seed_event.artists[0]):
                 for event in artist.events:
                     yield event
         
-        return super(Event, cls).get_all(seed_event, ['id'],
-            lambda api, hsh: gen())
+        return (seed_event, ['id'], lambda api, hsh: gen())
 
-    
     def _default_params(self, extra_params = None):
         if not self.id:
             raise InvalidParametersError("id has to be provided.")

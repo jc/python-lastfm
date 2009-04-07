@@ -90,7 +90,5 @@ class Group(LastfmBase):
         return "<lastfm.Group: %s>" % self.name
 
 from lastfm.api import Api
-from lastfm.error import InvalidParametersError, LastfmError
+from lastfm.error import InvalidParametersError
 from lastfm.user import User
-from lastfm.chart import (WeeklyChart, WeeklyAlbumChart, 
-    WeeklyArtistChart, WeeklyTrackChart, WeeklyTagChart)

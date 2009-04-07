@@ -159,7 +159,7 @@ def async_callback(func, *args, **kwargs):
     from threading import Thread
     callback = None
     for a in args:
-        if callable(a):
+        if hasattr(a, '__call__'):
             callback = a
             args = list(args)
             args.remove(a)
@@ -169,7 +169,7 @@ def async_callback(func, *args, **kwargs):
         callback = kwargs['callback']
         del kwargs['callback']
     
-    if callback is not None and callable(callback):
+    if callback is not None and hasattr(callback, '__call__'):
         def async_call():
             result = None
             try:

@@ -7,9 +7,10 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import cacheable, searchable, sharable, shoutable, taggable
+from lastfm.mixins import cacheable, searchable, sharable, shoutable, taggable, crawlable
 from lastfm.decorators import cached_property, top_property
 
+@crawlable
 @shoutable
 @sharable
 @taggable
@@ -370,9 +371,9 @@ class Artist(LastfmBase):
         a._fill_info()
         return a
     
-    @classmethod
-    def get_all(cls,seed_artist):
-        return super(Artist, cls).get_all(seed_artist, ['name'],
+    @staticmethod
+    def _get_all(seed_artist):
+        return (seed_artist, ['name'],
             lambda api, hsh: Artist(api, **hsh).similar)
 
     def _default_params(self, extra_params = None):

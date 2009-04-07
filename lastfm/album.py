@@ -7,9 +7,10 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import cacheable, searchable, taggable
+from lastfm.mixins import cacheable, searchable, taggable, crawlable
 from lastfm.decorators import cached_property, top_property
 
+@crawlable
 @taggable
 @searchable
 @cacheable
@@ -237,15 +238,14 @@ class Album(LastfmBase):
         a._fill_info()
         return a
     
-    @classmethod
-    def get_all(cls, seed_album):
+    @staticmethod
+    def _get_all(seed_album):
         def gen():
             for artist in Artist.get_all(seed_album.artist):
                 for album in artist.top_albums:
                     yield album
                     
-        return super(Album, cls).get_all(seed_album, ['name', 'artist'],
-            lambda api, hsh: gen())
+        return (seed_album, ['name', 'artist'], lambda api, hsh: gen())
         
     def _default_params(self, extra_params = {}):
         if not (self.artist and self.name):

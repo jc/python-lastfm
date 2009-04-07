@@ -6,11 +6,12 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import cacheable, shoutable, chartable
+from lastfm.mixins import cacheable, shoutable, chartable, crawlable
 import lastfm.playlist
 from lastfm.decorators import (
     cached_property, top_property, authentication_required, depaginate)
 
+@crawlable
 @chartable(['album', 'artist', 'track', 'tag'])
 @shoutable
 @cacheable
@@ -522,9 +523,9 @@ class User(LastfmBase):
         user._stats = Stats(subject = user, playcount = data.findtext('playcount'))
         return user
     
-    @classmethod
-    def get_all(cls,seed_user):
-        return super(User, cls).get_all(seed_user, ['name'],
+    @staticmethod
+    def _get_all(seed_user):
+        return (seed_user, ['name'],
             lambda api, hsh: User(api, **hsh).neighbours)
         
     def _default_params(self, extra_params = None):

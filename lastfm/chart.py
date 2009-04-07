@@ -5,6 +5,7 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
+from functools import reduce
 from lastfm.base import LastfmBase
 from lastfm.mixins import cacheable
 from operator import xor

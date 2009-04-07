@@ -6,9 +6,10 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import cacheable, searchable, sharable, taggable
+from lastfm.mixins import cacheable, searchable, sharable, taggable, crawlable
 from lastfm.decorators import cached_property, top_property
 
+@crawlable
 @sharable
 @taggable
 @searchable
@@ -273,15 +274,14 @@ class Track(LastfmBase):
         t._fill_info()
         return t
     
-    @classmethod
-    def get_all(cls, seed_track):
+    @staticmethod
+    def _get_all(seed_track):
         def gen():
             for artist in Artist.get_all(seed_track.artist):
                 for track in artist.top_tracks:
                     yield track
                     
-        return super(Track, cls).get_all(seed_track, ['name', 'artist'],
-            lambda api, hsh: gen())
+        return (seed_track, ['name', 'artist'], lambda api, hsh: gen())
 
     def _default_params(self, extra_params = None):
         if not (self.artist and self.name):

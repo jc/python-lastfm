@@ -11,6 +11,7 @@ from lastfm.mixins._sharable import sharable
 from lastfm.mixins._shoutable import shoutable
 from lastfm.mixins._taggable import taggable
 from lastfm.mixins._chartable import chartable
+from lastfm.mixins._crawlable import crawlable
 
 __all__ = ['cacheable', 'searchable', 'sharable', 'shoutable', 'taggable'
-           'chartable']
+           'chartable','crawlable']

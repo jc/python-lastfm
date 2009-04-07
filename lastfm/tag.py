@@ -6,9 +6,10 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixins import cacheable, searchable, chartable
+from lastfm.mixins import cacheable, searchable, chartable, crawlable
 from lastfm.decorators import cached_property, top_property
 
+@crawlable
 @chartable(['artist'])
 @searchable
 @cacheable
@@ -193,9 +194,9 @@ class Tag(LastfmBase):
                 for t in data.findall('tag')
                 ]
 
-    @classmethod
-    def get_all(cls, seed_tag):
-        return super(Tag, cls).get_all(seed_tag, ['name'],
+    @staticmethod
+    def _get_all(seed_tag):
+        return (seed_tag, ['name'],
             lambda api, hsh: Tag(api, **hsh).similar)
     
     def _default_params(self, extra_params = None):
@@ -240,8 +241,7 @@ class Tag(LastfmBase):
 from lastfm.album import Album
 from lastfm.api import Api
 from lastfm.artist import Artist
-from lastfm.error import LastfmError, InvalidParametersError
+from lastfm.error import InvalidParametersError
 from lastfm.playlist import Playlist
 from lastfm.stats import Stats
 from lastfm.track import Track
-from lastfm.chart import WeeklyChart, WeeklyArtistChart
