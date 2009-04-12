@@ -7,6 +7,7 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from threading import Lock
+from lastfm.util import Wormhole, logging
 from lastfm.decorators import cached_property, async_callback
 _lock = Lock()
 
@@ -23,6 +24,12 @@ class Api(object):
     """The minimum interval between successive HTTP request, in seconds"""
     
     SEARCH_XMLNS = "http://a9.com/-/spec/opensearch/1.1/"
+    
+    DEBUG_LEVELS = {
+        'LOW': 1,
+        'MEDIUM': 2,
+        'HIGH': 3
+    }
 
     def __init__(self,
                  api_key,
@@ -31,7 +38,8 @@ class Api(object):
                  input_encoding=None,
                  request_headers=None,
                  no_cache = False,
-                 debug = False):
+                 debug = None,
+                 logfile = None):
         """
         Create an Api object to access the last.fm webservice API. Use this object as a
         starting point for accessing all the webservice methods.
@@ -64,8 +72,19 @@ class Api(object):
         self._initialize_user_agent()
         self._input_encoding = input_encoding
         self._no_cache = no_cache
-        self._debug = debug
+        self._logfile = logfile
         self._last_fetch_time = datetime.now()
+        
+        if debug is not None:
+            if debug in Api.DEBUG_LEVELS:
+                self._debug = Api.DEBUG_LEVELS[debug]
+            else:
+                raise InvalidParametersError("debug parameter must be one of the keys in Api.DEBUG_LEVELS dict")
+        else:
+            self._debug = None
+        if self._debug is not None:
+            Wormhole.enable()
+            logging.set_api(self)
 
     @property
     def api_key(self):
@@ -588,6 +607,7 @@ class Api(object):
         """
         return Venue.search(self, search_item = venue, limit = limit, country = country)
 
+    @Wormhole.entrance('lfm-api-url')
     def _build_url(self, url, path_elements=None, extra_params=None):
         # Break url into consituent parts
         (scheme, netloc, path, params, query, fragment) = urlparse.urlparse(url)
@@ -656,11 +676,10 @@ class Api(object):
             self._last_fetch_time = datetime.now()
         return url_data
 
+    @Wormhole.entrance('lfm-api-raw-data')
     def _fetch_url(self, url, parameters = None, no_cache = False):
         # Add key/value parameters to the query string of the url
         url = self._build_url(url, extra_params=parameters)
-        if self._debug:
-            print url
         # Get a url opener that can handle basic auth
         opener = self._get_opener(url)
 
@@ -690,6 +709,7 @@ class Api(object):
         # Always return the latest version
         return url_data
 
+    @Wormhole.entrance('lfm-api-processed-data')
     def _fetch_data(self,
                    params,
                    sign = False,
@@ -710,17 +730,17 @@ class Api(object):
         xml = self._fetch_url(Api.API_ROOT_URL, params, no_cache = self._no_cache or no_cache)
         return self._check_xml(xml)
 
+    @Wormhole.entrance('lfm-api-raw-data')
     def _post_url(self,
                  url,
                  parameters):
         url = self._build_url(url)
         data = self._encode_parameters(parameters)
-        if self._debug:
-            print data
         opener = self._get_opener(url)
         url_data = self._read_url_data(opener, url, data)
         return url_data
 
+    @Wormhole.entrance('lfm-api-processed-data')
     def _post_data(self, params):
         params['api_key'] = self.api_key
 

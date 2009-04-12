@@ -5,7 +5,7 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm.mixin"
 
-from lastfm.util import lazylist
+from lastfm.util import lazylist, logging
 from lastfm.decorators import cached_property
 
 def chartable(chart_types):
@@ -83,8 +83,8 @@ def chartable(chart_types):
                 for wc in wcl:
                     try:
                         yield self.get_weekly_album_chart(wc.start, wc.end)
-                    except LastfmError:
-                        pass
+                    except LastfmError as ex:
+                        logging.log_silenced_exceptions(ex)
             return gen()
         
         def get_monthly_album_chart(self, start = None, end = None):
@@ -104,8 +104,8 @@ def chartable(chart_types):
                 for mc in mcl:
                     try:
                         yield self.get_monthly_album_chart(mc.start, mc.end)
-                    except LastfmError:
-                        pass
+                    except LastfmError as ex:
+                        logging.log_silenced_exceptions(ex)
             return gen()
     
         def get_quaterly_album_chart(self, start = None, end = None):
@@ -179,8 +179,8 @@ def chartable(chart_types):
                 for wc in wcl:
                     try:
                         yield self.get_weekly_artist_chart(wc.start, wc.end)
-                    except LastfmError:
-                        pass
+                    except LastfmError as ex:
+                        logging.log_silenced_exceptions(ex)
             return gen()
         
         def get_monthly_artist_chart(self, start = None, end = None):
@@ -200,8 +200,8 @@ def chartable(chart_types):
                 for mc in mcl:
                     try:
                         yield self.get_monthly_artist_chart(mc.start, mc.end)
-                    except LastfmError:
-                        pass
+                    except LastfmError as ex:
+                        logging.log_silenced_exceptions(ex)
             return gen()
     
         def get_quaterly_artist_chart(self, start = None, end = None):
@@ -275,8 +275,8 @@ def chartable(chart_types):
                 for wc in wcl:
                     try:
                         yield self.get_weekly_track_chart(wc.start, wc.end)
-                    except LastfmError:
-                        pass
+                    except LastfmError as ex:
+                        logging.log_silenced_exceptions(ex)
             return gen()
         
         def get_monthly_track_chart(self, start = None, end = None):
@@ -296,8 +296,8 @@ def chartable(chart_types):
                 for mc in mcl:
                     try:
                         yield self.get_monthly_track_chart(mc.start, mc.end)
-                    except LastfmError:
-                        pass
+                    except LastfmError as ex:
+                        logging.log_silenced_exceptions(ex)
             return gen()
     
         def get_quaterly_track_chart(self, start = None, end = None):
@@ -373,8 +373,8 @@ def chartable(chart_types):
                 for wc in wcl:
                     try:
                         yield self.get_weekly_tag_chart(wc.start, wc.end)
-                    except LastfmError:
-                        pass
+                    except LastfmError as ex:
+                        logging.log_silenced_exceptions(ex)
             return gen()
         
         def get_monthly_tag_chart(self, start = None, end = None):
@@ -394,8 +394,8 @@ def chartable(chart_types):
                 for mc in mcl:
                     try:
                         yield self.get_monthly_tag_chart(mc.start, mc.end)
-                    except LastfmError:
-                        pass
+                    except LastfmError as ex:
+                        logging.log_silenced_exceptions(ex)
             return gen()
         
         def get_quaterly_tag_chart(self, start = None, end = None):

@@ -4,6 +4,8 @@ __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm.util"
+
+from lastfm.util import Wormhole
     
 _registry = {}
 
@@ -24,6 +26,7 @@ class ObjectCache(object):
             ]
     
     @staticmethod
+    @Wormhole.entrance('lfm-obcache-register')
     def register(ob, key):
         cls_name = ob.__class__.__name__
         if not cls_name in _registry:

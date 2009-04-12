@@ -8,6 +8,7 @@ __package__ = "lastfm"
 from functools import reduce
 from lastfm.base import LastfmBase
 from lastfm.mixin import cacheable
+from lastfm.util import logging
 from operator import xor
 
 @cacheable
@@ -404,8 +405,8 @@ class RollingChart(Chart):
             try:
                 period_wacl.append(
                     getattr(subject, "get_weekly_%s_chart" % chart_type)(wc.start, wc.end))
-            except LastfmError:
-                pass
+            except LastfmError as ex:
+                logging.log_silenced_exceptions(ex)
         stats_dict = period_wacl[0].__dict__["_%ss" % chart_type][0].stats.__dict__
         count_attribute = [k for k in stats_dict.keys()
                            if stats_dict[k] is not None and k not in ['_rank', '_subject']][0]
