@@ -7,14 +7,18 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixin import cacheable, chartable
+from lastfm.mixin import mixin, chartable
 from lastfm.decorators import cached_property, depaginate
 
-@chartable(['album', 'artist', 'track', 'tag'])
-@cacheable
+@chartable('album', 'artist', 'track', 'tag')
+@mixin("cacheable", "property_adder")
 class Group(LastfmBase):
     """A class representing a group on last.fm."""
-    def init(self, api, name = None, **kwargs):
+    
+    class Meta(object):
+        properties = ["name"]
+    
+    def init(self, api, **kwargs):
         """
         Create a Group object by providing all the data related to it.
         
@@ -30,16 +34,8 @@ class Group(LastfmBase):
             raise InvalidParametersError("api reference must be supplied as an argument")
          
         self._api = api
-        self._name = name
+        super(Group, self).init(**kwargs)
 
-    @property
-    def name(self):
-        """
-        name of the group
-        @rtype: L{str}
-        """
-        return self._name
-    
     @cached_property
     @depaginate
     def members(self, page = None):

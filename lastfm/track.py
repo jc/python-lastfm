@@ -6,142 +6,39 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixin import cacheable, searchable, sharable, taggable, crawlable
+from lastfm.mixin import mixin
 from lastfm.decorators import cached_property, top_property
 
-@crawlable
-@sharable
-@taggable
-@searchable
-@cacheable
+@mixin("crawlable", "sharable", "taggable",
+    "searchable", "cacheable", "property_adder")
 class Track(LastfmBase):
     """A class representing a track."""
-    def init(self,
-                 api,
-                 name = None,
-                 mbid = None,
-                 url = None,
-                 duration = None,
-                 streamable = None,
-                 full_track = None,
-                 artist = None,
-                 album = None,
-                 position = None,
-                 image = None,
-                 stats = None,
-                 played_on = None,
-                 loved_on = None,
-                 wiki = None,
-                 subject = None):
+    class Meta(object):
+        properties = ["id", "name", "mbid", "url", "duration",
+            "artist", "image", "stats", "played_on", "loved_on",
+            "subject"]
+        fillable_properties = ["streamable", "full_track",
+            "album", "position", "wiki"]
+        
+    def init(self, api, **kwargs):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         self._api = api
-        self._id = id
-        self._name = name
-        self._mbid = mbid
-        self._url = url
-        self._duration = duration
-        self._streamable = streamable
-        self._full_track = full_track
-        self._artist = artist
-        self._album = album
-        self._position = position
-        self._image = image
-        self._stats = stats and Stats(
+        super(Track, self).init(**kwargs)
+        self._stats = hasattr(self, "_stats") and Stats(
                              subject = self,
-                             match = stats.match,
-                             playcount = stats.playcount,
-                             rank = stats.rank,
-                             listeners = stats.listeners,
-                            )
-        self._played_on = played_on
-        self._loved_on = loved_on
-        self._wiki = wiki and Wiki(
+                             match = self._stats.match,
+                             playcount = self._stats.playcount,
+                             rank = self._stats.rank,
+                             listeners = self._stats.listeners,
+                            ) or None
+        self._wiki = hasattr(self, "_wiki") and Wiki(
                          subject = self,
-                         published = wiki.published,
-                         summary = wiki.summary,
-                         content = wiki.content
-                        )
-        self._subject = subject
-
-    @property
-    def id(self):
-        """id of the track"""
-        return self._id
-
-    @property
-    def name(self):
-        """name of the track"""
-        return self._name
-
-    @property
-    def mbid(self):
-        """mbid of the track"""
-        return self._mbid
-
-    @property
-    def url(self):
-        """url of the tracks's page"""
-        return self._url
-
-    @property
-    def duration(self):
-        """duration of the tracks's page"""
-        return self._duration
-
-    @property
-    def streamable(self):
-        """is the track streamable"""
-        if self._streamable is None:
-            self._fill_info()
-        return self._streamable
-
-    @property
-    def full_track(self):
-        """is the full track streamable"""
-        if self._full_track is None:
-            self._fill_info()
-        return self._full_track
-
-    @property
-    def artist(self):
-        """artist of the track"""
-        return self._artist
-
-    @property
-    def album(self):
-        """artist of the track"""
-        if self._album is None:
-            self._fill_info()
-        return self._album
-
-    @property
-    def position(self):
-        """position of the track"""
-        if self._position is None:
-            self._fill_info()
-        return self._position
-
-    @property
-    def image(self):
-        """image of the track's album cover"""
-        return self._image
-
-    @property
-    def stats(self):
-        """stats of the track"""
-        return self._stats
-
-    @property
-    def played_on(self):
-        """datetime the track was last played"""
-        return self._played_on
-
-    @property
-    def loved_on(self):
-        """datetime the track was marked 'loved'"""
-        return self._loved_on
-
+                         published = self._wiki.published,
+                         summary = self._wiki.summary,
+                         content = self._wiki.content
+                        ) or None
+    
     @property
     def wiki(self):
         """wiki of the track"""
@@ -155,11 +52,11 @@ class Track(LastfmBase):
     def similar(self):
         """tracks similar to this track"""
         params = Track._check_params(
-                                    {'method': 'track.getSimilar'},
-                                    self.artist.name,
-                                    self.name,
-                                    self.mbid
-                                    )
+            {'method': 'track.getSimilar'},
+            self.artist.name,
+            self.name,
+            self.mbid
+        )
         data = self._api._fetch_data(params).find('similartracks')
         return [
                 Track(

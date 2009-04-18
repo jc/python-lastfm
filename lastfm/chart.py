@@ -7,35 +7,21 @@ __package__ = "lastfm"
 
 from functools import reduce
 from lastfm.base import LastfmBase
-from lastfm.mixin import cacheable
+from lastfm.mixin import mixin
 from lastfm.util import logging
 from operator import xor
 
-@cacheable
+@mixin("cacheable", "property_adder")
 class Chart(LastfmBase):
     """The base class for all the chart classes"""
+    class Meta(object):
+        properties = ["subject", "start", "end", "stats"]
 
     def init(self, subject, start, end, stats = None):
         self._subject = subject
         self._start = start
         self._end = end
         self._stats = stats
-
-    @property
-    def subject(self):
-        return self._subject
-
-    @property
-    def start(self):
-        return self._start
-
-    @property
-    def end(self):
-        return self._end
-    
-    @property
-    def stats(self):
-        return self._stats
     
     @staticmethod
     def _check_chart_params(params, subject, start = None, end = None):
@@ -93,42 +79,42 @@ class Chart(LastfmBase):
              self.end.strftime("%x"),
             )
 
+@mixin("property_adder")
 class AlbumChart(Chart):
+    class Meta(object):
+        properties = ["albums"]
+        
     def init(self, subject, start, end, stats, albums):
         super(AlbumChart, self).init(subject, start, end, stats)
         self._albums = albums
-        
-    @property
-    def albums(self):
-        return self._albums
     
+@mixin("property_adder")
 class ArtistChart(Chart):
+    class Meta(object):
+        properties = ["artists"]
+        
     def init(self, subject, start, end, stats, artists):
         super(ArtistChart, self).init(subject, start, end, stats)
         self._artists = artists
-        
-    @property
-    def artists(self):
-        return self._artists
     
+@mixin("property_adder")
 class TrackChart(Chart):
+    class Meta(object):
+        properties = ["tracks"]
+        
     def init(self, subject, start, end, tracks, stats):
         super(TrackChart, self).init(subject, start, end, stats)
         self._tracks = tracks
-        
-    @property
-    def tracks(self):
-        return self._tracks
 
+@mixin("property_adder")
 class TagChart(Chart):
+    class Meta(object):
+        properties = ["tags"]
+        
     def init(self, subject, start, end, tags, stats):
         super(TagChart, self).init(subject, start, end, stats)
         self._tags = tags
-        
-    @property
-    def tags(self):
-        return self._tags
-   
+    
 class WeeklyChart(Chart):
     """A class for representing the weekly charts"""
     @staticmethod

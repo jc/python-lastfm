@@ -84,7 +84,7 @@ class Api(object):
             self._debug = None
         if self._debug is not None:
             Wormhole.enable()
-            logging.set_api(self)
+        logging.set_api(self)
 
     @property
     def api_key(self):

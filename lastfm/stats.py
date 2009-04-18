@@ -5,79 +5,26 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
-class Stats(object):
+from lastfm.base import LastfmBase
+from lastfm.mixin import mixin
+
+@mixin("property_adder")
+class Stats(LastfmBase):
     """A class representing the stats of an artist."""
-    def __init__(self,
-                 subject,
-                 listeners = None,
-                 playcount = None,
-                 tagcount = None,
-                 count = None,
-                 match = None,
-                 rank = None,
-                 weight = None,
-                 attendance = None,
-                 reviews = None,):
+    
+    class Meta(object):
+        properties = ["listeners", "playcount",
+            "tagcount", "count", "match", "rank",
+            "weight", "attendance", "reviews"]
+        
+    def __init__(self, subject, **kwargs):
         self._subject = subject
-        self._listeners = listeners
-        self._playcount = playcount
-        self._tagcount = tagcount
-        self._count = count
-        self._match = match
-        self._rank = rank
-        self._weight = weight
-        self._attendance = attendance
-        self._reviews = reviews
+        super(Stats, self).init(**kwargs)
 
     @property
     def subject(self):
         """subject of the stats"""
         return self._subject
-
-    @property
-    def rank(self):
-        """rank of the subject"""
-        return self._rank
-
-    @property
-    def listeners(self):
-        """number of listeners of the subject"""
-        return self._listeners
-
-    @property
-    def playcount(self):
-        """playcount of the subject"""
-        return self._playcount
-
-    @property
-    def tagcount(self):
-        """tagcount of the subject"""
-        return self._tagcount
-    
-    @property
-    def count(self):
-        """count of the subject"""
-        return self._count
-        
-    @property
-    def match(self):
-        """match of the subject"""
-        return self._match
-
-    @property
-    def weight(self):
-        """weight of the subject"""
-        return self._weight
-
-    @property
-    def attendance(self):
-        """attendance of the subject"""
-        return self._attendance
-
-    @property
-    def reviews(self):
-        """reviews of the subject"""
-        return self._reviews
 
     def __repr__(self):
         if hasattr(self._subject, 'name'):

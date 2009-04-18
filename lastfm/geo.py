@@ -8,7 +8,7 @@ __package__ = "lastfm"
 
 from functools import reduce
 from lastfm.base import LastfmBase
-from lastfm.mixin import cacheable, crawlable
+from lastfm.mixin import mixin
 from lastfm.decorators import cached_property, top_property, depaginate
 
 class Geo(object):
@@ -146,22 +146,17 @@ class Geo(object):
                 for t in data.findall('track')
                 ]
 
-@crawlable
-@cacheable
+@mixin("crawlable", "cacheable", "property_adder")
 class Location(LastfmBase):
     """A class representing a location of an event"""
     XMLNS = "http://www.w3.org/2003/01/geo/wgs84_pos#"
-
-    def init(self,
-                 api,
-                 city = None,
-                 country = None,
-                 street = None,
-                 postal_code = None,
-                 latitude = None,
-                 longitude = None,
-                 timezone = None,
-                 **kwargs):
+    
+    class Meta(object):
+        properties = ["city", "country", "street",
+            "postal_code", "latitude", "longitude",
+            "timezone"]
+        
+    def init(self, api, **kwargs):
         """
         Create a Location object by providing all the data related to it.
         
@@ -188,69 +183,7 @@ class Location(LastfmBase):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         self._api = api
-        self._city = city
-        self._country = country
-        self._street = street
-        self._postal_code = postal_code
-        self._latitude = latitude
-        self._longitude = longitude
-        self._timezone = timezone
-
-    @property
-    def city(self):
-        """
-        city in which the location is situated
-        @rtype: L{str}
-        """
-        return self._city
-
-    @property
-    def country(self):
-        """
-        country in which the location is situated
-        @rtype: L{Country}
-        """
-        return self._country
-
-    @property
-    def street(self):
-        """
-        street in which the location is situated
-        @rtype: L{str}
-        """
-        return self._street
-
-    @property
-    def postal_code(self):
-        """
-        postal code of the location
-        @rtype: L{str}
-        """
-        return self._postal_code
-
-    @property
-    def latitude(self):
-        """
-        latitude of the location
-        @rtype: L{float}
-        """
-        return self._latitude
-
-    @property
-    def longitude(self):
-        """
-        longitude of the location
-        @rtype: L{float}
-        """
-        return self._longitude
-
-    @property
-    def timezone(self):
-        """
-        timezone in which the location is situated
-        @rtype: L{str}
-        """
-        return self._timezone
+        super(Location, self).init(**kwargs)
 
     @cached_property
     def top_tracks(self):
@@ -280,11 +213,8 @@ class Location(LastfmBase):
         @return:            events taking place at the location
         @rtype:             L{lazylist} of L{Event}
         """
-        return Geo.get_events(self._api,
-                             self.city,
-                             self.latitude,
-                             self.longitude,
-                             distance)
+        return Geo.get_events(self._api, self.city,
+            self.latitude, self.longitude, distance)
 
     @cached_property
     def events(self):
@@ -335,8 +265,7 @@ class Location(LastfmBase):
         else:
             return "<lastfm.geo.Location: %s>" % self.city
 
-@crawlable
-@cacheable
+@mixin("crawlable", "cacheable", "property_adder")
 class Country(LastfmBase):
     """A class representing a country."""
     ISO_CODES = {
@@ -587,7 +516,11 @@ class Country(LastfmBase):
          'ZM': 'Zambia',
          'ZW': 'Zimbabwe'}
     """ISO Codes of the countries"""
-    def init(self, api, name = None, **kwargs):
+    
+    class Meta(object):
+        properties = ["name"]
+        
+    def init(self, api, **kwargs):
         """
         Create a Country object by providing all the data related to it.
         @param api:    an instance of L{Api}
@@ -601,15 +534,7 @@ class Country(LastfmBase):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         self._api = api
-        self._name = name
-
-    @property
-    def name(self):
-        """
-        name of the country
-        @rtype: L{str}
-        """
-        return self._name
+        super(Country, self).init(**kwargs)
 
     @cached_property
     def top_artists(self):

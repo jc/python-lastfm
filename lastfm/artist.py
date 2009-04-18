@@ -7,29 +7,19 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixin import cacheable, searchable, sharable, shoutable, taggable, crawlable
+from lastfm.mixin import mixin
 from lastfm.decorators import cached_property, top_property
 
-@crawlable
-@shoutable
-@sharable
-@taggable
-@searchable
-@cacheable
+@mixin("crawlable", "shoutable", "sharable",
+    "taggable", "searchable", "cacheable", "property_adder")
 class Artist(LastfmBase):
     """A class representing an artist."""
-    def init(self,
-                 api,
-                 name = None,
-                 mbid = None,
-                 url = None,
-                 image = None,
-                 streamable = None,
-                 stats = None,
-                 similar = None,
-                 top_tags = None,
-                 bio = None,
-                 subject = None):
+    class Meta(object):
+        properties = ["name", "similar", "top_tags"]
+        fillable_properties = ["mbid", "url", "image",
+            "streamable", "stats", "bio"]
+        
+    def init(self, api, subject = None, **kwargs):
         """
         Create an Artist object by providing all the data related to it.
         
@@ -63,86 +53,22 @@ class Artist(LastfmBase):
             raise InvalidParametersError("api reference must be supplied as an argument")
         
         self._api = api
-        self._name = name
-        self._mbid = mbid
-        self._url = url
-        self._image = image
-        self._streamable = streamable
-        self._stats = stats and Stats(
-                             subject = self,
-                             listeners = stats.listeners,
-                             playcount = stats.playcount,
-                             weight = stats.weight,
-                             match = stats.match,
-                             rank = stats.rank
-                            )
-        self._similar = similar
-        self._top_tags = top_tags
-        self._bio = bio and Wiki(
-                         subject = self,
-                         published = bio.published,
-                         summary = bio.summary,
-                         content = bio.content
-                        )
+        super(Artist, self).init(**kwargs)
+        self._stats = hasattr(self, "_stats") and Stats(
+            subject = self,
+            listeners = self._stats.listeners,
+            playcount = self._stats.playcount,
+            weight = self._stats.weight,
+            match = self._stats.match,
+            rank = self._stats.rank
+        ) or None
+        self._bio = hasattr(self, "_bio") and Wiki(
+            subject = self,
+            published = self._bio.published,
+            summary = self._bio.summary,
+            content = self._bio.content
+        ) or None
         self._subject = subject
-
-    @property
-    def name(self):
-        """
-        name of the artist
-        @rtype: L{str}
-        """
-        return self._name
-
-    @property
-    def mbid(self):
-        """
-        MBID of the artist
-        @rtype: L{str}
-        """
-        if self._mbid is None:
-            self._fill_info()
-        return self._mbid
-
-    @property
-    def url(self):
-        """
-        url of the artist's page
-        @rtype: L{str}
-        """
-        if self._url is None:
-            self._fill_info()
-        return self._url
-
-    @property
-    def image(self):
-        """
-        images of the artist
-        @rtype: L{dict}
-        """
-        if self._image is None:
-            self._fill_info()
-        return self._image
-
-    @property
-    def streamable(self):
-        """
-        is the artist streamable on last.fm
-        @rtype: L{bool}
-        """
-        if self._streamable is None:
-            self._fill_info()
-        return self._streamable
-
-    @property
-    def stats(self):
-        """
-        stats for the artist
-        @rtype: L{Stats}
-        """
-        if self._stats is None:
-            self._fill_info()
-        return self._stats
 
     def get_similar(self, limit = None):
         """
@@ -181,7 +107,7 @@ class Artist(LastfmBase):
         artists similar to this artist
         @rtype: L{list} of L{Artist}
         """
-        if self._similar is None or len(self._similar) < 6:
+        if not hasattr(self, "_similar") or self._similar is None or len(self._similar) < 6:
             return self.get_similar()
         return self._similar[:]
 
@@ -199,7 +125,7 @@ class Artist(LastfmBase):
         top tags for the artist
         @rtype: L{list} of L{Tag}
         """
-        if self._top_tags is None or len(self._top_tags) < 6:
+        if not hasattr(self, "_top_tags") or self._top_tags is None or len(self._top_tags) < 6:
             params = self._default_params({'method': 'artist.getTopTags'})
             data = self._api._fetch_data(params).find('toptags')
             self._top_tags = [
@@ -220,16 +146,6 @@ class Artist(LastfmBase):
         @rtype: L{Tag}
         """
         pass
-
-    @property
-    def bio(self):
-        """
-        biography of the artist
-        @rtype: L{Wiki}
-        """
-        if self._bio is None:
-            self._fill_info()
-        return self._bio
 
     @cached_property
     def events(self):

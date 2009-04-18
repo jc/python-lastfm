@@ -7,28 +7,20 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixin import cacheable, searchable, taggable, crawlable
+from lastfm.mixin import mixin
 from lastfm.decorators import cached_property, top_property
 
-@crawlable
-@taggable
-@searchable
-@cacheable
+@mixin("crawlable", "taggable", "searchable", 
+    "cacheable", "property_adder")
 class Album(LastfmBase):
     """A class representing an album."""
-    def init(self,
-                 api,
-                 name = None,
-                 artist = None,
-                 id = None,
-                 mbid = None,
-                 url = None,
-                 release_date = None,
-                 image = None,
-                 stats = None,
-                 top_tags = None,
-                 streamable = None,
-                 subject = None):
+    class Meta(object):
+        properties = ["name", "artist", "top_tags",
+            "streamable"]
+        fillable_properties = ["id", "mbid", "url",
+            "release_date", "image", "stats", ]
+        
+    def init(self, api, subject = None, **kwargs):
         """
         Create an Album object by providing all the data related to it.
         
@@ -63,108 +55,16 @@ class Album(LastfmBase):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         self._api = api
-        self._name = name
-        self._artist = artist
-        self._id = id
-        self._mbid = mbid
-        self._url = url
-        self._release_date = release_date
-        self._image = image
-        self._stats = stats and Stats(
-                             subject = self,
-                             listeners = stats.listeners,
-                             playcount = stats.playcount,
-                             match = stats.match,
-                             rank = stats.rank
-                            )
-        self._top_tags = top_tags
-        self._streamable = streamable
+        super(Album, self).init(**kwargs)
+        self._stats = hasattr(self, "_stats") and Stats(
+             subject = self,
+             listeners = self._stats.listeners,
+             playcount = self._stats.playcount,
+             match = self._stats.match,
+             rank = self._stats.rank
+        ) or None
         self._subject = subject
-    
-    @property
-    def name(self):
-        """
-        name of the album
-        @rtype: L{str}
-        """
-        return self._name
-    
-    @property
-    def artist(self):
-        """
-        artist of the album
-        @rtype: L{Artist}
-        """
-        return self._artist
-    
-    @property
-    def id(self):
-        """
-        id of the album
-        @rtype: L{int}
-        """
-        if self._id is None:
-            self._fill_info()
-        return self._id
-
-    @property
-    def mbid(self):
-        """
-        MBID of the album
-        @rtype: L{str}
-        """
-        if self._mbid is None:
-            self._fill_info()
-        return self._mbid
-
-    @property
-    def url(self):
-        """
-        url of the album's page
-        @rtype: L{str}
-        """
-        if self._url is None:
-            self._fill_info()
-        return self._url
-
-    @property
-    def release_date(self):
-        """
-        release date of the album
-        @rtype: C{datetime.datetime}
-        """
-        if self._release_date is None:
-            self._fill_info()
-        return self._release_date
-
-    @property
-    def image(self):
-        """
-        cover images of the album
-        @rtype: L{dict}
-        """
-        if self._image is None:
-            self._fill_info()
-        return self._image
-
-    @property
-    def stats(self):
-        """
-        stats related to the album
-        @rtype: L{Stats}
-        """
-        if self._stats is None:
-            self._fill_info()
-        return self._stats
-    
-    @property
-    def streamable(self):
-        """
-        is the album streamable on last.fm
-        @rtype: L{bool}
-        """
-        return self._streamable
-
+        
     @cached_property
     def top_tags(self):
         """

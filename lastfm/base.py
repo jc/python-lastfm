@@ -9,6 +9,13 @@ __package__ = "lastfm"
 class LastfmBase(object):
     """Base class for all the classes in this package"""
     
+    def init(self, **kwargs):
+        for k in kwargs:
+            if (k in self.Meta.properties or
+                (hasattr(self.Meta, 'fillable_properties') and
+                    k in self.Meta.fillable_properties)):
+                setattr(self, "_{0}".format(k), kwargs[k])
+    
     def __eq__(self, other):
         raise NotImplementedError("The subclass must override this method")
     

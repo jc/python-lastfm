@@ -4,7 +4,7 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm.util"
 
 from lastfm.util.wormhole import Wormhole
-from lastfm.util.lazylist import lazylist
+from lastfm.util._lazylist import lazylist
 from lastfm.util.safelist import SafeList
 from lastfm.util.filecache import FileCache
 from lastfm.util.objectcache import ObjectCache

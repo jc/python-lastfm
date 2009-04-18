@@ -6,34 +6,19 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixin import cacheable
+from lastfm.mixin import mixin
 from lastfm.decorators import cached_property
 
-@cacheable
+@mixin("cacheable", "property_adder")
 class Shout(LastfmBase):
     """A class representing a shout."""
-
-    def init(self,
-             body = None,
-             author = None,
-             date = None,
-             **kwargs):
-        self._body = body
-        self._author = author
-        self._date = date
     
-    @cached_property
-    def body(self):
-        return self._body
-
-    @cached_property
-    def author(self):
-        return self._author
-
-    @cached_property
-    def date(self):
-        return self._date
-    
+    class Meta(object):
+        properties = ["body", "author", "date"]
+        
+    def init(self, **kwargs):
+        super(Shout, self).init(**kwargs)
+        
     @staticmethod
     def _hash_func(*args, **kwds):
         try:

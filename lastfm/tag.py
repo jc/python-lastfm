@@ -6,53 +6,27 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixin import cacheable, searchable, chartable, crawlable
+from lastfm.mixin import mixin, chartable
 from lastfm.decorators import cached_property, top_property
 
-@crawlable
-@chartable(['artist'])
-@searchable
-@cacheable
+@chartable("artist")
+@mixin("crawlable", "searchable", "cacheable", "property_adder")
 class Tag(LastfmBase):
     """A class representing a tag."""
-    def init(self,
-                 api,
-                 name = None,
-                 url = None,
-                 streamable = None,
-                 stats = None,
-                 **kwargs):
+    class Meta(object):
+        properties = ["name", "url", "streamable", "stats"]
+        
+    def init(self, api, **kwargs):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         
         self._api = api
-        self._name = name
-        self._url = url
-        self._streamable = streamable
-        self._stats = stats and Stats(
+        super(Tag, self).init(**kwargs)
+        self._stats = hasattr(self, '_stats') and Stats(
                              subject = self,
-                             count = stats.count,
-                             rank = stats.rank
-                             )
-
-    @property
-    def name(self):
-        """name of the tag"""
-        return self._name
-
-    @property
-    def url(self):
-        """url of the tag's page"""
-        return self._url
-
-    @property
-    def streamable(self):
-        """is the tag streamable"""
-        return self._streamable
-
-    @property
-    def stats(self):
-        return self._stats
+                             count = self._stats.count,
+                             rank = self._stats.rank
+                             ) or None
 
     @cached_property
     def similar(self):

@@ -6,12 +6,16 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixin import cacheable
+from lastfm.mixin import mixin
 from lastfm.decorators import cached_property
 
-@cacheable
+@mixin("cacheable", "property_adder")
 class Playlist(LastfmBase):
     """A class representing an XPSF playlist."""
+    
+    class Meta(object):
+        properties = ["url"]
+    
     def init(self, api, url, **kwargs):
         self._api = api
         self._data = None
@@ -24,11 +28,6 @@ class Playlist(LastfmBase):
         tmp = StringIO.StringIO()
         ElementTree.ElementTree(self._api._fetch_data(params)[0]).write(tmp)
         return tmp.getvalue()
-    
-    @property
-    def url(self):
-        """url of the playlist"""
-        return self._url
     
     @staticmethod
     def fetch(api, url):

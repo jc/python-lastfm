@@ -6,65 +6,33 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixin import cacheable, shoutable, chartable, crawlable
+from lastfm.mixin import chartable, mixin
 import lastfm.playlist
 from lastfm.decorators import (
     cached_property, top_property, authentication_required, depaginate)
 
-@crawlable
-@chartable(['album', 'artist', 'track', 'tag'])
-@shoutable
-@cacheable
+@chartable('album', 'artist', 'track', 'tag')
+@mixin("crawlable", "shoutable", "cacheable", "property_adder")
 class User(LastfmBase):
     """A class representing an user."""
-    def init(self,
-                 api,
-                 name = None,
-                 real_name = None,
-                 url = None,
-                 image = None,
-                 stats = None,
-                 **kwargs):
+    
+    class Meta(object):
+        properties = ["name", "real_name",
+            "url", "image", "stats"]
+        
+    def init(self, api, **kwargs):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         
         self._api = api
-        self._name = name
-        self._real_name = real_name
-        self._url = url
-        self._image = image
-        self._stats = stats and Stats(
-                             subject = self,
-                             match = stats.match,
-                             weight = stats.weight,
-                             playcount = stats.playcount
-                            )
+        super(User, self).init(**kwargs)
+        self._stats = hasattr(self, "_stats") and Stats(
+            subject = self,
+            match = self._stats.match,
+            weight = self._stats.weight,
+            playcount = self._stats.playcount
+        ) or None
         self._library = User.Library(api, self)
-
-    @property
-    def name(self):
-        """name of the user"""
-        return self._name
-
-    @property
-    def real_name(self):
-        """real name of the user"""
-        return self._real_name
-    
-    @property
-    def url(self):
-        """url of the user's page"""
-        return self._url
-
-    @property
-    def image(self):
-        """image of the user"""
-        return self._image
-
-    @property
-    def stats(self):
-        """stats for the user"""
-        return self._stats
 
     @property
     @authentication_required
@@ -340,8 +308,8 @@ class User(LastfmBase):
                      image = dict([(i.get('size'), i.text) for i in a.findall('image')]),
                      stats = Stats(
                                    subject = a.findtext('name'),
-                                   playcount = int(a.findtext('playcount')),
-                                   rank = int(a.attrib['rank'])
+                                   playcount = a.findtext('playcount').strip() and int(a.findtext('playcount')),
+                                   rank = a.attrib['rank'].strip() and int(a.attrib['rank'])
                                    )
                      )
                 for a in data.findall('album')
@@ -372,7 +340,7 @@ class User(LastfmBase):
                        stats = Stats(
                                      subject = a.findtext('name'),
                                      rank = a.attrib['rank'].strip() and int(a.attrib['rank']) or None,
-                                     playcount = a.findtext('playcount') and int(a.findtext('playcount')) or None
+                                     playcount = a.findtext('playcount').strip() and int(a.findtext('playcount')) or None
                                      ),
                        url = a.findtext('url'),
                        streamable = (a.findtext('streamable') == "1"),
@@ -555,8 +523,13 @@ class User(LastfmBase):
     def __repr__(self):
         return "<lastfm.User: %s>" % self.name
 
+    @mixin("property_adder")
     class Playlist(lastfm.playlist.Playlist):
         """A class representing a playlist belonging to the user."""
+        
+        class Meta(object):
+            properties = ["id", "title", "date", "size", "creator"]
+            
         def init(self, api, id, title, date, size, creator):
             super(User.Playlist, self).init(api, "lastfm://playlist/%s" % id)
             self._id = id
@@ -564,26 +537,6 @@ class User(LastfmBase):
             self._date = date
             self._size = size
             self._creator = creator
-
-        @property
-        def id(self):
-            return self._id
-
-        @property
-        def title(self):
-            return self._title
-
-        @property
-        def date(self):
-            return self._date
-
-        @property
-        def size(self):
-            return self._size
-
-        @property
-        def creator(self):
-            return self._creator
         
         @property
         def user(self):

@@ -6,48 +6,21 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixin import cacheable, searchable, crawlable
+from lastfm.mixin import mixin
 from lastfm.decorators import cached_property, depaginate
 
-@crawlable
-@searchable
-@cacheable
+@mixin("crawlable", "searchable", "cacheable", "property_adder")
 class Venue(LastfmBase):
     """A class representing a venue of an event"""
-    def init(self,
-             api,
-             id = None,
-             name = None,
-             location = None,
-             url = None,
-             **kwargs):
+    
+    class Meta(object):
+        properties = ["id", "name", "location", "url"]
+        
+    def init(self, api, **kwargs):
         if not isinstance(api, Api):
             raise InvalidParametersError("api reference must be supplied as an argument")
         self._api = api
-        self._id = id
-        self._name = name
-        self._location = location
-        self._url = url
-
-    @property
-    def id(self):
-        """id of the venue"""
-        return self._id
-    
-    @property
-    def name(self):
-        """name of the venue"""
-        return self._name
-
-    @property
-    def location(self):
-        """location of the event"""
-        return self._location
-
-    @property
-    def url(self):
-        """url of the event's page"""
-        return self._url
+        super(Venue, self).init(**kwargs)
 
     @cached_property
     def events(self):

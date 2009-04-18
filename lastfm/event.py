@@ -7,32 +7,23 @@ __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
 from lastfm.base import LastfmBase
-from lastfm.mixin import cacheable, sharable, shoutable, crawlable
+from lastfm.mixin import mixin
 
-@crawlable
-@shoutable
-@sharable
-@cacheable
+@mixin("crawlable", "shoutable", "sharable",
+    "cacheable", "property_adder")
 class Event(LastfmBase):
     """A class representing an event."""
     STATUS_ATTENDING = 0
     STATUS_MAYBE = 1
     STATUS_NOT = 2
+    
+    class Meta(object):
+        properties = ["id", "title", "artists",
+            "headliner", "venue", "start_date",
+            "description", "image", "url",
+            "stats", "tag"]
 
-    def init(self,
-                 api,
-                 id = None,
-                 title = None,
-                 artists = None,
-                 headliner = None,
-                 venue = None,
-                 start_date = None,
-                 description = None,
-                 image = None,
-                 url = None,
-                 stats = None,
-                 tag = None,
-                 **kwargs):
+    def init(self, api, **kwargs):
         """
         Create an Event object by providing all the data related to it.
         
@@ -65,109 +56,12 @@ class Event(LastfmBase):
             raise InvalidParametersError("api reference must be supplied as an argument")
         
         self._api = api
-        self._id = id
-        self._title = title
-        self._artists = artists
-        self._headliner = headliner
-        self._venue = venue
-        self._start_date = start_date
-        self._description = description
-        self._image = image
-        self._url = url
-        self._stats = stats and Stats(
-                             subject = self,
-                             attendance = stats.attendance,
-                             reviews = stats.reviews
-                            )
-        self._tag = tag
-
-    @property
-    def id(self):
-        """
-        id of the event
-        @rtype: L{int}
-        """
-        return self._id
-
-    @property
-    def title(self):
-        """
-        title of the event
-        @rtype: L{str}
-        """
-        return self._title
-
-    @property
-    def artists(self):
-        """
-        artists performing in the event
-        @rtype: L{list} of L{Artist}
-        """
-        return self._artists
-
-    @property
-    def headliner(self):
-        """
-        headliner artist of the event
-        @rtype: L{Artist}
-        """
-        return self._headliner
-
-    @property
-    def venue(self):
-        """
-        venue of the event
-        @rtype: L{Venue}
-        """
-        return self._venue
-
-    @property
-    def start_date(self):
-        """
-        start date of the event
-        @rtype: C{datetime.datetime}
-        """
-        return self._start_date
-
-    @property
-    def description(self):
-        """
-        description of the event
-        @rtype: L{str}
-        """
-        return self._description
-
-    @property
-    def image(self):
-        """
-        poster of the event
-        @rtype: L{dict}
-        """
-        return self._image
-
-    @property
-    def url(self):
-        """
-        url of the event's page
-        @rtype: L{str}
-        """
-        return self._url
-
-    @property
-    def stats(self):
-        """
-        statistics for the event
-        @rtype: L{Stats}
-        """
-        return self._stats
-
-    @property
-    def tag(self):
-        """
-        tag for the event
-        @rtype: L{str}
-        """
-        return self._tag
+        super(Event, self).init(**kwargs)
+        self._stats = hasattr(self, "_stats") and Stats(
+            subject = self,
+            attendance = self._stats.attendance,
+            reviews = self._stats.reviews
+        ) or None
 
     def attend(self, status = STATUS_ATTENDING):
         """

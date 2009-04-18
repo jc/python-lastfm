@@ -8,7 +8,7 @@ __package__ = "lastfm.mixin"
 from lastfm.util import lazylist, logging
 from lastfm.decorators import cached_property
 
-def chartable(chart_types):
+def chartable(*chart_types):
     def wrapper(cls):
         @cached_property
         def weekly_chart_list(self):

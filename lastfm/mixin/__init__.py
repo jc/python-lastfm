@@ -12,6 +12,15 @@ from lastfm.mixin._shoutable import shoutable
 from lastfm.mixin._taggable import taggable
 from lastfm.mixin._chartable import chartable
 from lastfm.mixin._crawlable import crawlable
+from lastfm.mixin._propertyadder import property_adder
+
+def mixin(*mixins):
+    def wrapper(cls):
+        for m in reversed(mixins):
+            if m in __all__:
+                cls = eval(m)(cls)
+        return cls
+    return wrapper
 
 __all__ = ['cacheable', 'searchable', 'sharable', 'shoutable', 'taggable'
-           'chartable','crawlable']
+           'chartable','crawlable', 'property_adder']
