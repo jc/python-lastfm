@@ -9,8 +9,6 @@ __package__ = "lastfm"
 from lastfm.base import LastfmBase
 from lastfm.mixin import mixin
 
-@mixin("crawlable", "shoutable", "sharable",
-    "cacheable", "property_adder")
 class Event(LastfmBase):
     """A class representing an event."""
     STATUS_ATTENDING = 0
@@ -219,6 +217,9 @@ class Event(LastfmBase):
 
     def __repr__(self):
         return "<lastfm.Event: %s at %s on %s>" % (self.title, self.venue.name, self.start_date.strftime("%x"))
+
+Event = mixin("crawlable", "shoutable", "sharable",
+              "cacheable", "property_adder")(Event)
 
 from datetime import datetime
 import time

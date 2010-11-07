@@ -14,7 +14,7 @@ class LastfmBase(object):
             if (k in self.Meta.properties or
                 (hasattr(self.Meta, 'fillable_properties') and
                     k in self.Meta.fillable_properties)):
-                setattr(self, "_{0}".format(k), kwargs[k])
+                setattr(self, "_%s" % k, kwargs[k])
     
     def __eq__(self, other):
         raise NotImplementedError("The subclass must override this method")

@@ -5,13 +5,14 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
-from functools import reduce
+import sys
+if sys.version_info >= (2, 6):
+    from functools import reduce
 from lastfm.base import LastfmBase
 from lastfm.mixin import mixin
 from lastfm.util import logging
 from operator import xor
 
-@mixin("cacheable", "property_adder")
 class Chart(LastfmBase):
     """The base class for all the chart classes"""
     class Meta(object):
@@ -78,8 +79,8 @@ class Chart(LastfmBase):
              self.start.strftime("%x"),
              self.end.strftime("%x"),
             )
+Chart = mixin("cacheable", "property_adder")(Chart)
 
-@mixin("property_adder")
 class AlbumChart(Chart):
     class Meta(object):
         properties = ["albums"]
@@ -87,8 +88,8 @@ class AlbumChart(Chart):
     def init(self, subject, start, end, stats, albums):
         super(AlbumChart, self).init(subject, start, end, stats)
         self._albums = albums
+AlbumChart = mixin("property_adder")(AlbumChart)
     
-@mixin("property_adder")
 class ArtistChart(Chart):
     class Meta(object):
         properties = ["artists"]
@@ -96,8 +97,8 @@ class ArtistChart(Chart):
     def init(self, subject, start, end, stats, artists):
         super(ArtistChart, self).init(subject, start, end, stats)
         self._artists = artists
+ArtistChart = mixin("property_adder")(ArtistChart)
     
-@mixin("property_adder")
 class TrackChart(Chart):
     class Meta(object):
         properties = ["tracks"]
@@ -105,8 +106,8 @@ class TrackChart(Chart):
     def init(self, subject, start, end, tracks, stats):
         super(TrackChart, self).init(subject, start, end, stats)
         self._tracks = tracks
+TrackChart = mixin("property_adder")(TrackChart)
 
-@mixin("property_adder")
 class TagChart(Chart):
     class Meta(object):
         properties = ["tags"]
@@ -114,6 +115,7 @@ class TagChart(Chart):
     def init(self, subject, start, end, tags, stats):
         super(TagChart, self).init(subject, start, end, stats)
         self._tags = tags
+TagChart = mixin("property_adder")(TagChart)
     
 class WeeklyChart(Chart):
     """A class for representing the weekly charts"""
@@ -391,7 +393,7 @@ class RollingChart(Chart):
             try:
                 period_wacl.append(
                     getattr(subject, "get_weekly_%s_chart" % chart_type)(wc.start, wc.end))
-            except LastfmError as ex:
+            except LastfmError, ex:
                 logging.log_silenced_exceptions(ex)
         stats_dict = period_wacl[0].__dict__["_%ss" % chart_type][0].stats.__dict__
         count_attribute = [k for k in stats_dict.keys()

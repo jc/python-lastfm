@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 """The last.fm web service API access functionalities"""
 
+from __future__ import with_statement
+
 __author__ = "Abhinav Sarkar <abhinav@abhinavsarkar.net>"
 __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
@@ -807,7 +809,7 @@ from lastfm.track import Track
 from lastfm.user import User
 from lastfm.venue import Venue
 
-if sys.version < '2.6':
+if sys.version_info < (2, 6):
     import md5
     def md5hash(string):
         return md5.new(string).hexdigest()

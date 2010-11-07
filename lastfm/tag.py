@@ -9,8 +9,6 @@ from lastfm.base import LastfmBase
 from lastfm.mixin import mixin, chartable
 from lastfm.decorators import cached_property, top_property
 
-@chartable("artist")
-@mixin("crawlable", "searchable", "cacheable", "property_adder")
 class Tag(LastfmBase):
     """A class representing a tag."""
     class Meta(object):
@@ -211,6 +209,8 @@ class Tag(LastfmBase):
 
     def __repr__(self):
         return "<lastfm.Tag: %s>" % self.name
+
+Tag = chartable("artist")(mixin("crawlable", "searchable", "cacheable", "property_adder")(Tag))
 
 from lastfm.album import Album
 from lastfm.api import Api

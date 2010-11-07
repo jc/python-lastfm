@@ -9,7 +9,6 @@ from lastfm.base import LastfmBase
 from lastfm.mixin import mixin
 from lastfm.decorators import cached_property, depaginate
 
-@mixin("crawlable", "searchable", "cacheable", "property_adder")
 class Venue(LastfmBase):
     """A class representing a venue of an event"""
     
@@ -110,6 +109,8 @@ class Venue(LastfmBase):
     def __repr__(self):
         return "<lastfm.geo.Venue: %s, %s>" % (self.name, self.location.city)
     
+Venue = mixin("crawlable", "searchable", "cacheable", "property_adder")(Venue)
+
 from lastfm.api import Api
 from lastfm.event import Event
 from lastfm.geo import Location, Country

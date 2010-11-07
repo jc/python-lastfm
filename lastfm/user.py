@@ -11,8 +11,6 @@ import lastfm.playlist
 from lastfm.decorators import (
     cached_property, top_property, authentication_required, depaginate)
 
-@chartable('album', 'artist', 'track', 'tag')
-@mixin("crawlable", "shoutable", "cacheable", "property_adder")
 class User(LastfmBase):
     """A class representing an user."""
     
@@ -534,7 +532,6 @@ class User(LastfmBase):
     def __repr__(self):
         return "<lastfm.User: %s>" % self.name
 
-    @mixin("property_adder")
     class Playlist(lastfm.playlist.Playlist):
         """A class representing a playlist belonging to the user."""
         
@@ -582,6 +579,8 @@ class User(LastfmBase):
 
         def __repr__(self):
             return "<lastfm.User.Playlist: %s>" % self.title
+    
+    Playlist = mixin("property_adder")(Playlist)
 
     class Library(object):
         """A class representing the music library of the user."""
@@ -775,6 +774,10 @@ class User(LastfmBase):
 
         def __repr__(self):
             return "<lastfm.User.Library: for user '%s'>" % self.user.name
+
+User = chartable('album', 'artist', 'track', 
+                 'tag')(mixin("crawlable", "shoutable", "cacheable", 
+                              "property_adder")(User))
 
 from datetime import datetime
 import time

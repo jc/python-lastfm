@@ -9,7 +9,6 @@ from lastfm.base import LastfmBase
 from lastfm.mixin import mixin
 from lastfm.decorators import cached_property
 
-@mixin("cacheable", "property_adder")
 class Shout(LastfmBase):
     """A class representing a shout."""
     
@@ -46,6 +45,8 @@ class Shout(LastfmBase):
 
     def __repr__(self):
         return "<lastfm.Shout: '%s' by %s>" % (self.body, self.author.name)
+
+Shout = mixin("cacheable", "property_adder")(Shout)
     
 from lastfm.error import InvalidParametersError
     

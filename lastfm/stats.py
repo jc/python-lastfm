@@ -8,7 +8,6 @@ __package__ = "lastfm"
 from lastfm.base import LastfmBase
 from lastfm.mixin import mixin
 
-@mixin("property_adder")
 class Stats(LastfmBase):
     """A class representing the stats of an artist."""
     
@@ -31,4 +30,5 @@ class Stats(LastfmBase):
             return "<lastfm.Stats: for '%s'>" % self._subject.name
         else:
             return "<lastfm.Stats: for '%s'>" % self._subject
-    
+
+Stats = mixin("property_adder")(Stats)

@@ -7,7 +7,6 @@ __package__ = "lastfm"
 
 from lastfm.mixin import mixin
 
-@mixin("property_adder")
 class Wiki(object):
     """A class representing the information from the wiki of the subject."""
     
@@ -26,3 +25,5 @@ class Wiki(object):
 
     def __repr__(self):
         return "<lastfm.Wiki: for %s '%s'>" % (self.subject.__class__.__name__, self.subject.name)
+
+Wiki = mixin("property_adder")(Wiki)

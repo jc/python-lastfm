@@ -9,7 +9,6 @@ from lastfm.base import LastfmBase
 from lastfm.mixin import mixin
 from lastfm.decorators import cached_property
 
-@mixin("cacheable", "property_adder")
 class Playlist(LastfmBase):
     """A class representing an XPSF playlist."""
     
@@ -51,6 +50,8 @@ class Playlist(LastfmBase):
     
     def __repr__(self):
         return "<lastfm.Playlist: %s>" % self.url
+
+Playlist = mixin("cacheable", "property_adder")(Playlist)
 
 import StringIO
 import sys

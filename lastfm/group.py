@@ -10,8 +10,6 @@ from lastfm.base import LastfmBase
 from lastfm.mixin import mixin, chartable
 from lastfm.decorators import cached_property, depaginate
 
-@chartable('album', 'artist', 'track', 'tag')
-@mixin("cacheable", "property_adder")
 class Group(LastfmBase):
     """A class representing a group on last.fm."""
     
@@ -84,6 +82,8 @@ class Group(LastfmBase):
 
     def __repr__(self):
         return "<lastfm.Group: %s>" % self.name
+
+Group = chartable('album', 'artist', 'track', 'tag')(mixin("cacheable", "property_adder")(Group))
 
 from lastfm.api import Api
 from lastfm.error import InvalidParametersError

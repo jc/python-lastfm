@@ -13,7 +13,7 @@ def property_adder(cls):
                 @property
                 def get(self):
                     try:
-                        return getattr(self, "_{0}".format(q))
+                        return getattr(self, "_%s" % (q))
                     except AttributeError:
                         return None
                 return get
@@ -28,7 +28,7 @@ def property_adder(cls):
                     def get(self):
                         fill = False
                         try:
-                            attrval = getattr(self, "_{0}".format(q))
+                            attrval = getattr(self, "_%s" % (q))
                             if attrval is None:
                                 fill = True
                             else:
@@ -37,7 +37,7 @@ def property_adder(cls):
                             fill = True
                         if fill:
                             self._fill_info()
-                            return getattr(self, "_{0}".format(q))
+                            return getattr(self, "_%s" % (q))
                     return get
                 setattr(cls, p, wrapper())
     return cls

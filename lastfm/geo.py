@@ -6,7 +6,10 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
-from functools import reduce
+import sys
+if sys.version_info >= (2, 6):
+    from functools import reduce
+
 from lastfm.base import LastfmBase
 from lastfm.mixin import mixin
 from lastfm.decorators import cached_property, top_property, depaginate
@@ -146,7 +149,6 @@ class Geo(object):
                 for t in data.findall('track')
                 ]
 
-@mixin("crawlable", "cacheable", "property_adder")
 class Location(LastfmBase):
     """A class representing a location of an event"""
     XMLNS = "http://www.w3.org/2003/01/geo/wgs84_pos#"
@@ -265,7 +267,8 @@ class Location(LastfmBase):
         else:
             return "<lastfm.geo.Location: %s>" % self.city
 
-@mixin("crawlable", "cacheable", "property_adder")
+Location = mixin("crawlable", "cacheable", "property_adder")(Location)
+
 class Country(LastfmBase):
     """A class representing a country."""
     ISO_CODES = {
@@ -611,6 +614,8 @@ class Country(LastfmBase):
 
     def __repr__(self):
         return "<lastfm.geo.Country: %s>" % self.name
+
+Country = mixin("crawlable", "cacheable", "property_adder")(Country)
 
 from lastfm.api import Api
 from lastfm.artist import Artist

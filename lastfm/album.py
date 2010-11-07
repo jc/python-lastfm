@@ -10,8 +10,6 @@ from lastfm.base import LastfmBase
 from lastfm.mixin import mixin
 from lastfm.decorators import cached_property, top_property
 
-@mixin("crawlable", "taggable", "searchable", 
-    "cacheable", "property_adder")
 class Album(LastfmBase):
     """A class representing an album."""
     class Meta(object):
@@ -234,6 +232,8 @@ class Album(LastfmBase):
     def __repr__(self):
         return "<lastfm.Album: '%s' by %s>" % (self.name, self.artist.name)
         
+Album = mixin("crawlable", "taggable", "searchable", 
+              "cacheable", "property_adder")(Album)
                      
 from datetime import datetime
 import time
