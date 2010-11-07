@@ -238,7 +238,9 @@ class User(LastfmBase):
         if limit is not None:
             params.update({'limit': limit})
         data = self._api._fetch_data(params, no_cache = True).find('recenttracks')
-        return [
+        result = []
+        for t in data.findall('track'):
+            result.append(
                 Track(
                       self._api,
                       subject = self,
@@ -270,15 +272,24 @@ class User(LastfmBase):
                                                          t.findtext('date').strip(),
                                                          '%d %b %Y, %H:%M'
                                                          )[0:6])
-                                           )
+                                           ) if t.findtext('date') else datetime(*datetime.now().timetuple()[0:6])
                       )
-                      for t in data.findall('track')
-                      ]
+                )
+            if 'nowplaying' in t.attrib and t.attrib['nowplaying'] == 'true':
+                self._now_playing = result[-1]
+        return result
 
     @property
     def recent_tracks(self):
         """recent tracks played by the user"""
         return self.get_recent_tracks()
+
+    @property
+    def now_playing(self):
+        if not hasattr(self, "_now_playing"):
+            self._now_playing = None
+            self.get_recent_tracks()
+        return self._now_playing
 
     @top_property("recent_tracks")
     def most_recent_track(self):
