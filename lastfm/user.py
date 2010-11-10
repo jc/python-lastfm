@@ -485,6 +485,7 @@ class User(LastfmBase):
         user = User(
                 api,
                 name = data.findtext('name'),
+                image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
                 url = data.findtext('url'),
             )
         user._language = data.findtext('lang')
@@ -501,6 +502,7 @@ class User(LastfmBase):
         user = User(
                 api,
                 name = data.findtext('name'),
+                image = dict([(i.get('size'), i.text) for i in data.findall('image')]),
                 url = data.findtext('url'),
             )
         user._language = data.findtext('lang')
