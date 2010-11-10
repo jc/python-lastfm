@@ -231,15 +231,22 @@ class User(LastfmBase):
                 for t in data.findall('track')
                 ]
 
-    def get_recent_tracks(self, limit = None):
+    @depaginate
+    def get_recent_tracks(self, limit = None, timefrom = None, timeto =None, page = None):
         params = self._default_params({'method': 'user.getRecentTracks'})
         if limit is not None:
             params.update({'limit': limit})
+        if timefrom is not None:
+            params.update({'from' : timefrom})
+        if timeto is not None:
+            params.update({'to' : timeto})
+        if page is not None:
+            params.update({'page': page})
         data = self._api._fetch_data(params, no_cache = True).find('recenttracks')
-        result = []
+        total_pages = int(data.attrib['totalPages'])
+        yield total_pages
         for t in data.findall('track'):
-            result.append(
-                Track(
+            track = Track(
                       self._api,
                       subject = self,
                       name = t.findtext('name'),
@@ -272,10 +279,10 @@ class User(LastfmBase):
                                                          )[0:6])
                                            ) if t.findtext('date') else datetime(*datetime.now().timetuple()[0:6])
                       )
-                )
             if 'nowplaying' in t.attrib and t.attrib['nowplaying'] == 'true':
-                self._now_playing = result[-1]
-        return result
+                self._now_playing = track
+            yield track
+
 
     @property
     def recent_tracks(self):
@@ -472,17 +479,19 @@ class User(LastfmBase):
 
     @staticmethod
     def get_info(api, name):
-        user = User(api, name = name)
-        friends = user.friends
-        if len(friends) == 0:
-            return user
-        else:
-            f = friends[0]
-            try:
-                user = [a for a in f.friends if a.name == user.name][0]
-                return user
-            except IndexError:
-                return user
+        data = api._fetch_data({'method' : 'user.getInfo', 'user' : name}).find('user')
+        user = User(
+                api,
+                name = data.findtext('name'),
+                url = data.findtext('url'),
+            )
+        user._language = data.findtext('lang')
+        user._country = Country(api, name = Country.ISO_CODES[data.findtext('country')])
+        user._age = int(data.findtext('age'))
+        user._gender = data.findtext('gender')
+        user._subscriber = (data.findtext('subscriber') == "1")
+        user._stats = Stats(subject = user, playcount = data.findtext('playcount'))
+        return user
         
     @staticmethod
     def get_authenticated_user(api):
