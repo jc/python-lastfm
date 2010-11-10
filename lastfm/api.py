@@ -65,7 +65,6 @@ class Api(object):
         self._api_key = api_key
         self._secret = secret
         self._session_key = session_key
-        self._cache = FileCache()
         self._urllib = urllib2
         self._cache_timeout = Api.DEFAULT_CACHE_TIMEOUT
         self._initialize_request_headers(request_headers)
@@ -74,6 +73,10 @@ class Api(object):
         self._no_cache = no_cache
         self._logfile = logfile
         self._last_fetch_time = datetime.now()
+        if self._no_cache:
+            self._cache = None
+        else:
+            self._cache = FileCache()
         
         if debug is not None:
             if debug in Api.DEBUG_LEVELS:
