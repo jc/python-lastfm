@@ -20,8 +20,8 @@ class Api(object):
     API_ROOT_URL = "http://ws.audioscrobbler.com/2.0/"
     """URL of the webservice API root"""
     
-    FETCH_INTERVAL = 1
-    """The minimum interval between successive HTTP request, in seconds"""
+    FETCH_INTERVAL = 200
+    """The minimum interval between successive HTTP request, in milliseconds"""
     
     SEARCH_XMLNS = "http://a9.com/-/spec/opensearch/1.1/"
     
@@ -672,9 +672,9 @@ class Api(object):
         with _lock:
             now = datetime.now()
             delta = now - self._last_fetch_time
-            delta = delta.seconds + float(delta.microseconds)/1000000
+            delta = delta.seconds*1000 + float(delta.microseconds)/1000
             if delta < Api.FETCH_INTERVAL:
-                time.sleep(Api.FETCH_INTERVAL - delta)
+                time.sleep((Api.FETCH_INTERVAL - delta)/1000)
             url_data = opener.open(url, data).read()
             self._last_fetch_time = datetime.now()
         return url_data
