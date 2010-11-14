@@ -500,6 +500,7 @@ class Country(LastfmBase):
          'TZ': 'Tanzania, United Republic of',
          'UA': 'Ukraine',
          'UG': 'Uganda',
+         'UK': 'United Kingdom',
          'UM': 'United States Minor Outlying Islands',
          'US': 'United States',
          'UY': 'Uruguay',
