@@ -488,8 +488,11 @@ class User(LastfmBase):
                 url = data.findtext('url'),
             )
         user._language = data.findtext('lang')
-        user._country = Country(api, name = Country.ISO_CODES[data.findtext('country')])
-        user._age = int(data.findtext('age'))
+        if data.findtext('country'):
+            user._country = Country(api, name = Country.ISO_CODES[data.findtext('country')])
+        if data.findtext('age'):
+            user._age = int(data.findtext('age'))
+
         user._gender = data.findtext('gender')
         user._subscriber = (data.findtext('subscriber') == "1")
         user._stats = Stats(subject = user, playcount = data.findtext('playcount'))
