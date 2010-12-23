@@ -54,7 +54,7 @@ class Playlist(LastfmBase):
 
 import StringIO
 import sys
-from lastfm.error import InvalidParametersError
+from lastfm.error import LastfmError, InvalidParametersError
 
 if sys.version_info >= (2, 5):
     import xml.etree.cElementTree as ElementTree
