@@ -155,7 +155,7 @@ class Event(LastfmBase):
                      headliner = Artist(api, name = data.findtext('artists/headliner')),
                      venue = Venue(
                                    api,
-                                   id = int(data.findtext('venue/url').split('/')[-1]),
+                                   id = int((data.findtext('venue/url').split('/')[-1]).split('+')[0]),
                                    name = data.findtext('venue/name'),
                                    location = Location(
                                        api,
