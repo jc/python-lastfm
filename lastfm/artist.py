@@ -162,6 +162,20 @@ class Artist(LastfmBase):
                 ]
 
     @cached_property
+    def past_events(self):
+        """
+        past events for the artist
+        @rtype: L{lazylist} of L{Event}
+        """
+        params = self._default_params({'method': 'artist.getPastEvents'})
+        data = self._api._fetch_data(params).find('events')
+
+        return [
+                Event.create_from_data(self._api, e)
+                for e in data.findall('event')
+                ]
+
+    @cached_property
     def top_albums(self):
         """
         top albums of the artist
