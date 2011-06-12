@@ -279,7 +279,8 @@ class User(LastfmBase):
                                                          t.findtext('date').strip(),
                                                          '%d %b %Y, %H:%M'
                                                          )[0:6])
-                                           ) if t.findtext('date') else datetime(*datetime.now().timetuple()[0:6])
+                                           ) if t.findtext('date') else datetime(*datetime.now().timetuple()[0:6]),
+                      bypass_registry=True
                       )
             if 'nowplaying' in t.attrib and t.attrib['nowplaying'] == 'true':
                 self._now_playing = track
