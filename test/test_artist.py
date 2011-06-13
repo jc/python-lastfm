@@ -168,7 +168,5 @@ for k,v in data.iteritems():
         self.assertEqual(getattr(self.artist, k), v)
     setattr(TestArtist, "testArtist%s" % k.replace('_', ' ').title().replace(' ', ''), testFunc)   
     
-test_suite = unittest.TestLoader().loadTestsFromTestCase(TestArtist)
-
 if __name__ == '__main__':
     unittest.main()

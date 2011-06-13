@@ -54,7 +54,5 @@ class TestPlaylist(unittest.TestCase):
 #"""
 #        self.assertEqual(self.playlist.data, data)
         
-test_suite = unittest.TestLoader().loadTestsFromTestCase(TestPlaylist)
-
 if __name__ == '__main__':
     unittest.main()

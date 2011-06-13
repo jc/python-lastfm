@@ -175,7 +175,5 @@ class TestTag(unittest.TestCase):
                 'alternative folk']
         self.assertEqual([tag.name for tag in self.api.search_tag('alternative')[:10]], tags)
     
-test_suite = unittest.TestLoader().loadTestsFromTestCase(TestTag)
-
 if __name__ == '__main__':
     unittest.main()

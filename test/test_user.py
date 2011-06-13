@@ -302,7 +302,5 @@ for k,v in data.iteritems():
         self.assertEqual(getattr(self.user, k), v)
     setattr(TestUser, "testUser%s" % k.replace('_', ' ').title().replace(' ', ''), testFunc)
                 
-test_suite = unittest.TestLoader().loadTestsFromTestCase(TestUser)
-
 if __name__ == '__main__':
     unittest.main()

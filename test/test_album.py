@@ -79,7 +79,5 @@ for k,v in data.iteritems():
         self.assertEqual(getattr(self.album, k), v)
     setattr(TestAlbum, "testAlbum%s" % k.replace('_', ' ').title().replace(' ', ''), testFunc)   
     
-test_suite = unittest.TestLoader().loadTestsFromTestCase(TestAlbum)
-
 if __name__ == '__main__':
     unittest.main()

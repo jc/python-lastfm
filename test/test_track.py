@@ -104,7 +104,5 @@ for k,v in data.iteritems():
         self.assertEqual(getattr(self.track, k), v)
     setattr(TestTrack, "testTrack%s" % k.replace('_', ' ').title().replace(' ', ''), testFunc)
                 
-test_suite = unittest.TestLoader().loadTestsFromTestCase(TestTrack)
-
 if __name__ == '__main__':
     unittest.main()

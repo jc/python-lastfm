@@ -128,7 +128,5 @@ class TestGroup(unittest.TestCase):
                 in self.group.get_weekly_tag_chart(wc.start, wc.end).tags[:10]],
             tags)
             
-test_suite = unittest.TestLoader().loadTestsFromTestCase(TestGroup)
-
 if __name__ == '__main__':
     unittest.main()

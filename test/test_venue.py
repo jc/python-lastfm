@@ -56,7 +56,5 @@ for k,v in data.iteritems():
         self.assertEqual(getattr(self.venue, k), v)
     setattr(TestVenue, "testVenue%s" % k.replace('_', ' ').title().replace(' ', ''), testFunc)
         
-test_suite = unittest.TestLoader().loadTestsFromTestCase(TestVenue)
-
 if __name__ == '__main__':
     unittest.main()
