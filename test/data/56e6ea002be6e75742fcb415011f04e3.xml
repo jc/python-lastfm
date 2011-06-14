@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<toptags artist="Pink Floyd">
+<tag>
+    <name>Progressive rock</name> 
+    <count>100</count>
+    <url>http://www.last.fm/tag/progressive%20rock</url>
+</tag>
+<tag>
+    <name>classic rock</name> 
+    <count>84</count>
+    <url>http://www.last.fm/tag/classic%20rock</url>
+</tag>
+<tag>
+    <name>Psychedelic Rock</name> 
+    <count>59</count>
+    <url>http://www.last.fm/tag/psychedelic%20rock</url>
+</tag>
+<tag>
+    <name>rock</name> 
+    <count>58</count>
+    <url>http://www.last.fm/tag/rock</url>
+</tag>
+<tag>
+    <name>psychedelic</name> 
+    <count>44</count>
+    <url>http://www.last.fm/tag/psychedelic</url>
+</tag>
+<tag>
+    <name>Progressive</name> 
+    <count>16</count>
+    <url>http://www.last.fm/tag/progressive</url>
+</tag>
+<tag>
+    <name>british</name> 
+    <count>15</count>
+    <url>http://www.last.fm/tag/british</url>
+</tag>
+<tag>
+    <name>Pink Floyd</name> 
+    <count>13</count>
+    <url>http://www.last.fm/tag/pink%20floyd</url>
+</tag>
+<tag>
+    <name>alternative</name> 
+    <count>9</count>
+    <url>http://www.last.fm/tag/alternative</url>
+</tag>
+<tag>
+    <name>70s</name> 
+    <count>8</count>
+    <url>http://www.last.fm/tag/70s</url>
+</tag>
+<tag>
+    <name>experimental</name> 
+    <count>5</count>
+    <url>http://www.last.fm/tag/experimental</url>
+</tag>
+<tag>
+    <name>art rock</name> 
+    <count>5</count>
+    <url>http://www.last.fm/tag/art%20rock</url>
+</tag>
+<tag>
+    <name>space rock</name> 
+    <count>4</count>
+    <url>http://www.last.fm/tag/space%20rock</url>
+</tag>
+<tag>
+    <name>60s</name> 
+    <count>3</count>
+    <url>http://www.last.fm/tag/60s</url>
+</tag>
+<tag>
+    <name>80s</name> 
+    <count>2</count>
+    <url>http://www.last.fm/tag/80s</url>
+</tag>
+<tag>
+    <name>alternative rock</name> 
+    <count>2</count>
+    <url>http://www.last.fm/tag/alternative%20rock</url>
+</tag>
+<tag>
+    <name>prog rock</name> 
+    <count>2</count>
+    <url>http://www.last.fm/tag/prog%20rock</url>
+</tag>
+<tag>
+    <name>hard rock</name> 
+    <count>2</count>
+    <url>http://www.last.fm/tag/hard%20rock</url>
+</tag>
+<tag>
+    <name>classic</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/classic</url>
+</tag>
+<tag>
+    <name>favorites</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/favorites</url>
+</tag>
+<tag>
+    <name>indie</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/indie</url>
+</tag>
+<tag>
+    <name>UK</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/uk</url>
+</tag>
+<tag>
+    <name>prog</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/prog</url>
+</tag>
+<tag>
+    <name>oldies</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/oldies</url>
+</tag>
+<tag>
+    <name>metal</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/metal</url>
+</tag>
+<tag>
+    <name>electronic</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/electronic</url>
+</tag>
+<tag>
+    <name>ambient</name> 
+    <count>1</count>
+    <url>http://www.last.fm/tag/ambient</url>
+</tag>
+<tag>
+    <name>pop</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/pop</url>
+</tag>
+<tag>
+    <name>guitar</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/guitar</url>
+</tag>
+<tag>
+    <name>legend</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/legend</url>
+</tag>
+<tag>
+    <name>Awesome</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/awesome</url>
+</tag>
+<tag>
+    <name>Avant-Garde</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/avant-garde</url>
+</tag>
+<tag>
+    <name>blues</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/blues</url>
+</tag>
+<tag>
+    <name>atmospheric</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/atmospheric</url>
+</tag>
+<tag>
+    <name>Favorite Artists</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/favorite%20artists</url>
+</tag>
+<tag>
+    <name>Best Band EVER</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/best%20band%20ever</url>
+</tag>
+<tag>
+    <name>instrumental</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/instrumental</url>
+</tag>
+<tag>
+    <name>Experimental Rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/experimental%20rock</url>
+</tag>
+<tag>
+    <name>psychadelic</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/psychadelic</url>
+</tag>
+<tag>
+    <name>trippy</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/trippy</url>
+</tag>
+<tag>
+    <name>chillout</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/chillout</url>
+</tag>
+<tag>
+    <name>Floyd</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/floyd</url>
+</tag>
+<tag>
+    <name>genius</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/genius</url>
+</tag>
+<tag>
+    <name>British Psychedelia</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/british%20psychedelia</url>
+</tag>
+<tag>
+    <name>male vocalists</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/male%20vocalists</url>
+</tag>
+<tag>
+    <name>punk</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/punk</url>
+</tag>
+<tag>
+    <name>david gilmour</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/david%20gilmour</url>
+</tag>
+<tag>
+    <name>british invasion</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/british%20invasion</url>
+</tag>
+<tag>
+    <name>indie rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/indie%20rock</url>
+</tag>
+<tag>
+    <name>Favorite</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/favorite</url>
+</tag>
+<tag>
+    <name>psychadelic rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/psychadelic%20rock</url>
+</tag>
+<tag>
+    <name>chill</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/chill</url>
+</tag>
+<tag>
+    <name>Roger Waters</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/roger%20waters</url>
+</tag>
+<tag>
+    <name>english</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/english</url>
+</tag>
+<tag>
+    <name>Favourites</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/favourites</url>
+</tag>
+<tag>
+    <name>england</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/england</url>
+</tag>
+<tag>
+    <name>art-rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/art-rock</url>
+</tag>
+<tag>
+    <name>electronica</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/electronica</url>
+</tag>
+<tag>
+    <name>Progressive metal</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/progressive%20metal</url>
+</tag>
+<tag>
+    <name>favourite</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/favourite</url>
+</tag>
+<tag>
+    <name>Mellow</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/mellow</url>
+</tag>
+<tag>
+    <name>jazz</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/jazz</url>
+</tag>
+<tag>
+    <name>90s</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/90s</url>
+</tag>
+<tag>
+    <name>Acid Rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/acid%20rock</url>
+</tag>
+<tag>
+    <name>Symphonic Rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/symphonic%20rock</url>
+</tag>
+<tag>
+    <name>emo</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/emo</url>
+</tag>
+<tag>
+    <name>psychodelic rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/psychodelic%20rock</url>
+</tag>
+<tag>
+    <name>favourite artists</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/favourite%20artists</url>
+</tag>
+<tag>
+    <name>heavy metal</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/heavy%20metal</url>
+</tag>
+<tag>
+    <name>Stoner Rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/stoner%20rock</url>
+</tag>
+<tag>
+    <name>Prog-Rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/prog-rock</url>
+</tag>
+<tag>
+    <name>album rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/album%20rock</url>
+</tag>
+<tag>
+    <name>Psychedelia</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/psychedelia</url>
+</tag>
+<tag>
+    <name>classics</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/classics</url>
+</tag>
+<tag>
+    <name>beautiful</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/beautiful</url>
+</tag>
+<tag>
+    <name>british rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/british%20rock</url>
+</tag>
+<tag>
+    <name>singer-songwriter</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/singer-songwriter</url>
+</tag>
+<tag>
+    <name>Great Lyricists</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/great%20lyricists</url>
+</tag>
+<tag>
+    <name>Favorite Bands</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/favorite%20bands</url>
+</tag>
+<tag>
+    <name>amazing</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/amazing</url>
+</tag>
+<tag>
+    <name>post-rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/post-rock</url>
+</tag>
+<tag>
+    <name>epic</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/epic</url>
+</tag>
+<tag>
+    <name>Grunge</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/grunge</url>
+</tag>
+<tag>
+    <name>folk</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/folk</url>
+</tag>
+<tag>
+    <name>Love</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/love</url>
+</tag>
+<tag>
+    <name>the best</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/the%20best</url>
+</tag>
+<tag>
+    <name>psychodelic</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/psychodelic</url>
+</tag>
+<tag>
+    <name>pink</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/pink</url>
+</tag>
+<tag>
+    <name>industrial</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/industrial</url>
+</tag>
+<tag>
+    <name>Favourite bands</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/favourite%20bands</url>
+</tag>
+<tag>
+    <name>relax</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/relax</url>
+</tag>
+<tag>
+    <name>70s rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/70s%20rock</url>
+</tag>
+<tag>
+    <name>Hip-Hop</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/hip-hop</url>
+</tag>
+<tag>
+    <name>punk rock</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/punk%20rock</url>
+</tag>
+<tag>
+    <name>new wave</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/new%20wave</url>
+</tag>
+<tag>
+    <name>britpop</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/britpop</url>
+</tag>
+<tag>
+    <name>legends</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/legends</url>
+</tag>
+<tag>
+    <name>reggae</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/reggae</url>
+</tag>
+<tag>
+    <name>Syd Barrett</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/syd%20barrett</url>
+</tag>
+<tag>
+    <name>trip-hop</name> 
+    <count>0</count>
+    <url>http://www.last.fm/tag/trip-hop</url>
+</tag>
+</toptags></lfm>
