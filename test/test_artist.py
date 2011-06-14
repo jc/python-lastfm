@@ -167,6 +167,7 @@ for k,v in data.iteritems():
     def testFunc(self):
         self.assertEqual(getattr(self.artist, k), v)
     setattr(TestArtist, "testArtist%s" % k.replace('_', ' ').title().replace(' ', ''), testFunc)   
+del testFunc
     
 if __name__ == '__main__':
     unittest.main()

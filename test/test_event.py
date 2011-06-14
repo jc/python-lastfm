@@ -77,6 +77,7 @@ for k,v in data.iteritems():
     def testFunc(self):
         self.assertEqual(getattr(self.event, k), v)
     setattr(TestEvent, "testEvent%s" % k.replace('_', ' ').title().replace(' ', ''), testFunc)          
+del testFunc
 
 if __name__ == '__main__':
     unittest.main()

@@ -107,6 +107,7 @@ for k,v in data.iteritems():
     def testFunc(self):
         self.assertEqual(getattr(self.location, k), v)
     setattr(TestGeo, "testLocation%s" % k.replace('_', ' ').title().replace(' ', ''), testFunc)
+del testFunc
     
 if __name__ == '__main__':
     unittest.main()
