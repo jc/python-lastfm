@@ -481,6 +481,19 @@ class User(LastfmBase):
 
     @staticmethod
     def get_info(api, name):
+        user = User(api, name = name)
+        friends = user.friends
+        if len(friends) == 0:
+            return user
+        else:
+            f = friends[0]
+            try:
+                user = [a for a in f.friends if a.name == user.name][0]
+                return user
+            except IndexError:
+                return user
+            
+        #reverting part of commit 16180a80fb5e99417152 to recover our unittests
         data = api._fetch_data({'method' : 'user.getInfo', 'user' : name}).find('user')
         user = User(
                 api,
