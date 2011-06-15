@@ -16,13 +16,13 @@ wsgi_intercept.add_wsgi_intercept('ws.audioscrobbler.com', 80, create_wsgi_app)
     
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from lastfm import Api
+from apikey import api_key
 
 class TestTag(unittest.TestCase):
     """ A test class for the Tag module. """
     
     def setUp(self):
-        apikey = "152a230561e72192b8b0f3e42362c6ff"        
-        self.api = Api(apikey, no_cache = True)
+        self.api = Api(api_key, no_cache = True)
         self.tag = self.api.get_tag("rock").most_similar
         
     def tearDown(self):

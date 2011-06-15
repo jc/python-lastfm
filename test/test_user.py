@@ -284,8 +284,8 @@ class TestUser(unittest.TestCase):
         self.assertEqual([(track.name, track.artist.name, track.stats.playcount)
                           for track in self.user.library.tracks[10:20]], tracks)
     
-apikey = "152a230561e72192b8b0f3e42362c6ff"        
-api = Api(apikey, no_cache = True)
+from apikey import api_key     
+api = Api(api_key, no_cache = True)
         
 data = {
     'name': 'RJ',

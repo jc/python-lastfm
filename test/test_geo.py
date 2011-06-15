@@ -94,8 +94,8 @@ class TestGeo(unittest.TestCase):
                     950520, 957543, 930614, 871240, 857063]
         self.assertEqual([e.id for e in self.country.events[:10]], event_ids)
     
-apikey = "152a230561e72192b8b0f3e42362c6ff"        
-api = Api(apikey, no_cache = True)
+from apikey import api_key
+api = Api(api_key, no_cache = True)
 data = {
     'city': "Tokyo",
     'country': api.get_country("Japan"),

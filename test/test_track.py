@@ -84,8 +84,8 @@ class TestTrack(unittest.TestCase):
         self.assertEqual([(t.name, t.artist.name) for t 
                           in list(api.search_track('baby')[:10])], tracks)
 
-apikey = "152a230561e72192b8b0f3e42362c6ff"        
-api = Api(apikey, no_cache = True)
+from apikey import api_key
+api = Api(api_key, no_cache = True)
         
 data = {
     'name': 'Lithium',

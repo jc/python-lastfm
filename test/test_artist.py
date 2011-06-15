@@ -149,9 +149,8 @@ class TestArtist(unittest.TestCase):
     def testArtistTopTrack(self):
         self.assertEqual(self.artist.top_track.name, 'You Give Love a Bad Name')
     
-
-apikey = "152a230561e72192b8b0f3e42362c6ff"        
-api = Api(apikey, no_cache = True)
+from apikey import api_key
+api = Api(api_key, no_cache = True)
    
 data = {
     'name': 'Bon Jovi',

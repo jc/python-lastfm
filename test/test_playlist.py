@@ -16,13 +16,13 @@ wsgi_intercept.add_wsgi_intercept('ws.audioscrobbler.com', 80, create_wsgi_app)
     
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from lastfm import Api
+from apikey import api_key
 
 class TestPlaylist(unittest.TestCase):
     """ A test class for the Geo module. """
     
     def setUp(self):
-        apikey = "152a230561e72192b8b0f3e42362c6ff"        
-        self.api = Api(apikey, no_cache = True)
+        self.api = Api(api_key, no_cache = True)
         self.playlist = self.api.get_playlist('lastfm://playlist/album/2287667')
         
     def tearDown(self):

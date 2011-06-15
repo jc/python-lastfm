@@ -43,8 +43,8 @@ class TestVenue(unittest.TestCase):
         self.assertEqual([venue.id for venue 
                           in list(api.search_venue('stadium')[:10])], venues)
                 
-apikey = "152a230561e72192b8b0f3e42362c6ff"        
-api = Api(apikey, no_cache = True)
+from apikey import api_key
+api = Api(api_key, no_cache = True)
         
 data = {
     'id': 8780357,
