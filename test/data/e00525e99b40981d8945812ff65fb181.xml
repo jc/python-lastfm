@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<events venue="Tokyo Dome" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
+    <event status="2">
+  <id>942975</id>
+  <title>KAT-TUN: 7 Days</title>
+
+  <artists>
+    <artist>KAT-TUN</artist>
+    <headliner>KAT-TUN</headliner>
+  </artists>
+  <venue>
+    <id>8780357</id>
+    <name>Tokyo Dome</name>
+    <location>
+      <city>Tokyo</city>
+      <country>Japan</country>
+      <street>1-3-61, Koraku, Bunkyo-ku</street>
+      <postalcode>112-8562</postalcode>
+      <geo:point>
+         <geo:lat>35.685</geo:lat>
+         <geo:long>139.7513889</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8780357</url>
+  </venue>
+  <startDate>Fri, 15 May 2009 02:56:01</startDate>
+  <description><![CDATA[<div class="bbcode">KAT-TUN takes over Tokyo Dome for a week, breaking their previous record of four consecutive days in August 2008 during the last days of their -Queen of Pirates- nationwide tour.</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/24615609.png</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/24615609.png</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/24615609.png</image>
+   <attendance>0</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=942975</tag>    
+  <url>http://www.last.fm/event/942975</url>
+</event>    <event status="2">
+  <id>942976</id>
+  <title>KAT-TUN: 7 Days</title>
+
+  <artists>
+    <artist>KAT-TUN</artist>
+    <headliner>KAT-TUN</headliner>
+  </artists>
+  <venue>
+    <id>8780357</id>
+    <name>Tokyo Dome</name>
+    <location>
+      <city>Tokyo</city>
+      <country>Japan</country>
+      <street>1-3-61, Koraku, Bunkyo-ku</street>
+      <postalcode>112-8562</postalcode>
+      <geo:point>
+         <geo:lat>35.685</geo:lat>
+         <geo:long>139.7513889</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8780357</url>
+  </venue>
+  <startDate>Sat, 16 May 2009 03:01:01</startDate>
+  <description><![CDATA[<div class="bbcode">KAT-TUN takes over Tokyo Dome for a week, breaking their previous record of four consecutive days in August 2008 during the last days of their -Queen of Pirates- nationwide tour.</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/24615609.png</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/24615609.png</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/24615609.png</image>
+   <attendance>0</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=942976</tag>    
+  <url>http://www.last.fm/event/942976</url>
+</event>    <event status="2">
+  <id>942986</id>
+  <title>KAT-TUN: 7 Days</title>
+
+  <artists>
+    <artist>KAT-TUN</artist>
+    <headliner>KAT-TUN</headliner>
+  </artists>
+  <venue>
+    <id>8780357</id>
+    <name>Tokyo Dome</name>
+    <location>
+      <city>Tokyo</city>
+      <country>Japan</country>
+      <street>1-3-61, Koraku, Bunkyo-ku</street>
+      <postalcode>112-8562</postalcode>
+      <geo:point>
+         <geo:lat>35.685</geo:lat>
+         <geo:long>139.7513889</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8780357</url>
+  </venue>
+  <startDate>Sun, 17 May 2009 03:19:01</startDate>
+  <description><![CDATA[<div class="bbcode">KAT-TUN takes over Tokyo Dome for a week, breaking their previous record of four consecutive days in August 2008 during the last days of their -Queen of Pirates- nationwide tour.</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/24615609.png</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/24615609.png</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/24615609.png</image>
+   <attendance>0</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=942986</tag>    
+  <url>http://www.last.fm/event/942986</url>
+</event>    <event status="2">
+  <id>942991</id>
+  <title>KAT-TUN: 7 Days</title>
+
+  <artists>
+    <artist>KAT-TUN</artist>
+    <headliner>KAT-TUN</headliner>
+  </artists>
+  <venue>
+    <id>8780357</id>
+    <name>Tokyo Dome</name>
+    <location>
+      <city>Tokyo</city>
+      <country>Japan</country>
+      <street>1-3-61, Koraku, Bunkyo-ku</street>
+      <postalcode>112-8562</postalcode>
+      <geo:point>
+         <geo:lat>35.685</geo:lat>
+         <geo:long>139.7513889</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8780357</url>
+  </venue>
+  <startDate>Mon, 18 May 2009 03:30:01</startDate>
+  <description><![CDATA[<div class="bbcode">KAT-TUN takes over Tokyo Dome for a week, breaking their previous record of four consecutive days in August 2008 during the last days of their -Queen of Pirates- nationwide tour.</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/24615609.png</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/24615609.png</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/24615609.png</image>
+   <attendance>0</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=942991</tag>    
+  <url>http://www.last.fm/event/942991</url>
+</event>    <event status="2">
+  <id>942993</id>
+  <title>KAT-TUN: 7 Days</title>
+
+  <artists>
+    <artist>KAT-TUN</artist>
+    <headliner>KAT-TUN</headliner>
+  </artists>
+  <venue>
+    <id>8780357</id>
+    <name>Tokyo Dome</name>
+    <location>
+      <city>Tokyo</city>
+      <country>Japan</country>
+      <street>1-3-61, Koraku, Bunkyo-ku</street>
+      <postalcode>112-8562</postalcode>
+      <geo:point>
+         <geo:lat>35.685</geo:lat>
+         <geo:long>139.7513889</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8780357</url>
+  </venue>
+  <startDate>Tue, 19 May 2009 03:33:01</startDate>
+  <description><![CDATA[<div class="bbcode">KAT-TUN takes over Tokyo Dome for a week, breaking their previous record of four consecutive days in August 2008 during the last days of their -Queen of Pirates- nationwide tour.</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/24615609.png</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/24615609.png</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/24615609.png</image>
+   <attendance>0</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=942993</tag>    
+  <url>http://www.last.fm/event/942993</url>
+</event>    <event status="2">
+  <id>942999</id>
+  <title>KAT-TUN: 7 Days</title>
+
+  <artists>
+    <artist>KAT-TUN</artist>
+    <headliner>KAT-TUN</headliner>
+  </artists>
+  <venue>
+    <id>8780357</id>
+    <name>Tokyo Dome</name>
+    <location>
+      <city>Tokyo</city>
+      <country>Japan</country>
+      <street>1-3-61, Koraku, Bunkyo-ku</street>
+      <postalcode>112-8562</postalcode>
+      <geo:point>
+         <geo:lat>35.685</geo:lat>
+         <geo:long>139.7513889</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8780357</url>
+  </venue>
+  <startDate>Wed, 20 May 2009 03:36:01</startDate>
+  <description><![CDATA[<div class="bbcode">KAT-TUN takes over Tokyo Dome for a week, breaking their previous record of four consecutive days in August 2008 during the last days of their -Queen of Pirates- nationwide tour.</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/24615609.png</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/24615609.png</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/24615609.png</image>
+   <attendance>0</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=942999</tag>    
+  <url>http://www.last.fm/event/942999</url>
+</event>    <event status="2">
+  <id>943002</id>
+  <title>KAT-TUN: 7 Days</title>
+
+  <artists>
+    <artist>KAT-TUN</artist>
+    <headliner>KAT-TUN</headliner>
+  </artists>
+  <venue>
+    <id>8780357</id>
+    <name>Tokyo Dome</name>
+    <location>
+      <city>Tokyo</city>
+      <country>Japan</country>
+      <street>1-3-61, Koraku, Bunkyo-ku</street>
+      <postalcode>112-8562</postalcode>
+      <geo:point>
+         <geo:lat>35.685</geo:lat>
+         <geo:long>139.7513889</geo:long>
+      </geo:point>
+    </location>
+    <url>http://www.last.fm/venue/8780357</url>
+  </venue>
+  <startDate>Thu, 21 May 2009 03:39:01</startDate>
+  <description><![CDATA[<div class="bbcode">KAT-TUN takes over Tokyo Dome for a week, breaking their previous record of four consecutive days in August 2008 during the last days of their -Queen of Pirates- nationwide tour.</div>]]></description>
+  <image size="small">http://userserve-ak.last.fm/serve/34/24615609.png</image>
+  <image size="medium">http://userserve-ak.last.fm/serve/64/24615609.png</image>
+  <image size="large">http://userserve-ak.last.fm/serve/126/24615609.png</image>
+   <attendance>0</attendance>
+   <reviews>0</reviews>
+   <tag>lastfm:event=943002</tag>    
+  <url>http://www.last.fm/event/943002</url>
+</event></events></lfm>

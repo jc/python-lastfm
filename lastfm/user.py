@@ -298,10 +298,11 @@ class User(LastfmBase):
             self.get_recent_tracks()
         return self._now_playing
 
-    @top_property("recent_tracks")
+#    @top_property("recent_tracks")
+    @property
     def most_recent_track(self):
         """most recent track played by the user"""
-        pass
+        return self.recent_tracks[0]
 
     def get_top_albums(self, period = None):
         params = self._default_params({'method': 'user.getTopAlbums'})

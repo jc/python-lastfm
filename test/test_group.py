@@ -16,13 +16,13 @@ wsgi_intercept.add_wsgi_intercept('ws.audioscrobbler.com', 80, create_wsgi_app)
     
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from lastfm import Api
+from apikey import api_key
 
 class TestGroup(unittest.TestCase):
     """ A test class for the Group module. """
     
     def setUp(self):
-        apikey = "152a230561e72192b8b0f3e42362c6ff"        
-        self.api = Api(apikey, no_cache = True)
+        self.api = Api(api_key, no_cache = True)
         self.group = self.api.get_group('Rock')
         
     def tearDown(self):
@@ -128,7 +128,5 @@ class TestGroup(unittest.TestCase):
                 in self.group.get_weekly_tag_chart(wc.start, wc.end).tags[:10]],
             tags)
             
-test_suite = unittest.TestLoader().loadTestsFromTestCase(TestGroup)
-
 if __name__ == '__main__':
     unittest.main()
