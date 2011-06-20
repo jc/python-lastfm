@@ -58,9 +58,9 @@ class TestEvent(unittest.TestCase):
         self.assertEqual((shout.author.name, shout.body),
                          ('Aeromaniac21280',
                           'It was a brillian show still jealous at some ppl who could meet them  video of joe perry banging the guitar in youtube, in between u will see a devils hand with the thorny black heavy metal wrist band, that hand IS MINE LOL!!!'))
-        
-apikey = "152a230561e72192b8b0f3e42362c6ff"        
-api = Api(apikey, no_cache = True)
+ 
+from apikey import api_key
+api = Api(api_key, no_cache = True)
 
 data = {
     'id': 216156,
@@ -77,8 +77,7 @@ for k,v in data.iteritems():
     def testFunc(self):
         self.assertEqual(getattr(self.event, k), v)
     setattr(TestEvent, "testEvent%s" % k.replace('_', ' ').title().replace(' ', ''), testFunc)          
-
-test_suite = unittest.TestLoader().loadTestsFromTestCase(TestEvent)
+del testFunc
 
 if __name__ == '__main__':
     unittest.main()

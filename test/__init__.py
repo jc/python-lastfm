@@ -1,3 +1,6 @@
+from lastfm import Api
+Api.FETCH_INTERVAL = 0
+
 import test_album
 import test_tag
 import test_event

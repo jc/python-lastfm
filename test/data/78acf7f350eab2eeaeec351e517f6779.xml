@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<toptags user="RJ">
+<tag>
+    <name>rock</name>
+    <count>16</count>
+    <url>www.last.fm/tag/rock</url>
+</tag>
+<tag>
+    <name>jazz</name>
+    <count>10</count>
+    <url>www.last.fm/tag/jazz</url>
+</tag>
+<tag>
+    <name>metal</name>
+    <count>10</count>
+    <url>www.last.fm/tag/metal</url>
+</tag>
+<tag>
+    <name>mellow</name>
+    <count>6</count>
+    <url>www.last.fm/tag/mellow</url>
+</tag>
+<tag>
+    <name>80s</name>
+    <count>6</count>
+    <url>www.last.fm/tag/80s</url>
+</tag>
+<tag>
+    <name>guitar</name>
+    <count>6</count>
+    <url>www.last.fm/tag/guitar</url>
+</tag>
+<tag>
+    <name>checkitout</name>
+    <count>5</count>
+    <url>www.last.fm/tag/checkitout</url>
+</tag>
+<tag>
+    <name>funky</name>
+    <count>4</count>
+    <url>www.last.fm/tag/funky</url>
+</tag>
+<tag>
+    <name>stoner rock</name>
+    <count>3</count>
+    <url>www.last.fm/tag/stoner%20rock</url>
+</tag>
+<tag>
+    <name>funk</name>
+    <count>3</count>
+    <url>www.last.fm/tag/funk</url>
+</tag>
+<tag>
+    <name>blues</name>
+    <count>3</count>
+    <url>www.last.fm/tag/blues</url>
+</tag>
+<tag>
+    <name>female vocalists</name>
+    <count>3</count>
+    <url>www.last.fm/tag/female%20vocalists</url>
+</tag>
+<tag>
+    <name>drone rock</name>
+    <count>3</count>
+    <url>www.last.fm/tag/drone%20rock</url>
+</tag>
+<tag>
+    <name>soul</name>
+    <count>3</count>
+    <url>www.last.fm/tag/soul</url>
+</tag>
+<tag>
+    <name>acoustic</name>
+    <count>3</count>
+    <url>www.last.fm/tag/acoustic</url>
+</tag>
+<tag>
+    <name>easy listening</name>
+    <count>2</count>
+    <url>www.last.fm/tag/easy%20listening</url>
+</tag>
+<tag>
+    <name>singer-songwriter</name>
+    <count>2</count>
+    <url>www.last.fm/tag/singer-songwriter</url>
+</tag>
+<tag>
+    <name>classic rock</name>
+    <count>2</count>
+    <url>www.last.fm/tag/classic%20rock</url>
+</tag>
+<tag>
+    <name>vacuum tube</name>
+    <count>2</count>
+    <url>www.last.fm/tag/vacuum%20tube</url>
+</tag>
+<tag>
+    <name>covers</name>
+    <count>2</count>
+    <url>www.last.fm/tag/covers</url>
+</tag>
+<tag>
+    <name>instrumental</name>
+    <count>2</count>
+    <url>www.last.fm/tag/instrumental</url>
+</tag>
+<tag>
+    <name>country</name>
+    <count>2</count>
+    <url>www.last.fm/tag/country</url>
+</tag>
+<tag>
+    <name>melodic rock</name>
+    <count>2</count>
+    <url>www.last.fm/tag/melodic%20rock</url>
+</tag>
+<tag>
+    <name>cowboy</name>
+    <count>1</count>
+    <url>www.last.fm/tag/cowboy</url>
+</tag>
+<tag>
+    <name>chilled out</name>
+    <count>1</count>
+    <url>www.last.fm/tag/chilled%20out</url>
+</tag>
+<tag>
+    <name>groove</name>
+    <count>1</count>
+    <url>www.last.fm/tag/groove</url>
+</tag>
+<tag>
+    <name>instrumental rock</name>
+    <count>1</count>
+    <url>www.last.fm/tag/instrumental%20rock</url>
+</tag>
+<tag>
+    <name>guitar virtuoso</name>
+    <count>1</count>
+    <url>www.last.fm/tag/guitar%20virtuoso</url>
+</tag>
+<tag>
+    <name>canadian</name>
+    <count>1</count>
+    <url>www.last.fm/tag/canadian</url>
+</tag>
+<tag>
+    <name>live</name>
+    <count>1</count>
+    <url>www.last.fm/tag/live</url>
+</tag>
+<tag>
+    <name>dance</name>
+    <count>1</count>
+    <url>www.last.fm/tag/dance</url>
+</tag>
+<tag>
+    <name>freedom</name>
+    <count>1</count>
+    <url>www.last.fm/tag/freedom</url>
+</tag>
+<tag>
+    <name>crap</name>
+    <count>1</count>
+    <url>www.last.fm/tag/crap</url>
+</tag>
+<tag>
+    <name>unplugged</name>
+    <count>1</count>
+    <url>www.last.fm/tag/unplugged</url>
+</tag>
+<tag>
+    <name>groovy</name>
+    <count>1</count>
+    <url>www.last.fm/tag/groovy</url>
+</tag>
+<tag>
+    <name>chillout</name>
+    <count>1</count>
+    <url>www.last.fm/tag/chillout</url>
+</tag>
+<tag>
+    <name>uplifting</name>
+    <count>1</count>
+    <url>www.last.fm/tag/uplifting</url>
+</tag>
+<tag>
+    <name>chilled</name>
+    <count>1</count>
+    <url>www.last.fm/tag/chilled</url>
+</tag>
+<tag>
+    <name>woman</name>
+    <count>1</count>
+    <url>www.last.fm/tag/woman</url>
+</tag>
+<tag>
+    <name>soft rock</name>
+    <count>1</count>
+    <url>www.last.fm/tag/soft%20rock</url>
+</tag>
+<tag>
+    <name>female vocalist</name>
+    <count>1</count>
+    <url>www.last.fm/tag/female%20vocalist</url>
+</tag>
+<tag>
+    <name>britpop</name>
+    <count>1</count>
+    <url>www.last.fm/tag/britpop</url>
+</tag>
+<tag>
+    <name>new wave</name>
+    <count>1</count>
+    <url>www.last.fm/tag/new%20wave</url>
+</tag>
+<tag>
+    <name>romantic</name>
+    <count>1</count>
+    <url>www.last.fm/tag/romantic</url>
+</tag>
+<tag>
+    <name>blahtag</name>
+    <count>1</count>
+    <url>www.last.fm/tag/blahtag</url>
+</tag>
+<tag>
+    <name>geek</name>
+    <count>1</count>
+    <url>www.last.fm/tag/geek</url>
+</tag>
+<tag>
+    <name>heavy</name>
+    <count>1</count>
+    <url>www.last.fm/tag/heavy</url>
+</tag>
+<tag>
+    <name>porno rock</name>
+    <count>1</count>
+    <url>www.last.fm/tag/porno%20rock</url>
+</tag>
+<tag>
+    <name>agressive</name>
+    <count>1</count>
+    <url>www.last.fm/tag/agressive</url>
+</tag>
+<tag>
+    <name>lounge</name>
+    <count>1</count>
+    <url>www.last.fm/tag/lounge</url>
+</tag>
+<tag>
+    <name>popular</name>
+    <count>1</count>
+    <url>www.last.fm/tag/popular</url>
+</tag>
+<tag>
+    <name>parody</name>
+    <count>1</count>
+    <url>www.last.fm/tag/parody</url>
+</tag>
+<tag>
+    <name>upcoming</name>
+    <count>1</count>
+    <url>www.last.fm/tag/upcoming</url>
+</tag>
+<tag>
+    <name>test tag</name>
+    <count>1</count>
+    <url>www.last.fm/tag/test%20tag</url>
+</tag>
+<tag>
+    <name>nostalgia</name>
+    <count>1</count>
+    <url>www.last.fm/tag/nostalgia</url>
+</tag>
+<tag>
+    <name>fixmytags</name>
+    <count>1</count>
+    <url>www.last.fm/tag/fixmytags</url>
+</tag>
+<tag>
+    <name>rhythm and blues</name>
+    <count>1</count>
+    <url>www.last.fm/tag/rhythm%20and%20blues</url>
+</tag>
+<tag>
+    <name>aggressive</name>
+    <count>1</count>
+    <url>www.last.fm/tag/aggressive</url>
+</tag>
+<tag>
+    <name>indie</name>
+    <count>1</count>
+    <url>www.last.fm/tag/indie</url>
+</tag>
+<tag>
+    <name>slow</name>
+    <count>1</count>
+    <url>www.last.fm/tag/slow</url>
+</tag>
+<tag>
+    <name>smooth jazz</name>
+    <count>1</count>
+    <url>www.last.fm/tag/smooth%20jazz</url>
+</tag>
+<tag>
+    <name>hard rock</name>
+    <count>1</count>
+    <url>www.last.fm/tag/hard%20rock</url>
+</tag>
+<tag>
+    <name>gothic</name>
+    <count>1</count>
+    <url>www.last.fm/tag/gothic</url>
+</tag>
+<tag>
+    <name>folk</name>
+    <count>1</count>
+    <url>www.last.fm/tag/folk</url>
+</tag>
+<tag>
+    <name>jason robert brown</name>
+    <count>1</count>
+    <url>www.last.fm/tag/jason%20robert%20brown</url>
+</tag>
+<tag>
+    <name>acid jazz</name>
+    <count>1</count>
+    <url>www.last.fm/tag/acid%20jazz</url>
+</tag>
+<tag>
+    <name>alt-country</name>
+    <count>1</count>
+    <url>www.last.fm/tag/alt-country</url>
+</tag>
+<tag>
+    <name>tag-tastic</name>
+    <count>1</count>
+    <url>www.last.fm/tag/tag-tastic</url>
+</tag>
+<tag>
+    <name>symphonic metal</name>
+    <count>1</count>
+    <url>www.last.fm/tag/symphonic%20metal</url>
+</tag>
+<tag>
+    <name>hip-hop</name>
+    <count>1</count>
+    <url>www.last.fm/tag/hip-hop</url>
+</tag>
+<tag>
+    <name>sleazy</name>
+    <count>1</count>
+    <url>www.last.fm/tag/sleazy</url>
+</tag>
+<tag>
+    <name>hair metal</name>
+    <count>1</count>
+    <url>www.last.fm/tag/hair%20metal</url>
+</tag>
+</toptags></lfm>

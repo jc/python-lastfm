@@ -1,6 +1,7 @@
 from urlparse import urlunparse
 import os
 import sys
+import re
 if sys.version < '2.6':
     import md5
     def md5hash(string):
@@ -13,6 +14,7 @@ else:
 A simple WSGI application for testing.
 """
 
+CACHE_PATH = os.path.join(os.path.dirname(__file__), 'data')
 _app_was_hit = False
 
 def success():
@@ -28,7 +30,6 @@ def test_app(environ, start_response):
                        environ['QUERY_STRING'],
                        ''
                        ))
-    key = md5hash(url)
     status = '200 OK'
     response_headers = [('Content-type','text/xml')]
     start_response(status, response_headers)
@@ -36,13 +37,29 @@ def test_app(environ, start_response):
     global _app_was_hit
     _app_was_hit = True
     
-    data_file = os.path.join(os.path.dirname(__file__), 'data', "%s.xml" % key)
+#    old_key = md5hash(url)
     
+    url_without_apikey = re.sub(r'(api_key=[^&]+.)','', url) 
+    key = md5hash(url_without_apikey)
+    data_file = os.path.join(CACHE_PATH, "%s.xml" % key)
+    
+#    old_file = os.path.join(CACHE_PATH, "%s.xml" % old_key)
+#    if os.path.exists(old_file):
+#        assert not os.path.exists(data_file)
+##        print 'RENME'
+#        os.rename(old_file, data_file)
+    
+#    print old_file
+#    print data_file
+#    print url
+#    print url_without_apikey
+    
+#    assert False
     try:
         filedata = open(data_file).read()
     except IOError:
         #print "\nintercepted: %s" % url
-        #print "key:", key 
+        #print "old_key:", old_key 
         import wsgi_intercept
         wsgi_intercept.remove_wsgi_intercept('ws.audioscrobbler.com', 80)
         import urllib2
