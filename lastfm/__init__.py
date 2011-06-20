@@ -11,10 +11,6 @@ __version__ = "0.2"
 __license__ = "GNU Lesser General Public License"
 __package__ = "lastfm"
 
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from lastfm.album import Album
 from lastfm.api import Api
 from lastfm.artist import Artist
