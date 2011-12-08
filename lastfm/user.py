@@ -279,7 +279,8 @@ class User(LastfmBase):
                                                          t.findtext('date').strip(),
                                                          '%d %b %Y, %H:%M'
                                                          )[0:6])
-                                           ) if t.findtext('date') else datetime(*datetime.now().timetuple()[0:6])
+                                           ) if t.findtext('date') else datetime(*datetime.now().timetuple()[0:6]),
+                      bypass_registry=True
                       )
             if 'nowplaying' in t.attrib and t.attrib['nowplaying'] == 'true':
                 self._now_playing = track
@@ -298,11 +299,10 @@ class User(LastfmBase):
             self.get_recent_tracks()
         return self._now_playing
 
-#    @top_property("recent_tracks")
-    @property
+    @top_property("recent_tracks")
     def most_recent_track(self):
         """most recent track played by the user"""
-        return self.recent_tracks[0]
+        pass
 
     def get_top_albums(self, period = None):
         params = self._default_params({'method': 'user.getTopAlbums'})
