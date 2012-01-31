@@ -136,7 +136,8 @@ class Geo(object):
                        stats = Stats(
                                      subject = t.findtext('name'),
                                      rank = int(t.attrib['rank']),
-                                     playcount = int(a.findtext('playcount')) if a.findtext('playcount') else None
+                                     playcount = int(a.findtext('playcount')) if a.findtext('playcount') else None,
+                                     listeners = int(a.findtext('listeners')) if a.findtext('listeners') else None
                                      ),
                        streamable = (t.findtext('streamable') == '1'),
                        full_track = (t.find('streamable').attrib['fulltrack'] == '1'),
