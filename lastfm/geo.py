@@ -90,7 +90,8 @@ class Geo(object):
                        stats = Stats(
                                      subject = a.findtext('name'),
                                      rank = int(a.attrib['rank']),
-                                     playcount = int(a.findtext('playcount'))
+                                     playcount = int(a.findtext('playcount')) if a.findtext('playcount') else None,
+                                     listeners = int(a.findtext('listeners')) if a.findtext('listeners') else None
                                      ),
                        url = 'http://' + a.findtext('url'),
                        image = {'large': a.findtext('image')}
