@@ -90,7 +90,8 @@ class Geo(object):
                        stats = Stats(
                                      subject = a.findtext('name'),
                                      rank = int(a.attrib['rank']),
-                                     playcount = int(a.findtext('playcount'))
+                                     playcount = int(a.findtext('playcount')) if a.findtext('playcount') else None,
+                                     listeners = int(a.findtext('listeners')) if a.findtext('listeners') else None
                                      ),
                        url = 'http://' + a.findtext('url'),
                        image = {'large': a.findtext('image')}
@@ -136,7 +137,8 @@ class Geo(object):
                        stats = Stats(
                                      subject = t.findtext('name'),
                                      rank = int(t.attrib['rank']),
-                                     playcount = int(t.findtext('playcount'))
+                                     playcount = int(a.findtext('playcount')) if a.findtext('playcount') else None,
+                                     listeners = int(a.findtext('listeners')) if a.findtext('listeners') else None
                                      ),
                        streamable = (t.findtext('streamable') == '1'),
                        full_track = (t.find('streamable').attrib['fulltrack'] == '1'),
