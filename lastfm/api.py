@@ -136,10 +136,9 @@ class Api(object):
         if session_key is not None:
             self._session_key = session_key
         else:
-            with _lock:
-                params = {'method': 'auth.getSession', 'token': self.auth_token}
-                self._session_key = self._fetch_data(params, sign = True).findtext('session/key')
-                self._auth_token = None
+            params = {'method': 'auth.getSession', 'token': self.auth_token}
+            self._session_key = self._fetch_data(params, sign = True).findtext('session/key')
+            self._auth_token = None
 
     @cached_property
     def auth_token(self):
